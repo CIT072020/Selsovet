@@ -3947,7 +3947,7 @@ end;
 procedure TfmMain.acReQueryGisExecute(Sender: TObject);
 begin
 // запросы в ГИС РН
-  ShowGurnal(TfmGurnQueryGis, 'fmGurnQueryGis');
+  //ShowGurnal(TfmGurnQueryGis, 'fmGurnQueryGis');
 end;
 
 procedure TfmMain.acReRogdExecute(Sender: TObject);

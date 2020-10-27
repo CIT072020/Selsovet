@@ -73,6 +73,8 @@ modules/
 
 *.dsm
 *.ddp
+*.BAK
+*.log
 
 *.adi
 SMDOSprOrg.adt
@@ -91,7 +93,7 @@ AutoBackUp*/
 ?copy/
 DocArxiv/
 NewData*/
-*Work/
+#*Work/
 Test*/
 !dcu/
 
