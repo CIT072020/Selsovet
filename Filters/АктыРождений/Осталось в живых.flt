@@ -1,0 +1,43 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Осталось в живых
+1
+1,"0"
+2,PARAM,401,192,96,,111
+2
+2
+3,PROP,FLD_OSTAT,GREAT_EQUAL_N,"fikAnd,fikFirst",0,1,1,1,dkFull
+1,VALUE,valNumber,0,,0,3,18991230,0,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_DATEZ,BETWEEN_D,fikAnd,0,1,1,2,dkFull
+1,VALUE,valDate,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valDate,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+19
+1,FIELDS_CTRL,2
+1,FLD_OSTAT,1
+1,CONTROLS,3
+1,CTRL,TStaticText,laName1_239e968ff4cea2e588ecd73798f97df3_1,"Название поля","sbParam"
+PROPS,
+1,CTRL,TStaticText,laOp1_239e968ff4cea2e588ecd73798f97df3_1,"Название операции","sbParam"
+PROPS,
+1,CTRL,TDBNumberEditEh,edNumber1_239e968ff4cea2e588ecd73798f97df3_1,"Ввод значения","sbParam"
+PROPS,
+1,FLD_DATEZ,2
+1,CONTROLS,4
+1,CTRL,TStaticText,laName1_3f917f2c2cd64d2d3b9fc2b27bdbe484_2,"Название поля","sbParam"
+PROPS,
+1,CTRL,TStaticText,laOp1_3f917f2c2cd64d2d3b9fc2b27bdbe484_2,"Название операции","sbParam"
+PROPS,
+1,CTRL,TDBDateTimeEditEh,edDate1_3f917f2c2cd64d2d3b9fc2b27bdbe484_2,"Ввод значения","sbParam"
+PROPS,
+1,CTRL,TDBDateTimeEditEh,edDate2_3f917f2c2cd64d2d3b9fc2b27bdbe484_2,"Ввод значения 2","sbParam"
+PROPS,

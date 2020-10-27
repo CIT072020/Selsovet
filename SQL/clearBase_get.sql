@@ -1,0 +1,1 @@
+select 'EXECUTE PROCEDURE sp_ZapTable('+''''+name+''''+');' as mmm from system.tables order by mmm

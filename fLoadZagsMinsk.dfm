@@ -1,0 +1,237 @@
+object fmLoadZagsMinsk: TfmLoadZagsMinsk
+  Left = 392
+  Top = 120
+  Width = 949
+  Height = 706
+  Caption = #1047#1072#1075#1088#1091#1079#1082#1072' '#1047#1040#1043#1057' '#1080#1079' XML ('#1052#1080#1085#1089#1082')'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  Icon.Data = {
+    0000010001001010000001002000680400001600000028000000100000002000
+    0000010020000000000000040000000000000000000000000000000000006B70
+    6E806B706EFF6B706EFF6B706EFF6B706EFF6B706EFF6B706EFF6B706EFF6B70
+    6EFF6B706EFF6B706EFF6B706EFF6B706EFF6B706EFF6B706EFF6B706E806B70
+    6EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+    FFFFFFFFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFFFFFFFFF6B706EFF6B70
+    6EFFFFFFFFFFB6B8B7FFB6B8B7FFB6B8B7FFB6B8B7FFB6B8B7FFB6B8B7FFB6B8
+    B7FFB6B8B7FFFFFFFFFF000000FFFFFFFFFFFFFFFFFFFFFFFFFF6B706EFF6B70
+    6EFFEFEFEFFFADB0AFFFAEB0AEFFAEB0AFFFADB0AEFFADB0AFFFADB0AFFFADB0
+    AFFFADB0AFFFEFEEEFFF000000FFEEEFEEFFEFEEEEFFEFEEEFFF6B706EFF6B70
+    6EFFDCDCDCFFDBDBDCFFDBDCDCFFDCDCDCFFDCDBDCFFDBDCDCFFDCDBDCFFDCDC
+    DCFFDBDCDBFFDCDCDBFF000000FFDBDCDCFFDCDCDBFFDCDCDCFF6B706EFF6B70
+    6EFFA1A4A3FFA1A4A2FFA1A4A3FFA1A4A3FFA1A4A3FFA1A4A3FFA1A4A3FFA1A4
+    A3FFA1A4A3FFA1A4A3FFA1A4A3FFA1A4A3FFA1A4A3FFA1A4A3FF6B706EFF6B70
+    6EFFF7F7F7FFE3E3E3FFEEEEEEFFFAFAFAFFFAFAFAFFC8D4CEFF8E6C3FFF8B67
+    38FFB4AE9AFFFAFAFAFFFCFCFCFFEEEEEEFFE3E3E3FFF0F0F0FF6B706EFF6B70
+    6EFFF9F9F9FFEEEEEEFFFAFAFAFFE4E4E4FFBFCBC5FF8B6738FFE3CBACFFDCBF
+    98FF8F6B3BFFACA692FFE4E4E4FFFAFAFAFFEEEEEEFFF1F1F1FF6B706EFF6B70
+    6EFFF9F9F9FFFAFAFAFFE4E4E4FFBFCBC5FF8B6738FFDCBF98FFC09F73FFC09F
+    73FFDFC8ABFF8B6738FFACA692FFE4E4E4FFF4F4F4FFF1F1F1FF6B706EFF6B70
+    6EFFFAFAFAFFEAE9E9FFC4CFCAFF8B6738FFDCBF98FFBF9F71FFBF9F71FFBF9F
+    71FFC09F73FFD8BB96FF8B6738FFAFA995FFEAE9EAFFF2F2F2FF6B706EFF6B70
+    6EFFFCFBFCFFECECEBFF8B6738FF8B6738FF8B6738FF8B6738FFCAA779FFBD92
+    58FF8B6738FF8B6738FF8B6738FF8B6738FFECECECFFF3F3F3FF6B706EFF6B75
+    72FFFDFDFDFFEEEEEEFFEDEDEDFFDEE2DFFFB09877FF8B6738FFCAA779FFCEB3
+    8FFF8E6B3DFFC3BCACFFEEEDEDFFEEEEEDFFEDEEEDFFF3F4F3FF6B706EFF6E71
+    6BFFDDE6E2FFFFFFFFFFD6E1DDFFDDD6C9FFB6996EFF8B6738FFE2CBABFFD3B7
+    92FF9B7D54FFE5DFD5FFFFFFFFFFFFFFFFFFFFFFFFFFF4F4F4FF6B706EFF887F
+    6B96737166FF757062FF856D4AFF9A7441FF9F7844FFD9BF9EFFEBD9C1FFAF86
+    51FF7D6A4EFF6B706EFF6B706EFF6B706EFF6B706EFF6B706EFF6B706E809270
+    425EBB96627ED1AD815DE6CEB1CDEFDFD0FFECDBC5FFDFC29BFFA08B68FD886E
+    43FD5A7F6A1B0000000000000000000000000000000000000000000000007785
+    6C7C91794D7E8B67386F8B67388C8B6738D48B6738FF8A693DF880714AE57A78
+    5885000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    00000000000000000000000000000000000000000000003F0000007F0000}
+  KeyPreview = True
+  OldCreateOrder = False
+  ShowHint = True
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnFile: TPanel
+    Left = 0
+    Top = 0
+    Width = 933
+    Height = 87
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 10
+      Top = 14
+      Width = 26
+      Height = 13
+      Caption = #1060#1072#1081#1083
+    end
+    object lbCountAll: TLabel
+      Left = 358
+      Top = 42
+      Width = 48
+      Height = 13
+      Caption = 'lbCountAll'
+    end
+    object lbCount: TLabel
+      Left = 470
+      Top = 42
+      Width = 37
+      Height = 13
+      Caption = 'lbCount'
+    end
+    object edFile: TDBEditEh
+      Left = 53
+      Top = 8
+      Width = 455
+      Height = 24
+      EditButtons = <
+        item
+          Hint = #1042#1099#1073#1088#1072#1090#1100' '#1092#1072#1081#1083
+          Style = ebsEllipsisEh
+          OnClick = edFileEditButtons0Click
+        end
+        item
+          Hint = #1042#1099#1073#1088#1072#1090#1100' '#1087#1072#1087#1082#1091
+          Style = ebsPlusEh
+          OnClick = edFileEditButtons1Click
+        end>
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      Visible = True
+    end
+    object btLoad: TButton
+      Left = 528
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100
+      TabOrder = 1
+      OnClick = btLoadClick
+    end
+    object cbSeria: TCheckBox
+      Left = 54
+      Top = 40
+      Width = 163
+      Height = 17
+      Hint = #1054#1073#1085#1086#1074#1083#1103#1090#1100' '#1089#1087#1088#1072#1074#1086#1095#1085#1080#1082' '#1089#1077#1088#1080#1080' '#1089#1074#1080#1076#1077#1090#1077#1083#1100#1089#1090#1074
+      Caption = #1057#1077#1088#1080#1080' '#1089#1074#1080#1076#1077#1090#1077#1083#1100#1089#1090#1074
+      TabOrder = 2
+    end
+    object cbError: TCheckBox
+      Left = 240
+      Top = 40
+      Width = 97
+      Height = 17
+      Hint = #1042#1099#1074#1086#1076#1080#1090#1100' '#1086#1096#1080#1073#1082#1080' '#1079#1072#1075#1088#1091#1079#1082#1080
+      Caption = #1054#1096#1080#1073#1082#1080
+      Checked = True
+      State = cbChecked
+      TabOrder = 3
+    end
+    object Button1: TButton
+      Left = 626
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = #1055#1088#1077#1088#1074#1072#1090#1100
+      TabOrder = 4
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Left = 722
+      Top = 8
+      Width = 75
+      Height = 25
+      Hint = #1059#1076#1072#1083#1080#1090#1100' '#1088#1072#1085#1077#1077' '#1079#1072#1075#1088#1091#1078#1077#1085#1085#1091#1102' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1102
+      Caption = #1059#1076#1072#1083#1080#1090#1100
+      TabOrder = 5
+      OnClick = Button2Click
+    end
+    object cbTypePunkt: TCheckBox
+      Left = 54
+      Top = 60
+      Width = 235
+      Height = 17
+      Caption = #1054#1073#1088#1072#1073#1072#1090#1099#1074#1072#1090#1100' '#1090#1080#1087' '#1085#1072#1089'. '#1087#1091#1085#1082#1090#1072
+      TabOrder = 6
+    end
+    object btCopyToClipboard: TButton
+      Left = 645
+      Top = 44
+      Width = 153
+      Height = 25
+      Caption = #1055#1088#1086#1090#1086#1082#1086#1083' '#1074' '#1073#1091#1092#1077#1088' '#1086#1073#1084#1077#1085#1072
+      TabOrder = 7
+      OnClick = btCopyToClipboardClick
+    end
+    object btUpdate: TButton
+      Left = 816
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+      TabOrder = 8
+      OnClick = btUpdateClick
+    end
+  end
+  object pnDebug: TPanel
+    Left = 0
+    Top = 87
+    Width = 933
+    Height = 581
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 1
+    object edDebug: TMemo
+      Left = 0
+      Top = 0
+      Width = 933
+      Height = 552
+      Align = alClient
+      Lines.Strings = (
+        '')
+      TabOrder = 0
+    end
+    object Panel1: TPanel
+      Left = 0
+      Top = 552
+      Width = 933
+      Height = 29
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 1
+      object lbCountFiles: TLabel
+        Left = 314
+        Top = 11
+        Width = 3
+        Height = 13
+      end
+      object pb: TProgressBar
+        Left = 9
+        Top = 7
+        Width = 281
+        Height = 17
+        Position = 20
+        Smooth = True
+        Step = 0
+        TabOrder = 0
+        Visible = False
+      end
+    end
+  end
+  object ChFile: TOpenDialog
+    DefaultExt = '*.xml'
+    Filter = 'XML (xml)|*.xml'
+    Left = 440
+    Top = 8
+  end
+end

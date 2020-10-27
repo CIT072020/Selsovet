@@ -1,0 +1,64 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Достижение возраста за период
+1
+1,"0"
+2,PARAM,401,238,96,,111
+3
+3
+3,PROP,FLD_DATER,LOWER_N,"fikAnd,fikFirst",0,1,1,1,dkAge
+1,VALUE,valNumber,0,,0,60,18991230,0,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valDate,0,,0,0,20170101,0,,0.00
+VALUES,
+3,PROP,FLD_DATER,GREAT_EQUAL_N,fikAnd,0,1,1,2,dkAge
+1,VALUE,valNumber,0,,0,60,18991230,0,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valDate,0,,0,0,20171231,0,,0.00
+VALUES,
+3,PROP,FLD_POL,EQUAL_S,fikAnd,0,1,0,3,dkFull
+1,VALUE,valString,0,М,0,0,18991230,0,Мужской,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+33
+1,FIELDS_CTRL,3
+1,FLD_DATER,1
+1,CONTROLS,5
+1,CTRL,TStaticText,laName1_c9a467790eda2bbcd5f0ccb1af5df57f_1,"Название поля","sbParam"
+PROPS,Caption=Возраст,Top=2,Left=11,Width=51,Height=17
+1,CTRL,TStaticText,laOp1_c9a467790eda2bbcd5f0ccb1af5df57f_1,"Название операции","sbParam"
+PROPS,Top=22,Left=10,Width=96,Height=17
+1,CTRL,TDBNumberEditEh,edNumber1_c9a467790eda2bbcd5f0ccb1af5df57f_1,"Ввод значения","sbParam"
+PROPS,""
+1,CTRL,TStaticText,laAge1_c9a467790eda2bbcd5f0ccb1af5df57f_1,"На дату","sbParam"
+PROPS,""
+1,CTRL,TDBDateTimeEditEh,edDate1_c9a467790eda2bbcd5f0ccb1af5df57f_1,"Ввод значения","sbParam"
+PROPS,""
+1,FLD_DATER,2
+1,CONTROLS,5
+1,CTRL,TStaticText,laName1_c9a467790eda2bbcd5f0ccb1af5df57f_2,"Название поля","sbParam"
+PROPS,Top=48,Left=27,Width=167,Height=17,"Caption=     "
+1,CTRL,TStaticText,laOp1_c9a467790eda2bbcd5f0ccb1af5df57f_2,"Название операции","sbParam"
+PROPS,""
+1,CTRL,TDBNumberEditEh,edNumber1_c9a467790eda2bbcd5f0ccb1af5df57f_2,"Ввод значения","sbParam"
+PROPS,""
+1,CTRL,TStaticText,laAge1_c9a467790eda2bbcd5f0ccb1af5df57f_2,"На дату","sbParam"
+PROPS,""
+1,CTRL,TDBDateTimeEditEh,edDate1_c9a467790eda2bbcd5f0ccb1af5df57f_2,"Ввод значения","sbParam"
+PROPS,""
+1,FLD_POL,3
+1,CONTROLS,3
+1,CTRL,TStaticText,laName1_657c4d6ebffa08c11d2de138620012ee_3,"Название поля","sbParam"
+PROPS,""
+1,CTRL,TStaticText,laOp1_657c4d6ebffa08c11d2de138620012ee_3,"Название операции","sbParam"
+PROPS,""
+1,CTRL,TComboBox,cbCombo1_657c4d6ebffa08c11d2de138620012ee_3,"Ввод значения","sbParam"
+PROPS,""

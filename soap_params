@@ -1,0 +1,7 @@
+Search Path
+$(DELPHI)\Source\Soap
+$(DELPHI)\Source\Soap\Backup
+
+Conditionals
+CLEANUP_SOAP_HEADERS
+FIX_ELEM_NODE_NS

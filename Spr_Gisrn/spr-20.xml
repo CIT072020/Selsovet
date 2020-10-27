@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATASETS VERSION="1">
+  <SPR-20 ONE_RECORD="0" RECORD_COUNT="12">
+    <row>
+      <TYPESPR>-20</TYPESPR>
+      <EXTCODE>0</EXTCODE>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-20</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-06-24</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-20</TYPESPR>
+      <EXTCODE>01</EXTCODE>
+      <LEX1>Неизвестная ошибка</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-20</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-08-05</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-20</TYPESPR>
+      <EXTCODE>02</EXTCODE>
+      <LEX1>Ошибка проверки данных</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-20</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-08-05</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-20</TYPESPR>
+      <EXTCODE>03</EXTCODE>
+      <LEX1>Неверный формат даты</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-20</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-08-05</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-20</TYPESPR>
+      <EXTCODE>04</EXTCODE>
+      <LEX1>Значение классификатора не найдено</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-20</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-08-05</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-20</TYPESPR>
+      <EXTCODE>05</EXTCODE>
+      <LEX1>Данные по лицу не найдены</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-20</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-08-05</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-20</TYPESPR>
+      <EXTCODE>06</EXTCODE>
+      <LEX1>Отсутствуют обязательные данные</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-20</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-09-11</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-20</TYPESPR>
+      <EXTCODE>07</EXTCODE>
+      <LEX1>Дублирование данных</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-20</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-09-11</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-20</TYPESPR>
+      <EXTCODE>08</EXTCODE>
+      <LEX1>Ошибка авторизации</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-20</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-09-11</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-20</TYPESPR>
+      <EXTCODE>09</EXTCODE>
+      <LEX1>Отсутствует семейная связь</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-20</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2013-06-21</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-20</TYPESPR>
+      <EXTCODE>10</EXTCODE>
+      <LEX1>Ошибка проверки ЭЦП</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-20</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2013-10-14</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-20</TYPESPR>
+      <EXTCODE>11</EXTCODE>
+      <LEX1>Ошибка хронологии</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-20</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-02-22</BEGINDATE>
+    </row>
+  </SPR-20>
+</DATASETS>

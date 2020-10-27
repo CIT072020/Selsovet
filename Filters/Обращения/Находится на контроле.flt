@@ -1,0 +1,23 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Находится на контроле
+0
+1,"0"
+2,PARAM,0,0,96,,111
+2
+2
+3,PROP,REQ_CHECK,EQUAL_N,"fikAnd,fikFirst",0,0,1,1,dkFull
+1,VALUE,valNumber,0,,0,1,18991230,0,да,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,CHECK_OUT,EQUAL_L,fikAnd,0,0,1,2,dkFull
+1,VALUE,valBoolean,0,,0,0,18991230,0,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,

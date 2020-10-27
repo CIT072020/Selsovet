@@ -1,0 +1,22 @@
+mFindInt.pas
+============
+
+TFindFieldKind         <<  ffkStamp
+
+FindFieldKindIden      << 'STAMP'
+
+TOperList.FillStrings  << K:=Kinds-[ffkNotNull, ffkFTS, ffkDoTrim, ffkStamp]; 
+
+TOperList.FillStrings  << if (ffkStamp in Oper.FieldKinds) and not (ffkStamp in Kinds) then Continue;
+
+TFilterInterface.TestErrors <<
+
+         // 6.2. провер€ем что бы тип ffkStamp сто€л только у пол€ с типом даты
+         if (Field<>nil) and (ffkStamp in Field.Kinds) and not (ffkDate in Field.Kinds) then begin
+            Result:=True;
+            if Errors<>nil then begin
+               Errors.Add(Format('ќшибка в типе пол€ %s. ѕоле не €вл€етс€ датой, хот€ указано наличие времени ', [Field.Name]));
+            end;
+         end;
+
+

@@ -1,0 +1,247 @@
+
+Âûïîëíÿåòñÿ çàïğîñ íà ïîëó÷åíèå äàííûõ èç ğåãèñòğà:
+
+/cover/
+/cover/message_id        ={2FF18271-7D3A-47D7-9B10-2A6ED1828E2B}
+/cover/message_type      =type: 82, code: 0001
+/cover/message_time      =2020.10.23 16:53
+/cover/message_source    =type: 80, code: 1
+/cover/parent_message_id =
+
+Çàïğîñ íà ïîëó÷åíèå ïğåñîíàëüíûõ äàííûõ person_request (1):
+
+person_request/request_id     ={8EE5CA6F-4621-4569-9132-286DF0AF48FA}
+person_request/identif_number =4101283A081PB4
+person_request/document/access        =nil
+person_request/document/document_type =nil
+person_request/document/authority     =nil
+person_request/document/date_of_issue =nil
+person_request/document/expire_date   =nil
+person_request/document/series        =
+person_request/document/number        =
+person_request/document/act_data      =nil
+person_request/document/active        =False
+
+Çàïğîñ íà ãåíåğàöèş íîâîãî èäåíòèôèêàöèîííîãî íîìåğà  (0):
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=729, âñåãî=729
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=8192, âñåãî=8192
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=7168, âñåãî=7168
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=8192, âñåãî=8192
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=8192, âñåãî=8192
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=8192, âñåãî=8192
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=8192, âñåãî=8192
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=8192, âñåãî=8192
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=8192, âñåãî=8192
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=8192, âñåãî=8192
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=8192, âñåãî=8192
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=8192, âñåãî=8192
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=8192, âñåãî=8192
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=8192, âñåãî=8192
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=8192, âñåãî=8192
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=8192, âñåãî=8192
+Ïîëó÷åíèå äàííûõ    ïîëó÷åíî=6172, âñåãî=6172
+
+Ïîëó÷åí îòâåò:
+
+/cover/
+/cover/message_id        ={9A79307B-9457-49FC-8F13-92C28057F0A6}
+/cover/message_type      =type: 82, code: 0001
+/cover/message_time      =2020.10.23 16:55
+/cover/message_source    =type: 80, code: 1
+/cover/parent_message_id ={2FF18271-7D3A-47D7-9B10-2A6ED1828E2B}
+
+Ñïèñîê ïåğñîíàëüíûõ äàííûõ personal_data (1):
+
+personal_data/request_id ={8EE5CA6F-4621-4569-9132-286DF0AF48FA}
+personal_data/access         =nil
+personal_data/identif        =4101283A081PB4
+personal_data/last_name      =ÈÂÀÍÎÂÀ
+personal_data/last_name_bel  =²ÂÀÍÎÂÀ
+personal_data/last_name_lat  =BUYAKEVICH
+personal_data/name_          =ÈĞÈÍÀ
+personal_data/name_bel       =²ĞÛÍÀ
+personal_data/name_lat       =
+personal_data/patronymic     =ÌÈÕÀÉËÎÂÍÀ
+personal_data/patronymic_bel =Ì²ÕÀÉËÀ¡ÍÀ
+personal_data/patronymic_lat =
+personal_data/sex            =type: 32, code: F, Text: ÆÅÍÑÊÈÉ, lang: ru, Text: Æ, lang: be
+personal_data/birth_day      =19831210
+personal_data/birth_place/country_b    =type: 8, code: BLR, Text: ĞÅÑÏÓÁËÈÊÀ ÁÅËÀĞÓÑÜ, lang: ru, Text: ĞİÑÏÓÁË²ÊÀ ÁÅËÀĞÓÑÜ, lang: be
+personal_data/birth_place/area_b       =
+personal_data/birth_place/area_b_bel   =
+personal_data/birth_place/region_b     =
+personal_data/birth_place/region_b_bel =
+personal_data/birth_place/type_city_b  =type: 68, code: 11100001, Text: Ã, lang: ru, Text: Ã, lang: be
+personal_data/birth_place/city_b       =ÌÈÍÑÊ
+personal_data/birth_place/city_b_bel   =Ì²ÍÑÊ
+personal_data/birth_place/city_b_ate   =nil
+personal_data/citizenship    =type: 8, code: BLR, Text: ĞÅÑÏÓÁËÈÊÀ ÁÅËÀĞÓÑÜ, lang: ru, Text: ĞİÑÏÓÁË²ÊÀ ÁÅËÀĞÓÑÜ, lang: be
+personal_data/status         =type: -18, code: 1, Text: ÀÊÒÈÂÅÍ, lang: ru
+personal_data/document[0]/access        =type: -3, code: 10, Text: ÎÒÊĞÛÒÀß ÃĞÓÏÏÀ ÈÍÔÎĞÌÀÖÈÈ, lang: ru
+personal_data/document[0]/document_type =type: 39, code: 54100001, Text: ÏÀÑÏÎĞÒ ÃĞÀÆÄÀÍÈÍÀ ĞÁ, lang: ru, Text: ÏÀØÏÀĞÒ ÃĞÀÌÀÄÇßÍ²ÍÀ ĞÁ, lang: be
+personal_data/document[0]/authority     =type: 24, code: 17606091, Text: ÔĞÓÍÇÅÍÑÊÎÅ ĞÓÂÄ Ã.ÌÈÍÑÊÀ, lang: ru, Text: ÔĞÓÍÇÅÍÑÊÀÅ ĞÓÓÑ Ã.Ì²ÍÑÊÀ, lang: be
+personal_data/document[0]/date_of_issue =2005.05.30
+personal_data/document[0]/expire_date   =2008.12.10
+personal_data/document[0]/series        =MP
+personal_data/document[0]/number        =0826214
+personal_data/document[0]/act_data      =nil
+personal_data/document[0]/active        =True
+personal_data/photo[0]/documents[0]/access        =type: -3, code: 10, Text: ÎÒÊĞÛÒÀß ÃĞÓÏÏÀ ÈÍÔÎĞÌÀÖÈÈ, lang: ru
+personal_data/photo[0]/documents[0]/document_type =type: 39, code: 54100001, Text: ÏÀÑÏÎĞÒ ÃĞÀÆÄÀÍÈÍÀ ĞÁ, lang: ru, Text: ÏÀØÏÀĞÒ ÃĞÀÌÀÄÇßÍ²ÍÀ ĞÁ, lang: be
+personal_data/photo[0]/documents[0]/authority     =type: 24, code: 17606091, Text: ÔĞÓÍÇÅÍÑÊÎÅ ĞÓÂÄ Ã.ÌÈÍÑÊÀ, lang: ru, Text: ÔĞÓÍÇÅÍÑÊÀÅ ĞÓÓÑ Ã.Ì²ÍÑÊÀ, lang: be
+personal_data/photo[0]/documents[0]/date_of_issue =2005.05.30
+personal_data/photo[0]/documents[0]/expire_date   =2008.12.10
+personal_data/photo[0]/documents[0]/series        =MP
+personal_data/photo[0]/documents[0]/number        =0826214
+personal_data/photo[0]/documents[0]/act_data      =nil
+personal_data/photo[0]/documents[0]/active        =True
+personal_data/nationality_data (0)
+personal_data/address/ =nil
+personal_data/deaths (0)
+personal_data/family/father/ =nil
+personal_data/family/mather/ =nil
+personal_data/family/wife/ =nil
+personal_data/family/husband/person_data/access         =nil
+personal_data/family/husband/person_data/identif        =3101149A066PB3
+personal_data/family/husband/person_data/last_name      =ÔÅÄÎÑÈÊ
+personal_data/family/husband/person_data/last_name_bel  =ÔÅÄÎÑ²Ê
+personal_data/family/husband/person_data/last_name_lat  =
+personal_data/family/husband/person_data/name_          =ÂËÀÄÈÌÈĞ
+personal_data/family/husband/person_data/name_bel       =ÓËÀÄÇ²Ì²Ğ
+personal_data/family/husband/person_data/name_lat       =
+personal_data/family/husband/person_data/patronymic     =ÑÒÅÏÀÍÎÂÈ×
+personal_data/family/husband/person_data/patronymic_bel =ÑÖßÏÀÍÀÂ²×
+personal_data/family/husband/person_data/patronymic_lat =
+personal_data/family/husband/person_data/sex            =type: 32, code: M, Text: ÌÓÆÑÊÎÉ, lang: ru, Text: Ì, lang: be
+personal_data/family/husband/person_data/birth_day      =19491110
+personal_data/family/husband/person_data/birth_place/country_b    =type: 8, code: BLR, Text: ĞÅÑÏÓÁËÈÊÀ ÁÅËÀĞÓÑÜ, lang: ru, Text: ĞİÑÏÓÁË²ÊÀ ÁÅËÀĞÓÑÜ, lang: be
+personal_data/family/husband/person_data/birth_place/area_b       =ÃĞÎÄÍÅÍÑÊÀß ÎÁËÀÑÒÜ
+personal_data/family/husband/person_data/birth_place/area_b_bel   =ÃĞÎÄÇÅÍÑÊÀß ÂÎÁËÀÑÖÜ
+personal_data/family/husband/person_data/birth_place/region_b     =ÑËÎÍÈÌÑÊÈÉ
+personal_data/family/husband/person_data/birth_place/region_b_bel =ÑËÎÍ²ÌÑÊ²
+personal_data/family/husband/person_data/birth_place/type_city_b  =nil
+personal_data/family/husband/person_data/birth_place/city_b       =ÏÎĞÅ×ÜÅ
+personal_data/family/husband/person_data/birth_place/city_b_bel   =ÏÀĞİ××À
+personal_data/family/husband/person_data/birth_place/city_b_ate   =nil
+personal_data/family/husband/person_data/citizenship    =type: 8, code: BLR, Text: ĞÅÑÏÓÁËÈÊÀ ÁÅËÀĞÓÑÜ, lang: ru, Text: ĞİÑÏÓÁË²ÊÀ ÁÅËÀĞÓÑÜ, lang: be
+personal_data/family/husband/person_data/status         =type: -18, code: 1, Text: ÀÊÒÈÂÅÍ, lang: ru
+personal_data/family/husband/person_data/document (0)
+personal_data/family/husband/person_data/photo (0)
+personal_data/family/husband/person_data/nationality_data (0)
+personal_data/family/husband/person_data/address/ =nil
+personal_data/family/husband/person_data/deaths (0)
+personal_data/family/husband/person_data/family/ =nil
+personal_data/family/husband/person_data/courts/ =nil
+personal_data/family/husband/person_data/educations (0)
+personal_data/family/husband/person_data/scienceRanks (0)
+personal_data/family/husband/person_data/scienceDegrees (0)
+personal_data/family/husband/person_data/pensions (0)
+personal_data/family/husband/person_data/insurances (0)
+personal_data/family/husband/person_data/taxies (0)
+personal_data/family/husband/person_data/militaries (0)
+personal_data/family/husband/documents[0]/access        =type: -3, code: 10, Text: ÎÒÊĞÛÒÀß ÃĞÓÏÏÀ ÈÍÔÎĞÌÀÖÈÈ, lang: ru
+personal_data/family/husband/documents[0]/document_type =type: 37, code: 54100006, Text: ÑÂÈÄÅÒÅËÜÑÒÂÎ Î ÇÀÊËŞ×ÅÍÈÈ ÁĞÀÊÀ, lang: ru, Text: ÏÀÑÂÅÄ×ÀÍÍÅ ÀÁ ÇÀÊËŞ×İÍÍ² ØËŞÁÓ, lang: be
+personal_data/family/husband/documents[0]/authority     =type: 80, code: 1, Text: ÁĞÅÑÒÑÊÈÉ ÎÁËÀÑÒÍÎÉ ÀĞÕÈÂ ÇÀÃÑ, lang: ru
+personal_data/family/husband/documents[0]/date_of_issue =2020.10.22
+personal_data/family/husband/documents[0]/expire_date   =nil
+personal_data/family/husband/documents[0]/series        =I-ÀË
+personal_data/family/husband/documents[0]/number        =2222229
+personal_data/family/husband/documents[0]/act_data      =nil
+personal_data/family/husband/documents[0]/active        =True
+personal_data/family/husband/documents[1]/access        =type: -3, code: 10, Text: ÎÒÊĞÛÒÀß ÃĞÓÏÏÀ ÈÍÔÎĞÌÀÖÈÈ, lang: ru
+personal_data/family/husband/documents[1]/document_type =type: 82, code: 0300, Text: ÀÊÒÎÂÀß ÇÀÏÈÑÜ ĞÅÃÈÑÒĞÀÖÈÈ ÇÀÊËŞ×ÅÍÈß ÁĞÀÊÀ, lang: ru
+personal_data/family/husband/documents[1]/authority     =type: 80, code: 1, Text: ÁĞÅÑÒÑÊÈÉ ÎÁËÀÑÒÍÎÉ ÀĞÕÈÂ ÇÀÃÑ, lang: ru
+personal_data/family/husband/documents[1]/date_of_issue =2020.10.22
+personal_data/family/husband/documents[1]/expire_date   =nil
+personal_data/family/husband/documents[1]/series        =
+personal_data/family/husband/documents[1]/number        =45
+personal_data/family/husband/documents[1]/act_data      =nil
+personal_data/family/husband/documents[1]/active        =True
+personal_data/family/child[0]/person_data/access         =nil
+personal_data/family/child[0]/person_data/identif        =7076770A001PB1
+personal_data/family/child[0]/person_data/last_name      =ËÀÏÀÍÈÊ
+personal_data/family/child[0]/person_data/last_name_bel  =ËÀÏÀÍ²Ê
+personal_data/family/child[0]/person_data/last_name_lat  =
+personal_data/family/child[0]/person_data/name_          =ÈÂÀÍ
+personal_data/family/child[0]/person_data/name_bel       =²ÂÀÍ
+personal_data/family/child[0]/person_data/name_lat       =
+personal_data/family/child[0]/person_data/patronymic     =ÎËÅÃÎÂÈ×
+personal_data/family/child[0]/person_data/patronymic_bel =ÀËÅÃÀÂ²×
+personal_data/family/child[0]/person_data/patronymic_lat =
+personal_data/family/child[0]/person_data/sex            =type: 32, code: M, Text: ÌÓÆÑÊÎÉ, lang: ru, Text: Ì, lang: be
+personal_data/family/child[0]/person_data/birth_day      =20190511
+personal_data/family/child[0]/person_data/birth_place/country_b    =type: 8, code: BLR, Text: ĞÅÑÏÓÁËÈÊÀ ÁÅËÀĞÓÑÜ, lang: ru, Text: ĞİÑÏÓÁË²ÊÀ ÁÅËÀĞÓÑÜ, lang: be
+personal_data/family/child[0]/person_data/birth_place/area_b       =ÌÈÍÑÊÀß ÎÁËÀÑÒÜ
+personal_data/family/child[0]/person_data/birth_place/area_b_bel   =Ì²ÍÑÊÀß ÂÎÁËÀÑÖÜ
+personal_data/family/child[0]/person_data/birth_place/region_b     =ÑËÓÖÊÈÉ
+personal_data/family/child[0]/person_data/birth_place/region_b_bel =ÑËÓÖÊ²
+personal_data/family/child[0]/person_data/birth_place/type_city_b  =type: 68, code: 11100068, Text: ÀÃĞÎÃÎĞÎÄÎÊ, lang: ru, Text: ÀÃĞÀÃÀĞÀÄÎÊ, lang: be
+personal_data/family/child[0]/person_data/birth_place/city_b       =ÌÎËÎÒÊÎÂÈ×È
+personal_data/family/child[0]/person_data/birth_place/city_b_bel   =ÌÀËÎÒÊÀÂ²×Û
+personal_data/family/child[0]/person_data/birth_place/city_b_ate   =nil
+personal_data/family/child[0]/person_data/citizenship    =nil
+personal_data/family/child[0]/person_data/status         =type: -18, code: 6, Text: ÀĞÕÈÂÍÛÉ, lang: ru
+personal_data/family/child[0]/person_data/document (0)
+personal_data/family/child[0]/person_data/photo (0)
+personal_data/family/child[0]/person_data/nationality_data (0)
+personal_data/family/child[0]/person_data/address/ =nil
+personal_data/family/child[0]/person_data/deaths (0)
+personal_data/family/child[0]/person_data/family/ =nil
+personal_data/family/child[0]/person_data/courts/ =nil
+personal_data/family/child[0]/person_data/educations (0)
+personal_data/family/child[0]/person_data/scienceRanks (0)
+personal_data/family/child[0]/person_data/scienceDegrees (0)
+personal_data/family/child[0]/person_data/pensions (0)
+personal_data/family/child[0]/person_data/insurances (0)
+personal_data/family/child[0]/person_data/taxies (0)
+personal_data/family/child[0]/person_data/militaries (0)
+personal_data/family/child[0]/documents (0)
+personal_data/family/child[1]/person_data/access         =nil
+personal_data/family/child[1]/person_data/identif        =7603922A001PB6
+personal_data/family/child[1]/person_data/last_name      =ÊÎÒÎÂ
+personal_data/family/child[1]/person_data/last_name_bel  =ÊÎÒÀ¡
+personal_data/family/child[1]/person_data/last_name_lat  =
+personal_data/family/child[1]/person_data/name_          =ÈÂÀÍ
+personal_data/family/child[1]/person_data/name_bel       =²ÂÀÍ
+personal_data/family/child[1]/person_data/name_lat       =
+personal_data/family/child[1]/person_data/patronymic     =ÎËÅÃÎÂÈ×
+personal_data/family/child[1]/person_data/patronymic_bel =ÀËÅÃÀÂ²×
+personal_data/family/child[1]/person_data/patronymic_lat =
+personal_data/family/child[1]/person_data/sex            =type: 32, code: M, Text: ÌÓÆÑÊÎÉ, lang: ru, Text: Ì, lang: be
+personal_data/family/child[1]/person_data/birth_day      =20190904
+personal_data/family/child[1]/person_data/birth_place/country_b    =type: 8, code: BLR, Text: ĞÅÑÏÓÁËÈÊÀ ÁÅËÀĞÓÑÜ, lang: ru, Text: ĞİÑÏÓÁË²ÊÀ ÁÅËÀĞÓÑÜ, lang: be
+personal_data/family/child[1]/person_data/birth_place/area_b       =ÌÈÍÑÊÀß ÎÁËÀÑÒÜ
+personal_data/family/child[1]/person_data/birth_place/area_b_bel   =Ì²ÍÑÊÀß ÂÎÁËÀÑÖÜ
+personal_data/family/child[1]/person_data/birth_place/region_b     =ÑËÓÖÊÈÉ
+personal_data/family/child[1]/person_data/birth_place/region_b_bel =ÑËÓÖÊ²
+personal_data/family/child[1]/person_data/birth_place/type_city_b  =type: 68, code: 11100068, Text: ÀÃĞÎÃÎĞÎÄÎÊ, lang: ru, Text: ÀÃĞÀÃÀĞÀÄÎÊ, lang: be
+personal_data/family/child[1]/person_data/birth_place/city_b       =ÌÎËÎÒÊÎÂÈ×È
+personal_data/family/child[1]/person_data/birth_place/city_b_bel   =ÌÀËÎÒÊÀÂ²×Û
+personal_data/family/child[1]/person_data/birth_place/city_b_ate   =nil
+personal_data/family/child[1]/person_data/citizenship    =nil
+personal_data/family/child[1]/person_data/status         =type: -18, code: 1, Text: ÀÊÒÈÂÅÍ, lang: ru
+personal_data/family/child[1]/person_data/document (0)
+personal_data/family/child[1]/person_data/photo (0)
+personal_data/family/child[1]/person_data/nationality_data (0)
+personal_data/family/child[1]/person_data/address/ =nil
+personal_data/family/child[1]/person_data/deaths (0)
+personal_data/family/child[1]/person_data/family/ =nil
+personal_data/family/child[1]/person_data/courts/ =nil
+personal_data/family/child[1]/person_data/educations (0)
+personal_data/family/child[1]/person_data/scienceRanks (0)
+personal_data/family/child[1]/person_data/scienceDegrees (0)
+personal_data/family/child[1]/person_data/pensions (0)
+personal_data/family/child[1]/person_data/insurances (0)
+personal_data/family/child[1]/person_data/taxies (0)
+personal_data/family/child[1]/person_data/militaries (0)
+personal_data/family/child[1]/documents (0)
+personal_data/courts/ =nil
+personal_data/educations (0)
+personal_data/scienceRanks (0)
+personal_data/scienceDegrees (0)
+personal_data/pensions (0)
+personal_data/insurances (0)
+personal_data/taxies (0)
+personal_data/militaries (0)
+
+Ñïèñîê èäåíòèôèêàöèîííûõ íîìåğîâ identif_number (0):

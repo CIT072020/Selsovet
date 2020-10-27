@@ -1,0 +1,31 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Не заполнен военкомат у отца
+1
+1,"0"
+2,PARAM,0,0,96,,111
+3
+3
+3,PROP,FLD_DATEZ,BETWEEN_D,"fikAnd,fikFirst",0,1,0,1,dkFull
+1,VALUE,valDate,1,,0,0,20050101,1,,0.00
+VALUES,
+1,VALUE,valDate,1,,0,0,20140101,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_ON_GRAG,EQUAL_N,fikAnd,0,0,1,3,dkFull
+1,VALUE,valNumber,0,,0,112,18991230,0,"Республики Беларусь",0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_ON_VOENKOM,EMPTY_N,fikAnd,0,0,0,2,dkFull
+1,VALUE,valNumber,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+0

@@ -1,0 +1,2 @@
+MSG=1~!!! Мама мыла раму !!!
+MSG=3~SQL=Обработка~delete from BaseTextProp where typeobj=41

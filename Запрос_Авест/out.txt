@@ -1,0 +1,347 @@
+
+расшифровка структуры криптографического сообщения (CMS) в <wsse:Sign>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</wsse:Sign>
+с помощью команды oopenssl :  cms -cmsout  -in D:\ecp.txt -inform DER -print -out out.txt
+
+подписывается информация между <ws:register_request></ws:register_request> включительно
+в криптографическом сообщении (CMS) должно быть продублировано тело запроса
+
+
+CMS_ContentInfo: 
+  contentType: pkcs7-signedData (1.2.840.113549.1.7.2)
+  d.signedData: 
+    version: 1
+    digestAlgorithms:
+        algorithm: BelT-HASH256 (1.2.112.0.2.0.34.101.31.81)
+        parameter: NULL
+    encapContentInfo: 
+      eContentType: pkcs7-data (1.2.840.113549.1.7.1)
+      eContent: 
+        0000 - 3c 77 73 3a 72 65 67 69-73 74 65 72 5f 72 65   <ws:register_re
+        000f - 71 75 65 73 74 3e 0d 0a-20 20 20 20 20 3c 77   quest>..     <w
+        001e - 73 3a 63 6f 76 65 72 3e-0d 0a 20 20 20 20 20   s:cover>..     
+        002d - 20 20 20 3c 74 79 70 3a-6d 65 73 73 61 67 65      <typ:message
+        003c - 5f 69 64 3e 7b 34 42 44-46 30 34 30 37 2d 31   _id>{4BDF0407-1
+        004b - 39 30 31 2d 34 33 41 33-2d 38 32 36 35 2d 32   901-43A3-8265-2
+        005a - 31 36 43 36 44 34 30 39-33 31 37 7d 3c 2f 74   16C6D409317}</t
+        0069 - 79 70 3a 6d 65 73 73 61-67 65 5f 69 64 3e 0d   yp:message_id>.
+        0078 - 0a 20 20 20 20 20 20 20-20 3c 74 79 70 3a 6d   .        <typ:m
+        0087 - 65 73 73 61 67 65 5f 74-79 70 65 3e 0d 0a 20   essage_type>.. 
+        0096 - 20 20 20 20 20 20 20 20-20 20 3c 74 79 70 3a             <typ:
+        00a5 - 63 6f 64 65 3e 38 38 3c-2f 74 79 70 3a 63 6f   code>88</typ:co
+        00b4 - 64 65 3e 0d 0a 20 20 20-20 20 20 20 20 20 20   de>..          
+        00c3 - 20 3c 74 79 70 3a 74 79-70 65 3e 2d 32 3c 2f    <typ:type>-2</
+        00d2 - 74 79 70 3a 74 79 70 65-3e 0d 0a 20 20 20 20   typ:type>..    
+        00e1 - 20 20 20 20 3c 2f 74 79-70 3a 6d 65 73 73 61       </typ:messa
+        00f0 - 67 65 5f 74 79 70 65 3e-0d 0a 20 20 20 20 20   ge_type>..     
+        00ff - 20 20 20 3c 74 79 70 3a-6d 65 73 73 61 67 65      <typ:message
+        010e - 5f 74 69 6d 65 3e 32 30-31 39 2d 31 30 2d 31   _time>2019-10-1
+        011d - 35 54 31 36 3a 35 32 3a-30 34 2e 38 38 39 2b   5T16:52:04.889+
+        012c - 30 33 3a 30 30 3c 2f 74-79 70 3a 6d 65 73 73   03:00</typ:mess
+        013b - 61 67 65 5f 74 69 6d 65-3e 0d 0a 20 20 20 20   age_time>..    
+        014a - 20 20 20 20 3c 74 79 70-3a 6d 65 73 73 61 67       <typ:messag
+        0159 - 65 5f 73 6f 75 72 63 65-3e 0d 0a 20 20 20 20   e_source>..    
+        0168 - 20 20 20 20 20 20 20 3c-74 79 70 3a 63 6f 64          <typ:cod
+        0177 - 65 3e 31 39 31 37 30 30-31 36 31 3c 2f 74 79   e>191700161</ty
+        0186 - 70 3a 63 6f 64 65 3e 0d-0a 20 20 20 20 20 20   p:code>..      
+        0195 - 20 20 20 20 20 3c 74 79-70 3a 74 79 70 65 3e        <typ:type>
+        01a4 - 38 30 3c 2f 74 79 70 3a-74 79 70 65 3e 0d 0a   80</typ:type>..
+        01b3 - 20 20 20 20 20 20 20 20-3c 2f 74 79 70 3a 6d           </typ:m
+        01c2 - 65 73 73 61 67 65 5f 73-6f 75 72 63 65 3e 0d   essage_source>.
+        01d1 - 0a 20 20 20 20 20 3c 2f-77 73 3a 63 6f 76 65   .     </ws:cove
+        01e0 - 72 3e 0d 0a 20 20 20 20-20 3c 77 73 3a 72 65   r>..     <ws:re
+        01ef - 71 75 65 73 74 3e 0d 0a-20 20 20 20 20 20 20   quest>..       
+        01fe - 20 3c 77 73 3a 70 65 72-73 6f 6e 5f 72 65 71    <ws:person_req
+        020d - 75 65 73 74 3e 0d 0a 20-20 20 20 20 20 20 20   uest>..        
+        021c - 20 20 20 3c 77 73 3a 72-65 71 75 65 73 74 5f      <ws:request_
+        022b - 69 64 3e 7b 43 44 33 42-44 37 42 35 2d 34 41   id>{CD3BD7B5-4A
+        023a - 34 38 2d 34 33 34 46 2d-41 38 38 45 2d 37 37   48-434F-A88E-77
+        0249 - 45 33 34 30 42 39 36 36-43 43 7d 3c 2f 77 73   E340B966CC}</ws
+        0258 - 3a 72 65 71 75 65 73 74-5f 69 64 3e 0d 0a 20   :request_id>.. 
+        0267 - 20 20 20 20 20 20 20 20-20 20 3c 77 73 3a 69             <ws:i
+        0276 - 64 65 6e 74 69 66 5f 6e-75 6d 62 65 72 3e 34   dentif_number>4
+        0285 - 32 38 31 31 38 31 42 30-33 36 50 42 31 3c 2f   281181B036PB1</
+        0294 - 77 73 3a 69 64 65 6e 74-69 66 5f 6e 75 6d 62   ws:identif_numb
+        02a3 - 65 72 3e 0d 0a 20 20 20-20 20 20 20 20 3c 2f   er>..        </
+        02b2 - 77 73 3a 70 65 72 73 6f-6e 5f 72 65 71 75 65   ws:person_reque
+        02c1 - 73 74 3e 0d 0a 20 20 20-20 20 3c 2f 77 73 3a   st>..     </ws:
+        02d0 - 72 65 71 75 65 73 74 3e-0d 0a 20 20 3c 2f 77   request>..  </w
+        02df - 73 3a 72 65 67 69 73 74-65 72 5f 72 65 71 75   s:register_requ
+        02ee - 65 73 74 3e                                    est>
+    certificates:
+      d.certificate: 
+        cert_info: 
+          version: 2
+          serialNumber: 20084051529362421794977724313
+          signature: 
+            algorithm: BigN-with-HBelT (1.2.112.0.2.0.34.101.45.12)
+            parameter: NULL
+          issuer: O=\x04 \x045\x04A\x04?\x04C\x041\x04;\x048\x04:\x040\x04=\x04A\x04:\x04>\x045\x00 \x04C\x04=\x048\x04B\x040\x04@\x04=\x04>\x045\x00 \x04?\x04@\x045\x044\x04?\x04@\x048\x04O\x04B\x048\x045\x00 \x00"\x04\x1D\x040\x04F\x048\x04>\x04=\x040\x04;\x04L\x04=\x04K\x049\x00 \x04F\x045\x04=\x04B\x04@\x00 \x04M\x04;\x045\x04:\x04B\x04@\x04>\x04=\x04=\x04K\x04E\x00 \x04C\x04A\x04;\x04C\x043\x00", CN=\x04 \x045\x04A\x04?\x04C\x041\x04;\x048\x04:\x040\x04=\x04A\x04:\x048\x049\x00 \x04C\x044\x04>\x04A\x04B\x04>\x042\x045\x04@\x04O\x04N\x04I\x048\x049\x00 \x04F\x045\x04=\x04B\x04@\x00 \x04\x13\x04>\x04A\x04!\x04#\x04\x1E\x04\x1A, C=BY, ST=\x04\x1C\x048\x04=\x04A\x04:\x040\x04O, L=\x043\x00.\x00 \x04\x1C\x048\x04=\x04A\x04:/street=\x04?\x04@\x00-\x04B\x00 \x04\x1C\x040\x04H\x045\x04@\x04>\x042\x040\x00,\x00 \x002\x005/emailAddress=rca@pki.gov.by
+          validity: 
+            notBefore: Jul  9 14:16:00 2018 GMT
+            notAfter: Jul  8 20:59:59 2020 GMT
+          subject: street=\xD1\x83\xD0\xBB.\xD0\xA0\xD0\xB0\xD0\xBA\xD0\xBE\xD0\xB2\xD1\x81\xD0\xBA\xD0\xB0\xD1\x8F, \xD0\xB4.14, CN=\xD0\x93\xD0\xBE\xD1\x81\xD1\x83\xD0\xB4\xD0\xB0\xD1\x80\xD1\x81\xD1\x82\xD0\xB2\xD0\xB5\xD0\xBD\xD0\xBD\xD0\xBE\xD0\xB5 \xD0\xBF\xD1\x80\xD0\xB5\xD0\xB4\xD0\xBF\xD1\x80\xD0\xB8\xD1\x8F\xD1\x82\xD0\xB8\xD0\xB5 "\xD0\x9D\xD0\xA6\xD0\xAD\xD0\xA3", SN=\xD0\x9B\xD0\xB5\xD0\xB2\xD0\xB8\xD1\x86\xD0\xBA\xD0\xB0\xD1\x8F/emailAddress=inna.levitskaya@nces.by, C=BY, O=\xD0\x93\xD0\xBE\xD1\x81\xD1\x83\xD0\xB4\xD0\xB0\xD1\x80\xD1\x81\xD1\x82\xD0\xB2\xD0\xB5\xD0\xBD\xD0\xBD\xD0\xBE\xD0\xB5 \xD0\xBF\xD1\x80\xD0\xB5\xD0\xB4\xD0\xBF\xD1\x80\xD0\xB8\xD1\x8F\xD1\x82\xD0\xB8\xD0\xB5 "\xD0\x9D\xD0\xA6\xD0\xAD\xD0\xA3"/name=\xD0\x98\xD0\xBD\xD0\xBD\xD0\xB0 \xD0\x9D\xD0\xB8\xD0\xBA\xD0\xBE\xD0\xBB\xD0\xB0\xD0\xB5\xD0\xB2\xD0\xBD\xD0\xB0, L=\xD0\xB3.\xD0\x9C\xD0\xB8\xD0\xBD\xD1\x81\xD0\xBA
+          key: 
+            algor: 
+              algorithm: BigN-PubKey (1.2.112.0.2.0.34.101.45.2.1)
+              parameter: OBJECT:BigN-Curve-256-v1 (1.2.112.0.2.0.34.101.45.3.1)
+            public_key:  (0 unused bits)
+              0000 - a6 a5 39 65 80 a6 ce b2-50 69 c0 28 31 35   ..9e....Pi.(15
+              000e - cf f3 4d ba a0 99 ec 36-10 bb 7c 9e b0 b1   ..M....6..|...
+              001c - f8 4e d0 dc 7a 58 bd 2e-db a0 bd 4e 6d 41   .N..zX.....NmA
+              002a - b1 08 c5 3e 58 aa d9 84-de 7c dc 99 63 62   ...>X....|..cb
+              0038 - 4a f5 9b c4 b4 77 de ab-                    J....w..
+          issuerUID: <ABSENT>
+          subjectUID: <ABSENT>
+          extensions:
+              object: X509v3 Authority Key Identifier (2.5.29.35)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 30 16 80 14 39 5e 80 d5-e4 d9 1c 59 3d   0...9^.....Y=
+                000d - 86 57 74 a7 9c d5 bd 41-7d 3b 80         .Wt....A};.
+
+              object: X509v3 Basic Constraints (2.5.29.19)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 30                                       0
+                0002 - <SPACES/NULS>
+
+              object: X509v3 Key Usage (2.5.29.15)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 03 02 03 b8                              ....
+
+              object: X509v3 Extended Key Usage (2.5.29.37)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 30 0a 06 08 2b 06 01 05-05 07 03 02      0...+.......
+
+              object: X509v3 Subject Key Identifier (2.5.29.14)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 04 14 8a b3 50 7b 92 e0-97 f9 f7 33 5c   ....P{.....3\
+                000d - 62 61 89 59 b9 92 3a 03-7e               ba.Y..:.~
+
+              object: undefined (1.2.112.1.2.1.1.5.4)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 30 24 30 22 80 0f 32 30-31 38 30 37 30   0$0"..2018070
+                000d - 39 31 34 31 34 30 31 5a-81 0f 32 30 33   9141401Z..203
+                001a - 33 30 37 30 39 31 34 31-34 30 31 5a      30709141401Z
+
+              object: undefined (1.2.112.1.2.1.1.1.1.2)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 1e 12 00 31 00 39 00 31-00 37 00 30 00   ...1.9.1.7.0.
+                000d - 30 00 31 00 36 00 31                     0.1.6.1
+
+              object: undefined (1.2.112.1.2.1.1.1.1.1)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 1e 1c 00 34 00 32 00 38-00 31 00 31 00   ...4.2.8.1.1.
+                000d - 38 00 31 00 42 00 30 00-33 00 36 00 50   8.1.B.0.3.6.P
+                001a - 00 42 00 31                              .B.1
+
+              object: undefined (1.2.112.1.2.1.1.1.2.1)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 1e 2e 00 31 00 2e 00 32-00 2e 00 31 00   ...1...2...1.
+                000d - 31 00 32 00 2e 00 31 00-2e 00 32 00 2e   1.2...1...2..
+                001a - 00 31 00 2e 00 31 00 2e-00 31 00 2e 00   .1...1...1...
+                0027 - 32 00 2e 00 31 00 2e 00-34               2...1...4
+
+              object: undefined (1.2.112.1.2.1.1.5.1)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 1e 3a 04 17 04 30 04 3c-04 35 04 41 04   .:...0.<.5.A.
+                000d - 42 04 38 04 42 04 35 04-3b 04 4c 00 20   B.8.B.5.;.L. 
+                001a - 04 3d 04 30 04 47 04 30-04 3b 04 4c 04   .=.0.G.0.;.L.
+                0027 - 3d 04 38 04 3a 04 30 00-20 04 3e 04 42   =.8.:.0. .>.B
+                0034 - 04 34 04 35 04 3b 04 30-                 .4.5.;.0
+        sig_alg: 
+          algorithm: BigN-with-HBelT (1.2.112.0.2.0.34.101.45.12)
+          parameter: NULL
+        signature:  (0 unused bits)
+          0000 - b5 39 47 39 2c 74 d7 39-02 3c f8 8b 44 fc 60   .9G9,t.9.<..D.`
+          000f - 12 ba c8 7f 9e b9 4c d4-d9 02 2c 8b 10 30 a0   ......L...,..0.
+          001e - 33 23 4a fc 93 bf 18 6e-6b a9 1f b2 4c b1 61   3#J....nk...L.a
+          002d - 8e 6b 0c                                       .k.
+
+      d.certificate: 
+        cert_info: 
+          version: 2
+          serialNumber: 20083183618806187254807003139
+          signature: 
+            algorithm: BigN-with-HBelT (1.2.112.0.2.0.34.101.45.12)
+            parameter: NULL
+          issuer: O=\x04 \x045\x04A\x04?\x04C\x041\x04;\x048\x04:\x040\x04=\x04A\x04:\x04>\x045\x00 \x04C\x04=\x048\x04B\x040\x04@\x04=\x04>\x045\x00 \x04?\x04@\x045\x044\x04?\x04@\x048\x04O\x04B\x048\x045\x00 \x00"\x04\x1D\x040\x04F\x048\x04>\x04=\x040\x04;\x04L\x04=\x04K\x049\x00 \x04F\x045\x04=\x04B\x04@\x00 \x04M\x04;\x045\x04:\x04B\x04@\x04>\x04=\x04=\x04K\x04E\x00 \x04C\x04A\x04;\x04C\x043\x00", CN=\x04\x1A\x04>\x04@\x04=\x045\x042\x04>\x049\x00 \x04C\x044\x04>\x04A\x04B\x04>\x042\x045\x04@\x04O\x04N\x04I\x048\x049\x00 \x04F\x045\x04=\x04B\x04@\x00 \x04\x13\x04>\x04A\x04!\x04#\x04\x1E\x04\x1A, C=BY
+          validity: 
+            notBefore: Jun 30 07:11:17 2014 GMT
+            notAfter: Jun 30 20:59:59 2029 GMT
+          subject: O=\x04 \x045\x04A\x04?\x04C\x041\x04;\x048\x04:\x040\x04=\x04A\x04:\x04>\x045\x00 \x04C\x04=\x048\x04B\x040\x04@\x04=\x04>\x045\x00 \x04?\x04@\x045\x044\x04?\x04@\x048\x04O\x04B\x048\x045\x00 \x00"\x04\x1D\x040\x04F\x048\x04>\x04=\x040\x04;\x04L\x04=\x04K\x049\x00 \x04F\x045\x04=\x04B\x04@\x00 \x04M\x04;\x045\x04:\x04B\x04@\x04>\x04=\x04=\x04K\x04E\x00 \x04C\x04A\x04;\x04C\x043\x00", CN=\x04 \x045\x04A\x04?\x04C\x041\x04;\x048\x04:\x040\x04=\x04A\x04:\x048\x049\x00 \x04C\x044\x04>\x04A\x04B\x04>\x042\x045\x04@\x04O\x04N\x04I\x048\x049\x00 \x04F\x045\x04=\x04B\x04@\x00 \x04\x13\x04>\x04A\x04!\x04#\x04\x1E\x04\x1A, C=BY, ST=\x04\x1C\x048\x04=\x04A\x04:\x040\x04O, L=\x043\x00.\x00 \x04\x1C\x048\x04=\x04A\x04:/street=\x04?\x04@\x00-\x04B\x00 \x04\x1C\x040\x04H\x045\x04@\x04>\x042\x040\x00,\x00 \x002\x005/emailAddress=rca@pki.gov.by
+          key: 
+            algor: 
+              algorithm: BigN-PubKey (1.2.112.0.2.0.34.101.45.2.1)
+              parameter: OBJECT:BigN-Curve-256-v1 (1.2.112.0.2.0.34.101.45.3.1)
+            public_key:  (0 unused bits)
+              0000 - ff 45 61 11 b7 ef 00 8e-94 6a 58 4c 70 f6   .Ea......jXLp.
+              000e - e7 de 48 26 47 db 01 0d-74 67 83 ba d1 73   ..H&G...tg...s
+              001c - e7 b2 a3 7f dc 2b ee 17-52 de c7 f7 ad d6   .....+..R.....
+              002a - fb 63 f9 64 2b 54 d2 d5-ca f9 1d 5d 9c 26   .c.d+T.....].&
+              0038 - 2f a8 c3 0f fd 63 96 5c-                    /....c.\
+          issuerUID: <ABSENT>
+          subjectUID: <ABSENT>
+          extensions:
+              object: X509v3 Key Usage (2.5.29.15)
+              critical: TRUE
+              value: 
+                0000 - 03 02 01 86                              ....
+
+              object: X509v3 Subject Key Identifier (2.5.29.14)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 04 14 39 5e 80 d5 e4 d9-1c 59 3d 86 57   ..9^.....Y=.W
+                000d - 74 a7 9c d5 bd 41 7d 3b-80               t....A};.
+
+              object: undefined (1.2.112.1.2.1.1.1.2.1)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 1e 2e 00 31 00 2e 00 32-00 2e 00 31 00   ...1...2...1.
+                000d - 31 00 32 00 2e 00 31 00-2e 00 32 00 2e   1.2...1...2..
+                001a - 00 31 00 2e 00 31 00 2e-00 31 00 2e 00   .1...1...1...
+                0027 - 32 00 2e 00 31 00 2e 00-32               2...1...2
+
+              object: X509v3 Certificate Policies (2.5.29.32)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 30 0d 30 0b 06 09 2a 70-01 02 01 01 01   0.0...*p.....
+                000d - 03 02                                    ..
+
+              object: X509v3 Authority Key Identifier (2.5.29.35)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 30 16 80 14 99 c8 26 66-8f 2d 01 b5 4a   0.....&f.-..J
+                000d - 27 ae 65 82 84 09 2f 2d-ab 97 fc         '.e.../-...
+
+              object: X509v3 Basic Constraints (2.5.29.19)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 30 03 01 01 ff                           0....
+        sig_alg: 
+          algorithm: BigN-with-HBelT (1.2.112.0.2.0.34.101.45.12)
+          parameter: NULL
+        signature:  (0 unused bits)
+          0000 - 28 b5 2f 88 e8 a3 6d f8-d6 61 d7 f3 56 0f 62   (./...m..a..V.b
+          000f - 68 8a 30 bd db af 3a ba-56 e6 47 6c 7a 0c f5   h.0...:.V.Glz..
+          001e - 57 63 b1 4a 51 65 74 57-89 a9 3d 34 dd 3f 32   Wc.JQetW..=4.?2
+          002d - 54 bc 07                                       T..
+
+      d.certificate: 
+        cert_info: 
+          version: 2
+          serialNumber: 20083183615645576780809502722
+          signature: 
+            algorithm: BigN-with-HBelT (1.2.112.0.2.0.34.101.45.12)
+            parameter: NULL
+          issuer: O=\x04 \x045\x04A\x04?\x04C\x041\x04;\x048\x04:\x040\x04=\x04A\x04:\x04>\x045\x00 \x04C\x04=\x048\x04B\x040\x04@\x04=\x04>\x045\x00 \x04?\x04@\x045\x044\x04?\x04@\x048\x04O\x04B\x048\x045\x00 \x00"\x04\x1D\x040\x04F\x048\x04>\x04=\x040\x04;\x04L\x04=\x04K\x049\x00 \x04F\x045\x04=\x04B\x04@\x00 \x04M\x04;\x045\x04:\x04B\x04@\x04>\x04=\x04=\x04K\x04E\x00 \x04C\x04A\x04;\x04C\x043\x00", CN=\x04\x1A\x04>\x04@\x04=\x045\x042\x04>\x049\x00 \x04C\x044\x04>\x04A\x04B\x04>\x042\x045\x04@\x04O\x04N\x04I\x048\x049\x00 \x04F\x045\x04=\x04B\x04@\x00 \x04\x13\x04>\x04A\x04!\x04#\x04\x1E\x04\x1A, C=BY
+          validity: 
+            notBefore: Jun 30 06:59:38 2014 GMT
+            notAfter: Jun 30 20:59:59 2034 GMT
+          subject: O=\x04 \x045\x04A\x04?\x04C\x041\x04;\x048\x04:\x040\x04=\x04A\x04:\x04>\x045\x00 \x04C\x04=\x048\x04B\x040\x04@\x04=\x04>\x045\x00 \x04?\x04@\x045\x044\x04?\x04@\x048\x04O\x04B\x048\x045\x00 \x00"\x04\x1D\x040\x04F\x048\x04>\x04=\x040\x04;\x04L\x04=\x04K\x049\x00 \x04F\x045\x04=\x04B\x04@\x00 \x04M\x04;\x045\x04:\x04B\x04@\x04>\x04=\x04=\x04K\x04E\x00 \x04C\x04A\x04;\x04C\x043\x00", CN=\x04\x1A\x04>\x04@\x04=\x045\x042\x04>\x049\x00 \x04C\x044\x04>\x04A\x04B\x04>\x042\x045\x04@\x04O\x04N\x04I\x048\x049\x00 \x04F\x045\x04=\x04B\x04@\x00 \x04\x13\x04>\x04A\x04!\x04#\x04\x1E\x04\x1A, C=BY
+          key: 
+            algor: 
+              algorithm: BigN-PubKey (1.2.112.0.2.0.34.101.45.2.1)
+              parameter: OBJECT:BigN-Curve-256-v1 (1.2.112.0.2.0.34.101.45.3.1)
+            public_key:  (0 unused bits)
+              0000 - e7 5d 0b 32 98 ba c0 b6-1c 9b e5 93 61 76   .].2........av
+              000e - 7e 89 ed f9 9e 47 7d 77-0c 82 64 e6 c0 8a   ~....G}w..d...
+              001c - dd a4 c1 ed ad a9 01 f1-00 47 52 d8 ca 0e   .........GR...
+              002a - d4 f0 98 c4 ed 8e cd cf-46 50 bd cc 6c b0   ........FP..l.
+              0038 - f0 16 09 b0 cd 8d 5d 92-                    ......].
+          issuerUID: <ABSENT>
+          subjectUID: <ABSENT>
+          extensions:
+              object: X509v3 Key Usage (2.5.29.15)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 03 02 01 86                              ....
+
+              object: X509v3 Subject Key Identifier (2.5.29.14)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 04 14 99 c8 26 66 8f 2d-01 b5 4a 27 ae   ....&f.-..J'.
+                000d - 65 82 84 09 2f 2d ab 97-fc               e.../-...
+
+              object: undefined (1.2.112.1.2.1.1.1.2.1)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 1e 2e 00 31 00 2e 00 32-00 2e 00 31 00   ...1...2...1.
+                000d - 31 00 32 00 2e 00 31 00-2e 00 32 00 2e   1.2...1...2..
+                001a - 00 31 00 2e 00 31 00 2e-00 31 00 2e 00   .1...1...1...
+                0027 - 32 00 2e 00 31 00 2e 00-31               2...1...1
+
+              object: X509v3 Certificate Policies (2.5.29.32)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 30 0d 30 0b 06 09 2a 70-01 02 01 01 01   0.0...*p.....
+                000d - 03 01                                    ..
+
+              object: X509v3 Authority Key Identifier (2.5.29.35)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 30 16 80 14 99 c8 26 66-8f 2d 01 b5 4a   0.....&f.-..J
+                000d - 27 ae 65 82 84 09 2f 2d-ab 97 fc         '.e.../-...
+
+              object: X509v3 Basic Constraints (2.5.29.19)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 30 03 01 01 ff                           0....
+
+              object: undefined (2.5.29.2)
+              critical: BOOL ABSENT
+              value: 
+                0000 - 30 24 30 22 80 0f 32 30-31 34 30 36 33   0$0"..2014063
+                000d - 30 30 36 35 39 33 38 5a-81 0f 32 30 33   0065938Z..203
+                001a - 34 30 36 33 30 32 30 35-39 35 39 5a      40630205959Z
+        sig_alg: 
+          algorithm: BigN-with-HBelT (1.2.112.0.2.0.34.101.45.12)
+          parameter: NULL
+        signature:  (0 unused bits)
+          0000 - 4e 85 51 9e 62 9f c1 d2-94 17 0b a5 7e 58 55   N.Q.b.......~XU
+          000f - dd 10 ed 9a 71 97 a0 90-d4 08 7d ee ca 72 71   ....q.....}..rq
+          001e - 19 cc c5 63 96 65 d4 1f-b2 47 ba 78 d8 76 60   ...c.e...G.x.v`
+          002d - 2b 35 6b                                       +5k
+    crls:
+      <EMPTY>
+    signerInfos:
+        version: 1
+        d.issuerAndSerialNumber: 
+          issuer: O=\x04 \x045\x04A\x04?\x04C\x041\x04;\x048\x04:\x040\x04=\x04A\x04:\x04>\x045\x00 \x04C\x04=\x048\x04B\x040\x04@\x04=\x04>\x045\x00 \x04?\x04@\x045\x044\x04?\x04@\x048\x04O\x04B\x048\x045\x00 \x00"\x04\x1D\x040\x04F\x048\x04>\x04=\x040\x04;\x04L\x04=\x04K\x049\x00 \x04F\x045\x04=\x04B\x04@\x00 \x04M\x04;\x045\x04:\x04B\x04@\x04>\x04=\x04=\x04K\x04E\x00 \x04C\x04A\x04;\x04C\x043\x00", CN=\x04 \x045\x04A\x04?\x04C\x041\x04;\x048\x04:\x040\x04=\x04A\x04:\x048\x049\x00 \x04C\x044\x04>\x04A\x04B\x04>\x042\x045\x04@\x04O\x04N\x04I\x048\x049\x00 \x04F\x045\x04=\x04B\x04@\x00 \x04\x13\x04>\x04A\x04!\x04#\x04\x1E\x04\x1A, C=BY, ST=\x04\x1C\x048\x04=\x04A\x04:\x040\x04O, L=\x043\x00.\x00 \x04\x1C\x048\x04=\x04A\x04:/street=\x04?\x04@\x00-\x04B\x00 \x04\x1C\x040\x04H\x045\x04@\x04>\x042\x040\x00,\x00 \x002\x005/emailAddress=rca@pki.gov.by
+          serialNumber: 20084051529362421794977724313
+        digestAlgorithm: 
+          algorithm: BelT-HASH256 (1.2.112.0.2.0.34.101.31.81)
+          parameter: NULL
+        signedAttrs:
+            object: contentType (1.2.840.113549.1.9.3)
+            value.set:
+              OBJECT:pkcs7-data (1.2.840.113549.1.7.1)
+
+            object: signingTime (1.2.840.113549.1.9.5)
+            value.set:
+              UTCTIME:Oct 15 13:53:27 2019 GMT
+
+            object: messageDigest (1.2.840.113549.1.9.4)
+            value.set:
+              OCTET STRING:
+                0000 - 24 1b 04 3f 97 c2 d5 98-db 33 bc d6 33   $..?.....3..3
+                000d - 58 80 d5 2c 02 fc 96 30-c2 67 ae 98 15   X..,...0.g...
+                001a - 30 3f 1e ec 3f dc                        0?..?.
+        signatureAlgorithm: 
+          algorithm: BigN-PubKey (1.2.112.0.2.0.34.101.45.2.1)
+          parameter: NULL
+        signature: 
+          0000 - 06 c1 8d eb 56 ad fe 7f-1a 4b 0b 13 b3 3b 20   ....V....K...; 
+          000f - 30 4a 84 10 36 a7 34 13-88 10 f0 31 ef 09 6d   0J..6.4....1..m
+          001e - e4 17 78 43 a9 f1 94 6c-be 38 3d 71 ba 87 a3   ..xC...l.8=q...
+          002d - 05 c6 70                                       ..p
+        unsignedAttrs:
+          <EMPTY>

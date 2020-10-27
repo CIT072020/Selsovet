@@ -1,0 +1,41 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+По типу документа и фамилии
+1
+1,"0"
+2,PARAM,393,212,96,,111
+2
+2
+3,PROP,FLD_TYPEDOK,EQUAL_N,"fikAnd,fikFirst",0,1,1,1,dkFull
+1,VALUE,valNumbers,0,,0,0,18991230,0,,0.00
+VALUES,52
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_FAMILIA,BEGIN,fikAnd,0,1,0,2,dkFull
+1,VALUE,valString,1,Иванов,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+17
+1,FIELDS_CTRL,2
+1,FLD_TYPEDOK,1
+1,CONTROLS,3
+1,CTRL,TLabel,laName1_e4439b78c5a883e67b0cf17de297e5ba_1,"Название поля","sbParam"
+PROPS,Top=2,Left=9,Width=90,Height=13,Visible=False
+1,CTRL,TLabel,laOp1_e4439b78c5a883e67b0cf17de297e5ba_1,"Название операции","sbParam"
+PROPS,Top=3,Left=174,Width=30,Height=13,Visible=False
+1,CTRL,TCheckListBox,chbSpr1_e4439b78c5a883e67b0cf17de297e5ba_1,"Ввод значения","sbParam"
+PROPS,Top=2,Left=11,Width=369,Height=68
+1,FLD_FAMILIA,2
+1,CONTROLS,3
+1,CTRL,TLabel,laName1_7cd9157bc89413ff741f463038eca299_2,"Название поля","sbParam"
+PROPS,Top=83,Left=15,Width=49,Height=13
+1,CTRL,TLabel,laOp1_7cd9157bc89413ff741f463038eca299_2,"Название операции","sbParam"
+PROPS,Top=120,Left=346,Width=30,Height=13,Visible=False
+1,CTRL,TEdit,edText1_7cd9157bc89413ff741f463038eca299_2,"Ввод значения","sbParam"
+PROPS,Top=79,Left=77,Width=232,Height=21

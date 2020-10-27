@@ -1,0 +1,1 @@
+start updateprog.exe /TYPESERVER

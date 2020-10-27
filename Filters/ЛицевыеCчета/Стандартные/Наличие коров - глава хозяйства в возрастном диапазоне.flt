@@ -1,0 +1,55 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Наличие коров - глава хозяйства в возрастном диапазоне
+1
+1,"0"
+2,PARAM,475,141,96,,111
+4
+2
+3,PROP,KOROVA,NOT_EMPTY_SN_P,"fikAnd,fikFirst",0,0,0,1,dkFull
+1,VALUE,valNumber,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,LIST_MENS,EXISTS,"fikPar,fikAnd",0,0,1,2,dkFull
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+PAR
+2
+3,PROP,LIST_MENS.FLD_FIRST,EQUAL_L,"fikAnd,fikFirst",0,0,1,3,dkFull
+1,VALUE,valBoolean,0,,1,0,18991230,0,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,LIST_MENS.FLD_DATER,BETWEEN_N,fikAnd,0,1,1,4,dkCurrentAge
+1,VALUE,valNumber,0,,0,40,18991230,0,,0.00
+VALUES,
+1,VALUE,valNumber,0,,0,50,18991230,0,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+15
+1,FIELDS_CTRL,2
+1,LIST_MENS.FLD_DATER,4
+1,CONTROLS,4
+1,CTRL,TStaticText,laName1_ffb5297c13041bf56f241866676100c5_4,"Название поля","sbParam"
+PROPS,,Top=15,Left=35,Width=111,Height=14,"Caption=Текущий возраст"
+1,CTRL,TStaticText,laOp1_ffb5297c13041bf56f241866676100c5_4,"Название операции","sbParam"
+PROPS,,Top=15,Left=154,Width=34,Height=13
+1,CTRL,TDBNumberEditEh,edNumber1_ffb5297c13041bf56f241866676100c5_4,"Ввод значения","sbParam"
+PROPS,,Top=12,Left=203,Width=41,Height=21
+1,CTRL,TDBNumberEditEh,edNumber2_ffb5297c13041bf56f241866676100c5_4,"Ввод значения 2","sbParam"
+PROPS,,Top=12,Left=279,Width=36,Height=21
+1,nil
+1,CONTROLS,1
+1,CTRL,TLabel,TLabel1,"и","sbParam"
+PROPS,Top=15,Left=258,Width=5,Height=10,Caption=и

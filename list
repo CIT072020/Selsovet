@@ -1,0 +1,55 @@
+//------------------- TYPE_DATE_SPRAV ----------------------
+function SPR_ARXIV_ROGD
+function ZAGS_SprBrak       Архивная справка о браке (отдельная)
+function SPR_ARXIV_brak     Архивная справка о браке 
+function ZAGS_SprRast       Архивная справка о расторжении брака (отдельно)
+function SPR_ARXIV_rast
+function ZAGS_SprChName
+function SPR_ARXIV_IM
+function ZAGS_SprOtsut
+function ZAGS_SprAkt        Справка о записи акта гражданского состояния
+function ZAGS_ZaklChName
+
+
+
+
+
+//------------------------------
+function SPR_ROGD_POS           6
+function SPR_ARXIV_SMERT        6
+function ZAGS_IzvOtsut          6
+function Izv_im(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function Soob_im(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function IZV_UstOtc(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function IZV_ISP_ROGD(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function IZV_ISP_SMERT(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function IZV_ISP_Brak(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function IZV_ISP_UstOtc(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function IZV_ISP_Adopt(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function IZV_ISP_ChName(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function IZV_ISP_ROGD_V(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function IZV_ISP_SMERT_V(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function IZV_ISP_Brak_V(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function SPR_ARX_ROGD(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function IZV_RB(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function SP_ROGD(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function SP_SMERT(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function SP_Brak(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function SP_RastBrak(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function SP_UstOtc(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function SP_Adopt(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function SP_ChName(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function Zakl(DateFiks: TDateTime; LicID, PID: Word):boolean; // Заключение о перемене ФИО  
+function SP_ROGDV(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function SP_SMERTV(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function SP_BrakV(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function SP_VIP_ROGD(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function SP_VIP_SMERT(DateFiks: TDateTime; LicID, PID: Word):boolean;
+function SP_VIP_SMERT(DateFiks: TDateTime; LicID, PID: Word):boolean;
+
+//---------------------------------------
+function IZV_INOST(DateFiks: TDateTime; LicID, PID: Word):boolean;  2
+function IZV_INOST1(DateFiks: TDateTime; LicID, PID: Word):boolean;  2
+function IZV_BRAK(DateFiks: TDateTime; LicID, PID: Word):boolean;
+
+

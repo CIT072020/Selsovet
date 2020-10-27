@@ -1,0 +1,41 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Год и месяц актовой записи
+1
+1,"0"
+2,PARAM,393,188,96,,111
+4
+2
+3,PROP,FLD_DATEZ,EQUAL_N,"fikAnd,fikFirst",0,1,1,1,dkYear
+1,VALUE,valNumber,0,,0,2006,18991230,0,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_DATEZ,EQUAL_N,fikAnd,0,1,0,2,dkMonth
+1,VALUE,valNumber,1,,0,2,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+17
+1,FIELDS_CTRL,2
+1,FLD_DATEZ,1
+1,CONTROLS,3
+1,CTRL,TLabel,laName1_3f917f2c2cd64d2d3b9fc2b27bdbe484_1,"Название поля","sbParam"
+PROPS,Caption=Год,Top=7,Left=13,Width=22,Height=13
+1,CTRL,TLabel,laOp1_3f917f2c2cd64d2d3b9fc2b27bdbe484_1,"Название операции","sbParam"
+PROPS,Top=5,Left=183,Width=30,Height=13,Caption=
+1,CTRL,TDBNumberEditEh,edNumber1_3f917f2c2cd64d2d3b9fc2b27bdbe484_1,"Ввод значения","sbParam"
+PROPS,Top=3,Left=64,Width=60,Height=21
+1,FLD_DATEZ,2
+1,CONTROLS,3
+1,CTRL,TLabel,laName1_3f917f2c2cd64d2d3b9fc2b27bdbe484_2,"Название поля","sbParam"
+PROPS,Top=43,Left=13,Width=39,Height=13,Caption=Месяц
+1,CTRL,TLabel,laOp1_3f917f2c2cd64d2d3b9fc2b27bdbe484_2,"Название операции","sbParam"
+PROPS,Top=11,Left=266,Width=30,Height=13,Caption=
+1,CTRL,TComboBox,cbMonth1_3f917f2c2cd64d2d3b9fc2b27bdbe484_2,"Ввод значения","sbParam"
+PROPS,Top=39,Left=64,Width=100,Height=21

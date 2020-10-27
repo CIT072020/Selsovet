@@ -1,0 +1,37 @@
+{
+    "cover": {
+		"message_id": "4D7961DF-3057-4587-A498-5D995C733D80",
+		"message_type": {
+			"code": "103",
+			"type": -2,
+			"active": "true"
+		},
+		"message_time": "2014-04-09T13:22:09.619+03:00",
+		"message_source": {
+			"code": "6",
+			"type": 131
+		}
+	},
+	"guardianship_info": {
+        "ward_data": {
+			"identif": "7746528A001PB4"
+        },
+		"guardian_data": {
+			"identif": "7120691A001PB3"
+        },
+        "establish_guardianship_date": "2016-06-05",
+        "remove_guardian_date": "2018-07-05",
+		"guardianship_document": {
+            "document_type": {
+                "code": "4",
+				"type": 133
+            },
+            "authority": {
+				"code": "6",
+				"type": 131
+			},
+            "date_of_issue": "2014-01-01",
+            "number": "1"
+        }
+    }
+}

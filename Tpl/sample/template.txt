@@ -1,0 +1,4 @@
+[NAME1]
+Caption=О занимаемом гражданином жилом помещении и составе семьи
+TemplateFile=%BaseDir%tpl\Справка1.rtf
+ScriptName='Template_1'

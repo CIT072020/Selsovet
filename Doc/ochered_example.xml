@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<database>
+  <info>
+    <source>401</source>
+    <name>Брестский</name>
+    <kname>Брестский райисполком</kname>
+    <shtamp>
+      <![CDATA[Республика Беларусь
+Брестская область
+Остромичский сельский  исполнительный комитет
+Кобринского района
+225889 д.Остромичи]]>
+    </shtamp>
+    <telefon>204629</telefon>
+    <date>26-03-2019</date>
+    <version>2</version>
+    <count>5456</count>
+  </info>
+  <rows>
+    <men fam="Амельянович" name="Александр" otch="Александрович" dater="14-07-2008" pol="М" in="9182264A001PB1" dec_date="16-10-2020" nomer="47">
+      <passport type="1" seria="НВ" nomer="2852310" date="24-06-2015" organ="Калинковичский РОВД Гомельской области"/>
+      <adres kod="10804" ate="10763" rn="Клецкий" np="Гулевичи" npt="2" ul="ул. Советская" dom="4" plosh_all="32"/>
+      <events>
+        <resh type="1" date="16-10-2020" nomer="2222" osnov="79" osnov_punkt="п.1.4. ст.36" osnov_ukaz="ЖК" osnov2="80" osnov2_punkt="п.1.5. ст.36" osnov2_ukaz="ЖК" dates="16-10-2020"/>
+      </events>
+      <sostav/>
+    </men>
+    <men fam="Шумакова" name="Тамара" otch="Николаевна" dater="23-12-1988" pol="Ж" in="1233388H016PB1" dec_date="30-11-2010" dec_date_real="30-11-2010" nomer="4" room="6">
+      <passport type="1" seria="НВ" nomer="2757061" date="31-07-2014" organ="Калинковичский РОВД Гомельской области"/>
+      <adres kod="10804" ate="10763" rn="Клецкий" np="Гулевичи" npt="2" ul="ул. Заречная" dom="9" plosh_all="49.22" kol_kom="2"/>
+      <events>
+        <resh type="1" date="23-12-2010" nomer="64" osnov="79" osnov_punkt="п.1.4. ст.36" osnov_ukaz="ЖК" dates="30-11-2010"/>
+      </events>
+      <sostav>
+        <men otn="муж" fam="Шумаков" name="Руслан" otch="Николаевич" in="3110189H050PB7" dater="11-01-1989" pol="М"/>
+        <men otn="дочь" fam="Шумакова" name="Дарья" otch="Руслановна" dater="28-10-2009" pol="Ж"/>
+        <men otn="сын" fam="Шумаков" name="Иван" otch="Русланович" dater="25-01-2013" pol="М"/>
+      </sostav>
+    </men>
+    <men fam="Иванова" name="Ольга" otch="Сергеевна" dater="10-01-1998" pol="Ж" dec_date="25-11-2008" dec_date_real="21-12-2018" room="6" room_date="19-12-2018" sirota="1">
+      <adres obl="Бресткска" rn="Брестский" punkt="д. Тельмы-2" ul="ул. Молодёжная" dom="44" plosh_all="171.5" kol_kom="6" kol_prop="4"/>
+      <events>
+        <resh type="1" date="21-01-2019" nomer="6" osnov="51" osnov_punkt="3.3." osnov_ukaz="563" dates="21-12-2018"/>
+      </events>
+      <otdelno>
+        <och type="2" dec_date="25-11-2008" dec_date_real="21-01-2019">
+          <events>
+            <resh type="1" date="22-01-2019" nomer="10" osnov="51" osnov_punkt="3.3." osnov_ukaz="563" dates="25-11-2008"/>
+          </events>
+        </och>
+      </otdelno>
+      <sostav/>
+    </men>
+    <men fam="Петрова" name="Татьяна" otch="Леонидовна" dater="28-02-1979" pol="М" dec_date="11-01-2019" dec_date_real="11-01-2019" room="6" room_date="24-07-1998">
+      <adres obl="Брестская" rn="Брестский" punkt="д. Ямно" ul="ул. Центральная" dom="18" plosh_all="44.99" kol_kom="3" kol_prop="7"/>
+      <events>
+        <resh type="1" date="06-02-2019" nomer="19" osnov="39" osnov_punkt="3.1.2." osnov_ukaz="563" dates="11-01-2019"/>
+      </events>
+      <otdelno>
+        <och type="2" dec_date="06-02-2019" dec_date_real="06-02-2019">
+          <events>
+            <resh type="1" date="11-02-2019" nomer="20" osnov="64" osnov_punkt="63.12.1." osnov_ukaz="563" dates="06-02-2019"/>
+          </events>
+        </och>
+      </otdelno>
+      <sostav>
+        <men otn="дочь" fam="Петрова" name="Наталья" otch="Анатольевна" dater="24-01-2003" pol="Ж">
+          <passport type="1" seria="АВ" nomer="2350433" date="16-09-2010" organ="Брестским РОВД Брестской области"/>
+        </men>
+      </sostav>
+    </men>
+    <men fam="Сидоренко" name="Инна" otch="Викторовна" dater="11-11-1985" dec_date="17-09-2012" dec_date_real="17-09-2012" nomer="61" room="6" room_date="29-11-2005">
+      <passport type="1" seria="АВ" nomer="2375898" date="07-12-2010" organ="Брестским РОВД Брестской области"/>
+      <adres obl="Брестская" rn="Брестский" np="Липинки" npt="2" ul="ул. Завидова" dom="13" plosh_all="35" kol_kom="1" kol_prop="9"/>
+      <events>
+        <resh type="1" date="27-09-2012" nomer="193" osnov="2" osnov_punkt="3.1.2." osnov_ukaz="565" dates="17-09-2012"/>
+      </events>
+      <otdelno>
+        <och type="1" nomer="6" dec_date="22-05-2014" dec_date_real="22-05-2014" dec_time="11:40">
+          <events>
+            <resh type="1" date="22-05-2014" nomer="91" osnov="39" osnov_punkt="3.1.2." osnov_ukaz="563" dates="22-05-2014"/>
+          </events>
+        </och>
+      </otdelno>
+      <sostav>
+        <men otn="сын" fam="Сидоренко" name="Иван" otch="Михайлович" dater="04-02-2006" pol="М">
+          <passport type="1" seria="АВ" nomer="3154724" date="16-02-2017" organ="Брестским РОВД"/>
+        </men>
+        <men otn="сын" fam="Сидоренко" name="Павел" otch="Михайлович" dater="14-07-2007" pol="М">
+          <passport type="1" seria="АВ" nomer="3154726" date="16-02-2017" organ="Брестским РОВД"/>
+        </men>
+        <men otn="дочь" fam="Сидоренко" name="Оксана" otch="Михайловна" dater="19-10-2010" pol="Ж">
+          <passport type="1" seria="АВ" nomer="3154725" date="16-02-2017" organ="Брестским РОВД"/>
+        </men>
+      </sostav>
+    </men>
+    <men fam="Петренко" name="Людмила" otch="Михайловна" dater="27-11-1983" tel="91-41-94родител" dec_date="01-02-2012" dec_date_real="01-02-2012" room="6" room_date="09-06-2009" newfamily="1">
+      <passport type="1" seria="АВ" nomer="2147713" date="19-12-2008" organ="Брестским РОВД Брестской области"/>
+      <adres obl="Брестская" rn="Брестский" np="Страдечь" npt="17" ul="ул Южная" dom="15" plosh_all="175.1" kol_kom="6" kol_prop="17"/>
+      <events>
+        <resh type="1" date="23-02-2012" nomer="59" osnov="11" osnov_punkt="3.1.11." osnov_ukaz="565" dates="01-02-2012"/>
+      </events>
+      <otdelno>
+        <och type="1" iskl="1" dec_date="01-02-2012" dec_date_real="01-02-2012">
+          <events>
+            <resh type="9" date="27-11-2014" nomer="492" osnov="1011" osnov_punkt="32.1." osnov_ukaz="563"/>
+            <resh type="1" date="23-02-2012" nomer="59" osnov="11" osnov_punkt="3.1.11." osnov_ukaz="565" dates="01-02-2012"/>
+          </events>
+        </och>
+      </otdelno>
+      <sostav>
+        <men otn="сын" fam="Петренко" name="Михаил" otch="Дмитриевич" dater="29-01-2011" pol="М"/>
+        <men otn="дочь" fam="Петренко" name="Анастасия" otch="Дмитриевна" dater="25-01-2009" pol="Ж"/>
+        <men otn="сын" fam="Петренко" name="Александр" otch="Дмитриевич" dater="15-09-2004" pol="М"/>
+        <men otn="муж" fam="Петренко" name="Дмитрий" otch="Николаевич" dater="27-06-1983" pol="М">
+          <passport type="1" seria="АВ" nomer="2123618" date="01-10-2008" organ="Ленинским РОВД г.Бреста"/>
+        </men>
+        <men otn="сын" fam="Бельчук" name="Станислав" otch="Дмитриевич" dater="23-07-2012" pol="М"/>
+      </sostav>
+    </men>
+    <men fam="Дашкевич" name="Алексей" otch="Викторович" dater="03-11-1982" tel="94-92-48" delo="201" dec_date="23-11-2006" dec_date_real="23-11-2006" date_check="30-08-2008" newfamily="1" iskl="1">
+      <passport type="1" seria="АВ" nomer="1943318" date="21-05-2007" organ="Брестский РОВД"/>
+      <adres obl="Брестская" rn="Брестский" np="Большие Мотыкалы" npt="17" ul="ул. Лесная" dom="44" plosh_all="78" kol_prop="6"/>
+      <events>
+        <resh type="9" date="14-04-2015" nomer="167" osnov="1011" osnov_punkt="32.1." osnov_ukaz="563"/>
+        <resh type="1" date="20-12-2006" nomer="522" osnov="1" osnov_punkt="3.1.1." osnov_ukaz="565" dates="23-11-2006"/>
+      </events>
+      <sostav>
+        <men otn="жена" fam="Дашкевич" name="Елена" otch="Александровна" dater="07-05-1984" pol="Ж">
+          <passport type="1" seria="АВ" nomer="3215964" date="17-07-2017" organ="Брестским РОВД Брестской области"/>
+        </men>
+        <men otn="дочь" fam="Дашкевич" name="Дарья" otch="Алексеевна" dater="08-08-2007" pol="Ж">
+          <passport type="1" seria="АВ" nomer="2900731" date="24-11-2014" organ="Брестский РОВД Брестской области"/>
+        </men>
+      </sostav>
+    </men>
+  </rows>
+</database>

@@ -1,0 +1,2978 @@
+<?xml version="1.0"?>
+<database xsi:noNamespaceSchemaLocation="schema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<info>
+	<date>2010-11-16</date>
+	<location>Отдел загс Ивановского райисполкома Брестской области</location>
+	<soato>1230000000</soato>
+</info>
+<birth period="2009-10">
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-09-24</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3090</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>51</lengthBody>
+		<A>2</A>
+		<B>1</B>
+		<C>2009-12-21</C>
+		<D>277</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H>1</H>
+		<I xsi:nil="true"/>
+		<J>2006-06-11</J>
+		<K>4</K>
+		<dateBirthFather>1981-08-08</dateBirthFather>
+		<dateBirthMother>1985-05-03</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>3</educationFather>
+		<educationMother>2</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-09-02</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3350</massBody>
+		<orderBody>2</orderBody>
+		<lengthBody>50</lengthBody>
+		<A>2</A>
+		<B>2</B>
+		<C>2008-11-20</C>
+		<D>286</D>
+		<E>1</E>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I>1</I>
+		<J>2000-09-20</J>
+		<K>1</K>
+		<dateBirthFather>1976-10-18</dateBirthFather>
+		<dateBirthMother>1978-10-08</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>1</educationFather>
+		<educationMother>3</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-07-27</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3580</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>52</lengthBody>
+		<A>1</A>
+		<B>1</B>
+		<C>2008-10-15</C>
+		<D>286</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K xsi:nil="true"/>
+		<dateBirthFather>1974-05-10</dateBirthFather>
+		<dateBirthMother>1984-05-18</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>1</educationFather>
+		<educationMother>4</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-09-25</dateBirth>
+		<sex>2</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3850</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>50</lengthBody>
+		<A>1</A>
+		<B>1</B>
+		<C>2008-12-10</C>
+		<D>286</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K xsi:nil="true"/>
+		<dateBirthFather>1987-03-10</dateBirthFather>
+		<dateBirthMother>1988-03-23</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>4</educationFather>
+		<educationMother>4</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-09-28</dateBirth>
+		<sex>2</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>2650</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>47</lengthBody>
+		<A>1</A>
+		<B>1</B>
+		<C>2008-12-22</C>
+		<D>279</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K xsi:nil="true"/>
+		<dateBirthFather>1984-12-25</dateBirthFather>
+		<dateBirthMother>1985-06-29</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>1</educationFather>
+		<educationMother>1</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-09-22</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>2750</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>50</lengthBody>
+		<A>1</A>
+		<B>1</B>
+		<C>2008-12-26</C>
+		<D>270</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K xsi:nil="true"/>
+		<dateBirthFather xsi:nil="true"/>
+		<dateBirthMother>1991-03-27</dateBirthMother>
+		<nationFather>1</nationFather>
+		<nameNF>русские</nameNF>
+		<nationMother>1</nationMother>
+		<nameNM>русские</nameNM>
+		<educationFather xsi:nil="true"/>
+		<educationMother>4</educationMother>
+		<typeDoc>3</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-09-30</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3600</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>51</lengthBody>
+		<A>1</A>
+		<B>1</B>
+		<C>2008-12-20</C>
+		<D>283</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K xsi:nil="true"/>
+		<dateBirthFather>1983-04-21</dateBirthFather>
+		<dateBirthMother>1988-01-16</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>2</educationFather>
+		<educationMother>3</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-09-29</dateBirth>
+		<sex>2</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3450</massBody>
+		<orderBody>2</orderBody>
+		<lengthBody>50</lengthBody>
+		<A>3</A>
+		<B>2</B>
+		<C>2008-12-12</C>
+		<D>290</D>
+		<E>1</E>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H>1</H>
+		<I>1</I>
+		<J xsi:nil="true"/>
+		<K>4</K>
+		<dateBirthFather>1979-10-31</dateBirthFather>
+		<dateBirthMother>1982-06-17</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>1</educationFather>
+		<educationMother>4</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-10-05</dateBirth>
+		<sex>2</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>2850</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>46</lengthBody>
+		<A>1</A>
+		<B>1</B>
+		<C>2008-12-22</C>
+		<D>287</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K xsi:nil="true"/>
+		<dateBirthFather>1988-03-30</dateBirthFather>
+		<dateBirthMother>1988-03-02</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>2</educationFather>
+		<educationMother>2</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-10-09</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>4400</massBody>
+		<orderBody>2</orderBody>
+		<lengthBody>54</lengthBody>
+		<A>2</A>
+		<B>2</B>
+		<C>2008-12-25</C>
+		<D>287</D>
+		<E>1</E>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I>1</I>
+		<J>2007-05-31</J>
+		<K>1</K>
+		<dateBirthFather>1981-08-11</dateBirthFather>
+		<dateBirthMother>1983-02-17</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>1</educationFather>
+		<educationMother>1</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-09-15</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3350</massBody>
+		<orderBody>2</orderBody>
+		<lengthBody>47</lengthBody>
+		<A>2</A>
+		<B>2</B>
+		<C>2008-12-08</C>
+		<D>280</D>
+		<E>1</E>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I>1</I>
+		<J>1999-12-21</J>
+		<K>1</K>
+		<dateBirthFather>1976-01-25</dateBirthFather>
+		<dateBirthMother>1976-11-10</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather xsi:nil="true"/>
+		<educationMother>1</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-10-17</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3750</massBody>
+		<orderBody>2</orderBody>
+		<lengthBody>54</lengthBody>
+		<A>2</A>
+		<B>2</B>
+		<C>2009-01-16</C>
+		<D>273</D>
+		<E>1</E>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I>1</I>
+		<J>2004-10-17</J>
+		<K>1</K>
+		<dateBirthFather>1980-04-19</dateBirthFather>
+		<dateBirthMother>1985-06-13</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>2</educationFather>
+		<educationMother>2</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-10-02</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3050</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>50</lengthBody>
+		<A>1</A>
+		<B>1</B>
+		<C>2009-01-04</C>
+		<D>268</D>
+		<E>1</E>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K xsi:nil="true"/>
+		<dateBirthFather>1972-06-03</dateBirthFather>
+		<dateBirthMother>1981-11-11</dateBirthMother>
+		<nationFather>1</nationFather>
+		<nameNF>русские</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>1</educationFather>
+		<educationMother>1</educationMother>
+		<typeDoc>3</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-10-19</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3000</massBody>
+		<orderBody>2</orderBody>
+		<lengthBody>49</lengthBody>
+		<A>3</A>
+		<B>2</B>
+		<C>2009-02-11</C>
+		<D>259</D>
+		<E>1</E>
+		<F xsi:nil="true"/>
+		<G>1</G>
+		<H xsi:nil="true"/>
+		<I>1</I>
+		<J>2006-07-01</J>
+		<K>3</K>
+		<dateBirthFather>1978-02-28</dateBirthFather>
+		<dateBirthMother>1982-02-25</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>2</educationFather>
+		<educationMother>1</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-10-16</dateBirth>
+		<sex>2</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3500</massBody>
+		<orderBody>3</orderBody>
+		<lengthBody>52</lengthBody>
+		<A>4</A>
+		<B>3</B>
+		<C>2009-01-06</C>
+		<D>282</D>
+		<E>2</E>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H>1</H>
+		<I>2</I>
+		<J>2008-09-22</J>
+		<K>1</K>
+		<dateBirthFather>1970-11-17</dateBirthFather>
+		<dateBirthMother>1986-04-28</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>4</educationFather>
+		<educationMother>4</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-10-14</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3900</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>52</lengthBody>
+		<A>1</A>
+		<B>1</B>
+		<C>2008-12-29</C>
+		<D>289</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K xsi:nil="true"/>
+		<dateBirthFather>1979-11-25</dateBirthFather>
+		<dateBirthMother>1984-12-08</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>1</educationFather>
+		<educationMother>2</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-09-07</dateBirth>
+		<sex>2</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3150</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>48</lengthBody>
+		<A>1</A>
+		<B>1</B>
+		<C>2008-11-28</C>
+		<D>283</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K xsi:nil="true"/>
+		<dateBirthFather xsi:nil="true"/>
+		<dateBirthMother>1991-10-20</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather xsi:nil="true"/>
+		<educationMother>4</educationMother>
+		<typeDoc>3</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-10-14</dateBirth>
+		<sex>2</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3150</massBody>
+		<orderBody>4</orderBody>
+		<lengthBody>51</lengthBody>
+		<A>5</A>
+		<B>3</B>
+		<C>2009-01-06</C>
+		<D>281</D>
+		<E>3</E>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H>2</H>
+		<I>3</I>
+		<J>2009-08-20</J>
+		<K>4</K>
+		<dateBirthFather>1984-02-18</dateBirthFather>
+		<dateBirthMother>1976-07-20</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>2</educationFather>
+		<educationMother>2</educationMother>
+		<typeDoc>3</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230804000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-10-03</dateBirth>
+		<sex>2</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3900</massBody>
+		<orderBody>2</orderBody>
+		<lengthBody>49</lengthBody>
+		<A>2</A>
+		<B>2</B>
+		<C>2008-12-25</C>
+		<D>282</D>
+		<E>1</E>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I>1</I>
+		<J>2004-05-20</J>
+		<K>1</K>
+		<dateBirthFather>1973-02-10</dateBirthFather>
+		<dateBirthMother>1984-07-16</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>4</educationFather>
+		<educationMother>4</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230804000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-07-06</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>2950</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>50</lengthBody>
+		<A>1</A>
+		<B>1</B>
+		<C xsi:nil="true"/>
+		<D>269</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K xsi:nil="true"/>
+		<dateBirthFather xsi:nil="true"/>
+		<dateBirthMother>1989-10-20</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather xsi:nil="true"/>
+		<educationMother>5</educationMother>
+		<typeDoc>3</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230813000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-10-18</dateBirth>
+		<sex>2</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3250</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>490</lengthBody>
+		<A>1</A>
+		<B>1</B>
+		<C>2009-01-26</C>
+		<D>265</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K xsi:nil="true"/>
+		<dateBirthFather>1986-12-11</dateBirthFather>
+		<dateBirthMother>1992-07-01</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>5</educationFather>
+		<educationMother>5</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230818000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-10-03</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3750</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>51</lengthBody>
+		<A>1</A>
+		<B>1</B>
+		<C>2008-12-29</C>
+		<D>278</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K xsi:nil="true"/>
+		<dateBirthFather>1985-06-22</dateBirthFather>
+		<dateBirthMother>1990-08-09</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>4</educationFather>
+		<educationMother>4</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230840000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-10-13</dateBirth>
+		<sex>2</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>4100</massBody>
+		<orderBody>3</orderBody>
+		<lengthBody>53</lengthBody>
+		<A>4</A>
+		<B>3</B>
+		<C>2008-12-31</C>
+		<D>285</D>
+		<E>2</E>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I>2</I>
+		<J xsi:nil="true"/>
+		<K>4</K>
+		<dateBirthFather>1978-08-06</dateBirthFather>
+		<dateBirthMother>1982-11-16</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>4</educationFather>
+		<educationMother>2</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-09-26</dateBirth>
+		<sex>2</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3650</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>51</lengthBody>
+		<A>2</A>
+		<B>1</B>
+		<C>2008-12-15</C>
+		<D>284</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H>1</H>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K>4</K>
+		<dateBirthFather>1985-06-06</dateBirthFather>
+		<dateBirthMother>1989-06-11</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>4</educationFather>
+		<educationMother>2</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-09-26</dateBirth>
+		<sex>2</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3400</massBody>
+		<orderBody>2</orderBody>
+		<lengthBody>51</lengthBody>
+		<A>2</A>
+		<B>2</B>
+		<C>2009-01-04</C>
+		<D xsi:nil="true"/>
+		<E>1</E>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I>1</I>
+		<J>2003-06-15</J>
+		<K>1</K>
+		<dateBirthFather>1978-01-22</dateBirthFather>
+		<dateBirthMother>1981-09-21</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>4</educationFather>
+		<educationMother>2</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230850000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-09-22</dateBirth>
+		<sex>2</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3450</massBody>
+		<orderBody>2</orderBody>
+		<lengthBody>50</lengthBody>
+		<A>2</A>
+		<B>2</B>
+		<C>2008-12-23</C>
+		<D>274</D>
+		<E>1</E>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I>1</I>
+		<J>2004-02-23</J>
+		<K>1</K>
+		<dateBirthFather>1977-11-01</dateBirthFather>
+		<dateBirthMother>1979-11-28</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>1</educationFather>
+		<educationMother>1</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230850000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-09-15</dateBirth>
+		<sex>2</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>2750</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>48</lengthBody>
+		<A>1</A>
+		<B>1</B>
+		<C>2008-11-26</C>
+		<D>293</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K xsi:nil="true"/>
+		<dateBirthFather>1986-10-06</dateBirthFather>
+		<dateBirthMother>1991-04-27</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>4</educationFather>
+		<educationMother>4</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230850000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-10-09</dateBirth>
+		<sex>2</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>2950</massBody>
+		<orderBody>2</orderBody>
+		<lengthBody>50</lengthBody>
+		<A>5</A>
+		<B>2</B>
+		<C xsi:nil="true"/>
+		<D>263</D>
+		<E>1</E>
+		<F xsi:nil="true"/>
+		<G>1</G>
+		<H>2</H>
+		<I>1</I>
+		<J xsi:nil="true"/>
+		<K>4</K>
+		<dateBirthFather>1985-08-02</dateBirthFather>
+		<dateBirthMother>1986-06-28</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>4</educationFather>
+		<educationMother>4</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230850000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-10-21</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>2700</massBody>
+		<orderBody>2</orderBody>
+		<lengthBody>49</lengthBody>
+		<A>2</A>
+		<B>2</B>
+		<C>2009-01-15</C>
+		<D>279</D>
+		<E>1</E>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I>1</I>
+		<J>2007-09-02</J>
+		<K>1</K>
+		<dateBirthFather xsi:nil="true"/>
+		<dateBirthMother>1986-08-15</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather xsi:nil="true"/>
+		<educationMother>4</educationMother>
+		<typeDoc>3</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230862000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-09-28</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>4750</massBody>
+		<orderBody>4</orderBody>
+		<lengthBody>52</lengthBody>
+		<A>4</A>
+		<B>4</B>
+		<C>2008-12-16</C>
+		<D>286</D>
+		<E>3</E>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I>3</I>
+		<J>2005-12-16</J>
+		<K>1</K>
+		<dateBirthFather>1978-06-25</dateBirthFather>
+		<dateBirthMother>1983-06-23</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>4</educationFather>
+		<educationMother>4</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230862000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-10-19</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3200</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>50</lengthBody>
+		<A>1</A>
+		<B>1</B>
+		<C>2009-01-11</C>
+		<D>281</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K xsi:nil="true"/>
+		<dateBirthFather>1981-12-08</dateBirthFather>
+		<dateBirthMother>1991-03-28</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>4</educationFather>
+		<educationMother>4</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230885000</soato>
+		<soatm xsi:nil="true"/>
+		<dateBirth>2009-09-01</dateBirth>
+		<sex>1</sex>
+		<typeBirth>1</typeBirth>
+		<living>0</living>
+		<massBody>3600</massBody>
+		<orderBody>1</orderBody>
+		<lengthBody>52</lengthBody>
+		<A>1</A>
+		<B>1</B>
+		<C>2008-10-20</C>
+		<D>284</D>
+		<E xsi:nil="true"/>
+		<F xsi:nil="true"/>
+		<G xsi:nil="true"/>
+		<H xsi:nil="true"/>
+		<I xsi:nil="true"/>
+		<J xsi:nil="true"/>
+		<K xsi:nil="true"/>
+		<dateBirthFather>1986-12-10</dateBirthFather>
+		<dateBirthMother>1988-01-25</dateBirthMother>
+		<nationFather>3</nationFather>
+		<nameNF>белорусы</nameNF>
+		<nationMother>3</nationMother>
+		<nameNM>белорусы</nameNM>
+		<educationFather>3</educationFather>
+		<educationMother>2</educationMother>
+		<typeDoc>1</typeDoc>
+		<dateRegMarriage xsi:nil="true"/>
+	</row>
+</birth>
+<death period="2009-10">
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-03</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1925-09-19</dateBirth>
+		<maritalStatus>2</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName>Хронический индуративный панкреатит.</basicReasonName>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая печёночная недостаточность. </directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>3</nation>
+		<nationName>белорусы</nationName>
+		<dateDeath>2009-10-04</dateDeath>
+		<deathFollowed>3</deathFollowed>
+		<dateBirth>1978-10-19</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>5</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName>Политравма: открытая черепно-мозговая травма, тупая травма грудной клетки и конечностей</basicReasonName>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Разрушение вещества головного мозга</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-08</dateDeath>
+		<deathFollowed>1</deathFollowed>
+		<dateBirth>1938-01-07</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>4</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName>ИБС, атеросклеротический кардиосклероз</basicReasonName>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая легочно-сердечная недостаточность</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-10</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1937-11-24</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>4</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName>Атеросклеротическая болезнь сердца</basicReasonName>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая сердечно-сосудистая недостаточность.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-14</dateDeath>
+		<deathFollowed>3</deathFollowed>
+		<dateBirth>1929-04-14</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName>Старость</basicReasonName>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName xsi:nil="true"/>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-18</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1931-05-18</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>5</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Рак прямой кишки</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-16</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1932-04-03</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName>Атеросклеротическая болезнь сердца</basicReasonName>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая сердечно-сосудистая недостаточность.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-18</dateDeath>
+		<deathFollowed>1</deathFollowed>
+		<dateBirth>1939-06-10</dateBirth>
+		<maritalStatus>2</maritalStatus>
+		<education>2</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName>Стеноз грудного отдела пищевода.</basicReasonName>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Легочно-сердечная недостаточность, абсцесс правого лёгкого. </directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-21</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1931-09-25</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>2</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName>Атеросклеротическая болезнь сердца</basicReasonName>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая сердечно-сосудистая недостаточность.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>3</nation>
+		<nationName>белорусы</nationName>
+		<dateDeath>2009-10-25</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1944-03-20</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Рак лёгкого</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-25</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1921-05-15</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Атеросклеротическая болезнь сердца</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-29</dateDeath>
+		<deathFollowed>1</deathFollowed>
+		<dateBirth>1940-01-23</dateBirth>
+		<maritalStatus>4</maritalStatus>
+		<education>2</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Кардиоэмболический инфаркт мозга в левом каротидном бассейне.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230804000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>2</nation>
+		<nationName>украинцы</nationName>
+		<dateDeath>2009-10-12</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1989-05-09</dateBirth>
+		<maritalStatus>2</maritalStatus>
+		<education>7</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая недостаточность кровообращения.Последствия перенесённого минингоэнцефалита.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230804000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-20</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1920-09-21</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Старость</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230804000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>3</nation>
+		<nationName>белорусы</nationName>
+		<dateDeath>2009-10-20</dateDeath>
+		<deathFollowed>3</deathFollowed>
+		<dateBirth>1972-04-28</dateBirth>
+		<maritalStatus>2</maritalStatus>
+		<education>5</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Кахексия смешанного генеза. Рак гортани с распадом и метастазами в лимфоузлы шеи.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230804000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-24</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1915-02-17</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>7</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Старость</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230804000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-24</dateDeath>
+		<deathFollowed>3</deathFollowed>
+		<dateBirth>1936-03-02</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>0</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая недостаточность кровообращения. Атеросклеротический кардиосклероз на фоне АГ</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230804000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-29</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1930-07-11</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая недостаточность кровообращения. ИБС:атеросклеротический кардиосклероз Н11а</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230813000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-09-30</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1940-03-05</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Меланома теменной области справа</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230813000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-21</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1930-06-29</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая недостаточность кровообращения. Атеросклеротический кардиосклероз</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230813000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-30</dateDeath>
+		<deathFollowed>1</deathFollowed>
+		<dateBirth>1953-11-30</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>5</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Гипостатическая пневмония</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230818000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>0</nation>
+		<nationName xsi:nil="true"/>
+		<dateDeath>2009-10-07</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1931-11-02</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Рак правой молочной железы.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230818000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>3</nation>
+		<nationName>белорусы</nationName>
+		<dateDeath>2009-10-16</dateDeath>
+		<deathFollowed>1</deathFollowed>
+		<dateBirth>1938-06-20</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>5</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая недостаточность кровообращения. ИБС. атеросклеротический кардиосклероз.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230818000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>0</nation>
+		<nationName xsi:nil="true"/>
+		<dateDeath>2009-10-29</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1911-07-01</dateBirth>
+		<maritalStatus>2</maritalStatus>
+		<education>7</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Старость.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230830000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>3</nation>
+		<nationName>белорусы</nationName>
+		<dateDeath>2009-10-02</dateDeath>
+		<deathFollowed>3</deathFollowed>
+		<dateBirth>1959-04-28</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>2</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Диагноз устанавливается.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230830000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-11</dateDeath>
+		<deathFollowed>1</deathFollowed>
+		<dateBirth>1930-08-31</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая сердечно-сосудистая недостаточность. Атеросклеротическая болезнь сердца.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230830000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-25</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1926-04-08</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Старость</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230840000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-26</dateDeath>
+		<deathFollowed>3</deathFollowed>
+		<dateBirth>1932-11-11</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>5</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName>атеросклеротическая болезнь сердца</basicReasonName>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая сердечно-сосудистая недостаточность</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-07</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1921-08-19</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName>атеросклеротическая болезнь сердца.</basicReasonName>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая сердечно-сосудистая недостаточность</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-11</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1931-05-19</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName>атеросклеротическая болезнь сердца.</basicReasonName>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая сердечно-сосудистая недостаточность</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-14</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1927-06-14</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Рак предстательной железы</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-21</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1921-06-29</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Старость</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-22</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1913-06-18</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Старость</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-25</dateDeath>
+		<deathFollowed>1</deathFollowed>
+		<dateBirth>1930-01-01</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>5</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName>атеросклеротическая болезнь сердца.</basicReasonName>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая легочно-сердечная недостаточность</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-26</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1923-01-09</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName>атеросклеротическая болезнь сердца.</basicReasonName>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая сердечно-сосудистая недостаточность</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>3</nation>
+		<nationName>белорусы</nationName>
+		<dateDeath>2009-10-27</dateDeath>
+		<deathFollowed>1</deathFollowed>
+		<dateBirth>1954-06-05</dateBirth>
+		<maritalStatus>4</maritalStatus>
+		<education>4</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName>ИБС, атеросклеротический кардиосклероз</basicReasonName>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая недостаточность кровообращения</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230850000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>3</nation>
+		<nationName>белорусы</nationName>
+		<dateDeath>2009-09-29</dateDeath>
+		<deathFollowed>3</deathFollowed>
+		<dateBirth>1958-04-14</dateBirth>
+		<maritalStatus>4</maritalStatus>
+		<education>2</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Механическая асфикция от закрытия просвета дыхательных путей водой при утоплении</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230850000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>3</nation>
+		<nationName>белорусы</nationName>
+		<dateDeath>2009-10-04</dateDeath>
+		<deathFollowed>3</deathFollowed>
+		<dateBirth>1984-10-09</dateBirth>
+		<maritalStatus>2</maritalStatus>
+		<education>4</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Отёк и дислокация головного мозга. Сочетанная тупая травма головы, позвоночника и верхних конечностей.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230850000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-08</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1930-08-09</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая сердечно-сосудистая недостаточность.ИБС. Атеросклеротический кардиосклероз. Постоянная форма мерцательной аритмии НIIБ.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230850000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>190</nation>
+		<nationName>сведения не представлены</nationName>
+		<dateDeath>2009-10-23</dateDeath>
+		<deathFollowed>3</deathFollowed>
+		<dateBirth>1928-07-12</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Старость</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230857000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-08</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1922-07-01</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Старость.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230857000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>3</nation>
+		<nationName>белорусы</nationName>
+		<dateDeath>2009-10-10</dateDeath>
+		<deathFollowed>1</deathFollowed>
+		<dateBirth>1949-01-11</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>5</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Паренхиматозно-субарахноидальное кровоизлияние в ствол мозга при АГ, СД, мерцательной аритмии.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230857000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-19</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1930-01-14</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая недостаточность кровообращения. Мультифокальная деменция в выраженной степени. Атеросклеротическая болезнь сердца.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230885000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-09-30</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1936-01-03</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая лёгочно-сердечная недостаточность.  Хроническая обструктивная болезнь лёгких.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230885000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-10</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1928-06-02</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Старость.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230885000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-26</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1928-08-06</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Старость.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230885000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-30</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1927-06-01</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Хроническая недостаточность кровообращения. Атеросклеротический кардиосклероз.</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230890000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-06</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1928-10-16</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>5</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Старость</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230890000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>3</nation>
+		<nationName>белорусы</nationName>
+		<dateDeath>2009-10-09</dateDeath>
+		<deathFollowed>1</deathFollowed>
+		<dateBirth>1949-09-26</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>1</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Внутримозговое кровоизлияние  в левом полушарии головного мозга при артериальной гипертензии</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230890000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>1</sex>
+		<nation>3</nation>
+		<nationName>белорусы</nationName>
+		<dateDeath>2009-10-16</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1959-01-07</dateBirth>
+		<maritalStatus>1</maritalStatus>
+		<education>4</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Рак лёгкого</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230890000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-20</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1928-12-29</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Старость</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230890000</soato>
+		<soatm xsi:nil="true"/>
+		<sex>2</sex>
+		<nation>192</nation>
+		<nationName>сведения отсутствуют</nationName>
+		<dateDeath>2009-10-26</dateDeath>
+		<deathFollowed>2</deathFollowed>
+		<dateBirth>1923-10-23</dateBirth>
+		<maritalStatus>3</maritalStatus>
+		<education>6</education>
+		<document xsi:nil="true"/>
+		<basicReasonM xsi:nil="true"/>
+		<basicReasonName xsi:nil="true"/>
+		<directReasonM xsi:nil="true"/>
+		<directReasonName>Старость</directReasonName>
+		<placeDeathsM xsi:nil="true"/>
+		<placeDeathsName xsi:nil="true"/>
+	</row>
+</death>
+<marriages period="2009-10">
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-03</dateRegMarriage>
+		<mDateBirth>1987-01-23</mDateBirth>
+		<wDateBirth>1988-08-17</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>4</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-03</dateRegMarriage>
+		<mDateBirth>1987-01-22</mDateBirth>
+		<wDateBirth>1987-01-18</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>4</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-04</dateRegMarriage>
+		<mDateBirth>1985-08-14</mDateBirth>
+		<wDateBirth>1984-09-22</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>1</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-04</dateRegMarriage>
+		<mDateBirth>1986-12-24</mDateBirth>
+		<wDateBirth>1988-07-26</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>3</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-04</dateRegMarriage>
+		<mDateBirth>1986-12-12</mDateBirth>
+		<wDateBirth>1987-11-04</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>1</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-04</dateRegMarriage>
+		<mDateBirth>1986-12-10</mDateBirth>
+		<wDateBirth>1988-06-20</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-04</dateRegMarriage>
+		<mDateBirth>1982-08-19</mDateBirth>
+		<wDateBirth>1984-03-11</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>1</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-04</dateRegMarriage>
+		<mDateBirth>1985-02-02</mDateBirth>
+		<wDateBirth>1983-03-29</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>1</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-04</dateRegMarriage>
+		<mDateBirth>1986-12-13</mDateBirth>
+		<wDateBirth>1987-05-10</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>3</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-10</dateRegMarriage>
+		<mDateBirth>1987-09-19</mDateBirth>
+		<wDateBirth>1989-10-14</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>4</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-10</dateRegMarriage>
+		<mDateBirth>1987-07-18</mDateBirth>
+		<wDateBirth>1987-09-29</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>4</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-10</dateRegMarriage>
+		<mDateBirth>1981-11-28</mDateBirth>
+		<wDateBirth>1989-01-10</wDateBirth>
+		<mNation>1</mNation>
+		<mNationName>русские</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>1</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>643</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-11</dateRegMarriage>
+		<mDateBirth>1986-12-01</mDateBirth>
+		<wDateBirth>1988-05-10</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>4</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-11</dateRegMarriage>
+		<mDateBirth>1986-01-16</mDateBirth>
+		<wDateBirth>1986-08-15</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-11</dateRegMarriage>
+		<mDateBirth>1982-03-24</mDateBirth>
+		<wDateBirth>1983-05-20</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>1</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-17</dateRegMarriage>
+		<mDateBirth>1984-05-15</mDateBirth>
+		<wDateBirth>1987-02-03</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>4</mEducation>
+		<wEducation>1</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>643</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-17</dateRegMarriage>
+		<mDateBirth>1976-06-21</mDateBirth>
+		<wDateBirth>1975-10-28</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>1</wEducation>
+		<mMaritalStatus>4</mMaritalStatus>
+		<wMaritalStatus>4</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-17</dateRegMarriage>
+		<mDateBirth>1988-08-06</mDateBirth>
+		<wDateBirth>1990-04-22</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>5</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-18</dateRegMarriage>
+		<mDateBirth>1991-04-22</mDateBirth>
+		<wDateBirth>1987-10-18</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>4</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-18</dateRegMarriage>
+		<mDateBirth>1987-03-16</mDateBirth>
+		<wDateBirth>1988-05-19</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>3</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-18</dateRegMarriage>
+		<mDateBirth>1981-07-19</mDateBirth>
+		<wDateBirth>1988-08-21</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>3</mEducation>
+		<wEducation>3</wEducation>
+		<mMaritalStatus>4</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-18</dateRegMarriage>
+		<mDateBirth>1990-01-01</mDateBirth>
+		<wDateBirth>1990-10-07</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>4</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-18</dateRegMarriage>
+		<mDateBirth>1989-02-12</mDateBirth>
+		<wDateBirth>1988-06-20</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-24</dateRegMarriage>
+		<mDateBirth>1983-04-23</mDateBirth>
+		<wDateBirth>1988-01-03</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>1</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-24</dateRegMarriage>
+		<mDateBirth>1987-03-21</mDateBirth>
+		<wDateBirth>1987-09-30</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>4</mEducation>
+		<wEducation>1</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-24</dateRegMarriage>
+		<mDateBirth>1981-11-29</mDateBirth>
+		<wDateBirth>1986-02-05</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>4</mEducation>
+		<wEducation>5</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-24</dateRegMarriage>
+		<mDateBirth>1959-11-02</mDateBirth>
+		<wDateBirth>1949-12-11</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>1</wNation>
+		<wNationName>русские</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>4</mMaritalStatus>
+		<wMaritalStatus>4</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>398</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-25</dateRegMarriage>
+		<mDateBirth>1986-03-26</mDateBirth>
+		<wDateBirth>1989-11-28</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-25</dateRegMarriage>
+		<mDateBirth>1982-07-31</mDateBirth>
+		<wDateBirth>1986-07-05</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-25</dateRegMarriage>
+		<mDateBirth>1980-11-22</mDateBirth>
+		<wDateBirth>1981-12-13</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>1</mEducation>
+		<wEducation>1</wEducation>
+		<mMaritalStatus>4</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-25</dateRegMarriage>
+		<mDateBirth>1984-04-25</mDateBirth>
+		<wDateBirth>1981-08-06</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>4</mEducation>
+		<wEducation>1</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-25</dateRegMarriage>
+		<mDateBirth>1984-07-20</mDateBirth>
+		<wDateBirth>1984-07-27</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-25</dateRegMarriage>
+		<mDateBirth>1987-10-13</mDateBirth>
+		<wDateBirth>1988-08-16</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>2</wNation>
+		<wNationName>украинцы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-25</dateRegMarriage>
+		<mDateBirth>1989-08-04</mDateBirth>
+		<wDateBirth>1986-05-09</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>1</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-25</dateRegMarriage>
+		<mDateBirth>1985-12-03</mDateBirth>
+		<wDateBirth>1987-07-29</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-31</dateRegMarriage>
+		<mDateBirth>1983-12-08</mDateBirth>
+		<wDateBirth>1983-09-22</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>1</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-31</dateRegMarriage>
+		<mDateBirth>1986-06-29</mDateBirth>
+		<wDateBirth>1992-05-12</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>4</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230000000</soato>
+		<dateRegMarriage>2009-10-31</dateRegMarriage>
+		<mDateBirth>1984-09-20</mDateBirth>
+		<wDateBirth>1988-04-12</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>1</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230804000</soato>
+		<dateRegMarriage>2009-10-24</dateRegMarriage>
+		<mDateBirth>1986-08-05</mDateBirth>
+		<wDateBirth>1991-01-15</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>4</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230813000</soato>
+		<dateRegMarriage>2009-10-04</dateRegMarriage>
+		<mDateBirth>1988-04-23</mDateBirth>
+		<wDateBirth>1990-10-05</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230813000</soato>
+		<dateRegMarriage>2009-10-10</dateRegMarriage>
+		<mDateBirth>1985-07-24</mDateBirth>
+		<wDateBirth>1983-10-01</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>5</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>4</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230818000</soato>
+		<dateRegMarriage>2009-10-17</dateRegMarriage>
+		<mDateBirth>1984-06-11</mDateBirth>
+		<wDateBirth>1988-09-13</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>3</mEducation>
+		<wEducation xsi:nil="true"/>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230830000</soato>
+		<dateRegMarriage>2009-10-18</dateRegMarriage>
+		<mDateBirth>1989-05-27</mDateBirth>
+		<wDateBirth>1989-12-06</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230840000</soato>
+		<dateRegMarriage>2009-10-24</dateRegMarriage>
+		<mDateBirth>1980-01-12</mDateBirth>
+		<wDateBirth>1989-09-19</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>5</mEducation>
+		<wEducation>3</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<dateRegMarriage>2009-10-04</dateRegMarriage>
+		<mDateBirth>1984-11-14</mDateBirth>
+		<wDateBirth>1986-09-28</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>1</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<dateRegMarriage>2009-10-09</dateRegMarriage>
+		<mDateBirth>1961-09-14</mDateBirth>
+		<wDateBirth>1966-11-23</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>4</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<dateRegMarriage>2009-10-10</dateRegMarriage>
+		<mDateBirth>1990-01-08</mDateBirth>
+		<wDateBirth>1990-05-24</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<dateRegMarriage>2009-10-11</dateRegMarriage>
+		<mDateBirth>1983-01-29</mDateBirth>
+		<wDateBirth>1985-01-05</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>1</mEducation>
+		<wEducation>1</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<dateRegMarriage>2009-10-18</dateRegMarriage>
+		<mDateBirth>1984-02-10</mDateBirth>
+		<wDateBirth>1983-05-18</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>1</mEducation>
+		<wEducation>1</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<dateRegMarriage>2009-10-24</dateRegMarriage>
+		<mDateBirth>1985-02-26</mDateBirth>
+		<wDateBirth>1983-11-11</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>1</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<dateRegMarriage>2009-10-25</dateRegMarriage>
+		<mDateBirth>1975-10-10</mDateBirth>
+		<wDateBirth>1983-01-09</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>1</mEducation>
+		<wEducation>1</wEducation>
+		<mMaritalStatus>4</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<dateRegMarriage>2009-10-28</dateRegMarriage>
+		<mDateBirth>1989-03-05</mDateBirth>
+		<wDateBirth>1989-08-23</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>4</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230845000</soato>
+		<dateRegMarriage>2009-10-31</dateRegMarriage>
+		<mDateBirth>1986-10-06</mDateBirth>
+		<wDateBirth>1990-02-17</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>4</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230857000</soato>
+		<dateRegMarriage>2009-10-25</dateRegMarriage>
+		<mDateBirth>1982-10-10</mDateBirth>
+		<wDateBirth>1981-04-11</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>2</mEducation>
+		<wEducation>3</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>3</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230885000</soato>
+		<dateRegMarriage>2009-10-11</dateRegMarriage>
+		<mDateBirth>1986-05-09</mDateBirth>
+		<wDateBirth>1987-05-22</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>1</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+	<row>
+		<soato>1230885000</soato>
+		<dateRegMarriage>2009-10-30</dateRegMarriage>
+		<mDateBirth>1977-12-21</mDateBirth>
+		<wDateBirth>1978-11-03</wDateBirth>
+		<mNation>3</mNation>
+		<mNationName>белорусы</mNationName>
+		<wNation>3</wNation>
+		<wNationName>белорусы</wNationName>
+		<mEducation>4</mEducation>
+		<wEducation>2</wEducation>
+		<mMaritalStatus>2</mMaritalStatus>
+		<wMaritalStatus>2</wMaritalStatus>
+		<mCitizenship>112</mCitizenship>
+		<wCitizenship>112</wCitizenship>
+		<countChild xsi:nil="true"/>
+	</row>
+</marriages>
+</database>

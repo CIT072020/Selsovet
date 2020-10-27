@@ -1,0 +1,853 @@
+<xs:schema targetNamespace="http://www.todes.by" elementFormDefault="qualified" xmlns="http://www.todes.by" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="Response" type="_Response"/>
+   <xs:complexType name="organDoc_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="20_notes">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="20_appPu">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="typeStreetPu_lex1">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="intracityRegion_lex1">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="intracityRegion_lex2">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="20_countryPu">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="countryPu_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="xs:string"/>
+         <xs:element name="lex3" type="xs:string"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="intracityRegion_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_dsdAddressLive">
+      <xs:sequence>
+         <xs:element name="app" type="dsdAddressLive_app"/>
+         <xs:element name="areaL" type="xs:string"/>
+         <xs:element name="areaObjNum" type="xs:positiveInteger"/>
+         <xs:element name="ateAddrNum" type="xs:positiveInteger"/>
+         <xs:element name="ateElementUid" type="dsdAddressLive_ateElementUid"/>
+         <xs:element name="ateObjectNum" type="xs:positiveInteger"/>
+         <xs:element name="cityL" type="xs:string"/>
+         <xs:element name="dsdAddressLiveBase" type="xs:string"/>
+         <xs:element name="house" type="xs:positiveInteger"/>
+         <xs:element name="korps" type="dsdAddressLive_korps"/>
+         <xs:element name="pid" type="xs:positiveInteger"/>
+         <xs:element name="regionL" type="xs:string"/>
+         <xs:element name="regionObjNum" type="xs:positiveInteger"/>
+         <xs:element name="streetL" type="dsdAddressLive_streetL"/>
+         <xs:element name="typeCityL" type="xs:string"/>
+         <xs:element name="typeStreetL" type="dsdAddressLive_typeStreetL"/>
+         <xs:element name="vilCouncilObjNum" type="xs:positiveInteger"/>
+         <xs:element name="villageCouncil" type="dsdAddressLive_villageCouncil"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="20_housePu">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="marks_lex2">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="typeStreetPu_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="Response_e">
+      <xs:sequence>
+         <xs:element name="addressLast" type="e_addressLast"/>
+         <xs:element name="aisPasspDocStatus" type="e_aisPasspDocStatus"/>
+         <xs:element name="app" type="e_app"/>
+         <xs:element name="areaB" type="xs:string"/>
+         <xs:element name="areaBBel" type="e_areaBBel"/>
+         <xs:element name="areaL" type="e_areaL"/>
+         <xs:element name="ateAddress" type="e_ateAddress"/>
+         <xs:element name="bdate" type="xs:positiveInteger"/>
+         <xs:element name="citizenship" type="e_citizenship"/>
+         <xs:element name="cityB" type="xs:string"/>
+         <xs:element name="cityBBel" type="e_cityBBel"/>
+         <xs:element name="cityL" type="e_cityL"/>
+         <xs:element name="contryL" type="e_contryL"/>
+         <xs:element name="countryB" type="e_countryB"/>
+         <xs:element name="dateRec" type="xs:string"/>
+         <xs:element name="docAppleDate" type="xs:string"/>
+         <xs:element name="docDateIssue" type="xs:string"/>
+         <xs:element name="docIssueOrgan" type="e_docIssueOrgan"/>
+         <xs:element name="docNum" type="xs:positiveInteger"/>
+         <xs:element name="docOrgan" type="e_docOrgan"/>
+         <xs:element name="docSery" type="xs:string"/>
+         <xs:element name="docType" type="e_docType"/>
+         <xs:element name="dsdAddressLive" type="e_dsdAddressLive"/>
+         <xs:element name="dsdDateRec" type="e_dsdDateRec"/>
+         <xs:element name="expireDate" type="e_expireDate"/>
+         <xs:element name="form19_20" type="form19_20"/>
+         <xs:element name="getPassportDate" type="e_getPassportDate"/>
+         <xs:element name="house" type="xs:positiveInteger"/>
+         <xs:element name="identif" type="xs:string"/>
+         <xs:element name="identifCheckResult" type="e_identifCheckResult"/>
+         <xs:element name="images" type="empty_element"/>
+         <xs:element name="intracityRegion" type="e_intracityRegion"/>
+         <xs:element name="korps" type="e_korps"/>
+         <xs:element name="name" type="xs:string"/>
+         <xs:element name="nameBel" type="e_nameBel"/>
+         <xs:element name="nameEn" type="e_nameEn"/>
+         <xs:element name="organDoc" type="e_organDoc"/>
+         <xs:element name="pid" type="xs:positiveInteger"/>
+         <xs:element name="regionB" type="xs:string"/>
+         <xs:element name="regionBBel" type="e_regionBBel"/>
+         <xs:element name="regionL" type="e_regionL"/>
+         <xs:element name="sex" type="e_sex"/>
+         <xs:element name="sname" type="xs:string"/>
+         <xs:element name="snameBel" type="e_snameBel"/>
+         <xs:element name="status" type="e_status"/>
+         <xs:element name="streetL" type="e_streetL"/>
+         <xs:element name="surname" type="xs:string"/>
+         <xs:element name="surnameBel" type="e_surnameBel"/>
+         <xs:element name="surnameEn" type="e_surnameEn"/>
+         <xs:element name="sysDocType" type="e_sysDocType"/>
+         <xs:element name="sysOrgan" type="e_sysOrgan"/>
+         <xs:element name="typeCityB" type="e_typeCityB"/>
+         <xs:element name="typeCityL" type="e_typeCityL"/>
+         <xs:element name="typeStreetL" type="e_typeStreetL"/>
+         <xs:element name="view" type="e_view"/>
+         <xs:element name="villageCouncil" type="e_villageCouncil"/>
+         <xs:element name="workPlace" type="xs:string"/>
+         <xs:element name="workPosition" type="xs:string"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="marks_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="typeStreetPu_lex2">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="marks_lex1">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_nameBel">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_status">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="docIssueOrgan_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="view_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:negativeInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="noAddrPu_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="sysDocType_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:negativeInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_typeCityB">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="typeCityB_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="xs:string"/>
+         <xs:element name="lex3" type="typeCityB_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="noAddrPu_lex2">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="20_korpsPu">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_citizenship">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="citizenship_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="xs:string"/>
+         <xs:element name="lex3" type="xs:string"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="cityL_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_nameEn">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_typeCityL">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="typeCityL_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="xs:string"/>
+         <xs:element name="lex3" type="typeCityL_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="typeCityPu_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="20_reason">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="reason_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="reason_lex2"/>
+         <xs:element name="lex3" type="reason_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_dsdDateRec">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_sex">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="sex_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="xs:string"/>
+         <xs:element name="lex3" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="intracityRegion_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:boolean"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_countryB">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="countryB_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="xs:string"/>
+         <xs:element name="lex3" type="xs:string"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="_Response">
+      <xs:sequence>
+         <xs:element name="e" type="Response_e"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_docType">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="docType_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="xs:string"/>
+         <xs:element name="lex3" type="docType_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="typeStreetL_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:boolean"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="areaL_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="streetL_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:boolean"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="dsdAddressLive_villageCouncil">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="causeIssue_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="maritalStatus_lex1">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="dsdAddressLive_ateElementUid">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="cityL_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="20_datePu">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="typeStreetPu_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:boolean"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="maritalStatus_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="education_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:boolean"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="maritalStatus_lex2">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="20_typeStreetPu">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="typeStreetPu_klUniPK"/>
+         <xs:element name="lex1" type="typeStreetPu_lex1"/>
+         <xs:element name="lex2" type="typeStreetPu_lex2"/>
+         <xs:element name="lex3" type="typeStreetPu_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="typeCityB_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="marks_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:boolean"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="form19_20">
+      <xs:sequence>
+         <xs:element name="appPu" type="20_appPu"/>
+         <xs:element name="areaPu" type="xs:string"/>
+         <xs:element name="causeIssue" type="20_causeIssue"/>
+         <xs:element name="cityPu" type="xs:string"/>
+         <xs:element name="countryPu" type="20_countryPu"/>
+         <xs:element name="datePu" type="20_datePu"/>
+         <xs:element name="dateRec" type="xs:string"/>
+         <xs:element name="dateReg" type="20_dateReg"/>
+         <xs:element name="dateRegTill" type="20_dateRegTill"/>
+         <xs:element name="deathDate" type="20_deathDate"/>
+         <xs:element name="education" type="20_education"/>
+         <xs:element name="form19_20Base" type="xs:string"/>
+         <xs:element name="housePu" type="20_housePu"/>
+         <xs:element name="infants" type="empty_element"/>
+         <xs:element name="korpsPu" type="20_korpsPu"/>
+         <xs:element name="maritalStatus" type="20_maritalStatus"/>
+         <xs:element name="marks" type="20_marks"/>
+         <xs:element name="noAddrPu" type="20_noAddrPu"/>
+         <xs:element name="notes" type="20_notes"/>
+         <xs:element name="pid" type="xs:positiveInteger"/>
+         <xs:element name="reason" type="20_reason"/>
+         <xs:element name="regType" type="20_regType"/>
+         <xs:element name="regionPu" type="xs:string"/>
+         <xs:element name="signAway" type="xs:boolean"/>
+         <xs:element name="signDestroy" type="xs:boolean"/>
+         <xs:element name="signNoReg" type="xs:boolean"/>
+         <xs:element name="signNoTake" type="xs:boolean"/>
+         <xs:element name="streetPu" type="20_streetPu"/>
+         <xs:element name="student" type="xs:boolean"/>
+         <xs:element name="term" type="20_term"/>
+         <xs:element name="termReg" type="20_termReg"/>
+         <xs:element name="typeCityPu" type="20_typeCityPu"/>
+         <xs:element name="typeStreetPu" type="20_typeStreetPu"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="causeIssue_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="countryPu_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="education_lex1">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_addressLast">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="education_lex2">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="education_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="regionL_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="docType_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="20_typeCityPu">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="typeCityPu_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="xs:string"/>
+         <xs:element name="lex3" type="typeCityPu_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="20_maritalStatus">
+      <xs:sequence>
+         <xs:element name="active" type="xs:boolean"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="maritalStatus_klUniPK"/>
+         <xs:element name="lex1" type="maritalStatus_lex1"/>
+         <xs:element name="lex2" type="maritalStatus_lex2"/>
+         <xs:element name="lex3" type="maritalStatus_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_surnameEn">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="20_termReg">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="termReg_klUniPK"/>
+         <xs:element name="lex1" type="termReg_lex1"/>
+         <xs:element name="lex2" type="termReg_lex2"/>
+         <xs:element name="lex3" type="termReg_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="20_education">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="education_klUniPK"/>
+         <xs:element name="lex1" type="education_lex1"/>
+         <xs:element name="lex2" type="education_lex2"/>
+         <xs:element name="lex3" type="education_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="regionL_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="typeCityB_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_ateAddress">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_cityL">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="cityL_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="xs:string"/>
+         <xs:element name="lex3" type="cityL_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="typeCityPu_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="view_lex2">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="20_marks">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="marks_klUniPK"/>
+         <xs:element name="lex1" type="marks_lex1"/>
+         <xs:element name="lex2" type="marks_lex2"/>
+         <xs:element name="lex3" type="marks_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="view_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_areaL">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="areaL_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="xs:string"/>
+         <xs:element name="lex3" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="noAddrPu_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_sysDocType">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="sysDocType_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="xs:string"/>
+         <xs:element name="lex3" type="xs:string"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="20_regType">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="regType_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="regType_lex2"/>
+         <xs:element name="lex3" type="regType_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_areaBBel">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_villageCouncil">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="villageCouncil_klUniPK"/>
+         <xs:element name="lex1" type="villageCouncil_lex1"/>
+         <xs:element name="lex2" type="villageCouncil_lex2"/>
+         <xs:element name="lex3" type="villageCouncil_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="sysOrgan_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:negativeInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="20_causeIssue">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="causeIssue_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="xs:string"/>
+         <xs:element name="lex3" type="causeIssue_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_aisPasspDocStatus">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="contryL_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="typeStreetL_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="20_term">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="typeStreetL_lex1">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="dsdAddressLive_korps">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="typeStreetL_lex2">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="streetL_lex2">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="streetL_lex1">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="streetL_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="sysOrgan_lex2">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="maritalStatus_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:boolean"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="sysOrgan_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_expireDate">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_streetL">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="streetL_klUniPK"/>
+         <xs:element name="lex1" type="streetL_lex1"/>
+         <xs:element name="lex2" type="streetL_lex2"/>
+         <xs:element name="lex3" type="streetL_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="typeCityL_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_regionBBel">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_regionL">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="regionL_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="xs:string"/>
+         <xs:element name="lex3" type="regionL_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="reason_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_korps">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="typeCityL_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="20_dateReg">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="villageCouncil_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:boolean"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_docIssueOrgan">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="docIssueOrgan_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="xs:string"/>
+         <xs:element name="lex3" type="xs:string"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="citizenship_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_intracityRegion">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="intracityRegion_klUniPK"/>
+         <xs:element name="lex1" type="intracityRegion_lex1"/>
+         <xs:element name="lex2" type="intracityRegion_lex2"/>
+         <xs:element name="lex3" type="intracityRegion_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="regType_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="reason_lex2">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="dsdAddressLive_app">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="reason_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_organDoc">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="organDoc_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="organDoc_lex2"/>
+         <xs:element name="lex3" type="organDoc_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="docType_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="20_noAddrPu">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="noAddrPu_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="noAddrPu_lex2"/>
+         <xs:element name="lex3" type="noAddrPu_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_identifCheckResult">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_contryL">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="contryL_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="xs:string"/>
+         <xs:element name="lex3" type="xs:string"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="20_streetPu">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="organDoc_lex2">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="villageCouncil_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="dsdAddressLive_typeStreetL">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="regType_lex2">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="villageCouncil_lex1">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="regType_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="villageCouncil_lex2">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="dsdAddressLive_streetL">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="20_dateRegTill">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="organDoc_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="countryB_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_surnameBel">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_getPassportDate">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_snameBel">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="20_deathDate">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="termReg_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:boolean"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="sex_klUniPK">
+      <xs:sequence>
+         <xs:element name="code" type="xs:positiveInteger"/>
+         <xs:element name="type" type="xs:positiveInteger"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_view">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="view_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="view_lex2"/>
+         <xs:element name="lex3" type="view_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="e_docOrgan">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_cityBBel">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_app">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="termReg_lex3">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_typeStreetL">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="typeStreetL_klUniPK"/>
+         <xs:element name="lex1" type="typeStreetL_lex1"/>
+         <xs:element name="lex2" type="typeStreetL_lex2"/>
+         <xs:element name="lex3" type="typeStreetL_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="termReg_lex2">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="e_sysOrgan">
+      <xs:sequence>
+         <xs:element name="active" type="xs:positiveInteger"/>
+         <xs:element name="dateBegin" type="xs:string"/>
+         <xs:element name="klUniPK" type="sysOrgan_klUniPK"/>
+         <xs:element name="lex1" type="xs:string"/>
+         <xs:element name="lex2" type="sysOrgan_lex2"/>
+         <xs:element name="lex3" type="sysOrgan_lex3"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="termReg_lex1">
+      <xs:attribute name="null" type="xs:boolean"/>
+   </xs:complexType>
+   <xs:complexType name="empty_element"/>
+</xs:schema>

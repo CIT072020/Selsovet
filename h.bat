@@ -1,0 +1,1 @@
+start zah.exe /user:ADSSYS /psw:sysdba

@@ -1,0 +1,40 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Срок исполнения истек
+1
+1,"0"
+2,PARAM,321,130,96,,111
+9
+3
+3,PROP,ANS_DATE,EMPTY_DB,"fikAnd,fikFirst",0,0,0,1,dkFull
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,EXEC_TERM,NOT_EMPTY_DB,fikAnd,0,0,0,8,dkFull
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,EXEC_TERM,LOWER_D,fikAnd,0,1,1,9,dkFull
+1,VALUE,valDate,1,,0,0,20091101,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+9
+1,FIELDS_CTRL,1
+1,EXEC_TERM,9
+1,CONTROLS,3
+1,CTRL,TLabel,laName1_3346dcc0016b38b5b2901e390c27c49a_9,"Название поля","sbParam"
+PROPS,Top=16,Left=23,Width=104,Height=13
+1,CTRL,TLabel,laOp1_3346dcc0016b38b5b2901e390c27c49a_9,"Название операции","sbParam"
+PROPS,Top=16,Left=139,Width=47,Height=13
+1,CTRL,TDBDateTimeEditEh,edDate1_3346dcc0016b38b5b2901e390c27c49a_9,"Ввод значения","sbParam"
+PROPS,Top=12,Left=191,Width=100,Height=21

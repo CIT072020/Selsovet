@@ -1,0 +1,96 @@
+{
+    "cover": {
+        "message_id": "EC2315E6-41AD-4938-A344-601AF243CA55",
+        "message_type": {
+            "code": "0700",
+            "type": -2
+        },
+        "message_time": "2012-07-25T11:25:12.093+02:00",
+        "message_source": {
+            "code": "17107",
+            "type": 80
+        },
+        "parent_message_id": "A561FB21-A50D-46AD-8691-F5BB7294A5D9"
+    },
+    "cng_cert_data": {
+        "person": {
+            "person_data": {
+                "identif": "3110865A045PB5",
+                "last_name": "ютюмюяэеб",
+                "last_name_bel": "ютюмюяэе║",
+                "name": "яепцеи",
+                "name_bel": "яъпцеи",
+                "patronymic": "оюбкнбхв",
+                "patronymic_bel": "ою║кюб╡в",
+                "sex": {
+                    "code": "M",
+                    "type": 32
+                },
+                "birth_day": "19650811",
+                "birth_place": {
+                    "country_b": {
+                        "code": "BLR",
+                        "type": 8
+                    },
+                    "area_b": "дмеопноерпнбяйюъ накюярэ",
+                    "area_b_bel": "дмеопюоърпнсяйюъ бнакюяжэ",
+                    "region_b": "осунбхвяйхи",
+                    "region_b_bel": "осуюб╡жй╡",
+                    "type_city_b": {
+                        "code": "11100009",
+                        "type": 68
+                    },
+                    "city_b": "йнбюкебхвх",
+                    "city_b_bel": "йюбюкеб╡вш"
+                },
+                "citizenship": {
+                    "code": "BLR",
+                    "type": 8
+                },
+                "status": {
+                    "code": "1",
+                    "type": -18
+                }
+            },
+            "old_last_name": "ютюмюяэеб",
+            "old_name": "бхйрнп",
+            "old_patronymic": "оюбкнбхв",
+            "birth_act_data": {
+                "act_type": {
+                    "code": "0100",
+                    "type": 82
+                },
+                "authority": {
+                    "code": "17107",
+                    "type": 80
+                },
+                "date": "1899-12-30"
+            }
+        },
+        "cng_act_data": {
+            "act_type": {
+                "code": "0700",
+                "type": 82
+            },
+            "authority": {
+                "code": "17107",
+                "type": 80
+            },
+            "date": "2012-07-25",
+            "number": "13"
+        },
+        "cng_certificate_data": {
+            "document_type": {
+                "code": "54100008",
+                "type": 37
+            },
+            "authority": {
+                "code": "17107",
+                "type": 80
+            },
+            "date_of_issue": "2012-07-25",
+            "series": "I-юк",
+            "number": "0004813"
+        }
+    }
+}

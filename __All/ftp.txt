@@ -1,0 +1,21 @@
+ftp://vc:IOlnelxy@vc.brest.by
+
+
+----------------
+10.30.254.20:21     
+belstatftp    
+L0df4!B
+----------------
+belstatftpreader
+123o!@#
+----------------
+local_max_rate=1048576
+session_support=NO
+idle_session_timeout=360
+data_connection_timeout=360
+accept_timeout=40
+connect_timeout=40
+ftpd_banner="NCES ftp SPAM Server"
+max_login_fails=5
+max_clients=100
+max_per_ip=10

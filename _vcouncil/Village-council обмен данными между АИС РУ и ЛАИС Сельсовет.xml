@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="4a9e3262-dc4b-4101-8063-6aef1edbbb69" activeEnvironment="Default" name="Обмен данными с сельсоветами" resourceRoot="" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="35cbd37c-9b7d-44f3-a20e-286d63f2d0b5" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://todes.by:8086" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>- no endpoint set -</con:endpoint><con:endpoint>http://todes.by:8086</con:endpoint></con:endpoints><con:resource name="getDocSetData" path="/cxf/vcouncil" id="74a44895-29cd-4a87-8dea-f6f96bf22d61"><con:settings/><con:parameters><con:parameter><con:name>identif</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>name</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>surname</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>sname</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>first</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>count</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="get docsetdata" id="49fa7ad5-050a-42dc-ac0e-c75b670bb610" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>text/html;charset=utf-8</con:mediaType><con:status>404</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="64e2733b-e835-469a-87f9-1fa31320bf44" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://todes.by:8086</con:endpoint><con:request/><con:originalUri>http://pustovoy.todes.by/cxf/cxf/vcouncil/data</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="identif" value="4090940B026PB5" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>identif</con:entry><con:entry>name</con:entry><con:entry>surname</con:entry><con:entry>sname</con:entry><con:entry>first</con:entry><con:entry>count</con:entry></con:parameterOrder></con:request><con:request name="getMovements" id="c8af634b-f098-4f6a-bb59-f6d70e500c3a" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://www.todes.by:8086</con:endpoint><con:request/><con:originalUri>http://pustovoy.todes.by/cxf/vcouncil/data</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="surname" value=""/>
+  <con:entry key="sname" value=""/>
+  <con:entry key="count" value=""/>
+  <con:entry key="name" value=""/>
+  <con:entry key="identif" value="4090940B026PB5"/>
+  <con:entry key="first" value=""/>
+</con:parameters><con:parameterOrder><con:entry>identif</con:entry><con:entry>name</con:entry><con:entry>surname</con:entry><con:entry>sname</con:entry><con:entry>first</con:entry><con:entry>count</con:entry></con:parameterOrder></con:request></con:method></con:resource><con:resource name="saveDocSetData" path="/cxf/vcouncil" id="3163ed28-d66d-4a2c-9007-604a9158a087"><con:settings/><con:parameters><con:parameter><con:name>sign</con:name><con:value/><con:style>HEADER</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>certificate</con:name><con:value/><con:style>HEADER</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="save docsetdata" id="c746d2ca-10e9-49bd-bf04-65f26e60772c" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/html;charset=utf-8</con:mediaType><con:status>404</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:ns="http://pustovoy.todes.by/cxf/kluni/data/1">ns:Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html;charset=iso-8859-1</con:mediaType><con:status>500</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/plain</con:mediaType><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>204</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/octet-stream</con:mediaType><con:status>200</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>200</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>200</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>200</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>200</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>200</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>401</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element xmlns:xfor="http://cxf.apache.org/bindings/xformat">xfor:XMLFault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="5198b2c0-56b1-40a3-b6eb-742738e53360" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.todes.by:8086</con:endpoint><con:request>{
+   "identif": "2222940B011PB5",
+   "view":    {
+      "klUniPK":       {
+         "type": -3,
+         "code": 10
+      },
+      "lex1": "ОБЫЧНАЯ ИНФОРМАЦИЯ",
+      "lex2": null,
+      "lex3": null,
+      "dateBegin": 1240674293000,
+      "active": 1
+   },
+   "sysDocType":    {
+      "klUniPK":       {
+         "type": -2,
+         "code": 8
+      },
+      "lex1": "ФОРМА 19-20 (ПРОПИСКА, ВЫПИСКА)",
+      "lex2": "ASB",
+      "lex3": "ADDRESS",
+      "dateBegin": 1240672051000,
+      "active": 1
+   },
+   "surname": "КРИ",
+   "name": "РАДЖЕШ",
+   "sname": "КОГУТАЕВ",
+   "sex":    {
+      "klUniPK":       {
+         "type": 32,
+         "code": 0
+      },
+      "lex1": null,
+      "lex2": null,
+      "lex3": null,
+      "dateBegin": 1240674288000,
+      "active": 1
+   },
+   "citizenship":    {
+      "klUniPK":       {
+         "type": 8,
+         "code": 11200001
+      },
+      "lex1": "РЕСПУБЛИКА БЕЛАРУСЬ",
+      "lex2": "РЭСПУБЛІКА БЕЛАРУСЬ",
+      "lex3": "BLR",
+      "dateBegin": 1026177363000,
+      "active": 1
+   },
+   "sysOrgan":    {
+      "klUniPK":       {
+         "type": -5,
+         "code": 26
+      },
+      "lex1": "АСБ ГУВД МИНГОРИСПОЛКОМА",
+      "lex2": null,
+      "lex3": null,
+      "dateBegin": 1240674553000,
+      "active": 1
+   },
+   "bdate": "19400909",
+   "dsdDateRec": null,
+   "docSery": "MC",
+   "docNum": "0922732",
+   "docDateIssue": 1012183200000,
+   "docAppleDate": 1544065200000,
+   "dateRec": 1544045783000,
+   "countryB":    {
+      "klUniPK":       {
+         "type": 8,
+         "code": 11200001
+      },
+      "lex1": "РЕСПУБЛИКА БЕЛАРУСЬ",
+      "lex2": "РЭСПУБЛІКА БЕЛАРУСЬ",
+      "lex3": "BLR",
+      "dateBegin": 1026177363000,
+      "active": 1
+   },
+   "areaB": "МИНСКАЯ ОБЛАСТЬ",
+   "regionB": "ПУХОВИЧСКИЙ",
+   "typeCityB":    {
+      "klUniPK":       {
+         "type": 35,
+         "code": 11100009
+      },
+      "lex1": "Д",
+      "lex2": "В",
+      "lex3": null,
+      "dateBegin": 1240674289000,
+      "active": 1
+   },
+   "cityB": "ПРУЦК",
+   "docType":    {
+      "klUniPK":       {
+         "type": 37,
+         "code": 54100015
+      },
+      "lex1": "ВИД НА ЖИТЕЛЬСТВО ЛИЦА БЕЗ ГРАЖДАНСТВА",
+      "lex2": "ПАСВЕДЧАННЕ НА ЖЫХАРСТВА АСОБЫ БЕЗ ГРАМАДЗЯНСТВА",
+      "lex3": null,
+      "dateBegin": 1240674292000,
+      "active": 1
+   },
+   "docOrgan": null,
+   "contryL":    {
+      "klUniPK":       {
+         "type": 8,
+         "code": 0
+      },
+      "lex1": null,
+      "lex2": null,
+      "lex3": "0",
+      "dateBegin": 1010758146000,
+      "active": 1
+   },
+   "areaL":    {
+      "klUniPK":       {
+         "type": 1,
+         "code": 11300006
+      },
+      "lex1": "МИНСКАЯ ОБЛАСТЬ",
+      "lex2": "МІНСКАЯ ВОБЛАСЦЬ",
+      "lex3": "17041",
+      "dateBegin": 1240674297000,
+      "active": 1
+   },
+   "regionL":    {
+      "klUniPK":       {
+         "type": 29,
+         "code": 11800088
+      },
+      "lex1": "ПУХОВИЧСКИЙ",
+      "lex2": "ПУХАВІЦКІ",
+      "lex3": null,
+      "dateBegin": 1240673183000,
+      "active": 1
+   },
+   "typeCityL":    {
+      "klUniPK":       {
+         "type": 35,
+         "code": 11100009
+      },
+      "lex1": "Д",
+      "lex2": "В",
+      "lex3": null,
+      "dateBegin": 1240674289000,
+      "active": 1
+   },
+   "cityL":    {
+      "klUniPK":       {
+         "type": 7,
+         "code": 11903466
+      },
+      "lex1": "ЗАДОЩЕНЬЕ",
+      "lex2": "ЗАДАШЧЭННЕ",
+      "lex3": null,
+      "dateBegin": 1240674127000,
+      "active": 1
+   },
+   "typeStreetL":    {
+      "klUniPK":       {
+         "type": 38,
+         "code": 0
+      },
+      "lex1": null,
+      "lex2": null,
+      "lex3": null,
+      "dateBegin": 1240674292000,
+      "active": 1
+   },
+   "streetL":    {
+      "klUniPK":       {
+         "type": 34,
+         "code": 0
+      },
+      "lex1": null,
+      "lex2": null,
+      "lex3": null,
+      "dateBegin": 1240674288000,
+      "active": 1
+   },
+   "house": "32",
+   "korps": null,
+   "app": null,
+   "organDoc":    {
+      "klUniPK":       {
+         "type": 24,
+         "code": 17608347
+      },
+      "lex1": "ШАЦКИЙ С/С",
+      "lex2": null,
+      "lex3": null,
+      "dateBegin": 1240674396000,
+      "active": 1
+   },
+   "workPlace": null,
+   "workPosition": "ПЕНСИОНЕР",
+   "docIssueOrgan":    {
+      "klUniPK":       {
+         "type": 24,
+         "code": 17608931
+      },
+      "lex1": "АЗИНСКИЙ С/С",
+      "lex2": null,
+      "lex3": null,
+      "dateBegin": 1240674420000,
+      "active": 1
+   },
+   "surnameBel": "КРЫ",
+   "nameBel": "РАДЖЭШ",
+   "snameBel": "КУТРАПАНСАН",
+   "surnameEn": "CREE",
+   "nameEn": "RAJESH",
+   "areaBBel": null,
+   "regionBBel": null,
+   "cityBBel": null,
+   "villageCouncil":    {
+      "klUniPK":       {
+         "type": 98,
+         "code": 0
+      },
+      "lex1": null,
+      "lex2": null,
+      "lex3": null,
+      "dateBegin": 1337022497000,
+      "active": 1
+   },
+   "intracityRegion":    {
+      "klUniPK":       {
+         "type": 99,
+         "code": 0
+      },
+      "lex1": null,
+      "lex2": null,
+      "lex3": null,
+      "dateBegin": 1337022497000,
+      "active": 1
+   },
+   "ateAddress": null,
+   "expireDate": null,
+   "aisPasspDocStatus": null,
+   "form19_20":    {
+      "form19_20Base": "form19_20",
+      "pid": 90017000,
+      "signAway": true,
+      "countryPu":       {
+         "klUniPK":          {
+            "type": 8,
+            "code": 11200241
+         },
+         "lex1": "АВСТРАЛИЯ",
+         "lex2": "АЎСТРАЛІЯ",
+         "lex3": "AUS",
+         "dateBegin": 1026177363000,
+         "active": 1
+      },
+      "areaPu": "АБХАЗСКАЯ АССР",
+      "regionPu": "МСТИСЛАВЛЬСКИЙ",
+      "cityPu": "\"ВАСИЛЁК\"",
+      "datePu": null,
+      "marks":       {
+         "klUniPK":          {
+            "type": 2,
+            "code": 0
+         },
+         "lex1": null,
+         "lex2": null,
+         "lex3": null,
+         "dateBegin": 1240672053000,
+         "active": 1
+      },
+      "notes": null,
+      "reason":       {
+         "klUniPK":          {
+            "type": 3,
+            "code": 2
+         },
+         "lex1": "ВРЕМЕННАЯ РЕГИСТРАЦИЯ",
+         "lex2": null,
+         "lex3": null,
+         "dateBegin": 1240674556000,
+         "active": 1
+      },
+      "term": null,
+      "dateRec": 1543978800000,
+      "typeCityPu":       {
+         "klUniPK":          {
+            "type": 35,
+            "code": 11100068
+         },
+         "lex1": "АГРОГОРОДОК",
+         "lex2": "АГРАГАРАДОК",
+         "lex3": null,
+         "dateBegin": 1240674590000,
+         "active": 1
+      },
+      "typeStreetPu":       {
+         "klUniPK":          {
+            "type": 38,
+            "code": 0
+         },
+         "lex1": null,
+         "lex2": null,
+         "lex3": null,
+         "dateBegin": 1240674292000,
+         "active": 1
+      },
+      "streetPu": null,
+      "housePu": null,
+      "korpsPu": null,
+      "appPu": null,
+      "dateReg": null,
+      "termReg":       {
+         "klUniPK":          {
+            "type": 27,
+            "code": 4
+         },
+         "lex1": "ДО 6-ТИ МЕСЯЦЕВ",
+         "lex2": null,
+         "lex3": null,
+         "dateBegin": 1240674586000,
+         "active": 1
+      },
+      "dateRegTill": null,
+      "causeIssue":       {
+         "klUniPK":          {
+            "type": 39,
+            "code": 59200021
+         },
+         "lex1": "ДОКУМЕНТИРОВАНИЕ",
+         "lex2": "ДАКУМЕНТАВАННЕ",
+         "lex3": null,
+         "dateBegin": 1240672094000,
+         "active": 1
+      },
+      "deathDate": null,
+      "signNoTake": false,
+      "signNoReg": false,
+      "signDestroy": false,
+      "noAddrPu":       {
+         "klUniPK":          {
+            "type": 70,
+            "code": 12
+         },
+         "lex1": "АННУЛИРОВАНИЕ РАЗРЕШЕНИЯ НА ПМЖ",
+         "lex2": null,
+         "lex3": null,
+         "dateBegin": 1240674587000,
+         "active": 1
+      },
+      "regType":       {
+         "klUniPK":          {
+            "type": 500,
+            "code": 2
+         },
+         "lex1": null,
+         "lex2": null,
+         "lex3": null,
+         "dateBegin": 1539226800000,
+         "active": 1
+      },
+      "maritalStatus":       {
+         "klUniPK":          {
+            "type": 501,
+            "code": 3
+         },
+         "lex1": "ВДОВЕЦ (ВДОВА)",
+         "lex2": null,
+         "lex3": null,
+         "dateBegin": 1539572400000,
+         "active": 1
+      },
+      "education":       {
+         "klUniPK":          {
+            "type": 502,
+            "code": 0
+         },
+         "lex1": null,
+         "lex2": null,
+         "lex3": null,
+         "dateBegin": 1539399600000,
+         "active": 1
+      },
+      "student": false,
+      "infants": []
+   },
+   "dsdAddressLive":    {
+      "dsdAddressLiveBase": "dsdAddressLive",
+      "pid": 90017000,
+      "areaL": "МИНСКАЯ ОБЛАСТЬ",
+      "areaObjNum": 17041,
+      "regionL": "ПУХОВИЧСКИЙ",
+      "regionObjNum": 20965,
+      "villageCouncil": null,
+      "vilCouncilObjNum": 21290,
+      "typeCityL": "Д",
+      "cityL": "ЗАДОЩЕНЬЕ",
+      "typeStreetL": null,
+      "streetL": null,
+      "house": "32",
+      "korps": null,
+      "app": null,
+      "ateObjectNum": 21293,
+      "ateElementUid": null,
+      "ateAddrNum": null
+   },
+   "getPassportDate": null,
+   "images": [],
+   "addressLast": null,
+   "dossieStatus": null,
+   "status": null
+}</con:request><con:originalUri>http://pustovoy.todes.by/cxf/kluni/data/1</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="sign" value="amlsnandwkn&amp;@871099udlaukbdeslfug12p91883y1hpd91h"/>
+  <con:entry key="certificate" value="109uu21nu0t17togdy70-fuib"/>
+</con:parameters><con:parameterOrder><con:entry>sign</con:entry><con:entry>certificate</con:entry></con:parameterOrder></con:request></con:method></con:resource><con:resource name="getMovements" path="/cxf/vcouncil/movements" id="12c23acd-a8d1-4fea-82ab-f5f47d3763ff"><con:settings/><con:parameters><con:parameter><con:name>sysOrgan</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>since</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>till</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>first</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>count</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="a7619240-6774-4df2-8886-a16e23405ec3" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>text/html;charset=iso-8859-1</con:mediaType><con:status>500 404</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="get" id="49aa6eca-91d5-4562-ad21-ff4129a156d8" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://todes.by:8086</con:endpoint><con:request/><con:originalUri>http://pustovoy.todes.by/cxf/vcouncil/data/movements</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="sysOrgan" value="26"/>
+  <con:entry key="since" value="01.01.2015"/>
+</con:parameters><con:parameterOrder><con:entry>sysOrgan</con:entry><con:entry>since</con:entry><con:entry>till</con:entry><con:entry>first</con:entry><con:entry>count</con:entry></con:parameterOrder></con:request></con:method></con:resource><con:resource name="Проверка статуса сервиса" path="/cxf/vcouncil/service/status" id="ce065f98-6219-481f-ab9b-4243ff45d0c6"><con:settings/><con:parameters/><con:method name="Method 1" id="0d617339-6499-4caf-aabe-06ad21b0c6cd" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="f659ff60-9382-464b-807f-0539e7a791e2" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8181</con:endpoint><con:request/><con:originalUri>http://localhost/cxf/vcouncil/service/status</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="3c940ec1-750d-4abe-9380-ae91ca146142" wadlVersion="http://wadl.dev.java.net/2009/02" name="Обмен данными с сельсоветами" type="rest" definitionUrl="COUNTRYPU" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT"/><con:endpoints/></con:interface><con:interface xsi:type="con:RestService" id="c214bfc2-865c-4e26-a8f3-a8edee9128cf" wadlVersion="http://wadl.dev.java.net/2009/02" name="Обмен данными с сельсоветами" type="rest" definitionUrl="catego" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints/></con:interface><con:interface xsi:type="con:RestService" id="ec88a189-4bbe-47bf-9756-1fde45bbed3a" wadlVersion="http://wadl.dev.java.net/2009/02" name="Обмен данными с сельсоветами" type="rest" definitionUrl="category" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints/></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

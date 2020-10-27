@@ -1,0 +1,8 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:act="http://spr.nvcm.net/ActualDictionaryWebService">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <act:receiveActualDictionary>
+      <requestGuid>aa81a56c-9895-4999-ba61-4c0ae00e6eea</requestGuid>
+    </act:receiveActualDictionary>
+  </soapenv:Body>
+</soapenv:Envelope>

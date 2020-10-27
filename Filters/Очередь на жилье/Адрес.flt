@@ -1,0 +1,86 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Адрес
+1
+1,"0"
+2,PARAM,403,295,96,,111
+6
+5
+3,PROP,FLD_PUNKT,EQUAL_N,"fikAnd,fikFirst",0,1,1,1,dkFull
+1,VALUE,valNumbers,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_UL,EQUAL_N,fikAnd,0,1,0,2,dkFull
+1,VALUE,valNumber,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_DOM,EQUAL_S,fikAnd,1,1,0,3,dkFull
+1,VALUE,valString,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_KORP,EQUAL_S,fikAnd,1,1,0,4,dkFull
+1,VALUE,valString,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_KV,EQUAL_S,fikAnd,1,1,0,6,dkFull
+1,VALUE,valString,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+41
+1,FIELDS_CTRL,5
+1,FLD_PUNKT,1
+1,CONTROLS,3
+1,CTRL,TStaticText,laName1_77c548a8de62dfc3ca9e5d9003fe8336_1,"Название поля","sbParam"
+PROPS,Top=2,Left=14,Width=115,Height=17
+1,CTRL,TStaticText,laOp1_77c548a8de62dfc3ca9e5d9003fe8336_1,"Название операции","sbParam"
+PROPS,Top=22,Left=10,Width=34,Height=17,Visible=False
+1,CTRL,TCheckListBox,chbSpr1_77c548a8de62dfc3ca9e5d9003fe8336_1,"Ввод значения","sbParam"
+PROPS,Top=20,Left=12,Width=343,Height=100
+1,FLD_UL,2
+1,CONTROLS,3
+1,CTRL,TStaticText,laName1_57a73f8357aa669ff847d213eb410fff_2,"Название поля","sbParam"
+PROPS,Top=138,Left=14,Width=36,Height=17
+1,CTRL,TStaticText,laOp1_57a73f8357aa669ff847d213eb410fff_2,"Название операции","sbParam"
+PROPS,Top=128,Left=97,Width=34,Height=17,Visible=False
+1,CTRL,TDBLookupComboboxEh,dbCombo1_57a73f8357aa669ff847d213eb410fff_2,"Ввод значения","sbParam"
+PROPS,Top=135,Left=59,Width=295,Height=21
+1,FLD_DOM,3
+1,CONTROLS,3
+1,CTRL,TStaticText,laName1_488d70814c646e90fb3d3cd4c28d44d4_3,"Название поля","sbParam"
+PROPS,Top=171,Left=14,Width=27,Height=17
+1,CTRL,TStaticText,laOp1_488d70814c646e90fb3d3cd4c28d44d4_3,"Название операции","sbParam"
+PROPS,Top=173,Left=104,Width=34,Height=17,Visible=False
+1,CTRL,TEdit,edText1_488d70814c646e90fb3d3cd4c28d44d4_3,"Ввод значения","sbParam"
+PROPS,Top=167,Left=61,Width=52,Height=21
+1,FLD_KORP,4
+1,CONTROLS,3
+1,CTRL,TStaticText,laName1_76dd3bf3352e013d1c361c651c3a43db_4,"Название поля","sbParam"
+PROPS,Top=170,Left=128,Width=40,Height=17
+1,CTRL,TStaticText,laOp1_76dd3bf3352e013d1c361c651c3a43db_4,"Название операции","sbParam"
+PROPS,Top=119,Left=195,Width=34,Height=17,Visible=False
+1,CTRL,TEdit,edText1_76dd3bf3352e013d1c361c651c3a43db_4,"Ввод значения","sbParam"
+PROPS,Top=167,Left=175,Width=52,Height=21
+1,FLD_KV,6
+1,CONTROLS,3
+1,CTRL,TStaticText,laName1_d2801004eaaf39f3ffad3a9b06995a2e_6,"Название поля","sbParam"
+PROPS,Top=170,Left=244,Width=52,Height=17
+1,CTRL,TStaticText,laOp1_d2801004eaaf39f3ffad3a9b06995a2e_6,"Название операции","sbParam"
+PROPS,Top=119,Left=53,Width=34,Height=17,Visible=False
+1,CTRL,TEdit,edText1_d2801004eaaf39f3ffad3a9b06995a2e_6,"Ввод значения","sbParam"
+PROPS,Top=167,Left=303,Width=52,Height=21

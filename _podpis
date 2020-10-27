@@ -1,0 +1,25 @@
+  nCountPodpis:=Podpis_Init(27);
+  DokumentCOUNT_PODPIS.AsInteger:=nCountPodpis;
+  if nCountPodpis=0 then begin
+    edDolgPodp3.Visible:=false;
+    edFIOPodp3.Visible:=false;
+    edDolgPodp2.Visible:=false;
+    edFIOPodp2.Visible:=false;
+    DokumentDOLG_PODP1.AsString  := DolgRukov;
+    DokumentFIO_PODP1.AsString  := FIORukov;
+  end else begin
+    DokumentDOLG_PODP1.AsString  := Podpis_Dolg(1);
+    DokumentFIO_PODP1.AsString  := Podpis_FIO(1);
+    DokumentDOLG_PODP2.AsString  := Podpis_Dolg(2);
+    DokumentFIO_PODP2.AsString  := Podpis_FIO(2);
+    DokumentDOLG_PODP3.AsString  := Podpis_Dolg(3);
+    DokumentFIO_PODP3.AsString  := Podpis_FIO(3);
+    if nCountPodpis<3 then begin
+      edDolgPodp3.Visible:=false;
+      edFIOPodp3.Visible:=false;
+    end;
+    if nCountPodpis<2 then begin
+      edDolgPodp2.Visible:=false;
+      edFIOPodp2.Visible:=false;
+    end;
+  end;

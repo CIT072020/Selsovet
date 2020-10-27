@@ -1,0 +1,26 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+История фамилий
+1
+1,"0"
+2,PARAM,0,0,96,,111
+2
+1
+3,PROP,LIST_MENS_HIST_FAM,EXISTS,"fikPar,fikAnd,fikFirst",0,0,1,1,dkFull
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+PAR
+1
+3,PROP,LIST_MENS_HIST_FAM.FLD_VALUE,BEGIN,"fikAnd,fikFirst",0,1,1,2,dkFull
+1,VALUE,valString,0,Ива,0,0,18991230,0,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+0

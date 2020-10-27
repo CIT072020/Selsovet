@@ -1,0 +1,24 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Заявления за период
+1
+1,"0"
+2,PARAM,0,0,96,,111
+3
+2
+3,PROP,FLD_DATEZ,BETWEEN_D,"fikAnd,fikFirst",0,1,1,2,dkFull
+1,VALUE,valDate,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valDate,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_ST21,EQUAL_L,fikAnd,0,1,0,3,dkFull
+1,VALUE,valBoolean,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+0

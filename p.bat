@@ -1,0 +1,1 @@
+start opeka.exe /user:ADSSYS /psw:sysdba

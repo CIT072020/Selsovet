@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATASETS VERSION="1">
+  <SPR141 ONE_RECORD="0" RECORD_COUNT="2">
+    <row>
+      <TYPESPR>141</TYPESPR>
+      <EXTCODE>1</EXTCODE>
+      <LEX1>РЕГИСТРАЦИОННАЯ КНИГА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>141</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-07-13</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>141</TYPESPR>
+      <EXTCODE>2</EXTCODE>
+      <LEX1>КНИГА ГОСУДАРСТВЕННОГО УЧЕТА УЧАСТКОВ ДЛЯ ЗАХОРОНЕНИЯ, МЕСТ В КОЛУМБАРИИ, СКЛЕПОВ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>141</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-24</BEGINDATE>
+    </row>
+  </SPR141>
+</DATASETS>

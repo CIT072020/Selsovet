@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base xsi:noNamespaceSchemaLocation="zags.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<info>
+	<soato>1212840002</soato>
+	<id_zags>121</id_zags>
+	<name>Чернинский Сельский Совет</name>
+	<first_date>2010-06-01</first_date>
+	<last_date>2010-12-20</last_date>
+	<birth_count>2</birth_count>
+	<marriage_count>2</marriage_count>
+	<death_count>2</death_count>
+	<paternity_count>1</paternity_count>
+</info>
+<birth>
+  <row>
+    <number>45</number>
+    <datez>2010-11-23</datez>
+    <cert>
+      <series>I-АЛ</series>
+      <number>0340716</number>
+      <date>2010-11-23</date>
+    </cert>
+    <identif/>
+    <surname bel="Панасюк">Панасюк</surname>
+    <name bel="Анастасія">Анастасия</name>
+    <patronymic bel="Андрэеўна">Андреевна</patronymic>
+    <date_birth>2010-11-12</date_birth>
+    <time_birth>14:10:00</time_birth>
+    <birthplace>
+      <isresp>True</isresp>
+      <country>112</country>
+      <isobl>True</isobl>
+      <obl bel="Брэсцкая">Брестская</obl>
+      <raion bel="Брэсцкi">Брестский</raion>
+      <typepunkt name="деревня">2</typepunkt>
+      <city bel="Чэрні">Черни</city>
+    </birthplace>
+    <residence>
+      <isresp/>
+      <country/>
+      <isobl/>
+      <obl/>
+      <raion/>
+      <typepunkt name=""/>
+      <city/>
+      <adress/>
+    </residence>
+    <sex>Ж</sex>
+    <type_birth>1</type_birth>
+    <live>True</live>
+    <order_body>2</order_body>
+    <count_survived>2</count_survived>
+    <mass_body>2800</mass_body>
+    <length_body>50</length_body>
+    <sp>
+      <a>2</a>
+      <b>2</b>
+      <c>2010-02-22</c>
+      <d>272</d>
+      <e>1</e>
+      <f/>
+      <g/>
+      <h/>
+      <i>1</i>
+      <j>1996-07-24</j>
+      <j_year/>
+      <k>1</k>
+    </sp>
+    <document>Медицинская справка о рождении № 3358  от 13.11.2010 выдана УЗ  "Брестский областной родильный дом"</document>
+    <father>
+      <surname bel="Панасюк">Панасюк</surname>
+      <name bel="Андрэй">Андрей</name>
+      <patronymic bel="Віктаравіч">Викторович</patronymic>
+      <onlyyear>False</onlyyear>
+      <date_birth>1975-11-12</date_birth>
+      <age/>
+      <nation name="белорусы">3</nation>
+      <citizenship>112</citizenship>
+      <rd_soato/>
+      <rd_isresp>True</rd_isresp>
+      <rd_country>112</rd_country>
+      <rd_isobl>True</rd_isobl>
+      <rd_obl>Брестская</rd_obl>
+      <rd_isrn>True</rd_isrn>
+      <rd_raion>Брестский</rd_raion>
+      <rd_typepunkt name="деревня">2</rd_typepunkt>
+      <rd_city>Черни</rd_city>
+      <rd_adress>ул. Мирная, дом 26</rd_adress>
+      <bp_isresp>True</bp_isresp>
+      <bp_country>112</bp_country>
+      <bp_isobl>True</bp_isobl>
+      <bp_obl/>
+      <bp_raion/>
+      <bp_typepunkt name="город">1</bp_typepunkt>
+      <bp_city>Брест</bp_city>
+      <work>СП ОАО "Брестгазоаппарат", слесарь</work>
+      <education>2</education>
+      <identif>3121175C032PB3</identif>
+      <document>Московским РОВД г. Бреста</document>
+      <doc_type>1</doc_type>
+      <doc_series>АВ</doc_series>
+      <doc_number>1042610</doc_number>
+      <doc_date>2002-07-19</doc_date>
+      <doc_org/>
+    </father>
+    <mother>
+      <surname bel="Панасюк">Панасюк</surname>
+      <name bel="Наталля">Наталья</name>
+      <patronymic bel="Аляксееўна">Алексеевна</patronymic>
+      <onlyyear>False</onlyyear>
+      <date_birth>1977-02-15</date_birth>
+      <age/>
+      <nation name="белорусы">3</nation>
+      <citizenship>112</citizenship>
+      <rd_soato/>
+      <rd_isresp>True</rd_isresp>
+      <rd_country>112</rd_country>
+      <rd_isobl>True</rd_isobl>
+      <rd_obl>Брестская</rd_obl>
+      <rd_isrn>True</rd_isrn>
+      <rd_raion>Брестский</rd_raion>
+      <rd_typepunkt name="деревня">2</rd_typepunkt>
+      <rd_city>Черни</rd_city>
+      <rd_adress>ул. Мирная, дом 26</rd_adress>
+      <bp_isresp>True</bp_isresp>
+      <bp_country>112</bp_country>
+      <bp_isobl>True</bp_isobl>
+      <bp_obl/>
+      <bp_raion/>
+      <bp_typepunkt name="город">1</bp_typepunkt>
+      <bp_city>Брест</bp_city>
+      <work>СООО "Швейная фабрина Нелва", швея</work>
+      <education>2</education>
+      <identif>4150277C030PB7</identif>
+      <document>Московским РОВД г. Бреста</document>
+      <doc_type>1</doc_type>
+      <doc_series>АВ</doc_series>
+      <doc_number>1042612</doc_number>
+      <doc_date>2002-07-19</doc_date>
+      <doc_org/>
+    </mother>
+    <father_information_reason>1</father_information_reason>
+    <father_information>Запись акта о заключении брака № 735 от 12.08.1995 по Дому гражданских обрядов  Брестского горисполкома</father_information>
+    <date_marriage>1899-12-30</date_marriage>
+    <he_witness>Покало Андрей Викторович</he_witness>
+    <she_witness>Юхнович Алла  Сергеевна</she_witness>
+    <head_registry bel="В.У.Катовіч">В.В.Котович</head_registry>
+    <declarant>Панасюк Андрей Викторович , Брестский район, д. Черни, ул. Мирная, дом 26</declarant>
+    <holding_rec>False</holding_rec>
+    <specialist bel=""/>
+    <name_zags bel=""/>
+    <mark>национальность отца- запись акта о рождении № 3028 от 26.11.1975 по  отделу ЗАГС Брестского горисполкома#национальность матери-запись акта о рождении № 659 от 11.03.1977 по Дому гражданских обрядов Брестского горисполкома</mark>
+    <firstweek_dead>False</firstweek_dead>
+    <date_death>1899-12-30</date_death>
+    <number_cert>04/7(1132(5.13)</number_cert>
+    <date_cert>2010-11-23</date_cert>
+	<other/>
+	<changes/>
+  </row>
+  <row>
+    <number>46</number>
+    <datez>2010-12-08</datez>
+    <cert>
+      <series>I-АЛ</series>
+      <number>0340717</number>
+      <date>2010-12-08</date>
+    </cert>
+    <identif/>
+    <surname bel="Лысенка">Лысенко</surname>
+    <name bel="Віктар">Виктор</name>
+    <patronymic bel="Сяргеевіч">Сергеевич</patronymic>
+    <date_birth>2010-11-24</date_birth>
+    <time_birth>12:40:00</time_birth>
+    <birthplace>
+      <isresp>True</isresp>
+      <country>112</country>
+      <isobl>True</isobl>
+      <obl bel="Брэсцкая">Брестская</obl>
+      <raion bel="Брэсцкi">Брестский</raion>
+      <typepunkt name="деревня">2</typepunkt>
+      <city bel="Валоскі">Волоски</city>
+    </birthplace>
+    <residence>
+      <isresp/>
+      <country/>
+      <isobl/>
+      <obl/>
+      <raion/>
+      <typepunkt name=""/>
+      <city/>
+      <adress/>
+    </residence>
+    <sex>М</sex>
+    <type_birth>1</type_birth>
+    <live>True</live>
+    <order_body>10</order_body>
+    <count_survived>9</count_survived>
+    <mass_body>3490</mass_body>
+    <length_body>51</length_body>
+    <sp>
+      <a>10</a>
+      <b>10</b>
+      <c>2010-02-20</c>
+      <d>277</d>
+      <e>9</e>
+      <f/>
+      <g/>
+      <h/>
+      <i>8</i>
+      <j>2007-09-01</j>
+      <j_year/>
+      <k>1</k>
+    </sp>
+    <document>Медицинская справка о рождении № 3454 от 25.11.2010  выдана УЗ  "Брестский областной родильный дом"</document>
+    <father>
+      <surname bel="Лысенка">Лысенко</surname>
+      <name bel="Сяргей">Сергей</name>
+      <patronymic bel="Уладзіміравіч">Владимирович</patronymic>
+      <onlyyear>False</onlyyear>
+      <date_birth>1962-02-17</date_birth>
+      <age/>
+      <nation name="русские">1</nation>
+      <citizenship>999</citizenship>
+      <rd_soato/>
+      <rd_isresp>True</rd_isresp>
+      <rd_country>112</rd_country>
+      <rd_isobl>True</rd_isobl>
+      <rd_obl>Брестская</rd_obl>
+      <rd_isrn>True</rd_isrn>
+      <rd_raion>Брестский</rd_raion>
+      <rd_typepunkt name="деревня">2</rd_typepunkt>
+      <rd_city>Волоски</rd_city>
+      <rd_adress>дом 8</rd_adress>
+      <bp_isresp>True</bp_isresp>
+      <bp_country>398</bp_country>
+      <bp_isobl>True</bp_isobl>
+      <bp_obl>Целиноградская</bp_obl>
+      <bp_raion>Киймийский</bp_raion>
+      <bp_typepunkt name="поселок сельского типа">8</bp_typepunkt>
+      <bp_city>Ярославский</bp_city>
+      <work>Дорожно-эксплуатационное  предприятие г. Брест, дорожный  рабочий</work>
+      <education>3</education>
+      <identif>3170262А001VF6</identif>
+      <document>Брестским РОВД Брестской области</document>
+      <doc_type>2</doc_type>
+      <doc_series>ВА</doc_series>
+      <doc_number>0000750</doc_number>
+      <doc_date>2006-11-03</doc_date>
+      <doc_org/>
+    </father>
+    <mother>
+      <surname bel="Лысенка">Лысенко</surname>
+      <name bel="Наталля">Наталья</name>
+      <patronymic bel="Паўлаўна">Павловна</patronymic>
+      <onlyyear>False</onlyyear>
+      <date_birth>1967-11-23</date_birth>
+      <age/>
+      <nation name="белорусы">3</nation>
+      <citizenship>112</citizenship>
+      <rd_soato/>
+      <rd_isresp>True</rd_isresp>
+      <rd_country>112</rd_country>
+      <rd_isobl>True</rd_isobl>
+      <rd_obl>Брестская</rd_obl>
+      <rd_isrn>True</rd_isrn>
+      <rd_raion>Брестский</rd_raion>
+      <rd_typepunkt name="деревня">2</rd_typepunkt>
+      <rd_city>Волоски</rd_city>
+      <rd_adress>дом 8</rd_adress>
+      <bp_isresp>True</bp_isresp>
+      <bp_country>398</bp_country>
+      <bp_isobl>True</bp_isobl>
+      <bp_obl>Павлодарская</bp_obl>
+      <bp_raion>Лебяжинский</bp_raion>
+      <bp_typepunkt name="село">3</bp_typepunkt>
+      <bp_city>Черное</bp_city>
+      <work>КУСП " Молодая гвардия", доярка</work>
+      <education>4</education>
+      <identif>4231167C036PB9</identif>
+      <document>Брестским РОВД Брестской области</document>
+      <doc_type>1</doc_type>
+      <doc_series>АВ</doc_series>
+      <doc_number>1319530</doc_number>
+      <doc_date>2003-09-18</doc_date>
+      <doc_org/>
+    </mother>
+    <father_information_reason>1</father_information_reason>
+    <father_information>Запись акта о заключении брака № 15 от 06.11.2002 по отделу ЗАГС Брестского райисполкома Брестской области</father_information>
+    <date_marriage>1899-12-30</date_marriage>
+    <he_witness>Карпук Светлана Петровна</he_witness>
+    <she_witness>Карпук Вячеслав Петрович</she_witness>
+    <head_registry bel="В.У.Катовіч">В.В.Котович</head_registry>
+    <declarant>Лысенко Наталья Павловна , Брестский район, д. Волоски, дом 8</declarant>
+    <holding_rec>False</holding_rec>
+    <specialist bel=""/>
+    <name_zags bel=""/>
+    <mark>национальность отца- запись акта о рождении № 15 от 27.02.1962 по Ярославскому сельскому Совету Киймийского района Целиноградской области Казахстана #национальность матери- запись акта о рождении № 22 от 03.04.1967 по Кызыл-аскерскому сельскому Совету Лебяжинского района Павлодарской  области Казахстана</mark>
+    <firstweek_dead>False</firstweek_dead>
+    <date_death>1899-12-30</date_death>
+    <number_cert>04-7/1177(5.13)</number_cert>
+    <date_cert>2010-12-08</date_cert>
+	<other/>
+	<changes/>	
+  </row>
+</birth>
+<marriage>
+  <row>
+    <number>21</number>
+    <datez>2010-11-20</datez>
+    <cert>
+      <series>I-АЛ</series>
+      <number>0194149</number>
+      <date>2010-11-20</date>
+    </cert>
+    <groom>
+      <surname_before bel="Буйкевіч">Буйкевич</surname_before>
+      <surname_after bel="Буйкевіч">Буйкевич</surname_after>
+      <name bel="Вадзім">Вадим</name>
+      <patronymic bel="Дзмітрыевіч">Дмитриевич</patronymic>
+      <only_year>False</only_year>
+      <date_birth>1982-01-01</date_birth>
+      <bp_isresp>True</bp_isresp>
+      <bp_country>112</bp_country>
+      <bp_isobl>True</bp_isobl>
+      <bp_obl bel="Брэсцкая">Брестская</bp_obl>
+      <bp_raion bel="Брэсцкi">Брестский</bp_raion>
+      <bp_typepunkt name="деревня">2</bp_typepunkt>
+      <bp_city bel="Чэрні">Черни</bp_city>
+      <nation name="белорусы">3</nation>
+      <citizenship>112</citizenship>
+      <work>ЗАОО" Брестоптимал", отделочник</work>
+      <education>5</education>
+      <rd_isresp>True</rd_isresp>
+      <rd_country>112</rd_country>
+      <rd_isobl>True</rd_isobl>
+      <rd_obl>Брестская</rd_obl>
+      <rd_isrn>True</rd_isrn>
+      <rd_raion>Брестский</rd_raion>
+      <rd_typepunkt name="деревня">2</rd_typepunkt>
+      <rd_city>Черни</rd_city>
+      <rd_adress>ул. Высокая, дом 3</rd_adress>
+      <from_year_live>1982</from_year_live>
+      <marital_status>2</marital_status>
+      <identif>3010182C067PB8</identif>
+      <age/>
+      <document>Брестским РОВД Брестской области</document>
+      <doc_type>1</doc_type>
+      <doc_series>АВ</doc_series>
+      <doc_number>2023224</doc_number>
+      <doc_date>2007-12-14</doc_date>
+      <doc_org/>
+      <voenkom name=""/>
+      <reservist>False</reservist>
+    </groom>
+    <bride>
+      <surname_before bel="Змеева">Змеева</surname_before>
+      <surname_after bel="Буйкевіч">Буйкевич</surname_after>
+      <name bel="Марыя">Мария</name>
+      <patronymic bel="Аляксандраўна">Александровна</patronymic>
+      <only_year>False</only_year>
+      <date_birth>1990-01-23</date_birth>
+      <bp_isresp>True</bp_isresp>
+      <bp_country>112</bp_country>
+      <bp_isobl>True</bp_isobl>
+      <bp_obl bel="Брэсцкая">Брестская</bp_obl>
+      <bp_raion bel="Брэсцкi">Брестский</bp_raion>
+      <bp_typepunkt name="деревня">2</bp_typepunkt>
+      <bp_city bel="Велюнь">Велюнь</bp_city>
+      <nation name="белорусы">3</nation>
+      <citizenship>112</citizenship>
+      <work>КУСП " Молодая гвардия",оператор машинного доения</work>
+      <education>5</education>
+      <rd_isresp>True</rd_isresp>
+      <rd_country>112</rd_country>
+      <rd_isobl>True</rd_isobl>
+      <rd_obl>Брестская</rd_obl>
+      <rd_isrn>True</rd_isrn>
+      <rd_raion>Брестский</rd_raion>
+      <rd_typepunkt name="деревня">2</rd_typepunkt>
+      <rd_city>Велюнь</rd_city>
+      <rd_adress>дом 13/1</rd_adress>
+      <from_year_live>1990</from_year_live>
+      <marital_status>2</marital_status>
+      <identif>4230190C037PB9</identif>
+      <age/>
+      <document>Брестским РОВД  Брестской области</document>
+      <doc_type>1</doc_type>
+      <doc_series>АВ</doc_series>
+      <doc_number>1866398</doc_number>
+      <doc_date>2006-10-13</doc_date>
+      <doc_org/>
+      <voenkom name=""/>
+      <reservist>False</reservist>
+    </bride>
+    <marriage_isterm>False</marriage_isterm>
+    <children/>
+    <he_witness>Щерба Василий Леонидович</he_witness>
+    <she_witness>Цундер Юлия Владимировна</she_witness>
+    <head_registry>В.В.Котович</head_registry>
+    <specialist bel=""/>
+    <declarant/>
+    <solemnly>True</solemnly>
+    <duty>35000  рублей по кассовому чеку № 76741  от 02.09.2010 АСБ "Беларусбанк"   ф-л  104/4 д. Черни, Брестский район</duty>
+    <date_reg_marriage>1899-12-30</date_reg_marriage>
+    <name_zags bel=""/>
+    <reason_decl_marrage/>
+    <reason_decl_durreg/>
+	<other/>
+	<changes/>	
+  </row>
+  <row>
+    <number>22</number>
+    <datez>2010-11-21</datez>
+    <cert>
+      <series>I-АЛ</series>
+      <number>0194150</number>
+      <date>2010-11-21</date>
+    </cert>
+    <groom>
+      <surname_before bel="Скіндзер">Скиндер</surname_before>
+      <surname_after bel="Скіндзер">Скиндер</surname_after>
+      <name bel="Віктар">Виктор</name>
+      <patronymic bel="Пятровіч">Петрович</patronymic>
+      <only_year>False</only_year>
+      <date_birth>1975-12-18</date_birth>
+      <bp_isresp>True</bp_isresp>
+      <bp_country>112</bp_country>
+      <bp_isobl>True</bp_isobl>
+      <bp_obl bel=""/>
+      <bp_raion bel=""/>
+      <bp_typepunkt name="город">1</bp_typepunkt>
+      <bp_city bel="Брэст">Брест</bp_city>
+      <nation name="белорусы">3</nation>
+      <citizenship>112</citizenship>
+      <work>ОАО" Брестмаш", инженер</work>
+      <education>1</education>
+      <rd_isresp>True</rd_isresp>
+      <rd_country>112</rd_country>
+      <rd_isobl>True</rd_isobl>
+      <rd_obl/>
+      <rd_isrn>True</rd_isrn>
+      <rd_raion/>
+      <rd_typepunkt name="город">1</rd_typepunkt>
+      <rd_city>Брест</rd_city>
+      <rd_adress>ул.Суворова,д.101" А", кв.144</rd_adress>
+      <from_year_live>2007</from_year_live>
+      <marital_status>2</marital_status>
+      <identif>3181275С062РВ3</identif>
+      <age/>
+      <document>Московским РОВД г. Бреста</document>
+      <doc_type>1</doc_type>
+      <doc_series>АВ</doc_series>
+      <doc_number>0970156</doc_number>
+      <doc_date>2002-03-15</doc_date>
+      <doc_org/>
+      <voenkom name=""/>
+      <reservist>False</reservist>
+    </groom>
+    <bride>
+      <surname_before bel="Удавіхіна">Удавихина</surname_before>
+      <surname_after bel="Скіндзер">Скиндер</surname_after>
+      <name bel="Марына">Марина</name>
+      <patronymic bel="Валянцінаўна">Валентиновна</patronymic>
+      <only_year>False</only_year>
+      <date_birth>1979-07-15</date_birth>
+      <bp_isresp>True</bp_isresp>
+      <bp_country>643</bp_country>
+      <bp_isobl>False</bp_isobl>
+      <bp_obl bel="Татарская Асср">Татарская АССР</bp_obl>
+      <bp_raion bel=""/>
+      <bp_typepunkt name="город">1</bp_typepunkt>
+      <bp_city bel="Ніжнекамск">Нижнекамск</bp_city>
+      <nation name="русские">1</nation>
+      <citizenship>112</citizenship>
+      <work> не работает, проживает за счет сбережений</work>
+      <education>1</education>
+      <rd_isresp>True</rd_isresp>
+      <rd_country>112</rd_country>
+      <rd_isobl>True</rd_isobl>
+      <rd_obl>Брестская</rd_obl>
+      <rd_isrn>True</rd_isrn>
+      <rd_raion>Брестский</rd_raion>
+      <rd_typepunkt name="деревня">2</rd_typepunkt>
+      <rd_city>Черни</rd_city>
+      <rd_adress>ул. Наганова, дом 4</rd_adress>
+      <from_year_live>1989</from_year_live>
+      <marital_status>2</marital_status>
+      <identif>4150779С044РВ5</identif>
+      <age/>
+      <document>Брестским РОВД Брестской области</document>
+      <doc_type>1</doc_type>
+      <doc_series>АВ</doc_series>
+      <doc_number>1555489</doc_number>
+      <doc_date>2004-07-01</doc_date>
+      <doc_org/>
+      <voenkom name=""/>
+      <reservist>False</reservist>
+    </bride>
+    <marriage_isterm>False</marriage_isterm>
+    <children/>
+    <he_witness>Курлович   Татьяна Николаевна</he_witness>
+    <she_witness>Чинарян Давид Саркисович</she_witness>
+    <head_registry>В.В.Котович</head_registry>
+    <specialist bel=""/>
+    <declarant/>
+    <solemnly>True</solemnly>
+    <duty>35000 рублей по кассовому чеку №81391 от 19.10.2010   АСБ "Беларусбанк"   ф-л  104/4 д. Черни, Брестский район</duty>
+    <date_reg_marriage>1899-12-30</date_reg_marriage>
+    <name_zags bel=""/>
+    <reason_decl_marrage/>
+    <reason_decl_durreg/>
+	<other/>
+	<changes/>	
+  </row>
+</marriage>
+<death>
+  <row>
+    <number>6</number>
+    <datez>2010-06-02</datez>
+    <cert>
+      <series>I-АЛ</series>
+      <number>0320971</number>
+      <date>2010-06-02</date>
+    </cert>
+    <surname bel="Шастак">Шестак</surname>
+    <name bel="Ніна">Нина</name>
+    <patronymic bel="Пракопаўна">Прокофьевна</patronymic>
+    <sex>Ж</sex>
+    <nation name="сведения не представлены">190</nation>
+    <citizenship>112</citizenship>
+    <date_death_year>0</date_death_year>
+    <date_death>2010-06-02</date_death>
+    <death_followed>2</death_followed>
+    <deathplace>
+      <isresp>True</isresp>
+      <country>112</country>
+      <isobl>True</isobl>
+      <obl bel="Брэсцкая">Брестская</obl>
+      <raion bel="Брэсцкi">Брестский</raion>
+      <typepunkt name="деревня">2</typepunkt>
+      <city bel="Чэрні">Черни</city>
+    </deathplace>
+    <reason_direct name="Хроническая недостаточность кровообращения" bel="хранічная недахопнасць кровазвароту"/>
+    <reason_basic name="" bel=""/>
+    <place_death name="" bel=""/>
+    <document_type/>
+    <document>Врачебное свидетельство о смерти № 5  выдано 02 .06.2010 Чернинской сельской врачебной амбулаторией Брестского  района Брестской области</document>
+    <date_birth_year>0</date_birth_year>
+    <date_birth>1928-05-20</date_birth>
+    <birthplace>
+      <isresp>True</isresp>
+      <country>112</country>
+      <isobl>True</isobl>
+      <obl>Могилёвская</obl>
+      <raion>Краснопольский</raion>
+      <typepunkt name="деревня">2</typepunkt>
+      <city>Высокий Борок</city>
+    </birthplace>
+    <residence>
+      <soato/>
+      <isresp>True</isresp>
+      <country>112</country>
+      <isobl>True</isobl>
+      <obl>Брестская</obl>
+      <isrn>True</isrn>
+      <raion>Брестский</raion>
+      <typepunkt name="деревня">2</typepunkt>
+      <city>Черни</city>
+      <adress>ул Молодёжная, дом 16</adress>
+    </residence>
+    <marital_status>3</marital_status>
+    <work>пенсионерка</work>
+    <education>2</education>
+    <decl>Шестак Анатолий Анатольевич, г. Брест, ул. Адамковская,59/2 кв.115</decl>
+    <sprav_number>04-7/344(5.13)</sprav_number>
+    <sprav_date>2010-06-02</sprav_date>
+    <doc_delivery>паспорт АВ2024228 выдан 18.12.2007 Брестским РОВД  Брестской области</doc_delivery>
+    <bilet_delivery>не предоставлен</bilet_delivery>
+    <mark/>
+    <head_registry bel="В.У.Катовіч">В.В.Котович</head_registry>
+    <holding_rec>False</holding_rec>
+    <specialist bel=""/>
+    <mother_date_birth>1899-12-30</mother_date_birth>
+    <child_count/>
+    <name_zags bel=""/>
+    <vus>False</vus>
+    <ticket_out>False</ticket_out>
+    <age>82</age>
+    <voenkomat name=""/>
+    <identif_number>4200528С047РВ4</identif_number>
+    <doc>
+      <type>1</type>
+      <series>АВ</series>
+      <number>2024228</number>
+      <date>2007-12-18</date>
+      <org/>
+      <org_name>Брестский РОВД</org_name>
+    </doc>
+    <judgement>False</judgement>
+	<other/>
+	<changes/>	
+  </row>
+  <row>
+    <number>7</number>
+    <datez>2010-06-11</datez>
+    <cert>
+      <series>I-АЛ</series>
+      <number>0320972</number>
+      <date>2010-06-11</date>
+    </cert>
+    <surname bel="Грыцук">Грицук</surname>
+    <name bel="Міхаіл">Михаил</name>
+    <patronymic bel="Анатольевіч">Анатольевич</patronymic>
+    <sex>М</sex>
+    <nation name="сведения не представлены">190</nation>
+    <citizenship>112</citizenship>
+    <date_death_year>0</date_death_year>
+    <date_death>2010-06-10</date_death>
+    <death_followed>3</death_followed>
+    <deathplace>
+      <isresp>True</isresp>
+      <country>112</country>
+      <isobl>True</isobl>
+      <obl bel="Брэсцкая">Брестская</obl>
+      <raion bel="Брэсцкi">Брестский</raion>
+      <typepunkt name="деревня">2</typepunkt>
+      <city bel="Чэрні">Черни</city>
+    </deathplace>
+    <reason_direct name="Механическая асфиксия вследствие закрытия дыхательных путей водой при утоплении" bel="мехнанічная асфіксія    ў выніку закрыцця дыхавых шляхоў прі утапленіі"/>
+    <reason_basic name="" bel=""/>
+    <place_death name="" bel=""/>
+    <document_type/>
+    <document>Врачебное свидетельство о смерти № 463 выдано  11.06.2010  Государственной службой медицинских судебных экспертиз. Управление по Брестской области.</document>
+    <date_birth_year>0</date_birth_year>
+    <date_birth>1964-09-23</date_birth>
+    <birthplace>
+      <isresp>True</isresp>
+      <country>112</country>
+      <isobl>True</isobl>
+      <obl/>
+      <raion/>
+      <typepunkt name="город">1</typepunkt>
+      <city>Брест</city>
+    </birthplace>
+    <residence>
+      <soato/>
+      <isresp>True</isresp>
+      <country>112</country>
+      <isobl>True</isobl>
+      <obl>Брестская</obl>
+      <isrn>True</isrn>
+      <raion>Брестский</raion>
+      <typepunkt name="деревня">2</typepunkt>
+      <city>Черни</city>
+      <adress>ул Молодёжная, дом 3</adress>
+    </residence>
+    <marital_status>1</marital_status>
+    <work>КУСП "Молодая гвардия", сторож</work>
+    <education>5</education>
+    <decl>Грицук Галина Анатольевна, д. Черни,ул. Молодежная,3, Брестского района Брестской области</decl>
+    <sprav_number>04-7/374(5.13)</sprav_number>
+    <sprav_date>2010-06-11</sprav_date>
+    <doc_delivery>паспорт АВ0217544 выдан 13.05.1998 Брестским РОВД  Брестской области</doc_delivery>
+    <bilet_delivery>не предоставлен</bilet_delivery>
+    <mark>Смерть наступила на берегу водоема   в д. Черни</mark>
+    <head_registry bel="В.У.Катовіч">В.В.Котович</head_registry>
+    <holding_rec>False</holding_rec>
+    <specialist bel=""/>
+    <mother_date_birth>1899-12-30</mother_date_birth>
+    <child_count/>
+    <name_zags bel=""/>
+    <vus>True</vus>
+    <ticket_out>True</ticket_out>
+    <age>45</age>
+    <voenkomat name="Брестский райвоенкомат">13</voenkomat>
+    <identif_number>3230964С010РВ6</identif_number>
+    <doc>
+      <type>1</type>
+      <series>АВ</series>
+      <number>0217544</number>
+      <date>1998-05-13</date>
+      <org/>
+      <org_name>Брестский РОВД</org_name>
+    </doc>
+    <judgement>False</judgement>
+	<other/>
+	<changes/>	
+  </row>
+</death>
+<paternity>
+  <row>
+    <number>1</number>
+    <datez>2010-06-22</datez>
+    <cert>
+      <series>I-АЛ</series>
+      <number>0010961</number>
+      <date>2010-06-22</date>
+    </cert>
+    <citizenship/>
+    <surname_before>Токун</surname_before>
+    <surname_after>Токун</surname_after>
+    <name_before>Данил</name_before>
+    <name_after>Данил</name_after>
+    <patronymic_before>Николаевич</patronymic_before>
+    <patronymic_after>Николаевич</patronymic_after>
+    <sex>М</sex>
+    <date_birth>2010-05-14</date_birth>
+    <birthplace>
+      <isresp>True</isresp>
+      <country>112</country>
+      <isobl>True</isobl>
+      <obl>Брестская</obl>
+      <raion>Брестский</raion>
+      <typepunkt name="деревня">2</typepunkt>
+      <city>Черни</city>
+    </birthplace>
+    <registration>
+      <number>24</number>
+      <date>2010-06-22</date>
+      <place>ЧЕРНИНСКИЙ СЕЛЬИСПОЛКОМ   Брестского района Брестской области </place>
+    </registration>
+    <basis>1</basis>
+    <decl_date>2010-06-22</decl_date>
+    <judgement/>
+    <father>
+      <identif>3131279С038РВ3</identif>
+      <surname bel="Токун">Токун</surname>
+      <name bel="Мікалай">Николай</name>
+      <patronymic bel="Фаміч">Фомич</patronymic>
+      <date_birth>1979-12-13</date_birth>
+      <nation name="белорусы">3</nation>
+      <citizenship>112</citizenship>
+      <bp_isresp>True</bp_isresp>
+      <bp_country>112</bp_country>
+      <bp_isobl>True</bp_isobl>
+      <bp_obl>Брестская</bp_obl>
+      <bp_raion>Брестский</bp_raion>
+      <bp_typepunkt name="деревня">2</bp_typepunkt>
+      <bp_city>М. Косичи</bp_city>
+      <rd_soato/>
+      <rd_isresp>True</rd_isresp>
+      <rd_country>112</rd_country>
+      <rd_isobl>True</rd_isobl>
+      <rd_obl>Брестская</rd_obl>
+      <rd_isrn>2</rd_isrn>
+      <rd_raion>Брестский</rd_raion>
+      <rd_city>М. Косичи</rd_city>
+      <rd_adress>ул. Центральная, 17</rd_adress>
+      <education>4</education>
+      <work>КУСП "Молодая гвардия", пастух</work>
+      <document>Брестским РОВД  Брестской области</document>
+      <doc_type name="паспорт гражданина РБ">1</doc_type>
+      <doc_series>АВ</doc_series>
+      <doc_number>2163511</doc_number>
+      <doc_date>2009-02-20</doc_date>
+      <doc_org/>
+    </father>
+    <mother>
+      <identif>4230185С007РВ2</identif>
+      <surname bel="Токун">Токун</surname>
+      <name bel="Вольга">Ольга</name>
+      <patronymic bel="Сяргееўна">Сергеевна</patronymic>
+      <date_birth>1985-01-23</date_birth>
+      <nation name="белорусы">3</nation>
+      <citizenship>112</citizenship>
+      <bp_isresp>True</bp_isresp>
+      <bp_country>112</bp_country>
+      <bp_isobl>True</bp_isobl>
+      <bp_obl>Брестская</bp_obl>
+      <bp_raion>Брестский</bp_raion>
+      <bp_typepunkt name="деревня">2</bp_typepunkt>
+      <bp_city>Черни</bp_city>
+      <rd_soato/>
+      <rd_isresp>True</rd_isresp>
+      <rd_country>112</rd_country>
+      <rd_isobl>True</rd_isobl>
+      <rd_obl>Брестская</rd_obl>
+      <rd_isrn>2</rd_isrn>
+      <rd_raion>Брестский</rd_raion>
+      <rd_city>Черни</rd_city>
+      <rd_adress>ул Пионерская, дом 5, кв. 15</rd_adress>
+      <document>Брестским РОВД Брестской области</document>
+      <doc_type name="паспорт гражданина РБ">1</doc_type>
+      <doc_series>АВ</doc_series>
+      <doc_number>2306762</doc_number>
+      <doc_date>2010-05-28</doc_date>
+      <doc_org/>
+    </mother>
+    <mark>национальность отца- запись акта о рождении  № 44 от 26.12.1979 по Тельминскому сельскому Совету  Брестского района  Брестской области</mark>
+    <head_registry bel="В.У.Катовіч">В.В.Котович</head_registry>
+    <holding_rec>False</holding_rec>
+    <specialist bel=""/>
+    <name_zags bel=""/>
+    <notice>
+      <number/>
+      <date>1899-12-30</date>
+      <adress/>
+    </notice>
+    <voenkomat name=""/>
+    <judgement_date>1899-12-30</judgement_date>
+	<other/>
+	<changes/>	
+  </row>
+</paternity>
+</base>

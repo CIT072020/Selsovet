@@ -1,0 +1,1 @@
+start zags_fr3.exe /user:ADSSYS /psw:sysdba

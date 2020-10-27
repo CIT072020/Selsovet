@@ -1,0 +1,37 @@
+{
+    "cover": {
+		"message_id": "4D7961DF-3057-4587-A498-5D995C733D80",
+		"message_type": {
+			"code": "103",
+			"type": -2
+		},
+		"message_time": "2014-04-09T13:22:09.619+03:00",
+		"message_source": {
+			"code": "6",
+			"type": 131
+		}
+	},
+	"trusteeship_info": {
+        "ward_data": {
+			"identif": "7492594A001PB1"
+        },
+        "trustee_data": {
+			"identif": "7120691A001PB3"
+        },
+        "establish_trusteeship_date": "2016-05-07",
+        "remove_trustee_date": "2017-06-08",
+		"trusteeship_document": {
+            "document_type": {
+                "code": "4",
+				"type": 133
+				  
+            },
+            "authority": {
+				"code": "6",
+				"type": 131
+			},
+            "date_of_issue": "2014-01-01",
+            "number": 6
+        }
+    }
+}

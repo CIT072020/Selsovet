@@ -1,0 +1,11 @@
+﻿<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:his="http://spr.nvcm.net/HistoryDictionaryWebService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <his:chargeHistoryDictionary>
+        <companyId>61fb0fa8-432e-444f-b1a7-862b6f042514</companyId>
+        <dictionaryId>bd3141f9-aed3-4f62-a74c-8a093a0b2ba9</dictionaryId>
+        <historyDateFrom>01.08.2016</historyDateFrom>
+         <historyDateTo>10.08.2016</historyDateTo>
+      </his:chargeHistoryDictionary>
+   </soapenv:Body>
+</soapenv:Envelope>

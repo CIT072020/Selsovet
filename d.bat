@@ -1,0 +1,1 @@
+start laissmdo.exe /usr:ADSSYS /psw:sysdba

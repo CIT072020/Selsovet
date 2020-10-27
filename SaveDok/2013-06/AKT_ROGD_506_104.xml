@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATASETS VERSION="1" DATE_SAVE="2014-07-10" DATE_DOK="2013-06-26" NOMER_DOK="57" TYPEOBJ="6" ID_SOURCE="506" ID_ZAGS="50001" NAME_ZAGS="" PODR="">
+  <DOKUMENT ONE_RECORD="1" RECORD_COUNT="1">
+    <ID>104</ID>
+    <DATEIZM>2014-05-21</DATEIZM>
+    <NOMER>57</NOMER>
+    <DATEZ>2013-06-26</DATEZ>
+    <SVID_SERIA>I-АЛ</SVID_SERIA>
+    <SVID_NOMER>4343450</SVID_NOMER>
+    <FAMILIA>АФАНАСЬЕВ</FAMILIA>
+    <OTCH>Сергеевич</OTCH>
+    <NAME>Иван</NAME>
+    <DATER>2013-06-13</DATER>
+    <GOSUD>112</GOSUD>
+    <OBL>Гомельская</OBL>
+    <GOROD>Буда-Кошелево</GOROD>
+    <SOATO_ID>-1</SOATO_ID>
+    <POL>М</POL>
+    <TYPEROD>1</TYPEROD>
+    <GIVOROGD>1</GIVOROGD>
+    <SCHET>1</SCHET>
+    <OSTAT>1</OSTAT>
+    <DOKUMENT>
+      <![CDATA[Медицинская справка о рождении № ]]>
+    </DOKUMENT>
+    <ON_FAMILIA>АФАНАСЬЕВ</ON_FAMILIA>
+    <ON_NAME>СЕРГЕЙ</ON_NAME>
+    <ON_OTCH>ПАВЛОВИЧ</ON_OTCH>
+    <ON_DATER>1965-08-11</ON_DATER>
+    <ON_GRAG>112</ON_GRAG>
+    <ON_SOATO>3205501</ON_SOATO>
+    <ON_GOSUD>112</ON_GOSUD>
+    <ON_OBL>Гомельская</ON_OBL>
+    <ON_GOROD>Буда-Кошелево</ON_GOROD>
+    <ON_DOKUMENT>
+      <![CDATA[ФРУНЗЕНСКОЕ РУВД Г.МИНСКА]]>
+    </ON_DOKUMENT>
+    <OTMETKA>
+      <![CDATA[аловлао лаолао лалвалвао валваолвоа лвоалвоа валовалов алваолвао валваолвоа влаолоалвао влаовлао а влао лваолаолва аловлаова аоалваолва дадада адладал]]>
+    </OTMETKA>
+    <ON_B_RESP>1</ON_B_RESP>
+    <ON_B_OBL>1</ON_B_OBL>
+    <ONA_FAMILIA>БУЯКЕВИЧ</ONA_FAMILIA>
+    <ONA_NAME>ИРИНА</ONA_NAME>
+    <ONA_OTCH>МИХАЙЛОВНА</ONA_OTCH>
+    <ONA_DATER>1983-12-10</ONA_DATER>
+    <ONA_GRAG>112</ONA_GRAG>
+    <ONA_SOATO>3205501</ONA_SOATO>
+    <ONA_GOSUD>112</ONA_GOSUD>
+    <ONA_OBL>Гомельская</ONA_OBL>
+    <ONA_GOROD>Буда-Кошелево</ONA_GOROD>
+    <ONA_DOKUMENT>
+      <![CDATA[ФРУНЗЕНСКОЕ РУВД Г.МИНСКА]]>
+    </ONA_DOKUMENT>
+    <ONA_B_RESP>1</ONA_B_RESP>
+    <ONA_B_OBL>1</ONA_B_OBL>
+    <SVED>1</SVED>
+    <SVED_NOT_SVID>1</SVED_NOT_SVID>
+    <SVED_UST>0</SVED_UST>
+    <SVED_DATEB>2013-06-12</SVED_DATEB>
+    <RUKOV>И.А. Казакова</RUKOV>
+    <B_RESP>1</B_RESP>
+    <B_OBL>1</B_OBL>
+    <FIRST_EKZ>1</FIRST_EKZ>
+    <PROV>0</PROV>
+    <NAME_B>Іван</NAME_B>
+    <OTCH_B>Сяргеевіч</OTCH_B>
+    <OBL_B>Гомельская</OBL_B>
+    <GOROD_B>Буда-Кошелево</GOROD_B>
+    <ON_FAMILIA_B>АФАНАСЬЕЎ</ON_FAMILIA_B>
+    <ON_NAME_B>СЯРГЕЙ</ON_NAME_B>
+    <ON_OTCH_B>ПАЎЛАВІЧ</ON_OTCH_B>
+    <ONA_FAMILIA_B>БУЯКЕВІЧ</ONA_FAMILIA_B>
+    <ONA_NAME_B>ІРЫНА</ONA_NAME_B>
+    <ONA_OTCH_B>МІХАЙЛАЎНА</ONA_OTCH_B>
+    <RUKOV_B>І.А. Казакова</RUKOV_B>
+    <FAMILIA_B>АФАНАСЬЕЎ</FAMILIA_B>
+    <DATESV>2013-06-26</DATESV>
+    <SPEC>А.Н.Пальчукевич</SPEC>
+    <VOSSTAN>0</VOSSTAN>
+    <ID_ZAGS>50001</ID_ZAGS>
+    <ON_ONLYGOD>0</ON_ONLYGOD>
+    <ONA_ONLYGOD>0</ONA_ONLYGOD>
+    <COPIA>0</COPIA>
+    <NOMER_EKZ>1</NOMER_EKZ>
+    <FIRSTWEEK>0</FIRSTWEEK>
+    <SPRAV_NOMER>57</SPRAV_NOMER>
+    <SPRAV_DATE>2013-06-26</SPRAV_DATE>
+    <POVTOR>0</POVTOR>
+    <ON_B_RN>1</ON_B_RN>
+    <ONA_B_RN>1</ONA_B_RN>
+    <CHERN>1</CHERN>
+    <TORGESTV>0</TORGESTV>
+    <ON_IDENTIF>3110865A045PB5</ON_IDENTIF>
+    <ONA_IDENTIF>4101283A081PB4</ONA_IDENTIF>
+    <IDENTIF>7008423A001PB5</IDENTIF>
+    <STATUS>1</STATUS>
+    <ONA_STATUS>1</ONA_STATUS>
+    <ON_STATUS>1</ON_STATUS>
+    <POLE_GRN>3021</POLE_GRN>
+    <B_GOROD>1</B_GOROD>
+    <ONA_B_GOROD>1</ONA_B_GOROD>
+    <ON_B_GOROD>1</ON_B_GOROD>
+    <TYPEREG>1</TYPEREG>
+    <ON_DOK_TYPE>1</ON_DOK_TYPE>
+    <ON_DOK_SERIA>MP</ON_DOK_SERIA>
+    <ON_DOK_NOMER>0826210</ON_DOK_NOMER>
+    <ON_DOK_ORGAN>17606091</ON_DOK_ORGAN>
+    <ON_DOK_DATE>2000-05-30</ON_DOK_DATE>
+    <ONA_DOK_TYPE>1</ONA_DOK_TYPE>
+    <ONA_DOK_SERIA>MP</ONA_DOK_SERIA>
+    <ONA_DOK_NOMER>0826214</ONA_DOK_NOMER>
+    <ONA_DOK_ORGAN>17606091</ONA_DOK_ORGAN>
+    <ONA_DOK_DATE>2005-05-30</ONA_DOK_DATE>
+    <TYPEMESSAGE>0100</TYPEMESSAGE>
+    <ON_M_GOSUD>112</ON_M_GOSUD>
+    <ON_M_OBL>МИНСКАЯ ОБЛАСТЬ</ON_M_OBL>
+    <ON_M_RAION>ПУХОВИЧСКИЙ</ON_M_RAION>
+    <ON_M_B_GOROD>2</ON_M_B_GOROD>
+    <ON_M_GOROD>КОВАЛЕВИЧИ</ON_M_GOROD>
+    <ONA_M_GOSUD>112</ONA_M_GOSUD>
+    <ONA_M_B_GOROD>1</ONA_M_B_GOROD>
+    <ONA_M_GOROD>МИНСК</ONA_M_GOROD>
+    <NOTPRINT29>0</NOTPRINT29>
+    <IS_GOROD>0</IS_GOROD>
+    <RN_ON_M_B_GOROD>11100009</RN_ON_M_B_GOROD>
+    <RN_ONA_M_B_GOROD>11100001</RN_ONA_M_B_GOROD>
+    <TYPE_EKZ>1</TYPE_EKZ>
+    <DUBL_SPR>0</DUBL_SPR>
+    <DELETE_CRLF>0</DELETE_CRLF>
+    <DECL_ID>1</DECL_ID>
+    <ON_VOENKOM>46</ON_VOENKOM>
+  </DOKUMENT>
+  <SVIDPOVTOR ONE_RECORD="0" RECORD_COUNT="0"/>
+  <HISTZAGS ONE_RECORD="0" RECORD_COUNT="0"/>
+</DATASETS>

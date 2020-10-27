@@ -1,0 +1,8 @@
+﻿<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:his="http://spr.nvcm.net/HistoryDictionaryWebService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <his:receiveHistoryDictionary>
+         <requestGuid>9d1d7ea8-9d9a-48e4-aaab-e85be2c6102e</requestGuid>
+      </his:receiveHistoryDictionary>
+   </soapenv:Body>
+</soapenv:Envelope>

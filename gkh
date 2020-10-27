@@ -1,0 +1,4 @@
+
+Список недоступных для корректировки справочников в главной базе:
+
+  SELECT * FROM sysspr.PropertysObj WHERE TYPEOBJ=100 and ENABLE=false

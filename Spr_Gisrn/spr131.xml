@@ -1,0 +1,1738 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATASETS VERSION="1">
+  <SPR131 ONE_RECORD="0" RECORD_COUNT="192">
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>1</EXTCODE>
+      <LEX1>ДОКУМЕНТ ИЗ ИСПОЛКОМА О ДАННЫЕ О МЕСТЕ ЗАХОРОНЕНИЯ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>0</ACTIVE>
+      <BEGINDATE>2015-12-11</BEGINDATE>
+      <ENDDATE>2017-08-10</ENDDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>2</EXTCODE>
+      <LEX1>ДОКУМЕНТ ИЗ ИСПОЛКОМА О ДАННЫЕ О ЕЖЕМЕСЯЧНОМ ДЕНЕЖНОМ СОДЕРЖАНИИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>0</ACTIVE>
+      <BEGINDATE>2015-12-11</BEGINDATE>
+      <ENDDATE>2017-08-10</ENDDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>3</EXTCODE>
+      <LEX1>ДОКУМЕНТ ИЗ ИСПОЛКОМА О ДАННЫЕ ОБ ОПЕКЕ И ПОПЕЧИТЕЛЬСТВЕ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>0</ACTIVE>
+      <BEGINDATE>2015-12-11</BEGINDATE>
+      <ENDDATE>2017-08-10</ENDDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>4</EXTCODE>
+      <LEX1>ДОКУМЕНТ ИЗ ИСПОЛКОМА О ДАТЕ ПОСТАНОВКИ НА УЧЕТ В КАЧЕСТВЕ БЕЗРАБОТНОГО И ДАТЕ СНЯТИЯ С УЧЕТА В КАЧЕСТВЕ БЕЗРАБОТНОГО</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>0</ACTIVE>
+      <BEGINDATE>2015-12-11</BEGINDATE>
+      <ENDDATE>2017-08-10</ENDDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>5</EXTCODE>
+      <LEX1>ДОКУМЕНТ ИЗ ИСПОЛКОМА О ДАННЫЕ О СТАТУСЕ РАБОТАЮЩЕГО, БЕЗРАБОТНОГО, НЕРАБОТАЮЩЕГО</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>0</ACTIVE>
+      <BEGINDATE>2015-12-11</BEGINDATE>
+      <ENDDATE>2017-08-10</ENDDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>6</EXTCODE>
+      <LEX1>БРЕСТСКИЙ ГОРОДСКОЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>7</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ЛЕНИНСКОГО РАЙОНА Г.БРЕСТА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>8</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ МОСКОВСКОГО РАЙОНА Г.БРЕСТА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>9</EXTCODE>
+      <LEX1>БРЕСТСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>10</EXTCODE>
+      <LEX1>БАРАНОВИЧСКИЙ ГОРОДСКОЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>11</EXTCODE>
+      <LEX1>БЕРЁЗОВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>12</EXTCODE>
+      <LEX1>ГАНЦЕВИЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>13</EXTCODE>
+      <LEX1>ДРОГИЧИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>14</EXTCODE>
+      <LEX1>ЖАБИНКОВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>15</EXTCODE>
+      <LEX1>ИВАНОВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>16</EXTCODE>
+      <LEX1>ИВАЦЕВИЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>17</EXTCODE>
+      <LEX1>КАМЕНЕЦКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>18</EXTCODE>
+      <LEX1>КОБРИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>19</EXTCODE>
+      <LEX1>ЛУНИНЕЦКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>20</EXTCODE>
+      <LEX1>ЛЯХОВИЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>21</EXTCODE>
+      <LEX1>МАЛОРИТСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>22</EXTCODE>
+      <LEX1>ПИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>23</EXTCODE>
+      <LEX1>ПИНСКИЙ ГОРОДСКОЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>24</EXTCODE>
+      <LEX1>ПРУЖАНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>25</EXTCODE>
+      <LEX1>СТОЛИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>26</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ОКТЯБРЬСКОГО РАЙОНА Г.ГРОДНО</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>27</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ЛЕНИНСКОГО РАЙОНА Г.ГРОДНО</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>28</EXTCODE>
+      <LEX1>БЕРЕСТОВИЦКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>29</EXTCODE>
+      <LEX1>ВОЛКОВЫССКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>30</EXTCODE>
+      <LEX1>ВОРОНОВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>31</EXTCODE>
+      <LEX1>ГРОДНЕНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>32</EXTCODE>
+      <LEX1>ДЯТЛОВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>33</EXTCODE>
+      <LEX1>ЗЕЛЬВЕНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>34</EXTCODE>
+      <LEX1>КОРЕЛИЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>35</EXTCODE>
+      <LEX1>ИВЬЕВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>36</EXTCODE>
+      <LEX1>ЛИДСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>37</EXTCODE>
+      <LEX1>НОВОГРУДСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>38</EXTCODE>
+      <LEX1>ОСТРОВЕЦКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>39</EXTCODE>
+      <LEX1>ОШМЯНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>40</EXTCODE>
+      <LEX1>СВИСЛОЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>41</EXTCODE>
+      <LEX1>СЛОНИМСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>42</EXTCODE>
+      <LEX1>СМОРГОНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>43</EXTCODE>
+      <LEX1>ЩУЧИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>44</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ЗАВОДСКОГО РАЙОНА Г.МИНСКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>45</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ПЕРВОМАЙСКОГО РАЙОНА Г.МИНСКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>46</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ СОВЕТСКОГО РАЙОНА Г.МИНСКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>47</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ЦЕНТРАЛЬНОГО РАЙОНА Г.МИНСКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>48</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ МОСКОВСКОГО РАЙОНА Г.МИНСКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>49</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ФРУНЗЕНСКОГО РАЙОНА Г.МИНСКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>50</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ПАРТИЗАНСКОГО РАЙОНА Г.МИНСКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>51</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ОКТЯБРЬСКОГО РАЙОНА Г.МИНСКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>52</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ЛЕНИНСКОГО РАЙОНА Г.МИНСКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>53</EXTCODE>
+      <LEX1>БАРАНОВИЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ БРЕСТСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>54</EXTCODE>
+      <LEX1>МОСТОВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГРОДНЕНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>55</EXTCODE>
+      <LEX1>БЕРЕЗИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>56</EXTCODE>
+      <LEX1>БОРИСОВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>57</EXTCODE>
+      <LEX1>ВИЛЕЙСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>58</EXTCODE>
+      <LEX1>ВОЛОЖИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>59</EXTCODE>
+      <LEX1>ДЗЕРЖИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>60</EXTCODE>
+      <LEX1>КЛЕЦКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>61</EXTCODE>
+      <LEX1>КОПЫЛЬСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>62</EXTCODE>
+      <LEX1>КРУПСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>63</EXTCODE>
+      <LEX1>ЛОГОЙСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>64</EXTCODE>
+      <LEX1>ЛЮБАНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>65</EXTCODE>
+      <LEX1>МИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>66</EXTCODE>
+      <LEX1>МОЛОДЕЧНЕНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>67</EXTCODE>
+      <LEX1>МЯДЕЛЬСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>68</EXTCODE>
+      <LEX1>НЕСВИЖСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>69</EXTCODE>
+      <LEX1>ПУХОВИЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>70</EXTCODE>
+      <LEX1>СЛУЦКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>71</EXTCODE>
+      <LEX1>СМОЛЕВИЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>72</EXTCODE>
+      <LEX1>СОЛИГОРСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>73</EXTCODE>
+      <LEX1>СТАРОДОРОЖСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>74</EXTCODE>
+      <LEX1>УЗДЕНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>75</EXTCODE>
+      <LEX1>ЧЕРВЕНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>76</EXTCODE>
+      <LEX1>ЖОДИНСКИЙ ГОРОДСКОЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>77</EXTCODE>
+      <LEX1>МОГИЛЕВСКИЙ ГОРОДСКОЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>78</EXTCODE>
+      <LEX1>МОГИЛЕВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>79</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ОКТЯБРЬСКОГО РАЙОНА Г.МОГИЛЕВА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>80</EXTCODE>
+      <LEX1>БОБРУЙСКИЙ ГОРОДСКОЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>81</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ПЕРВОМАЙСКОГО РАЙОНА Г.БОБРУЙСКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>82</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ЛЕНИНСКОГО РАЙОНА Г.БОБРУЙСКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>83</EXTCODE>
+      <LEX1>БЕЛЫНИЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>84</EXTCODE>
+      <LEX1>БОБРУЙСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>85</EXTCODE>
+      <LEX1>БЫХОВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>86</EXTCODE>
+      <LEX1>ГЛУССКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>87</EXTCODE>
+      <LEX1>ГОРЕЦКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>88</EXTCODE>
+      <LEX1>ДРИБИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>89</EXTCODE>
+      <LEX1>КИРОВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>90</EXTCODE>
+      <LEX1>КЛИМОВИЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>91</EXTCODE>
+      <LEX1>КЛИЧЕВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>92</EXTCODE>
+      <LEX1>КОСТЮКОВИЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>93</EXTCODE>
+      <LEX1>КРАСНОПОЛЬСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>94</EXTCODE>
+      <LEX1>КРИЧЕВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>95</EXTCODE>
+      <LEX1>КРУГЛЯНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>96</EXTCODE>
+      <LEX1>МСТИСЛАВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>97</EXTCODE>
+      <LEX1>ОСИПОВИЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>98</EXTCODE>
+      <LEX1>СЛАВГОРОДСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>99</EXTCODE>
+      <LEX1>ХОТИМСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>100</EXTCODE>
+      <LEX1>ЧАУССКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>101</EXTCODE>
+      <LEX1>ЧЕРИКОВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>102</EXTCODE>
+      <LEX1>ШКЛОВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МОГИЛЕВСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>103</EXTCODE>
+      <LEX1>БРАГИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>104</EXTCODE>
+      <LEX1>БУДА-КОШЕЛЁВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>105</EXTCODE>
+      <LEX1>ВЕТКОВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>106</EXTCODE>
+      <LEX1>ГОМЕЛЬСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>107</EXTCODE>
+      <LEX1>ДОБРУШСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>108</EXTCODE>
+      <LEX1>ЕЛЬСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>109</EXTCODE>
+      <LEX1>ЖИТКОВИЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>110</EXTCODE>
+      <LEX1>ЖЛОБИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>111</EXTCODE>
+      <LEX1>КАЛИНКОВИЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>112</EXTCODE>
+      <LEX1>КОРМЯНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>113</EXTCODE>
+      <LEX1>ЛЕЛЬЧИЦКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>114</EXTCODE>
+      <LEX1>ЛОЕВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>115</EXTCODE>
+      <LEX1>МОЗЫРСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>116</EXTCODE>
+      <LEX1>НАРОВЛЯНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>117</EXTCODE>
+      <LEX1>ОКТЯБРЬСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>118</EXTCODE>
+      <LEX1>ПЕТРИКОВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>119</EXTCODE>
+      <LEX1>РЕЧИЦКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>120</EXTCODE>
+      <LEX1>РОГАЧЕВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>121</EXTCODE>
+      <LEX1>СВЕТЛОГОРСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>122</EXTCODE>
+      <LEX1>ХОЙНИКСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>123</EXTCODE>
+      <LEX1>ЧЕЧЕРСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>124</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ЖЕЛЕЗНОДОРОЖНОГО РАЙОНА Г.ГОМЕЛЯ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>125</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ НОВОБЕЛИЦКОГО РАЙОНА Г.ГОМЕЛЯ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>126</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ СОВЕТСКОГО РАЙОНА Г.ГОМЕЛЯ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>127</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ЦЕНТРАЛЬНОГО РАЙОНА Г.ГОМЕЛЯ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>128</EXTCODE>
+      <LEX1>АЗДЕЛЕНСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>129</EXTCODE>
+      <LEX1>БОБОВИЧСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>130</EXTCODE>
+      <LEX1>ГРАБОВСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>131</EXTCODE>
+      <LEX1>ДОЛГОЛЕССКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>132</EXTCODE>
+      <LEX1>ЕРЁМИНСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>133</EXTCODE>
+      <LEX1>ЗЯБРОВСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>134</EXTCODE>
+      <LEX1>КРАСНЕНСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>135</EXTCODE>
+      <LEX1>МАРКОВИЧСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>136</EXTCODE>
+      <LEX1>ПРИБОРСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>137</EXTCODE>
+      <LEX1>ПОКОЛЮБИЧСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>138</EXTCODE>
+      <LEX1>ПРИБЫТКОВСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>139</EXTCODE>
+      <LEX1>РУДНЕМАРИМОНОВСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>140</EXTCODE>
+      <LEX1>ТЕРЕНИЧСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>141</EXTCODE>
+      <LEX1>ТЕРЕШКОВИЧСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>142</EXTCODE>
+      <LEX1>ТЕРЮХСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>143</EXTCODE>
+      <LEX1>УЛУКОВСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>144</EXTCODE>
+      <LEX1>УРИЦКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>145</EXTCODE>
+      <LEX1>ЧЕНКОВСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>146</EXTCODE>
+      <LEX1>ЧЕРЕТЯНСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>147</EXTCODE>
+      <LEX1>ШАРПИЛОВСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>148</EXTCODE>
+      <LEX1>БОЛЬШЕВИТСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ГОМЕЛЬСКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>149</EXTCODE>
+      <LEX1>БАБИЧСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ РЕЧИЦКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>150</EXTCODE>
+      <LEX1>БЕЛОБОЛОТСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ РЕЧИЦКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>151</EXTCODE>
+      <LEX1>БОРЩЕВСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ РЕЧИЦКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>152</EXTCODE>
+      <LEX1>ВЫШЕМИРСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ РЕЧИЦКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>153</EXTCODE>
+      <LEX1>ВАСИЛЕВИЧСКИЙ ГОРОДСКОЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ РЕЧИЦКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>154</EXTCODE>
+      <LEX1>ГЛЫБОВСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ РЕЧИЦКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>155</EXTCODE>
+      <LEX1>ЗАХОДОВСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ РЕЧИЦКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>156</EXTCODE>
+      <LEX1>ЗАСПЕНСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ РЕЧИЦКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>157</EXTCODE>
+      <LEX1>ЗАЩЕБЬЕВСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ РЕЧИЦКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>158</EXTCODE>
+      <LEX1>ЗАРЕЧСКИЙ ПОСЕЛКОВЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ РЕЧИЦКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>159</EXTCODE>
+      <LEX1>ЖМУРОВСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ РЕЧИЦКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>160</EXTCODE>
+      <LEX1>КОМСОМОЛЬСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ РЕЧИЦКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>161</EXTCODE>
+      <LEX1>КОРОВАТИЧСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ РЕЧИЦКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>162</EXTCODE>
+      <LEX1>НОВОБАРСУКСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ РЕЧИЦКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>163</EXTCODE>
+      <LEX1>ОЗЕРИЩИНСКИЙ СЕЛЬСКИЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ РЕЧИЦКОГО РАЙОНА ГОМЕЛЬСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>164</EXTCODE>
+      <LEX1>БЕШЕНКОВИЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>165</EXTCODE>
+      <LEX1>БРАСЛАВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>166</EXTCODE>
+      <LEX1>ВЕРХНЕДВИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>167</EXTCODE>
+      <LEX1>ВИТЕБСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>168</EXTCODE>
+      <LEX1>ГЛУБОКСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>169</EXTCODE>
+      <LEX1>ГОРОДОКСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>170</EXTCODE>
+      <LEX1>ДОКШИЦКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>171</EXTCODE>
+      <LEX1>ДУБРОВЕНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>172</EXTCODE>
+      <LEX1>ЛЕПЕЛЬСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>173</EXTCODE>
+      <LEX1>ЛИОЗНЕНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>174</EXTCODE>
+      <LEX1>МИОРСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>175</EXTCODE>
+      <LEX1>НОВОПОЛОЦКИЙ ГОРОДСКОЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>176</EXTCODE>
+      <LEX1>ПОЛОЦКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>177</EXTCODE>
+      <LEX1>ПОСТАВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>178</EXTCODE>
+      <LEX1>РОССОНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>179</EXTCODE>
+      <LEX1>СЕННЕНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>180</EXTCODE>
+      <LEX1>ТОЛОЧИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>181</EXTCODE>
+      <LEX1>УШАЧСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>182</EXTCODE>
+      <LEX1>ЧАШНИКСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>183</EXTCODE>
+      <LEX1>ШАРКОВЩИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>184</EXTCODE>
+      <LEX1>ШУМИЛИНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>185</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ОКТЯБРЬСКОГО РАЙОНА Г.ВИТЕБСКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>186</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ПЕРВОМАЙСКОГО РАЙОНА Г.ВИТЕБСКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>187</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ЖЕЛЕЗНОДОРОЖНОГО РАЙОНА Г.ВИТЕБСКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>188</EXTCODE>
+      <LEX1>ВИТЕБСКИЙ ГОРОДСКОЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>189</EXTCODE>
+      <LEX1>АДМИНИСТРАЦИЯ ЛЕНИНСКОГО РАЙОНА Г.МОГИЛЕВА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-04</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>190</EXTCODE>
+      <LEX1>СТОЛБЦОВСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ МИНСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-05</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>191</EXTCODE>
+      <LEX1>ОРШАНСКИЙ РАЙОННЫЙ ИСПОЛНИТЕЛЬНЫЙ КОМИТЕТ ВИТЕБСКОЙ ОБЛАСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2016-08-05</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>131</TYPESPR>
+      <EXTCODE>700842912</EXTCODE>
+      <LEX1>УПРАВЛЕНИЕ ПО ТРУДУ, ЗАНЯТОСТИ И СОЦИАЛЬНОЙ ЗАЩИТЕ ШКЛОВСКОГО РАЙИСПОЛКОМА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>131</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2018-02-05</BEGINDATE>
+    </row>
+  </SPR131>
+</DATASETS>

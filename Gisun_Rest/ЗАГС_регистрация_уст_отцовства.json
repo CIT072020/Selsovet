@@ -1,0 +1,345 @@
+{
+	"cover": {
+		"message_id": "6E983E6F-C1F1-4226-AF1A-21EB3CE088CF",
+		"message_type": {
+				"code": "0200",
+				"type": -2,
+				"active": true
+		},
+		"message_time": "2016-02-25T16:44:05.004+03:00",
+		"message_source": {
+			"code": "17120",
+			"type": 80,
+			"active": true
+		},
+		"parent_message_id": "4D7961DF-3057-4587-A498-5D995C733D80"
+	},
+    "aff_cert_data": {
+        "aff_person": {
+            "birth_act_data": {
+				"act_type": {
+					"code": "0100",
+					"type": 82
+				},
+				"authority": {
+					"code": "0",
+					"type": 80
+				},
+				"date": "2015-12-09",
+				"number": "1"
+			},
+			"before_aff_person_data": {
+				"identif": "7572323A001PB2",
+				"last_name": "»¬¿ÕŒ¬¿",
+				"last_name_bel": "≤¬¿ÕŒ¬¿",
+				"name": "»Õ√¿",
+				"name_bel": "≤Õ√¿",
+				"patronymic": "¬» “Œ–Œ¬Õ¿",
+				"patronymic_bel": "¬≤ “¿–¿°Õ¿",
+				"sex": {
+					"code": "F", 
+					"type": 32
+				},
+				"birth_day": "20130621",
+				"birth_place": {
+					"country_b": {
+						"code": "BLR",
+						"type": 8
+					},
+					"area_b": "¡–≈—“— ¿ﬂ Œ¡À¿—“‹",
+					"area_b_bel": "¡–›—÷ ¿ﬂ ¬Œ¡À¿C÷‹",
+					"region_b": "¬ŒÀŒ∆»Õ— »…",
+					"region_b_bel": "¬¿ÀŒ∆€Õ— ≤",
+					"type_city_b": {
+						"code": "11100001",
+						"type": 68
+					},
+					"city_b": "¡–≈—“",
+					"city_b_bel": "¡–›—“"
+				},
+				"citizenship": {
+					"code": "0",
+					"type": 8
+				},
+				"status": {
+					"code": "1",
+					"type": -18
+				}
+			},
+			"after_aff_person_data": {
+				"identif": "7572323A001PB2",
+				"last_name": "»¬¿ÕŒ¬¿",
+				"last_name_bel": "≤¬¿ÕŒ¬¿",
+				"name": "»Õ√¿",
+				"name_bel": "≤Õ√¿",
+				"patronymic": "¬» “Œ–Œ¬Õ¿",
+				"patronymic_bel": "¬≤ “¿–¿°Õ¿",
+				"sex": {
+					"code": "F", 
+					"type": 32
+				},
+				"birth_day": "20130621",
+				"birth_place": {
+					"country_b": {
+						"code": "BLR",
+						"type": 8
+					},
+					"area_b": "¡–≈—“— ¿ﬂ Œ¡À¿—“‹",
+					"area_b_bel": "¡–›—÷ ¿ﬂ ¬Œ¡À¿C÷‹",
+					"region_b": "¬ŒÀŒ∆»Õ— »…",
+					"region_b_bel": "¬¿ÀŒ∆€Õ— ≤",
+					"type_city_b": {
+						"code": "11100001",
+						"type": 68
+					},
+					"city_b": "¡–≈—“",
+					"city_b_bel": "¡–›—“"
+				},
+				"citizenship": {
+					"code": "0",
+					"type": 8
+				},
+				"status": {
+					"code": "1",
+					"type": -18
+				}
+			}
+		},
+		"mother_data": {
+			"identif": "4090983H011PB6",
+            "last_name": "ƒ«»◊ Œ¬— ¿ﬂ",
+            "last_name_bel": "ƒ«≤◊ Œ°— ¿ﬂ",
+            "name": "¿Õ¿—“¿—»ﬂ",
+            "name_bel": "¿Õ¿—“¿—≤ﬂ",
+            "patronymic": "√≈Œ–√»≈¬Õ¿",
+            "patronymic_bel": "√≈Œ–√≤≈°Õ¿",
+            "sex": {
+                "code": "F", 
+                "type": 32,
+                "lexema": {
+					"value": [
+						{
+							"value": "∆≈Õ— »…",
+							"lang": "ru"
+						},
+						{
+							"value": "∆¿ÕŒ◊€",
+							"lang": "be"
+						}
+					]
+                },
+                "active": true
+            },
+            "birth_day": "19830909",
+			"birth_place": {
+				"country_b": {
+					"code": "BLR",
+					"type": 8,
+					"lexema": {
+						"value": [
+							{
+								"value": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+								"lang": "ru"
+							},
+							{
+								"value": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+								"lang": "be"
+							}
+						]
+					},
+					"active": true
+				},
+				"type_city_b": {
+					"code": "11100001", 
+					"type": 68,
+					"lexema": {
+						"value": [
+							{
+								"value": "√",
+								"lang": "ru"
+							},
+							{
+								"value": "√",
+								"lang": "be"
+							}
+						]
+					},
+					"active": true
+				},
+				"city_b": "√ŒÃ≈À‹",
+				"city_b_bel": "√ŒÃ≈À‹"
+			},
+			"citizenship": {
+				"code": "BLR",
+				"type": 8,
+				"lexema": {
+					"value": [
+						{
+							"value": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+							"lang": "ru"
+						},
+						{
+							"value": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+							"lang": "be"
+						}
+					]
+				},
+				"active": true
+            },
+			"status": {
+				"code": "1",
+				"type": -18,
+				"lexema": {
+					"value": [
+						{
+							"value": "¿ “»¬≈Õ",
+							"lang": "ru"
+						},
+						{
+							"value": "¿ “€¬≈Õ",
+							"lang": "be"
+						}
+					]
+				},
+				"active": true
+			}
+		},
+		"father_data": {
+            "identif": "3010182A132PB7",
+            "last_name": "√–ŒÃŒ¬»◊",
+            "last_name_bel": "√–¿ÃŒ¬≤◊",
+            "name": "œ¿¬≈À",
+            "name_bel": "œ¿¬≈À",
+            "patronymic": "»√Œ–≈¬»◊",
+            "patronymic_bel": "≤√¿–¿¬≤◊",
+            "sex": {
+                "code": "M", 
+                "type": 32,
+                "lexema": {
+					"value": [
+						{
+							"value": "Ã”∆— Œ…",
+							"lang": "ru"
+						},
+						{
+							"value": "Ã",
+							"lang": "be"
+						}
+					]
+                },
+                "active": true
+            },
+            "birth_day": "19851202",
+			   "birth_place": {
+                "country_b": {
+					"code": "BLR",
+					"type": 8,
+                    "lexema": {
+						"value": [
+						{
+							"value": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+							"lang": "ru"
+						},
+						{
+							"value": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+							"lang": "be"
+						}
+					]
+                    },
+                    "active": true
+                },
+                "type_city_b": {
+					"code": "11100001", 
+					"type": 68,
+					"lexema": {
+						"value": [
+							{
+								"value": "√",
+								"lang": "ru"
+							},
+							{
+								"value": "√",
+								"lang": "be"
+							}
+						]
+					},
+					"active": true
+                },
+                "city_b": "Ã»Õ— ",
+                "city_b_bel": "Ã≤Õ— "
+            },
+			"citizenship": {
+				"code": "BLR",
+				"type": 8,
+				"lexema": {
+					"value": [
+						{
+							"value": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+							"lang": "ru"
+						},
+						{
+							"value": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+							"lang": "be"
+						}
+					]
+				},
+				"active": true
+			},
+			"status": {
+				"code": "1",
+				"type": -18,
+				"lexema": {
+					"value": [
+						{
+							"value": "¿ “»¬≈Õ",
+							"lang": "ru"
+						},
+						{
+							"value": "¿ “€¬≈Õ",
+							"lang": "be"
+						}
+					]
+				},
+				"active": true
+			}
+		},
+		"aff_act_data": {
+			"act_type": {
+				"code": "0200",
+				"type": 82
+			},
+			"authority": {
+				"code": "28",
+				"type": 80
+			},
+			"date": "2015-12-07",
+			"number": "1"
+		},
+		"aff_mother_certificate_data": {
+			"document_type": {			  
+				"code": "54100027",
+				"type": 37
+			},
+			"authority": {
+				"code": "28",
+				"type": 80
+			},
+			"date_of_issue": "2015-12-11",
+			"series": "I-AAA",
+			"number": "0020999"
+		},
+		"aff_father_certificate_data": {
+			"document_type": {			  
+				"code": "54100026",
+				"type": 37
+			},
+			"authority": {
+				"code": "28",
+				"type": 80
+			},
+			"date_of_issue": "2015-12-10",
+			"series": "I-AAS",
+			"number": "0020998"	
+		}
+	}
+}

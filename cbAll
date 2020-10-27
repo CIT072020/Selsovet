@@ -1,0 +1,15 @@
+before
+-------
+  if IDProg()<>'ZAGS' then begin
+    cbAll.Visible:=false;
+  end;
+
+
+onclick
+-------
+  if IDProg()='ZAGS' then begin
+    if not cbAll.Checked then begin
+      Query1.Filter:='id_zags='+Parameters('ID');
+    end;
+  end;
+

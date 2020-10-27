@@ -1,0 +1,1 @@
+start lais.exe /user:ADSSYS /psw:sysdba

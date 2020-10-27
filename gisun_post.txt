@@ -1,0 +1,137 @@
+
+Выполняется отправка данных актовой записи в регистр:
+
+Запись акта о заключении брака
+
+/cover/
+/cover/message_id        ={F7D43401-5C20-4EC1-8968-60D2597459B5}
+/cover/message_type      =type: -2, code: 0300
+/cover/message_time      =2020.10.22 11:56
+/cover/message_source    =type: 80, code: 1
+/cover/parent_message_id ={FBC62057-7F6F-4081-9D18-0C32655715A7}
+
+Информация о невесте
+
+Персональные данные невесты
+
+bride/bride_data/access         =nil
+bride/bride_data/identif        =4101283A081PB4
+bride/bride_data/last_name      =ИВАНОВА
+bride/bride_data/last_name_bel  =ІВАНОВА
+bride/bride_data/last_name_lat  =
+bride/bride_data/name_          =ИРИНА
+bride/bride_data/name_bel       =ІРЫНА
+bride/bride_data/name_lat       =
+bride/bride_data/patronymic     =МИХАЙЛОВНА
+bride/bride_data/patronymic_bel =МІХАЙЛАЎНА
+bride/bride_data/patronymic_lat =
+bride/bride_data/sex            =type: 32, code: F
+bride/bride_data/birth_day      =19831210
+bride/bride_data/birth_place/country_b    =type: 8, code: BLR
+bride/bride_data/birth_place/area_b       =
+bride/bride_data/birth_place/area_b_bel   =
+bride/bride_data/birth_place/region_b     =
+bride/bride_data/birth_place/region_b_bel =
+bride/bride_data/birth_place/type_city_b  =type: 68, code: 11100001
+bride/bride_data/birth_place/city_b       =МИНСК
+bride/bride_data/birth_place/city_b_bel   =МІНСК
+bride/bride_data/birth_place/city_b_ate   =nil
+bride/bride_data/citizenship    =type: 8, code: BLR
+bride/bride_data/status         =type: -18, code: 1
+bride/bride_data/document (0)
+bride/bride_data/photo (0)
+bride/bride_data/nationality_data (0)
+bride/bride_data/address/ =nil
+bride/bride_data/deaths (0)
+bride/bride_data/family/ =nil
+bride/bride_data/courts/ =nil
+bride/bride_data/educations (0)
+bride/bride_data/scienceRanks (0)
+bride/bride_data/scienceDegrees (0)
+bride/bride_data/pensions (0)
+bride/bride_data/insurances (0)
+bride/bride_data/taxies (0)
+bride/bride_data/militaries (0)
+
+Фамилия до заключения брака
+
+bride/old_last_name =ИВАНОВА
+
+Информация о женихе
+
+Персональные данные жениха
+
+bridegroom/bridegroom_data/access         =nil
+bridegroom/bridegroom_data/identif        =3101149A066PB3
+bridegroom/bridegroom_data/last_name      =ФЕДОСИК
+bridegroom/bridegroom_data/last_name_bel  =ФЕДОСІК
+bridegroom/bridegroom_data/last_name_lat  =
+bridegroom/bridegroom_data/name_          =ВЛАДИМИР
+bridegroom/bridegroom_data/name_bel       =УЛАДЗІМІР
+bridegroom/bridegroom_data/name_lat       =
+bridegroom/bridegroom_data/patronymic     =СТЕПАНОВИЧ
+bridegroom/bridegroom_data/patronymic_bel =СЦЯПАНАВІЧ
+bridegroom/bridegroom_data/patronymic_lat =
+bridegroom/bridegroom_data/sex            =type: 32, code: M
+bridegroom/bridegroom_data/birth_day      =19491110
+bridegroom/bridegroom_data/birth_place/country_b    =type: 8, code: BLR
+bridegroom/bridegroom_data/birth_place/area_b       =ГРОДНЕНСКАЯ
+bridegroom/bridegroom_data/birth_place/area_b_bel   =ГРОДЗЕНСКАЯ
+bridegroom/bridegroom_data/birth_place/region_b     =СЛОНИМСКИЙ
+bridegroom/bridegroom_data/birth_place/region_b_bel =СЛОНІМСКІ
+bridegroom/bridegroom_data/birth_place/type_city_b  =nil
+bridegroom/bridegroom_data/birth_place/city_b       =ПОРЕЧЬЕ
+bridegroom/bridegroom_data/birth_place/city_b_bel   =ПАРЭЧЧА
+bridegroom/bridegroom_data/birth_place/city_b_ate   =nil
+bridegroom/bridegroom_data/citizenship    =type: 8, code: BLR
+bridegroom/bridegroom_data/status         =type: -18, code: 1
+bridegroom/bridegroom_data/document (0)
+bridegroom/bridegroom_data/photo (0)
+bridegroom/bridegroom_data/nationality_data (0)
+bridegroom/bridegroom_data/address/ =nil
+bridegroom/bridegroom_data/deaths (0)
+bridegroom/bridegroom_data/family/ =nil
+bridegroom/bridegroom_data/courts/ =nil
+bridegroom/bridegroom_data/educations (0)
+bridegroom/bridegroom_data/scienceRanks (0)
+bridegroom/bridegroom_data/scienceDegrees (0)
+bridegroom/bridegroom_data/pensions (0)
+bridegroom/bridegroom_data/insurances (0)
+bridegroom/bridegroom_data/taxies (0)
+bridegroom/bridegroom_data/militaries (0)
+
+Фамилия до заключения брака
+
+bridegroom/old_last_name =ФЕДОСИК
+
+Сведения о совместных детях, не достигших 18 лет (0):
+
+Информация об актовой записи
+
+mrg_act_data/act_type  =type: 82, code: 0300
+mrg_act_data/authority =type: 80, code: 1
+mrg_act_data/date      =2020.10.22
+mrg_act_data/number    =45
+
+Информация о печатном документе
+
+mrg_certificate_data/document_type =type: 37, code: 54100006
+mrg_certificate_data/authority     =type: 80, code: 1
+mrg_certificate_data/date_of_issue =2020.10.22
+mrg_certificate_data/expire_date   =nil
+mrg_certificate_data/series        =I-АЛ
+mrg_certificate_data/number        =2222229
+mrg_certificate_data/act_data/ =nil
+Получение данных    получено=732, всего=732
+Получение данных    получено=63, всего=63
+
+Получен ответ:
+
+/cover/
+/cover/message_id        ={D25448B4-7EE3-4A4F-A9FC-786BBED92D93}
+/cover/message_type      =type: -2, code: 0300
+/cover/message_time      =2020.10.22 11:57
+/cover/message_source    =type: 80, code: 1
+/cover/parent_message_id ={F7D43401-5C20-4EC1-8968-60D2597459B5}
+
+Список ошибок error_list (0):

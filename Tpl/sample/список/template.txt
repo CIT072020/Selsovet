@@ -1,0 +1,8 @@
+[NAME1]
+Caption=О занимаемом гражданином жилом помещении и составе семьи
+TemplateFile=Архивная справка.doc
+ScriptName="Template_1"
+Fields=DATES,DATER,SHTAMP
+Tables="TABLE1=COL1,COL2","LIST1=ITEM1,ITEM2,ITEM3"
+Params=PAR1=1,PAR2=2
+Files=Шапка.doc

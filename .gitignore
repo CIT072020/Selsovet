@@ -67,3 +67,38 @@ __recovery/
 
 # Boss dependency manager vendor folder https://github.com/HashLoad/boss
 modules/
+
+#sss added
+#---!!!---
+
+*.dsm
+*.ddp
+
+*.adi
+SMDOSprOrg.adt
+
+
+*.dbf
+*.cdx
+
+adscollate.*
+adslocal.*
+aicu32.*
+*.chr
+icudt40l.dat
+
+AutoBackUp*/
+?copy/
+DocArxiv/
+NewData*/
+*Work/
+Test*/
+
+!TemplateExel/
+*.xls*
+
+*.rar
+*.zip
+
+*.elf
+

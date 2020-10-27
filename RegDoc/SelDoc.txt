@@ -1,0 +1,43 @@
+unit mDRecInt
+
+uses
+   fSelDoc3
+
+
+function TOutgoingDoc.SelectDocument(var Query: TAdsQuery; Bookmark: TStringList): Boolean;
+begin
+   Result:=fSelDoc3.SelectDocument3(Self, Query, Bookmark);
+end;
+
+
+вызов по кнопке:
+
+
+procedure (Sender: TObject; var Handled: Boolean);
+var
+   Query: TAdsQuery;
+   LastOrder: Integer;
+   Bookmark: TStringList;
+   I: Integer;
+begin
+   Bookmark:=TStringList.Create;
+   try
+      if FDoc.SelectDocument(Query, Bookmark) then begin
+         try
+            if Bookmark.Count=1 then begin
+               Query.Bookmark:=Bookmark[I];
+
+               FDoc[''].As:=Query.FieldByName('').As;
+
+            end;
+         finally
+            Query.Free;
+         end;
+      end;
+   finally
+      Bookmark.Free;
+   end;
+end;
+
+
+

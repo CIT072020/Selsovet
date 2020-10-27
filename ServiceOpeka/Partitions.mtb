@@ -1,0 +1,21 @@
+"@@FILE VERSION@@","251"
+"@@TABLEDEF START@@"
+"ID=AutoInc,0,""ID"","""",10,Data,"""""
+"TYPEOBJ=Integer,0,""TYPEOBJ"","""",10,Data,"""""
+"NOMER=Integer,0,""NOMER"","""",10,Data,"""""
+"NAME=String,30,""NAME"","""",30,Data,"""""
+"FNAME=String,100,""FNAME"","""",100,Data,"""""
+"VISIBLE=Boolean,0,""VISIBLE"","""",1,Data,"""""
+"ENABLED=Boolean,0,""ENABLED"","""",1,Data,"""""
+"USER=String,30,""USER"","""",30,Data,"""""
+"@@TABLEDEF END@@"
+"ID","TYPEOBJ","NOMER","NAME","FNAME","VISIBLE","ENABLED","USER",
+"7","1","0","Статические","Статические","True","True",,
+"6","1","1","Дом","Дом","True","True",,
+"11","1","2","Участок","Участок","True","True",,
+"8","2","0","Статические","Статические","True","True",,
+"1","2","1","Животноводство","Животноводство","True","True",,
+"3","2","2","Земля","Земля","True","True",,
+"10","2","11","Показатели","Показатели","True","True",,
+"2","3","0","Статические","Статические","True","True",,
+"9","20","1","Основное","Основное","True","True",,

@@ -1,0 +1,22 @@
+Host : 10.30.251.170
+--------------------
+username:  admin
+password:  cit411bel
+
+Host    : 10.30.251.170:21
+Username: anonymous
+
+folder  :  var/ftpd/pub
+
+
+Host : 10.30.254.20
+-------------------
+для чтения:  Username: belstatftpreader
+             Password: 123o!@#
+
+админ:       Username: belstatftp
+             Password: L0df4!B
+
+
+folder  :  \
+

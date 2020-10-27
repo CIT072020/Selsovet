@@ -1,0 +1,23 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Лишение родительских прав
+0
+1,"0"
+2,PARAM,0,0,96,,111
+2
+2
+3,PROP,FLD_ON_DATE_LR,NOT_EMPTY_DB,"fikAnd,fikFirst",0,0,0,1,dkFull
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_ONA_DATE_LR,NOT_EMPTY_DB,fikOr,0,0,0,2,dkFull
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,

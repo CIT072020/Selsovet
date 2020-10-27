@@ -1,0 +1,560 @@
+[TABLE]
+@@FILE VERSION@@;251
+@@TABLEDEF START@@
+TABLE_ID=AutoInc,0,"TABLE_ID","",10,INV,Data,""
+NAME=String,30,"NAME","",30,Data,""
+TABLE_NAME=String,30,"TABLE_NAME","",30,Data,""
+ALIAS=String,10,"ALIAS","",10,Data,""
+SHORT=String,30,"SHORT","",30,Data,""
+CAPTION=String,100,"CAPTION","",100,Data,""
+COMM=String,100,"COMM","",100,Data,""
+INDEX_NAME=String,30,"INDEX_NAME","",30,Data,""
+MASTER_FIELD=String,100,"MASTER_FIELD","",100,Data,""
+KEY_FIELD=String,100,"KEY_FIELD","",100,Data,""
+NAME_FIELD=String,100,"NAME_FIELD","",100,Data,""
+AUTO_INC=String,30,"AUTO_INC","",30,Data,""
+STYLE=String,250,"STYLE","",250,Data,""
+@@INDEXDEF START@@
+indPrimary=TABLE_ID,indPrimary,UNIQ
+@@INDEXDEF END@@
+@@TABLEDEF END@@
+TABLE_ID;NAME;TABLE_NAME;ALIAS;SHORT;CAPTION;COMM;INDEX_NAME;MASTER_FIELD;KEY_FIELD;NAME_FIELD;AUTO_INC;STYLE
+0;DOC_MAIN;DocMain;d;Документы;Зарегистрированные документы;Зарегистрированные документы;;;DOC_ID;;DOC_ID;bsView,bsMaster
+1;DOC_LINK;DocLink;l;Связи;Связи между документами;Cписок связей с другими документами;PR_KEY;DOC_ID;DOC_ID,LINK_ID;;LINK_ID;bsDetail, bsFindVisible
+2;DOC_WORK;DocWork;w;Ход рассмотрения;Ход рассмотрения документа;Ход рассмотрения документа;PR_KEY;DOC_ID;DOC_ID,WORK_ID;;WORK_ID;bsDetail, bsFindVisible
+3;VISIT_BOOK;DocMain;v;Журнал;Журнал учета приема посетителей;Журнал учета приема посетителей;;;DOC_ID;;DOC_ID;bsView,bsMaster
+4;INFO_BOOK;DocMain;i;Справки;Журнал учета выданных справок;Журнал учета выданных справок и (или) других документов, выдаваемых гражданам;;;;;DOC_ID;bsView,bsMaster
+5;DOC_FILE;DocFile;f;Файлы;Прикрепленные файлы;Список прикрепленных к документу файлов;PR_KEY;DOC_ID;DOC_ID,FILE_ID;;FILE_ID;bsDetail, bsFindVisible
+6;DOC_IN;DocMain;d;Входящие;Журнал регистрации входящих документов;;;;;;DOC_ID;bsView,bsMaster
+7;DOC_OUT;DocMain;d;Исходящие;Журнал регистрации исходящих документов;;;;;;DOC_ID;bsView,bsMaster
+8;ADM_PROC;DocMain;p;Административные процедуры;Журнал регистрации административных процедур;;;;;;DOC_ID;bsView,bsMaster
+
+[FIELD]
+@@FILE VERSION@@;251
+@@TABLEDEF START@@
+TABLE_ID=Integer,0,"TABLE_ID","",10,INV,Data,""
+FIELD_ID=AutoInc,0,"FIELD_ID","",10,INV,Data,""
+NAME=String,30,"NAME","",30,Data,""
+FIELD_NAME=String,30,"FIELD_NAME","",30,Data,""
+SYNONIM=String,30,"SYNONIM","",30,Data,""
+CAPTION=String,100,"CAPTION","",100,Data,""
+COMM=String,100,"COMM","",100,Data,""
+GROUP=String,100,"GROUP","",100,Data,""
+SPR_NAME=String,30,"SPR_NAME","",30,Data,""
+ENUM_NAME=String,30,"ENUM_NAME","",30,Data,""
+ORDER=Integer,0,"ORDER","",10,Data,""
+STYLE=String,250,"STYLE","",250,Data,""
+LINK_STYLE=String,30,"LINK_STYLE","",30,Data,""
+SEL_STYLE=String,30,"SEL_STYLE","",30,Data,""
+DATA_KIND=String,30,"DATA_KIND","",30,Data,""
+LOOKUP=String,30,"LOOKUP","",30,Data,""
+EXCLUDE=Boolean,0,"EXCLUDE","",1,Data,""
+WIDTH=Integer,0,"WIDTH","",10,INV,Data,""
+TITLE=String,100,"TITLE","",100,Data,""
+EXCLUDE_STYLE=String,100,"EXCLUDE_STYLE","",100,Data,""
+INCLUDE_STYLE=String,100,"INCLUDE_STYLE","",100,Data,""
+FIELD_MODE=String,30,"FIELD_MODE","",30,Data,""
+FIELD_KIND=String,30,"FIELD_KIND","",30,Data,""
+@@INDEXDEF START@@
+indPrimary=TABLE_ID;FIELD_ID,indPrimary,UNIQ
+indOrder=TABLE_ID;ORDER,indOrder
+@@INDEXDEF END@@
+@@TABLEDEF END@@
+TABLE_ID;FIELD_ID;NAME;FIELD_NAME;SYNONIM;CAPTION;COMM;GROUP;SPR_NAME;ENUM_NAME;ORDER;STYLE;LINK_STYLE;SEL_STYLE;DATA_KIND;LOOKUP;EXCLUDE;WIDTH;TITLE;EXCLUDE_STYLE;INCLUDE_STYLE;FIELD_MODE;FIELD_KIND
+0;358;POST_ID;POST_ID;;Идентификатор СМДО;Идентификатор домкумента СМДО;;;;5;fsServerSide,fsViewVisible,fsKeyField;lsNone;ssNone;dkNumber;;True;;;;;;
+0;0;DOC_ID;DOC_ID;;Идентификатор;Идентификатор документа;;;;10;fsServerSide,fsNotNull,fsKeyField,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+0;1;DOC_TYPE;DOC_TYPE;;Тип документа;Тип документа;;;DOC_TYPE;20;fsNotNull,fsReadOnly,fsViewVisible;lsLinkEnum;ssNone;dkNumber;;True;;;;;;
+0;2;GROUP_ID;GROUP_ID;;Группа документа;Идентификатор группы документов;;SP_DOCGROUP;;21;fsNotNull,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+0;149;LOOKUP_GROUP_ID;LOOKUP_GROUP_ID;;Группа документа;Наименование группы документов;;SP_DOCGROUP;;22;fsFindVisible,fsViewVisible,fsEditVisible,fsInternal,fsLookup,fsReadOnly;lsLinkSpr;ssShowWindow;dkNumber;GROUP_ID;True;;;;;;
+0;3;GROUP_KIND;GROUP_KIND;;Базовая группа документа;Вид базовой группы документов;;;GROUP_KIND;25;fsNotNull,fsReadOnly,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+0;4;FOLDER_ID;FOLDER_ID;;Папка;Папка пользователя, в которой находится документ;Регистрация;SP_FOLDER;;30;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+0;6;REG_NUM;REG_NUM;;Номер;Регистрационный номер документа;Регистрация;;;40;fsFindVisible,fsViewVisible,fsEditVisible,fsInOrderBy,fsNotNull;lsNone;ssNone;dkNumber;;False;30;№ п/п;;;;
+0;7;REG_IND;REG_IND;;Индекс;Регистрационный индекс документа;Регистрация;;;50;fsFindVisible,fsViewVisible,fsEditVisible,fsInOrderBy,fsNotNull;lsNone;ssNone;dkString;;False;50;;;;;
+0;5;REG_DATE;REG_DATE;;Дата регистрации;Дата регистрации документа;Регистрация;;;60;fsFindVisible,fsViewVisible,fsEditVisible,fsInOrderBy,fsNotNull;lsNone;ssNone;dkDate;;False;80;;;;;
+0;8;APP_FORM;APP_FORM;;Форма поступления;Форма поступления обращения;Регистрация;;APP_FORM;70;fsFindVisible,fsViewVisible,fsEditVisible,fsNotNull;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+0;146;FROM_VISIT;FROM_VISIT;;С личного приема;Отметка "С личного приема";Регистрация;;;75;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;False;60;;;;;
+0;369;TEL_LINE;TEL_LINE;;Прямая тел. линия;Отметка "Прямая тел. линия";Регистрация;;;75;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;False;60;;;;;
+0;10;SIGN_TYPE;SIGN_TYPE;;Вид подписи;Вид подписи обращения;Заявитель/посетитель;;SIGN_TYPE;90;fsFindVisible,fsEditVisible,fsViewVisible,fsNotNull;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+0;148;SIGN_KIND;SIGN_KIND;;Вид заявителя;Вид заявителя;Заявитель/посетитель;;SIGN_KIND;92;fsFindVisible,fsEditVisible,fsViewVisible,fsNotNull;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+0;147;SIGN_NUM;SIGN_NUM;;Количество человек;Количество человек (для коллективных обращений);Заявитель/посетитель;;;95;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+0;11;SIGN_ORG;SIGN_ORG;;Идентификатор юридического лица;Идентификатор юридического лица;;SP_CORR;;100;fsEditVisible,fsViewVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+0;12;SIGN_MAN;SIGN_MAN;;Идентификатор заявителя;Идентификатор заявителя;;;;110;fsEditVisible,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+0;13;SIGN_NAME;SIGN_NAME;;Заявитель;Заявитель;Заявитель/посетитель;;;120;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;150;;;;;
+0;14;SIGN_GROUP;SIGN_GROUP;;Социальная группа/категория автора обращения;Социальная группа/категория автора обращения;Заявитель/посетитель;SP_MANGROUP;;130;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+0;15;SIGN_PLACE;SIGN_PLACE;;Населенный пункт;Идентификатор населенного пункта;Заявитель/посетитель;SP_PLACE;;140;fsViewVisible,fsEditVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+0;67;LOOKUP_SIGN_PLACE;LOOKUP_SIGN_PLACE;;Населенный пункт;Населенный пункт;Заявитель/посетитель;SP_PLACE;;141;fsInternal,fsLookup,fsViewVisible,fsEditVisible,fsFindVisible;lsLinkSpr;ssShowWindow;dkNumber;SIGN_PLACE;True;70;;;;;
+0;195;ADR_PLACE;ADR_PLACE;;Наименование населенного пункта;Наименование населенного пункта;Заявитель/посетитель;;;143;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;100;Населенный пункт;;;;
+0;16;ADR_ID;ADR_ID;;Идентификатор адреса;Идентификатор адреса;;;;150;fsViewVisible,fsEditVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+0;17;ADR_TEXT;ADR_TEXT;;Адрес;Адрес места жительства заявителя;Заявитель/посетитель;;;160;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;100;;;;;
+0;18;ADR_PHONE;ADR_PHONE;;Контактный телефон;Контактный телефон;Заявитель/посетитель;;;170;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkString;;True;;;;;;
+0;19;ADR_IN;ADR_IN;;На территории исполкома;На территории исполкома;Заявитель/посетитель;;;180;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+0;20;ADR_NOTE;ADR_NOTE;;Дргугие сведения о заявителе;Дргугие сведения о заявителе;Заявитель/посетитель;;;190;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkString;;True;;;;;;
+0;9;APP_KIND;APP_KIND;;Вид обращения;Вид обращения;Обращение;;APP_KIND;195;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+0;21;IN_DATE;IN_DATE;;Дата поступления;Дата поступления;Обращение;;;200;fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;True;80;;;;;
+0;22;NUM_LIST;NUM_LIST;;Листов;Количество листов обращения;Обращение;;;210;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+0;23;NUM_APP;NUM_APP;;Приложений;Количество листов приложений;Обращение;;;220;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+0;91;REPEAT_TEXT;REPEAT_TEXT;;Даты, индексы повторных обращений;Даты, индексы повторных обращений;Обращение;;;225;fsFindVisible,fsViewVisible,fsEditVisible,fsReadOnly;lsNone;ssNone;dkString;;True;;;;;;
+0;24;IS_REPEAT;IS_REPEAT;;Повторное обращение;Повторное обращение;Обращение;;;230;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;False;55;Повторно;;;;
+0;25;COVER_CORR;COVER_CORR;;Идентификатор корреспондента;Идентификатор корреспондента сопроводительного письма;Сопроводительное письмо/Поручение;SP_CORR;;240;fsViewVisible,fsEditVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+0;26;COVER_NAME;COVER_NAME;;Наименование корреспондента;Наименование корреспондента сопроводительного письма;Сопроводительное письмо/Поручение;;;250;fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+0;66;LOOKUP_COVER_CORR;LOOKUP_COVER_CORR;;Идентификатор корреспондента;Идентификатор корреспондента сопроводительного письма;Сопроводительное письмо/Поручение;SP_CORR;;251;fsInternal,fsLookup,fsViewVisible,fsEditVisible,fsFindVisible;lsLinkSpr;ssShowWindow;dkNumber;COVER_CORR;False;100;Сопроводительное письмо|Корреспондент;;;;
+0;27;COVER_DATE;COVER_DATE;;Дата сопроводительного письма;Дата сопроводительного письма;Сопроводительное письмо/Поручение;;;260;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;Сопроводительное письмо|Дата;;;;
+0;28;COVER_IND;COVER_IND;;Индекс сопроводительного письма;Индекс сопроводительного письма;Сопроводительное письмо/Поручение;;;270;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;50;Сопроводительное письмо|Индекс;;;;
+0;29;COVER_TYPE;COVER_TYPE;;Вид сопроводительного письма;Вид сопроводительного письма;Сопроводительное письмо/Поручение;;COVER_TYPE;280;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+0;30;CORR_TYPE;CORR_TYPE;;Обращение поступило из;Обращение поступило из;Сопроводительное письмо/Поручение;;CORR_TYPE;290;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+0;31;COVER_TEXT;COVER_TEXT;;Текст письма, поручения;Текст письма, поручения;Сопроводительное письмо/Поручение;;;300;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkString;;True;;;;;;
+0;32;REQ_ANS;REQ_ANS;;Требуется ответ;Требуется ответ;Сопроводительное письмо/Поручение;;;310;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+0;33;REQ_TERM;REQ_TERM;;Требуемый срок ответа;Требуемый срок ответа;Сопроводительное письмо/Поручение;;;320;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;True;;;;;;
+0;34;REQ_DATE;REQ_DATE;;Дата ответа;Дата ответа;Сопроводительное письмо/Поручение;;;330;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;True;;;;;;
+0;35;REQ_IND;REQ_IND;;Индекс ответа;Индекс ответа;Сопроводительное письмо/Поручение;;;340;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkString;;True;;;;;;
+0;36;REQ_TEXT;REQ_TEXT;;Краткое содержание ответа;Краткое содержание ответа;Сопроводительное письмо/Поручение;;;350;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkString;;True;;;;;;
+0;37;REQ_CHECK;REQ_CHECK;;Контроль;Контроль;Контроль;;LOGICAL;360;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;False;55;;;;;
+0;38;SUBJ_ID;SUBJ_ID;;Тематика;Тематика;Обращение;SP_SUBJ;;370;fsViewVisible,fsEditVisible,fsLookupCombo;lsLinkSpr;ssShowWindow;dkNumber;;False;300;;csEditMode;;nmOnlyName;nsShortName
+0;92;LOOKUP_SUBJ_ID;LOOKUP_SUBJ_ID;;Тематика (локальный справочник);Тематика (локальный справочник);Обращение;SP_SUBJ;;371;fsInternal,fsLookup,fsViewVisible,fsEditVisible,fsFindVisible;lsLinkSpr;ssShowWindow;dkNumber;SUBJ_ID;True;100;;;;;
+0;39;CONTENT;CONTENT;;Содержание;Краткое содержание;Обращение;;;380;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;150;;;;;
+0;40;RES_TEXT;RES_TEXT;;Резолюция;Текст резолюции;Резолюция/Исполнение;;;390;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;150;;;;;
+0;41;RES_MAN;RES_MAN;;Автор резолюции;Автор резолюции;Резолюция/Исполнение;SP_OFFICIAL;;400;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+0;42;RES_DATE;RES_DATE;;Дата наложения резолюции;Дата наложения резолюции;Резолюция/Исполнение;;;410;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;True;;;;;;
+0;43;EXEC_MAN;EXEC_MAN;;Исполнитель;Исполнитель;Резолюция/Исполнение;SP_OFFICIAL;;420;fsFindVisible,fsViewVisible,fsEditVisible;lsLinkSpr;ssPickList;dkNumber;;False;75;;;;;
+0;356;EXEC_TERM2;EXEC_TERM2;;Исполнитель - срок исполнения;Исполнитель - срок исполнения;Резолюция/Исполнение;;;425;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;True;70;;;;;
+0;44;EXEC_ORG;EXEC_ORG;;Документ направлен на исполнение;Организация, в которую направлен документ для исполнения;Резолюция/Исполнение;SP_CORR;;430;fsViewVisible,fsEditVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+0;65;LOOKUP_EXEC_ORG;LOOKUP_EXEC_ORG;;Документ направлен на исполнение;Организация, в которую направлен документ для исполнения;Резолюция/Исполнение;SP_CORR;;431;fsInternal,fsLookup,fsViewVisible,fsEditVisible,fsFindVisible;lsLinkSpr;ssShowWindow;dkNumber;EXEC_ORG;False;;Направлен на исполнение;;;;
+0;45;EXEC_DATE;EXEC_DATE;;Дата направления;Дата направления на рассмотрение и исполнение;Резолюция/Исполнение;;;440;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;;;;;
+0;46;EXEC_TERM;EXEC_TERM;;Срок исполнения;Срок исполнения;Резолюция/Исполнение;;;450;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;;;;;
+0;47;EXT_TERM;EXT_TERM;;Продление срока рассмотрения;Продление срока рассмотрения;Резолюция/Исполнение;;;460;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;True;;;;;;
+0;48;EXEC_FACT;EXEC_FACT;;Дата исполнения;Дата исполнения;Резолюция/Исполнение;;;470;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;;;;;
+0;93;ORDER_ORG;ORDER_ORG;;Кому выдали предписание;Кому выдали предписание;Предписание;SP_CORR;;473;fsViewVisible,fsEditVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+0;98;LOOKUP_ORDER_ORG;LOOKUP_ORDER_ORG;;Кому выдали предписание;Кому выдали предписание;Предписание;SP_CORR;;474;fsInternal,fsLookup,fsViewVisible,fsEditVisible,fsFindVisible;lsLinkSpr;ssShowWindow;dkNumber;ORDER_ORG;True;;;;;;
+0;94;ORDER_TEXT;ORDER_TEXT;;Текст предписания;Текст предписания;Предписание;;;475;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+0;95;ORDER_DATE;ORDER_DATE;;Дата выдачи предписания;Дата выдачи предписания;Предписание;;;476;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;True;;;;;;
+0;96;ORDER_TERM;ORDER_TERM;;Cрок исполнения предписания;Cрок исполнения предписания;Предписание;;;477;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;True;;;;;;
+0;97;ORDER_FACT;ORDER_FACT;;Дата исполнения предписания;Дата исполнения предписания;Предписание;;;478;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;True;;;;;;
+0;49;ANS_DATE;ANS_DATE;;Дата ответа;Дата регистрации ответа;Результат рассмотрения обращения;;;480;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;Результат рассмотрения обращения|Дата;;;;
+0;50;ANS_IND;ANS_IND;;Индекс ответа;Регистрационный индекс ответа;Результат рассмотрения обращения;;;490;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;45;Результат рассмотрения обращения|Индекс;;;;
+0;51;ANS_KIND;ANS_KIND;;Вид решения;Вид принятого решения;Результат рассмотрения обращения;;ANS_KIND;500;fsFindVisible,fsViewVisible,fsEditVisible;lsLinkEnum;ssPickList;dkNumber;;False;;Результат рассмотрения обращения|Результат;;;;
+0;52;ANS_TEXT;ANS_TEXT;;Краткое содержание;Краткое содержание принятого решения;Результат рассмотрения обращения;;;510;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;;Результат рассмотрения обращения|Содержание;;;;
+0;357;ANS_VISIT;ANS_VISIT;;Ответ заявителю в ходе личного приема;Ответ заявителю в ходе личного приема;Результат рассмотрения обращения;;;515;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;;Результат рассмотрения обращения|Личный прием;;;;
+0;53;CHECK_MAN;CHECK_MAN;;Принял решении о снятии;Должностное лицо, принявшее решении о снятии с контроля;Контроль;SP_OFFICIAL;;520;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+0;54;CHECK_DATE;CHECK_DATE;;Дата снятия с контроля;Дата снятия с контроля;Контроль;;;530;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;True;;;;;;
+0;55;CHECK_OUT;CHECK_OUT;;Снято с контроля;Снято с контроля;Контроль;;;540;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkBoolean;;False;60;Снято с контроля;;;;
+0;56;FILE_ID;FILE_ID;;Дело;Индекс дела;Дело;SP_FILELIST;;550;fsViewVisible,fsEditVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+0;64;LOOKUP_FILE_ID;LOOKUP_FILE_ID;;Дело;Индекс дела;Дело;SP_FILELIST2;;551;fsInternal,fsLookup,fsEditVisible,fsViewVisible,fsFindVisible;lsLinkSpr;ssShowWindow;dkNumber;FILE_ID;False;50;Индекс дела;;;;
+0;57;FILE_VOL;FILE_VOL;;Том;Номер тома;Дело;;;560;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+0;58;FILE_LIST;FILE_LIST;;Лист;Номер листа;Дело;;;570;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+0;59;IN_FILE;IN_FILE;;В дело;В дело;Дело;;;580;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+0;60;VISIT_MAN;VISIT_MAN;;Вел прием;Должностное лицо, ведущее прием;Личный прием граждан;SP_OFFICIAL;;590;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+0;61;VISIT_OUT;VISIT_OUT;;Выездной;Прием выездной или в исполкоме;Личный прием граждан;;;600;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+0;62;VISIT_DATE;VISIT_DATE;;Дата приема;Дата приема;Личный прием граждан;;;610;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;True;;;;;;
+0;63;VISIT_CHIEF;VISIT_CHIEF;;Председатель;Прием вел председатель;Личный прием граждан;;;620;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+0;145;VISIT_TIME;VISIT_TIME;;Время приема;Фактическое время приема;Личный прием граждан;;;630;fsFindVisible,fsEditVisible,fsViewVisible,fsInOrderBy;lsNone;ssNone;dkDate;;False;60;Время приема;;;;
+0;197;PROV_TYPE;PROV_TYPE;;Тип документа;Тип документа;Документ, удостоверяющий личность;;PROV_TYPE;900;fsViewVisible, fsEditVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+0;198;PROV_SER;PROV_SER;;Серия;Серия;Документ, удостоверяющий личность;;;901;fsViewVisible, fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+0;199;PROV_NUM;PROV_NUM;;Номер;Номер;Документ, удостоверяющий личность;;;902;fsViewVisible, fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+0;200;PROV_DATE;PROV_DATE;;Дата выдачи;Дата выдачи;Документ, удостоверяющий личность;;;903;fsViewVisible, fsEditVisible;lsNone;ssNone;dkDate;;True;;;;;;
+0;201;PROV_ORG;PROV_ORG;;Орган выдачи;Орган выдачи;Документ, удостоверяющий личность;;;904;fsViewVisible, fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+0;202;PERSON_ID;PERSON_ID;;Номер идентификации;Номер идентификации;Документ, удостоверяющий личность;;;905;fsViewVisible, fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+0;209;ACC_ID;ACC_ID;;Идентификатор лицевого счета;Идентификатор лицевого счета;Лицевой счет;;;906;fsViewVisible, fsEditVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+0;210;ACC_NUM;ACC_NUM;;Номер лицевого счета;Номер лицевого счета;Лицевой счет;;;907;fsViewVisible, fsEditVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+0;361;IDEN_DATE;IDEN_DATE;;Даты повторных обращений;Даты повторных обращений;;;;920;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+0;362;IDEN_TEXT;IDEN_TEXT;;Текст повторных обращений;Текст повторных обращений;;;;921;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+0;349;NOT_EXP;NOT_EXP;;Не учитывать;Не учитывать в статистике;;;;9999;fsNotNull,fsReadOnly,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+0;377;IN_DELO_DATE;IN_DELO_DATE;;Дата направления в дело;Дата направления в дело;;;;922;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;80;;;;;
+1;68;DOC_ID;DOC_ID;;Идентификатор главного документа;Идентификатор главного документа;;;;10;fsServerSide, fsViewVisible, fsReadOnly;lsNone;ssNone;dkNumber;;True;;;;;;
+1;69;LINK_ID;LINK_ID;;Идентификатор связи;Идентификатор связи;;;;20;fsViewVisible, fsReadOnly;lsNone;ssNone;dkNumber;;True;;;;;;
+1;71;N_ORDER;N_ORDER;;Порядок просмотра связей;Порядок просмотра связей;;;;25;fsViewVisible, fsReadOnly;lsNone;ssNone;dkNumber;;True;;;;;;
+1;70;LINK_TYPE;LINK_TYPE;;Тип связи;Тип связи;;;LINK_TYPE;30;fsViewVisible, fsEditVisible, fsFindVisible;lsLinkEnum;ssPickList;dkNumber;;False;150;;;;;
+1;144;LINK_KIND;LINK_KIND;;Вид связи;Вид связи;;;LINK_KIND;35;fsViewVisible, fsEditVisible, fsFindVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+1;72;LINK_DOC;LINK_DOC;;Идентификатор связанного документа;Идентификатор связанного документа;;;;50;fsViewVisible, fsEditVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+1;73;DOC_TYPE;DOC_TYPE;;Тип связанного документа;Тип связанного документа;;;DOC_TYPE;60;fsViewVisible, fsEditVisible, fsFindVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+1;74;GROUP_ID;GROUP_ID;;Группа документа;Группа документа;;SP_DOCGROUP;;70;fsNotNull,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+1;75;GROUP_KIND;GROUP_KIND;;Базовая группа документа;Вид базовой группы документа;;;GROUP_KIND;80;fsViewVisible, fsEditVisible, fsFindVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+1;76;REG_DATE;REG_DATE;;Дата регистрации связанного документа;Дата регистрации связанного документа;;;;90;fsViewVisible, fsFindVisible, fsInOrderBy, fsEditVisible;lsNone;ssNone;dkDate;;False;100;Предыдущее обращение|Дата регистрации;;;;
+1;77;REG_IND;REG_IND;;Регистрационный индекс связанного документа;Регистрационный индекс связанного документа;;;;100;fsViewVisible, fsFindVisible, fsEditVisible;lsNone;ssNone;dkString;;False;50;Предыдущее обращение|Индекс;;;;
+1;78;IN_BASE;IN_BASE;;Связанный документ в базе;Связанный документ в базе;;;LOGICAL;110;fsViewVisible, fsFindVisible, fsInOrderBy, fsEditVisible;lsLinkEnum;ssPickList;dkNumber;;False;70;Предыдущее обращение|Есть в базе;;;;
+1;79;DOC_NOTE;DOC_NOTE;;Примечание;Примечание;;;;120;fsViewVisible, fsEditVisible, fsFindVisible;lsNone;ssNone;dkString;;False;230;;;;;
+1;140;IS_PRINT;IS_PRINT;;Печатать в РКК;Печатать в РКК;;;LOGICAL;130;fsViewVisible, fsEditVisible, fsFindVisible;lsLinkEnum;ssPickList;dkNumber;;False;55;;;;;
+2;80;DOC_ID;DOC_ID;;Идентификатор документа;Идентификатор документа;;;;10;fsServerSide, fsViewVisible, fsReadOnly;lsNone;ssNone;dkNumber;;True;;;;;;
+2;81;WORK_ID;WORK_ID;;Вторичный ключ;Вторичный ключ;;;;20;fsViewVisible, fsReadOnly;lsNone;ssNone;dkNumber;;True;;;;;;
+2;82;N_ORDER;N_ORDER;;Порядок просмотра записей;Порядок просмотра записей;;;;30;fsViewVisible, fsReadOnly;lsNone;ssNone;dkNumber;;True;;;;;;
+2;83;OUT_NOTE;OUT_NOTE;;Поручение/запрос/промежуточное решение/уведомление/извещение/передача для исполнения;Поручение/запрос/промежуточное решение/уведомление/извещение/передача для исполнения;;;;40;fsViewVisible, fsEditVisible, fsFindVisible;lsNone;ssNone;dkString;;False;165;Поручение/запрос/уведомление/другое|Корр./исп./кр. содержание;;;;
+2;84;OUT_DATE;OUT_DATE;;Дата;Дата;;;;50;fsViewVisible, fsEditVisible, fsFindVisible;lsNone;ssNone;dkDate;;False;75;Поручение/запрос/уведомление/другое|Дата;;;;
+2;85;OUT_IND;OUT_IND;;Индекс;Индекс;;;;60;fsViewVisible, fsEditVisible, fsFindVisible;lsNone;ssNone;dkString;;False;45;Поручение/запрос/уведомление/другое|Индекс;;;;
+2;87;CHECK_OUT;CHECK_OUT;;Отметка о контроле;Отметка о контроле;;;CHECK;70;fsViewVisible, fsEditVisible, fsFindVisible;lsLinkEnum;ssPickList;dkNumber;;False;58;Ответ|Контроль;;;;
+2;86;CHECK_DATE;CHECK_DATE;;Контрольный срок;Контрольный срок;;;;80;fsViewVisible, fsEditVisible, fsFindVisible;lsNone;ssNone;dkDate;;False;75;Ответ|Срок;;;;
+2;88;IN_NOTE;IN_NOTE;;Ответ/промежуточное решение;Ответ/промежуточное решение;;;;90;fsViewVisible, fsEditVisible, fsFindVisible;lsNone;ssNone;dkString;;False;165;Ответ/исполнение|Корр./исп./кр. содержание;;;;
+2;89;IN_DATE;IN_DATE;;Дата;Дата;;;;100;fsViewVisible, fsEditVisible, fsFindVisible;lsNone;ssNone;dkDate;;False;75;Ответ/исполнение|Дата;;;;
+2;90;IN_IND;IN_IND;;Индекс;Индекс;;;;110;fsViewVisible, fsEditVisible, fsFindVisible;lsNone;ssNone;dkString;;False;45;Ответ/исполнение|Индекс;;;;
+3;99;DOC_ID;DOC_ID;;Идентификатор;Идентификатор документа;;;;10;fsServerSide,fsNotNull,fsKeyField,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+3;100;DOC_TYPE;DOC_TYPE;;Тип документа;Тип документа;;;DOC_TYPE;20;fsNotNull,fsReadOnly,fsViewVisible;lsLinkEnum;ssNone;dkNumber;;True;;;;;;
+3;101;GROUP_ID;GROUP_ID;;Вид документа;Идентификатор вида документа;;SP_DOCGROUP;;21;fsNotNull,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+3;102;GROUP_KIND;GROUP_KIND;;Группа документов;Базовая группа документа;;;GROUP_KIND;22;fsNotNull,fsReadOnly,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+3;103;FOLDER_ID;FOLDER_ID;;Папка;Папка пользователя, в которой находится документ;Регистрация;SP_FOLDER;;30;fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+3;104;REG_NUM;REG_NUM;;Номер;Регистрационный номер документа;Регистрация;;;40;fsViewVisible,fsEditVisible,fsReadOnly;lsNone;ssNone;dkNumber;;True;30;№ п/п;;;;
+3;131;VISIT_NUM;VISIT_NUM;;Регистрационный номер;Регистрационный номер в журнале учета приема посетителей;Регистрация;;;41;fsFindVisible,fsEditVisible,fsViewVisible,fsInOrderBy;lsNone;ssNone;dkNumber;;False;30;№ п/п;;;;
+3;130;VISIT_PLAN;VISIT_PLAN;;Дата предварительной записи на прием;Дата предварительной записи на прием;Регистрация;;;43;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;False;80;Дата записи на прием;;;;
+3;142;PLAN_DATE;PLAN_DATE;;Дата приема, на который произведена запись;Дата приема, на который произведена запись;Регистрация;;;44;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;False;80;Записан на прием|Дата;;;;
+3;143;PLAN_TIME;PLAN_TIME;;Время приема, на который произведена запись;Время приема, на который произведена запись;Регистрация;;;45;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;False;80;Записан на прием|Время;;;;
+3;128;VISIT_DATE;VISIT_DATE;;Фактическая дата приема;Фактическая дата приема;Личный прием граждан;;;46;fsFindVisible,fsEditVisible,fsViewVisible,fsInOrderBy;lsNone;ssNone;dkDate;;False;80;Дата приема;;;;
+3;141;VISIT_TIME;VISIT_TIME;;Фактическое время приема;Фактическое время приема;Личный прием граждан;;;47;fsFindVisible,fsEditVisible,fsViewVisible,fsInOrderBy;lsNone;ssNone;dkDate;;False;80;Время приема;;;;
+3;105;REG_IND;REG_IND;;Индекс;Регистрационный индекс документа;Письменное обращение;;;50;fsFindVisible,fsViewVisible,fsEditVisible,fsReadOnly;lsNone;ssNone;dkString;;True;50;;;;;
+3;106;REG_DATE;REG_DATE;;Дата регистрации;Дата регистрации документа;Письменное обращение;;;60;fsFindVisible,fsViewVisible,fsEditVisible,fsReadOnly;lsNone;ssNone;dkDate;;True;80;;;;;
+3;107;APP_FORM;APP_FORM;;Вид поступления;Вид поступления обращения;Регистрация;;APP_FORM;70;fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+3;108;SIGN_TYPE;SIGN_TYPE;;Тип подписи;Тип подписи обращения;Посетитель;;SIGN_TYPE;90;fsEditVisible,fsViewVisible,fsNotNull;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+3;109;SIGN_MAN;SIGN_MAN;;Идентификатор заявителя;Идентификатор заявителя;;;;110;fsViewVisible,fsEditVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+3;110;SIGN_NAME;SIGN_NAME;;Заявитель;Заявитель;Посетитель;;;120;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;150;;;;;
+3;111;SIGN_GROUP;SIGN_GROUP;;Социальная группа/категория автора обращения;Социальная группа/категория автора обращения;Посетитель;SP_MANGROUP;;130;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+3;112;SIGN_PLACE;SIGN_PLACE;;Населенный пункт;Идентификатор населенного пункта;Посетитель;SP_PLACE;;140;fsViewVisible,fsEditVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+3;113;LOOKUP_SIGN_PLACE;LOOKUP_SIGN_PLACE;;Населенный пункт;Населенный пункт;Посетитель;SP_PLACE;;141;fsInternal,fsLookup,fsViewVisible,fsEditVisible,fsFindVisible;lsLinkSpr;ssShowWindow;dkNumber;SIGN_PLACE;False;70;;;;;
+3;114;ADR_ID;ADR_ID;;Идентификатор адреса;Идентификатор адреса;;;;150;fsViewVisible,fsEditVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+3;115;ADR_TEXT;ADR_TEXT;;Адрес;Адрес места жительства заявителя;Посетитель;;;160;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;100;;;;;
+3;116;ADR_PHONE;ADR_PHONE;;Контактный телефон;Контактный телефон;Посетитель;;;170;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkString;;False;;;;;;
+3;117;ADR_IN;ADR_IN;;На территории исполкома;На территории исполкома;Посетитель;;;180;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+3;118;ADR_NOTE;ADR_NOTE;;Дргугие сведения о заявителе;Дргугие сведения о заявителе;Посетитель;;;190;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkString;;False;;;;;;
+3;119;APP_KIND;APP_KIND;;Вид обращения;Вид обращения;Обращение;;APP_KIND;195;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+3;139;IN_DATE;IN_DATE;;Дата поступления;Дата поступления;Обращение;;;200;fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;True;80;;;;;
+3;133;IS_REPEAT;IS_REPEAT;;Повторное обращение;Повторное обращение;Обращение;;;230;fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;True;40;Повтор;;;;
+3;134;REQ_ANS;REQ_ANS;;Требуется ответ;Требуется ответ;;;;310;fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+3;135;REQ_CHECK;REQ_CHECK;;Особый контроль;Особый контроль;Контроль;;;360;fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+3;120;SUBJ_ID;SUBJ_ID;;Идентификатор тематики;Идентификатор тематики;Обращение;SP_SUBJ;;370;fsViewVisible,fsEditVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;100;;csEditMode;;nmOnlyName;nsShortName
+3;121;LOOKUP_SUBJ_ID;LOOKUP_SUBJ_ID;;Тематика;Тематика;Обращение;SP_SUBJ;;371;fsInternal,fsLookup,fsViewVisible,fsEditVisible,fsFindVisible;lsLinkSpr;ssShowWindow;dkNumber;SUBJ_ID;False;100;;;;;
+3;122;CONTENT;CONTENT;;Содержание;Краткое содержание;Обращение;;;380;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;150;;;;;
+3;138;EXEC_MAN;EXEC_MAN;;Исполнитель;Исполнитель;Письменное обращение;SP_OFFICIAL;;420;fsFindVisible,fsViewVisible,fsEditVisible,fsReadOnly;lsLinkSpr;ssPickList;dkNumber;;True;70;;;;;
+3;123;EXEC_FACT;EXEC_FACT;;Дата исполнения;Дата исполнения;Результат приема;;;470;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;;;;;
+3;126;VISIT_MAN;VISIT_MAN;;Вел прием;Должностное лицо, ведущее прием;Личный прием граждан;SP_OFFICIAL;;492;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;False;100;;;;;
+3;127;VISIT_OUT;VISIT_OUT;;Выездной;Прием выездной или в исполкоме;Личный прием граждан;;;493;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;False;;;;;;
+3;129;VISIT_CHIEF;VISIT_CHIEF;;Председатель;Прием вел председатель;Личный прием граждан;;;494;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;False;;;;;;
+3;124;ANS_KIND;ANS_KIND;;Вид решения;Вид принятого решения;Результат приема;;ANS_KIND;500;fsFindVisible,fsViewVisible,fsEditVisible;lsLinkEnum;ssPickList;dkNumber;;False;;Результат приема|Результат;;;;
+3;125;ANS_TEXT;ANS_TEXT;;Краткое содержание;Краткое содержание принятого решения;Результат приема;;;510;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;;Результат приема|Содержание;;;;
+3;132;SIGN_ORG;SIGN_ORG;;Идентификатор юридического лица;Идентификатор юридического лица;;SP_CORR;;520;fsViewVisible,fsEditVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+3;136;CHECK_OUT;CHECK_OUT;;Снято с контроля или выполнено;Снято с контроля или выполнено;Контроль;;;540;fsViewVisible,fsEditVisible;lsNone;ssNone;dkBoolean;;True;60;Выполнено;;;;
+3;137;IN_FILE;IN_FILE;;В дело;В дело;Дело;;;580;fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+3;350;NOT_EXP;NOT_EXP;;Не учитывать;Не учитывать в статистике;;;;9999;fsNotNull,fsReadOnly,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+4;150;DOC_ID;DOC_ID;;Идентификатор;Идентификатор документа;;;;10;fsServerSide,fsNotNull,fsKeyField,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+4;151;DOC_TYPE;DOC_TYPE;;Тип документа;Тип документа;;;DOC_TYPE;20;fsNotNull,fsReadOnly,fsViewVisible;lsLinkEnum;ssNone;dkNumber;;True;;;;;;
+4;154;GROUP_KIND;GROUP_KIND;;Базовая группа документа;Вид базовой группы документов;;;GROUP_KIND;50;fsNotNull,fsReadOnly,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+4;160;APP_KIND;APP_KIND;;Вид обращения;Вид обращения;;;APP_KIND;110;fsViewVisible,fsEditVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+4;161;SIGN_TYPE;SIGN_TYPE;;Вид подписи;Вид подписи обращения;;;SIGN_TYPE;120;fsViewVisible,fsEditVisible,fsNotNull;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+4;162;SIGN_KIND;SIGN_KIND;;Вид заявителя;Вид заявителя;;;SIGN_KIND;130;fsViewVisible,fsEditVisible,fsNotNull;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+4;164;SIGN_MAN;SIGN_MAN;;Идентификатор заявителя;Идентификатор заявителя;;;;150;fsEditVisible,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+4;166;SIGN_GROUP;SIGN_GROUP;;Социальная группа/категория автора обращения;Социальная группа/категория автора обращения;;SP_MANGROUP;;170;fsViewVisible,fsEditVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+4;167;SIGN_PLACE;SIGN_PLACE;;Населенный пункт;Идентификатор населенного пункта;;SP_PLACE;;180;fsViewVisible,fsEditVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+4;169;ADR_ID;ADR_ID;;Идентификатор адреса;Идентификатор адреса;;;;200;fsViewVisible,fsEditVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+4;173;ADR_NOTE;ADR_NOTE;;Дргугие сведения о заявителе;Дргугие сведения о заявителе;;;;240;fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+4;174;IN_DATE;IN_DATE;;Дата поступления;Дата поступления;;;;250;fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;True;80;;;;;
+4;213;VISIT_DATE;VISIT_DATE;;Дата приема;Дата приема;;;;251;fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;True;;;;;;
+4;178;ANS_DATE;ANS_DATE;;Дата ответа;Дата регистрации ответа;;;;290;fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;True;70;Результат рассмотрения обращения|Дата;;;;
+4;180;ANS_KIND;ANS_KIND;;Вид решения;Вид принятого решения;;;ANS_KIND;310;fsViewVisible,fsEditVisible;lsLinkEnum;ssPickList;dkNumber;;True;;Результат рассмотрения обращения|Результат;;;;
+4;181;ANS_TEXT;ANS_TEXT;;Краткое содержание;Краткое содержание принятого решения;;;;320;fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;Результат рассмотрения обращения|Содержание;;;;
+4;208;PERSON_ID;PERSON_ID;;Номер идентификации;Номер идентификации;;;;905;fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+4;211;ACC_ID;ACC_ID;;Идентификатор лицевого счета;Идентификатор лицевого счета;;;;906;fsViewVisible, fsEditVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+4;158;REG_IND;REG_IND;;Индекс;Регистрационный индекс документа;;;;990;fsViewVisible,fsEditVisible,fsInOrderBy;lsNone;ssNone;dkString;;True;50;;;;;
+4;157;REG_NUM;REG_NUM;;Регистрационный номер;Регистрационный номер документа;;;;1005;fsFindVisible,fsEditVisible,fsViewVisible,fsInOrderBy;lsNone;ssNone;dkNumber;;False;30;№ п/п;;;;
+4;156;REG_DATE;REG_DATE;;Дата подачи заявления;Дата подачи заявления;;;;1010;fsFindVisible,fsViewVisible,fsEditVisible,fsInOrderBy;lsNone;ssNone;dkDate;;False;80;Дата подачи заявления;;;;
+4;159;APP_FORM;APP_FORM;;Форма поступления;Форма поступления обращения;;;APP_FORM;1015;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;False;70;;;;;
+4;165;SIGN_NAME;SIGN_NAME;;Заявитель;Ф.И.О. лица, обратившегося за выдачей справки или другого документа;;;;1020;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;150;;;;;
+4;170;ADR_TEXT;ADR_TEXT;;Адрес;Адрес места жительства заявителя;;;;1030;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;150;;;;;
+4;168;LOOKUP_SIGN_PLACE;LOOKUP_SIGN_PLACE;;Населенный пункт;Населенный пункт;;SP_PLACE;;1031;fsFindVisible,fsViewVisible,fsEditVisible,fsInternal,fsLookup;lsLinkSpr;ssShowWindow;dkNumber;SIGN_PLACE;True;70;;;;;
+4;196;ADR_PLACE;ADR_PLACE;;Наименование населенного пункта;Наименование населенного пункта;;;;1032;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;100;Населенный пункт;;;;
+4;172;ADR_IN;ADR_IN;;На территории исполкома;На территории исполкома;;;;1033;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+4;171;ADR_PHONE;ADR_PHONE;;Телефон;Контактный телефон;;;;1040;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkString;;False;80;;;;;
+4;203;PROV_TYPE;PROV_TYPE;;Тип документа;Тип документа;Документ, удостоверяющий личность;;PROV_TYPE;1051;fsFindVisible,fsViewVisible,fsEditVisible;lsLinkEnum;ssPickList;dkNumber;;False;60;Документ, удостоверяющий личность|Тип;;;;
+4;204;PROV_SER;PROV_SER;;Серия;Серия;Документ, удостоверяющий личность;;;1052;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;45;Документ, удостоверяющий личность|Серия;;;;
+4;205;PROV_NUM;PROV_NUM;;Номер;Номер;Документ, удостоверяющий личность;;;1053;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;45;Документ, удостоверяющий личность|Номер;;;;
+4;206;PROV_DATE;PROV_DATE;;Дата выдачи;Дата выдачи;Документ, удостоверяющий личность;;;1054;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;80;Документ, удостоверяющий личность|Дата;;;;
+4;207;PROV_ORG;PROV_ORG;;Орган выдачи;Орган выдачи;Документ, удостоверяющий личность;;;1055;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;90;Документ, удостоверяющий личность|Орган выдачи;;;;
+4;175;CONTENT;CONTENT;;Наименование справки (документа);Наименование запрашиваемой справки или другого документа;;;;1090;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;250;;;;;
+4;176;EXEC_TERM;EXEC_TERM;;Срок исполнения;Срок исполнения;;;;1100;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;;;;;
+4;183;PAYMENT;PAYMENT;;Размер платы;Размер платы, взимаемый за выдачу справки или документа (если требуется);;;;1110;fsViewVisible, fsEditVisible, fsFindVisible;lsNone;ssNone;dkNumber;;False;60;;;;;
+4;177;EXEC_FACT;EXEC_FACT;;Дата выдачи справки (документа);Дата выдачи справки (документа) гражданину (или дата направления по почте);;;;1120;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;110;Дата выдачи справки (документа);;;;
+4;179;ANS_IND;ANS_IND;;Номер справки (документа) ;Регистрационный номер справки по журналу регистрации исходящей корреспонденции;;;;1130;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;65;;;;;
+4;212;ACC_NUM;ACC_NUM;;Номер лицевого счета;Номер лицевого счета;;;;2000;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+4;152;GROUP_ID;GROUP_ID;;Группа документа;Идентификатор группы документов;;SP_DOCGROUP;;2010;fsNotNull,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+4;153;LOOKUP_GROUP_ID;LOOKUP_GROUP_ID;;Группа документа;Наименование группы документов;;SP_DOCGROUP;;2011;fsFindVisible,fsViewVisible,fsEditVisible,fsInternal,fsLookup,fsReadOnly;lsLinkSpr;ssShowWindow;dkNumber;GROUP_ID;True;;;;;;
+4;155;FOLDER_ID;FOLDER_ID;;Папка пользователя;Папка пользователя, в которой находится документ;;SP_FOLDER;;2020;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+4;351;NOT_EXP;NOT_EXP;;Не учитывать;Не учитывать в статистике;;;;9999;fsNotNull,fsReadOnly,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+5;184;DOC_ID;DOC_ID;;Идентификатор документа;Идентификатор документа;;;;10;fsServerSide, fsViewVisible, fsReadOnly;lsNone;ssNone;dkNumber;;True;;;;;;
+5;185;FILE_ID;FILE_ID;;Вторичный ключ;Вторичный ключ;;;;20;fsViewVisible, fsReadOnly;lsNone;ssNone;dkNumber;;True;;;;;;
+5;186;N_ORDER;N_ORDER;;Порядок просмотра записей;Порядок просмотра записей;;;;30;fsViewVisible, fsReadOnly;lsNone;ssNone;dkNumber;;True;;;;;;
+5;187;STORE_KIND;STORE_KIND;;Способ хранения;Способ хранения;;;STORE_KIND;40;fsViewVisible, fsEditVisible, fsFindVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+5;188;DIR_YEAR;DIR_YEAR;;Год;Год;;;;50;fsViewVisible, fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+5;189;DIR_MONTH;DIR_MONTH;;Месяц;Месяц;;;;60;fsViewVisible, fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+5;190;DIR_NAME;DIR_NAME;;Имя файла в специальной папке;Имя файла в специальной папке;;;;70;fsViewVisible, fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+5;191;NAME;NAME;;Имя файла;Имя файла;;;;80;fsViewVisible, fsEditVisible, fsFindVisible;lsNone;ssNone;dkString;;False;175;;;;;
+5;194;NOTE;NOTE;;Примечание (описание);Примечание (описание);;;;85;fsViewVisible, fsEditVisible, fsFindVisible;lsNone;ssNone;dkString;;False;250;;;;;
+5;192;PATH;PATH;;Путь к файлу;Путь к файлу;;;;90;fsViewVisible, fsEditVisible, fsFindVisible;lsNone;ssNone;dkString;;False;180;;;;;
+5;193;READ_ONLY;READ_ONLY;;Только для чтения;Только для чтения;;;LOGICAL;100;fsFindVisible,fsViewVisible,fsEditVisible,fsReadOnly;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+5;375;SIGNATURE;SIGNATURE;;значение ЭЦП;значение ЭЦП;;;;110;fsViewVisible,fsEditVisible,fsReadOnly;lsNone;ssNone;dkString;;True;500;;;;;
+5;376;SIGNINFO;SIGNINFO;;информация о ЭЦП;информация о ЭЦП;;;;120;fsViewVisible,fsEditVisible,fsReadOnly;lsNone;ssNone;dkString;;False;500;;;;;
+6;374;DOC_STATUS;DOC_STATUS;;Статус документа;Статус документа;;;STATUS;4;fsServerSide,fsFindVisible,fsViewVisible,fsReadOnly;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+6;359;POST_ID;POST_ID;;Идентификатор СМДО;Идентификатор документа СМДО;;;;5;fsViewVisible,fsEditVisible,fsKeyField;lsNone;ssNone;dkNumber;;True;;;;;;
+6;214;DOC_ID;DOC_ID;;Идентификатор;Идентификатор документа;;;;10;fsServerSide,fsNotNull,fsKeyField,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+6;215;DOC_TYPE;DOC_TYPE;;Тип документа;Тип документа;;;DOC_TYPE;20;fsNotNull,fsReadOnly,fsViewVisible;lsLinkEnum;ssNone;dkNumber;;True;;;;;;
+6;216;GROUP_KIND;GROUP_KIND;;Базовая группа документа;Вид базовой группы документов;;;GROUP_KIND;30;fsNotNull,fsReadOnly,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+6;217;APP_FORM;APP_FORM;;Форма поступления;Форма поступления документа;;;APP_FORM;40;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+6;218;IN_DATE;IN_DATE;;Дата поступления;Дата поступления;;;;50;fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;True;80;;;;;
+6;219;REG_NUM;REG_NUM;;№ п/п;Регистрационный номер документа;;;;60;fsFindVisible,fsEditVisible,fsViewVisible,fsInOrderBy;lsNone;ssNone;dkNumber;;False;30;№ п/п;;;;
+6;220;REG_DATE;REG_DATE;;Дата поступления;Дата регистрации документа;;;;70;fsFindVisible,fsViewVisible,fsEditVisible,fsInOrderBy;lsNone;ssNone;dkDate;;False;80;;;;;
+6;221;REG_IND;REG_IND;;Входящий индекс;Регистрационный индекс документа;;;;80;fsFindVisible,fsViewVisible,fsEditVisible,fsInOrderBy;lsNone;ssNone;dkString;;False;50;;;;;
+6;222;DELIV_KIND;DELIV_KIND;;Способ доставки;Способ доставки документа;;;DELIV_KIND;90;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;False;;;;;;
+6;223;SIGN_ORG;SIGN_ORG;;Идентификатор корреспондента;Идентификатор корреспондента;;SP_CORR;;100;fsEditVisible,fsViewVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+6;224;LOOKUP_SIGN_ORG;LOOKUP_SIGN_ORG;;Корреспондент;Автор (корреспондент);;SP_CORR;;110;fsFindVisible,fsViewVisible,fsEditVisible,fsInternal,fsLookup;lsLinkSpr;ssShowWindow;dkNumber;SIGN_ORG;False;;;;;;
+6;225;SIGN_NAME;SIGN_NAME;;Подписал;Кто подписал документ;;;;120;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;150;;;;;
+6;226;DOC_DATE;DOC_DATE;;Дата документа;Дата документа;;;;130;fsFindVisible,fsViewVisible,fsEditVisible,fsInOrderBy;lsNone;ssNone;dkDate;;False;80;;;;;
+6;227;DOC_IND;DOC_IND;;Индекс документа;Индекс документа;;;;140;fsFindVisible,fsViewVisible,fsEditVisible,fsInOrderBy;lsNone;ssNone;dkString;;False;50;;;;;
+6;228;REQ_IND;REQ_IND;;Ответ на исходящий №;Ответ на исходящий на документ (регистрационный индекс документа);;;;150;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkString;;False;;;;;;
+6;229;REQ_DATE;REQ_DATE;;Ответ на исходящий от;Ответ на исходящий на документ (дата документа);;;;160;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;False;;;;;;
+6;230;DOC_KIND;DOC_KIND;;Вид документа;Наименование вида документа;;;DOC_KIND;170;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;False;;;;;;
+6;231;NUM_LIST;NUM_LIST;;Листов;Количество листов обращения;;;;180;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+6;232;NUM_APP;NUM_APP;;Приложений;Количество листов приложений;;;;190;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+6;233;CONTENT;CONTENT;;Краткое содержание;Заголовок (краткое содержание);;;;200;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;150;;;;;
+6;234;ADR_NOTE;ADR_NOTE;;Исполнитель;Исполнитель, подготовивший документ;;;;210;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkString;;True;;;;;;
+6;235;ADR_PHONE;ADR_PHONE;;Телефон;Номер служебного телефона исполнителя;;;;220;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkString;;True;;;;;;
+6;236;SUBJ_ID;SUBJ_ID;;Идентификатор тематики;Идентификатор тематики;;SP_SUBJ;;230;fsViewVisible,fsEditVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;100;;csEditMode;;nmOnlyName;nsShortName
+6;237;LOOKUP_SUBJ_ID;LOOKUP_SUBJ_ID;;Тематика;Тематика;;SP_SUBJ;;240;fsInternal,fsLookup,fsViewVisible,fsEditVisible,fsFindVisible;lsLinkSpr;ssShowWindow;dkNumber;SUBJ_ID;False;100;;;;;
+6;238;REQ_TEXT;REQ_TEXT;;Кому адресован;Кому адресован документ;;;;250;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkString;;True;;;;;;
+6;239;RES_TEXT;RES_TEXT;;Текст резолюции;Текст резолюции;;;;260;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;150;;;;;
+6;240;RES_MAN;RES_MAN;;Автор резолюции;Автор резолюции;;SP_OFFICIAL;;270;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+6;241;RES_DATE;RES_DATE;;Дата резолюции;Дата наложения резолюции;;;;280;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;True;;;;;;
+6;242;EXEC_MAN;EXEC_MAN;;Исполнитель;Исполнитель;;SP_OFFICIAL;;290;fsFindVisible,fsViewVisible,fsEditVisible;lsLinkSpr;ssPickList;dkNumber;;False;75;;;;;
+6;371;IDEN_TEXT;IDEN_TEXT;;ФИО исполнителей;ФИО исполнителей;;;;292;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;;Исполнители;;;;
+6;370;IDEN_DATE;IDEN_DATE;;Идентификаторы исполнителей;Идентификаторы исполнителей;;;;293;fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+6;243;EXEC_TERM;EXEC_TERM;;Срок исполнения;Срок исполнения;;;;300;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;;;;;
+6;244;EXEC_FACT;EXEC_FACT;;Дата исполнения;Дата исполнения;;;;310;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;;;;;
+6;245;ANS_TEXT;ANS_TEXT;;Краткое содержание ответа (решения);Краткое содержание принятого решения (ответа);;;;320;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;;Отправленный ответ (принятое решение)|Содержание;;;;
+6;246;ANS_DATE;ANS_DATE;;Дата документа-ответа;Дата регистрации ответа;;;;330;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;Отправленный ответ (принятое решение)|Дата;;;;
+6;247;ANS_IND;ANS_IND;;Индекс документа-ответа;Регистрационный индекс ответа;;;;340;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;45;Отправленный ответ (принятое решение)|Индекс;;;;
+6;248;REQ_CHECK;REQ_CHECK;;Контроль;Отметка о контроле;;;LOGICAL;350;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;False;55;;;;;
+6;249;CHECK_OUT;CHECK_OUT;;Снят с контроля;Документа снят с контроля или выполнен;;;;360;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkBoolean;;False;60;Снято с контроля;;;;
+6;250;CHECK_DATE;CHECK_DATE;;Дата снятия с контроля;Дата снятия с контроля;;;;370;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;True;;;;;;
+6;251;CHECK_MAN;CHECK_MAN;;Принял решении о снятии;Должностное лицо, принявшее решении о снятии с контроля;;SP_OFFICIAL;;380;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+6;252;IN_FILE;IN_FILE;;В дело;Документ находится в деле;;;;390;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+6;253;FILE_ID;FILE_ID;;Индекс дела;Индекс дела;;SP_FILELIST;;400;fsViewVisible,fsEditVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+6;254;LOOKUP_FILE_ID;LOOKUP_FILE_ID;;Индекс дела;Индекс дела;;SP_FILELIST2;;410;fsInternal,fsLookup,fsEditVisible,fsViewVisible,fsFindVisible;lsLinkSpr;ssShowWindow;dkNumber;FILE_ID;False;50;Индекс дела;;;;
+6;378;IN_DELO_DATE;IN_DELO_DATE;;Дата направления в дело;Дата направления в дело;;;;411;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;80;;;;;
+6;255;FILE_VOL;FILE_VOL;;Том;Номер тома;;;;420;fsEditVisible,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+6;256;FILE_LIST;FILE_LIST;;Лист;Номер листа;;;;430;fsEditVisible,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+6;257;FOLDER_ID;FOLDER_ID;;Папка;Папка пользователя, в которой находится документ;;SP_FOLDER;;440;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+6;258;GROUP_ID;GROUP_ID;;Группа документа;Идентификатор группы документов;;SP_DOCGROUP;;450;fsNotNull,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+6;259;LOOKUP_GROUP_ID;LOOKUP_GROUP_ID;;Группа;Наименование группы документов;;SP_DOCGROUP;;460;fsFindVisible,fsViewVisible,fsEditVisible,fsInternal,fsLookup,fsReadOnly;lsLinkSpr;ssShowWindow;dkNumber;GROUP_ID;True;;;;;;
+6;352;NOT_EXP;NOT_EXP;;Не учитывать;Не учитывать в статистике;;;;9999;fsNotNull,fsReadOnly,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+7;360;POST_ID;POST_ID;;Идентификатор СМДО;Идентификатор документа СМДО;;;;5;fsViewVisible,fsEditVisible,fsKeyField;lsNone;ssNone;dkNumber;;True;;;;;;
+7;260;DOC_ID;DOC_ID;;Идентификатор;Идентификатор документа;;;;10;fsServerSide,fsNotNull,fsKeyField,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+7;261;DOC_TYPE;DOC_TYPE;;Тип документа;Тип документа;;;DOC_TYPE;20;fsNotNull,fsReadOnly,fsViewVisible;lsLinkEnum;ssNone;dkNumber;;True;;;;;;
+7;262;GROUP_KIND;GROUP_KIND;;Базовая группа документа;Вид базовой группы документов;;;GROUP_KIND;30;fsNotNull,fsReadOnly,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+7;263;APP_FORM;APP_FORM;;Форма поступления;Форма поступления документа;;;APP_FORM;40;fsViewVisible,fsEditVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+7;264;IN_DATE;IN_DATE;;Дата поступления;Дата поступления;;;;50;fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;True;80;;;;;
+7;265;REG_NUM;REG_NUM;;№ п/п;Регистрационный номер документа;;;;60;fsFindVisible,fsEditVisible,fsViewVisible,fsInOrderBy;lsNone;ssNone;dkNumber;;False;30;№ п/п;;;;
+7;266;REG_DATE;REG_DATE;;Дата регистрации;Дата регистрации документа;;;;70;fsFindVisible,fsViewVisible,fsEditVisible,fsInOrderBy;lsNone;ssNone;dkDate;;False;80;;;;;
+7;267;REG_IND;REG_IND;;Исходящий индекс;Регистрационный индекс документа;;;;80;fsFindVisible,fsViewVisible,fsEditVisible,fsInOrderBy;lsNone;ssNone;dkString;;False;50;;;;;
+7;268;DELIV_KIND;DELIV_KIND;;Способ отправки;Способ отправки документа;;;DELIV_KIND;90;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;False;;;;;;
+7;269;SIGN_ORG;SIGN_ORG;;Идентификатор корреспондента;Идентификатор корреспондента;;SP_CORR;;100;fsEditVisible,fsViewVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+7;270;LOOKUP_SIGN_ORG;LOOKUP_SIGN_ORG;;Корреспондент;Автор (корреспондент);;SP_CORR;;110;fsFindVisible,fsViewVisible,fsEditVisible,fsInternal,fsLookup;lsLinkSpr;ssShowWindow;dkNumber;SIGN_ORG;False;;;;;;
+7;271;SIGN_NAME;SIGN_NAME;;Кому направлен документ;Кому направлен документ;;;;120;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;150;;;;;
+7;272;REQ_IND;REQ_IND;;Ответ на входящий №;Ответ на входящий документ (регистрационный индекс документа);;;;150;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkString;;False;;;;;;
+7;273;REQ_DATE;REQ_DATE;;Ответ на входящий от;Ответ на входящий документ (дата документа);;;;160;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;False;;;;;;
+7;274;DOC_KIND;DOC_KIND;;Вид документа;Наименование вида документа;;;DOC_KIND;170;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;False;;;;;;
+7;275;NUM_LIST;NUM_LIST;;Листов;Количество листов обращения;;;;180;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+7;276;NUM_APP;NUM_APP;;Приложений;Количество листов приложений;;;;190;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+7;277;CONTENT;CONTENT;;Краткое содержание;Заголовок (краткое содержание);;;;200;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;150;;;;;
+7;278;SUBJ_ID;SUBJ_ID;;Идентификатор тематики;Идентификатор тематики;;SP_SUBJ;;230;fsViewVisible,fsEditVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;100;;csEditMode;;nmOnlyName;nsShortName
+7;279;LOOKUP_SUBJ_ID;LOOKUP_SUBJ_ID;;Тематика;Тематика;;SP_SUBJ;;240;fsInternal,fsLookup,fsViewVisible,fsEditVisible,fsFindVisible;lsLinkSpr;ssShowWindow;dkNumber;SUBJ_ID;False;100;;;;;
+7;280;RES_MAN;RES_MAN;;Подписал;Кто подписал документ;;SP_OFFICIAL;;270;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+7;281;EXEC_MAN;EXEC_MAN;;Исполнитель;Исполнитель;;SP_OFFICIAL;;290;fsFindVisible,fsViewVisible,fsEditVisible;lsLinkSpr;ssPickList;dkNumber;;False;75;;;;;
+7;373;IDEN_TEXT;IDEN_TEXT;;Дополнительные корреспонденты;Дополнительные корреспонденты;;;;292;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;;Корреспонденты;;;;
+7;372;IDEN_DATE;IDEN_DATE;;Идентификаторы дополнительных корреспондентов;Идентификаторы корреспондентов;;;;293;fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+7;282;EXEC_DATE;EXEC_DATE;;Дата направления;Дата направления на рассмотрение и исполнение;;;;295;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;;;;;
+7;283;EXEC_TERM;EXEC_TERM;;Срок исполнения;Дата ожидаемого ответа;;;;300;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;;;;;
+7;284;EXEC_FACT;EXEC_FACT;;Дата исполнения;Дата получения ответа;;;;310;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;;;;;
+7;285;ANS_TEXT;ANS_TEXT;;Краткое содержание ответа;Краткое содержание ответа;;;;320;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;;Полученный ответ|Содержание;;;;
+7;286;ANS_DATE;ANS_DATE;;Дата ответа;Дата регистрации ответа;;;;330;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;Полученный ответ|Дата;;;;
+7;287;ANS_IND;ANS_IND;;Индекс ответа;Регистрационный индекс ответа;;;;340;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;45;Полученный ответ|Индекс;;;;
+7;288;REQ_CHECK;REQ_CHECK;;Контроль;Отметка о контроле;;;LOGICAL;350;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;False;55;;;;;
+7;289;CHECK_OUT;CHECK_OUT;;Снят с контроля;Документа снят с контроля или выполнен;;;;360;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkBoolean;;False;60;Снято с контроля;;;;
+7;290;CHECK_DATE;CHECK_DATE;;Дата снятия с контроля;Дата снятия с контроля;;;;370;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;True;;;;;;
+7;291;CHECK_MAN;CHECK_MAN;;Принял решении о снятии;Должностное лицо, принявшее решении о снятии с контроля;;SP_OFFICIAL;;380;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+7;292;IN_FILE;IN_FILE;;В дело;Документ находится в деле;;;;390;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+7;293;FILE_ID;FILE_ID;;Индекс дела;Индекс дела;;SP_FILELIST;;400;fsViewVisible,fsEditVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+7;294;LOOKUP_FILE_ID;LOOKUP_FILE_ID;;Индекс дела;Индекс дела;;SP_FILELIST2;;410;fsInternal,fsLookup,fsEditVisible,fsViewVisible,fsFindVisible;lsLinkSpr;ssShowWindow;dkNumber;FILE_ID;False;50;Индекс дела;;;;
+7;379;IN_DELO_DATE;IN_DELO_DATE;;Дата направления в дело;Дата направления в дело;;;;411;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;80;;;;;
+7;295;FILE_VOL;FILE_VOL;;Том;Номер тома;;;;420;fsEditVisible,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+7;296;FILE_LIST;FILE_LIST;;Лист;Номер листа;;;;430;fsEditVisible,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+7;297;FOLDER_ID;FOLDER_ID;;Папка;Папка пользователя, в которой находится документ;;SP_FOLDER;;440;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+7;298;GROUP_ID;GROUP_ID;;Группа документа;Идентификатор группы документов;;SP_DOCGROUP;;450;fsNotNull,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+7;299;LOOKUP_GROUP_ID;LOOKUP_GROUP_ID;;Группа;Наименование группы документов;;SP_DOCGROUP;;460;fsFindVisible,fsViewVisible,fsEditVisible,fsInternal,fsLookup,fsReadOnly;lsLinkSpr;ssShowWindow;dkNumber;GROUP_ID;True;;;;;;
+7;353;NOT_EXP;NOT_EXP;;Не учитывать;Не учитывать в статистике;;;;9999;fsNotNull,fsReadOnly,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+8;300;DOC_ID;DOC_ID;;Идентификатор;Идентификатор документа;;;;10;fsServerSide,fsNotNull,fsKeyField,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+8;301;DOC_TYPE;DOC_TYPE;;Тип документа;Тип документа;;;DOC_TYPE;20;fsNotNull,fsReadOnly,fsViewVisible;lsLinkEnum;ssNone;dkNumber;;True;;;;;;
+8;302;GROUP_KIND;GROUP_KIND;;Базовая группа документа;Вид базовой группы документов;;;GROUP_KIND;30;fsNotNull,fsReadOnly,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+8;303;SIGN_TYPE;SIGN_TYPE;;Вид подписи;Вид подписи заявления;;;SIGN_TYPE;40;fsViewVisible,fsEditVisible,fsNotNull;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+8;304;SIGN_NUM;SIGN_NUM;;Количество человек;Количество человек);;;;50;fsViewVisible,fsEditVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+8;305;ACC_ID;ACC_ID;;Идентификатор лицевого счета;Идентификатор лицевого счета;;;;60;fsViewVisible, fsEditVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+8;306;ACC_NUM;ACC_NUM;;Номер лицевого счета;Номер лицевого счета;;;;70;fsViewVisible, fsEditVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+8;307;REG_NUM;REG_NUM;;№ п/п;Регистрационный номер;;;;80;fsFindVisible,fsViewVisible,fsEditVisible,fsInOrderBy,fsNotNull;lsNone;ssNone;dkNumber;;False;30;№ п/п;;;;
+8;308;REG_IND;REG_IND;;Индекс;Регистрационный индекс;;;;90;fsFindVisible,fsViewVisible,fsEditVisible,fsInOrderBy,fsNotNull;lsNone;ssNone;dkString;;False;50;;;;;
+8;309;REG_DATE;REG_DATE;;Дата подачи заявления;Дата подачи заявления;;;;100;fsFindVisible,fsViewVisible,fsEditVisible,fsInOrderBy,fsNotNull;lsNone;ssNone;dkDate;;False;80;;;;;
+8;310;IN_DATE;IN_DATE;;Дата поступления;Дата поступления;;;;110;fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;True;80;;;;;
+8;311;APP_FORM;APP_FORM;;Форма подачи заявления;Форма подачи заявления;;;APP_FORM;120;fsFindVisible,fsViewVisible,fsEditVisible,fsNotNull;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+8;312;SIGN_KIND;SIGN_KIND;;Вид заявителя;Вид заявителя;;;SIGN_KIND1;130;fsFindVisible,fsEditVisible,fsViewVisible,fsNotNull;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+8;313;SIGN_ORG;SIGN_ORG;;Идентификатор юридического лица;Идентификатор юридического лица;;SP_CORR;;140;fsEditVisible,fsViewVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+8;314;SIGN_MAN;SIGN_MAN;;Идентификатор гражданина;Идентификатор гражданина;;;;150;fsEditVisible,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+8;315;SIGN_NAME;SIGN_NAME;;Заявитель;Заявитель;;;;160;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;150;;;;;
+8;316;ADR_PHONE;ADR_PHONE;;Контактный телефон;Контактный телефон;;;;170;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkString;;True;;;;;;
+8;317;ADR_ID;ADR_ID;;Идентификатор адреса;Идентификатор адреса;;;;180;fsViewVisible,fsEditVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+8;318;ADR_TEXT;ADR_TEXT;;Адрес заявителя;Адрес заявителя;;;;190;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;100;;;;;
+8;319;APP_KIND;APP_KIND;;Вид обращения;Вид обращения;;;APP_KIND1;200;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;True;;;;;;
+8;320;NUM_LIST;NUM_LIST;;Листов;Количество листов заявления;;;;210;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+8;321;NUM_APP;NUM_APP;;Документов;Количество листов документов, представленных заинтересованным лицом;;;;220;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+8;322;IS_REPEAT;IS_REPEAT;;Повторное заявление;Повторное заявление;;;;230;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;False;55;Повторно;;;;
+8;323;REPEAT_TEXT;REPEAT_TEXT;;Даты, индексы повторных заявлений;Даты, индексы повторных заявлений;;;;240;fsFindVisible,fsViewVisible,fsEditVisible,fsReadOnly;lsNone;ssNone;dkString;;True;;;;;;
+8;324;CONTENT;CONTENT;;Административная процедура;Наименование административной процедуры;;;;250;fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;150;;;;;
+8;348;ADM_PROC;ADM_PROC;;Административная процедура;Административная процедура;;SP_ADMPROC2;;251;fsFindVisible,fsEditVisible;lsLinkSpr;ssPickList;dkNumber;;False;150;;;;;
+8;355;ADM_PROC_R;;;Административная процедура;Административная процедура;;;;252;fsViewVisible;lsNone;ssNone;dkString;;False;150;;;;;
+8;325;EXEC_MAN;EXEC_MAN;;Исполнитель;Исполнитель;;SP_OFFICIAL;;260;fsFindVisible,fsViewVisible,fsEditVisible;lsLinkSpr;ssPickList;dkNumber;;False;75;;;;;
+8;326;EXEC_TERM;EXEC_TERM;;Срок исполнения;Срок исполнения;;;;270;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;;;;;
+8;327;EXEC_ORG;EXEC_ORG;;Заявление направлено в;Организация, в которую направлено заявление;;SP_CORR;;280;fsViewVisible,fsEditVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+8;328;LOOKUP_EXEC_ORG;LOOKUP_EXEC_ORG;;Заявление направлено в;Организация, в которую направлено заявление;;SP_CORR;;290;fsInternal,fsLookup,fsViewVisible,fsEditVisible,fsFindVisible;lsLinkSpr;ssShowWindow;dkNumber;EXEC_ORG;False;;Направлен на исполнение;;;;
+8;329;EXEC_DATE;EXEC_DATE;;Дата направления;Дата направления заявления;;;;300;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;;;;;
+8;330;ANS_KIND;ANS_KIND;;Вид решения;Вид принятого административного решения;;;ANS_KIND1;310;fsFindVisible,fsViewVisible,fsEditVisible;lsLinkEnum;ssPickList;dkNumber;;False;;Результат рассмотрения обращения|Результат;;;;
+8;331;ANS_DATE;ANS_DATE;;Дата принятого решения;Дата принятого административного решения;;;;320;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;70;Результат рассмотрения обращения|Дата;;;;
+8;332;ANS_IND;ANS_IND;;Номер принятого решения;Номер принятого административного решения;;;;330;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;45;Результат рассмотрения обращения|Индекс;;;;
+8;333;ANS_TEXT;ANS_TEXT;;Краткое содержание принятого решения;Результат принятого административного решения;;;;340;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;;Результат рассмотрения обращения|Содержание;;;;
+8;334;DELIV_KIND;DELIV_KIND;;Способ доставки;Способ доставки уведомления о принятом решении;;;DELIV_KIND1;350;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;False;;;;;;
+8;335;RES_DATE;RES_DATE;;Дата направления (получения);Дата направления (получения) уведомления;;;;360;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;True;;;;;;
+8;336;REQ_CHECK;REQ_CHECK;;Контроль;Контроль;;;LOGICAL;370;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkEnum;ssPickList;dkNumber;;False;55;;;;;
+8;337;CHECK_OUT;CHECK_OUT;;Снят с контроля;Снят с контроля;;;;380;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkBoolean;;False;60;Снято с контроля;;;;
+8;338;CHECK_DATE;CHECK_DATE;;Дата снятия с контроля;Дата снятия с контроля;;;;390;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkDate;;True;;;;;;
+8;339;CHECK_MAN;CHECK_MAN;;Принял решении о снятии;Должностное лицо, принявшее решении о снятии с контроля;;SP_OFFICIAL;;400;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+8;340;IN_FILE;IN_FILE;;В дело;В дело;;;;410;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+8;341;FILE_ID;FILE_ID;;Индекс дела;Индекс дела;;SP_FILELIST;;420;fsViewVisible,fsEditVisible;lsLinkSpr;ssShowWindow;dkNumber;;True;;;;;;
+8;342;LOOKUP_FILE_ID;LOOKUP_FILE_ID;;Индекс дела;Индекс дела;;SP_FILELIST2;;430;fsInternal,fsLookup,fsEditVisible,fsViewVisible,fsFindVisible;lsLinkSpr;ssShowWindow;dkNumber;FILE_ID;False;50;Индекс дела;;;;
+8;343;FILE_VOL;FILE_VOL;;Том;Номер тома;;;;440;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+8;344;FILE_LIST;FILE_LIST;;Лист;Номер листа;;;;450;fsFindVisible,fsEditVisible,fsViewVisible;lsNone;ssNone;dkNumber;;True;;;;;;
+8;345;FOLDER_ID;FOLDER_ID;;Папка;Папка пользователя, в которой находится документ;;SP_FOLDER;;460;fsFindVisible,fsEditVisible,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+8;346;GROUP_ID;GROUP_ID;;Группа документа;Идентификатор группы документов;;SP_DOCGROUP;;470;fsNotNull,fsViewVisible;lsLinkSpr;ssPickList;dkNumber;;True;;;;;;
+8;347;LOOKUP_GROUP_ID;LOOKUP_GROUP_ID;;Группа;Наименование группы документов;;SP_DOCGROUP;;480;fsFindVisible,fsViewVisible,fsEditVisible,fsInternal,fsLookup,fsReadOnly;lsLinkSpr;ssShowWindow;dkNumber;GROUP_ID;True;;;;;;
+8;363;PROV_TYPE;PROV_TYPE;;Тип документа;Тип документа;Документ, удостоверяющий личность;;PROV_TYPE;490;fsFindVisible,fsViewVisible,fsEditVisible;lsLinkEnum;ssPickList;dkNumber;;False;60;Документ, удостоверяющий личность|Тип;;;;
+8;364;PROV_SER;PROV_SER;;Серия;Серия;Документ, удостоверяющий личность;;;500;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;45;Документ, удостоверяющий личность|Серия;;;;
+8;365;PROV_NUM;PROV_NUM;;Номер;Номер;Документ, удостоверяющий личность;;;510;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;45;Документ, удостоверяющий личность|Номер;;;;
+8;366;PROV_DATE;PROV_DATE;;Дата выдачи;Дата выдачи;Документ, удостоверяющий личность;;;520;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkDate;;False;80;Документ, удостоверяющий личность|Дата;;;;
+8;367;PROV_ORG;PROV_ORG;;Орган выдачи;Орган выдачи;Документ, удостоверяющий личность;;;530;fsFindVisible,fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;False;90;Документ, удостоверяющий личность|Орган выдачи;;;;
+8;368;PERSON_ID;PERSON_ID;;Номер идентификации;Номер идентификации;;;;540;fsViewVisible,fsEditVisible;lsNone;ssNone;dkString;;True;;;;;;
+8;354;NOT_EXP;NOT_EXP;;Не учитывать;Не учитывать в статистике;;;;9999;fsNotNull,fsReadOnly,fsViewVisible;lsNone;ssNone;dkBoolean;;True;;;;;;
+
+[FIND_OPER]
+@@FILE VERSION@@;251
+@@TABLEDEF START@@
+Name=String,30,"Name","",30,Data,""
+Caption=String,50,"Caption","",50,Data,""
+SQL=String,300,"SQL","",300,Data,""
+FieldKinds=String,50,"FieldKinds","",50,Data,""
+NeedValue=Boolean,0,"NeedValue","",1,Data,""
+TwoValue=Boolean,0,"TwoValue","",1,Data,""
+IgnoreCase=Boolean,0,"IgnoreCase","",1,Data,""
+MultiSel=Boolean,0,"MultiSel","",1,Data,""
+MultiOr=Boolean,0,"MultiOr","",1,Data,""
+Order=Integer,0,"Order","",10,Data,""
+Visible=Boolean,0,"Visible","",1,Data,""
+OwnValue=Boolean,0,"OwnValue","",1,Data,""
+OwnValName=String,100,"OwnValName","",100,Data,""
+OwnValKind=String,50,"OwnValKind","",50,Data,""
+SprName=String,50,"SprName","",50,Data,""
+@@INDEXDEF START@@
+indPrimary=NAME,indPrimary,UNIQ
+indOrder=ORDER,indOrder
+@@INDEXDEF END@@
+@@TABLEDEF END@@
+Name;Caption;SQL;FieldKinds;NeedValue;TwoValue;IgnoreCase;MultiSel;MultiOr;Order;Visible;OwnValue;OwnValName;OwnValKind;SprName
+EQUAL_D;равен;%%s='%%s';DATE;True;False;False;True;True;1;True;False;;;
+EQUAL_D_P;равен;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_DATE)='%%5:s');DATE,PROP;True;False;False;True;True;1;True;False;;;
+EQUAL_D_R;равен;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s='%%4:s');DATE,REL;True;False;False;True;True;1;True;False;;;
+EQUAL_L;равен;%%s=%%s;BOOLEAN;True;False;False;True;False;1;True;False;;;
+EQUAL_L_P;равен;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND %%4:s='%%5:s');BOOLEAN,PROP;True;False;False;True;False;1;True;False;;;
+EQUAL_L_R;равен;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s=%%4:s);BOOLEAN,REL;True;False;False;True;False;1;True;False;;;
+EQUAL_N;равен;%%s=%%s;NUMBER,FLOAT,SPR;True;False;False;True;True;1;True;False;;;
+EQUAL_N_P;равен;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_NUMERIC)=%%5:s);NUMBER,FLOAT,SPR,PROP;True;False;False;True;True;1;True;False;;;
+EQUAL_N_R;равен;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s=%%4:s);NUMBER,FLOAT,SPR,REL;True;False;False;True;True;1;True;False;;;
+EQUAL_S;равен;%%s='%%s';STRING,SPR;True;False;False;True;True;1;True;False;;;
+EQUAL_S_P;равен;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND %%4:s='%%5:s');STRING,SPR,PROP;True;False;False;True;True;1;True;False;;;
+EQUAL_S_R;равен;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s='%%4:s');STRING,SPR,REL;True;False;False;True;True;1;True;False;;;
+FTS;содержит слова;contains(%%s, '%%s');STRING,FTS;True;False;False;True;True;1;True;False;;;
+EXISTS;содержит значения;exists (select * from %%0:s %%1:s where %%2:s ^$^);LIST;False;False;False;False;False;1;True;False;;;
+NOT_EXISTS;не содержит значения;not exists (select * from %%0:s %%1:s where %%2:s ^$^);LIST;False;False;False;False;False;2;True;False;;;
+NOT_EQUAL_D;не равен;%%s<>'%%s';DATE;True;False;False;True;False;2;True;False;;;
+NOT_EQUAL_D_P;не равен;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_DATE)<>'%%5:s');DATE,PROP;True;False;False;True;False;2;True;False;;;
+NOT_EQUAL_D_R;не равен;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<>'%%4:s');DATE,REL;True;False;False;True;False;2;True;False;;;
+NOT_EQUAL_S;не равен;%%s<>'%%s';STRING,SPR;True;False;False;True;False;2;True;False;;;
+NOT_EQUAL_S_P;не равен;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND %%4:s<>'%%5:s');STRING,SPR,PROP;True;False;False;True;False;2;True;False;;;
+NOT_EQUAL_S_R;не равен;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<>'%%4:s');STRING,SPR,REL;True;False;False;True;False;2;True;False;;;
+NOT_EQUAL_L;не равен;%%s<>%%s;BOOLEAN;True;False;False;True;False;2;False;False;;;
+NOT_EQUAL_L_P;не равен;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND %%4:s<>'%%5:s');BOOLEAN,PROP;True;False;False;True;False;2;False;False;;;
+NOT_EQUAL_L_R;не равен;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<>%%4:s);BOOLEAN,REL;True;False;False;True;False;2;False;False;;;
+NOT_EQUAL_N;не равен;%%s<>%%s;NUMBER,FLOAT,SPR;True;False;False;True;False;2;True;False;;;
+NOT_EQUAL_N_P;не равен;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_NUMERIC)<>%%5:s);NUMBER,FLOAT,SPR,PROP;True;False;False;True;False;2;True;False;;;
+NOT_EQUAL_N_R;не равен;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<>%%4:s);NUMBER,FLOAT,SPR,REL;True;False;False;True;False;2;True;False;;;
+COUNT_EQUAL_L;в количестве равном;exists (select count(*) from %%0:s %%1:s where %%2:s ^$^ group by %%3:s having count(*)=%%4:s);LIST;True;False;False;False;False;3;True;False;;;
+COUNT_NOT_EQUAL_L;в количестве не равном;exists (select count(*) from %%0:s %%1:s where %%2:s ^$^ group by %%3:s having count(*)<>%%4:s);LIST;True;False;False;False;False;4;True;False;;;
+EMPTY_DB;пустой;%%s is null;DATE,BOOLEAN,NULL;False;False;False;True;False;10;True;False;;;
+EMPTY_DB_P;пустой;not exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s');DATE,BOOLEAN,PROP,NULL;False;False;False;True;False;10;True;False;;;
+EMPTY_DB_R;пустой;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s is null);DATE,BOOLEAN,REL,NULL;False;False;False;True;False;10;True;False;;;
+EMPTY_N;пустой;%%s is null;NUMBER,FLOAT,SPR,NULL;False;False;False;True;False;10;True;False;;;
+EMPTY_N_R;пустой;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s is null);NUMBER,FLOAT,SPR,REL,NULL;False;False;False;True;False;10;True;False;;;
+EMPTY_S;пустой;(%%0:s='' OR %%0:s is null);STRING,TEXT,SPR,NULL;False;False;True;True;False;10;True;False;;;
+EMPTY_S_R;пустой;exists (select * from %%0:s %%1:s where %%2:s AND (%%3:s='' OR %%3:s is null));STRING,TEXT,SPR,REL,NULL;False;False;True;True;False;10;True;False;;;
+EMPTY_SN_P;пустой;not exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s');NUMBER,FLOAT,STRING,TEXT,SPR,PROP,NULL;False;False;True;True;False;10;True;False;;;
+NOT_EMPTY_DB;не пустой;%%s is not null;DATE,BOOLEAN,NULL;False;False;False;True;False;11;True;False;;;
+NOT_EMPTY_DB_P;не пустой;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s');DATE,BOOLEAN,PROP,NULL;False;False;False;True;False;11;True;False;;;
+NOT_EMPTY_DB_R;не пустой;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s is not null);DATE,BOOLEAN,REL,NULL;False;False;False;True;False;11;True;False;;;
+NOT_EMPTY_N;не пустой;%%s is not null;NUMBER,FLOAT,SPR,NULL;False;False;False;True;False;11;True;False;;;
+NOT_EMPTY_N_R;не пустой;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s is not null);NUMBER,FLOAT,SPR,REL,NULL;False;False;False;True;False;11;True;False;;;
+NOT_EMPTY_S;не пустой;%%0:s<>'' AND %%0:s is not null;STRING,TEXT,SPR,NULL;False;False;True;True;False;11;True;False;;;
+NOT_EMPTY_S_R;не пустой;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<>'' AND %%3:s is not null);STRING,TEXT,SPR,REL,NULL;False;False;True;True;False;11;True;False;;;
+NOT_EMPTY_SN_P;не пустой;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s');NUMBER,FLOAT,STRING,TEXT,SPR,PROP,NULL;False;False;True;True;False;11;True;False;;;
+COUNT_GREAT_L;в количестве больше;exists (select count(*) from %%0:s %%1:s where %%2:s ^$^ group by %%3:s having count(*)>%%4:s);LIST;True;False;False;False;False;20;True;False;;;
+GREAT_D;больше;%%s>'%%s';DATE;True;False;False;False;False;20;True;False;;;
+GREAT_D_R;больше;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s>'%%4:s');DATE,REL;True;False;False;False;False;20;True;False;;;
+GREAT_D_P;больше;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_DATE)>'%%5:s');DATE,PROP;True;False;False;False;False;20;True;False;;;
+GREAT_N_P;больше;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_NUMERIC)>%%5:s);NUMBER,FLOAT,PROP;True;False;False;False;False;20;True;False;;;
+GREAT_N;больше;%%s>%%s;NUMBER,FLOAT;True;False;False;False;False;20;True;False;;;
+GREAT_N_R;больше;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s>%%4:s);NUMBER,FLOAT,REL;True;False;False;False;False;20;True;False;;;
+COUNT_GREAT_EQUAL_L;в количестве больше или равном;exists (select count(*) from %%0:s %%1:s where %%2:s ^$^ group by %%3:s having count(*)>=%%4:s);LIST;True;False;False;False;False;21;True;False;;;
+GREAT_EQUAL_D;больше или равен;%%s>='%%s';DATE;True;False;False;False;False;21;True;False;;;
+GREAT_EQUAL_D_R;больше или равен;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s>='%%4:s');DATE,REL;True;False;False;False;False;21;True;False;;;
+GREAT_EQUAL_D_P;больше или равен;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_DATE)>='%%5:s');DATE,PROP;True;False;False;False;False;21;True;False;;;
+GREAT_EQUAL_N;больше или равен;%%s>=%%s;NUMBER,FLOAT;True;False;False;False;False;21;True;False;;;
+GREAT_EQUAL_N_R;больше или равен;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s>=%%4:s);NUMBER,FLOAT,REL;True;False;False;False;False;21;True;False;;;
+GREAT_EQUAL_N_P;больше или равен;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_NUMERIC)>=%%5:s);NUMBER,FLOAT,PROP;True;False;False;False;False;21;True;False;;;
+COUNT_LOWER_L;в количестве меньше;exists (select count(*) from %%0:s %%1:s where %%2:s ^$^ group by %%3:s having count(*)<%%4:s);LIST;True;False;False;False;False;30;True;False;;;
+LOWER_D;меньше;%%s<'%%s';DATE;True;False;False;False;False;30;True;False;;;
+LOWER_D_R;меньше;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<'%%4:s');DATE,REL;True;False;False;False;False;30;True;False;;;
+LOWER_D_P;меньше;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_DATE)<'%%5:s');DATE,PROP;True;False;False;False;False;30;True;False;;;
+LOWER_N;меньше;%%s<%%s;NUMBER,FLOAT;True;False;False;False;False;30;True;False;;;
+LOWER_N_R;меньше;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<%%4:s);NUMBER,FLOAT,REL;True;False;False;False;False;30;True;False;;;
+LOWER_N_P;меньше;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_NUMERIC)<%%5:s);NUMBER,FLOAT,PROP;True;False;False;False;False;30;True;False;;;
+COUNT_LOWER_EQUAL_L;в количестве меньше или равном;exists (select count(*) from %%0:s %%1:s where %%2:s ^$^ group by %%3:s having count(*)<=%%4:s);LIST;True;False;False;False;False;31;True;False;;;
+LOWER_EQUAL_D;меньше или равен;%%s<='%%s';DATE;True;False;False;False;False;31;True;False;;;
+LOWER_EQUAL_D_R;меньше или равен;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<='%%4:s');DATE,REL;True;False;False;False;False;31;True;False;;;
+LOWER_EQUAL_D_P;меньше или равен;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_DATE)<='%%5:s');DATE,PROP;True;False;False;False;False;31;True;False;;;
+LOWER_EQUAL_N;меньше или равен;%%s<=%%s;NUMBER,FLOAT;True;False;False;False;False;31;True;False;;;
+LOWER_EQUAL_N_R;меньше или равен;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<=%%4:s);NUMBER,FLOAT,REL;True;False;False;False;False;31;True;False;;;
+LOWER_EQUAL_N_P;меньше или равен;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_NUMERIC)<=%%5:s);NUMBER,FLOAT,PROP;True;False;False;False;False;31;True;False;;;
+LIKE;содержит;%%s like '%%%%%%s%%%%' ;STRING,TEXT;True;False;False;False;False;40;True;False;;;
+LIKE_R;содержит;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s like '%%%%%%4:s%%%%');STRING,TEXT,REL;True;False;False;False;False;40;True;False;;;
+LIKE_P;содержит;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND %%4:s like '%%%%%%5:s%%%%');STRING,TEXT,SPR,PROP;True;False;False;False;False;40;True;False;;;
+NOT_LIKE;не содержит;not (%%s like '%%%%%%s%%%%' );STRING,TEXT;True;False;False;False;False;41;True;False;;;
+NOT_LIKE_R;не содержит;exists (select * from %%0:s %%1:s where %%2:s AND not (%%3:s like '%%%%%%4:s%%%%'));STRING,TEXT,REL;True;False;False;False;False;41;True;False;;;
+NOT_LIKE_P;не содержит;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND not (%%4:s like '%%%%%%5:s%%%%'));STRING,TEXT,SPR,PROP;True;False;False;False;False;41;True;False;;;
+BEGIN;начинается с;%%s like '%%s%%%%';STRING,TEXT;True;False;False;False;False;42;True;False;;;
+BEGIN_P;начинается с;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND %%4:s like '%%5:s%%%%');STRING,TEXT,PROP;True;False;False;False;False;42;True;False;;;
+BEGIN_R;начинается с;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s like '%%4:s%%%%');STRING,TEXT,REL;True;False;False;False;False;42;True;False;;;
+END;оканчивается на;%%s like '%%%%%%s';STRING,TEXT;True;False;False;False;False;43;True;False;;;
+END_R;оканчивается на;exists (select * from %%0:s %%1:s where %%2:s AND %%3:s like '%%%%%%4:s');STRING,TEXT,REL;True;False;False;False;False;43;True;False;;;
+END_P;оканчивается на;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND %%4:s like '%%%%%%5:s');STRING,TEXT,PROP;True;False;False;False;False;43;True;False;;;
+BETWEEN_D;между;(%%s BETWEEN '%%1s' AND '%%s');DATE;True;True;False;False;False;50;True;False;;;
+BETWEEN_D_P;между;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND (CAST(%%4:s AS SQL_DATE) BETWEEN '%%5:s' AND '%%6:s'));DATE,PROP;True;True;False;False;False;50;True;False;;;
+BETWEEN_D_R;между;exists (select * from %%0:s %%1:s where %%2:s AND (%%3:s BETWEEN '%%4:s' AND '%%5:s'));DATE,REL;True;True;False;False;False;50;True;False;;;
+BETWEEN_N;между;(%%s BETWEEN %%1s AND %%s);NUMBER,FLOAT;True;True;False;False;False;50;True;False;;;
+BETWEEN_N_P;между;exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND (CAST(%%4:s AS SQL_NUMERIC) BETWEEN %%5:s AND %%6:s));NUMBER,FLOAT,PROP;True;True;False;False;False;50;True;False;;;
+BETWEEN_N_R;между;exists (select * from %%0:s %%1:s where %%2:s AND (%%3:s BETWEEN %%4:s AND %%5:s));NUMBER,FLOAT,REL;True;True;False;False;False;50;True;False;;;
+USER_OP_NF_1;меньше чем за предыдущий период;;NUMBER,FLOAT,PROP;True;False;False;False;False;100;False;True;Год;NUMBER;YEAR
+USER_OP_D_2;меньше чем за предыдущий период;;DATE,PROP;True;False;False;False;False;100;False;True;Год;NUMBER;YEAR
+

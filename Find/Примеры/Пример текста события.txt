@@ -1,0 +1,10 @@
+FFilterInterface.OnUserOperEvent:=OnUserOper;
+
+
+function <???>.OnUserOper(Oper: TOperItem; FindField: TFindFieldItem; RelItem: TRelItem; FullFieldName, Value1, Value2, OperVal: string; var Expr: string): Boolean;
+begin
+   Result:=False;
+   if (FindField<>nil) and (FindField.Name='LIC_ID') and (Oper.Name='EQUAL_L') then begin
+      Expr:=Format('case when %0:s is null or %0:s=0 then false else true end=%1:s', [FullFieldName, Value1])
+   end;
+end;

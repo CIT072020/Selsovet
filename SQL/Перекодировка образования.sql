@@ -1,0 +1,23 @@
+update АктыРождений set on_obraz=4 where on_obraz=2;
+update АктыРождений set on_obraz=2 where on_obraz=3;
+update АктыРождений set ona_obraz=4 where ona_obraz=2;
+update АктыРождений set ona_obraz=2 where ona_obraz=3;
+update AktAdopt set on_obraz=4 where on_obraz=2;
+update AktAdopt set on_obraz=2 where on_obraz=3;
+update AktTermMarriage set on_obraz=4 where on_obraz=2;
+update AktTermMarriage set on_obraz=2 where on_obraz=3;
+update ЗаключениеБраков set on_obraz=4 where on_obraz=2;
+update ЗаключениеБраков set on_obraz=2 where on_obraz=3;
+update AktAdopt set ona_obraz=4 where ona_obraz=2;
+update AktAdopt set ona_obraz=2 where ona_obraz=3;
+update AktTermMarriage set ona_obraz=4 where ona_obraz=2;
+update AktTermMarriage set ona_obraz=2 where ona_obraz=3;
+update ЗаключениеБраков set ona_obraz=4 where ona_obraz=2;
+update ЗаключениеБраков set ona_obraz=2 where ona_obraz=3;
+update АктыСмертей set obraz=4 where obraz=2;
+update АктыСмертей set obraz=2 where obraz=3;
+update ТалоныПрибытия set obraz=4 where obraz=2;
+update ТалоныПрибытия set obraz=2 where obraz=3;
+update Население set obraz=4 where obraz=2;
+update Население set obraz=2 where obraz=3;
+

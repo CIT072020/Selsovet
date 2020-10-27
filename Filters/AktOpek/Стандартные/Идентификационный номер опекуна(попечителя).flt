@@ -1,0 +1,26 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Идентификационный номер опекуна(попечителя)
+1
+1,"0"
+2,PARAM,401,146,96,,111
+1
+1
+3,PROP,FLD_ON_IDENTIF,EQUAL_S,"fikAnd,fikFirst",0,1,1,1,dkFull
+1,VALUE,valString,1,22232323232,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+9
+1,FIELDS_CTRL,1
+1,FLD_ON_IDENTIF,1
+1,CONTROLS,3
+1,CTRL,TStaticText,laName1_dc8fd726af72320c9f754edfd0e4c9d1_1,"Название поля","sbParam"
+PROPS,"Caption=Идентификационный номер опекуна(попечителя)",Top=2,Left=27,Width=294,Height=17
+1,CTRL,TStaticText,laOp1_dc8fd726af72320c9f754edfd0e4c9d1_1,"Название операции","sbParam"
+PROPS,Top=22,Left=10,Width=34,Height=17,Visible=False
+1,CTRL,TEdit,edText1_dc8fd726af72320c9f754edfd0e4c9d1_1,"Ввод значения","sbParam"
+PROPS,Top=20,Left=29,Width=230,Height=21

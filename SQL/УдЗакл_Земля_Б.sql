@@ -1,0 +1,4 @@
+DELETE FROM БазаСвойствОбъектов
+  WHERE date_fiks='1899-12-30' and 
+  (POKAZ='POSEV' or POKAZ='POSEV_ZERN' or POKAZ='POSEV_KART' or POKAZ='POSEV_OV' or  
+   POKAZ='POSEV_OVZ' or POKAZ='POSEV_KORM' or POKAZ='POSEV_TRAV')

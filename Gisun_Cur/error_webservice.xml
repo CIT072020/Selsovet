@@ -1,0 +1,45 @@
+----------------------------------------------------------------
+<ns3:error_list>
+  <ns3:error>
+     <ns3:error_code>
+       <ns2:code>08</ns2:code>
+       <ns2:active>true</ns2:active>
+     </ns3:error_code>
+     <ns3:error_place>IP: 178.172.245.113</ns3:error_place>
+     <ns3:check_name>Ошибка авторизации</ns3:check_name>
+     <ns3:description>Неверное имя пользователя/пароль/IP</ns3:description>
+  </ns3:error>
+</ns3:error_list>
+
+----------------------------------------------------------------
+<ns3:error_list>
+  <ns3:error>
+     <ns3:error_code>
+       <ns2:code>05</ns2:code>
+       <ns2:type>-20</ns2:type>
+       <ns2:lexema>
+          <ns2:value lang="ru">Данные по лицу не найдены</ns2:value>
+       </ns2:lexema>
+       <ns2:active>true</ns2:active>
+     </ns3:error_code>
+     <ns3:wrong_value>ИВНОВ ИВАН ИВНОВИЧ 19600101</ns3:wrong_value>
+  </ns3:error>
+</ns3:error_list>
+
+-----------------------------------------------------------------
+<ns3:error_list>
+  <ns3:error>
+    <ns3:error_code>
+      <ns2:code>05</ns2:code>
+      <ns2:type>-20</ns2:type> 
+      <ns2:lexema>
+        <ns2:value lang="ru">Данные по лицу не найдены</ns2:value>
+      </ns2:lexema>
+      <ns2:active>true</ns2:active>
+    </ns3:error_code>
+    <ns3:error_place>{0713F6CD-00CC-49E9-9F36-CC5D3D541CB3}</ns3:error_place>
+    <ns3:wrong_value>3061154A020PB6</ns3:wrong_value>
+  </ns3:error>
+</ns3:error_list>
+
+

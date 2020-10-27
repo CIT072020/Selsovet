@@ -1,0 +1,162 @@
+function floattostr(e: extended): string;<br>
+function inttostr(i: Longint): string;   <br>
+function strtoint(s: string): Longint;<br>
+function strtointdef(s: string; def: Longint): Longint;<br>
+function copy(s: string; ifrom, icount: Longint): string;<br>
+function pos(substr, s: string): Longint;<br>
+procedure delete(var s: string; ifrom, icount: Longint);<br>
+procedure insert(s: string; var s2: string; ipos: Longint);<br>
+function getarraylength(var v: array): Integer;<br>
+procedure setarraylength(var v: array; i: Integer);<br>
+Function StrGet(var S : String; I : Integer) : Char;<br>
+procedure StrSet(c : Char; I : Integer; var s : String);<br>
+Function Uppercase(s : string) : string;<br>
+Function Lowercase(s : string) : string;<br>
+Function AnsiUppercase(s : string) : string;<br>
+Function AnsiLowercase(s : string) : string;<br>
+Function Trim(s : string) : string;<br>
+Function Length(s : String) : Longint;<br>
+procedure SetLength(var S: String; L: Longint);<br>
+Function Sin(e : Extended) : Extended;<br>
+Function Cos(e : Extended) : Extended;<br>
+Function Sqrt(e : Extended) : Extended;<br>
+Function Round(e : Extended) : Longint;<br>
+Function Trunc(e : Extended) : Longint;<br>
+Function Int(e : Extended) : Extended;<br>
+Function Pi : Extended;<br>
+Function Abs(e : Extended) : Extended;<br>
+function StrToFloat(s: string): Extended;<br>
+Function FloatToStr(e : Extended) : String;<br>
+Function Padl(s : string;I : longInt) : string;<br>
+Function Padr(s : string;I : longInt) : string;<br>
+Function Padz(s : string;I : longInt) : string;<br>
+Function Replicate(c : char;I : longInt) : string;<br>
+Function StringOfChar(c : char;I : longInt) : string;<br>
+function StrToInt64(s: string): int64; // only when int64 is available<br>
+function Int64ToStr(i: Int64): string; // only when int64 is available<br>
+function SizeOf(c: const): Longint;<br>
+
+функции работы датой
+--------------------
+function EncodeDate(Year, Month, Day: Word): TDateTime;<br>
+function EncodeTime(Hour, Min, Sec, MSec: Word): TDateTime;<br>
+function TryEncodeDate(Year, Month, Day: Word; out Date: TDateTime): Boolean;<br>
+function TryEncodeTime(Hour, Min, Sec, MSec: Word; out Time: TDateTime): Boolean;<br>
+procedure DecodeDate(const DateTime: TDateTime; var Year, Month, Day: Word);<br>
+procedure DecodeTime(const DateTime: TDateTime; var Hour, Min, Sec, MSec: Word);<br>
+function DayOfWeek(const DateTime: TDateTime): Word;<br>
+function Date: TDateTime;<br>
+function Time: TDateTime;<br>
+function Now: TDateTime;<br>
+function DateTimeToUnix(D: TDateTime): Int64;<br>
+function UnixToDateTime(U: Int64): TDateTime;<br>
+function DateToStr(D: TDateTime): string;<br>
+function StrToDate(const s: string): TDateTime;<br>
+function FormatDateTime(const fmt: string; D: TDateTime): string;<br>
+
+функции работы с базой
+----------------------
+function dbGetIndex( ds : TDataSet ) : String;');
+function dbSetIndex( ds : TDataSet; strNameIndex : String) : Boolean;');
+function dbGetDataSet( strName : String) : TDataSet;');
+function dbFindKey( ds : TDataSet; arrKey : TVariantArray; lHard : Boolean) : Boolean;');
+function dbLocate( ds : TDataSet; strFields : String; arrKey : TVariantArray; opt : String) : Boolean;');
+function dbOpenSQL( strSQL  : String; strProp : String) : TDataSet;');
+function dbOpen( strTableName : String; strProp : String) : TDataSet;');
+procedure dbClose( ds : TDataSet);');
+procedure dbEmptyTable( ds : TDataSet );');
+function dbZap( ds : TDataSet ) : Boolean;');
+procedure dbCopyRecord( FromDataSet : TDataSet; ToDataSet : TDataSet; lCheckNameField : Boolean);');
+procedure dbAppendRecord( FromDataSet : TDataSet; ToDataSet : TDataSet; lCheckNameField : Boolean);');
+function dbExecuteSQL( strSQL : String) : Boolean);');
+
+function dbLastError() : String;');
+
+function dbRegisterConnect( strCompName : String; strProp : String) : String;');
+function dbSetCurrentConnect( strID : String) : Boolean;');
+procedure dbSetPropertyConnect( strID : String; strProp : String);');
+function  dbOpenConnect( strNameConn : String; strPropConn : String ) : String;');
+function dbCloseConnect( strID : String) : Boolean;');
+
+function dbCreateMemTable( strFields : String; strIndex : String) : TDataSet;');
+procedure dbEmptyMemTable( ds : TDataSet );');
+procedure dbSortMemTable( ds : TDataSet; strFields : String; strOpt : String );');
+procedure dbSetAutoIncMinValue( ds : TDataSet; n : Integer);');
+
+procedure dbEdit( ds : TDataSet );');
+procedure dbPost( ds : TDataSet );');
+function dbChangeSQL( ds : TDataSet; strSQL : String; lReopen : Boolean) : Boolean;');
+function dbSetParamSQL( ds : TDataSet; strParamName : String; Value : Variant) : Boolean;');
+procedure dbSetRange( ds : TDataSet; arrKey : TArrVariant);');
+procedure dbEditRange( ds : TDataSet; arrKey : TArrVariant);');
+procedure dbCancelRange( ds : TDataSet);');
+
+мои функции
+-----------
+procedure ShowMessage( strMess : String);');
+function Problem( strMess : String) : Boolean;');
+procedure PutError( strMess : String);');
+procedure Beep;');
+procedure CreateProgress(strName : String; strPodp : String; nCount : Integer);');
+procedure ChangeProgress(nCount : Integer; strPodp : String);');
+procedure CloseProgress;');
+procedure ChangeProgress2Text(nCount : Integer; strPodp : String);');
+procedure ChangeProgress2Pos(nCount : Integer);');
+procedure Delay(nCount : Integer);');
+
+function Parameters(strNamePar : String) : String;');
+function ParamAsInteger(strNamePar : String) : Integer;');
+function ParamAsDate(strNamePar : String) : TDateTime;');
+function ParamAsBoolean(strNamePar : String) : Boolean;');
+function ParameAsName(strNamePar : String) : String;');
+
+function  xRound(nValue : Extended; iCount : Integer) : Extended;');
+function  AutoRound(nValue : Extended) : Extended;');
+function  RoundValut(nValue : Extended; strKod : String) : Extended;');
+function  ValueRound(strKod : String) : Integer;');
+function  QStr( s : String) : String;');
+function  QIdent( s : String) : String;');
+
+procedure SetGlobalString(strNameVar : String; Value : String)
+procedure SetGlobalVar(strNameVar : String; Value : Variant)
+function GetGlobalVar(strNameVar : String) : Variant)
+
+procedure ClearReports
+procedure AddReport( strName : String; strFile : String)
+function CountReports : Integer
+function ReportName( n : Integer ) : String
+function ReportFile( n : Integer ) : String
+
+procedure SetGlobalFlat( l : Boolean )
+procedure SetGlobalStepY( n : Integer )
+
+procedure SetScreenCursor( strCursor : String )
+procedure RestScreenCursor
+
+function MoneyToStr( eNumber : Extended; Format : Byte; lPrintZeroDrob : Boolean ) : String
+
+function Right( s : String; i : Integer) : String;')
+function PadLStr( s : String; i : Integer; c : Char) : String
+function PadLInt( n : Integer; i : Integer; c : Char) : String
+function PadRStr( s : String; i : Integer; c : Char) : String
+function PadRInt( n : Integer; i : Integer; c : Char) : String
+
+procedure StrToStrings( s : String; sl : TStringList; cDelim : String)
+function StringReplace( s : String; sS : String; cN : String) : String
+function ANSI2OEM( s : String) : String
+
+function IsAllDigit( s : String) : Boolean
+function IsRestDay( vYear, vMonth, vDay : Variant) : Boolean
+function CountDays( vYear, vMonth : Variant) : Integer
+
+function CreateReportTable( strName : String; lFR : Boolean) : Boolean
+function FindReportTable( strName : String) : TDataSet
+function FreeReportTable( strName : String) : Boolean
+procedure FreeReportTables
+
+function CopyFile(strSource,strDesc : String; lFailIfExists,lShowErr,lCheckFree : Boolean) : Boolean;
+function GetFolderMyDocument : String
+
+
+
+

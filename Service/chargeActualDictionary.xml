@@ -1,0 +1,10 @@
+﻿<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:act="http://spr.nvcm.net/ActualDictionaryWebService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <act:chargeActualDictionary>
+         <companyId>61fb0fa8-432e-444f-b1a7-862b6f042514</companyId>
+         <dictionaryId>bd3141f9-aed3-4f62-a74c-8a093a0b2ba9</dictionaryId>
+         <actualDate>09.08.2016</actualDate>
+      </act:chargeActualDictionary>
+   </soapenv:Body>
+</soapenv:Envelope>

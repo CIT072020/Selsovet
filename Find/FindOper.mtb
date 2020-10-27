@@ -1,0 +1,116 @@
+"@@FILE VERSION@@","251"
+"@@TABLEDEF START@@"
+"Name=String,30,""Имя"","""",30,Data,"""""
+"Caption=String,50,""Заголовок"","""",50,Data,"""""
+"SQL=String,300,""Шаблон запроса"","""",300,Data,"""""
+"FieldKinds=String,50,""Типы полей"","""",50,Data,"""""
+"NeedValue=Boolean,0,""Требует значения"","""",5,Data,"""""
+"TwoValue=Boolean,0,""Два значения"","""",5,Data,"""""
+"IgnoreCase=Boolean,0,""Игнорировать регистр"","""",5,Data,"""""
+"MultiSel=Boolean,0,""Множественный выбор"","""",5,Data,"""""
+"MultiOr=Boolean,0,""Связывать по ИЛИ/И"","""",5,Data,"""""
+"Order=Word,0,""Порядок"","""",10,Data,"""""
+"Visible=Boolean,0,""Видимость"","""",5,Data,"""""
+"OwnValue=Boolean,0,""Собственное значение"","""",5,Data,"""""
+"OwnValName=String,100,""Название значения"","""",100,Data,"""""
+"OwnValKind=String,50,""Тип значения"","""",50,Data,"""""
+"SprName=String,50,""Справочник"","""",50,Data,"""""
+"@@INDEXDEF START@@"
+"indName=""NAME"",""indName"",UNIQ"
+"indOrder=""Order"",""indOrder"""
+"@@INDEXDEF END@@"
+"@@TABLEDEF END@@"
+"Name","Caption","SQL","FieldKinds","NeedValue","TwoValue","IgnoreCase","MultiSel","MultiOr","Order","Visible","OwnValue","OwnValName","OwnValKind","SprName",
+"EQUAL_D","равен","%%s='%%s'","DATE","True","False","False","True","True","1","True","False",,,,
+"EQUAL_D_P","равен","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_DATE)='%%5:s')","DATE,PROP","True","False","False","True","True","1","True","False",,,,
+"EQUAL_D_R","равен","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s='%%4:s')","DATE,REL","True","False","False","True","True","1","True","False",,,,
+"EQUAL_L","равен","%%s=%%s","BOOLEAN","True","False","False","True","False","1","True","False",,,,
+"EQUAL_L_P","равен","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND %%4:s='%%5:s')","BOOLEAN,PROP","True","False","False","True","False","1","True","False",,,,
+"EQUAL_L_R","равен","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s=%%4:s)","BOOLEAN,REL","True","False","False","True","False","1","True","False",,,,
+"EQUAL_N","равен","%%s=%%s","NUMBER,FLOAT,SPR","True","False","False","True","True","1","True","False",,,,
+"EQUAL_N_P","равен","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_NUMERIC)=%%5:s)","NUMBER,FLOAT,SPR,PROP","True","False","False","True","True","1","True","False",,,,
+"EQUAL_N_R","равен","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s=%%4:s)","NUMBER,FLOAT,SPR,REL","True","False","False","True","True","1","True","False",,,,
+"EQUAL_S","равен","%%s='%%s'","STRING,SPR","True","False","False","True","True","1","True","False",,,,
+"EQUAL_S_P","равен","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND %%4:s='%%5:s')","STRING,SPR,PROP","True","False","False","True","True","1","True","False",,,,
+"EQUAL_S_R","равен","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s='%%4:s')","STRING,SPR,REL","True","False","False","True","True","1","True","False",,,,
+"FTS","содержит слова","contains(%%s, '%%s')","STRING,FTS","True","False","False","True","True","1","True","False",,,,
+"EXISTS","содержит значения","exists (select * from %%0:s %%1:s where %%2:s ^$^)","LIST","False","False","False","False","False","1","True","False",,,,
+"NOT_EXISTS","не содержит значения","not exists (select * from %%0:s %%1:s where %%2:s ^$^)","LIST","False","False","False","False","False","2","True","False",,,,
+"NOT_EQUAL_D","не равен","%%s<>'%%s'","DATE","True","False","False","True","False","2","True","False",,,,
+"NOT_EQUAL_D_P","не равен","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_DATE)<>'%%5:s')","DATE,PROP","True","False","False","True","False","2","True","False",,,,
+"NOT_EQUAL_D_R","не равен","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<>'%%4:s')","DATE,REL","True","False","False","True","False","2","True","False",,,,
+"NOT_EQUAL_S","не равен","%%s<>'%%s'","STRING,SPR","True","False","False","True","False","2","True","False",,,,
+"NOT_EQUAL_S_P","не равен","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND %%4:s<>'%%5:s')","STRING,SPR,PROP","True","False","False","True","False","2","True","False",,,,
+"NOT_EQUAL_S_R","не равен","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<>'%%4:s')","STRING,SPR,REL","True","False","False","True","False","2","True","False",,,,
+"NOT_EQUAL_L","не равен","%%s<>%%s","BOOLEAN","True","False","False","True","False","2","False","False",,,,
+"NOT_EQUAL_L_P","не равен","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND %%4:s<>'%%5:s')","BOOLEAN,PROP","True","False","False","True","False","2","False","False",,,,
+"NOT_EQUAL_L_R","не равен","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<>%%4:s)","BOOLEAN,REL","True","False","False","True","False","2","False","False",,,,
+"NOT_EQUAL_N","не равен","%%s<>%%s","NUMBER,FLOAT,SPR","True","False","False","True","False","2","True","False",,,,
+"NOT_EQUAL_N_P","не равен","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_NUMERIC)<>%%5:s)","NUMBER,FLOAT,SPR,PROP","True","False","False","True","False","2","True","False",,,,
+"NOT_EQUAL_N_R","не равен","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<>%%4:s)","NUMBER,FLOAT,SPR,REL","True","False","False","True","False","2","True","False",,,,
+"COUNT_EQUAL_L","в количестве равном","exists (select count(*) from %%0:s %%1:s where %%2:s ^$^ group by %%3:s having count(*)=%%4:s)","LIST","True","False","False","False","False","3","True","False",,,,
+"COUNT_NOT_EQUAL_L","в количестве не равном","exists (select count(*) from %%0:s %%1:s where %%2:s ^$^ group by %%3:s having count(*)<>%%4:s)","LIST","True","False","False","False","False","4","True","False",,,,
+"EMPTY_DB","пустой","%%s is null","DATE,BOOLEAN,NULL","False","False","False","True","False","10","True","False",,,,
+"EMPTY_DB_P","пустой","not exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s')","DATE,BOOLEAN,PROP,NULL","False","False","False","True","False","10","True","False",,,,
+"EMPTY_DB_R","пустой","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s is null)","DATE,BOOLEAN,REL,NULL","False","False","False","True","False","10","True","False",,,,
+"EMPTY_N","пустой","%%s is null","NUMBER,FLOAT,SPR,NULL","False","False","False","True","False","10","True","False",,,,
+"EMPTY_N_R","пустой","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s is null)","NUMBER,FLOAT,SPR,REL,NULL","False","False","False","True","False","10","True","False",,,,
+"EMPTY_S","пустой","(%%0:s='' OR %%0:s is null)","STRING,TEXT,SPR,NULL","False","False","True","True","False","10","True","False",,,,
+"EMPTY_S_R","пустой","exists (select * from %%0:s %%1:s where %%2:s AND (%%3:s='' OR %%3:s is null))","STRING,TEXT,SPR,REL,NULL","False","False","True","True","False","10","True","False",,,,
+"EMPTY_SN_P","пустой","not exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s')","NUMBER,FLOAT,STRING,TEXT,SPR,PROP,NULL","False","False","True","True","False","10","True","False",,,,
+"NOT_EMPTY_DB","не пустой","%%s is not null","DATE,BOOLEAN,NULL","False","False","False","True","False","11","True","False",,,,
+"NOT_EMPTY_DB_P","не пустой","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s')","DATE,BOOLEAN,PROP,NULL","False","False","False","True","False","11","True","False",,,,
+"NOT_EMPTY_DB_R","не пустой","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s is not null)","DATE,BOOLEAN,REL,NULL","False","False","False","True","False","11","True","False",,,,
+"NOT_EMPTY_N","не пустой","%%s is not null","NUMBER,FLOAT,SPR,NULL","False","False","False","True","False","11","True","False",,,,
+"NOT_EMPTY_N_R","не пустой","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s is not null)","NUMBER,FLOAT,SPR,REL,NULL","False","False","False","True","False","11","True","False",,,,
+"NOT_EMPTY_S","не пустой","%%0:s<>'' AND %%0:s is not null","STRING,TEXT,SPR,NULL","False","False","True","True","False","11","True","False",,,,
+"NOT_EMPTY_S_R","не пустой","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<>'' AND %%3:s is not null)","STRING,TEXT,SPR,REL,NULL","False","False","True","True","False","11","True","False",,,,
+"NOT_EMPTY_SN_P","не пустой","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s')","NUMBER,FLOAT,STRING,TEXT,SPR,PROP,NULL","False","False","True","True","False","11","True","False",,,,
+"COUNT_GREAT_L","в количестве больше","exists (select count(*) from %%0:s %%1:s where %%2:s ^$^ group by %%3:s having count(*)>%%4:s)","LIST","True","False","False","False","False","20","True","False",,,,
+"GREAT_D","больше","%%s>'%%s'","DATE","True","False","False","False","False","20","True","False",,,,
+"GREAT_D_R","больше","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s>'%%4:s')","DATE,REL","True","False","False","False","False","20","True","False",,,,
+"GREAT_D_P","больше","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_DATE)>'%%5:s')","DATE,PROP","True","False","False","False","False","20","True","False",,,,
+"GREAT_N_P","больше","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_NUMERIC)>%%5:s)","NUMBER,FLOAT,PROP","True","False","False","False","False","20","True","False",,,,
+"GREAT_N","больше","%%s>%%s","NUMBER,FLOAT","True","False","False","False","False","20","True","False",,,,
+"GREAT_N_R","больше","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s>%%4:s)","NUMBER,FLOAT,REL","True","False","False","False","False","20","True","False",,,,
+"COUNT_GREAT_EQUAL_L","в количестве больше или равном","exists (select count(*) from %%0:s %%1:s where %%2:s ^$^ group by %%3:s having count(*)>=%%4:s)","LIST","True","False","False","False","False","21","True","False",,,,
+"GREAT_EQUAL_D","больше или равен","%%s>='%%s'","DATE","True","False","False","False","False","21","True","False",,,,
+"GREAT_EQUAL_D_R","больше или равен","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s>='%%4:s')","DATE,REL","True","False","False","False","False","21","True","False",,,,
+"GREAT_EQUAL_D_P","больше или равен","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_DATE)>='%%5:s')","DATE,PROP","True","False","False","False","False","21","True","False",,,,
+"GREAT_EQUAL_N","больше или равен","%%s>=%%s","NUMBER,FLOAT","True","False","False","False","False","21","True","False",,,,
+"GREAT_EQUAL_N_R","больше или равен","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s>=%%4:s)","NUMBER,FLOAT,REL","True","False","False","False","False","21","True","False",,,,
+"GREAT_EQUAL_N_P","больше или равен","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_NUMERIC)>=%%5:s)","NUMBER,FLOAT,PROP","True","False","False","False","False","21","True","False",,,,
+"COUNT_LOWER_L","в количестве меньше","exists (select count(*) from %%0:s %%1:s where %%2:s ^$^ group by %%3:s having count(*)<%%4:s)","LIST","True","False","False","False","False","30","True","False",,,,
+"LOWER_D","меньше","%%s<'%%s'","DATE","True","False","False","False","False","30","True","False",,,,
+"LOWER_D_R","меньше","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<'%%4:s')","DATE,REL","True","False","False","False","False","30","True","False",,,,
+"LOWER_D_P","меньше","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_DATE)<'%%5:s')","DATE,PROP","True","False","False","False","False","30","True","False",,,,
+"LOWER_N","меньше","%%s<%%s","NUMBER,FLOAT","True","False","False","False","False","30","True","False",,,,
+"LOWER_N_R","меньше","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<%%4:s)","NUMBER,FLOAT,REL","True","False","False","False","False","30","True","False",,,,
+"LOWER_N_P","меньше","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_NUMERIC)<%%5:s)","NUMBER,FLOAT,PROP","True","False","False","False","False","30","True","False",,,,
+"COUNT_LOWER_EQUAL_L","в количестве меньше или равном","exists (select count(*) from %%0:s %%1:s where %%2:s ^$^ group by %%3:s having count(*)<=%%4:s)","LIST","True","False","False","False","False","31","True","False",,,,
+"LOWER_EQUAL_D","меньше или равен","%%s<='%%s'","DATE","True","False","False","False","False","31","True","False",,,,
+"LOWER_EQUAL_D_R","меньше или равен","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<='%%4:s')","DATE,REL","True","False","False","False","False","31","True","False",,,,
+"LOWER_EQUAL_D_P","меньше или равен","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_DATE)<='%%5:s')","DATE,PROP","True","False","False","False","False","31","True","False",,,,
+"LOWER_EQUAL_N","меньше или равен","%%s<=%%s","NUMBER,FLOAT","True","False","False","False","False","31","True","False",,,,
+"LOWER_EQUAL_N_R","меньше или равен","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s<=%%4:s)","NUMBER,FLOAT,REL","True","False","False","False","False","31","True","False",,,,
+"LOWER_EQUAL_N_P","меньше или равен","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND CAST(%%4:s AS SQL_NUMERIC)<=%%5:s)","NUMBER,FLOAT,PROP","True","False","False","False","False","31","True","False",,,,
+"LIKE","содержит","%%s like '%%%%%%s%%%%' ","STRING,TEXT","True","False","False","False","False","40","True","False",,,,
+"LIKE_R","содержит","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s like '%%%%%%4:s%%%%')","STRING,TEXT,REL","True","False","False","False","False","40","True","False",,,,
+"LIKE_P","содержит","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND %%4:s like '%%%%%%5:s%%%%')","STRING,TEXT,SPR,PROP","True","False","False","False","False","40","True","False",,,,
+"NOT_LIKE","не содержит","not (%%s like '%%%%%%s%%%%' )","STRING,TEXT","True","False","False","False","False","41","True","False",,,,
+"NOT_LIKE_R","не содержит","exists (select * from %%0:s %%1:s where %%2:s AND not (%%3:s like '%%%%%%4:s%%%%'))","STRING,TEXT,REL","True","False","False","False","False","41","True","False",,,,
+"NOT_LIKE_P","не содержит","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND not (%%4:s like '%%%%%%5:s%%%%'))","STRING,TEXT,SPR,PROP","True","False","False","False","False","41","True","False",,,,
+"BEGIN","начинается с","%%s like '%%s%%%%'","STRING,TEXT","True","False","False","False","False","42","True","False",,,,
+"BEGIN_P","начинается с","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND %%4:s like '%%5:s%%%%')","STRING,TEXT,PROP","True","False","False","False","False","42","True","False",,,,
+"BEGIN_R","начинается с","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s like '%%4:s%%%%')","STRING,TEXT,REL","True","False","False","False","False","42","True","False",,,,
+"END","оканчивается на","%%s like '%%%%%%s'","STRING,TEXT","True","False","False","False","False","43","True","False",,,,
+"END_R","оканчивается на","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s like '%%%%%%4:s')","STRING,TEXT,REL","True","False","False","False","False","43","True","False",,,,
+"END_P","оканчивается на","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND %%4:s like '%%%%%%5:s')","STRING,TEXT,PROP","True","False","False","False","False","43","True","False",,,,
+"BETWEEN_D","между","(%%s BETWEEN '%%1s' AND '%%s')","DATE","True","True","False","False","False","50","True","False",,,,
+"BETWEEN_D_P","между","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND (CAST(%%4:s AS SQL_DATE) BETWEEN '%%5:s' AND '%%6:s'))","DATE,PROP","True","True","False","False","False","50","True","False",,,,
+"BETWEEN_D_R","между","exists (select * from %%0:s %%1:s where %%2:s AND (%%3:s BETWEEN '%%4:s' AND '%%5:s'))","DATE,REL","True","True","False","False","False","50","True","False",,,,
+"BETWEEN_N","между","(%%s BETWEEN %%1s AND %%s)","NUMBER,FLOAT","True","True","False","False","False","50","True","False",,,,
+"BETWEEN_N_P","между","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND (CAST(%%4:s AS SQL_NUMERIC) BETWEEN %%5:s AND %%6:s))","NUMBER,FLOAT,PROP","True","True","False","False","False","50","True","False",,,,
+"BETWEEN_N_R","между","exists (select * from %%0:s %%1:s where %%2:s AND (%%3:s BETWEEN %%4:s AND %%5:s))","NUMBER,FLOAT,REL","True","True","False","False","False","50","True","False",,,,
+"USER_OP_NF_1","меньше чем за предыдущий период",,"NUMBER,FLOAT,PROP","True","False","False","False","False","100","True","True","Год","NUMBER","YEAR",
+"USER_OP_D_2","меньше чем за предыдущий период",,"DATE,PROP","True","False","False","False","False","100","True","True","Год","NUMBER","YEAR",

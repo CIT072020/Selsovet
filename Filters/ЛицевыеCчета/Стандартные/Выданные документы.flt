@@ -1,0 +1,50 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Выданные документы
+1
+1,"0"
+2,PARAM,393,252,96,,111
+3
+1
+3,PROP,LIST_DOKUM,EXISTS,"fikPar,fikAnd,fikFirst",0,0,1,1,dkFull
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+PAR
+2
+3,PROP,LIST_DOKUM.FLD_TypeDok,EQUAL_N,"fikAnd,fikFirst",0,1,1,2,dkFull
+1,VALUE,valNumbers,0,,0,0,18991230,0,,0.00
+VALUES,2
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,LIST_DOKUM.FLD_DATE_DOK,EQUAL_N,fikAnd,0,1,0,3,dkYear
+1,VALUE,valNumber,0,,0,2009,18991230,0,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+17
+1,FIELDS_CTRL,2
+1,LIST_DOKUM.FLD_TypeDok,2
+1,CONTROLS,3
+1,CTRL,TLabel,laName1_81e5a201b29ce19e5e4ea3f252d10f59_2,"Название поля","sbParam"
+PROPS,"Caption=Тип документа",Top=2,Left=15,Width=90,Height=13
+1,CTRL,TLabel,laOp1_81e5a201b29ce19e5e4ea3f252d10f59_2,"Название операции","sbParam"
+PROPS,Top=22,Left=10,Width=30,Height=13,Visible=False
+1,CTRL,TCheckListBox,chbSpr1_81e5a201b29ce19e5e4ea3f252d10f59_2,"Ввод значения","sbParam"
+PROPS,Top=20,Left=16,Width=308,Height=100
+1,LIST_DOKUM.FLD_DATE_DOK,3
+1,CONTROLS,3
+1,CTRL,TLabel,laName1_30f269430e78c546b3ee2ad4f86bcbed_3,"Название поля","sbParam"
+PROPS,Top=131,Left=252,Width=98,Height=13,Visible=False
+1,CTRL,TLabel,laOp1_30f269430e78c546b3ee2ad4f86bcbed_3,"Название операции","sbParam"
+PROPS,Top=131,Left=16,Width=91,Height=13,"Caption=Год выдачи равен"
+1,CTRL,TDBNumberEditEh,edNumber1_30f269430e78c546b3ee2ad4f86bcbed_3,"Ввод значения","sbParam"
+PROPS,Top=127,Left=124,Width=45,Height=21

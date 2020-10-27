@@ -1,0 +1,14 @@
+  ...
+  TGetSOK = function(nAlg:Integer; PAttribute:Pointer; pPin:PChar):Integer; cdecl; 
+  TSign   = function(nLenData:Integer; Data:Pointer; nAlg:Integer; nLen:PInt; Value:Pointer; pPin:PChar):Integer; cdecl;
+  THash   = function(nLenData:Integer; Data:Pointer; nAlg:Integer; nLen:PInt; Value:Pointer; pPin:PChar):Integer; cdecl;
+   ...
+  GetSOK_ : TGetSOK;
+  Sign_:TSign;
+  Hash_:TSign;
+
+   ...
+  DLL:=LoadLibrary('libnki_func.dll');
+  @GetSOK_ := getProcAddress ( DLL, 'GetSOK' );     // вернуть сертификат
+  @Sign_ := getProcAddress ( DLL, 'Sign' );         // подписать
+  @Hash_ := getProcAddress ( DLL, 'Hash' );         // вычислить хеш

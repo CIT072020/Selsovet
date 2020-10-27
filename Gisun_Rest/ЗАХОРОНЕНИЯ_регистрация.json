@@ -1,0 +1,62 @@
+{
+    "cover": {
+		"message_id": "4D7961DF-3057-4587-A498-5D995C733D80",
+		"message_type": {
+			"code": "101",
+			"type": -2,
+			"active": "true"
+		},
+		"message_time": "2014-04-09T13:22:09.619+03:00",
+		"message_source": {
+			"code": "6",
+			"type": 131
+		}
+	},
+	"burial_info": {
+        "person_data": {
+			"identif": "7720742A001PB6"
+        },
+		"burial_data": {
+			"country": {
+				"code": "BLR",
+				"type": 8
+			},			
+			"area": {
+				"code": "22672",
+				"type": 1
+			},			
+			"region": {
+				"code": "23890",
+				"type": 29
+			},			
+			"soviet": {
+				"code": "25426",
+				"type": 67
+			},			
+			"city": {
+				"code": "12856",
+				"type": 7
+			},			
+			"burial_name": {
+				"code": "1",
+				"type": 134
+			},			
+			"sector": "1",			
+			"row": "1",			
+			"place": "121",			
+			"vault": "vvv"
+        },
+		"burial_document": {
+            "document_type": {
+                "code": "1",
+				"type": 133
+            },
+            "authority": {
+				"code": "6",
+				"type": 131
+			},
+            "date_of_issue": "2017-01-03",
+            "number": "1"
+        }
+    }
+}

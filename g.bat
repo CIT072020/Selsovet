@@ -1,0 +1,1 @@
+start gkh.exe /user:ADSSYS /psw:sysdba

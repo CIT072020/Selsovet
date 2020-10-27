@@ -1,0 +1,249 @@
+{
+	"cover": {
+		"message_id": "6E983E6F-C1F1-4226-AF1A-21EB3CE088CF",
+		"message_type": {
+				"code": "0300",
+				"type": -2
+		},
+		"message_time": "2016-02-25T16:44:05.004+03:00",
+		"message_source": {
+			"code": "17120",
+			"type": 80,
+			"active": true
+		},
+		"parent_message_id": "4D7961DF-3057-4587-A498-5D995C733D80"
+	},
+    "mrg_cert_data": {
+        "bride": {
+            "bride_data": {
+				"identif": "7172252A001PB3",
+				"last_name": "—“¿Õ ≈¬»◊◊",
+				"last_name_bel": "—“¿Õ ≈¬≤◊",
+				"name": "—¬≈“À¿Õ¿",
+				"name_bel": "—¬ﬂ“À¿Õ¿",
+				"patronymic": "œ≈“–Œ¬Õ¿",
+				"patronymic_bel": "œﬂ“–Œ°Õ¿",
+				"sex": {
+					"code": "F", 
+					"type": 32,
+					"lexema": {
+						"value": [
+							{
+								"value": "∆≈Õ— »…",
+								"lang": "ru"
+							},
+							{
+								"value": "∆¿ÕŒ◊€",
+								"lang": "be"
+							}
+						]
+					},
+					"active": true
+				},
+				"birth_day": "19851111",
+                "birth_place": {
+                    "country_b": {
+                        "code": "BLR",
+                        "type": 8,
+                        "lexema": {
+                            "value": [
+                            {
+                                "value": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+                                "lang": "ru"
+                            },
+                            {
+                                "value": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+                                "lang": "be"
+                            }
+                        ]
+                        },
+                        "active": true
+                    },
+                    "area_b": "ÃËÌÒÍ‡ˇ",
+                    "area_b_bel": "ÃiÌÒÍ‡ˇ",
+                    "region_b": "”Á‰ÂÌÒÍËÈ",
+                    "region_b_bel": "”Á‰ÂÌÒÍ≥",
+                    "type_city_b": {
+                        "code": "11100001", 
+                        "type": 68,
+                        "lexema": {
+                            "value": [
+                                {
+                                    "value": "√",
+                                    "lang": "ru"
+                                },
+                                {
+                                    "value": "√",
+                                    "lang": "be"
+                                }
+                            ]
+                        },
+                        "active": true
+                    }
+                },
+				"citizenship": {
+					"code": "BLR",
+					"type": 8,
+					"lexema": {
+						"value": [
+							{
+								"value": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+								"lang": "ru"
+							},
+							{
+								"value": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+								"lang": "be"
+							}
+						]
+					},
+					"active": true
+            },
+			"status": {
+				"code": "1",
+				"type": -18,
+				"lexema": {
+					"value": [
+						{
+							"value": "¿ “»¬≈Õ",
+							"lang": "ru"
+						},
+						{
+							"value": "¿ “€¬≈Õ",
+							"lang": "be"
+						}
+					]
+				},
+				"active": true
+			}
+            }
+        },
+        "bridegroom": {
+            "bridegroom_data": {
+				"identif": "3010182A132PB7",
+				"last_name": "ﬁ–◊≈Õ Œ",
+				"last_name_bel": "ﬁ–◊¿Õ ¿",
+				"name": "Õ» ŒÀ¿…",
+				"name_bel": "Ã≤ ¿À¿…",
+				"patronymic": "Õ» ŒÀ¿≈¬»◊",
+				"patronymic_bel": "Ã≤ ¿À¿≈¬≤◊",
+				"sex": {
+					"code": "M", 
+					"type": 32,
+					"lexema": {
+						"value": [
+							{
+								"value": "Ã”∆— Œ…",
+								"lang": "ru"
+							},
+							{
+								"value": "Ã”∆— €",
+								"lang": "be"
+							}
+						]
+					},
+					"active": true
+				},
+				"birth_day": "19820101",
+				"birth_place": {
+					"country_b": {
+						"code": "BLR",
+						"type": 8,
+						"lexema": {
+							"value": [
+							{
+								"value": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+								"lang": "ru"
+							},
+							{
+								"value": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+								"lang": "be"
+							}
+						]
+						},
+						"active": true
+					},
+					"area_b": "ÃŒ√»À®¬— ¿ﬂ Œ¡À¿—“‹",
+					"area_b_bel": "Ã¿√≤À®°— ¿ﬂ ¬Œ¡À¿—÷‹",
+					"type_city_b": {
+						"code": "11100001", 
+						"type": 68,
+						"lexema": {
+							"value": [
+								{
+									"value": "√",
+									"lang": "ru"
+								},
+								{
+									"value": "√",
+									"lang": "be"
+								}
+							]
+						},
+						"active": true
+					},
+					"city_b": "√Œ– »",
+					"city_b_bel": "√Œ– ≤"
+				},
+				"citizenship": {
+					"code": "BLR",
+					"type": 8,
+					"lexema": {
+						"value": [
+							{
+								"value": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+								"lang": "ru"
+							},
+							{
+								"value": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+								"lang": "be"
+							}
+						]
+					},
+					"active": true
+				},
+				"status": {
+					"code": "1",
+					"type": -18,
+					"lexema": {
+						"value": [
+							{
+								"value": "¿ “»¬≈Õ",
+								"lang": "ru"
+							},
+							{
+								"value": "¿ “€¬≈Õ",
+								"lang": "be"
+							}
+						]
+					},
+					"active": true
+				}
+            }
+        },
+        "mrg_act_data": {
+			"act_type": {
+				"code": "0300",
+				"type": 82
+			},
+			"authority": {
+				"code": "617",
+				"type": 80
+			},
+			"date": "2013-08-08",
+			"number": "12"
+        },
+        "mrg_certificate_data": {
+			"document_type": {			  
+				"code": "54100006",
+				"type": 37
+			},
+			"authority": {
+				"code": "617",
+				"type": 80
+			},
+			"date_of_issue": "2013-06-11",
+			"series": "I-¿À",
+			"number": "0221734"
+        }
+    }
+}

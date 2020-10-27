@@ -1,0 +1,46 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Трудоспособное население
+1
+1,"0"
+2,PARAM,401,192,96,,111
+11
+1
+3,PROP,FLD_IS_TRUD,EQUAL_N,"fikAnd,fikFirst",0,1,1,11,dkFull
+1,VALUE,valNumbers,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+29
+1,FIELDS_CTRL,2
+1,FLD_DATER,3
+1,CONTROLS,6
+1,CTRL,TStaticText,laName1_c9a467790eda2bbcd5f0ccb1af5df57f_3,"Название поля","sbParam"
+PROPS,"Caption=Возраст для женщин"
+1,CTRL,TStaticText,laOp1_c9a467790eda2bbcd5f0ccb1af5df57f_3,"Название операции","sbParam"
+PROPS,""
+1,CTRL,TDBNumberEditEh,edNumber1_c9a467790eda2bbcd5f0ccb1af5df57f_3,"Ввод значения","sbParam"
+PROPS,""
+1,CTRL,TDBNumberEditEh,edNumber2_c9a467790eda2bbcd5f0ccb1af5df57f_3,"Ввод значения 2","sbParam"
+PROPS,""
+1,CTRL,TStaticText,laAge1_c9a467790eda2bbcd5f0ccb1af5df57f_3,"На дату","sbParam"
+PROPS,""
+1,CTRL,TDBDateTimeEditEh,edDate1_c9a467790eda2bbcd5f0ccb1af5df57f_3,"Ввод значения","sbParam"
+PROPS,""
+1,FLD_DATER,5
+1,CONTROLS,6
+1,CTRL,TStaticText,laName1_c9a467790eda2bbcd5f0ccb1af5df57f_5,"Название поля","sbParam"
+PROPS,Top=48,Left=27,Width=128,Height=17,"Caption=Возраст для мужчин"
+1,CTRL,TStaticText,laOp1_c9a467790eda2bbcd5f0ccb1af5df57f_5,"Название операции","sbParam"
+PROPS,""
+1,CTRL,TDBNumberEditEh,edNumber1_c9a467790eda2bbcd5f0ccb1af5df57f_5,"Ввод значения","sbParam"
+PROPS,""
+1,CTRL,TDBNumberEditEh,edNumber2_c9a467790eda2bbcd5f0ccb1af5df57f_5,"Ввод значения 2","sbParam"
+PROPS,""
+1,CTRL,TStaticText,laAge1_c9a467790eda2bbcd5f0ccb1af5df57f_5,"На дату","sbParam"
+PROPS,""
+1,CTRL,TDBDateTimeEditEh,edDate1_c9a467790eda2bbcd5f0ccb1af5df57f_5,"Ввод значения","sbParam"
+PROPS,""

@@ -1,0 +1,134 @@
+1. Наша программа передает только талоны прибытия ?
+2. Какие реквизиты обязательны к передаче, какие нет.
+3. Непонятен формат даты ( "dateBegin": 1240674293000 )
+4. Нужно ли нам использовать справочники (СВЯЗАННЫЕ С АДРЕСОМ)  "type": 1,7,8,29,34,35,38 
+   если да, то как часто они обновляются, нам их нужно постоянно обновлять?
+5. Будут ли с/с включены в справочник "type": -5
+6. Непонятно как передавать детей.
+7. Ниже по тексту знаком "???" перечисленны непонятные реквизиты
+8. Хотелось-бы увидеть примеры с максимально заполненными полями
+
+{
+   "identif"    : "2222940B011PB5",
+   "view"       : {"klUniPK":{"type": -3,"code": 10}, "lex1": "ОБЫЧНАЯ ИНФОРМАЦИЯ", "lex2": null, "lex3": null, "dateBegin": 1240674293000, "active": 1},
+   "sysDocType" : { "klUniPK": { "type": -2, "code": 8  },  "lex1": "ФОРМА 19-20 (ПРОПИСКА, ВЫПИСКА)",   "lex2": "ASB",  "lex3": "ADDRESS",  "dateBegin": 1240672051000, "active": 1  },
+   "surname"    : "КРИ",
+   "name"       : "РАДЖЕШ",
+   "sname"      : "КОГУТАЕВ",
+   "surnameBel" : "КРЫ",
+   "nameBel"    : "РАДЖЭШ",
+   "snameBel"   : "КУТРАПАНСАН",
+   "surnameEn"  : "CREE",
+   "nameEn"     : "RAJESH",
+   "sex"        : { "klUniPK":{ "type": 32, "code": 0 }, "lex1": null, "lex2": null, "lex3": null, "dateBegin": 1240674288000, "active": 1  },
+   "citizenship": {"klUniPK": {"type": 8, "code": 11200001}, "lex1": "РЕСПУБЛИКА БЕЛАРУСЬ", "lex2": "РЭСПУБЛІКА БЕЛАРУСЬ", "lex3": "BLR", "dateBegin": 1026177363000, "active": 1 },
+   "sysOrgan"   : {"klUniPK": {"type": -5, "code": 26}, "lex1": "АСБ ГУВД МИНГОРИСПОЛКОМА", "lex2": null, "lex3": null, "dateBegin": 1240674553000, "active": 1 },
+   "bdate"      : "19400909",
+   "dsdDateRec" : null,  // ДАТА ЗАПИСИ ??? КАКОЙ ЗАПИСИ
+   "docSery"    : "MC",
+   "docNum"     : "0922732",
+   "docDateIssue": 1012183200000,  
+   "docAppleDate": 1544065200000,  
+   "dateRec"     : 1544045783000,  
+   // МЕСТО РОЖДЕНИЯ
+   "countryB"  : {"klUniPK":{"type": 8, "code": 11200001}, "lex1": "РЕСПУБЛИКА БЕЛАРУСЬ", "lex2": "РЭСПУБЛІКА БЕЛАРУСЬ", "lex3": "BLR", "dateBegin": 1026177363000, "active": 1 },
+   "areaB"     : "МИНСКАЯ ОБЛАСТЬ",
+   "regionB"   : "ПУХОВИЧСКИЙ",
+   "typeCityB" :{"klUniPK":{"type": 35,"code": 11100009}, "lex1": "Д", "lex2": "В", "lex3": null, "dateBegin": 1240674289000, "active": 1},
+   "cityB"     : "ПРУЦК",
+   "areaBBel"  : null,
+   "regionBBel": null,
+   "cityBBel"  : null,
+
+   "docType"  :{"klUniPK": {"type": 37, "code": 54100015}, "lex1": "ВИД НА ЖИТЕЛЬСТВО ЛИЦА БЕЗ ГРАЖДАНСТВА", "lex2": "ПАСВЕДЧАННЕ НА ЖЫХАРСТВА АСОБЫ БЕЗ ГРАМАДЗЯНСТВА", "lex3": null, "dateBegin": 1240674292000, "active": 1},
+   "docOrgan" : null,
+   // МЕСТО ЖИТЕЛЬСТВА
+   "contryL"  : {"klUniPK":{"type": 8,"code": 0}, "lex1": null,"lex2": null, "lex3": "0","dateBegin": 1010758146000, "active": 1},
+   "areaL"    : {"klUniPK":{"type": 1,"code": 11300006}, "lex1": "МИНСКАЯ ОБЛАСТЬ", "lex2": "МІНСКАЯ ВОБЛАСЦЬ", "lex3": "17041", "dateBegin": 1240674297000, "active": 1},
+   "regionL"  : {"klUniPK":{"type": 29, "code": 11800088}, "lex1": "ПУХОВИЧСКИЙ", "lex2": "ПУХАВІЦКІ", "lex3": null, "dateBegin": 1240673183000, "active": 1},
+   "typeCityL": {"klUniPK":{"type": 35, "code": 11100009 }, "lex1": "Д", "lex2": "В", "lex3": null, "dateBegin": 1240674289000, "active": 1},
+   "cityL"    : {"klUniPK":{"type": 7,"code": 11903466}, "lex1": "ЗАДОЩЕНЬЕ", "lex2": "ЗАДАШЧЭННЕ", "lex3": null, "dateBegin": 1240674127000, "active": 1},
+   "typeStreetL": {"klUniPK":{"type": 38, "code": 0}, "lex1": null, "lex2": null, "lex3": null, "dateBegin": 1240674292000, "active": 1},
+   "streetL"    : {"klUniPK":{"type": 34, "code": 0}, "lex1": null, "lex2": null, "lex3": null, "dateBegin": 1240674288000,  "active": 1},
+   "house": "32",
+   "korps": null,
+   "app"  : null,
+
+   // ОРГАН ВЫДАЧИ ДОКУМЕНТА, КАКОГО ???
+   "organDoc": {"klUniPK": {"type": 24,"code": 17608347}, "lex1": "ШАЦКИЙ С/С", "lex2": null,"lex3": null,"dateBegin": 1240674396000,"active": 1}, //???
+
+   "workPlace": null,
+   "workPosition": "ПЕНСИОНЕР",
+
+   // ОРГАН ВЫДАЧИ ОСНОВНОГО ДОКУМЕНТА, КАКОГО ???
+   "docIssueOrgan": {"klUniPK":{"type": 24, "code": 17608931},"lex1": "АЗИНСКИЙ С/С", "lex2": null,"lex3": null,"dateBegin": 1240674420000, "active": 1}, //???
+
+   "villageCouncil":{"klUniPK":{"type": 98,"code": 0}, "lex1": null, "lex2": null, "lex3": null,"dateBegin": 1337022497000, "active": 1},    // С/С
+   "intracityRegion":{"klUniPK":{"type": 99,"code": 0 }, "lex1": null, "lex2": null, "lex3": null, "dateBegin": 1337022497000, "active": 1}, // РАЙОН ГОРОДА
+   "ateAddress": null,  //???
+   "expireDate": null,  //???
+   "aisPasspDocStatus": null,  //???
+   "form19_20":    {
+      "form19_20Base": "form19_20",   
+      "pid"      : 90017000,  // ??? какое значение передавать ? 
+      "signAway" : true, // ??? ЧТО ПЕРЕДАВАТЬ 0,1 ИЛИ true,false    прибыл-убыл(0- прибыл,1 - убыл)
+      // ПРИБЫТИЕ-УБЫТИЕ
+      "countryPu": {"klUniPK": {"type": 8,"code": 11200241}, "lex1": "АВСТРАЛИЯ", "lex2": "АЎСТРАЛІЯ", "lex3": "AUS","dateBegin": 1026177363000,"active": 1},
+      "areaPu"   : "АБХАЗСКАЯ АССР",
+      "regionPu" : "МСТИСЛАВЛЬСКИЙ",
+      "cityPu"   : "\"ВАСИЛЁК\"",
+      "typeCityPu": {"klUniPK": {"type": 35,"code": 11100068}, "lex1": "АГРОГОРОДОК","lex2": "АГРАГАРАДОК", "lex3": null, "dateBegin": 1240674590000,"active": 1},
+      "typeStreetPu": {"klUniPK": {"type": 38,"code": 0}, "lex1": null, "lex2": null, "lex3": null, "dateBegin": 1240674292000,"active": 1},
+      "streetPu" : null,
+      "housePu"  : null,
+      "korpsPu"  : null,
+      "appPu"    : null,
+
+      "datePu"   : null,
+      "marks"    : {"klUniPK":{"type": 2,"code": 0}, "lex1": null, "lex2": null, "lex3": null, "dateBegin": 1240672053000, "active": 1},   // ОСОБЫЕ ОТМЕТКИ
+      "notes"    : null,
+      "reason"   : {"klUniPK": {"type": 3,"code": 2}, "lex1": "ВРЕМЕННАЯ РЕГИСТРАЦИЯ", "lex2": null, "lex3": null,"dateBegin": 1240674556000, "active": 1},
+      "term"     : null,
+      "dateRec"  : 1543978800000,
+      "dateReg"  : null,     // ДАТА ПРОПИСКИ
+      "termReg"  : {"klUniPK":{"type": 27,"code": 4}, "lex1": "ДО 6-ТИ МЕСЯЦЕВ", "lex2": null,"lex3": null,"dateBegin": 1240674586000, "active": 1},  // СРОК ПРОПИСКИ
+      "dateRegTill": null,   // ДО КАКОЙ ДАТЫ
+      "causeIssue" : {"klUniPK": {"type": 39, "code": 59200021}, "lex1": "ДОКУМЕНТИРОВАНИЕ", "lex2": "ДАКУМЕНТАВАННЕ", "lex3": null, "dateBegin": 1240672094000,"active": 1},
+      "deathDate"  : null,   // ДАТА СМЕРТИ
+      "signNoTake" : false,  // ??? отметка о неполучении паспорта (ЗАЧЕМ С/С ЭТО ПЕРЕДАВАТЬ)
+      "signNoReg"  : false,  // ??? отметка о получении паспорта без прописки
+      "signDestroy": false,  // ??? отметка паспорт уничтожен как невостребованный
+      "noAddrPu"   : {"klUniPK":{"type": 70,"code": 12}, "lex1": "АННУЛИРОВАНИЕ РАЗРЕШЕНИЯ НА ПМЖ", "lex2": null,"lex3": null,"dateBegin": 1240674587000,"active": 1},
+
+      "regType"    : {"klUniPK":{"type": 500,"code": 2}, "lex1": null, "lex2": null, "lex3": null, "dateBegin": 1539226800000, "active": 1},// тип регистрации (1 - постоянная, 2 временная)
+      "maritalStatus":{"klUniPK":{"type": 501,"code": 3},"lex1": "ВДОВЕЦ (ВДОВА)", "lex2": null, "lex3": null, "dateBegin": 1539572400000, "active": 1},  // СЕМЕЙНОЕ ПОЛОЖЕНИЕ
+      "education"  : {"klUniPK":{"type": 502,"code": 0}, "lex1": null,"lex2": null, "lex3": null, "dateBegin": 1539399600000, "active": 1},// ОБРАЗОВАНИЕ
+      "student": false,
+      "infants": []      // ??? несовершеннолетний ИЛИ несовершеннолетние, В КАКОМ ВИДЕ ???
+    },
+   "dsdAddressLive":    {   // ??? что должно быть заполнено обязвтельно
+      "dsdAddressLiveBase": "dsdAddressLive",
+      "pid": 90017000,
+      "areaL": "МИНСКАЯ ОБЛАСТЬ",
+      "areaObjNum": 17041,
+      "regionL": "ПУХОВИЧСКИЙ",
+      "regionObjNum": 20965,
+      "villageCouncil": null,
+      "vilCouncilObjNum": 21290,
+      "typeCityL": "Д",
+      "cityL": "ЗАДОЩЕНЬЕ",
+      "typeStreetL": null,
+      "streetL": null,
+      "house": "32",
+      "korps": null,
+      "app": null,
+      "ateObjectNum": 21293,
+      "ateElementUid": null,
+      "ateAddrNum": null
+   },
+   "getPassportDate": null,  // ??? дата вручения паспорта на руки
+   "images": [],         // ???
+   "addressLast": null,  // ??? ПОСЛЕДНИЙ АДРЕС 
+   "dossieStatus": null, // ??? СТАТУС ДОКУМЕНТА
+   "status": null        // ??? СТАТУС
+}

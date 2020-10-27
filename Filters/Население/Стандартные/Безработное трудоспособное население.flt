@@ -1,0 +1,37 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Безработное трудоспособное население
+0
+1,"0"
+2,PARAM,401,192,96,"Безработное трудоспособное население на сегодня",111
+11
+4
+3,PROP,FLD_PENS_TIP,EMPTY_N,"fikAnd,fikFirst",0,0,0,10,dkFull
+1,VALUE,valNumber,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_WORK_SPR,EMPTY_N,fikAnd,0,0,0,9,dkFull
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,WORK_NAME,EMPTY_SN_P,fikAnd,0,0,0,8,dkFull
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_IS_TRUD,EQUAL_N,fikAnd,0,0,1,11,dkFull
+1,VALUE,valNumbers,0,,0,0,18991230,0,,0.00
+VALUES,1
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,

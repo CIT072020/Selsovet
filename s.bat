@@ -1,0 +1,1 @@
+start selsovet.exe /user:ADSSYS /psw:sysdba

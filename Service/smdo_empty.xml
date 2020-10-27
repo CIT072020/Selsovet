@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Envelop type="SDIP-1.0"  msg_id="GUID" dtstаmр="2014-09-26Т00:14:30.592+03:00" subject="www">
+  <Header msg_type="1" msg_acknow="2" >
+    <Sender  id="SMDOCODE_ADRESAT" name="NAME_ADRESAT" sys_id="SED_GUID_ADRESAT"  system="SED_NAME_ADRESAT" />
+    <Receiver  id="MY_ID" name="MY_NAME"  sys_id="MY_SED_GUID"  system="MY_SED_NAME" />
+  </Header>
+  <Body>
+  </Body>
+</Envelop>

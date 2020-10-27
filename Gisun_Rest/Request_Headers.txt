@@ -1,0 +1,7 @@
+Reg-auth-username: PASSPORT_USER
+Reg-auth-password: user_password
+Content-Type: application/json
+Accept: */*
+Postman-Token: c86d5e1d-5feb-4b01-9dd8-652e061ec8ee
+Host: a.todes.by:13201
+Content-Length: 822

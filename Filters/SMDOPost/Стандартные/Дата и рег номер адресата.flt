@@ -1,0 +1,31 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Дата и рег номер адресата
+1
+1,"0"
+2,PARAM,0,0,96,,111
+5
+3
+3,PROP,FLD_NAME,LIKE,"fikAnd,fikFirst",1,1,0,5,dkFull
+1,VALUE,valString,1,22222,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_ADR_REGNUMBER,EQUAL_S,fikAnd,0,1,0,1,dkFull
+1,VALUE,valString,1,S014/32,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_ADR_REGDATE,EQUAL_D,fikAnd,0,1,0,2,dkFull
+1,VALUE,valDate,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+0

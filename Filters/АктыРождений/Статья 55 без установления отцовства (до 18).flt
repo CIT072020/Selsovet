@@ -1,0 +1,79 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Статья 55 без установления отцовства (до 18)
+1
+1,"0"
+2,PARAM,401,146,96,,111
+9
+6
+3,PROP,FLD_DateR,BETWEEN_D,"fikAnd,fikFirst",0,1,1,7,dkFull
+1,VALUE,valDate,0,,0,0,20000101,0,,0.00
+VALUES,
+1,VALUE,valDate,0,,0,0,20181231,0,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_SVED,EQUAL_N,fikAnd,0,0,1,1,dkFull
+1,VALUE,valNumbers,0,,0,0,18991230,0,,0.00
+VALUES,3
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_ON_DateR,EMPTY_DB,fikAnd,0,0,0,2,dkFull
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_DateR,LOWER_N,fikAnd,0,0,1,4,dkCurrentAge
+1,VALUE,valNumber,0,,0,18,18991230,0,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_GIVOROGD,EQUAL_L,fikAnd,0,0,1,5,dkFull
+1,VALUE,valBoolean,0,,1,0,18991230,0,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,-,-,"fikPar,fikAnd",0,0,0,9,dkFull
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+PAR
+2
+3,PROP,FLD_FIRSTWEEK,EQUAL_L,fikAnd,0,0,1,6,dkFull
+1,VALUE,valBoolean,0,,0,0,18991230,0,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+3,PROP,FLD_FIRSTWEEK,EMPTY_DB,fikOr,0,0,0,8,dkFull
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,0.00
+VALUES,
+11
+1,FIELDS_CTRL,1
+1,FLD_DateR,7
+1,CONTROLS,4
+1,CTRL,TStaticText,laName1_d531e2c67161529f2dbca6615447f341_7,"Название поля","sbParam"
+PROPS,Top=2,Left=27,Width=188,Height=17,"Caption=Дата рождения ребенка"
+1,CTRL,TStaticText,laOp1_d531e2c67161529f2dbca6615447f341_7,"Название операции","sbParam"
+PROPS,""
+1,CTRL,TDBDateTimeEditEh,edDate1_d531e2c67161529f2dbca6615447f341_7,"Ввод значения","sbParam"
+PROPS,""
+1,CTRL,TDBDateTimeEditEh,edDate2_d531e2c67161529f2dbca6615447f341_7,"Ввод значения 2","sbParam"
+PROPS,""

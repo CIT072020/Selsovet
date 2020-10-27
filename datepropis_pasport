@@ -1,0 +1,55 @@
+  0    11 июля 2011
+  1   "11" июля 2011
+  2   "11" июля 2011 г.   +chr(160)
+  3   11.07.2011
+  4   11 июля 2011 г.
+  5   11 июля 2011 года
+  6   11 июля 2011 г.  +chr(160)
+  7   2011
+  8   11.07.11
+
+паспорт
+
+ 0    паспорт МА4646464 выдан ОООООООООООООООООО 30.05.2008
+ 1    паспорт МА4646464 выдан ОООООООООООООООООО 30.05.2008 инд.номер 5757M575РВ1
+ 2    паспорт серия МА № 5656565 , выданный 30.05.2004г.
+ 3    паспорт серия <u>МА</u> № <u>5656565</u> , выданный 30.05.2004г.
+ 4    ОООООООООООООООООО
+ 5    паспорт серия МА № 5656565
+
+//-- save and rest date in FastReport --------------------------------------
+  edDateBegin.Date:=GetLastValue('RAST_BR_DATE1','D');            
+  edDateEnd.Date:=GetLastValue('RAST_BR_DATE2','D');          
+  cbAll.Checked:=GetLastValue('ALL_ZAGS','L');          
+  ...
+  SetLastValue('RAST_BR_DATE1',edDateBegin.Date, 'D');            
+  SetLastValue('RAST_BR_DATE2',edDateEnd.Date, 'D');            
+  SetLastValue('ALL_ZAGS',cbAll.Checked, 'L');          
+//------------------------------------
+
+procedure TfmGurnZRogd.SetListParEditForm;
+begin
+  inherited;
+  FListPar.Add('ENABLE_SKIP=1');
+end;
+
+
+
+//------------------------------------------
+.Create()
+
+  SetLength(FArrAddProperty,2);
+  SetAddProperty(0, 'OTHER', '', ftMemo);
+  SetAddProperty(1, 'IZMEN', '', ftMemo);
+
+//------------------------------------------
+.ReadDok()
+
+  ReadDopProperty(dmBase.TypeObj_ZXXX, DokumentID.AsInteger,
+          STOD('1899-12-30',tdAds));
+
+//------------------------------------------
+.WriteDok()
+
+  WriteDopProperty(dmBase.TypeObj_ZXXX, DokumentID.AsInteger,
+                   STOD('1899-12-30',tdAds));

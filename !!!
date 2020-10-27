@@ -1,0 +1,1 @@
+SELECT ID,NOMER,DATEZ,ONA_FAMILIA,ONA_NAME,ONA_OTCH,ONA_DATER FROM ЗаключениеБраков WHERE ON_FAMILIA='Алексеев222' and ONA_FAMILIA='Акулич' and ONA_NAME='Светлана' and ONA_OTCH='Павловна' and ONA_DATER='1998-07-06'

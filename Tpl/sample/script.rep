@@ -1,0 +1,31 @@
+procedure Template_1(DateFiks: TDateTime; LicID, PID: Word);
+var
+   ds: TDataSet;      
+   FIO: TField;       
+   DATER: TField;     
+   DATES: TField;     
+begin
+   ds:=GetTemplateDataSet('NAME1', 'MAIN');
+   if ds<>nil then begin
+      if not ds.Active then begin
+         ds.Open;
+      end;
+      FIO:=ds.FindField('FIO');
+      DATER:=ds.FindField('DATER');
+      DATES:=ds.FindField('DATES');
+      ds.Edit;
+      if FIO<>nil then begin
+         FIO.AsString:='Фамилия';
+      end;
+      if DATER<>nil then begin
+         DATER.AsString:='Дата рождения';
+      end;
+      if DATES<>nil then begin
+         DATES.AsString:='Другая дата';
+      end;
+      ds.Post;
+   end;
+end;
+
+begin
+end.

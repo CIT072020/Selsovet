@@ -1,0 +1,56 @@
+Фильтр АС "Сельсовет" (СОДЕРЖАНИЕ ЭТОГО ФАЙЛА НЕЛЬЗЯ МЕНЯТЬ ВРУЧНУЮ)
+Версия=3
+
+Найти обращение
+1
+1,"0"
+2,PARAM,426,130,96,,111
+3
+3
+3,PROP,REG_NUM,EQUAL_N,"fikAnd,fikFirst",0,1,0,1,dkFull
+1,VALUE,valNumber,1,,0,0,18991230,1,,"0.00"
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,"0.00"
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,"0.00"
+VALUES,
+3,PROP,REG_IND,EQUAL_S,fikAnd,0,1,0,2,dkFull
+1,VALUE,valString,1,,0,0,18991230,1,,"0.00"
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,"0.00"
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,"0.00"
+VALUES,
+3,PROP,REG_DATE,EQUAL_D,fikAnd,0,1,0,3,dkFull
+1,VALUE,valDate,1,,0,0,18991230,1,,"0.00"
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,"0.00"
+VALUES,
+1,VALUE,valNone,1,,0,0,18991230,1,,"0.00"
+VALUES,
+25
+1,FIELDS_CTRL,3
+1,REG_NUM,1
+1,CONTROLS,3
+1,CTRL,TLabel,laName1_8374b80e02c37c12cbd8b2ef8fd60f60_1,"Название поля","sbParam"
+PROPS,Top=12,Left=30,Width=31,Height=13,"Caption=№ п/п"
+1,CTRL,TLabel,laOp1_8374b80e02c37c12cbd8b2ef8fd60f60_1,"Название операции",""
+PROPS,__IsDeleted=1
+1,CTRL,TDBNumberEditEh,edNumber1_8374b80e02c37c12cbd8b2ef8fd60f60_1,"Ввод значения","sbParam"
+PROPS,Top=10,Left=76,Width=30,Height=21,TabOrder=1
+1,REG_IND,2
+1,CONTROLS,3
+1,CTRL,TLabel,laName1_92a818a16fd55e1f4b2406399d1570ac_2,"Название поля","sbParam"
+PROPS,Top=12,Left=120,Width=38,Height=13,Caption=индекс
+1,CTRL,TLabel,laOp1_92a818a16fd55e1f4b2406399d1570ac_2,"Название операции",""
+PROPS,__IsDeleted=1
+1,CTRL,TEdit,edText1_92a818a16fd55e1f4b2406399d1570ac_2,"Ввод значения","sbParam"
+PROPS,Top=10,Left=172,Width=58,Height=21,"Anchors=[akTop,akRight]",TabOrder=2
+1,REG_DATE,3
+1,CONTROLS,3
+1,CTRL,TLabel,laName1_9f166a5842be359f2fe23258322e556b_3,"Название поля","sbParam"
+PROPS,Top=12,Left=245,Width=11,Height=13,Caption=от
+1,CTRL,TLabel,laOp1_9f166a5842be359f2fe23258322e556b_3,"Название операции",""
+PROPS,__IsDeleted=1
+1,CTRL,TDBDateTimeEditEh,edDate1_9f166a5842be359f2fe23258322e556b_3,"Ввод значения","sbParam"
+PROPS,Top=10,Left=275,Width=100,Height=21,TabOrder=3
