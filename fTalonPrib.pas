@@ -879,7 +879,7 @@ var
   vKeyValues : Variant;
   dLastSost : TDateTime;
   lCheckEn, lAdd, lChangeLic, lAddLic, lCloseLic, lSeekMen : Boolean;
-  nIdChild, nIdMen : Integer;
+  nIdChild, nIdMen, nIdLic : Integer;
   s,strSoob, strLich, strOldLic, sKodOtnosh : String;
   nCurNomer:Integer;
   recID:TID;
@@ -989,6 +989,9 @@ begin
 
     lChangeLic := false;
     strLich:='';
+    if EmptyLICH_ID
+      then nIdLic:=0
+      else nIdLic:=DokumentLICH_ID.AsInteger;
     if ProvDvig then begin
       lAdd := false;
 //  было    if not EmptyLICH_ID and ( (dLastSost = dmBase.GetDateCurrentSost) or
@@ -1006,9 +1009,9 @@ begin
           nCurNomer:=1;
           strLich:='Ѕез лицевого счета';
         end else begin
-          nCurNomer:=dmBase.CountMensEx(dmBase.GetDateCurrentSost, DokumentLICH_ID.AsString,'000',nil);
+          nCurNomer:=dmBase.CountMensEx(dmBase.GetDateCurrentSost, InttoStr(nIdLic),'000',nil);
           nCurNomer:=nCurNomer+1;
-          vKeyValues := dmBase.CreateSeek( dmBase.GetDateCurrentSost, DokumentLICH_ID.AsInteger);
+          vKeyValues := dmBase.CreateSeek( dmBase.GetDateCurrentSost, nIdLic);
           if dmBase.tbLich.Locate('DATE_FIKS;ID',vKeyValues,[]) then begin
             strLich := 'Ћицевой счет '+Trim(dmBase.tbLich.FieldByName('NOMER').AsString);
           end;
@@ -1016,7 +1019,7 @@ begin
         lSeekMen:=false;
         //------- копируем человека -----------------------------------------------------------
         if FCopyMen and (DokumentMEN_ID.AsInteger>0) then begin
-          dmBase.CopyMen(fmMain.DateFiks,DokumentMEN_ID.AsString,DokumentLICH_ID.AsString,DokumentADRES_ID.AsString,0,FSaveMigr);
+          dmBase.CopyMen(fmMain.DateFiks,DokumentMEN_ID.AsString,IntToStr(nIdLic),DokumentADRES_ID.AsString,0,FSaveMigr);
           nIdMen:=DokumentMEN_ID.AsInteger;
           if dmBase.tbMens.Locate('DATE_FIKS;ID',VarArrayOf([dmBase.GetDateCurrentSost,nIdMen]),[]) then begin
             EditDataSet(Dokument);
@@ -1062,7 +1065,7 @@ begin
                 dmBase.tbMens.FieldByName('LIC_ID').AsInteger:=0;
                 dmBase.tbMens.FieldByName('NSTR').AsInteger:=1;
               end else begin
-                dmBase.tbMens.FieldByName('LIC_ID').AsString:=DokumentLICH_ID.AsString;
+                dmBase.tbMens.FieldByName('LIC_ID').AsInteger:=nIdLic;
                 dmBase.tbMens.FieldByName('NSTR').AsInteger :=nCurNomer;
               end;
               nCurNomer:=nCurNomer+1;
@@ -1292,13 +1295,12 @@ begin
       while not mtDeti.Eof do begin
         nIdChild := -1;
         lAdd := false;
-        if ProvDvig then begin
-          if not EmptyLICH_ID and
-             ((dLastSost = dmBase.GetDateCurrentSost) or (DokumentDATEZ.AsDateTime >= dLastSost)) then begin
+        if ProvDvig and ((dLastSost = dmBase.GetDateCurrentSost) or (DokumentDATEZ.AsDateTime >= dLastSost)) then begin
+//          if not EmptyLICH_ID then begin
              //=== 05.09.2018 =========================
             lSeekMen:=false;
             if FCopyMen and (mtDetiCHILD_ID.AsInteger>0) then begin  //------- копируем ребенка
-              dmBase.CopyMen(fmMain.DateFiks,mtDetiCHILD_ID.AsString,DokumentLICH_ID.AsString,DokumentADRES_ID.AsString,0,FSaveMigr);
+              dmBase.CopyMen(fmMain.DateFiks,mtDetiCHILD_ID.AsString,InttoStr(nIdLic),DokumentADRES_ID.AsString,0,FSaveMigr);
               nIdChild:=mtDetiCHILD_ID.AsInteger;
               if dmBase.tbMens.Locate('DATE_FIKS;ID',VarArrayOf([dmBase.GetDateCurrentSost,nIdChild]),[]) then begin
                 EditDataSet(mtDeti);
@@ -1310,8 +1312,8 @@ begin
             //=========================================
             // у ребенка нет ид. и он не записывалс€
             if mtDetiCHILD_ID.AsString='' then begin
-              vKeyValues := dmBase.CreateSeek( dmBase.GetDateCurrentSost, DokumentLICH_ID.AsInteger);
-              if dmBase.tbLich.Locate('DATE_FIKS;ID',vKeyValues,[]) then begin
+//              vKeyValues := dmBase.CreateSeek( dmBase.GetDateCurrentSost, DokumentLICH_ID.AsInteger);
+//              if dmBase.tbLich.Locate('DATE_FIKS;ID',vKeyValues,[]) then begin
                 //=== 05.09.2018 ===========================
                 if nIdChild<=0 then begin
                   nIdChild := dmBase.GetNewID(dmBase.TypeObj_Nasel);
@@ -1327,7 +1329,7 @@ begin
                   //======================================
                   dmBase.tbMens.FieldByName('DATE_FIKS').AsDateTime := dmBase.GetDateCurrentSost;
                   dmBase.tbMens.FieldByName('ID').AsInteger         := nIdChild;
-                  dmBase.tbMens.FieldByName('LIC_ID').AsString      := DokumentLICH_ID.AsString;
+                  dmBase.tbMens.FieldByName('LIC_ID').AsInteger     := nIdLic;
 
                   dmBase.tbMens.FieldByName('NSTR').AsInteger       := nCurNomer;
                   nCurNomer:=nCurNomer+1;
@@ -1358,7 +1360,7 @@ begin
                   EditDataSet(mtDeti);
                   mtDetiCHILD_ID.AsInteger := nIdChild;
                   PostDataSet(mtDeti);
-                end;
+//                end;
               end;
             end else begin
               vKeyValues := dmBase.CreateSeek( dmBase.GetDateCurrentSost, mtDetiCHILD_ID.AsInteger);
@@ -1399,9 +1401,7 @@ begin
               //------------------------------------------------------------------------------
               dmBase.tbMens.FieldByName('CANDELETE').AsBoolean := false;
               dmBase.tbMens.FieldByName('ADRES_ID').AsString   := DokumentADRES_ID.AsString;
-              dmBase.tbMens.FieldByName('LIC_ID').AsString     := DokumentLICH_ID.AsString;
-
-              dmBase.tbMens.FieldByName('LIC_ID').AsString     := DokumentLICH_ID.AsString;
+              dmBase.tbMens.FieldByName('LIC_ID').AsInteger    := nIDLic; //DokumentLICH_ID.AsString;
 
               if nIdMen>-1 then begin
                 if DokumentPOL.AsString='∆'
@@ -1455,7 +1455,7 @@ begin
             end else begin
 
             end;
-          end;
+//          end;   EmptyLICH_ID
         end;
         Append;
         FieldByName('ID').Value := nID;

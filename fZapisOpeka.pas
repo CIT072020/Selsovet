@@ -434,6 +434,16 @@ type
     edDateDokSn: TDBDateTimeEditEh;
     lbDokToText: TLabel;
     DokumentVERNO: TBooleanField;
+    edSendOrg: TDBEditEh;
+    Label66: TLabel;
+    Label70: TLabel;
+    edSendDate: TDBDateTimeEditEh;
+    edSendPrich: TDBEditEh;
+    DokumentSEND_ORG: TStringField;
+    DokumentSEND_ORG_SPR: TIntegerField;
+    DokumentSEND_ORG_TYPE: TIntegerField;
+    DokumentSEND_DATE: TDateField;
+    DokumentSEND_PRICH: TStringField;
     procedure dsDokumentDataChange(Sender: TObject; Field: TField);
     procedure edFamiliaDoCheckDrawRequiredState(Sender: TObject;  var DrawState: Boolean);
     procedure edOBL_RNotInList(Sender: TObject; NewText: String;   var RecheckInList: Boolean);
@@ -479,6 +489,14 @@ type
     procedure edDateDokUstCheckDrawRequiredState(Sender: TObject;   var DrawState: Boolean);
     procedure edDateDokSnCheckDrawRequiredState(Sender: TObject;    var DrawState: Boolean);
     procedure lbDokToTextGetText(Sender: TObject; var Text: String);
+    procedure edSendOrgEditButtons0Click(Sender: TObject;
+      var Handled: Boolean);
+    procedure edSendOrgEditButtons1Click(Sender: TObject;
+      var Handled: Boolean);
+    procedure edSendOrgEditButtons2Click(Sender: TObject;
+      var Handled: Boolean);
+    procedure edSendOrgEditButtons3Click(Sender: TObject;
+      var Handled: Boolean);
   private
 //    H : THintWindow;
     procedure OnDestroyHint(Sender : TObject);
@@ -2045,6 +2063,28 @@ begin
   DokumentUST_OTHER.AsBoolean:=false;
 end;
 //----------------------------------------------------------------------------------
+//====== SEND_ORG ========
+procedure TfmZapisOpeka.edSendOrgEditButtons0Click(Sender: TObject;  var Handled: Boolean);
+begin
+//
+end;
+
+procedure TfmZapisOpeka.edSendOrgEditButtons1Click(Sender: TObject;  var Handled: Boolean);
+begin
+//
+end;
+
+procedure TfmZapisOpeka.edSendOrgEditButtons2Click(Sender: TObject;  var Handled: Boolean);
+begin
+//
+end;
+
+procedure TfmZapisOpeka.edSendOrgEditButtons3Click(Sender: TObject;  var Handled: Boolean);
+begin
+//
+end;
+//--------------------------------------------------------------------------------------
+
 procedure TfmZapisOpeka.TBItemCreatePopech18Click(Sender: TObject);
 var
   lOk:Boolean;
@@ -2169,6 +2209,7 @@ begin
   edNomerOtm.DataField:=sFldNomer;
 }
 end;
+
 
 
 end.

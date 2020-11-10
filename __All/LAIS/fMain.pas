@@ -605,6 +605,8 @@ type
     TBItemDeloToVedomArx: TTBItem;
     TBItemNomekToVedomArx: TTBItem;
     TBItemNew2: TTBItem;
+    TBItemLoadSysSpr: TTBItem;
+    acReQueryGis: TAction;
     procedure acSetParametersExecute(Sender: TObject);
     procedure acAdminParametersExecute(Sender: TObject);
 
@@ -840,6 +842,8 @@ type
     procedure TBItemNomekToVedomArxClick(Sender: TObject);
     procedure TBItemDeloToVedomArxClick(Sender: TObject);
     procedure TBItemNew2Click(Sender: TObject);
+    procedure TBItemLoadSysSprClick(Sender: TObject);
+    procedure acReQueryGisExecute(Sender: TObject);
 //  protected
 //    procedure CreateParams(var Params: TCreateParams);
   private
@@ -1096,7 +1100,7 @@ uses fPropertyObj, fAbout, fOperFind, fEditSpr, fChoiceZAGS,
      fAdres, dAdres, uObjectsScript, fIzbUch, fPropHouse, fAddSobstv, fWarning, fAccountSvid, uFindBase, fmChList,
      fPrintSSS, fShablon, fChoiceNasel, fTableGurnal, fRegGISUN, fListSvid, {fAlfavitZAGS,} fLoadLic, DsiWin32, mVerInfo,
      {$IFDEF SMDO} fSMDOZagrSpr, {$ENDIF}      // СМДО
-     fEditMemo, fSetPropUsers, fChoiceAdres, uOcheredToXML;
+     fQueryGisun, fEditMemo, fSetPropUsers, fChoiceAdres, uOcheredToXML;
 
 {$R *.DFM}
 
@@ -2474,6 +2478,21 @@ begin
 
   if not Role.SystemAdmin then exit;
 
+  sl:=TStringList.Create;     
+  RunQueryGISUN(-1, sl);
+  sl.Free;
+  exit;
+  {
+  sl:=TStringList.Create;
+  try
+    Http_GetText('https://nces.by/wp-content/uploads/certificates/pki/kuc.cer', sl);
+    ShowStrings(sl,'');
+  finally
+    sl.Free;
+  end;
+  exit;
+  }
+
   {   извлечение даты из произвольного формата
   GetLocaleFormatSettings(1049,fs);
   fs.DateSeparator:='-';
@@ -2483,6 +2502,8 @@ begin
   ShowMessage(DateToSQL(d));
   exit;
   }
+
+  {
   da:=TRegdoc2XML.Create;
   SetLength(da.arrTypeDok,2);
   da.arrTypeDok[0]:=3;
@@ -2497,7 +2518,7 @@ begin
   end;
   ShowStrings(da.FProtokol,'');
   da.Free;
-
+   }
 //    n:=Avest.RefreshCOC('avest', true, s, true);
 //    if s<>'' then ShowMessage(s);
    {
@@ -3923,6 +3944,11 @@ begin
   ShowGurnal(TfmGurnPassportViza, 'fmGurnPassportViza');
 end;
 
+procedure TfmMain.acReQueryGisExecute(Sender: TObject);
+begin
+// запросы в ГИС РН
+  //ShowGurnal(TfmGurnQueryGis, 'fmGurnQueryGis');
+end;
 
 procedure TfmMain.acReRogdExecute(Sender: TObject);
 begin
@@ -5212,7 +5238,7 @@ begin
         end;
       {$ENDIF}
     end;
-
+         
     FRunActivate := true;
 //    CheckAndRunSprSMDO;
 
@@ -7693,7 +7719,11 @@ procedure TfmMain.TBItemDeloToVedomArxClick(Sender: TObject);
 begin
   DeloToVedomArx;
 end;
-
+//---------------------
+procedure TfmMain.TBItemLoadSysSprClick(Sender: TObject);
+begin
+  RunLoadSysSpr(pn);
+end;
 
 initialization
   ListGurnal := TStringList.Create;

@@ -1972,3 +1972,31 @@ ORDER BY n.Familia,n.Name
 27.10.2020 15:49  Начало автоматического резервного копирования по пути:E:\Projects\Selsovet7\AutoBackup\
 27.10.2020 15:49  Успешное завершение резервного копирования.
 27.10.2020 15:51  Завершен сеанс пользователя.
+03.11.2020 10:31  Начало автоматического резервного копирования по пути:E:\Projects\Selsovet7\AutoBackup\
+03.11.2020 10:31  Успешное завершение резервного копирования.
+03.11.2020 10:33  Завершен сеанс пользователя.
+09.11.2020 12:23  Начало автоматического резервного копирования по пути:E:\Projects\Selsovet7\AutoBackup\
+09.11.2020 12:23  Успешное завершение резервного копирования.
+09.11.2020 12:24  Начало резервного копирования по пути:D:\ttt\КопияДанных\
+09.11.2020 12:24  Успешное завершение резервного копирования.
+09.11.2020 12:24  СМДО: загрузка справочника организаций
+09.11.2020 12:25  Журнал fmGurnQueryGis, Ошибка открытия запроса: Query: Error 7200:  AQE Error:  State = S0000;   NativeError = 2122;  [iAnywhere Solutions][Advantage SQL Engine]Table or alias not found: ad -- Location of error in the SQL statement is: 184 (line: 4 column: 28)
+SELECT qg.ID, qg.COVER_MESSAGE_ID, qg.COVER_MESSAGE_TIME, qg.USER_GIS,
+qg.Familia, qg.Name, qg.Otch, qg.DateR, qg.Pol, qg.IDENTIF, qg.Grag
+FROM QueryGis qg
+ORDER BY qg.DateZ DESC, ad.Nomer DESC
+
+09.11.2020 12:25  Завершен сеанс пользователя.
+09.11.2020 12:27  Журнал fmGurnQueryGis, Ошибка открытия запроса: Query: Error 7200:  AQE Error:  State = S0000;   NativeError = 2122;  [iAnywhere Solutions][Advantage SQL Engine]Table or alias not found: qg -- Location of error in the SQL statement is: 11
+SELECT qg.ID, qg.COVER_MESSAGE_ID, qg.COVER_MESSAGE_TIME, qg.USER_GIS,
+qg.Familia, qg.Name, qg.Otch, qg.DateR, qg.Pol, qg.IDENTIF, qg.Grag
+FROM QueryGis ag
+ORDER BY qg.DateZ DESC, ad.Nomer DESC
+
+09.11.2020 12:27  Завершен сеанс пользователя.
+09.11.2020 12:29  Завершен сеанс пользователя.
+10.11.2020 14:29  Начало автоматического резервного копирования по пути:E:\Projects\Selsovet7\AutoBackup\
+10.11.2020 14:29  Успешное завершение резервного копирования.
+10.11.2020 14:35  Завершен сеанс пользователя.
+10.11.2020 14:53  Завершен сеанс пользователя.
+10.11.2020 15:41  Завершен сеанс пользователя.

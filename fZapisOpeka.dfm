@@ -1,9 +1,9 @@
 inherited fmZapisOpeka: TfmZapisOpeka
-  Left = 483
-  Top = 157
+  Left = 439
+  Top = 82
   ActiveControl = edDateUst
   Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086#1073' '#1086#1087#1077#1082#1077' /'#1087#1086#1087#1077#1095#1080#1090#1077#1083#1100#1089#1090#1074#1077'/'
-  ClientHeight = 742
+  ClientHeight = 768
   ClientWidth = 974
   Constraints.MinHeight = 780
   Constraints.MinWidth = 900
@@ -22,14 +22,14 @@ inherited fmZapisOpeka: TfmZapisOpeka
   PixelsPerInch = 96
   TextHeight = 13
   inherited sp: TSplitter
-    Top = 720
+    Top = 746
     Width = 974
     Height = 0
     Align = alBottom
     Visible = False
   end
   inherited pnTable: TPanel
-    Top = 720
+    Top = 746
     Width = 974
     Height = 0
     Align = alBottom
@@ -95,7 +95,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
   end
   inherited sb: TScrollBox
     Width = 974
-    Height = 670
+    Height = 696
     Align = alClient
     inherited pnPovtor: TPanel
       TabOrder = 3
@@ -107,12 +107,12 @@ inherited fmZapisOpeka: TfmZapisOpeka
       Left = 0
       Top = 0
       Width = 974
-      Height = 154
+      Height = 176
       Align = alTop
       TabOrder = 0
       DesignSize = (
         974
-        154)
+        176)
       object ImageGISUN: TImage
         Left = 946
         Top = 5
@@ -274,9 +274,35 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Style = [fsBold]
         ParentFont = False
       end
+      object Label66: TLabel
+        Left = 6
+        Top = 152
+        Width = 58
+        Height = 13
+        Caption = #1087#1077#1088#1077#1076#1072#1085#1086' '#1074
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label70: TLabel
+        Left = 630
+        Top = 152
+        Width = 42
+        Height = 13
+        Caption = #1087#1088#1080#1095#1080#1085#1072
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
       object StaticText1: TStaticText
         Left = 525
-        Top = 7
+        Top = 8
         Width = 19
         Height = 19
         Hint = #1044#1088#1091#1075#1072#1103' '#1086#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103' '#1091#1089#1090#1072#1085#1086#1074#1080#1083#1072' '#1086#1087#1077#1082#1091
@@ -433,7 +459,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
       end
       object N_F_cbOtheOrg: TDBCheckBoxEh
         Left = 559
-        Top = 5
+        Top = 9
         Width = 15
         Height = 17
         Hint = #1044#1088#1091#1075#1072#1103' '#1086#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103' '#1091#1089#1090#1072#1085#1086#1074#1080#1083#1072' '#1086#1087#1077#1082#1091
@@ -686,12 +712,115 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Visible = True
         OnCheckDrawRequiredState = edDateDokSnCheckDrawRequiredState
       end
+      object edSendOrg: TDBEditEh
+        Left = 76
+        Top = 145
+        Width = 378
+        Height = 26
+        Hint = #1054#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103' '#1082#1091#1076#1072' '#1087#1077#1088#1077#1076#1072#1085#1086' '#1076#1077#1083#1086
+        Anchors = [akLeft, akTop, akRight]
+        DataField = 'SEND_ORG_SPR'
+        DataSource = dsDokument
+        EditButtons = <
+          item
+            Hint = #1042#1099#1073#1088#1072#1090#1100' '#1086#1088#1075#1072#1085#1080#1079#1072#1094#1080#1102
+            Style = ebsEllipsisEh
+            OnClick = edSendOrgEditButtons0Click
+          end
+          item
+            Glyph.Data = {
+              C6010000424DC60100000000000036000000280000000A0000000A0000000100
+              2000000000009001000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000FF000000FF000000FF000000FF0000
+              000000000000000000000000000000000000000000FF000000FF000000FF0000
+              00FF000000FF000000FF00000000000000000000000000000000000000FF0000
+              00FF000000000000000000000000000000FF0000000000000000000000000000
+              0000000000FF000000FF00000000000000000000000000000000000000000000
+              00000000000000000000000000FF000000FF0000000000000000000000000000
+              000000000000000000000000000000000000000000FF000000FF000000000000
+              000000000000000000FF00000000000000000000000000000000000000FF0000
+              00FF000000FF000000FF000000FF000000FF0000000000000000000000000000
+              000000000000000000FF000000FF000000FF000000FF00000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              00000000000000000000}
+            Hint = #1042#1099#1073#1088#1072#1090#1100' '#1089#1077#1083#1100#1089#1082#1080#1081' '#1089#1086#1074#1077#1090
+            Style = ebsGlyphEh
+            OnClick = edSendOrgEditButtons1Click
+          end
+          item
+            Glyph.Data = {
+              D6000000424DD60000000000000076000000280000000A0000000C0000000100
+              0400000000006000000000000000000000001000000000000000000000008000
+              00000080000080800000000080008000800000808000C0C0C00080808000FF00
+              000000FF0000FFFF00000000FF00FF00FF0000FFFF00FFFFFF00888888888800
+              0000800000000800000080BBBBBB0800000080BBBBBB0800000080BBBBBB0800
+              000080BBBBBB0800000080BBBBBB0800000080BBB0000800000080BBB0AA0800
+              000080BBB0A08800000080000008880000008888888888000000}
+            Hint = #1055#1086#1089#1083#1077#1076#1085#1077#1077' '#1074#1099#1073#1088#1072#1085#1085#1086#1077' '#1079#1085#1072#1095#1077#1085#1080#1077
+            Style = ebsGlyphEh
+            OnClick = edSendOrgEditButtons2Click
+          end
+          item
+            Hint = #1054#1095#1080#1089#1090#1080#1090#1100' '#1079#1085#1072#1095#1077#1085#1080#1077
+            Style = ebsGlyphEh
+            OnClick = edSendOrgEditButtons3Click
+          end>
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 18
+        Visible = True
+        OnCheckDrawRequiredState = edOtmOrgCheckDrawRequiredState
+      end
+      object edSendDate: TDBDateTimeEditEh
+        Left = 486
+        Top = 145
+        Width = 115
+        Height = 26
+        Hint = #1044#1072#1090#1072' '#1091#1089#1090#1072#1085#1086#1074#1083#1077#1085#1080#1103' '#1086#1087#1077#1082#1080' ('#1087#1086#1087#1077#1095#1080#1090#1077#1083#1100#1089#1090#1074#1072')'
+        DataField = 'SEND_DATE'
+        DataSource = dsDokument
+        EditButtons = <>
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Kind = dtkDateEh
+        ParentFont = False
+        TabOrder = 19
+        Visible = True
+        OnCheckDrawRequiredState = GisunCheckDrawRequiredState
+      end
+      object edSendPrich: TDBEditEh
+        Left = 688
+        Top = 145
+        Width = 277
+        Height = 26
+        Anchors = [akLeft, akTop, akRight]
+        DataField = 'SEND_PRICH'
+        DataSource = dsDokument
+        EditButtons = <>
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 20
+        Visible = True
+      end
     end
     object pc: TPageControl
       Left = 0
-      Top = 154
+      Top = 176
       Width = 974
-      Height = 516
+      Height = 520
       ActivePage = tsChild
       Align = alClient
       TabOrder = 2
@@ -701,7 +830,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Caption = #1055#1086#1076#1086#1087#1077#1095#1085#1099#1081
         DesignSize = (
           966
-          488)
+          492)
         object Label4: TLabel
           Left = 3
           Top = 37
@@ -1923,7 +2052,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         ImageIndex = 1
         DesignSize = (
           966
-          488)
+          492)
         object Label9: TLabel
           Left = 7
           Top = 11
@@ -2855,7 +2984,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         ImageIndex = 2
         DesignSize = (
           966
-          488)
+          492)
         object Label28: TLabel
           Left = 8
           Top = 27
@@ -3809,7 +3938,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
           Left = 196
           Top = 406
           Width = 768
-          Height = 80
+          Height = 84
           HelpContext = 999
           Anchors = [akLeft, akTop, akRight, akBottom]
           AutoSelect = False
@@ -3837,7 +3966,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         ImageIndex = 3
         DesignSize = (
           966
-          488)
+          492)
         object GridRS: TDBGridEh
           Left = 0
           Top = 31
@@ -3955,7 +4084,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
     end
   end
   inherited StBar: TStatusBar
-    Top = 720
+    Top = 746
     Width = 974
   end
   inherited pnAdd: TPanel
@@ -5581,6 +5710,23 @@ inherited fmZapisOpeka: TfmZapisOpeka
     object DokumentVERNO: TBooleanField
       FieldName = 'VERNO'
     end
+    object DokumentSEND_ORG: TStringField
+      FieldName = 'SEND_ORG'
+      Size = 200
+    end
+    object DokumentSEND_ORG_SPR: TIntegerField
+      FieldName = 'SEND_ORG_SPR'
+    end
+    object DokumentSEND_ORG_TYPE: TIntegerField
+      FieldName = 'SEND_ORG_TYPE'
+    end
+    object DokumentSEND_DATE: TDateField
+      FieldName = 'SEND_DATE'
+    end
+    object DokumentSEND_PRICH: TStringField
+      FieldName = 'SEND_PRICH'
+      Size = 200
+    end
   end
   inherited frDBDokument: TfrDBDataSet
     Left = 864
@@ -5666,8 +5812,8 @@ inherited fmZapisOpeka: TfmZapisOpeka
     Top = 162
   end
   inherited frDBPovtSvid: TfrDBDataSet
-    Left = 464
-    Top = 194
+    Left = 472
+    Top = 170
   end
   object dsGragd: TDataSource [24]
     Left = 700

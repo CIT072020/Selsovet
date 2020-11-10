@@ -10,7 +10,7 @@ uses
   MetaTask, mPermit, frRtfExp, frOLEExl, FR_Class, FR_E_HTML2, FR_DCtrl, FR_AdsDb, uDataSet2XML, JPEG, ComObj,
   ActnList, ImgList, TB2MDI, TB2Dock, TB2Toolbar, TB2Item, StdCtrls, Mask, DateUtils, MaskUtils,
   DBCtrlsEh, db, fChSS, fChRR, dBase, fExportStru, fmQueryEx, MainLibFr, reportTask, fTelnet,
-  FR_VCCtrl, frCheckListBox, uPadegFIO, UserEvents, StrUtils, QStrings,
+  FR_VCCtrl, frCheckListBox, uPadegFIO, UserEvents, StrUtils, QStrings, ExtCtrls,
   fLichSchet, dLichSchet, fMen,dMen, adsset, adsdata, AdsDictionary,
   fGurnal, fGurnAlfKn, fGurnNasel, FuncPr, FuncEh,OLEUtils, kbmMemTable, fParamsGisun,
   kbmMemCSVStreamFormat, mFindInt, FR_DSet, FR_DBSet, SasaIniFile, adsTable,
@@ -21,7 +21,7 @@ uses
   {$IFDEF USE_TEMPLATE}  mTempl, mTplInt, {$ENDIF}
   {$IFDEF GISUN} uGisun, {$ENDIF}
   {$IFDEF SMDO} uSMDO, fGurnSMDO, uAvest, fSMDODoc, {$ENDIF}      // ÑÌÄÎ
-  extctrls,buttons, act2rtf, sasadbgrid, RKP, fRunObrab, OpisEdit,uTypes,
+  buttons, act2rtf, sasadbgrid, RKP, fRunObrab, OpisEdit,uTypes,
  {$IFDEF VER150} Variants, {$ENDIF}
  {$IFDEF USE_FR3} MainLibFR3, frxAdsComponents, modify_components, {frx2xto30,}
   frxClass, frxDCtrl, frxDesgn, frxExportRTF, frxExportHTML, frxDBSet,
@@ -607,6 +607,8 @@ type
     TBItemNew2: TTBItem;
     TBItemLoadSysSpr: TTBItem;
     acReQueryGis: TAction;
+    TBSeparatorItem8: TTBSeparatorItem;
+    TBItemQueryGis: TTBItem;
     procedure acSetParametersExecute(Sender: TObject);
     procedure acAdminParametersExecute(Sender: TObject);
 
@@ -1100,7 +1102,7 @@ uses fPropertyObj, fAbout, fOperFind, fEditSpr, fChoiceZAGS,
      fAdres, dAdres, uObjectsScript, fIzbUch, fPropHouse, fAddSobstv, fWarning, fAccountSvid, uFindBase, fmChList,
      fPrintSSS, fShablon, fChoiceNasel, fTableGurnal, fRegGISUN, fListSvid, {fAlfavitZAGS,} fLoadLic, DsiWin32, mVerInfo,
      {$IFDEF SMDO} fSMDOZagrSpr, {$ENDIF}      // ÑÌÄÎ
-     fQueryGisun, fEditMemo, fSetPropUsers, fChoiceAdres, uOcheredToXML;
+     fGurnQueryGis, fQueryGisun, fEditMemo, fSetPropUsers, fChoiceAdres, uOcheredToXML;
 
 {$R *.DFM}
 
@@ -3947,7 +3949,7 @@ end;
 procedure TfmMain.acReQueryGisExecute(Sender: TObject);
 begin
 // çàïðîñû â ÃÈÑ ÐÍ
-  //ShowGurnal(TfmGurnQueryGis, 'fmGurnQueryGis');
+  ShowGurnal(TfmGurnQueryGis, 'fmGurnQueryGis');
 end;
 
 procedure TfmMain.acReRogdExecute(Sender: TObject);

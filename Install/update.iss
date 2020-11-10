@@ -4,13 +4,13 @@
 
 ;#define AppZAGS
 ;#define AppLAIS             
-#define AppPost
+;#define AppPost
 
 ;#define AppZAH
 ;#define AppOPEKA
 
 ;#define AppGKH
-;#define AppOCH
+#define AppOCH
 
 ;#define SELSOVET_TO_LAIS
 #define ADS

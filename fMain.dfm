@@ -315,6 +315,11 @@ object fmMain: TfmMain
         object TBItemReAktZ: TTBItem
           Action = acReAktZ
         end
+        object TBSeparatorItem8: TTBSeparatorItem
+        end
+        object TBItemQueryGis: TTBItem
+          Action = acReQueryGis
+        end
       end
       object TBSubmenuDocs: TTBSubmenuItem
         Caption = #1059#1095#1077#1090' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074

@@ -5984,7 +5984,7 @@ begin
 
   sl1:=TStringList.Create;
   sl:=TStringList.Create;
-
+      
   Mess:=TMimeMess.Create;//создали объект
   sl.LoadFromFile(sFile);
   Mess.Lines.Assign(sl);//записали всю полученную от сервера информацию

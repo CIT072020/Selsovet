@@ -741,6 +741,10 @@ object fmMain: TfmMain
           object TBItem67: TTBItem
             Action = acLoadSprOrgSMDO
           end
+          object TBItemLoadSysSpr: TTBItem
+            Caption = #1057#1082#1072#1095#1072#1090#1100' '#1086#1073#1085#1086#1074#1083#1077#1085#1080#1077' '#1089#1080#1089#1090#1077#1084#1085#1099#1093' '#1089#1087#1088#1072#1074#1086#1095#1085#1080#1082#1086#1074
+            OnClick = TBItemLoadSysSprClick
+          end
           object TBItemLoadChangeATE: TTBItem
             Action = acLoadChangeATE
             Visible = False
@@ -7910,6 +7914,11 @@ object fmMain: TfmMain
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1089#1077#1088#1090#1080#1092#1080#1082#1072#1090' '#1074' BASE64'
       Hint = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1089#1077#1088#1090#1080#1092#1080#1082#1072#1090' '#1074' BASE64 '#1074' '#1087#1088#1086#1075#1088#1072#1084#1084#1091' SChannel'
       OnExecute = acSaveCertExecute
+    end
+    object acReQueryGis: TAction
+      Category = #1050#1085#1080#1075#1080
+      Caption = #1047#1072#1087#1088#1086#1089#1099' '#1074' '#1043#1048#1057' '#1056#1053
+      OnExecute = acReQueryGisExecute
     end
   end
   object frADSComponents1: TfrADSComponents

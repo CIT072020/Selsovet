@@ -268,6 +268,10 @@ type
       tbZapisOpeka:TAdsTable;
     {$ENDIF}
 
+    {$IFDEF GISUN}
+    tbQueryGisun:TAdsTable;
+    {$ENDIF}
+    
     {$IFDEF ZAGS}
       PredZapis:TAdsTable;
       DeclareTermMarriage : TAdsTable;
@@ -377,6 +381,7 @@ type
     Adres_Propis:Boolean;
     Adres_Result:String;
     Adres_OnlyText:Boolean;
+    Adres_UchNomer:String;
 
     SavedAdres:TAdres;
 
@@ -449,6 +454,7 @@ type
     function GlobalAdresToRec:TAdres;
     procedure RecAdresToGlobal(adr:TAdres);
     procedure ClearGlobalAdres;
+    function FindAdresFromID(DateFiks : TDateTime; nID : Integer): TDataSet;
     function AdresAsRecord(DateFiks : TDateTime; strID : String; lNameIsNotDom:Boolean; lOnlyAdres:Boolean): TAdres;
     function AdresFromID(DateFiks : TDateTime; strID : String; lNameIsNotDom:Boolean=true) : String;
     function AdresFromIDEx(DateFiks : TDateTime; strID : String; lNameIsNotDom:Boolean; lOnlyText:Boolean) : String;
@@ -991,6 +997,13 @@ begin
   {$IFDEF ADD_OPEKA}
     tbZapisOpeka:= CreateAddTable('AktOpek','tbZapisOpeka','AdsConnection');
   {$ENDIF}
+
+
+  {$IF Defined(GISUN) and Defined(QUERY_GIS) }
+    tbQueryGisun:=CreateAddTable('QueryGis','tbQueryGisun','AdsConnection');
+  {$ELSE}
+    tbQueryGisun:=nil;
+  {$IFEND}
 
   SprPerevod  := CreateAddTable('SprPerevod','','AdsConnection');
   SprSklon    := CreateAddTable('Sklonenie','SprSklon','AdsSharedConnection');
@@ -3327,6 +3340,7 @@ begin
   Result.Propis     :=Adres_Propis    ;
   Result.AdresPropis:=Adres_Result    ;
   Result.OnlyText   :=Adres_OnlyText  ;
+  Result.UchNomer   :=Adres_UchNomer  ;
 end;
 //-------------------------------------------------------------------------
 procedure TdmBase.RecAdresToGlobal(adr:TAdres);
@@ -3369,6 +3383,7 @@ begin
   Adres_Propis    :=adr.Propis;
   Adres_Result    :=adr.AdresPropis;
   Adres_OnlyText  :=adr.OnlyText;
+  Adres_UchNomer  :=adr.UchNomer;
 end;
 
 //-------------------------------------------------------------------------
@@ -3430,6 +3445,15 @@ begin
   end;
 end;
 //-------------------------------
+function TdmBase.FindAdresFromID(DateFiks : TDateTime; nID : Integer): TDataSet;
+begin
+  if (nID>0) and tbAdres.Locate('DATE_FIKS;ID', VarArrayOf([DateFiks,nID]), []) then begin
+    Result:=tbAdres;
+  end else begin
+    Result:=nil;
+  end;
+end;
+//-------------------------------
 //  lNameIsNotDom   включать наименование строения если без номера дома
 function TdmBase.AdresFromID(DateFiks : TDateTime; strID : String; lNameIsNotDom:Boolean): String;
 var
@@ -3437,6 +3461,7 @@ var
   s : String;
   Opis:TOpisEdit;
   nID:Integer;
+  lOk:Boolean;
 begin
   if strID='' then begin
     Result := '';
@@ -3455,10 +3480,15 @@ begin
   Adres_ID   := nID;
   Adres_Obl  := Globaltask.ParamAsString('OBL');
   Adres_Raion:= Globaltask.ParamAsString('RAION');
-
-  if tbAdres.Locate('DATE_FIKS;ID', VarArrayOf([DateFiks,nID]), []) then begin
+  if (tbAdres.FieldByName('DATE_FIKS').AsDateTime=DateFiks) and (nID=tbAdres.FieldByName('ID').AsInteger) then begin
+    lOk:=true;
+  end else begin
+    lOk:=tbAdres.Locate('DATE_FIKS;ID', VarArrayOf([DateFiks,nID]), []);
+  end;
+  if lOk then begin
     Adres_Etag:=tbAdres.FieldByName('ETAG').AsString;
     Adres_Kol_Etag:=tbAdres.FieldByName('KOL_ETAG').AsString;
+    Adres_UchNomer:=tbAdres.FieldByName('UCH_NOMER').AsString;
     Adres_Predst := '';
     if tbAdres.FieldByName('PREDST').AsString<>'' then begin
       if SprPredst.Locate('ID',tbAdres.FieldByName('PREDST').AsString,[]) then begin
@@ -3574,7 +3604,7 @@ begin
   WorkQuery.SQL.Text:='select b.not_dom, b.id, b.punkt, trim(isnull(tp.name,'''')) tp_name, trim(p.name) punkt_name, iif(p.name is null, '''', trim(isnull(tp.name,''''))+char(160)+trim(p.name)) punkt_fullname, '+
   '       u.id ul, trim(u.name) ul_name, iif(u.name is null,'''',trim(isnull(tu.name,''''))+char(160)+trim(u.name)) ul_fullname, '+
   '       trim(isnull(b.dom,'''')) dom, trim(isnull(b.korp,'''')) korp, trim(isnull(b.kv,'''')) kv, '+
-  ' isnull(p.gorod,false) isgorod, etag, kol_etag, raion '+
+  ' isnull(p.gorod,false) isgorod, etag, kol_etag, raion, uch_nomer, uch_for, uch_pred_date, plosh_uch '+
   ' from БазаДомов b '+
   ' left join СпрНасПунктов p on p.id=b.punkt '+
   ' left join SysSpr.TypePunkt tp on tp.id=p.typepunkt'+
@@ -3588,6 +3618,7 @@ begin
       Result.PunktKod:=FieldByName('PUNKT').AsInteger;
       Result.PunktN:=FieldByName('PUNKT_NAME').AsString;
       Result.Punkt:=FieldByName('PUNKT_FULLNAME').AsString;
+      Result.UchNomer:=FieldByName('UCH_NOMER').AsString;
       sResult:=sResult+Result.Punkt;
       Result.IsGorod:=FieldByName('ISGOROD').AsBoolean;
       if Result.IsGorod
@@ -8602,7 +8633,7 @@ begin
         if FileExists(strDir+'version') then begin
           if MemoRead(strDir+'version', strMainVersion) then begin
             if strMainVersion<>'' then begin
-              strVersion := GetVersionProgram;
+              strVersion := GetVersionProgram(5);
               try
                 nVersion     := StrToInt(StringReplace(strVersion,'.','',[rfReplaceAll]));
                 nMainVersion := StrToInt(StringReplace(strMainVersion,'.','',[rfReplaceAll]));
@@ -9061,7 +9092,7 @@ begin
         end;
       end;
     except
-      on E:Exception do GlobalTask.LogFile.WriteToLogFile(FormatDateTime('dd.mm.yyyy hh:mm ',dmBase.getCurDate)+E.Message);
+      on E:Exception do GlobalTask.LogFile.WriteToLogFile(FormatDateTime('dd.mm.yyyy hh:nn ',dmBase.getCurDate)+E.Message);
     end;
   end;
 end;
@@ -16752,7 +16783,7 @@ begin
 //         'INSERT INTO sprDocSubjG SELECT * FROM sysspr.sprDocSubj WHERE handled=false;'#13#10;
       AdsConnection.Execute(s);
     except
-      on E: Exception do begin
+      on E: Exception do begin    
         CloseMessage;
         Result:=false;
         PutError('ОШИБКА:'+E.Message);

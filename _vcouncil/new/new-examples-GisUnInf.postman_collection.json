@@ -1,0 +1,2868 @@
+{
+	"info": {
+		"_postman_id": "4617b2c6-ab91-4b4e-9988-d2cf2594e234",
+		"name": "GisUnInf",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Суды",
+			"item": [
+				{
+					"name": "Получение актовой записи о смерти",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n        \"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n        \"message_type\": {\r\n            \"code\": \"4100\",\r\n            \"type\": -2\r\n        },\r\n        \"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n        \"message_source\": {\r\n            \"code\": \"501\",\r\n            \"type\": 88\r\n        }\r\n    },\r\n    \"death_info\": {\r\n        \"person_data\": {\r\n            \"identif\": \"7781198A001PB8\"\r\n        },\r\n        \"death_data\": {\r\n            \"death_date\": \"2014-09-21+03:00\"\r\n        },\r\n        \"death_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"1\",\r\n                \"type\": 127\r\n            },\r\n            \"authority\": {\r\n                \"code\": \"304\",\r\n                \"type\": 88\r\n            },\r\n            \"date_of_issue\": \"2014-09-21\",\r\n            \"number\": \"2134-201\",\r\n            \"active\": true\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/court/deceased",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"court",
+								"deceased"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Признание физического лица ограниченно дееспособным",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n        \"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n        \"message_type\": {\r\n               \"code\": \"4100\",\r\n               \"type\": -2\r\n        },\r\n        \"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n        \"message_source\": {\r\n               \"code\": \"501\",\r\n               \"type\": 88\r\n        }\r\n    },\r\n    \"restrict_efficient_info\": {\r\n        \"person_data\": {\r\n            \"identif\": \"7781198A001PB8\"\r\n        },\r\n        \"restrict_efficient_data\": {\r\n            \"restrict_unefficient_date\": \"2014-09-18+02:00\"\r\n        },\r\n        \"restrict_efficient_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"1\",\r\n                \"type\": 127\r\n            },\r\n            \"authority\": {\r\n                \"code\": \"304\",\r\n                \"type\": 88\r\n            },\r\n            \"date_of_issue\": \"2014-09-18+02:00\",\r\n            \"number\": \"2134-201\",\r\n            \"active\": true\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/court/restrict-efficient",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"court",
+								"restrict-efficient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Признание физического лица недееспособным",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n        \"message_type\": {\r\n            \"code\": \"4100\",\r\n            \"type\": -2\r\n        },\r\n        \"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n        \"message_source\": {\r\n            \"code\": \"501\",\r\n            \"type\": 88\r\n        }\r\n    },\r\n    \"unefficient_info\": {\r\n        \"person_data\": {\r\n            \"identif\": \"7781198A001PB8\"\r\n        },\r\n        \"unefficient_data\": {\r\n            \"unefficient_date_cancel\": \"2015-05-07\"\r\n        },\r\n        \"unefficient_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"1\",\r\n                \"type\": 127\r\n            },\r\n            \"authority\": {\r\n                \"code\": \"501\",\r\n                \"type\": 88\r\n            },\r\n            \"date_of_issue\": \"2015-04-07\",\r\n            \"number\": \"4561\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/court/unefficient",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"court",
+								"unefficient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Развод",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n        \"message_type\": {\r\n            \"code\": \"4100\",\r\n            \"type\": -2\r\n        },\r\n        \"message_source\": {\r\n            \"code\": \"111\",\r\n            \"type\": 88\r\n        }\r\n    },\r\n    \"dvc_cert_info\": {\r\n        \"wife_data\": {\r\n            \"identif\": \"4310789A024PB8\"\r\n        },\r\n        \"huband_data\": {\r\n            \"identif\": \"3201185A034PB5\"\r\n        },\r\n        \"dvc_date\": \"2016-12-10\",\r\n        \"dvc_region\": {\r\n            \"code\": \"1\",\r\n            \"type\": 1\r\n        },\r\n        \"dvc_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"1\",\r\n                \"type\": 127\r\n            },\r\n            \"authority\": {\r\n                \"code\":  \"111\",\r\n                \"type\": 88\r\n            },\r\n            \"date_of_issue\": \"2014-12-01\",\r\n            \"number\": \"123\"\r\n       }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/court/divorce",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"court",
+								"divorce"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Развод инностранец",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n        \"message_type\": {\r\n            \"code\": \"4100\",\r\n            \"type\": -2\r\n        },\r\n        \"message_source\": {\r\n            \"code\": \"111\",\r\n            \"type\": 88\r\n        }\r\n    },\r\n    \"dvc_cert_info\": {\r\n        \"wife_data\": {\r\n            \"identif\": \"4310789A024PB8\"\r\n        },\r\n\t\t\"huband_data\": {\r\n            \"last_name\": \"МАРУШКЕВИЧ\",\r\n            \"name\": \"АНДРЕЙ\",\r\n            \"sex\": {\r\n                \"code\": \"M\",\r\n                \"type\": 32\r\n            },\r\n            \"birth_day\": \"19851120\",\r\n            \"birth_place\": {\r\n                \"country_b\": {\r\n                    \"code\": \"RUS\",\r\n                    \"type\": 8\r\n                },\r\n                \"city_b\": \"МОСКВА\"\r\n            },\r\n            \"status\": {\r\n                \"code\": \"4\",\r\n                \"type\": -18\r\n            }\r\n        },\r\n        \"dvc_date\": \"2016-12-10\",\r\n        \"dvc_region\": {\r\n            \"code\": \"1\",\r\n            \"type\": 1\r\n        },\r\n        \"dvc_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"1\",\r\n                \"type\": 127\r\n            },\r\n            \"authority\": {\r\n                \"code\":  \"111\",\r\n                \"type\": 88\r\n            },\r\n            \"date_of_issue\": \"2014-12-01\",\r\n            \"number\": \"123\"\r\n       }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/court/divorce",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"court",
+								"divorce"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Развод инностранка",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n        \"message_id\": \"431711\",\r\n        \"message_type\": {\r\n            \"code\": \"4100\",\r\n            \"type\": -2\r\n        },\r\n        \"message_source\": {\r\n            \"code\": \"707\",\r\n            \"type\": 88\r\n        }\r\n    },\r\n    \"dvc_cert_info\": {\r\n        \"wife_data\": {\r\n            \"last_name\": \"ТЕБЕНЬКОВА\",\r\n            \"name\": \"НАТАЛЬЯ\",\r\n            \"sex\": {\r\n                \"code\": \"F\",\r\n                \"type\": 32\r\n            },\r\n            \"birth_day\": \"19800503\",\r\n            \"birth_place\": {\r\n                \"country_b\": {\r\n                    \"code\": \"RUS\",\r\n                    \"type\": 8\r\n                },\r\n                \"city_b\": \"Г.САНКТ-ПЕТЕРБУРГ\"\r\n            },\r\n            \"status\": {\r\n                \"code\": \"4\",\r\n                \"type\": -18\r\n            }\r\n        },\r\n        \"huband_data\": {\r\n           \"identif\": \"3290869А078РВ4\"\r\n        },\r\n        \"dvc_date\": \"2016-09-29+03:00\",\r\n        \"dvc_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"1\",\r\n                \"type\": 127\r\n            },\r\n            \"authority\": {\r\n                \"code\": \"707\",\r\n                \"type\": 88\r\n            },\r\n            \"date_of_issue\": \"2016-08-16+03:00\",\r\n            \"number\": \"408-2016\",\r\n            \"active\": true\r\n        }\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/court/divorce",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"court",
+								"divorce"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Признание физического лица безвестно отсутствующим",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true,
+							"connection": true,
+							"host": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"type": "text",
+								"value": "no-cache",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cover\":\r\n  {\r\n    \"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n    \"message_type\":\r\n    {\r\n      \"code\": \"4100\",\r\n      \"type\": -2\r\n    },\r\n    \"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n    \"message_source\":\r\n    {\r\n      \"code\": \"501\",\r\n      \"type\": 88\r\n    }\r\n  },\r\n  \"absent_info\":\r\n  {\r\n    \"person_data\":\r\n    {\r\n      \"identif\": \"7781198A001PB8\"\r\n    },\r\n    \"absent_data\":\r\n    {\r\n      \"absent_date\": \"2014-09-19\"\r\n    },\r\n    \"absent_document\":\r\n    {\r\n      \"document_type\":\r\n      {\r\n        \"code\": \"1\",\r\n        \"type\": 127\r\n      },\r\n      \"authority\":\r\n      {\r\n        \"code\": \"304\",\r\n        \"type\": 88\r\n      },\r\n      \"date_of_issue\": \"2014-09-18+03:00\",\r\n      \"number\": \"2134-201\",\r\n      \"active\": true\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/court/absent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"court",
+								"absent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Суд недейств",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"4100\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"705\",\r\n\t\t\t\"type\": 88\r\n\t\t}\r\n\t},\r\n    \"dvc_cert_info\": {\r\n            \"wife_data\": {\r\n                \"last_name\": \"УБИЛАВА\",\r\n                \"name\": \"ЛЕЛА\",\r\n                \"sex\": {\r\n                  \"code\": \"F\",\r\n                  \"type\": 32\r\n                },\r\n               \"birth_day\": \"19790920\",\r\n               \"birth_place\": {\r\n                    \"country_b\": {\r\n                        \"code\": \"GEO\",\r\n                        \"type\": 8\r\n                    },\r\n                    \"city_b\": \"ГАЛИ\"\r\n                },\r\n                \"status\": {\r\n                  \"code\": \"4\",\r\n                  \"type\": -18\r\n                }\r\n            },\r\n            \"huband_data\": {\r\n               \"identif\": \"4010137K169PB6\"\r\n            },\r\n            \"invalid_mrg_date\": \"2013-07-26+03:00\",\r\n            \"invalid_mrg_document\": {\r\n                \"document_type\": {\r\n                  \"code\": \"1\",\r\n                  \"type\": 127\r\n                },\r\n                \"authority\": {\r\n                  \"code\": \"304\",\r\n                  \"type\": 88\r\n                },\r\n                \"date_of_issue\": \"2014-09-18+03:00\",\r\n                \"number\": \"2134-2014\",\r\n                \"active\": true\r\n            }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/court/invalid-mrg",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"court",
+								"invalid-mrg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Восстановление родительских прав",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"connection": true,
+							"accept-encoding": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"4100\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"111\",\r\n\t\t\t\"type\": 88\r\n\t\t}\r\n\t},\r\n\t\"prnt_rights_info\": {\r\n        \"parent_data\": {\r\n            \"identif\": \"3061154A020PB6\"\r\n        },\r\n        \"child_data\": {\r\n            \"identif\": \"7842164A001PB3\"\r\n        },\r\n        \"return_prnt_rights_date\": \"2015-06-06\",\r\n        \"prnt_rights_document\": {\r\n            \"document_type\": {\r\n                  \"code\": \"1\",\r\n                  \"type\": 127\r\n            },\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"111\",\r\n\t\t\t\t\"type\": 88\r\n\t\t\t},\r\n\t\t\t\"date_of_issue\": \"2015-02-03\",\r\n\t\t\t\"number\": \"1\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/court/parent-rights",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"court",
+								"parent-rights"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Лишение родительских прав",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"4100\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"111\",\r\n\t\t\t\"type\": 88\r\n\t\t}\r\n\t},\r\n\t\"prnt_rights_info\": {\r\n        \"parent_data\": {\r\n            \"identif\": \"4090983H011PB6\"\r\n        },\r\n        \"child_data\": {\r\n            \"identif\": \"7746528A001PB4\"\r\n        },\r\n        \"deprivation_prnt_rights_date\": \"2015-07-06\",\r\n        \"prnt_rights_document\": {\r\n            \"document_type\": {\r\n                  \"code\": \"1\",\r\n                  \"type\": 127\r\n            },\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"111\",\r\n\t\t\t\t\"type\": 88\r\n\t\t\t},\r\n\t\t\t\"date_of_issue\": \"2015-02-02\",\r\n\t\t\t\"number\": \"6\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/court/parent-rights",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"court",
+								"parent-rights"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "47a24e4b-d277-427e-9291-e95fe6f9c053",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "48ad4352-3448-4050-aec4-8a669f0f3bfc",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Инвалидность",
+			"item": [
+				{
+					"name": "Внести данные по инвалидности",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true,
+							"connection": true,
+							"host": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cover\": {\r\n    \"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n    \"message_type\": {\r\n      \"code\": \"106\",\r\n      \"type\": -2\r\n    },\r\n    \"message_source\": {\r\n      \"code\": \"1\",\r\n      \"type\": 156\r\n    }\r\n  },\r\n  \"disability_info\": {\r\n    \"person_data\": {\r\n      \"identif\": \"3010249A000VF8\"\r\n    },\r\n    \"disability_document\": {\r\n      \"document_type\": {\r\n        \"code\": \"1\",\r\n        \"type\": 155\r\n      },\r\n      \"authority\": {\r\n        \"code\": \"1\",\r\n        \"type\": 156\r\n      }\r\n    },\r\n    \"disability_data\": {\r\n      \"disability_group\": {\r\n        \"code\": \"8\",\r\n        \"type\": 153\r\n      },\r\n      \"disability_date\": \"2006-04-01\",\r\n      \"disability_term\": \"2006-04-05\",\r\n      \"disability_cause\": {\r\n        \"code\": \"69\",\r\n        \"type\": 154\r\n      }\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/disability",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"disability"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Образование",
+			"item": [
+				{
+					"name": "Внести данные по образованию",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true,
+							"connection": true,
+							"host": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cover\": {\r\n    \"message_type\": {\r\n      \"code\": \"98\",\r\n      \"type\": -2\r\n    },\r\n    \"message_source\": {\r\n      \"code\": \"32-1\",\r\n      \"type\": 109\r\n    }\r\n  },\r\n  \"education_info\": {\r\n    \"person_data\": {\r\n      \"identif\": \"B33999391\"\r\n    },\r\n    \"education_document\": {\r\n      \"document_type\": {\r\n        \"code\": \"13\",\r\n        \"type\": 107\r\n      },\r\n      \"authority\": {\r\n        \"code\": \"32-1\",\r\n        \"type\": 109\r\n      },\r\n      \"date_of_issue\": \"2010-10-10\",\r\n      \"expire_date\": \"2010-10-13\",\r\n      \"series\": \"SD\",\r\n      \"number\": \"111126\",\r\n      \"active\": 1\r\n    },\r\n    \"education_data\": {\r\n      \"education_specialization\": {\r\n        \"code\": \"44\",\r\n        \"type\": 108\r\n      },\r\n      \"education_department\": {\r\n        \"code\": \"32-2\",\r\n        \"type\": 109\r\n      },\r\n      \"education_begin_data\": \"2005-09-02\",\r\n      \"education_end_data\": \"2014-06-03\",\r\n      \"education_record_number\": \"1235\",\r\n      \"active\": 0\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/education",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"education"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ФСЗН",
+			"item": [
+				{
+					"name": "Внести данные по ФСЗН",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true,
+							"host": true,
+							"connection": true,
+							"accept-encoding": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cover\": {\r\n    \"message_id\": \"7492594A001PB1\",\r\n    \"message_time\": \"2017-07-13\",\r\n    \"message_type\": {\r\n      \"code\": \"99\",\r\n      \"type\": -2\r\n    },\r\n    \"message_source\": {\r\n      \"code\": \"1\",\r\n      \"type\": 125\r\n    }\r\n  },\r\n  \"employment_info\": {\r\n    \"person_data\": {\r\n      \"identif\": \"7120691A001PB3\"\r\n    },\r\n    \"employment_data\": {\r\n      \"employment_organization\": \"790466336\",\r\n      \"employment_period\": \r\n      [\r\n        {\r\n          \"employment_begin_date\": \"2004-08-01\",\r\n          \"employment_end_date\": \"2005-12-31\"\r\n        },\r\n        {\r\n          \"employment_begin_date\": \"2015-08-01\",\r\n          \"employment_end_date\": \"2015-11-20\"\r\n        }\r\n      ],\r\n      \"active\": 1\r\n    },\r\n    \"employment_document\": {\r\n      \"date_of_issue\": \"2017-07-13\",\r\n      \"document_type\": {\r\n        \"code\": \"1\",\r\n        \"type\": 126\r\n      },\r\n      \"authority\": {\r\n        \"code\": \"1\",\r\n        \"type\": 125\r\n      },\r\n      \"number\": \"452\"\r\n    }\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/fszn",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"fszn"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Страхование",
+			"item": [
+				{
+					"name": "Внести данные по страховке",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true,
+							"connection": true,
+							"host": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"cover\": \r\n\t\t{\r\n            \"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n            \"message_type\": \r\n\t\t\t{\r\n               \"code\": \"96\",\r\n               \"type\": -2\r\n            },\r\n\t\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n            \"message_source\": \r\n\t\t\t{\r\n               \"code\":\"100\",\r\n               \"type\":105\r\n            }\r\n        },\r\n\t\t \r\n\t\"insurance_info\":\r\n\t{\r\n\t\t\"person_data\":\r\n\t\t{\r\n\t\t\t\"identif\": \"7120691A001PB3\"\r\n\t\t},\r\n\t\t\"insurance_document\":\r\n\t\t{\r\n\t\t\t\"document_type\":\r\n\t\t\t{\r\n\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\"type\": 106\r\n\t\t\t},\r\n\t\t\t\"authority\":\r\n\t\t\t{\r\n\r\n\t\t\t\t\"code\": \"100\",\r\n\t\t\t\t\"type\": 105\r\n\t\t\t},\r\n\t\t\t\"date_of_issue\": \"2015-01-01\",\r\n\t\t\t\"number\": \"1\"\t   \r\n\t\t},\r\n\t\t\"insurance_data\":\r\n\t\t{\r\n\t\t\t\"insurance_awarding_date\": \"2015-03-02\",\r\n\t\t\t\"insurance_suspension_date\": \"2015-04-02\"\r\n\t\t}\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/insurance",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"insurance"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Пенсии",
+			"item": [
+				{
+					"name": "Внести данные о пенсии",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true,
+							"connection": true,
+							"host": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-sign",
+								"value": "4BVLesHGwUls0LP0lNnU6WBn0nSHbfpqTDP8qT7WoMjgtqWVLFg821oWbpnvuqT6",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-key",
+								"value": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVLekNDQStXZ0F3SUJBZ0lDSUdvd0RRWUpLbkFBQWdBaVpTME1CUUF3Z2RVeENqQUlCZ05WQkF3TUFURXgKQ3pBSkJnTlZCQVlUQWtKWk1SY3dGUVlEVlFRSURBN1FuTkM0MEwzUmdkQzYwTERSanpFVE1CRUdBMVVFQnd3SwowSnpRdU5DOTBZSFF1akVVTUJJR0ExVUVDZ3dMMEp6UWt0Q1VJTkNnMEpFeEhUQWJCZ05WQkFzTUZOQ1UwSlBRCnVOQ2NJTkNjMEpMUWxDRFFvTkNSTVRZd05BWURWUVFEREMzUW85Q21JTkNnMExYUXM5QzQwWUhSZ3RHQTBMQWcKMEwzUXNOR0IwTFhRdTlDMTBMM1F1TkdQSUNnME5Ta3hIekFkQmdrcWhraUc5dzBCQ1FFV0VIVXVhMmx5WldWMgpMa0J0YVdFdVlua3dKaGNSTVRjd01qSXlNVFUxT0RJM0t6QXpNREFYRVRJd01ESXlNakF3TURBd01Dc3dNekF3Ck1JSUJ3akVMTUFrR0ExVUVCaE1DUWxreEV6QVJCZ05WQkFnTUN0Q2MwTGpRdmRHQjBMb3hMakFzQmdOVkJBY00KSmRDekx0Q2MwTGpRdmRHQjBMb3NJTkdEMExzdTBKclJnTkN3MFlIUXZkQ3cwWThzTlNBeFR6Qk5CZ05WQkFvTQpSdENjMExqUXZkR0IwTHJRdU5DNUlOQ3owTDdSZ05DKzBMVFJnZEM2MEw3UXVTRFF2ZEMrMFlMUXNOR0EwTGpRCnNOQzcwWXpRdmRHTDBMa2cwTDdRdXRHQTBZUFFzeUF4R1RBWEJnTlZCQXNNRU5DOTBMN1JndEN3MFlEUXVOR0QKMFlFeFFUQS9CZ05WQkFNTU9OQ2IwTGpSZ3RDeTBMalF2ZEM2MEw0ZzBKTFF0ZEdBMEw3UXZkQzQwTHJRc0NEUQprTkM5MExEUmd0QyswTHZSak5DMTBMTFF2ZEN3TVE4d0RRWUpLb1pJaHZjTkFRa0JGZ0F4Q1RBSEJnTlZCQzBNCkFERUpNQWNHQTFVRUJSTUFNUmt3RndZRFZRUVBEQkRRdmRDKzBZTFFzTkdBMExqUmc5R0JNUmt3RndZRFZRUUUKREJEUW05QzQwWUxRc3RDNDBMM1F1dEMrTVJrd0Z3WURWUVFwREJEUWt0QzEwWURRdnRDOTBMalF1dEN3TVI4dwpIUVlEVlFRcURCYlFrTkM5MExEUmd0QyswTHZSak5DMTBMTFF2ZEN3TVE4d0RRWURWUVFyREFiUWtpN1FrQzR4CkNUQUhCZ05WQkVFTUFERUtNQWdHQTFVRURBd0JOREJ1TUNjR0NpcHdBQUlBSW1VdEFnRXdHVEFNQmdvcWNBQUMKQUNKbExRTUJCZ2txY0FBQ0FDSmxIMUVEUXdBRVFJYU55b1F5eHppeWZuV0NFWWw1aTZQWVg5TkNaQlVjcGh1MApyMnFnZTBkRWNSOU1lSmVnOWNKRmhLdUhVb1R4Q3JxWFMwSlVZY2VSWTY5czVObDFKUjZqZ1pRd2daRXdDUVlEClZSMFRCQUl3QURBc0JnbGdoa2dCaHZoQ0FRMEVIeFlkVDNCbGJsTlRUQ0JIWlc1bGNtRjBaV1FnUTJWeWRHbG0KYVdOaGRHVXdLUVlEVlIwT0JDSUVJSVdHcmxPNUJVL0pnTkJKejh2ZXpYODlkdHUvQWNFVmd2N3lGQmhZRmZkTApNQ3NHQTFVZEl3UWtNQ0tBSUd5NkhOamdudllVaDNlNXFlbkZvS055MHRteUpkV0M3aU9NYzQrcjdmV0hNQTBHCkNTcHdBQUlBSW1VdERBVUFBekVBYXRPY2tOQTZDd2NBck1kOGU5MEMrSVZLWHE2b0QwM05kOXUrUkg2ajlwZHAKOXVEWk0weW5KVWtSQUoyM0xSQ3IKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-date",
+								"value": "2019-05-20T15:04:24",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cover\": {\r\n    \"message_id\":\"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n    \"message_type\": {\r\n      \"code\":\"83\",\r\n      \"type\":-2\r\n    },\r\n    \"message_time\":\"2014-04-09T13:22:09.619+03:00\",\r\n    \"message_source\": {\r\n      \"code\":\"6\",\r\n      \"type\":140\r\n    }\r\n  },\r\n  \"pension_info\": {\r\n    \"person_data\": {\r\n      \"identif\": \"7120691A001PB3\"\r\n    },\r\n    \"pension_document\": {\r\n      \"document_type\": {\r\n        \"code\": \"1\",\r\n        \"type\": 133\r\n      },\r\n      \"authority\": {\r\n        \"code\": \"6\",\r\n        \"type\": 140\r\n      },\r\n      \"date_of_issue\": \"2017-01-07\",\r\n      \"series\": \"A1\",\r\n      \"number\": \"002\"\r\n    },\r\n    \"pension_data\": {\r\n      \"pension_type\": {\r\n        \"code\": \"72\",\r\n        \"type\": 89\r\n      },\r\n      \"pension_awarding_date\": \"2016-05-11\",\r\n      \"active\": 1\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/pension",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"pension"
+							]
+						},
+						"description": "Adding a new data of KGB pension"
+					},
+					"response": []
+				},
+				{
+					"name": "Внести данные о пенсии сотрудников КГБ",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"host": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\":\r\n\t\t\t         {\r\n\t\t\t\t\t\t\"code\": \"83\",\r\n\t\t\t\t\t\t\"type\": -2\r\n\t\t\t\t\t  },\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\":\r\n\t\t\t         {\r\n\t\t\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\t\t\"type\": 121\r\n\t\t\t\t\t  }\r\n\t},\r\n\t\"pension_info\": {\r\n\t\t\"person_data\":\r\n\t\t{\r\n\t\t\t\"identif\": \"7120691A001PB3\"\r\n\t\t},\r\n\t\t\"pension_document\":\r\n\t\t{\r\n\t\t\t\"document_type\":\r\n\t\t\t{\r\n\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\"type\": 124\r\n\t\t\t},\r\n\t\t\t\"authority\":\r\n\t\t\t{\r\n\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\"type\": 121\r\n\t\t\t},\r\n\t\t\t\"date_of_issue\": \"2014-01-02\",\r\n\t\t\t\"series\": \"A4A\",\r\n\t\t\t\"number\": \"A4A\"\t   \r\n\t\t},\r\n\t\t\"pension_data\":\r\n\t\t{\r\n\t\t\t\"pension_type\":\r\n\t\t\t{\r\n\t\t\t\t\"code\": \"3\",\r\n\t\t\t\t\"type\": 89\r\n\t\t\t},\r\n\t\t\t\"pension_awarding_date\": \"1941-05-06\",\r\n\t\t\t\"active\": 1\r\n\t\t}\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/pension",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"pension"
+							]
+						},
+						"description": "Adding KGB pension data"
+					},
+					"response": []
+				},
+				{
+					"name": "Внести данные о пенсии сотрудников МЧС",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t  \"code\": \"83\",\r\n\t\t  \"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t  \"code\": \"1\",\r\n\t\t  \"type\": 120\r\n\t\t}\r\n\t},\r\n\t\"pension_info\": {\r\n\t\t\"person_data\": {\r\n\t\t  \"identif\": \"7718616A001PB3\"\r\n\t\t},\r\n\t\t\"pension_document\": {\r\n\t\t\t\"document_type\": {\r\n\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\"type\": 92\r\n\t\t\t},\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\"type\": 120\r\n\t\t\t},\r\n\t\t\t\"date_of_issue\": \"2014-01-02\",\r\n\t\t\t\"series\": \"A2A\",\r\n\t\t\t\"number\": \"123711\"\r\n\t\t},\r\n\t\t\"pension_data\": {\r\n\t\t\t\"pension_type\": {\r\n\t\t\t\t\"code\": \"3\",\r\n\t\t\t\t\"type\": 89\r\n\t\t\t},\r\n\t\t\t\"pension_awarding_date\": \"2014-05-06\"\r\n\t\t}\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/pension",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"pension"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Внести данные о пенсии сотрудников МО",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t  \"code\": \"83\",\r\n\t\t  \"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t  \"code\": \"100\",\r\n\t\t  \"type\": 119\r\n\t\t}\r\n\t},\r\n\t\"pension_info\": {\r\n\t\t\"person_data\": {\r\n\t\t  \"identif\": \"7120691A001PB3\"\r\n\t\t},\r\n\t\t\"pension_document\": {\r\n\t\t\t\"document_type\": {\r\n\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\"type\": 122\r\n\t\t\t},\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"100\",\r\n\t\t\t\t\"type\": 119\r\n\t\t\t},\r\n\t\t\t\"date_of_issue\": \"2014-01-03\",\r\n\t\t\t\"series\": \"A4A\",\r\n\t\t\t\"number\": \"123311\"\r\n\t\t},\r\n\t\t\"pension_data\": {\r\n\t\t\t\"pension_type\": {\r\n\t\t\t\t\"code\": \"3\",\r\n\t\t\t\t\"type\": 89\r\n\t\t\t},\r\n\t\t\t\"pension_awarding_date\": \"1941-05-06\"\r\n\t\t}\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/pension",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"pension"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Наука",
+			"item": [
+				{
+					"name": "Внести данные об ученом звании",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cover\": {\r\n    \"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n    \"message_type\": {\r\n      \"code\": \"93\",\r\n      \"type\": -2\r\n    },\r\n    \"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n    \"message_source\": {\r\n      \"code\": \"1\",\r\n      \"type\": 115\r\n    }\r\n  },\r\n  \"science_rank_info\": {\r\n    \"person_data\": {\r\n      \"identif\": \"7755122A001PB4\"\r\n    },\r\n    \"science_rank_document\": {\r\n      \"document_type\": {\r\n        \"code\": \"1\",\r\n        \"type\": 111\r\n      },\r\n      \"authority\": {\r\n        \"code\": \"1\",\r\n        \"type\": 115\r\n      },\r\n      \"date_of_issue\": \"2015-01-01\",\r\n      \"series\": \"SD\",\r\n      \"number\": \"1\"\r\n    },\r\n    \"science_rank_data\": {\r\n      \"science_rank\": {\r\n        \"code\": \"1\",\r\n        \"type\": 113\r\n      },\r\n      \"science_rank_date\": \"2015-01-01\",\r\n      \"science_rank_number\": \"123\"\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/vak",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"vak"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Внести данные об ученом уровне",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"db33fff7-0b02-4de6-9789-47329b56d065\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"93\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2015-11-26T11:39:23.206+02:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"1\",\r\n\t\t\t\"type\": 115\r\n\t\t}\r\n\t},\r\n    \"science_degree_info\": {\r\n\t\t\"person_data\": {\r\n\t\t\t\"identif\": \"7718616A001PB3\"\r\n\t\t},\r\n        \"science_degree_document\": {\r\n            \"document_type\": {\r\n\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\"type\": 111\r\n            },\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\"type\": 115\r\n\t\t\t},\r\n            \"date_of_issue\": \"2012-09-01+02:00\",\r\n            \"series\": \"B\",\r\n            \"number\": \"1111111\",\r\n\t\t\t\"active\": true\r\n        },\r\n        \"science_degree_data\": {\r\n            \"science_degree\": {\r\n\t\t\t\t\"code\": \"24\",\r\n\t\t\t\t\"type\": 112\r\n            },\r\n            \"science_degree_date\": \"2012-09-01+02:00\",\r\n            \"science_degree_number\": \"999\",\r\n\t\t\t\"active\": true\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/vak",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"vak"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "common",
+			"item": [
+				{
+					"name": "Получить персоональные данные по идентификатору",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true,
+							"connection": true,
+							"host": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cover\": {\r\n    \"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n    \"message_type\": {\r\n      \"code\": \"-2\",\r\n      \"type\": 300\r\n    },\r\n    \"message_time\": \"2011-12-07T13:22:09.619+03:00\",\r\n    \"message_source\": {\r\n      \"code\": \"17120\",\r\n      \"type\": 80\r\n    },\r\n    \"agreement\": {\r\n      \"operator_info\": \"НКФО ЕРИП ул. Толстого,д. 6\",\r\n      \"target\": \"верификация персональных данных\",\r\n      \"rights\": [\r\n        7\r\n      ],\r\n      \"issue_date\": \"2019-12-07T13:22:09.619+03:00\",\r\n      \"expiry_date\": \"2023-12-07T13:22:09.619+03:00\",\r\n      \"assignee_persons\": [\r\n        \"инспектор Иванов Иван Иванович\",\r\n        \"зам. начальника отдела Петров Иван Петрович\"\r\n      ]\r\n    },\r\n    \"dataset\": [\r\n      201, \r\n      703, \r\n      208,\r\n      480,\r\n      481,\r\n      482,\r\n      490,\r\n      491,\r\n      527,\r\n      528,\r\n      252,\r\n      465,\r\n      466,\r\n      516,\r\n      517\r\n    ]\r\n  },\r\n  \"request\": {\r\n    \"person_request\": [\r\n      {\r\n        \"request_id\": \"реб1\",\r\n        \"identif_number\": \"7120691A001PB3\"\r\n      }\r\n    ]\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/common/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"common",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить идентификационные номера",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t    \"code\": \"-2\",\r\n\t\t    \"type\": 300\r\n\t\t},\r\n\t\t\"message_time\": \"2011-12-07T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t    \"code\": \"17120\",\r\n\t\t    \"type\": 80\r\n\t\t}\r\n\t},\r\n\t\"request\": {\r\n\t\t\"identif_request\": [\r\n\t\t\t{\r\n\t\t\t\t\"request_id\": \"1\",\r\n\t\t\t\t \"sex\": {\r\n                  \t\"code\": \"F\",\r\n                  \t\"type\": 32\r\n                },\r\n\t\t\t\t\"birth_day\": \"19900101\"\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t\"request_id\": \"2\",\r\n\t\t\t\t \"sex\": {\r\n                  \t\"code\": \"F\",\r\n                  \t\"type\": 32\r\n                },\r\n\t\t\t\t\"birth_day\": \"19900101\"\r\n\t\t\t},\r\n\t\t\t{\r\n\t\t\t\t\"request_id\": \"3\",\r\n\t\t\t\t \"sex\": {\r\n                  \t\"code\": \"F\",\r\n                  \t\"type\": 32\r\n                },\r\n\t\t\t\t\"birth_day\": \"19900101\"\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/common/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"common",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Установить идентификационный номер",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true,
+							"connection": true,
+							"host": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"type": "text",
+								"value": "PASSPORT_USER"
+							},
+							{
+								"key": "Reg-auth-password",
+								"type": "text",
+								"value": "user_password"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cover\": {\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"88\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"900\",\r\n\t\t\t\"type\": 88\r\n\t\t},\r\n\t\t\"agreement\": {\r\n\t\t\t\"operator_info\": \"НКФО ЕРИП ул. Толстого,д. 6\",\r\n\t\t\t\"target\": \"верификация персональных данных\",\r\n\t\t\t\"rights\": [\r\n\t\t\t\t7\r\n\t\t\t],\r\n\t\t\t\"issue_date\": \"2019-12-07T13:22:09.619+03:00\",\r\n\t\t\t\"expiry_date\": \"2023-12-07T13:22:09.619+03:00\",\r\n\t\t\t\"assignee_persons\": [\r\n\t\t\t\t\"инспектор Иванов Иван Иванович\",\r\n\t\t\t\t\"зам. начальника отдела Петров Иван Петрович\"\r\n\t\t\t]\r\n\t\t},\r\n\t\t\"dataset\": [\r\n\t\t\t411,\r\n\t\t\t408,\r\n\t\t\t412,\r\n\t\t\t410,\r\n\t\t\t409\r\n\t\t]\r\n\t},\r\n\t\"request\": {\r\n\t\t\"surname\": \"ИВАНОВ\",\r\n\t\t\"name\": \"ИВАН\",\r\n\t\t\"sname\": \"ИВАНОВИЧ\",\r\n\t\t\"bdate\": \"20120511\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/common/person-identif",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"common",
+								"person-identif"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Найти персоональные данные",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t    \"code\": \"-2\",\r\n\t\t    \"type\": 300\r\n\t\t},\r\n\t\t\"message_time\": \"2011-12-07T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t    \"code\": \"17120\",\r\n\t\t    \"type\": 80\r\n\t\t},\r\n\t\t\"system_id\": {\r\n\t\t    \"code\": \"7\",\r\n\t\t    \"type\": -30\r\n\t\t}\r\n\t},\r\n\t\"request\": {\r\n        \"arrival\": true,\r\n        \"departure\": false,\r\n        \"permAddress\": true,\r\n        \"tempAddress\": false,\r\n        \"region\": {\r\n\t\t\t\"code\": \"110\",\r\n\t\t\t\"type\": 29\r\n        },\r\n        \"soviet\": {\r\n\t\t\t\"code\": \"401\",\r\n\t\t\t\"type\": 67\r\n        },\r\n        \"archive\": true\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/common/register-persons",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"common",
+								"register-persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Первый запрос на запуск поиска внесенных данных за период",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cover\": {\r\n    \"message_id\": \"4D7961DF-3157-4587-A498-5D995C733D80\",\r\n    \"message_type\": {\r\n      \"code\": \"-2\",\r\n      \"type\": 300\r\n    },\r\n    \"message_time\": \"2011-12-07T13:22:09.619+03:00\",\r\n    \"message_source\": {\r\n      \"code\": \"17120\",\r\n      \"type\": 80\r\n    }\r\n  },\r\n  \"request\":\r\n  {\r\n\t  \"person_request\": [\r\n      {\r\n        \"request_id\": \"req1\",\r\n        \"search\": {\r\n          \"date_from\": \"2019-01-07 11:21:11\",\r\n          \"date_to\": \"2021-01-01 11:21:11\",\r\n          \"dataset\": [208, 480, 481, 482, 218, 490, 491, 501, 504, 505, 219, 485, 486, 302, 441, 442, 443, 444]\r\n        }\r\n      },\r\n      {\r\n        \"request_id\": \"req3\",\r\n        \"search\": {\r\n          \"date_from\": \"2019-01-07 11:21:11\",\r\n          \"date_to\": \"2021-01-01 11:21:11\",\r\n          \"dataset\": [208, 480, 481, 482, 250, 510, 258, 465, 466, 254, 527, 528]\r\n        }\r\n      }\r\n    ]\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/common/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"common",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Запрос для получения состояния и данных отложенного поиска",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/common/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"common",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Запрос для установки времени запуска отложенного поиска",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"7219190f-3864-4be1-be9f-9cb190632bf0\",\r\n    \"date\": \"2020-08-05 16:45:17\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/deferredsearch",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"deferredsearch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Список запросов отложенного поиска",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/deferredsearch",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"deferredsearch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Первый запрос на предоставление персоональных данных (справка/выписка)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"type": "text",
+								"value": "PASSPORT_USER"
+							},
+							{
+								"key": "Reg-auth-password",
+								"type": "text",
+								"value": "user_password"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identif\": \"4190259A000PB6\",\r\n  \"erip_operation\": \"333\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/inquiry",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Проверка отправленной справки (выписки)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"user-agent": true,
+							"host": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/inquiry/response/552dd3c6-655a-42a9-be5b-32b0e7f8b2e8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"inquiry",
+								"response",
+								"552dd3c6-655a-42a9-be5b-32b0e7f8b2e8"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Армия",
+			"item": [
+				{
+					"name": "Военнообязанный",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true,
+							"connection": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"type": "text",
+								"value": "no-cache",
+								"disabled": true
+							},
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cover\":\r\n  {\r\n    \"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n    \"message_type\": {\r\n      \"code\": \"95\",\r\n      \"type\": -2\r\n    },\r\n    \"message_source\": {\r\n      \"code\": \"716\",\r\n      \"type\": 104\r\n    }\r\n  },\r\n  \"military_service_info\": {\r\n    \"person_data\": {\r\n      \"identif\": \"3010249A000VF8\"\r\n    },\r\n    \"military_service_document\": {\r\n      \"document_type\": {\r\n        \"code\": \"1\",\r\n        \"type\": 103\r\n      },\r\n      \"authority\": {\r\n        \"code\": \"716\",\r\n        \"type\": 104\r\n      },\r\n      \"active\": true\r\n    },\r\n    \"military_service_data\": {\r\n      \"military_service_awarding_date\": \"2006-04-01\",\r\n      \"active\": 1\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/military",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"military"
+							]
+						},
+						"description": "Adding of military data"
+					},
+					"response": []
+				},
+				{
+					"name": "Военнообязанный. Неактивный",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cover\":\r\n  {\r\n    \"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n    \"message_type\": {\r\n      \"code\": \"95\",\r\n      \"type\": -2\r\n    },\r\n    \"message_source\": {\r\n      \"code\": \"365\",\r\n      \"type\": 104\r\n    }\r\n  },\r\n  \"military_service_info\": {\r\n    \"person_data\": {\r\n      \"identif\": \"3161289A028PB4\"\r\n    },\r\n    \"military_service_document\": {\r\n      \"document_type\": {\r\n        \"code\": \"1\",\r\n        \"type\": 103\r\n      },\r\n      \"authority\": {\r\n        \"code\": \"815\",\r\n        \"type\": 104\r\n      },\r\n      \"active\": false\r\n    },\r\n    \"military_service_data\": {\r\n      \"military_service_awarding_date\": \"2011-04-04\",\r\n      \"active\": 0\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/military",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"military"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Классификаторы",
+			"item": [
+				{
+					"name": "Данные по классификатору. Пример 1",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"83\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"6\",\r\n\t\t\t\"type\": 140\r\n\t\t}\r\n\t},\r\n    \"request\": {\r\n        \"cl_type\": 32,\r\n        \"date_from\": \"1015-10-11T00:00:00\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/classif/cl-changes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"classif",
+								"cl-changes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Данные по классификатору. Пример  2",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"83\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"6\",\r\n\t\t\t\"type\": 140\r\n\t\t}\r\n\t},\r\n    \"request\": {\r\n        \"cl_type\": 131,\r\n        \"date_from\": \"1015-11-11T00:00:00\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/classif/cl-changes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"classif",
+								"cl-changes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Данные по классификатору. Пример 3",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"83\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"6\",\r\n\t\t\t\"type\": 140\r\n\t\t}\r\n\t},\r\n    \"request\": {\r\n        \"cl_type\": 24,\r\n        \"date_from\": \"1000-07-07\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/classif/cl-changes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"classif",
+								"cl-changes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Типы классификаторов",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"connection": true,
+							"accept-encoding": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"83\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"6\",\r\n\t\t\t\"type\": 140\r\n\t\t}\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/classif/cl-types",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"classif",
+								"cl-types"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "local",
+			"item": [
+				{
+					"name": "Внести данные по ежемесячному содержанию",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"102\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"2\",\r\n\t\t\t\"type\": 140\r\n\t\t}\r\n\t},\r\n    \"salary_info\": {\r\n\t\t\"person_data\": {\r\n\t\t\t\"identif\": \"7120691A001PB3\"\r\n\t\t},\r\n        \"salary_data\": {\r\n            \"salary_awarding_date\": \"2016-04-02\",\r\n            \"salary_suspension_date\": \"2017-04-02\"\r\n        },\r\n        \"salary_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"2\",\r\n\t\t\t\t\"type\": 133\r\n            },\r\n            \"authority\": {\r\n\t\t\t\t\"code\": \"2\",\r\n\t\t\t\t\"type\": 140\r\n\t\t\t},\r\n            \"date_of_issue\": \"2015-05-05\",\r\n            \"number\": 123\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/local/salary",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"local",
+								"salary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Внести данные по попечительству (дата установления/отстранения попечителя)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true,
+							"connection": true,
+							"host": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"type": "text",
+								"value": "PASSPORT_USER"
+							},
+							{
+								"key": "Reg-auth-password",
+								"type": "text",
+								"value": "user_password"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"103\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"6\",\r\n\t\t\t\"type\": 131\r\n\t\t}\r\n\t},\r\n\t\"trusteeship_info\": {\r\n        \"ward_data\": {\r\n\t\t\t\"identif\": \"7492594A001PB1\"\r\n        },\r\n        \"trustee_data\": {\r\n\t\t\t\"identif\": \"7120691A001PB3\"\r\n        },\r\n        \"establish_trusteeship_date\": \"2016-05-07\",\r\n        \"remove_trustee_date\": \"2017-06-08\",\r\n\t\t\"trusteeship_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"4\",\r\n\t\t\t\t\"type\": 133\r\n\t\t\t\t  \r\n            },\r\n            \"authority\": {\r\n\t\t\t\t\"code\": \"6\",\r\n\t\t\t\t\"type\": 131\r\n\t\t\t},\r\n            \"date_of_issue\": \"2014-01-01\",\r\n            \"number\": 6\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/local/trusteeship",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"local",
+								"trusteeship"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Внести данные по попечительству (дата установления/прекращения попечительства)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true,
+							"connection": true,
+							"host": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"type": "text",
+								"value": "PASSPORT_USER"
+							},
+							{
+								"key": "Reg-auth-password",
+								"type": "text",
+								"value": "user_password"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"103\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"6\",\r\n\t\t\t\"type\": 131\r\n\t\t}\r\n\t},\r\n\t\"trusteeship_info\": {\r\n        \"ward_data\": {\r\n\t\t\t\"identif\": \"7492594A001PB1\"\r\n        },\r\n        \"trustee_data\": {\r\n\t\t\t\"identif\": \"7120691A001PB3\"\r\n        },\r\n        \"establish_trusteeship_date\": \"2016-05-07\",\r\n        \"termination_trusteeship_date\": \"2017-09-08\",\r\n\t\t\"trusteeship_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"4\",\r\n\t\t\t\t\"type\": 133\r\n\t\t\t\t  \r\n            },\r\n            \"authority\": {\r\n\t\t\t\t\"code\": \"6\",\r\n\t\t\t\t\"type\": 131\r\n\t\t\t},\r\n            \"date_of_issue\": \"2014-01-01\",\r\n            \"number\": 6\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/local/trusteeship",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"local",
+								"trusteeship"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Внести данные по попечительству (дата установления/освобождения попечителя)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true,
+							"connection": true,
+							"host": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"type": "text",
+								"value": "PASSPORT_USER"
+							},
+							{
+								"key": "Reg-auth-password",
+								"type": "text",
+								"value": "user_password"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"103\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"6\",\r\n\t\t\t\"type\": 131\r\n\t\t}\r\n\t},\r\n\t\"trusteeship_info\": {\r\n        \"ward_data\": {\r\n\t\t\t\"identif\": \"7492594A001PB1\"\r\n        },\r\n        \"trustee_data\": {\r\n\t\t\t\"identif\": \"7120691A001PB3\"\r\n        },\r\n        \"establish_trusteeship_date\": \"2016-05-07\",\r\n        \"release_trustee_date\": \"2018-09-08\",\r\n\t\t\"trusteeship_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"4\",\r\n\t\t\t\t\"type\": 133\r\n\t\t\t\t  \r\n            },\r\n            \"authority\": {\r\n\t\t\t\t\"code\": \"6\",\r\n\t\t\t\t\"type\": 131\r\n\t\t\t},\r\n            \"date_of_issue\": \"2014-01-01\",\r\n            \"number\": 6\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/local/trusteeship",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"local",
+								"trusteeship"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Постановка на учет безработного. Пример 1",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"ffac4651-cdd4-431a-a5c5-2c70e10f7a99\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"105\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"13\",\r\n\t\t\t\"type\": 131\r\n\t\t}\r\n\t},\r\n\t\"unemployment_info\": {\r\n        \"person_data\": {\r\n\t\t\t\"identif\": \"7120691A001PB3\"\r\n        },\r\n        \"unemployment_data\": {\r\n\t\t\t\"unemployment_begin_data\": \"2016-02-11\",\r\n\t\t\t\"unemployment_end_data\": \"2016-05-05\"\r\n        },\r\n\t\t\"unemployment_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"5\",\r\n\t\t\t\t\"type\": 133\r\n            },\r\n            \"authority\": {\r\n\t\t\t\t\"code\": \"13\",\r\n\t\t\t\t\"type\": 131\r\n\t\t\t},\r\n            \"date_of_issue\": \"2014-01-01\",\r\n            \"number\": 1\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/local/unemployment",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"local",
+								"unemployment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Постановка на учет безработного. Пример 3",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"ffac4651-cdd4-431a-a5c5-2c70e10f7a99\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"105\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"12\",\r\n\t\t\t\"type\": 131\r\n\t\t}\r\n\t},\r\n\t\"unemployment_info\": {\r\n        \"person_data\": {\r\n\t\t\t\"identif\": \"7120691A001PB3\"\r\n        },\r\n        \"unemployment_data\": {\r\n\t\t\t\"unemployment_begin_data\": \"2016-02-12\",\r\n\t\t\t\"unemployment_end_data\": \"2016-05-05\"\r\n        },\r\n\t\t\"unemployment_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"5\",\r\n\t\t\t\t\"type\": 133\r\n            },\r\n            \"authority\": {\r\n\t\t\t\t\"code\": \"12\",\r\n\t\t\t\t\"type\": 131\r\n\t\t\t},\r\n            \"date_of_issue\": \"2014-01-01\",\r\n            \"number\": 1\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/local/unemployment",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"local",
+								"unemployment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Постановка на учет безработного. Пример  2",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"ffac4651-cdd4-431a-a5c5-2c70e10f7a99\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"104\",\r\n\t\t\t\"type\": -2,\r\n\t\t\t\"active\": \"true\"\r\n\t\t},\r\n\t\t\"message_time\": \"2018-04-03T16:13:38\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"107\",\r\n\t\t\t\"type\": 140,\r\n\t\t\t\"active\": \"true\"\r\n\t\t}\r\n\t},\r\n\t\"unemployment_info\": {\r\n        \"person_data\": {\r\n\t\t\t\"identif\": \"3070659C018PB3\"\r\n        },\r\n        \"unemployment_data\": {\r\n\t\t\t\"unemployment_begin_data\": \"2017-08-23\",\r\n\t\t\t\"unemployment_end_data\": \"2017-09-04\",\r\n\t\t\t\"active\": \"1\"\r\n        },\r\n\t\t\"unemployment_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"5\",\r\n\t\t\t\t\"type\": 133\r\n            },\r\n            \"authority\": {\r\n\t\t\t\t\"code\": \"107\",\r\n\t\t\t\t\"type\": 140\r\n\t\t\t},\r\n            \"date_of_issue\": \"2017-08-23\",\r\n            \"number\": \"120000000035598\",\r\n\t\t\t\"active\": \"true\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/local/unemployment",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"local",
+								"unemployment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Внести данные по статусу работающего",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"104\",\r\n\t\t\t\"type\": -2,\r\n\t\t\t\"active\": \"true\"\r\n\t\t},\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"1\",\r\n\t\t\t\"type\": 131,\r\n\t\t\t\"active\": \"true\"\r\n\t\t}\r\n\t},\r\n\t\"employment_status_info\": {\r\n        \"person_data\": {\r\n\t\t\t\"identif\": \"3110179A016PB5\"\r\n        },\r\n        \"employment_status_data\": {\r\n            \"code\": \"2\",\r\n\t\t\t\"type\": 130\r\n        },\r\n\t\t\"employment_status_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"5\",\r\n\t\t\t\t\"type\": 133\r\n            },\r\n            \"authority\": {\r\n\t\t\t\t\"code\": \"10\",\r\n\t\t\t\t\"type\": 131\r\n\t\t\t},\r\n            \"date_of_issue\": \"2014-01-01\",\r\n            \"number\": \"1\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/local/employment-status",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"local",
+								"employment-status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Внести данные об опекунстве (дата установления/освобождения опекуна)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true,
+							"connection": true,
+							"host": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"type": "text",
+								"value": "PASSPORT_USER"
+							},
+							{
+								"key": "Reg-auth-password",
+								"type": "text",
+								"value": "user_password"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"103\",\r\n\t\t\t\"type\": -2,\r\n\t\t\t\"active\": \"true\"\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"6\",\r\n\t\t\t\"type\": 131\r\n\t\t}\r\n\t},\r\n\t\"guardianship_info\": {\r\n        \"ward_data\": {\r\n\t\t\t\"identif\": \"7746528A001PB4\"\r\n        },\r\n\t\t\"guardian_data\": {\r\n\t\t\t\"identif\": \"7120691A001PB3\"\r\n        },\r\n        \"establish_guardianship_date\": \"2016-06-05\",\r\n        \"release_guardian_date\": \"2016-07-05\",\r\n\t\t\"guardianship_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"4\",\r\n\t\t\t\t\"type\": 133\r\n            },\r\n            \"authority\": {\r\n\t\t\t\t\"code\": \"6\",\r\n\t\t\t\t\"type\": 131\r\n\t\t\t},\r\n            \"date_of_issue\": \"2014-01-01\",\r\n            \"number\": \"1\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/local/guardianship",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"local",
+								"guardianship"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Внести данные об опекунстве (дата установления/прекращения опеки)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true,
+							"connection": true,
+							"host": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"type": "text",
+								"value": "PASSPORT_USER"
+							},
+							{
+								"key": "Reg-auth-password",
+								"type": "text",
+								"value": "user_password"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"103\",\r\n\t\t\t\"type\": -2,\r\n\t\t\t\"active\": \"true\"\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"6\",\r\n\t\t\t\"type\": 131\r\n\t\t}\r\n\t},\r\n\t\"guardianship_info\": {\r\n        \"ward_data\": {\r\n\t\t\t\"identif\": \"7746528A001PB4\"\r\n        },\r\n\t\t\"guardian_data\": {\r\n\t\t\t\"identif\": \"7120691A001PB3\"\r\n        },\r\n        \"establish_guardianship_date\": \"2016-06-05\",\r\n        \"termination_guardianship_date\": \"2017-07-05\",\r\n\t\t\"guardianship_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"4\",\r\n\t\t\t\t\"type\": 133\r\n            },\r\n            \"authority\": {\r\n\t\t\t\t\"code\": \"6\",\r\n\t\t\t\t\"type\": 131\r\n\t\t\t},\r\n            \"date_of_issue\": \"2014-01-01\",\r\n            \"number\": \"1\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/local/guardianship",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"local",
+								"guardianship"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Внести данные об опекунстве (дата установления/отстранения опекуна)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true,
+							"connection": true,
+							"host": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"type": "text",
+								"value": "PASSPORT_USER"
+							},
+							{
+								"key": "Reg-auth-password",
+								"type": "text",
+								"value": "user_password"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"103\",\r\n\t\t\t\"type\": -2,\r\n\t\t\t\"active\": \"true\"\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"6\",\r\n\t\t\t\"type\": 131\r\n\t\t}\r\n\t},\r\n\t\"guardianship_info\": {\r\n        \"ward_data\": {\r\n\t\t\t\"identif\": \"7746528A001PB4\"\r\n        },\r\n\t\t\"guardian_data\": {\r\n\t\t\t\"identif\": \"7120691A001PB3\"\r\n        },\r\n        \"establish_guardianship_date\": \"2016-06-05\",\r\n        \"remove_guardian_date\": \"2018-07-05\",\r\n\t\t\"guardianship_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"4\",\r\n\t\t\t\t\"type\": 133\r\n            },\r\n            \"authority\": {\r\n\t\t\t\t\"code\": \"6\",\r\n\t\t\t\t\"type\": 131\r\n\t\t\t},\r\n            \"date_of_issue\": \"2014-01-01\",\r\n            \"number\": \"1\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/local/guardianship",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"local",
+								"guardianship"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Установить данные по захоронению",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"user-agent": true,
+							"host": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n\t\t\"message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"101\",\r\n\t\t\t\"type\": -2,\r\n\t\t\t\"active\": \"true\"\r\n\t\t},\r\n\t\t\"message_time\": \"2014-04-09T13:22:09.619+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"6\",\r\n\t\t\t\"type\": 131\r\n\t\t}\r\n\t},\r\n\t\"burial_info\": {\r\n        \"person_data\": {\r\n\t\t\t\"identif\": \"7720742A001PB6\"\r\n        },\r\n\t\t\"burial_data\": {\r\n\t\t\t\"country\": {\r\n\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\"type\": 8\r\n\t\t\t},\t\t\t\r\n\t\t\t\"area\": {\r\n\t\t\t\t\"code\": \"22672\",\r\n\t\t\t\t\"type\": 1\r\n\t\t\t},\t\t\t\r\n\t\t\t\"region\": {\r\n\t\t\t\t\"code\": \"23890\",\r\n\t\t\t\t\"type\": 29\r\n\t\t\t},\t\t\t\r\n\t\t\t\"soviet\": {\r\n\t\t\t\t\"code\": \"25426\",\r\n\t\t\t\t\"type\": 67\r\n\t\t\t},\t\t\t\r\n\t\t\t\"city\": {\r\n\t\t\t\t\"code\": \"12856\",\r\n\t\t\t\t\"type\": 7\r\n\t\t\t},\t\t\t\r\n\t\t\t\"burial_name\": {\r\n\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\"type\": 134\r\n\t\t\t},\t\t\t\r\n\t\t\t\"sector\": \"1\",\t\t\t\r\n\t\t\t\"row\": \"1\",\t\t\t\r\n\t\t\t\"place\": \"121\",\t\t\t\r\n\t\t\t\"vault\": \"vvv\"\r\n        },\r\n\t\t\"burial_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"1\",\r\n\t\t\t\t\"type\": 133\r\n            },\r\n            \"authority\": {\r\n\t\t\t\t\"code\": \"6\",\r\n\t\t\t\t\"type\": 131\r\n\t\t\t},\r\n            \"date_of_issue\": \"2017-01-03\",\r\n            \"number\": \"1\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/local/burial",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"local",
+								"burial"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Загс",
+			"item": [
+				{
+					"name": "Внести актовую запись о смерти",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true,
+							"connection": true,
+							"host": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"type": "text",
+								"value": "PASSPORT_USER"
+							},
+							{
+								"key": "Reg-auth-password",
+								"type": "text",
+								"value": "user_password"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cover\": {\r\n\t\t\"message_id\": \"6E983E6F-C1F1-4226-AF1A-21EB3CE088CF\",\r\n\t\t\"message_type\": {\r\n\t\t\t\"code\": \"0400\",\r\n\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2016-02-25T16:44:05.004+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"17120\",\r\n\t\t\t\"type\": 80\r\n\t\t}\r\n\t},\r\n    \"dcs_cert_data\": {\r\n        \"person_data\": {\r\n            \"identif\": \"7172252A001PB3\",\r\n            \"last_name\": \"СТАНКЕВИЧ\",\r\n            \"last_name_bel\": \"СТАНКЕВІЧ\",\r\n\t\t\t\"name\": \"СВЕТЛАНА\",\r\n\t\t\t\"name_bel\": \"СВЯТЛАНА\",\r\n            \"patronymic\": \"ПЕТРОВНА\",\r\n            \"patronymic_bel\": \"ПЯТРОЎНА\",\r\n            \"sex\": {\r\n               \"code\": \"F\", \r\n               \"type\": 32, \r\n               \"lexema\": {\r\n                  \"value\": [\r\n                     {\r\n                        \"value\": \"ЖЕНСКИЙ\",\r\n                        \"lang\": \"ru\"\r\n                     },\r\n                     {\r\n                        \"value\": \"Ж\",\r\n                        \"lang\": \"be\"\r\n                     }\r\n                  ]\r\n\t\t\t\t   },\r\n               \"active\": true\r\n            },\r\n\t\t\t\"birth_day\": \"19851111\",\r\n\t\t\t\"birth_place\": {\r\n\t\t\t\t\"country_b\": {\r\n\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\"type\": 8,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n\t\t\t\t},\r\n\t\t\t\t\"area_b\": \"Минская\",\r\n\t\t\t\t\"area_b_bel\": \"Мiнская\",\r\n\t\t\t\t\"region_b\": \"Узденский\",\r\n\t\t\t\t\"region_b_bel\": \"Узденскі\",\r\n\t\t\t\t\"type_city_b\": {\r\n\t\t\t\t\t\"code\": \"11100001\",\r\n\t\t\t\t\t\"type\": 68,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n\t\t\t\t},\r\n\t\t\t\t\"city_b\": \"БРЕСТ\",\r\n\t\t\t\t\"city_b_bel\": \"БРЭСТ\"\r\n\t\t\t},\r\n\t\t\t\"citizenship\": {\r\n\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\"type\": 8,\r\n\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n\t\t\t\t},\r\n\t\t\t\t\"active\": true\r\n\t\t\t},\r\n\t\t\t\"status\": {\r\n\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\"type\": -18,\r\n\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"АКТИВЕН\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"АКТЫВЕН\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n\t\t\t\t},\r\n\t\t\t\t\"active\": true\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"decease_data\": {\r\n\t\t\t\"death_cause\": {\t\t\t  \t\t\t\t  \r\n\t\t\t\t\"code\": \"A06.9\",\r\n\t\t\t\t\"type\": 81\r\n\t\t\t},\r\n\t\t\t\"death_date\": \"20160101\",\r\n\t\t\t\"decease_place\": {\r\n\t\t\t\t\"country_d\": {\r\n\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\"type\": 8\r\n\t\t\t\t},\r\n\t\t\t\t\"area_d\": \"БРЕСТСКАЯ ОБЛАСТЬ\",\r\n\t\t\t\t\"area_d_bel\": \"БРЭСЦКАЯ ВОБЛАСЦЬ\",\r\n\t\t\t\t\"region_d\": \"БРЕСТСКИЙ\",\r\n\t\t\t\t\"region_d_bel\": \"БРЭСЦКІ\",\r\n\t\t\t\t\"type_city_d\": {\r\n\t\t\t\t\t\"code\": \"17120\",\r\n\t\t\t\t\t\"type\": 80\r\n\t\t\t\t},\r\n\t\t\t\t\"city_d\": \"СТРАДЕЧЬ\",\r\n\t\t\t\t\"city_d_bel\": \"СТРАДЗЕЧ\"\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"reason\": \"ВРАЧЕБНОЕ СВИДЕТЕЛЬСТВО О СМЕРТИ (МЕРТВОРОЖДЕНИИ) №\",\r\n\t\t\"dcs_act_data\": {\r\n\t\t\t\"act_type\": {\r\n\t\t\t\t\"code\": \"0400\",\r\n\t\t\t\t\"type\": 82\r\n\t\t\t},\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"22362\",\r\n\t\t\t\t\"type\": 80\r\n\t\t\t},\r\n\t\t\t\"date\": \"2016-04-02\",\r\n\t\t\t\"number\": \"124\"\r\n\t\t},\r\n\t\t\"dcs_certificate_data\": {\r\n\t\t\t\"document_type\": {\t\t\t  \r\n\t\t\t\t\"code\": \"17120\",\r\n\t\t\t\t\"type\": 80\r\n\t\t\t},\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"22362\",\r\n\t\t\t\t\"type\": 80\r\n\t\t\t},\r\n\t\t\t\"date_of_issue\": \"2016-04-02\",\r\n\t\t\t\"series\": \"I-АЛ\",\r\n\t\t\t\"number\": \"1234\"\r\n\t\t}\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/zags/decease-certificate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"zags",
+								"decease-certificate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Внести актовую запись о рождении",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cover\": {\r\n\t\t\"message_id\": \"224FB59D-7957-45D3-AC7F-0E7726F57977\",\r\n\t\t\"message_type\": {\r\n\t\t\t\t\"code\": \"0160\",\r\n\t\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2013-06-24T08:16:17.812+02:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"18108\",\r\n\t\t\t\"type\": 80\r\n\t\t},\r\n\t\t\"parent_message_id\": \"BC0BD02F-032A-419A-A08F-72EB6DBF6E7F\"\r\n\t},\r\n    \"birth_cert_data\": {\r\n        \"child_data\": {\r\n            \"identif\": \"7027566A001PB8\",\r\n            \"last_name\": \"ИВАНОВА\",\r\n            \"last_name_bel\": \"ІВАНОВА\",\r\n            \"name\": \"ИНГА\",\r\n            \"name_bel\": \"ІНГА\",\r\n            \"patronymic\": \"ВИКТОРОВНА\",\r\n            \"patronymic_bel\": \"ВІКТАРАЎНА\",\r\n            \"sex\": {\r\n                \"code\": \"F\", \r\n                \"type\": 32\r\n            },\r\n            \"birth_day\": \"20130621\",\r\n            \"birth_place\": {\r\n                \"country_b\": {\r\n\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\"type\": 8\r\n                },\r\n                \"area_b\": \"БРЕСТСКАЯ ОБЛАСТЬ\",\r\n                \"area_b_bel\": \"БРЭСЦКАЯ ВОБЛАCЦЬ\",\r\n                \"region_b\": \"ВОЛОЖИНСКИЙ\",\r\n                \"region_b_bel\": \"ВАЛОЖЫНСКІ\",\r\n                \"type_city_b\": {\r\n\t\t\t\t\t\"code\": \"11100002\",\r\n\t\t\t\t\t\"type\": 68\r\n                },\r\n                \"city_b\": \"БРЕСТ\",\r\n\t\t\t\t\"city_b_bel\": \"БРЭСТ\"\r\n            },\r\n            \"citizenship\": {\r\n\t\t\t\t\"code\": \"0\",\r\n\t\t\t\t\"type\": 8\r\n            },\r\n            \"status\": {\r\n\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\"type\": -18\r\n            }\r\n        },\r\n        \"mother_data\": {\r\n            \"identif\": \"7310278A001PB3\",\r\n            \"last_name\": \"ДЗИЧКОВСКАЯ\",\r\n            \"last_name_bel\": \"ДЗІЧКОЎСКАЯ\",\r\n            \"name\": \"АНАСТАСИЯЯЯ\",\r\n            \"name_bel\": \"АНАСТАСІЯ\",\r\n            \"patronymic\": \"ГЕОРГИЕВНА\",\r\n            \"patronymic_bel\": \"ГЕОРГІЕЎНА\",\r\n            \"sex\": {\r\n                \"code\": \"F\", \r\n                \"type\": 32,\r\n                \"lexema\": {\r\n\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"ЖЕНСКИЙ\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"ЖАНОЧЫ\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n                },\r\n                \"active\": true\r\n            },\r\n            \"birth_day\": \"19830909\",\r\n            \"birth_place\": {\r\n                \"country_b\": {\r\n\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\"type\": 8,\r\n                    \"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n                    },\r\n                    \"active\": true\r\n                },\r\n                \"type_city_b\": {\r\n\t\t\t\t\t\"code\": \"11100001\", \r\n\t\t\t\t\t\"type\": 68,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n                },\r\n                \"city_b\": \"ГОМЕЛЬ\",\r\n                \"city_b_bel\": \"ГОМЕЛЬ\"\r\n            },\r\n            \"citizenship\": {\r\n\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\"type\": 8,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n            },\r\n\t\t\t\"status\": {\r\n\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\"type\": -18,\r\n\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"АКТИВЕН\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"АКТЫВЕН\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n\t\t\t\t},\r\n\t\t\t\t\"active\": true\r\n\t\t\t}\r\n        },\r\n        \"father_data\": {\r\n            \"last_name\": \"ГРОМОВИЧ\",\r\n            \"last_name_bel\": \"ГРАМОВІЧ\",\r\n            \"name\": \"ПАВЕЛ\",\r\n            \"name_bel\": \"АНАСТАСІЯ\",\r\n            \"patronymic\": \"ИГОРЕВИЧ\",\r\n            \"patronymic_bel\": \"ІГАРАВІЧ\",\r\n            \"sex\": {\r\n                \"code\": \"M\", \r\n                \"type\": 32,\r\n                \"lexema\": {\r\n\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"МУЖСКОЙ\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"МУЖСКЫ\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n                },\r\n                \"active\": true\r\n            },\r\n            \"birth_day\": \"19851202\",\r\n            \"birth_place\": {\r\n                \"country_b\": {\r\n\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\"type\": 8,\r\n                    \"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n                    },\r\n                    \"active\": true\r\n                },\r\n                \"type_city_b\": {\r\n\t\t\t\t\t\"code\": \"11100001\", \r\n\t\t\t\t\t\"type\": 68,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n                },\r\n                \"city_b\": \"МИНСК\",\r\n                \"city_b_bel\": \"МІНСК\"\r\n            },\r\n            \"citizenship\": {\r\n\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\"type\": 8,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n            },\r\n\t\t\t\"status\": {\r\n\t\t\t\t\"code\": \"4\",\r\n\t\t\t\t\"type\": -18,\r\n\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"АКТИВЕН\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"АКТЫВЕН\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n\t\t\t\t},\r\n\t\t\t\t\"active\": true\r\n\t\t\t}\r\n        },\r\n        \"birth_act_data\": {\r\n\t\t\t\"act_type\": {\r\n\t\t\t\t\"code\": \"0100\",\r\n\t\t\t\t\"type\": 82\r\n\t\t\t},\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"18108\",\r\n\t\t\t\t\"type\": 80\r\n\t\t\t},\r\n\t\t\t\"date\": \"2013-06-22\",\r\n\t\t\t\"number\": \"1243\"\r\n        },\r\n        \"birth_certificate_data\": {\r\n\t\t\t\"document_type\": {\t\t\t  \r\n\t\t\t\t\"code\": \"54100005\",\r\n\t\t\t\t\"type\": 37\r\n\t\t\t},\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"18108\",\r\n\t\t\t\t\"type\": 80\r\n\t\t\t},\r\n\t\t\t\"date_of_issue\": \"2013-06-23\",\r\n\t\t\t\"series\": \"I-АЛ\",\r\n\t\t\t\"number\": \"2222225\"\r\n        }\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/zags/birth-certificate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"zags",
+								"birth-certificate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Внести актовую запись о регистрации брака",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cover\": {\r\n\t\t\"message_id\": \"6E983E6F-C1F1-4226-AF1A-21EB3CE088CF\",\r\n\t\t\"message_type\": {\r\n\t\t\t\t\"code\": \"0300\",\r\n\t\t\t\t\"type\": -2\r\n\t\t},\r\n\t\t\"message_time\": \"2016-02-25T16:44:05.004+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"17120\",\r\n\t\t\t\"type\": 80,\r\n\t\t\t\"active\": true\r\n\t\t},\r\n\t\t\"parent_message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\"\r\n\t},\r\n    \"mrg_cert_data\": {\r\n        \"bride\": {\r\n            \"bride_data\": {\r\n\t\t\t\t\"identif\": \"7172252A001PB3\",\r\n\t\t\t\t\"last_name\": \"СТАНКЕВИЧЧ\",\r\n\t\t\t\t\"last_name_bel\": \"СТАНКЕВІЧ\",\r\n\t\t\t\t\"name\": \"СВЕТЛАНА\",\r\n\t\t\t\t\"name_bel\": \"СВЯТЛАНА\",\r\n\t\t\t\t\"patronymic\": \"ПЕТРОВНА\",\r\n\t\t\t\t\"patronymic_bel\": \"ПЯТРОЎНА\",\r\n\t\t\t\t\"sex\": {\r\n\t\t\t\t\t\"code\": \"F\", \r\n\t\t\t\t\t\"type\": 32,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"ЖЕНСКИЙ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"ЖАНОЧЫ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n\t\t\t\t},\r\n\t\t\t\t\"birth_day\": \"19851111\",\r\n                \"birth_place\": {\r\n                    \"country_b\": {\r\n                        \"code\": \"BLR\",\r\n                        \"type\": 8,\r\n                        \"lexema\": {\r\n                            \"value\": [\r\n                            {\r\n                                \"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n                                \"lang\": \"ru\"\r\n                            },\r\n                            {\r\n                                \"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n                                \"lang\": \"be\"\r\n                            }\r\n                        ]\r\n                        },\r\n                        \"active\": true\r\n                    },\r\n                    \"area_b\": \"Минская\",\r\n                    \"area_b_bel\": \"Мiнская\",\r\n                    \"region_b\": \"Узденский\",\r\n                    \"region_b_bel\": \"Узденскі\",\r\n                    \"type_city_b\": {\r\n                        \"code\": \"11100001\", \r\n                        \"type\": 68,\r\n                        \"lexema\": {\r\n                            \"value\": [\r\n                                {\r\n                                    \"value\": \"Г\",\r\n                                    \"lang\": \"ru\"\r\n                                },\r\n                                {\r\n                                    \"value\": \"Г\",\r\n                                    \"lang\": \"be\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"active\": true\r\n                    }\r\n                },\r\n\t\t\t\t\"citizenship\": {\r\n\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\"type\": 8,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n            },\r\n\t\t\t\"status\": {\r\n\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\"type\": -18,\r\n\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"АКТИВЕН\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"АКТЫВЕН\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n\t\t\t\t},\r\n\t\t\t\t\"active\": true\r\n\t\t\t}\r\n            }\r\n        },\r\n        \"bridegroom\": {\r\n            \"bridegroom_data\": {\r\n\t\t\t\t\"identif\": \"3010182A132PB7\",\r\n\t\t\t\t\"last_name\": \"ЮРЧЕНКО\",\r\n\t\t\t\t\"last_name_bel\": \"ЮРЧАНКА\",\r\n\t\t\t\t\"name\": \"НИКОЛАЙ\",\r\n\t\t\t\t\"name_bel\": \"МІКАЛАЙ\",\r\n\t\t\t\t\"patronymic\": \"НИКОЛАЕВИЧ\",\r\n\t\t\t\t\"patronymic_bel\": \"МІКАЛАЕВІЧ\",\r\n\t\t\t\t\"sex\": {\r\n\t\t\t\t\t\"code\": \"M\", \r\n\t\t\t\t\t\"type\": 32,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"МУЖСКОЙ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"МУЖСКЫ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n\t\t\t\t},\r\n\t\t\t\t\"birth_day\": \"19820101\",\r\n\t\t\t\t\"birth_place\": {\r\n\t\t\t\t\t\"country_b\": {\r\n\t\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\t\"type\": 8,\r\n\t\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\"active\": true\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"area_b\": \"МОГИЛЁВСКАЯ ОБЛАСТЬ\",\r\n\t\t\t\t\t\"area_b_bel\": \"МАГІЛЁЎСКАЯ ВОБЛАСЦЬ\",\r\n\t\t\t\t\t\"type_city_b\": {\r\n\t\t\t\t\t\t\"code\": \"11100001\", \r\n\t\t\t\t\t\t\"type\": 68,\r\n\t\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t]\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\"active\": true\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"city_b\": \"ГОРКИ\",\r\n\t\t\t\t\t\"city_b_bel\": \"ГОРКІ\"\r\n\t\t\t\t},\r\n\t\t\t\t\"citizenship\": {\r\n\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\"type\": 8,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n\t\t\t\t},\r\n\t\t\t\t\"status\": {\r\n\t\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\t\"type\": -18,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"АКТИВЕН\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"АКТЫВЕН\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n\t\t\t\t}\r\n            }\r\n        },\r\n        \"mrg_act_data\": {\r\n\t\t\t\"act_type\": {\r\n\t\t\t\t\"code\": \"0300\",\r\n\t\t\t\t\"type\": 82\r\n\t\t\t},\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"617\",\r\n\t\t\t\t\"type\": 80\r\n\t\t\t},\r\n\t\t\t\"date\": \"2013-08-08\",\r\n\t\t\t\"number\": \"12\"\r\n        },\r\n        \"mrg_certificate_data\": {\r\n\t\t\t\"document_type\": {\t\t\t  \r\n\t\t\t\t\"code\": \"54100006\",\r\n\t\t\t\t\"type\": 37\r\n\t\t\t},\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"617\",\r\n\t\t\t\t\"type\": 80\r\n\t\t\t},\r\n\t\t\t\"date_of_issue\": \"2013-06-11\",\r\n\t\t\t\"series\": \"I-АЛ\",\r\n\t\t\t\"number\": \"0221734\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/zags/marriage-certificate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"zags",
+								"marriage-certificate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Внести актовую запись о расторжении брака",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cover\": {\r\n\t\t\"message_id\": \"6E983E6F-C1F1-4226-AF1A-21EB3CE088CF\",\r\n\t\t\"message_type\": {\r\n\t\t\t\t\"code\": \"0500\",\r\n\t\t\t\t\"type\": -2,\r\n                \"active\": true\r\n\t\t},\r\n\t\t\"message_time\": \"2016-02-25T16:44:05.004+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"17120\",\r\n\t\t\t\"type\": 80\r\n\t\t}\r\n\t},\r\n\t\"dvc_cert_data\": {\r\n        \"wife\": {\r\n            \"wife_data\": {\r\n\t\t\t\t\"identif\": \"7172252A001PB3\",\r\n\t\t\t\t\"last_name\": \"СТАНКЕВИЧ\",\r\n\t\t\t\t\"last_name_bel\": \"СТАНКЕВІЧ\",\r\n\t\t\t\t\"name\": \"СВЕТЛАНА\",\r\n\t\t\t\t\"name_bel\": \"СВЯТЛАНА\",\r\n\t\t\t\t\"patronymic\": \"ПЕТРОВНА\",\r\n\t\t\t\t\"patronymic_bel\": \"ПЯТРОЎНА\",\r\n\t\t\t\t\"sex\": {\r\n\t\t\t\t\t\"code\": \"F\", \r\n\t\t\t\t\t\"type\": 32\r\n\t\t\t\t},\r\n\t\t\t\t\"birth_day\": \"19851111\",\r\n\t\t\t\t\"birth_place\": {\r\n\t\t\t\t\t\"country_b\": {\r\n\t\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\t\"type\": 8,\r\n\t\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\"active\": true\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"area_b\": \"Минская\",\r\n\t\t\t\t\t\"area_b_bel\": \"Мiнская\",\r\n\t\t\t\t\t\"region_b\": \"Узденский\",\r\n\t\t\t\t\t\"region_b_bel\": \"Узденский\",\r\n\t\t\t\t\t\"type_city_b\": {\r\n\t\t\t\t\t\t\"code\": \"11100001\", \r\n\t\t\t\t\t\t\"type\": 68,\r\n\t\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t]\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\"active\": true\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"city_b\": \"Брест\",\r\n\t\t\t\t\t\"city_b_bel\": \"Брэст\"\r\n\t\t\t\t},\r\n\t\t\t\t\"citizenship\": {\r\n\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\"type\": 8,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n\t\t\t\t},\r\n\t\t\t\t\"status\": {\r\n\t\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\t\"type\": -18,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"АКТИВЕН\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"АКТЫВЕН\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n\t\t\t\t}\r\n \t\t\t}\r\n        },\r\n        \"husband\": {\r\n            \"husband_data\": {\r\n\t\t\t\t\"identif\": \"3201185A034PB5\",\r\n\t\t\t\t\"last_name\": \"ЮРЧЕНКО\",\r\n\t\t\t\t\"last_name_bel\": \"ЮРЧАНКА\",\r\n\t\t\t\t\"name\": \"НИКОЛАЙ\",\r\n\t\t\t\t\"name_bel\": \"МІКАЛАЙ\",\r\n\t\t\t\t\"patronymic\": \"НИКОЛАЕВИЧ\",\r\n\t\t\t\t\"patronymic_bel\": \"МІКАЛАЕВІЧ\",\r\n\t\t\t\t\"sex\": {\r\n\t\t\t\t\t\"code\": \"M\", \r\n\t\t\t\t\t\"type\": 32,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"МУЖСКОЙ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"МУЖСКІ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n\t\t\t\t},\r\n\t\t\t\t\"birth_day\": \"19820101\",\r\n\t\t\t\t\"birth_place\": {\r\n\t\t\t\t\t\"country_b\": {\r\n\t\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\t\"type\": 8,\r\n\t\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\"active\": true\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"area_b\": \"МОГИЛЁВСКАЯ ОБЛАСТЬ\",\r\n\t\t\t\t\t\"area_b_bel\": \"МАГІЛЁЎСКАЯ ВОБЛАСЦЬ\",\r\n\t\t\t\t\t\"type_city_b\": {\r\n\t\t\t\t\t\t\"code\": \"11100001\", \r\n\t\t\t\t\t\t\"type\": 68,\r\n\t\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t]\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\"active\": true\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"city_b\": \"ГОРКИ\",\r\n\t\t\t\t\t\"city_b_bel\": \"ГОРКІ\"\r\n\t\t\t\t},\r\n\t\t\t\t\"citizenship\": {\r\n\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\"type\": 8,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n\t\t\t\t},\r\n\t\t\t\t\"status\": {\r\n\t\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\t\"type\": -18,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"АКТИВЕН\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"АКТЫВЕН\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n        \"dvc_act_data\": {\r\n\t\t\t\"act_type\": {\r\n\t\t\t\t\"code\": \"0500\",\r\n\t\t\t\t\"type\": 82\r\n\t\t\t},\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"617\",\r\n\t\t\t\t\"type\": 80\r\n\t\t\t},\r\n\t\t\t\"date\": \"2013-08-08\",\r\n\t\t\t\"number\": \"12\"\r\n        },\r\n        \"dvc_wm_certificate_data\": {\r\n\t\t\t\"document_type\": {\t\t\t  \r\n\t\t\t\t\"code\": \"54100007\",\r\n\t\t\t\t\"type\": 37\r\n\t\t\t},\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"617\",\r\n\t\t\t\t\"type\": 80\r\n\t\t\t},\r\n\t\t\t\"date_of_issue\": \"2013-06-11\",\r\n\t\t\t\"series\": \"I-АЛ\",\r\n\t\t\t\"number\": \"0221733\"\r\n        },\r\n        \"dvc_mn_certificate_data\": {\r\n\t\t\t\"document_type\": {\t\t\t  \r\n\t\t\t\t\"code\": \"54100008\",\r\n\t\t\t\t\"type\": 37\r\n\t\t\t},\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"617\",\r\n\t\t\t\t\"type\": 80\r\n\t\t\t},\r\n\t\t\t\"date_of_issue\": \"2013-06-11\",\r\n\t\t\t\"series\": \"I-АЛ\",\r\n\t\t\t\"number\": \"0221744\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/zags/divorce-certificate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"zags",
+								"divorce-certificate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Внести актовую запись об установлении отцовства",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"cover\": {\r\n\t\t\"message_id\": \"6E983E6F-C1F1-4226-AF1A-21EB3CE088CF\",\r\n\t\t\"message_type\": {\r\n\t\t\t\t\"code\": \"0200\",\r\n\t\t\t\t\"type\": -2,\r\n\t\t\t\t\"active\": true\r\n\t\t},\r\n\t\t\"message_time\": \"2016-02-25T16:44:05.004+03:00\",\r\n\t\t\"message_source\": {\r\n\t\t\t\"code\": \"17120\",\r\n\t\t\t\"type\": 80,\r\n\t\t\t\"active\": true\r\n\t\t},\r\n\t\t\"parent_message_id\": \"4D7961DF-3057-4587-A498-5D995C733D80\"\r\n\t},\r\n    \"aff_cert_data\": {\r\n        \"aff_person\": {\r\n            \"birth_act_data\": {\r\n\t\t\t\t\"act_type\": {\r\n\t\t\t\t\t\"code\": \"0100\",\r\n\t\t\t\t\t\"type\": 82\r\n\t\t\t\t},\r\n\t\t\t\t\"authority\": {\r\n\t\t\t\t\t\"code\": \"0\",\r\n\t\t\t\t\t\"type\": 80\r\n\t\t\t\t},\r\n\t\t\t\t\"date\": \"2015-12-09\",\r\n\t\t\t\t\"number\": \"1\"\r\n\t\t\t},\r\n\t\t\t\"before_aff_person_data\": {\r\n\t\t\t\t\"identif\": \"7572323A001PB2\",\r\n\t\t\t\t\"last_name\": \"ИВАНОВА\",\r\n\t\t\t\t\"last_name_bel\": \"ІВАНОВА\",\r\n\t\t\t\t\"name\": \"ИНГА\",\r\n\t\t\t\t\"name_bel\": \"ІНГА\",\r\n\t\t\t\t\"patronymic\": \"ВИКТОРОВНА\",\r\n\t\t\t\t\"patronymic_bel\": \"ВІКТАРАЎНА\",\r\n\t\t\t\t\"sex\": {\r\n\t\t\t\t\t\"code\": \"F\", \r\n\t\t\t\t\t\"type\": 32\r\n\t\t\t\t},\r\n\t\t\t\t\"birth_day\": \"20130621\",\r\n\t\t\t\t\"birth_place\": {\r\n\t\t\t\t\t\"country_b\": {\r\n\t\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\t\"type\": 8\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"area_b\": \"БРЕСТСКАЯ ОБЛАСТЬ\",\r\n\t\t\t\t\t\"area_b_bel\": \"БРЭСЦКАЯ ВОБЛАCЦЬ\",\r\n\t\t\t\t\t\"region_b\": \"ВОЛОЖИНСКИЙ\",\r\n\t\t\t\t\t\"region_b_bel\": \"ВАЛОЖЫНСКІ\",\r\n\t\t\t\t\t\"type_city_b\": {\r\n\t\t\t\t\t\t\"code\": \"11100001\",\r\n\t\t\t\t\t\t\"type\": 68\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"city_b\": \"БРЕСТ\",\r\n\t\t\t\t\t\"city_b_bel\": \"БРЭСТ\"\r\n\t\t\t\t},\r\n\t\t\t\t\"citizenship\": {\r\n\t\t\t\t\t\"code\": \"0\",\r\n\t\t\t\t\t\"type\": 8\r\n\t\t\t\t},\r\n\t\t\t\t\"status\": {\r\n\t\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\t\"type\": -18\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t\"after_aff_person_data\": {\r\n\t\t\t\t\"identif\": \"7572323A001PB2\",\r\n\t\t\t\t\"last_name\": \"ИВАНОВА\",\r\n\t\t\t\t\"last_name_bel\": \"ІВАНОВА\",\r\n\t\t\t\t\"name\": \"ИНГА\",\r\n\t\t\t\t\"name_bel\": \"ІНГА\",\r\n\t\t\t\t\"patronymic\": \"ВИКТОРОВНА\",\r\n\t\t\t\t\"patronymic_bel\": \"ВІКТАРАЎНА\",\r\n\t\t\t\t\"sex\": {\r\n\t\t\t\t\t\"code\": \"F\", \r\n\t\t\t\t\t\"type\": 32\r\n\t\t\t\t},\r\n\t\t\t\t\"birth_day\": \"20130621\",\r\n\t\t\t\t\"birth_place\": {\r\n\t\t\t\t\t\"country_b\": {\r\n\t\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\t\"type\": 8\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"area_b\": \"БРЕСТСКАЯ ОБЛАСТЬ\",\r\n\t\t\t\t\t\"area_b_bel\": \"БРЭСЦКАЯ ВОБЛАCЦЬ\",\r\n\t\t\t\t\t\"region_b\": \"ВОЛОЖИНСКИЙ\",\r\n\t\t\t\t\t\"region_b_bel\": \"ВАЛОЖЫНСКІ\",\r\n\t\t\t\t\t\"type_city_b\": {\r\n\t\t\t\t\t\t\"code\": \"11100001\",\r\n\t\t\t\t\t\t\"type\": 68\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"city_b\": \"БРЕСТ\",\r\n\t\t\t\t\t\"city_b_bel\": \"БРЭСТ\"\r\n\t\t\t\t},\r\n\t\t\t\t\"citizenship\": {\r\n\t\t\t\t\t\"code\": \"0\",\r\n\t\t\t\t\t\"type\": 8\r\n\t\t\t\t},\r\n\t\t\t\t\"status\": {\r\n\t\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\t\"type\": -18\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"mother_data\": {\r\n\t\t\t\"identif\": \"4090983H011PB6\",\r\n            \"last_name\": \"ДЗИЧКОВСКАЯ\",\r\n            \"last_name_bel\": \"ДЗІЧКОЎСКАЯ\",\r\n            \"name\": \"АНАСТАСИЯ\",\r\n            \"name_bel\": \"АНАСТАСІЯ\",\r\n            \"patronymic\": \"ГЕОРГИЕВНА\",\r\n            \"patronymic_bel\": \"ГЕОРГІЕЎНА\",\r\n            \"sex\": {\r\n                \"code\": \"F\", \r\n                \"type\": 32,\r\n                \"lexema\": {\r\n\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"ЖЕНСКИЙ\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"ЖАНОЧЫ\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n                },\r\n                \"active\": true\r\n            },\r\n            \"birth_day\": \"19830909\",\r\n\t\t\t\"birth_place\": {\r\n\t\t\t\t\"country_b\": {\r\n\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\"type\": 8,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n\t\t\t\t},\r\n\t\t\t\t\"type_city_b\": {\r\n\t\t\t\t\t\"code\": \"11100001\", \r\n\t\t\t\t\t\"type\": 68,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n\t\t\t\t},\r\n\t\t\t\t\"city_b\": \"ГОМЕЛЬ\",\r\n\t\t\t\t\"city_b_bel\": \"ГОМЕЛЬ\"\r\n\t\t\t},\r\n\t\t\t\"citizenship\": {\r\n\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\"type\": 8,\r\n\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n\t\t\t\t},\r\n\t\t\t\t\"active\": true\r\n            },\r\n\t\t\t\"status\": {\r\n\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\"type\": -18,\r\n\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"АКТИВЕН\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"АКТЫВЕН\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n\t\t\t\t},\r\n\t\t\t\t\"active\": true\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"father_data\": {\r\n            \"identif\": \"3010182A132PB7\",\r\n            \"last_name\": \"ГРОМОВИЧ\",\r\n            \"last_name_bel\": \"ГРАМОВІЧ\",\r\n            \"name\": \"ПАВЕЛ\",\r\n            \"name_bel\": \"ПАВЕЛ\",\r\n            \"patronymic\": \"ИГОРЕВИЧ\",\r\n            \"patronymic_bel\": \"ІГАРАВІЧ\",\r\n            \"sex\": {\r\n                \"code\": \"M\", \r\n                \"type\": 32,\r\n                \"lexema\": {\r\n\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"МУЖСКОЙ\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"М\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n                },\r\n                \"active\": true\r\n            },\r\n            \"birth_day\": \"19851202\",\r\n\t\t\t   \"birth_place\": {\r\n                \"country_b\": {\r\n\t\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\t\"type\": 8,\r\n                    \"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n                    },\r\n                    \"active\": true\r\n                },\r\n                \"type_city_b\": {\r\n\t\t\t\t\t\"code\": \"11100001\", \r\n\t\t\t\t\t\"type\": 68,\r\n\t\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"value\": \"Г\",\r\n\t\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"active\": true\r\n                },\r\n                \"city_b\": \"МИНСК\",\r\n                \"city_b_bel\": \"МІНСК\"\r\n            },\r\n\t\t\t\"citizenship\": {\r\n\t\t\t\t\"code\": \"BLR\",\r\n\t\t\t\t\"type\": 8,\r\n\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"РЕСПУБЛИКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"РЭСПУБЛІКА БЕЛАРУСЬ\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n\t\t\t\t},\r\n\t\t\t\t\"active\": true\r\n\t\t\t},\r\n\t\t\t\"status\": {\r\n\t\t\t\t\"code\": \"1\",\r\n\t\t\t\t\"type\": -18,\r\n\t\t\t\t\"lexema\": {\r\n\t\t\t\t\t\"value\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"АКТИВЕН\",\r\n\t\t\t\t\t\t\t\"lang\": \"ru\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"value\": \"АКТЫВЕН\",\r\n\t\t\t\t\t\t\t\"lang\": \"be\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n\t\t\t\t},\r\n\t\t\t\t\"active\": true\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"aff_act_data\": {\r\n\t\t\t\"act_type\": {\r\n\t\t\t\t\"code\": \"0200\",\r\n\t\t\t\t\"type\": 82\r\n\t\t\t},\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"28\",\r\n\t\t\t\t\"type\": 80\r\n\t\t\t},\r\n\t\t\t\"date\": \"2015-12-07\",\r\n\t\t\t\"number\": \"1\"\r\n\t\t},\r\n\t\t\"aff_mother_certificate_data\": {\r\n\t\t\t\"document_type\": {\t\t\t  \r\n\t\t\t\t\"code\": \"54100027\",\r\n\t\t\t\t\"type\": 37\r\n\t\t\t},\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"28\",\r\n\t\t\t\t\"type\": 80\r\n\t\t\t},\r\n\t\t\t\"date_of_issue\": \"2015-12-11\",\r\n\t\t\t\"series\": \"I-AAA\",\r\n\t\t\t\"number\": \"0020999\"\r\n\t\t},\r\n\t\t\"aff_father_certificate_data\": {\r\n\t\t\t\"document_type\": {\t\t\t  \r\n\t\t\t\t\"code\": \"54100026\",\r\n\t\t\t\t\"type\": 37\r\n\t\t\t},\r\n\t\t\t\"authority\": {\r\n\t\t\t\t\"code\": \"28\",\r\n\t\t\t\t\"type\": 80\r\n\t\t\t},\r\n\t\t\t\"date_of_issue\": \"2015-12-10\",\r\n\t\t\t\"series\": \"I-AAS\",\r\n\t\t\t\"number\": \"0020998\"\t\r\n\t\t}\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/zags/affiliation-certificate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"zags",
+								"affiliation-certificate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Внести актовую запись о регистрации перемены фамилии, собственного имени, отчества",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n        \"message_id\": \"EC2315E6-41AD-4938-A344-601AF243CA55\",\r\n        \"message_type\": {\r\n            \"code\": \"0700\",\r\n            \"type\": -2\r\n        },\r\n        \"message_time\": \"2012-07-25T11:25:12.093+02:00\",\r\n        \"message_source\": {\r\n            \"code\": \"17107\",\r\n            \"type\": 80\r\n        },\r\n        \"parent_message_id\": \"A561FB21-A50D-46AD-8691-F5BB7294A5D9\"\r\n    },\r\n    \"cng_cert_data\": {\r\n        \"person\": {\r\n            \"person_data\": {\r\n                \"identif\": \"3110865A045PB5\",\r\n                \"last_name\": \"АФАНАСЬЕВ\",\r\n                \"last_name_bel\": \"АФАНАСЬЕЎ\",\r\n                \"name\": \"СЕРГЕЙ\",\r\n                \"name_bel\": \"СЯРГЕЙ\",\r\n                \"patronymic\": \"ПАВЛОВИЧ\",\r\n                \"patronymic_bel\": \"ПАЎЛАВІЧ\",\r\n                \"sex\": {\r\n                    \"code\": \"M\",\r\n                    \"type\": 32\r\n                },\r\n                \"birth_day\": \"19650811\",\r\n                \"birth_place\": {\r\n                    \"country_b\": {\r\n                        \"code\": \"BLR\",\r\n                        \"type\": 8\r\n                    },\r\n                    \"area_b\": \"ДНЕПРОПЕТРОВСКАЯ ОБЛАСТЬ\",\r\n                    \"area_b_bel\": \"ДНЕПРАПЯТРОУСКАЯ ВОБЛАСЦЬ\",\r\n                    \"region_b\": \"ПУХОВИЧСКИЙ\",\r\n                    \"region_b_bel\": \"ПУХАВІЦКІ\",\r\n                    \"type_city_b\": {\r\n                        \"code\": \"11100009\",\r\n                        \"type\": 68\r\n                    },\r\n                    \"city_b\": \"КОВАЛЕВИЧИ\",\r\n                    \"city_b_bel\": \"КАВАЛЕВІЧЫ\"\r\n                },\r\n                \"citizenship\": {\r\n                    \"code\": \"BLR\",\r\n                    \"type\": 8\r\n                },\r\n                \"status\": {\r\n                    \"code\": \"1\",\r\n                    \"type\": -18\r\n                }\r\n            },\r\n            \"old_last_name\": \"АФАНАСЬЕВ\",\r\n            \"old_name\": \"ВИКТОР\",\r\n            \"old_patronymic\": \"ПАВЛОВИЧ\",\r\n            \"birth_act_data\": {\r\n                \"act_type\": {\r\n                    \"code\": \"0100\",\r\n                    \"type\": 82\r\n                },\r\n                \"authority\": {\r\n                    \"code\": \"17107\",\r\n                    \"type\": 80\r\n                },\r\n                \"date\": \"1899-12-30\"\r\n            }\r\n        },\r\n        \"cng_act_data\": {\r\n            \"act_type\": {\r\n                \"code\": \"0700\",\r\n                \"type\": 82\r\n            },\r\n            \"authority\": {\r\n                \"code\": \"17107\",\r\n                \"type\": 80\r\n            },\r\n            \"date\": \"2012-07-25\",\r\n            \"number\": \"13\"\r\n        },\r\n        \"cng_certificate_data\": {\r\n            \"document_type\": {\r\n                \"code\": \"54100008\",\r\n                \"type\": 37\r\n            },\r\n            \"authority\": {\r\n                \"code\": \"17107\",\r\n                \"type\": 80\r\n            },\r\n            \"date_of_issue\": \"2012-07-25\",\r\n            \"series\": \"I-АЛ\",\r\n            \"number\": \"0004813\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/zags/name-change-certificate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"zags",
+								"name-change-certificate"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Налог",
+			"item": [
+				{
+					"name": "Внести данные физического лица о налоговых обязательствах",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"connection": true,
+							"accept-encoding": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Reg-auth-username",
+								"value": "PASSPORT_USER",
+								"type": "text"
+							},
+							{
+								"key": "Reg-auth-password",
+								"value": "user_password",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cover\": {\r\n        \"message_type\": {\r\n            \"code\": \"97\",\r\n            \"type\": -2\r\n        },\r\n        \"message_source\": {\r\n            \"code\": \"302\",\r\n            \"type\": 110\r\n        }\r\n    },\r\n    \"tax_info\": {\r\n        \"person_data\": {\r\n            \"identif\": \"7755122A001PB4\"\r\n        },\r\n        \"tax_document\": {\r\n            \"document_type\": {\r\n                \"code\": \"1\",\r\n                \"type\": 114\r\n            },\r\n            \"date_of_issue\": \"2010-10-10\",\r\n            \"expire_date\": \"2010-10-13\",\r\n            \"authority\": {\r\n                \"code\": \"702\",\r\n                \"type\": 110\r\n            }\r\n        },\r\n        \"tax_data\": {\r\n            \"tax_awarding_date\": \"2010-10-31\",\r\n            \"tax_number\": \"123123123\",\r\n            \"tax_debt_data\": \"1\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/gisun-inf/api/v1/tax",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"gisun-inf",
+								"api",
+								"v1",
+								"tax"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
