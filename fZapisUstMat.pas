@@ -637,6 +637,9 @@ begin
   {$ENDIF}
   TBItemHistCorr.Visible:=FUpdatingObj;
 
+  edON_DOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edON_DOK_TYPE.DropDownBox.Width:=TYPEDOK_WIDTH;  // utypes.pas
+
 end;
 {
 function TfmZapisUstMat.GetNameReport: String;

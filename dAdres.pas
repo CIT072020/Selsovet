@@ -119,6 +119,8 @@ type
     mtDokumentPUNKT_NAME: TStringField;
     mtDokumentNAMEHOUSE: TStringField;
     mtDokumentADRES_TEXT: TStringField;
+    mtDokumentUCH_PRIM: TMemoField;
+    mtDokumentUCH_TYPEOWNER: TIntegerField;
   private
     FdmMens: TdmMen;
     procedure SetdmMens(const Value: TdmMen);
@@ -225,7 +227,7 @@ var
   vKeyValues : Variant;
   dsMen : TDataSet;
   lErr, lFind : Boolean;
-  i : Integer;
+  i,n : Integer;
   adr : TAdres;
   slLich:TstringList;
   fld:TField;
@@ -265,7 +267,13 @@ begin
           WriteField( mtDokumentKV,  FieldByName('KV'), lErr );
           WriteField( mtDokumentTIP,  FieldByName('TIP'), lErr );
           WriteField( mtDokumentPRIM,  FieldByName('PRIM'), lErr );
-          WriteField( mtDokumentNOM_XOZ,  FieldByName('VID'), lErr );     // !!! VID => NOM_XOZ !!!
+          n:=Pos('#',mtDokumentPRIM.AsString);
+          if n>0 then begin
+            mtDokumentUCH_PRIM.AsString:=Copy(mtDokumentPRIM.AsString,n+1,Length(mtDokumentPRIM.AsString));
+            mtDokumentPRIM.AsString:=Copy(mtDokumentPRIM.AsString,1,n-1);
+          end;
+          WriteField( mtDokumentNOM_XOZ,  FieldByName('VID'), lErr );             // !!! VID => NOM_XOZ
+          WriteField( mtDokumentUCH_TYPEOWNER, FieldByName('HOUSE_ID'), lErr );   // !!! HOUSE_ID => UCH_TYPEOWNER
 
           WriteField( mtDokumentETAG,  FieldByName('ETAG'), lErr );
           WriteField( mtDokumentKOL_ETAG,  FieldByName('KOL_ETAG'), lErr );
@@ -549,8 +557,13 @@ begin
         //--------------------------------
 
         WriteField( FieldByName('TIP'), mtDokumentTIP, lErr );
-        WriteField( FieldByName('PRIM'), mtDokumentPRIM, lErr );
+
+        if Trim(mtDokumentUCH_PRIM.AsString)<>''
+          then FieldByName('PRIM').AsString:=mtDokumentPRIM.AsString+'#'+mtDokumentUCH_PRIM.AsString
+          else FieldByName('PRIM').AsString:=mtDokumentPRIM.AsString;
+
         WriteField( FieldByName('VID'), mtDokumentNOM_XOZ, lErr );   // !!! NOM_XOZ => VID !!!
+        WriteField( FieldByName('HOUSE_ID'), mtDokumentUCH_TYPEOWNER, lErr );   // !!! UCH_TYPEOWNER => HOUSE_ID !!!
 
         WriteField( FieldByName('ETAG'), mtDokumentETAG, lErr );
         WriteField( FieldByName('KOL_ETAG'), mtDokumentKOL_ETAG, lErr );

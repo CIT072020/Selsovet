@@ -184,8 +184,8 @@ Filename: "{app}\ZAGS.exe"; Description: "«¿√—"; Flags: nowait postinstall skipi
 root:HKCU;subkey:"Software\VCBOUS"; Flags: uninsdeletekeyifempty
 root:HKCU;subkey:"Software\VCBOUS\ZAGS"; Flags: uninsdeletekey
 root:HKCU;subkey:"Software\VCBOUS\ZAGS";valuetype:string;valuename:"installpath";valuedata:"{app}"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\ZAGS";valuetype:string;valuename:"version";valuedata:"9.1.0"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\ZAGS";valuetype:string;valuename:"update";valuedata:"184"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\ZAGS";valuetype:string;valuename:"version";valuedata:"9.3.1"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\ZAGS";valuetype:string;valuename:"update";valuedata:"186"; Flags: uninsdeletevalue
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\LastUpdate"

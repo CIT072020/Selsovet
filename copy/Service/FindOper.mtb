@@ -110,7 +110,7 @@
 "END","оканчивается на","%%s like '%%%%%%s'","STRING,TEXT","True","False","False","False","False","43","True","False",,,,
 "END_R","оканчивается на","exists (select * from %%0:s %%1:s where %%2:s AND %%3:s like '%%%%%%4:s')","STRING,TEXT,REL","True","False","False","False","False","43","True","False",,,,
 "END_P","оканчивается на","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND %%4:s like '%%%%%%5:s')","STRING,TEXT,PROP","True","False","False","False","False","43","True","False",,,,
-"LIKE_AS_TEXT","содержит значение из списка","position(','+%%s+',' IN  ','+'%%s'+',')>0","STRING,TEXT","True","False","True","False","True","44","True","False",,,,
+"LIKE_AS_TEXT","содержит значение из списка","position(','+Upper(Trim(%%s))+',' IN  ','+Upper('%%s')+',')>0","STRING,TEXT","True","False","True","False","True","44","True","False",,,,
 "BETWEEN_D","между","(%%s BETWEEN '%%1s' AND '%%s')","DATE","True","True","False","False","False","50","True","False",,,,
 "BETWEEN_D_TS","между","(cast(%%s as SQL_DATE) BETWEEN '%%1s' AND '%%s')","DATE,STAMP","True","True","False","False","False","50","True","False",,,,
 "BETWEEN_D_P","между","exists (select * from %%0:s %%1:s where %%2:s AND %%1:s.POKAZ='%%3:s' AND (CAST(%%4:s AS SQL_DATE) BETWEEN '%%5:s' AND '%%6:s'))","DATE,PROP","True","True","False","False","False","50","True","False",,,,

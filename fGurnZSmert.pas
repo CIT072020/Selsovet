@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  fGurnal, Db, adsdata, adsfunc, adstable, Grids, DBGridEh, SasaDBGrid, uProject, uTypes,
+  fGurnal, Db, adsdata, adsfunc, adstable, Grids, DBGridEh, SasaDBGrid, uProject, uTypes, uProjectAll,
   TB2Item, TB2Dock, TB2Toolbar, Menus, MetaTask, FuncPr, dbFunc, ImgList, ComCtrls,
   ExtCtrls;
 
@@ -50,7 +50,7 @@ const
 
 implementation
 
-uses dBase;
+uses dBase, fmain;
 
 {$R *.DFM}
 
@@ -60,8 +60,12 @@ constructor TfmGurnZSmert.Create(Owner: TComponent);
 begin
   TypeEditObj := dmBase.TypeObj_ZSmert;
   inherited;
-  TBItemGrantSprav.Visible:=true;
+//  TBItemGrantSprav.Visible:=true;
+  VisibleItem(TBItemGrantSprav, true);
   FSeekAsQuery:=true;
+
+  fmMain.ImageList.GetIcon(IL_SMERT, self.Icon );
+
 end;
 
 function TfmGurnZSmert.LoadQuery: Boolean;
@@ -119,7 +123,8 @@ begin
 //    Query.Filter   := 'datez-dates>'+GlobalTask.ParamAsString('ZADER_SMERT');
 //  end;
   Query.Filtered := true;
-  TBItemClrFlt.Enabled:=true;
+  EnableItem(TBItemClrFlt, true);
+//  TBItemClrFlt.Enabled:=true;
 end;
 
 procedure TfmGurnZSmert.CheckPropertyGridColumns;
@@ -137,13 +142,14 @@ begin
   if c<>nil then c.OnGetCellParams := GridColumnsGetMestoG;
   c := Grid.FieldColumns['MESTOR'];
   if c<>nil then c.OnGetCellParams := GridColumnsGetMestoR;
-  {$IFDEF ZAGS}
-    c := Grid.FieldColumns['MESTO_Z'];
-    if c<>nil then c.Visible:=false;
-  {$ELSE}
-    c := Grid.FieldColumns['MESTO_Z'];
-    if c<>nil then c.OnGetCellParams := GridColumnsGetMestoZ;
-    c := Grid.FieldColumns['PODR'];
+
+  c := Grid.FieldColumns['MESTO_Z'];
+  if (c<>nil) then begin
+    c.OnGetCellParams := GridColumnsGetMestoZ;
+    c.Visible:=GlobalTask.ParamAsBoolean('MESTO_ZAH');
+  end;
+  {$IFDEF LAIS}
+    c:=Grid.FieldColumns['PODR'];
     if c<>nil then c.Visible:=false;
   {$ENDIF}
 end;
@@ -180,7 +186,8 @@ end;
 
 procedure TfmGurnZSmert.GridColumnsGetMestoZ(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
 begin
-  Params.Text := dmBase.ReadPropSimpleDok(_TypeObj_ZSmert, Query.fieldbyName('ID').AsInteger, STOD('1899-12-30',tdAds), 'MESTO_Z', ftMemo);
+  Params.Text:=dmBase.ReadPropSimpleDok(_TypeObj_ZSmert, Query.fieldbyName('ID').AsInteger, STOD('1899-12-30',tdAds), 'OTHER', ftMemo);
+  Params.Text:=getFieldFromSL(Params.Text, 'MESTO_Z', '');
 end;
 
 procedure TfmGurnZSmert.GridColumnsGetMestoS(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
@@ -209,13 +216,15 @@ begin
   Query.OnFilterRecord := nil;
   Query.Filter   := 'pole_grn>=3000 and pole_grn<4000 and lich_id=1';
   Query.Filtered := true;
-  TBItemClrFlt.Enabled:=true;
+  EnableItem(TBItemClrFlt, true);
+//  TBItemClrFlt.Enabled:=true;
 end;
 
 procedure TfmGurnZSmert.Event_LichNomerNotPrint(Sender: TObject);
 begin
   setAdditiveFilter;
-  TBItemClrFlt.Enabled:=true;
+  EnableItem(TBItemClrFlt, true);
+//  TBItemClrFlt.Enabled:=true;
 end;
 
 //----------------------------------------------------------------
@@ -247,7 +256,7 @@ begin
   Query.Filtered := false;
   Query.OnFilterRecord:=nil;
   Query.Filter := '';
-  if not TBItemClrFlt.Enabled then begin
+  if not ClrFltEnabled then begin
     FilterInterface.Filter.ClearFilter;     // !!!    гарантированно очистим фильтр
   end;
   s:=getAdditiveFilter;
@@ -269,8 +278,9 @@ begin
   if Result<>'' then begin
     FNewSQL:=ChangeWhere( Query.SQL.Text, Result, false);
   end;
-  if not TBItemClrFlt.Enabled
-    then TBItemClrFlt.Enabled:=FSeekAsQuery_Active;
+  if not ClrFltEnabled
+    then EnableItem(TBItemClrFlt, FSeekAsQuery_Active);
+         //TBItemClrFlt.Enabled:=FSeekAsQuery_Active;
 end;
 
 //----------------------------------------------------------------

@@ -1629,6 +1629,11 @@ begin
     CreatefrxDBdataSet(self,tbDeti,'Deti','Общие дети');
   {$ENDIF}
   //cbON_VUS.AllowGrayed
+  edON_DOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edONA_DOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edON_DOK_TYPE.DropDownBox.Width:=TYPEDOK_Width;  // utypes.pas
+  edONA_DOK_TYPE.DropDownBox.Width:=TYPEDOK_Width;  // utypes.pas
+
 end;
 
 destructor TfmZapisBrak.Destroy;

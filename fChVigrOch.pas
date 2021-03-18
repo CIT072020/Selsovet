@@ -109,13 +109,13 @@ begin
   strFileName:=getNameFile;
   strFullFileName:=strPath+'\'+strFileName;
   ex.NameExportFile:=strFullFileName;
-  GlobalTask.LogFile.WriteToLogFile('Начало выгрузки очередников.');
+  GlobalTask.WriteToLogFile('Начало выгрузки очередников.');
 
   if not ex.RunExport then begin
     lErr:=true;
     if FShow
       then PutError(ex.LastError)
-      else GlobalTask.LogFile.WriteToLogFile(ex.LastError);
+      else GlobalTask.WriteToLogFile(ex.LastError);
   end;
   nCount:=ex.CountMen;
 
@@ -135,6 +135,7 @@ begin
       Zip.OpenArchive(fmCreate);
       Zip.AddFiles('ochered*.xml');
       Zip.CloseArchive;
+//!!!      Zip.Password:=''
       DeleteFile(strFullFileName);
       strFileName:=getNameFileArx;
       strFullFileName:=strPath+'\'+strFileName;
@@ -210,7 +211,7 @@ begin
         if lErr then begin
           if FShow
             then PutError(s)
-            else GlobalTask.LogFile.WriteToLogFile(Stringreplace(s,#13,' ',[rfReplaceAll, rfIgnoreCase]));
+            else GlobalTask.WriteToLogFile(Stringreplace(s,#13,' ',[rfReplaceAll, rfIgnoreCase]));
         end;
       end;
     end;
@@ -219,41 +220,41 @@ begin
 //    then report.ShowPreparedReport;
 
   if not lErr then begin
-    GlobalTask.LogFile.WriteToLogFile('Окончание выгрузки очередников.');
+    GlobalTask.WriteToLogFile('Окончание выгрузки очередников.');
     ss :='Выгрузка успешно завершена. Выгружено: '+IntToStr(nCount)+' человек.';
-    GlobalTask.LogFile.WriteToLogFile(ss);
+    GlobalTask.WriteToLogFile(ss);
     if lCopy then begin
       DeleteFiles(strPath+'\*.*');
     end;
     if FShow
       then ShowMessage(ss);
   end else begin
-    GlobalTask.LogFile.WriteToLogFile('Ошибка выгрузки очередников.');
+    GlobalTask.WriteToLogFile('Ошибка выгрузки очередников.');
   end;
 
   if lFTP then begin
-    GlobalTask.LogFile.WriteToLogFile('Передача файла очередников по FTP.');
+    GlobalTask.WriteToLogFile('Передача файла очередников по FTP.');
     if SetPropertyFPT(fmMain.IdFTP1, SERVER_OCHERED, '') then begin
       fmMain.CheckVisibleProgress(true,'Передача:');
       if not fmMain.PutFileFTP(FShow,strFullFileName) then begin //strPath+'\'+GetNameFile) then begin
         lErr:=true;
-        GlobalTask.LogFile.WriteToLogFile('Ошибка передачи файла по FTP.');
+        GlobalTask.WriteToLogFile('Ошибка передачи файла по FTP.');
       end;
       fmMain.CheckVisibleProgress(false,'');
     end else begin
       s:='Ошибка чтения параметров FTP.';
-      GlobalTask.LogFile.WriteToLogFile(s);
+      GlobalTask.WriteToLogFile(s);
       if FShow
         then PutError(s);
       lErr:=true;
     end;
     if lErr then begin
       s:='Ошибка передачи файла '+strFullFileName+' по FTP.';
-      GlobalTask.LogFile.WriteToLogFile(s);
+      GlobalTask.WriteToLogFile(s);
       if FShow then ShellExecute(Application.Handle, PChar('explore'), PChar(strPath), nil, nil, SW_SHOWNORMAL);
     end else begin
       s:='Файл '+strFileName+' передан по FTP.';
-      GlobalTask.LogFile.WriteToLogFile(s);
+      GlobalTask.WriteToLogFile(s);
       DeleteFiles(strPath+'\*.*');
     end;
   end else begin

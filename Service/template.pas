@@ -95,11 +95,6 @@ begin
              else Result:=Globaltask.ParamAsString('SHTAMP'); 
 end;
 //---------------------------------------------------------------
-function CreateFIO(ds:TDataSet):String;
-begin
-  Result:=ds.Fld('FAMILIA').AsString+' '+ds.Fld('NAME').AsString+' '+ds.Fld('OTCH').AsString;
-end;
-//---------------------------------------------------------------
 function Zags_Akt_Rukov : String;
 begin
   Result:=DokZags.Fld('RUKOV').AsString;
@@ -1311,7 +1306,7 @@ begin
        result:=false;
      end;
      s:=Trim(DokZags.Fld('IZMEN').AsString);
-     if s='' then s:=getResource('SPR_ROGD_IZM',nType) else s:=s+'.';
+     if s='' then s:=getResource('SPR_ROGD_IZM',nType) else if Right(s,1)<>'.' then s:=s+'.';
      if DokZAGS.Fld('ON_DATE_LR')<>nil then begin // !!!
        if not DokZAGS.Fld('ON_DATE_LR').IsNull 
          then s:=s+CRLF+getResource('SPR_ON_LR',nType)+' '+DatePropis(DokZAGS.Fld('ON_DATE_LR').AsDateTime,TYPE_DATE_SPRAV);

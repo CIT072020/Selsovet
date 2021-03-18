@@ -29,9 +29,9 @@ begin
 //  slExcelReport.Add('ѕерепись. ƒанные по населенным пунктам=ListCountPerepis2');
 //  slExcelReport.Add('----------');
   slExcelReport.Add(' оличество дворов в разрезе нас. пунктов=ListCountDvor');
-  slExcelReport.Add('—писок дл€ обследовани€ дом.хоз€йств (окт€брь 2019)=ObsledDomHoz4');
+  slExcelReport.Add('—писок дл€ обследовани€ дом.хоз€йств (даты рождений)=ObsledDomHoz4');
   slExcelReport.Add('„исленность скота и птицы=ObsledDomHoz5');
-//  slExcelReport.Add('—писок дл€ обследовани€ дом.хоз€йств (€нварь 2019)=ObsledDomHoz3');
+//  slExcelReport.Add('3 —писок дл€ обследовани€ дом.хоз€йств (€нварь 2019)=ObsledDomHoz3');
   slExcelReport.Add('—писок пустующих жилых помещений=ExcelListEmptyAdres');
   slExcelReport.Add('Ћьготники на оплату ∆ ”=ExcelListLgotEl');
 end;

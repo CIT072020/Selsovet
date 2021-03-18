@@ -1783,6 +1783,9 @@ inherited dmMen: TdmMen
       FieldName = 'SPEC_TEXT'
       BlobType = ftMemo
     end
+    object mtDokumentVUS_ISKL: TBooleanField
+      FieldName = 'VUS_ISKL'
+    end
   end
   inherited tbDopProp: TkbmMemTable
     Top = 80

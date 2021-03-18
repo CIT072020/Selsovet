@@ -1,0 +1,4212 @@
+[
+    {
+        "pid": 2000000000000018947,
+        "identif": "4221074A011PB0",
+        "view": {
+            "klUniPK": {
+                "type": -3,
+                "code": 10
+            },
+            "lex1": "Œ¡€◊Õ¿ﬂ »Õ‘Œ–Ã¿÷»ﬂ",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652693000,
+            "active": true
+        },
+        "sysDocType": {
+            "klUniPK": {
+                "type": -2,
+                "code": 10
+            },
+            "lex1": "Ã¿ÿ»ÕŒ◊»“¿≈Ã€≈ ƒŒ ”Ã≈Õ“€(¡ƒ’)",
+            "lex2": "PASSPORT",
+            "lex3": "FORM1",
+            "dateBegin": 1240652694000,
+            "active": true
+        },
+        "surname": "¬≈Õ√”–¿",
+        "name": "¿ÀÀ¿",
+        "sname": "Õ» ŒÀ¿≈¬Õ¿",
+        "sex": {
+            "klUniPK": {
+                "type": 32,
+                "code": 21000002
+            },
+            "lex1": "∆≈Õ— »…",
+            "lex2": "∆",
+            "lex3": "2",
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "citizenship": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "sysOrgan": {
+            "klUniPK": {
+                "type": -5,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1540320930000,
+            "active": true
+        },
+        "bdate": "19741022",
+        "dsdDateRec": null,
+        "docSery": "MP",
+        "docNum": "0826129",
+        "regNum": null,
+        "docDateIssue": 959634000000,
+        "docAppleDate": 1036175906000,
+        "dateRec": 959547600000,
+        "ateAddress": null,
+        "expireDate": null,
+        "aisPasspDocStatus": null,
+        "identifCheckResult": null,
+        "countryB": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "areaB": null,
+        "regionB": null,
+        "typeCityB": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityB": "Ã»Õ— ",
+        "docType": {
+            "klUniPK": {
+                "type": 37,
+                "code": 54100001
+            },
+            "lex1": "œ¿—œŒ–“ √–¿∆ƒ¿Õ»Õ¿ –¡",
+            "lex2": "œ¿ÿœ¿–“ √–¿Ã¿ƒ«ﬂÕ≤Õ¿ –¡",
+            "lex3": null,
+            "dateBegin": 1240652692000,
+            "active": true
+        },
+        "docOrgan": null,
+        "contryL": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "areaL": {
+            "klUniPK": {
+                "type": 1,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240650452000,
+            "active": true
+        },
+        "regionL": {
+            "klUniPK": {
+                "type": 29,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652687000,
+            "active": true
+        },
+        "typeCityL": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityL": {
+            "klUniPK": {
+                "type": 7,
+                "code": 11906424
+            },
+            "lex1": "Ã»Õ— ",
+            "lex2": "Ã≤Õ— ",
+            "lex3": null,
+            "dateBegin": 1240652388000,
+            "active": true
+        },
+        "typeStreetL": {
+            "klUniPK": {
+                "type": 38,
+                "code": 11700003
+            },
+            "lex1": "”À",
+            "lex2": "¬”À",
+            "lex3": null,
+            "dateBegin": 1240650491000,
+            "active": true
+        },
+        "streetL": {
+            "klUniPK": {
+                "type": 34,
+                "code": 11400028
+            },
+            "lex1": "¿—¿Õ¿À»≈¬¿ ƒ.",
+            "lex2": "¿—¿Õ¿À≤≈¬¿ ƒ.",
+            "lex3": null,
+            "dateBegin": 1240651103000,
+            "active": true
+        },
+        "house": "22",
+        "korps": "1",
+        "app": "156",
+        "organDoc": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17608047
+            },
+            "lex1": "Œ “ﬂ¡–‹— Œ≈ –”¬ƒ √.Ã»Õ— ¿",
+            "lex2": " ¿—“–€◊Õ≤÷ ¿≈ –””— √.Ã≤Õ— ¿",
+            "lex3": "1005823460541|104",
+            "dateBegin": 1240651592000,
+            "active": true
+        },
+        "workPlace": null,
+        "workPosition": null,
+        "docIssueOrgan": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17608047
+            },
+            "lex1": "Œ “ﬂ¡–‹— Œ≈ –”¬ƒ √.Ã»Õ— ¿",
+            "lex2": " ¿—“–€◊Õ≤÷ ¿≈ –””— √.Ã≤Õ— ¿",
+            "lex3": "1005823460541|104",
+            "dateBegin": 1240651592000,
+            "active": true
+        },
+        "surnameBel": "¬≈Õ√”–¿",
+        "nameBel": "¿À¿",
+        "snameBel": "Ã≤ ¿À¿≈°Õ¿",
+        "surnameEn": null,
+        "nameEn": null,
+        "areaBBel": null,
+        "regionBBel": null,
+        "cityBBel": "Ã≤Õ— ",
+        "villageCouncil": {
+            "klUniPK": {
+                "type": 98,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "intracityRegion": {
+            "klUniPK": {
+                "type": 99,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "form19_20": null,
+        "dsdAddressLive": null,
+        "getPassportDate": 960498000000,
+        "images": [],
+        "addressLast": null,
+        "status": null
+    },
+    {
+        "pid": 2000000000004635954,
+        "identif": "4221074A011PB0",
+        "view": {
+            "klUniPK": {
+                "type": -3,
+                "code": 10
+            },
+            "lex1": "Œ¡€◊Õ¿ﬂ »Õ‘Œ–Ã¿÷»ﬂ",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652693000,
+            "active": true
+        },
+        "sysDocType": {
+            "klUniPK": {
+                "type": -2,
+                "code": 8
+            },
+            "lex1": "‘Œ–Ã¿ 19-20 (œ–Œœ»— ¿, ¬€œ»— ¿)",
+            "lex2": "ASB",
+            "lex3": "ADDRESS",
+            "dateBegin": 1240650451000,
+            "active": true
+        },
+        "surname": "¬≈Õ√”–¿",
+        "name": "¿ÀÀ¿",
+        "sname": "Õ» ŒÀ¿≈¬Õ¿",
+        "sex": {
+            "klUniPK": {
+                "type": 32,
+                "code": 21000002
+            },
+            "lex1": "∆≈Õ— »…",
+            "lex2": "∆",
+            "lex3": "2",
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "citizenship": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "sysOrgan": {
+            "klUniPK": {
+                "type": -5,
+                "code": 26
+            },
+            "lex1": "¿—¡ √”¬ƒ Ã»Õ√Œ–»—œŒÀ ŒÃ¿",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652953000,
+            "active": true
+        },
+        "bdate": "19741022",
+        "dsdDateRec": null,
+        "docSery": "MP",
+        "docNum": "0826129",
+        "regNum": null,
+        "docDateIssue": 959634000000,
+        "docAppleDate": 1039730400000,
+        "dateRec": 1041522571000,
+        "ateAddress": null,
+        "expireDate": null,
+        "aisPasspDocStatus": null,
+        "identifCheckResult": null,
+        "countryB": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "areaB": null,
+        "regionB": null,
+        "typeCityB": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityB": "Ã»Õ— ",
+        "docType": {
+            "klUniPK": {
+                "type": 37,
+                "code": 54100032
+            },
+            "lex1": "œ¿—œŒ–“",
+            "lex2": "œ¿ÿœ¿–“",
+            "lex3": null,
+            "dateBegin": 1240652701000,
+            "active": true
+        },
+        "docOrgan": "Œ “ﬂ¡–‹— Œ≈ –”¬ƒ √.Ã»Õ— ¿",
+        "contryL": {
+            "klUniPK": {
+                "type": 8,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": "0",
+            "dateBegin": 1010743746000,
+            "active": true
+        },
+        "areaL": {
+            "klUniPK": {
+                "type": 1,
+                "code": 11300006
+            },
+            "lex1": "Ã»Õ— ¿ﬂ Œ¡À¿—“‹",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1567517771000,
+            "active": true
+        },
+        "regionL": {
+            "klUniPK": {
+                "type": 29,
+                "code": 11800085
+            },
+            "lex1": "ÃŒÀŒƒ≈◊Õ≈Õ— »…",
+            "lex2": "Ã¿À¿ƒ«≈◊¿Õ— ≤",
+            "lex3": null,
+            "dateBegin": 1240651587000,
+            "active": true
+        },
+        "typeCityL": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100005
+            },
+            "lex1": "œ",
+            "lex2": "œ",
+            "lex3": null,
+            "dateBegin": 1240652689000,
+            "active": true
+        },
+        "cityL": {
+            "klUniPK": {
+                "type": 7,
+                "code": 11911050
+            },
+            "lex1": "◊»—“‹",
+            "lex2": "◊€—÷‹",
+            "lex3": null,
+            "dateBegin": 1240652185000,
+            "active": true
+        },
+        "typeStreetL": {
+            "klUniPK": {
+                "type": 38,
+                "code": 11700003
+            },
+            "lex1": "”À",
+            "lex2": "¬”À",
+            "lex3": null,
+            "dateBegin": 1240650491000,
+            "active": true
+        },
+        "streetL": {
+            "klUniPK": {
+                "type": 34,
+                "code": 11400906
+            },
+            "lex1": "÷≈Õ“–¿À‹Õ¿ﬂ",
+            "lex2": "÷›Õ“–¿À‹Õ¿ﬂ",
+            "lex3": null,
+            "dateBegin": 1240651052000,
+            "active": true
+        },
+        "house": "8",
+        "korps": null,
+        "app": "1",
+        "organDoc": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17605016
+            },
+            "lex1": "ÃŒÀŒƒ≈◊Õ≈Õ— »… √–Œ¬ƒ Ã»Õ— Œ… Œ¡À¿—“»",
+            "lex2": "Ã¿À¿ƒ«≈◊¿Õ— ≤ √–¿”— Ã≤Õ— ¿… ¬Œ¡À¿—÷≤",
+            "lex3": null,
+            "dateBegin": 1240651605000,
+            "active": false
+        },
+        "workPlace": null,
+        "workPosition": null,
+        "docIssueOrgan": {
+            "klUniPK": {
+                "type": 24,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240650467000,
+            "active": true
+        },
+        "surnameBel": null,
+        "nameBel": null,
+        "snameBel": null,
+        "surnameEn": null,
+        "nameEn": null,
+        "areaBBel": null,
+        "regionBBel": null,
+        "cityBBel": null,
+        "villageCouncil": {
+            "klUniPK": {
+                "type": 98,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "intracityRegion": {
+            "klUniPK": {
+                "type": 99,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "form19_20": null,
+        "dsdAddressLive": {
+            "dsdAddressLiveBase": "dsdAddressLive",
+            "pid": 2000000000004635954,
+            "areaL": "Ã»Õ— ¿ﬂ",
+            "areaObjNum": 17041,
+            "regionL": "ÃŒÀŒƒ≈◊Õ≈Õ— »…",
+            "regionObjNum": 20213,
+            "villageCouncil": "◊»—“»Õ— »…",
+            "vilCouncilObjNum": 20504,
+            "typeCityL": "Ô.",
+            "cityL": "◊»—“‹",
+            "typeStreetL": "”À",
+            "streetL": "÷≈Õ“–¿À‹Õ¿ﬂ",
+            "house": "8",
+            "korps": null,
+            "app": "1",
+            "ateObjectNum": 20507,
+            "ateElementUid": 38608,
+            "ateAddrNum": 0
+        },
+        "getPassportDate": null,
+        "images": [],
+        "addressLast": null,
+        "status": null
+    },
+    {
+        "pid": 2000000000004635955,
+        "identif": "4221074A011PB0",
+        "view": {
+            "klUniPK": {
+                "type": -3,
+                "code": 10
+            },
+            "lex1": "Œ¡€◊Õ¿ﬂ »Õ‘Œ–Ã¿÷»ﬂ",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652693000,
+            "active": true
+        },
+        "sysDocType": {
+            "klUniPK": {
+                "type": -2,
+                "code": 8
+            },
+            "lex1": "‘Œ–Ã¿ 19-20 (œ–Œœ»— ¿, ¬€œ»— ¿)",
+            "lex2": "ASB",
+            "lex3": "ADDRESS",
+            "dateBegin": 1240650451000,
+            "active": true
+        },
+        "surname": "¬≈Õ√”–¿",
+        "name": "¿ÀÀ¿",
+        "sname": "Õ» ŒÀ¿≈¬Õ¿",
+        "sex": {
+            "klUniPK": {
+                "type": 32,
+                "code": 21000002
+            },
+            "lex1": "∆≈Õ— »…",
+            "lex2": "∆",
+            "lex3": "2",
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "citizenship": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "sysOrgan": {
+            "klUniPK": {
+                "type": -5,
+                "code": 26
+            },
+            "lex1": "¿—¡ √”¬ƒ Ã»Õ√Œ–»—œŒÀ ŒÃ¿",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652953000,
+            "active": true
+        },
+        "bdate": "19741022",
+        "dsdDateRec": null,
+        "docSery": "MP",
+        "docNum": "0146723",
+        "regNum": null,
+        "docDateIssue": 873666000000,
+        "docAppleDate": 662418000000,
+        "dateRec": 1027593797000,
+        "ateAddress": null,
+        "expireDate": null,
+        "aisPasspDocStatus": null,
+        "identifCheckResult": null,
+        "countryB": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "areaB": null,
+        "regionB": null,
+        "typeCityB": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityB": "Ã»Õ— ",
+        "docType": {
+            "klUniPK": {
+                "type": 37,
+                "code": 54100032
+            },
+            "lex1": "œ¿—œŒ–“",
+            "lex2": "œ¿ÿœ¿–“",
+            "lex3": null,
+            "dateBegin": 1240652701000,
+            "active": true
+        },
+        "docOrgan": "Œ “ﬂ¡–‹— »… –Œ¬ƒ √.Ã»Õ— ¿",
+        "contryL": {
+            "klUniPK": {
+                "type": 8,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": "0",
+            "dateBegin": 1010743746000,
+            "active": true
+        },
+        "areaL": {
+            "klUniPK": {
+                "type": 1,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240650452000,
+            "active": true
+        },
+        "regionL": {
+            "klUniPK": {
+                "type": 29,
+                "code": 11800051
+            },
+            "lex1": "Œ “ﬂ¡–‹— »…",
+            "lex2": "¿ ÷ﬂ¡–— ≤",
+            "lex3": null,
+            "dateBegin": 1240651591000,
+            "active": true
+        },
+        "typeCityL": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityL": {
+            "klUniPK": {
+                "type": 7,
+                "code": 11906424
+            },
+            "lex1": "Ã»Õ— ",
+            "lex2": "Ã≤Õ— ",
+            "lex3": null,
+            "dateBegin": 1240652388000,
+            "active": true
+        },
+        "typeStreetL": {
+            "klUniPK": {
+                "type": 38,
+                "code": 11700003
+            },
+            "lex1": "”À",
+            "lex2": "¬”À",
+            "lex3": null,
+            "dateBegin": 1240650491000,
+            "active": true
+        },
+        "streetL": {
+            "klUniPK": {
+                "type": 34,
+                "code": 11400028
+            },
+            "lex1": "¿—¿Õ¿À»≈¬¿ ƒ.",
+            "lex2": "¿—¿Õ¿À≤≈¬¿ ƒ.",
+            "lex3": null,
+            "dateBegin": 1240651103000,
+            "active": true
+        },
+        "house": "22",
+        "korps": "1",
+        "app": "156",
+        "organDoc": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17606005
+            },
+            "lex1": "Œ “ﬂ¡–‹— »… –Œ¬ƒ √.Ã»Õ— ¿",
+            "lex2": " ¿—“–€◊Õ≤÷ ≤ –¿”— √.Ã≤Õ— ¿",
+            "lex3": null,
+            "dateBegin": 1240651601000,
+            "active": false
+        },
+        "workPlace": null,
+        "workPosition": null,
+        "docIssueOrgan": {
+            "klUniPK": {
+                "type": 24,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240650467000,
+            "active": true
+        },
+        "surnameBel": null,
+        "nameBel": null,
+        "snameBel": null,
+        "surnameEn": null,
+        "nameEn": null,
+        "areaBBel": null,
+        "regionBBel": null,
+        "cityBBel": null,
+        "villageCouncil": {
+            "klUniPK": {
+                "type": 98,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "intracityRegion": {
+            "klUniPK": {
+                "type": 99,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "form19_20": null,
+        "dsdAddressLive": {
+            "dsdAddressLiveBase": "dsdAddressLive",
+            "pid": 2000000000004635955,
+            "areaL": "Ã»Õ— ",
+            "areaObjNum": 17030,
+            "regionL": "Œ “ﬂ¡–‹— »…",
+            "regionObjNum": 17034,
+            "villageCouncil": null,
+            "vilCouncilObjNum": 0,
+            "typeCityL": "„.",
+            "cityL": "Ã»Õ— ",
+            "typeStreetL": "”À",
+            "streetL": "¿—¿Õ¿À»≈¬¿",
+            "house": "22",
+            "korps": "1",
+            "app": "156",
+            "ateObjectNum": 17030,
+            "ateElementUid": 4753,
+            "ateAddrNum": 0
+        },
+        "getPassportDate": null,
+        "images": [],
+        "addressLast": null,
+        "status": null
+    },
+    {
+        "pid": 2000000000004635956,
+        "identif": "4221074A011PB0",
+        "view": {
+            "klUniPK": {
+                "type": -3,
+                "code": 10
+            },
+            "lex1": "Œ¡€◊Õ¿ﬂ »Õ‘Œ–Ã¿÷»ﬂ",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652693000,
+            "active": true
+        },
+        "sysDocType": {
+            "klUniPK": {
+                "type": -2,
+                "code": 8
+            },
+            "lex1": "‘Œ–Ã¿ 19-20 (œ–Œœ»— ¿, ¬€œ»— ¿)",
+            "lex2": "ASB",
+            "lex3": "ADDRESS",
+            "dateBegin": 1240650451000,
+            "active": true
+        },
+        "surname": "¬≈Õ√”–¿",
+        "name": "¿ÀÀ¿",
+        "sname": "Õ» ŒÀ¿≈¬Õ¿",
+        "sex": {
+            "klUniPK": {
+                "type": 32,
+                "code": 21000002
+            },
+            "lex1": "∆≈Õ— »…",
+            "lex2": "∆",
+            "lex3": "2",
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "citizenship": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "sysOrgan": {
+            "klUniPK": {
+                "type": -5,
+                "code": 26
+            },
+            "lex1": "¿—¡ √”¬ƒ Ã»Õ√Œ–»—œŒÀ ŒÃ¿",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652953000,
+            "active": true
+        },
+        "bdate": "19741022",
+        "dsdDateRec": null,
+        "docSery": "MP",
+        "docNum": "0146723",
+        "regNum": null,
+        "docDateIssue": 873666000000,
+        "docAppleDate": 1039125600000,
+        "dateRec": 1039458709000,
+        "ateAddress": null,
+        "expireDate": null,
+        "aisPasspDocStatus": null,
+        "identifCheckResult": null,
+        "countryB": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "areaB": null,
+        "regionB": null,
+        "typeCityB": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityB": "Ã»Õ— ",
+        "docType": {
+            "klUniPK": {
+                "type": 37,
+                "code": 54100032
+            },
+            "lex1": "œ¿—œŒ–“",
+            "lex2": "œ¿ÿœ¿–“",
+            "lex3": null,
+            "dateBegin": 1240652701000,
+            "active": true
+        },
+        "docOrgan": "Œ “ﬂ¡–‹— »… –Œ¬ƒ √.Ã»Õ— ¿",
+        "contryL": {
+            "klUniPK": {
+                "type": 8,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": "0",
+            "dateBegin": 1010743746000,
+            "active": true
+        },
+        "areaL": {
+            "klUniPK": {
+                "type": 1,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240650452000,
+            "active": true
+        },
+        "regionL": {
+            "klUniPK": {
+                "type": 29,
+                "code": 11800051
+            },
+            "lex1": "Œ “ﬂ¡–‹— »…",
+            "lex2": "¿ ÷ﬂ¡–— ≤",
+            "lex3": null,
+            "dateBegin": 1240651591000,
+            "active": true
+        },
+        "typeCityL": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityL": {
+            "klUniPK": {
+                "type": 7,
+                "code": 11906424
+            },
+            "lex1": "Ã»Õ— ",
+            "lex2": "Ã≤Õ— ",
+            "lex3": null,
+            "dateBegin": 1240652388000,
+            "active": true
+        },
+        "typeStreetL": {
+            "klUniPK": {
+                "type": 38,
+                "code": 11700003
+            },
+            "lex1": "”À",
+            "lex2": "¬”À",
+            "lex3": null,
+            "dateBegin": 1240650491000,
+            "active": true
+        },
+        "streetL": {
+            "klUniPK": {
+                "type": 34,
+                "code": 11400028
+            },
+            "lex1": "¿—¿Õ¿À»≈¬¿ ƒ.",
+            "lex2": "¿—¿Õ¿À≤≈¬¿ ƒ.",
+            "lex3": null,
+            "dateBegin": 1240651103000,
+            "active": true
+        },
+        "house": "22",
+        "korps": "1",
+        "app": "156",
+        "organDoc": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17606005
+            },
+            "lex1": "Œ “ﬂ¡–‹— »… –Œ¬ƒ √.Ã»Õ— ¿",
+            "lex2": " ¿—“–€◊Õ≤÷ ≤ –¿”— √.Ã≤Õ— ¿",
+            "lex3": null,
+            "dateBegin": 1240651601000,
+            "active": false
+        },
+        "workPlace": null,
+        "workPosition": null,
+        "docIssueOrgan": {
+            "klUniPK": {
+                "type": 24,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240650467000,
+            "active": true
+        },
+        "surnameBel": null,
+        "nameBel": null,
+        "snameBel": null,
+        "surnameEn": null,
+        "nameEn": null,
+        "areaBBel": null,
+        "regionBBel": null,
+        "cityBBel": null,
+        "villageCouncil": {
+            "klUniPK": {
+                "type": 98,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "intracityRegion": {
+            "klUniPK": {
+                "type": 99,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "form19_20": null,
+        "dsdAddressLive": {
+            "dsdAddressLiveBase": "dsdAddressLive",
+            "pid": 2000000000004635956,
+            "areaL": "Ã»Õ— ",
+            "areaObjNum": 17030,
+            "regionL": "Œ “ﬂ¡–‹— »…",
+            "regionObjNum": 17034,
+            "villageCouncil": null,
+            "vilCouncilObjNum": 0,
+            "typeCityL": "„.",
+            "cityL": "Ã»Õ— ",
+            "typeStreetL": "”À",
+            "streetL": "¿—¿Õ¿À»≈¬¿",
+            "house": "22",
+            "korps": "1",
+            "app": "156",
+            "ateObjectNum": 17030,
+            "ateElementUid": 4753,
+            "ateAddrNum": 0
+        },
+        "getPassportDate": null,
+        "images": [],
+        "addressLast": null,
+        "status": null
+    },
+    {
+        "pid": 2000000000004635957,
+        "identif": "4221074A011PB0",
+        "view": {
+            "klUniPK": {
+                "type": -3,
+                "code": 10
+            },
+            "lex1": "Œ¡€◊Õ¿ﬂ »Õ‘Œ–Ã¿÷»ﬂ",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652693000,
+            "active": true
+        },
+        "sysDocType": {
+            "klUniPK": {
+                "type": -2,
+                "code": 8
+            },
+            "lex1": "‘Œ–Ã¿ 19-20 (œ–Œœ»— ¿, ¬€œ»— ¿)",
+            "lex2": "ASB",
+            "lex3": "ADDRESS",
+            "dateBegin": 1240650451000,
+            "active": true
+        },
+        "surname": "ƒŒÀ√¿ﬂ",
+        "name": "¿ÀÀ¿",
+        "sname": "Õ» ŒÀ¿≈¬Õ¿",
+        "sex": {
+            "klUniPK": {
+                "type": 32,
+                "code": 21000002
+            },
+            "lex1": "∆≈Õ— »…",
+            "lex2": "∆",
+            "lex3": "2",
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "citizenship": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "sysOrgan": {
+            "klUniPK": {
+                "type": -5,
+                "code": 26
+            },
+            "lex1": "¿—¡ √”¬ƒ Ã»Õ√Œ–»—œŒÀ ŒÃ¿",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652953000,
+            "active": true
+        },
+        "bdate": "19741022",
+        "dsdDateRec": null,
+        "docSery": "MH",
+        "docNum": "0095796",
+        "regNum": null,
+        "docDateIssue": 840488400000,
+        "docAppleDate": 840488400000,
+        "dateRec": 1039458709000,
+        "ateAddress": null,
+        "expireDate": null,
+        "aisPasspDocStatus": null,
+        "identifCheckResult": null,
+        "countryB": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "areaB": null,
+        "regionB": null,
+        "typeCityB": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityB": "Ã»Õ— ",
+        "docType": {
+            "klUniPK": {
+                "type": 37,
+                "code": 54100032
+            },
+            "lex1": "œ¿—œŒ–“",
+            "lex2": "œ¿ÿœ¿–“",
+            "lex3": null,
+            "dateBegin": 1240652701000,
+            "active": true
+        },
+        "docOrgan": "Œ “ﬂ¡–‹— »… –Œ¬ƒ √.Ã»Õ— ¿",
+        "contryL": {
+            "klUniPK": {
+                "type": 8,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": "0",
+            "dateBegin": 1010743746000,
+            "active": true
+        },
+        "areaL": {
+            "klUniPK": {
+                "type": 1,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240650452000,
+            "active": true
+        },
+        "regionL": {
+            "klUniPK": {
+                "type": 29,
+                "code": 11800051
+            },
+            "lex1": "Œ “ﬂ¡–‹— »…",
+            "lex2": "¿ ÷ﬂ¡–— ≤",
+            "lex3": null,
+            "dateBegin": 1240651591000,
+            "active": true
+        },
+        "typeCityL": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityL": {
+            "klUniPK": {
+                "type": 7,
+                "code": 11906424
+            },
+            "lex1": "Ã»Õ— ",
+            "lex2": "Ã≤Õ— ",
+            "lex3": null,
+            "dateBegin": 1240652388000,
+            "active": true
+        },
+        "typeStreetL": {
+            "klUniPK": {
+                "type": 38,
+                "code": 11700003
+            },
+            "lex1": "”À",
+            "lex2": "¬”À",
+            "lex3": null,
+            "dateBegin": 1240650491000,
+            "active": true
+        },
+        "streetL": {
+            "klUniPK": {
+                "type": 34,
+                "code": 11400028
+            },
+            "lex1": "¿—¿Õ¿À»≈¬¿ ƒ.",
+            "lex2": "¿—¿Õ¿À≤≈¬¿ ƒ.",
+            "lex3": null,
+            "dateBegin": 1240651103000,
+            "active": true
+        },
+        "house": "22",
+        "korps": "1",
+        "app": "156",
+        "organDoc": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17606005
+            },
+            "lex1": "Œ “ﬂ¡–‹— »… –Œ¬ƒ √.Ã»Õ— ¿",
+            "lex2": " ¿—“–€◊Õ≤÷ ≤ –¿”— √.Ã≤Õ— ¿",
+            "lex3": null,
+            "dateBegin": 1240651601000,
+            "active": false
+        },
+        "workPlace": null,
+        "workPosition": null,
+        "docIssueOrgan": {
+            "klUniPK": {
+                "type": 24,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240650467000,
+            "active": true
+        },
+        "surnameBel": null,
+        "nameBel": null,
+        "snameBel": null,
+        "surnameEn": null,
+        "nameEn": null,
+        "areaBBel": null,
+        "regionBBel": null,
+        "cityBBel": null,
+        "villageCouncil": {
+            "klUniPK": {
+                "type": 98,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "intracityRegion": {
+            "klUniPK": {
+                "type": 99,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "form19_20": null,
+        "dsdAddressLive": {
+            "dsdAddressLiveBase": "dsdAddressLive",
+            "pid": 2000000000004635957,
+            "areaL": "Ã»Õ— ",
+            "areaObjNum": 17030,
+            "regionL": "Œ “ﬂ¡–‹— »…",
+            "regionObjNum": 17034,
+            "villageCouncil": null,
+            "vilCouncilObjNum": 0,
+            "typeCityL": "„.",
+            "cityL": "Ã»Õ— ",
+            "typeStreetL": "”À",
+            "streetL": "¿—¿Õ¿À»≈¬¿",
+            "house": "22",
+            "korps": "1",
+            "app": "156",
+            "ateObjectNum": 17030,
+            "ateElementUid": 4753,
+            "ateAddrNum": 0
+        },
+        "getPassportDate": null,
+        "images": [],
+        "addressLast": null,
+        "status": null
+    },
+    {
+        "pid": 26000000000001561711,
+        "identif": "4221074A011PB0",
+        "view": {
+            "klUniPK": {
+                "type": -3,
+                "code": 10
+            },
+            "lex1": "Œ¡€◊Õ¿ﬂ »Õ‘Œ–Ã¿÷»ﬂ",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652693000,
+            "active": true
+        },
+        "sysDocType": {
+            "klUniPK": {
+                "type": -2,
+                "code": 8
+            },
+            "lex1": "‘Œ–Ã¿ 19-20 (œ–Œœ»— ¿, ¬€œ»— ¿)",
+            "lex2": "ASB",
+            "lex3": "ADDRESS",
+            "dateBegin": 1240650451000,
+            "active": true
+        },
+        "surname": "¬≈Õ√”–¿",
+        "name": "¿ÀÀ¿",
+        "sname": "Õ» ŒÀ¿≈¬Õ¿",
+        "sex": {
+            "klUniPK": {
+                "type": 32,
+                "code": 21000002
+            },
+            "lex1": "∆≈Õ— »…",
+            "lex2": "∆",
+            "lex3": "2",
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "citizenship": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "sysOrgan": {
+            "klUniPK": {
+                "type": -5,
+                "code": 26
+            },
+            "lex1": "¿—¡ √”¬ƒ Ã»Õ√Œ–»—œŒÀ ŒÃ¿",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652953000,
+            "active": true
+        },
+        "bdate": "19741022",
+        "dsdDateRec": null,
+        "docSery": "MP",
+        "docNum": "0826129",
+        "regNum": null,
+        "docDateIssue": 959634000000,
+        "docAppleDate": 1109282400000,
+        "dateRec": 1109541600000,
+        "ateAddress": null,
+        "expireDate": null,
+        "aisPasspDocStatus": null,
+        "identifCheckResult": null,
+        "countryB": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "areaB": null,
+        "regionB": null,
+        "typeCityB": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityB": "Ã»Õ— ",
+        "docType": {
+            "klUniPK": {
+                "type": 37,
+                "code": 54100032
+            },
+            "lex1": "œ¿—œŒ–“",
+            "lex2": "œ¿ÿœ¿–“",
+            "lex3": null,
+            "dateBegin": 1240652701000,
+            "active": true
+        },
+        "docOrgan": null,
+        "contryL": {
+            "klUniPK": {
+                "type": 8,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": "0",
+            "dateBegin": 1010743746000,
+            "active": true
+        },
+        "areaL": {
+            "klUniPK": {
+                "type": 1,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240650452000,
+            "active": true
+        },
+        "regionL": {
+            "klUniPK": {
+                "type": 29,
+                "code": 11800120
+            },
+            "lex1": "œ≈–¬ŒÃ¿…— »…",
+            "lex2": "œ≈–ÿ¿Ã¿…— ≤",
+            "lex3": null,
+            "dateBegin": 1240651585000,
+            "active": true
+        },
+        "typeCityL": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityL": {
+            "klUniPK": {
+                "type": 7,
+                "code": 11906424
+            },
+            "lex1": "Ã»Õ— ",
+            "lex2": "Ã≤Õ— ",
+            "lex3": null,
+            "dateBegin": 1240652388000,
+            "active": true
+        },
+        "typeStreetL": {
+            "klUniPK": {
+                "type": 38,
+                "code": 11700003
+            },
+            "lex1": "”À",
+            "lex2": "¬”À",
+            "lex3": null,
+            "dateBegin": 1240650491000,
+            "active": true
+        },
+        "streetL": {
+            "klUniPK": {
+                "type": 34,
+                "code": 11400724
+            },
+            "lex1": "—≈ƒ€’ ¬.ﬂ.",
+            "lex2": "—ﬂƒ€’ ¬.ﬂ.",
+            "lex3": null,
+            "dateBegin": 1240651064000,
+            "active": true
+        },
+        "house": "4",
+        "korps": null,
+        "app": "59",
+        "organDoc": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17606007
+            },
+            "lex1": "œ≈–¬ŒÃ¿…— »… –Œ¬ƒ √.Ã»Õ— ¿",
+            "lex2": "œ≈–ÿ¿Ã¿…— ≤ –¿”— √.Ã≤Õ— ¿",
+            "lex3": null,
+            "dateBegin": 1240651602000,
+            "active": false
+        },
+        "workPlace": null,
+        "workPosition": null,
+        "docIssueOrgan": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17608047
+            },
+            "lex1": "Œ “ﬂ¡–‹— Œ≈ –”¬ƒ √.Ã»Õ— ¿",
+            "lex2": " ¿—“–€◊Õ≤÷ ¿≈ –””— √.Ã≤Õ— ¿",
+            "lex3": "1005823460541|104",
+            "dateBegin": 1240651592000,
+            "active": true
+        },
+        "surnameBel": null,
+        "nameBel": null,
+        "snameBel": null,
+        "surnameEn": null,
+        "nameEn": null,
+        "areaBBel": null,
+        "regionBBel": null,
+        "cityBBel": null,
+        "villageCouncil": {
+            "klUniPK": {
+                "type": 98,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "intracityRegion": {
+            "klUniPK": {
+                "type": 99,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "form19_20": {
+            "form19_20Base": "form19_20",
+            "pid": 26000000000001561711,
+            "signAway": false,
+            "countryPu": {
+                "klUniPK": {
+                    "type": 8,
+                    "code": 11200001
+                },
+                "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+                "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+                "lex3": "BLR",
+                "dateBegin": 1026155763000,
+                "active": true
+            },
+            "areaPu": "Ã»Õ— ¿ﬂ",
+            "regionPu": "ÃŒÀŒƒ≈◊Õ≈Õ— »…",
+            "cityPu": "◊»—“‹",
+            "datePu": 1107208800000,
+            "marks": {
+                "klUniPK": {
+                    "type": 2,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240650453000,
+                "active": true
+            },
+            "notes": null,
+            "reason": {
+                "klUniPK": {
+                    "type": 3,
+                    "code": 59601005
+                },
+                "lex1": "Œ¡Ã≈Õ, œŒ ”œ ¿, ƒ¿–≈Õ»≈",
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652670000,
+                "active": true
+            },
+            "term": "ASDB",
+            "dateRec": 1109541600000,
+            "typeCityPu": {
+                "klUniPK": {
+                    "type": 35,
+                    "code": 11100009
+                },
+                "lex1": "ƒ",
+                "lex2": "¬",
+                "lex3": null,
+                "dateBegin": 1240652689000,
+                "active": true
+            },
+            "typeStreetPu": {
+                "klUniPK": {
+                    "type": 38,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652692000,
+                "active": true
+            },
+            "streetPu": null,
+            "housePu": null,
+            "korpsPu": null,
+            "appPu": null,
+            "dateReg": 1109282400000,
+            "termReg": {
+                "klUniPK": {
+                    "type": 27,
+                    "code": 1
+                },
+                "lex1": "œŒ—“ŒﬂÕÕŒ",
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652986000,
+                "active": true
+            },
+            "dateRegTill": null,
+            "causeIssue": {
+                "klUniPK": {
+                    "type": 39,
+                    "code": 59200002
+                },
+                "lex1": "ƒŒ—“»∆≈Õ»≈ 25-À≈“Õ≈√Œ ¬Œ«–¿—“¿",
+                "lex2": "ƒ¿—ﬂ√Õ≈ÕÕ≈ 25-√¿ƒŒ¬¿√¿ °«–Œ—“”",
+                "lex3": null,
+                "dateBegin": 1240650493000,
+                "active": true
+            },
+            "deathDate": null,
+            "signNoTake": false,
+            "signNoReg": false,
+            "signDestroy": false,
+            "noAddrPu": {
+                "klUniPK": {
+                    "type": 70,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652987000,
+                "active": true
+            },
+            "regType": {
+                "klUniPK": {
+                    "type": 500,
+                    "code": 1
+                },
+                "lex1": "œŒ—“ŒﬂÕÕ¿ﬂ –≈√»—“–¿÷»ﬂ",
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1539205200000,
+                "active": true
+            },
+            "maritalStatus": {
+                "klUniPK": {
+                    "type": 501,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1539378000000,
+                "active": false
+            },
+            "education": {
+                "klUniPK": {
+                    "type": 502,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1539378000000,
+                "active": true
+            },
+            "student": false,
+            "infants": [
+                {
+                    "form19_20InfantBase": "Form19_20Infant",
+                    "rid": 26000000000000209338,
+                    "pid": 26000000000001561711,
+                    "sex": {
+                        "klUniPK": {
+                            "type": 32,
+                            "code": 21000001
+                        },
+                        "lex1": "Ã”∆— Œ…",
+                        "lex2": null,
+                        "lex3": null,
+                        "dateBegin": 1540395909000,
+                        "active": true
+                    },
+                    "dateRec": -2208999600000,
+                    "rel": {
+                        "klUniPK": {
+                            "type": 16,
+                            "code": 0
+                        },
+                        "lex1": null,
+                        "lex2": null,
+                        "lex3": null,
+                        "dateBegin": 1507626835000,
+                        "active": true
+                    },
+                    "surname": null,
+                    "name": "—¿ÿ¿",
+                    "sname": null,
+                    "docId": null,
+                    "bdate": "19951100"
+                },
+                {
+                    "form19_20InfantBase": "Form19_20Infant",
+                    "rid": 26000000000000209339,
+                    "pid": 26000000000001561711,
+                    "sex": {
+                        "klUniPK": {
+                            "type": 32,
+                            "code": 21000002
+                        },
+                        "lex1": "∆≈Õ— »…",
+                        "lex2": "∆",
+                        "lex3": "2",
+                        "dateBegin": 1240652688000,
+                        "active": true
+                    },
+                    "dateRec": -2208999600000,
+                    "rel": {
+                        "klUniPK": {
+                            "type": 16,
+                            "code": 0
+                        },
+                        "lex1": null,
+                        "lex2": null,
+                        "lex3": null,
+                        "dateBegin": 1507626835000,
+                        "active": true
+                    },
+                    "surname": null,
+                    "name": " —≈Õ»ﬂ",
+                    "sname": null,
+                    "docId": null,
+                    "bdate": "19990400"
+                }
+            ]
+        },
+        "dsdAddressLive": {
+            "dsdAddressLiveBase": "dsdAddressLive",
+            "pid": 26000000000001561711,
+            "areaL": "Ã»Õ— ",
+            "areaObjNum": 17030,
+            "regionL": "œ≈–¬ŒÃ¿…— »…",
+            "regionObjNum": 17037,
+            "villageCouncil": null,
+            "vilCouncilObjNum": 0,
+            "typeCityL": "„.",
+            "cityL": "Ã»Õ— ",
+            "typeStreetL": "”À",
+            "streetL": "—≈ƒ€’",
+            "house": "4",
+            "korps": null,
+            "app": "59",
+            "ateObjectNum": 17030,
+            "ateElementUid": 20430,
+            "ateAddrNum": 0
+        },
+        "getPassportDate": null,
+        "images": [],
+        "addressLast": null,
+        "status": null
+    },
+    {
+        "pid": 26000000000001561707,
+        "identif": "4221074A011PB0",
+        "view": {
+            "klUniPK": {
+                "type": -3,
+                "code": 10
+            },
+            "lex1": "Œ¡€◊Õ¿ﬂ »Õ‘Œ–Ã¿÷»ﬂ",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652693000,
+            "active": true
+        },
+        "sysDocType": {
+            "klUniPK": {
+                "type": -2,
+                "code": 8
+            },
+            "lex1": "‘Œ–Ã¿ 19-20 (œ–Œœ»— ¿, ¬€œ»— ¿)",
+            "lex2": "ASB",
+            "lex3": "ADDRESS",
+            "dateBegin": 1240650451000,
+            "active": true
+        },
+        "surname": "ƒŒÀ√¿ﬂ",
+        "name": "¿ÀÀ¿",
+        "sname": "Õ» ŒÀ¿≈¬Õ¿",
+        "sex": {
+            "klUniPK": {
+                "type": 32,
+                "code": 21000002
+            },
+            "lex1": "∆≈Õ— »…",
+            "lex2": "∆",
+            "lex3": "2",
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "citizenship": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "sysOrgan": {
+            "klUniPK": {
+                "type": -5,
+                "code": 26
+            },
+            "lex1": "¿—¡ √”¬ƒ Ã»Õ√Œ–»—œŒÀ ŒÃ¿",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652953000,
+            "active": true
+        },
+        "bdate": "19741022",
+        "dsdDateRec": null,
+        "docSery": "MH",
+        "docNum": "0095796",
+        "regNum": null,
+        "docDateIssue": 840488400000,
+        "docAppleDate": 840488400000,
+        "dateRec": 1027544400000,
+        "ateAddress": null,
+        "expireDate": null,
+        "aisPasspDocStatus": null,
+        "identifCheckResult": null,
+        "countryB": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "areaB": null,
+        "regionB": null,
+        "typeCityB": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityB": "Ã»Õ— ",
+        "docType": {
+            "klUniPK": {
+                "type": 37,
+                "code": 54100032
+            },
+            "lex1": "œ¿—œŒ–“",
+            "lex2": "œ¿ÿœ¿–“",
+            "lex3": null,
+            "dateBegin": 1240652701000,
+            "active": true
+        },
+        "docOrgan": null,
+        "contryL": {
+            "klUniPK": {
+                "type": 8,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": "0",
+            "dateBegin": 1010743746000,
+            "active": true
+        },
+        "areaL": {
+            "klUniPK": {
+                "type": 1,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240650452000,
+            "active": true
+        },
+        "regionL": {
+            "klUniPK": {
+                "type": 29,
+                "code": 11800051
+            },
+            "lex1": "Œ “ﬂ¡–‹— »…",
+            "lex2": "¿ ÷ﬂ¡–— ≤",
+            "lex3": null,
+            "dateBegin": 1240651591000,
+            "active": true
+        },
+        "typeCityL": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityL": {
+            "klUniPK": {
+                "type": 7,
+                "code": 11906424
+            },
+            "lex1": "Ã»Õ— ",
+            "lex2": "Ã≤Õ— ",
+            "lex3": null,
+            "dateBegin": 1240652388000,
+            "active": true
+        },
+        "typeStreetL": {
+            "klUniPK": {
+                "type": 38,
+                "code": 11700003
+            },
+            "lex1": "”À",
+            "lex2": "¬”À",
+            "lex3": null,
+            "dateBegin": 1240650491000,
+            "active": true
+        },
+        "streetL": {
+            "klUniPK": {
+                "type": 34,
+                "code": 11410690
+            },
+            "lex1": "¿—¿Õ¿À»≈¬¿ ƒ.—.",
+            "lex2": "¿—¿Õ¿À»≈¬¿ ƒ.—.",
+            "lex3": null,
+            "dateBegin": 1240652894000,
+            "active": false
+        },
+        "house": "22",
+        "korps": "1",
+        "app": "156",
+        "organDoc": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17606005
+            },
+            "lex1": "Œ “ﬂ¡–‹— »… –Œ¬ƒ √.Ã»Õ— ¿",
+            "lex2": " ¿—“–€◊Õ≤÷ ≤ –¿”— √.Ã≤Õ— ¿",
+            "lex3": null,
+            "dateBegin": 1240651601000,
+            "active": false
+        },
+        "workPlace": null,
+        "workPosition": null,
+        "docIssueOrgan": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17606005
+            },
+            "lex1": "Œ “ﬂ¡–‹— »… –Œ¬ƒ √.Ã»Õ— ¿",
+            "lex2": " ¿—“–€◊Õ≤÷ ≤ –¿”— √.Ã≤Õ— ¿",
+            "lex3": null,
+            "dateBegin": 1240651601000,
+            "active": false
+        },
+        "surnameBel": null,
+        "nameBel": null,
+        "snameBel": null,
+        "surnameEn": null,
+        "nameEn": null,
+        "areaBBel": null,
+        "regionBBel": null,
+        "cityBBel": null,
+        "villageCouncil": {
+            "klUniPK": {
+                "type": 98,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "intracityRegion": {
+            "klUniPK": {
+                "type": 99,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "form19_20": {
+            "form19_20Base": "form19_20",
+            "pid": 26000000000001561707,
+            "signAway": false,
+            "countryPu": {
+                "klUniPK": {
+                    "type": 8,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": "0",
+                "dateBegin": 1010743746000,
+                "active": true
+            },
+            "areaPu": null,
+            "regionPu": null,
+            "cityPu": null,
+            "datePu": null,
+            "marks": {
+                "klUniPK": {
+                    "type": 2,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240650453000,
+                "active": true
+            },
+            "notes": null,
+            "reason": {
+                "klUniPK": {
+                    "type": 3,
+                    "code": 59601009
+                },
+                "lex1": "œ–Œœ»—¿Õ «ƒ≈—‹ œŒ—“ŒﬂÕÕŒ",
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652670000,
+                "active": true
+            },
+            "term": null,
+            "dateRec": 1027544400000,
+            "typeCityPu": {
+                "klUniPK": {
+                    "type": 35,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652688000,
+                "active": true
+            },
+            "typeStreetPu": {
+                "klUniPK": {
+                    "type": 38,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652692000,
+                "active": true
+            },
+            "streetPu": null,
+            "housePu": null,
+            "korpsPu": null,
+            "appPu": null,
+            "dateReg": 662418000000,
+            "termReg": {
+                "klUniPK": {
+                    "type": 27,
+                    "code": 1
+                },
+                "lex1": "œŒ—“ŒﬂÕÕŒ",
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652986000,
+                "active": true
+            },
+            "dateRegTill": null,
+            "causeIssue": {
+                "klUniPK": {
+                    "type": 39,
+                    "code": 59200010
+                },
+                "lex1": "œ¿—œŒ–“»«¿÷»ﬂ",
+                "lex2": "œ¿ÿœ¿–“€«¿÷€ﬂ",
+                "lex3": null,
+                "dateBegin": 1240650493000,
+                "active": true
+            },
+            "deathDate": null,
+            "signNoTake": false,
+            "signNoReg": false,
+            "signDestroy": false,
+            "noAddrPu": {
+                "klUniPK": {
+                    "type": 70,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652987000,
+                "active": true
+            },
+            "regType": {
+                "klUniPK": {
+                    "type": 500,
+                    "code": 1
+                },
+                "lex1": "œŒ—“ŒﬂÕÕ¿ﬂ –≈√»—“–¿÷»ﬂ",
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1539205200000,
+                "active": true
+            },
+            "maritalStatus": {
+                "klUniPK": {
+                    "type": 501,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1539378000000,
+                "active": false
+            },
+            "education": {
+                "klUniPK": {
+                    "type": 502,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1539378000000,
+                "active": true
+            },
+            "student": false,
+            "infants": [
+                {
+                    "form19_20InfantBase": "Form19_20Infant",
+                    "rid": 26000000000000209332,
+                    "pid": 26000000000001561707,
+                    "sex": {
+                        "klUniPK": {
+                            "type": 32,
+                            "code": 21000001
+                        },
+                        "lex1": "Ã”∆— Œ…",
+                        "lex2": null,
+                        "lex3": null,
+                        "dateBegin": 1540395909000,
+                        "active": true
+                    },
+                    "dateRec": -2208999600000,
+                    "rel": {
+                        "klUniPK": {
+                            "type": 16,
+                            "code": 0
+                        },
+                        "lex1": null,
+                        "lex2": null,
+                        "lex3": null,
+                        "dateBegin": 1507626835000,
+                        "active": true
+                    },
+                    "surname": null,
+                    "name": "—¿ÿ¿",
+                    "sname": null,
+                    "docId": null,
+                    "bdate": "19951100"
+                }
+            ]
+        },
+        "dsdAddressLive": {
+            "dsdAddressLiveBase": "dsdAddressLive",
+            "pid": 26000000000001561707,
+            "areaL": "Ã»Õ— ",
+            "areaObjNum": 17030,
+            "regionL": "Œ “ﬂ¡–‹— »…",
+            "regionObjNum": 17034,
+            "villageCouncil": null,
+            "vilCouncilObjNum": 0,
+            "typeCityL": "„.",
+            "cityL": "Ã»Õ— ",
+            "typeStreetL": "”À",
+            "streetL": "¿—¿Õ¿À»≈¬¿",
+            "house": "22",
+            "korps": "1",
+            "app": "156",
+            "ateObjectNum": 17030,
+            "ateElementUid": 4753,
+            "ateAddrNum": 0
+        },
+        "getPassportDate": null,
+        "images": [],
+        "addressLast": null,
+        "status": null
+    },
+    {
+        "pid": 26000000000001561708,
+        "identif": "4221074A011PB0",
+        "view": {
+            "klUniPK": {
+                "type": -3,
+                "code": 10
+            },
+            "lex1": "Œ¡€◊Õ¿ﬂ »Õ‘Œ–Ã¿÷»ﬂ",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652693000,
+            "active": true
+        },
+        "sysDocType": {
+            "klUniPK": {
+                "type": -2,
+                "code": 8
+            },
+            "lex1": "‘Œ–Ã¿ 19-20 (œ–Œœ»— ¿, ¬€œ»— ¿)",
+            "lex2": "ASB",
+            "lex3": "ADDRESS",
+            "dateBegin": 1240650451000,
+            "active": true
+        },
+        "surname": "¬≈Õ√”–¿",
+        "name": "¿ÀÀ¿",
+        "sname": "Õ» ŒÀ¿≈¬Õ¿",
+        "sex": {
+            "klUniPK": {
+                "type": 32,
+                "code": 21000002
+            },
+            "lex1": "∆≈Õ— »…",
+            "lex2": "∆",
+            "lex3": "2",
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "citizenship": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "sysOrgan": {
+            "klUniPK": {
+                "type": -5,
+                "code": 26
+            },
+            "lex1": "¿—¡ √”¬ƒ Ã»Õ√Œ–»—œŒÀ ŒÃ¿",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652953000,
+            "active": true
+        },
+        "bdate": "19741022",
+        "dsdDateRec": null,
+        "docSery": "MP",
+        "docNum": "0826129",
+        "regNum": null,
+        "docDateIssue": 959634000000,
+        "docAppleDate": 1039125600000,
+        "dateRec": 1039384800000,
+        "ateAddress": null,
+        "expireDate": null,
+        "aisPasspDocStatus": null,
+        "identifCheckResult": null,
+        "countryB": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "areaB": null,
+        "regionB": null,
+        "typeCityB": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityB": "Ã»Õ— ",
+        "docType": {
+            "klUniPK": {
+                "type": 37,
+                "code": 54100032
+            },
+            "lex1": "œ¿—œŒ–“",
+            "lex2": "œ¿ÿœ¿–“",
+            "lex3": null,
+            "dateBegin": 1240652701000,
+            "active": true
+        },
+        "docOrgan": null,
+        "contryL": {
+            "klUniPK": {
+                "type": 8,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": "0",
+            "dateBegin": 1010743746000,
+            "active": true
+        },
+        "areaL": {
+            "klUniPK": {
+                "type": 1,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240650452000,
+            "active": true
+        },
+        "regionL": {
+            "klUniPK": {
+                "type": 29,
+                "code": 11800051
+            },
+            "lex1": "Œ “ﬂ¡–‹— »…",
+            "lex2": "¿ ÷ﬂ¡–— ≤",
+            "lex3": null,
+            "dateBegin": 1240651591000,
+            "active": true
+        },
+        "typeCityL": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityL": {
+            "klUniPK": {
+                "type": 7,
+                "code": 11906424
+            },
+            "lex1": "Ã»Õ— ",
+            "lex2": "Ã≤Õ— ",
+            "lex3": null,
+            "dateBegin": 1240652388000,
+            "active": true
+        },
+        "typeStreetL": {
+            "klUniPK": {
+                "type": 38,
+                "code": 11700003
+            },
+            "lex1": "”À",
+            "lex2": "¬”À",
+            "lex3": null,
+            "dateBegin": 1240650491000,
+            "active": true
+        },
+        "streetL": {
+            "klUniPK": {
+                "type": 34,
+                "code": 11410690
+            },
+            "lex1": "¿—¿Õ¿À»≈¬¿ ƒ.—.",
+            "lex2": "¿—¿Õ¿À»≈¬¿ ƒ.—.",
+            "lex3": null,
+            "dateBegin": 1240652894000,
+            "active": false
+        },
+        "house": "22",
+        "korps": "1",
+        "app": "156",
+        "organDoc": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17606005
+            },
+            "lex1": "Œ “ﬂ¡–‹— »… –Œ¬ƒ √.Ã»Õ— ¿",
+            "lex2": " ¿—“–€◊Õ≤÷ ≤ –¿”— √.Ã≤Õ— ¿",
+            "lex3": null,
+            "dateBegin": 1240651601000,
+            "active": false
+        },
+        "workPlace": null,
+        "workPosition": null,
+        "docIssueOrgan": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17608047
+            },
+            "lex1": "Œ “ﬂ¡–‹— Œ≈ –”¬ƒ √.Ã»Õ— ¿",
+            "lex2": " ¿—“–€◊Õ≤÷ ¿≈ –””— √.Ã≤Õ— ¿",
+            "lex3": "1005823460541|104",
+            "dateBegin": 1240651592000,
+            "active": true
+        },
+        "surnameBel": null,
+        "nameBel": null,
+        "snameBel": null,
+        "surnameEn": null,
+        "nameEn": null,
+        "areaBBel": null,
+        "regionBBel": null,
+        "cityBBel": null,
+        "villageCouncil": {
+            "klUniPK": {
+                "type": 98,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "intracityRegion": {
+            "klUniPK": {
+                "type": 99,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "form19_20": {
+            "form19_20Base": "form19_20",
+            "pid": 26000000000001561708,
+            "signAway": true,
+            "countryPu": {
+                "klUniPK": {
+                    "type": 8,
+                    "code": 11200001
+                },
+                "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+                "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+                "lex3": "BLR",
+                "dateBegin": 1026155763000,
+                "active": true
+            },
+            "areaPu": "Ã»Õ— ¿ﬂ",
+            "regionPu": "ÃŒÀŒƒ≈◊Õ≈Õ— »…",
+            "cityPu": "◊»—“‹",
+            "datePu": 1039125600000,
+            "marks": {
+                "klUniPK": {
+                    "type": 2,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240650453000,
+                "active": true
+            },
+            "notes": null,
+            "reason": {
+                "klUniPK": {
+                    "type": 3,
+                    "code": 59601014
+                },
+                "lex1": "Õ¿ œŒ—“ŒﬂÕÕŒ≈ Ã≈—“Œ ∆»“≈À‹—“¬¿",
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652670000,
+                "active": true
+            },
+            "term": null,
+            "dateRec": 1039384800000,
+            "typeCityPu": {
+                "klUniPK": {
+                    "type": 35,
+                    "code": 11100005
+                },
+                "lex1": "œ",
+                "lex2": "œ",
+                "lex3": null,
+                "dateBegin": 1240652689000,
+                "active": true
+            },
+            "typeStreetPu": {
+                "klUniPK": {
+                    "type": 38,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652692000,
+                "active": true
+            },
+            "streetPu": null,
+            "housePu": null,
+            "korpsPu": null,
+            "appPu": null,
+            "dateReg": 662418000000,
+            "termReg": {
+                "klUniPK": {
+                    "type": 27,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652986000,
+                "active": true
+            },
+            "dateRegTill": null,
+            "causeIssue": {
+                "klUniPK": {
+                    "type": 39,
+                    "code": 59200002
+                },
+                "lex1": "ƒŒ—“»∆≈Õ»≈ 25-À≈“Õ≈√Œ ¬Œ«–¿—“¿",
+                "lex2": "ƒ¿—ﬂ√Õ≈ÕÕ≈ 25-√¿ƒŒ¬¿√¿ °«–Œ—“”",
+                "lex3": null,
+                "dateBegin": 1240650493000,
+                "active": true
+            },
+            "deathDate": null,
+            "signNoTake": false,
+            "signNoReg": false,
+            "signDestroy": false,
+            "noAddrPu": {
+                "klUniPK": {
+                    "type": 70,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652987000,
+                "active": true
+            },
+            "regType": {
+                "klUniPK": {
+                    "type": 500,
+                    "code": 1
+                },
+                "lex1": "œŒ—“ŒﬂÕÕ¿ﬂ –≈√»—“–¿÷»ﬂ",
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1539205200000,
+                "active": true
+            },
+            "maritalStatus": {
+                "klUniPK": {
+                    "type": 501,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1539378000000,
+                "active": false
+            },
+            "education": {
+                "klUniPK": {
+                    "type": 502,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1539378000000,
+                "active": true
+            },
+            "student": false,
+            "infants": [
+                {
+                    "form19_20InfantBase": "Form19_20Infant",
+                    "rid": 26000000000000209333,
+                    "pid": 26000000000001561708,
+                    "sex": {
+                        "klUniPK": {
+                            "type": 32,
+                            "code": 21000001
+                        },
+                        "lex1": "Ã”∆— Œ…",
+                        "lex2": null,
+                        "lex3": null,
+                        "dateBegin": 1540395909000,
+                        "active": true
+                    },
+                    "dateRec": -2208999600000,
+                    "rel": {
+                        "klUniPK": {
+                            "type": 16,
+                            "code": 0
+                        },
+                        "lex1": null,
+                        "lex2": null,
+                        "lex3": null,
+                        "dateBegin": 1507626835000,
+                        "active": true
+                    },
+                    "surname": null,
+                    "name": "—¿ÿ¿",
+                    "sname": null,
+                    "docId": null,
+                    "bdate": "19951100"
+                },
+                {
+                    "form19_20InfantBase": "Form19_20Infant",
+                    "rid": 26000000000000209334,
+                    "pid": 26000000000001561708,
+                    "sex": {
+                        "klUniPK": {
+                            "type": 32,
+                            "code": 21000002
+                        },
+                        "lex1": "∆≈Õ— »…",
+                        "lex2": "∆",
+                        "lex3": "2",
+                        "dateBegin": 1240652688000,
+                        "active": true
+                    },
+                    "dateRec": -2208999600000,
+                    "rel": {
+                        "klUniPK": {
+                            "type": 16,
+                            "code": 0
+                        },
+                        "lex1": null,
+                        "lex2": null,
+                        "lex3": null,
+                        "dateBegin": 1507626835000,
+                        "active": true
+                    },
+                    "surname": null,
+                    "name": " —≈Õ»ﬂ",
+                    "sname": null,
+                    "docId": null,
+                    "bdate": "19990400"
+                }
+            ]
+        },
+        "dsdAddressLive": {
+            "dsdAddressLiveBase": "dsdAddressLive",
+            "pid": 26000000000001561708,
+            "areaL": "Ã»Õ— ",
+            "areaObjNum": 17030,
+            "regionL": "Œ “ﬂ¡–‹— »…",
+            "regionObjNum": 17034,
+            "villageCouncil": null,
+            "vilCouncilObjNum": 0,
+            "typeCityL": "„.",
+            "cityL": "Ã»Õ— ",
+            "typeStreetL": "”À",
+            "streetL": "¿—¿Õ¿À»≈¬¿",
+            "house": "22",
+            "korps": "1",
+            "app": "156",
+            "ateObjectNum": 17030,
+            "ateElementUid": 4753,
+            "ateAddrNum": 0
+        },
+        "getPassportDate": null,
+        "images": [],
+        "addressLast": null,
+        "status": null
+    },
+    {
+        "pid": 26000000000001561709,
+        "identif": "4221074A011PB0",
+        "view": {
+            "klUniPK": {
+                "type": -3,
+                "code": 10
+            },
+            "lex1": "Œ¡€◊Õ¿ﬂ »Õ‘Œ–Ã¿÷»ﬂ",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652693000,
+            "active": true
+        },
+        "sysDocType": {
+            "klUniPK": {
+                "type": -2,
+                "code": 8
+            },
+            "lex1": "‘Œ–Ã¿ 19-20 (œ–Œœ»— ¿, ¬€œ»— ¿)",
+            "lex2": "ASB",
+            "lex3": "ADDRESS",
+            "dateBegin": 1240650451000,
+            "active": true
+        },
+        "surname": "¬≈Õ√”–¿",
+        "name": "¿ÀÀ¿",
+        "sname": "Õ» ŒÀ¿≈¬Õ¿",
+        "sex": {
+            "klUniPK": {
+                "type": 32,
+                "code": 21000002
+            },
+            "lex1": "∆≈Õ— »…",
+            "lex2": "∆",
+            "lex3": "2",
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "citizenship": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "sysOrgan": {
+            "klUniPK": {
+                "type": -5,
+                "code": 26
+            },
+            "lex1": "¿—¡ √”¬ƒ Ã»Õ√Œ–»—œŒÀ ŒÃ¿",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652953000,
+            "active": true
+        },
+        "bdate": "19741022",
+        "dsdDateRec": null,
+        "docSery": "MP",
+        "docNum": "0146723",
+        "regNum": null,
+        "docDateIssue": 873666000000,
+        "docAppleDate": 873666000000,
+        "dateRec": 1039384800000,
+        "ateAddress": null,
+        "expireDate": null,
+        "aisPasspDocStatus": null,
+        "identifCheckResult": null,
+        "countryB": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "areaB": null,
+        "regionB": null,
+        "typeCityB": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityB": "Ã»Õ— ",
+        "docType": {
+            "klUniPK": {
+                "type": 37,
+                "code": 54100032
+            },
+            "lex1": "œ¿—œŒ–“",
+            "lex2": "œ¿ÿœ¿–“",
+            "lex3": null,
+            "dateBegin": 1240652701000,
+            "active": true
+        },
+        "docOrgan": null,
+        "contryL": {
+            "klUniPK": {
+                "type": 8,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": "0",
+            "dateBegin": 1010743746000,
+            "active": true
+        },
+        "areaL": {
+            "klUniPK": {
+                "type": 1,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240650452000,
+            "active": true
+        },
+        "regionL": {
+            "klUniPK": {
+                "type": 29,
+                "code": 11800051
+            },
+            "lex1": "Œ “ﬂ¡–‹— »…",
+            "lex2": "¿ ÷ﬂ¡–— ≤",
+            "lex3": null,
+            "dateBegin": 1240651591000,
+            "active": true
+        },
+        "typeCityL": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityL": {
+            "klUniPK": {
+                "type": 7,
+                "code": 11906424
+            },
+            "lex1": "Ã»Õ— ",
+            "lex2": "Ã≤Õ— ",
+            "lex3": null,
+            "dateBegin": 1240652388000,
+            "active": true
+        },
+        "typeStreetL": {
+            "klUniPK": {
+                "type": 38,
+                "code": 11700003
+            },
+            "lex1": "”À",
+            "lex2": "¬”À",
+            "lex3": null,
+            "dateBegin": 1240650491000,
+            "active": true
+        },
+        "streetL": {
+            "klUniPK": {
+                "type": 34,
+                "code": 11410690
+            },
+            "lex1": "¿—¿Õ¿À»≈¬¿ ƒ.—.",
+            "lex2": "¿—¿Õ¿À»≈¬¿ ƒ.—.",
+            "lex3": null,
+            "dateBegin": 1240652894000,
+            "active": false
+        },
+        "house": "22",
+        "korps": "1",
+        "app": "156",
+        "organDoc": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17606005
+            },
+            "lex1": "Œ “ﬂ¡–‹— »… –Œ¬ƒ √.Ã»Õ— ¿",
+            "lex2": " ¿—“–€◊Õ≤÷ ≤ –¿”— √.Ã≤Õ— ¿",
+            "lex3": null,
+            "dateBegin": 1240651601000,
+            "active": false
+        },
+        "workPlace": null,
+        "workPosition": null,
+        "docIssueOrgan": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17606005
+            },
+            "lex1": "Œ “ﬂ¡–‹— »… –Œ¬ƒ √.Ã»Õ— ¿",
+            "lex2": " ¿—“–€◊Õ≤÷ ≤ –¿”— √.Ã≤Õ— ¿",
+            "lex3": null,
+            "dateBegin": 1240651601000,
+            "active": false
+        },
+        "surnameBel": null,
+        "nameBel": null,
+        "snameBel": null,
+        "surnameEn": null,
+        "nameEn": null,
+        "areaBBel": null,
+        "regionBBel": null,
+        "cityBBel": null,
+        "villageCouncil": {
+            "klUniPK": {
+                "type": 98,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "intracityRegion": {
+            "klUniPK": {
+                "type": 99,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "form19_20": {
+            "form19_20Base": "form19_20",
+            "pid": 26000000000001561709,
+            "signAway": false,
+            "countryPu": {
+                "klUniPK": {
+                    "type": 8,
+                    "code": 11200001
+                },
+                "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+                "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+                "lex3": "BLR",
+                "dateBegin": 1026155763000,
+                "active": true
+            },
+            "areaPu": "Ã»Õ— ¿ﬂ",
+            "regionPu": "ÃŒÀŒƒ≈◊Õ≈Õ— »…",
+            "cityPu": "◊»—“‹",
+            "datePu": 1039125600000,
+            "marks": {
+                "klUniPK": {
+                    "type": 2,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240650453000,
+                "active": true
+            },
+            "notes": null,
+            "reason": {
+                "klUniPK": {
+                    "type": 3,
+                    "code": 59601014
+                },
+                "lex1": "Õ¿ œŒ—“ŒﬂÕÕŒ≈ Ã≈—“Œ ∆»“≈À‹—“¬¿",
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652670000,
+                "active": true
+            },
+            "term": null,
+            "dateRec": 1039384800000,
+            "typeCityPu": {
+                "klUniPK": {
+                    "type": 35,
+                    "code": 11100005
+                },
+                "lex1": "œ",
+                "lex2": "œ",
+                "lex3": null,
+                "dateBegin": 1240652689000,
+                "active": true
+            },
+            "typeStreetPu": {
+                "klUniPK": {
+                    "type": 38,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652692000,
+                "active": true
+            },
+            "streetPu": null,
+            "housePu": null,
+            "korpsPu": null,
+            "appPu": null,
+            "dateReg": 662418000000,
+            "termReg": {
+                "klUniPK": {
+                    "type": 27,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652986000,
+                "active": true
+            },
+            "dateRegTill": null,
+            "causeIssue": {
+                "klUniPK": {
+                    "type": 39,
+                    "code": 59200009
+                },
+                "lex1": "Œ¡Ã≈Õ",
+                "lex2": "¿¡Ã≈Õ",
+                "lex3": null,
+                "dateBegin": 1240650493000,
+                "active": true
+            },
+            "deathDate": null,
+            "signNoTake": false,
+            "signNoReg": false,
+            "signDestroy": false,
+            "noAddrPu": {
+                "klUniPK": {
+                    "type": 70,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652987000,
+                "active": true
+            },
+            "regType": {
+                "klUniPK": {
+                    "type": 500,
+                    "code": 1
+                },
+                "lex1": "œŒ—“ŒﬂÕÕ¿ﬂ –≈√»—“–¿÷»ﬂ",
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1539205200000,
+                "active": true
+            },
+            "maritalStatus": {
+                "klUniPK": {
+                    "type": 501,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1539378000000,
+                "active": false
+            },
+            "education": {
+                "klUniPK": {
+                    "type": 502,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1539378000000,
+                "active": true
+            },
+            "student": false,
+            "infants": [
+                {
+                    "form19_20InfantBase": "Form19_20Infant",
+                    "rid": 26000000000000209335,
+                    "pid": 26000000000001561709,
+                    "sex": {
+                        "klUniPK": {
+                            "type": 32,
+                            "code": 21000001
+                        },
+                        "lex1": "Ã”∆— Œ…",
+                        "lex2": null,
+                        "lex3": null,
+                        "dateBegin": 1540395909000,
+                        "active": true
+                    },
+                    "dateRec": -2208999600000,
+                    "rel": {
+                        "klUniPK": {
+                            "type": 16,
+                            "code": 0
+                        },
+                        "lex1": null,
+                        "lex2": null,
+                        "lex3": null,
+                        "dateBegin": 1507626835000,
+                        "active": true
+                    },
+                    "surname": null,
+                    "name": "—¿ÿ¿",
+                    "sname": null,
+                    "docId": null,
+                    "bdate": "19951100"
+                }
+            ]
+        },
+        "dsdAddressLive": {
+            "dsdAddressLiveBase": "dsdAddressLive",
+            "pid": 26000000000001561709,
+            "areaL": "Ã»Õ— ",
+            "areaObjNum": 17030,
+            "regionL": "Œ “ﬂ¡–‹— »…",
+            "regionObjNum": 17034,
+            "villageCouncil": null,
+            "vilCouncilObjNum": 0,
+            "typeCityL": "„.",
+            "cityL": "Ã»Õ— ",
+            "typeStreetL": "”À",
+            "streetL": "¿—¿Õ¿À»≈¬¿",
+            "house": "22",
+            "korps": "1",
+            "app": "156",
+            "ateObjectNum": 17030,
+            "ateElementUid": 4753,
+            "ateAddrNum": 0
+        },
+        "getPassportDate": null,
+        "images": [],
+        "addressLast": null,
+        "status": null
+    },
+    {
+        "pid": 26000000000001561710,
+        "identif": "4221074A011PB0",
+        "view": {
+            "klUniPK": {
+                "type": -3,
+                "code": 10
+            },
+            "lex1": "Œ¡€◊Õ¿ﬂ »Õ‘Œ–Ã¿÷»ﬂ",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652693000,
+            "active": true
+        },
+        "sysDocType": {
+            "klUniPK": {
+                "type": -2,
+                "code": 8
+            },
+            "lex1": "‘Œ–Ã¿ 19-20 (œ–Œœ»— ¿, ¬€œ»— ¿)",
+            "lex2": "ASB",
+            "lex3": "ADDRESS",
+            "dateBegin": 1240650451000,
+            "active": true
+        },
+        "surname": "¬≈Õ√”–¿",
+        "name": "¿ÀÀ¿",
+        "sname": "Õ» ŒÀ¿≈¬Õ¿",
+        "sex": {
+            "klUniPK": {
+                "type": 32,
+                "code": 21000002
+            },
+            "lex1": "∆≈Õ— »…",
+            "lex2": "∆",
+            "lex3": "2",
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "citizenship": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "sysOrgan": {
+            "klUniPK": {
+                "type": -5,
+                "code": 26
+            },
+            "lex1": "¿—¡ √”¬ƒ Ã»Õ√Œ–»—œŒÀ ŒÃ¿",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652953000,
+            "active": true
+        },
+        "bdate": "19741022",
+        "dsdDateRec": null,
+        "docSery": "MP",
+        "docNum": "0826129",
+        "regNum": null,
+        "docDateIssue": 959634000000,
+        "docAppleDate": 1039730400000,
+        "dateRec": 1041458400000,
+        "ateAddress": null,
+        "expireDate": null,
+        "aisPasspDocStatus": null,
+        "identifCheckResult": null,
+        "countryB": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "areaB": null,
+        "regionB": null,
+        "typeCityB": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityB": "Ã»Õ— ",
+        "docType": {
+            "klUniPK": {
+                "type": 37,
+                "code": 54100032
+            },
+            "lex1": "œ¿—œŒ–“",
+            "lex2": "œ¿ÿœ¿–“",
+            "lex3": null,
+            "dateBegin": 1240652701000,
+            "active": true
+        },
+        "docOrgan": null,
+        "contryL": {
+            "klUniPK": {
+                "type": 8,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": "0",
+            "dateBegin": 1010743746000,
+            "active": true
+        },
+        "areaL": {
+            "klUniPK": {
+                "type": 1,
+                "code": 11300006
+            },
+            "lex1": "Ã»Õ— ¿ﬂ Œ¡À¿—“‹",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1567517771000,
+            "active": true
+        },
+        "regionL": {
+            "klUniPK": {
+                "type": 29,
+                "code": 11800085
+            },
+            "lex1": "ÃŒÀŒƒ≈◊Õ≈Õ— »…",
+            "lex2": "Ã¿À¿ƒ«≈◊¿Õ— ≤",
+            "lex3": null,
+            "dateBegin": 1240651587000,
+            "active": true
+        },
+        "typeCityL": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100005
+            },
+            "lex1": "œ",
+            "lex2": "œ",
+            "lex3": null,
+            "dateBegin": 1240652689000,
+            "active": true
+        },
+        "cityL": {
+            "klUniPK": {
+                "type": 7,
+                "code": 11911050
+            },
+            "lex1": "◊»—“‹",
+            "lex2": "◊€—÷‹",
+            "lex3": null,
+            "dateBegin": 1240652185000,
+            "active": true
+        },
+        "typeStreetL": {
+            "klUniPK": {
+                "type": 38,
+                "code": 11700003
+            },
+            "lex1": "”À",
+            "lex2": "¬”À",
+            "lex3": null,
+            "dateBegin": 1240650491000,
+            "active": true
+        },
+        "streetL": {
+            "klUniPK": {
+                "type": 34,
+                "code": 11400906
+            },
+            "lex1": "÷≈Õ“–¿À‹Õ¿ﬂ",
+            "lex2": "÷›Õ“–¿À‹Õ¿ﬂ",
+            "lex3": null,
+            "dateBegin": 1240651052000,
+            "active": true
+        },
+        "house": "8",
+        "korps": null,
+        "app": "1",
+        "organDoc": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17605016
+            },
+            "lex1": "ÃŒÀŒƒ≈◊Õ≈Õ— »… √–Œ¬ƒ Ã»Õ— Œ… Œ¡À¿—“»",
+            "lex2": "Ã¿À¿ƒ«≈◊¿Õ— ≤ √–¿”— Ã≤Õ— ¿… ¬Œ¡À¿—÷≤",
+            "lex3": null,
+            "dateBegin": 1240651605000,
+            "active": false
+        },
+        "workPlace": null,
+        "workPosition": null,
+        "docIssueOrgan": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17608047
+            },
+            "lex1": "Œ “ﬂ¡–‹— Œ≈ –”¬ƒ √.Ã»Õ— ¿",
+            "lex2": " ¿—“–€◊Õ≤÷ ¿≈ –””— √.Ã≤Õ— ¿",
+            "lex3": "1005823460541|104",
+            "dateBegin": 1240651592000,
+            "active": true
+        },
+        "surnameBel": null,
+        "nameBel": null,
+        "snameBel": null,
+        "surnameEn": null,
+        "nameEn": null,
+        "areaBBel": null,
+        "regionBBel": null,
+        "cityBBel": null,
+        "villageCouncil": {
+            "klUniPK": {
+                "type": 98,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "intracityRegion": {
+            "klUniPK": {
+                "type": 99,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "form19_20": {
+            "form19_20Base": "form19_20",
+            "pid": 26000000000001561710,
+            "signAway": false,
+            "countryPu": {
+                "klUniPK": {
+                    "type": 8,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": "0",
+                "dateBegin": 1010743746000,
+                "active": true
+            },
+            "areaPu": null,
+            "regionPu": null,
+            "cityPu": "√Œ–Œƒ Ã»Õ— ",
+            "datePu": 1039730400000,
+            "marks": {
+                "klUniPK": {
+                    "type": 2,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240650453000,
+                "active": true
+            },
+            "notes": null,
+            "reason": {
+                "klUniPK": {
+                    "type": 3,
+                    "code": 59601014
+                },
+                "lex1": "Õ¿ œŒ—“ŒﬂÕÕŒ≈ Ã≈—“Œ ∆»“≈À‹—“¬¿",
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652670000,
+                "active": true
+            },
+            "term": null,
+            "dateRec": 1041458400000,
+            "typeCityPu": {
+                "klUniPK": {
+                    "type": 35,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652688000,
+                "active": true
+            },
+            "typeStreetPu": {
+                "klUniPK": {
+                    "type": 38,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652692000,
+                "active": true
+            },
+            "streetPu": null,
+            "housePu": null,
+            "korpsPu": null,
+            "appPu": null,
+            "dateReg": 1039730400000,
+            "termReg": {
+                "klUniPK": {
+                    "type": 27,
+                    "code": 1
+                },
+                "lex1": "œŒ—“ŒﬂÕÕŒ",
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652986000,
+                "active": true
+            },
+            "dateRegTill": null,
+            "causeIssue": {
+                "klUniPK": {
+                    "type": 39,
+                    "code": 59200002
+                },
+                "lex1": "ƒŒ—“»∆≈Õ»≈ 25-À≈“Õ≈√Œ ¬Œ«–¿—“¿",
+                "lex2": "ƒ¿—ﬂ√Õ≈ÕÕ≈ 25-√¿ƒŒ¬¿√¿ °«–Œ—“”",
+                "lex3": null,
+                "dateBegin": 1240650493000,
+                "active": true
+            },
+            "deathDate": null,
+            "signNoTake": false,
+            "signNoReg": false,
+            "signDestroy": false,
+            "noAddrPu": {
+                "klUniPK": {
+                    "type": 70,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1240652987000,
+                "active": true
+            },
+            "regType": {
+                "klUniPK": {
+                    "type": 500,
+                    "code": 1
+                },
+                "lex1": "œŒ—“ŒﬂÕÕ¿ﬂ –≈√»—“–¿÷»ﬂ",
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1539205200000,
+                "active": true
+            },
+            "maritalStatus": {
+                "klUniPK": {
+                    "type": 501,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1539378000000,
+                "active": false
+            },
+            "education": {
+                "klUniPK": {
+                    "type": 502,
+                    "code": 0
+                },
+                "lex1": null,
+                "lex2": null,
+                "lex3": null,
+                "dateBegin": 1539378000000,
+                "active": true
+            },
+            "student": false,
+            "infants": [
+                {
+                    "form19_20InfantBase": "Form19_20Infant",
+                    "rid": 26000000000000209336,
+                    "pid": 26000000000001561710,
+                    "sex": {
+                        "klUniPK": {
+                            "type": 32,
+                            "code": 21000001
+                        },
+                        "lex1": "Ã”∆— Œ…",
+                        "lex2": null,
+                        "lex3": null,
+                        "dateBegin": 1540395909000,
+                        "active": true
+                    },
+                    "dateRec": -2208999600000,
+                    "rel": {
+                        "klUniPK": {
+                            "type": 16,
+                            "code": 0
+                        },
+                        "lex1": null,
+                        "lex2": null,
+                        "lex3": null,
+                        "dateBegin": 1507626835000,
+                        "active": true
+                    },
+                    "surname": null,
+                    "name": "—¿ÿ¿",
+                    "sname": null,
+                    "docId": null,
+                    "bdate": "19951100"
+                },
+                {
+                    "form19_20InfantBase": "Form19_20Infant",
+                    "rid": 26000000000000209337,
+                    "pid": 26000000000001561710,
+                    "sex": {
+                        "klUniPK": {
+                            "type": 32,
+                            "code": 21000002
+                        },
+                        "lex1": "∆≈Õ— »…",
+                        "lex2": "∆",
+                        "lex3": "2",
+                        "dateBegin": 1240652688000,
+                        "active": true
+                    },
+                    "dateRec": -2208999600000,
+                    "rel": {
+                        "klUniPK": {
+                            "type": 16,
+                            "code": 0
+                        },
+                        "lex1": null,
+                        "lex2": null,
+                        "lex3": null,
+                        "dateBegin": 1507626835000,
+                        "active": true
+                    },
+                    "surname": null,
+                    "name": " —≈Õ»ﬂ",
+                    "sname": null,
+                    "docId": null,
+                    "bdate": "19990400"
+                }
+            ]
+        },
+        "dsdAddressLive": {
+            "dsdAddressLiveBase": "dsdAddressLive",
+            "pid": 26000000000001561710,
+            "areaL": "Ã»Õ— ¿ﬂ",
+            "areaObjNum": 17041,
+            "regionL": "ÃŒÀŒƒ≈◊Õ≈Õ— »…",
+            "regionObjNum": 20213,
+            "villageCouncil": "◊»—“»Õ— »…",
+            "vilCouncilObjNum": 20504,
+            "typeCityL": "Ô.",
+            "cityL": "◊»—“‹",
+            "typeStreetL": "”À",
+            "streetL": "÷≈Õ“–¿À‹Õ¿ﬂ",
+            "house": "8",
+            "korps": null,
+            "app": "1",
+            "ateObjectNum": 20507,
+            "ateElementUid": 38608,
+            "ateAddrNum": 0
+        },
+        "getPassportDate": null,
+        "images": [],
+        "addressLast": null,
+        "status": null
+    },
+    {
+        "pid": 26000000000001561712,
+        "identif": "4221074A011PB0",
+        "view": {
+            "klUniPK": {
+                "type": -3,
+                "code": 10
+            },
+            "lex1": "Œ¡€◊Õ¿ﬂ »Õ‘Œ–Ã¿÷»ﬂ",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652693000,
+            "active": true
+        },
+        "sysDocType": {
+            "klUniPK": {
+                "type": -2,
+                "code": 8
+            },
+            "lex1": "‘Œ–Ã¿ 19-20 (œ–Œœ»— ¿, ¬€œ»— ¿)",
+            "lex2": "ASB",
+            "lex3": "ADDRESS",
+            "dateBegin": 1240650451000,
+            "active": true
+        },
+        "surname": "¬≈Õ√”–¿",
+        "name": "¿ÀÀ¿",
+        "sname": "Õ» ŒÀ¿≈¬Õ¿",
+        "sex": {
+            "klUniPK": {
+                "type": 32,
+                "code": 21000002
+            },
+            "lex1": "∆≈Õ— »…",
+            "lex2": "∆",
+            "lex3": "2",
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "citizenship": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "sysOrgan": {
+            "klUniPK": {
+                "type": -5,
+                "code": 26
+            },
+            "lex1": "¿—¡ √”¬ƒ Ã»Õ√Œ–»—œŒÀ ŒÃ¿",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652953000,
+            "active": true
+        },
+        "bdate": "19741022",
+        "dsdDateRec": null,
+        "docSery": "MH",
+        "docNum": "0095796",
+        "regNum": null,
+        "docDateIssue": 840488400000,
+        "docAppleDate": 851378400000,
+        "dateRec": 1027544400000,
+        "ateAddress": null,
+        "expireDate": null,
+        "aisPasspDocStatus": null,
+        "identifCheckResult": null,
+        "countryB": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "areaB": null,
+        "regionB": null,
+        "typeCityB": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityB": "Ã»Õ— ",
+        "docType": {
+            "klUniPK": {
+                "type": 37,
+                "code": 54100032
+            },
+            "lex1": "œ¿—œŒ–“",
+            "lex2": "œ¿ÿœ¿–“",
+            "lex3": null,
+            "dateBegin": 1240652701000,
+            "active": true
+        },
+        "docOrgan": null,
+        "contryL": {
+            "klUniPK": {
+                "type": 8,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": "0",
+            "dateBegin": 1010743746000,
+            "active": true
+        },
+        "areaL": {
+            "klUniPK": {
+                "type": 1,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240650452000,
+            "active": true
+        },
+        "regionL": {
+            "klUniPK": {
+                "type": 29,
+                "code": 11800051
+            },
+            "lex1": "Œ “ﬂ¡–‹— »…",
+            "lex2": "¿ ÷ﬂ¡–— ≤",
+            "lex3": null,
+            "dateBegin": 1240651591000,
+            "active": true
+        },
+        "typeCityL": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityL": {
+            "klUniPK": {
+                "type": 7,
+                "code": 11906424
+            },
+            "lex1": "Ã»Õ— ",
+            "lex2": "Ã≤Õ— ",
+            "lex3": null,
+            "dateBegin": 1240652388000,
+            "active": true
+        },
+        "typeStreetL": {
+            "klUniPK": {
+                "type": 38,
+                "code": 11700003
+            },
+            "lex1": "”À",
+            "lex2": "¬”À",
+            "lex3": null,
+            "dateBegin": 1240650491000,
+            "active": true
+        },
+        "streetL": {
+            "klUniPK": {
+                "type": 34,
+                "code": 11410690
+            },
+            "lex1": "¿—¿Õ¿À»≈¬¿ ƒ.—.",
+            "lex2": "¿—¿Õ¿À»≈¬¿ ƒ.—.",
+            "lex3": null,
+            "dateBegin": 1240652894000,
+            "active": false
+        },
+        "house": "22",
+        "korps": "1",
+        "app": "156",
+        "organDoc": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17606005
+            },
+            "lex1": "Œ “ﬂ¡–‹— »… –Œ¬ƒ √.Ã»Õ— ¿",
+            "lex2": " ¿—“–€◊Õ≤÷ ≤ –¿”— √.Ã≤Õ— ¿",
+            "lex3": null,
+            "dateBegin": 1240651601000,
+            "active": false
+        },
+        "workPlace": null,
+        "workPosition": null,
+        "docIssueOrgan": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17606005
+            },
+            "lex1": "Œ “ﬂ¡–‹— »… –Œ¬ƒ √.Ã»Õ— ¿",
+            "lex2": " ¿—“–€◊Õ≤÷ ≤ –¿”— √.Ã≤Õ— ¿",
+            "lex3": null,
+            "dateBegin": 1240651601000,
+            "active": false
+        },
+        "surnameBel": null,
+        "nameBel": null,
+        "snameBel": null,
+        "surnameEn": null,
+        "nameEn": null,
+        "areaBBel": null,
+        "regionBBel": null,
+        "cityBBel": null,
+        "villageCouncil": {
+            "klUniPK": {
+                "type": 98,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "intracityRegion": {
+            "klUniPK": {
+                "type": 99,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "form19_20": null,
+        "dsdAddressLive": {
+            "dsdAddressLiveBase": "dsdAddressLive",
+            "pid": 26000000000001561712,
+            "areaL": "Ã»Õ— ",
+            "areaObjNum": 17030,
+            "regionL": "Œ “ﬂ¡–‹— »…",
+            "regionObjNum": 17034,
+            "villageCouncil": null,
+            "vilCouncilObjNum": 0,
+            "typeCityL": "„.",
+            "cityL": "Ã»Õ— ",
+            "typeStreetL": "”À",
+            "streetL": "¿—¿Õ¿À»≈¬¿",
+            "house": "22",
+            "korps": "1",
+            "app": "156",
+            "ateObjectNum": 17030,
+            "ateElementUid": 4753,
+            "ateAddrNum": 0
+        },
+        "getPassportDate": null,
+        "images": [],
+        "addressLast": null,
+        "status": null
+    },
+    {
+        "pid": 2000000000004635953,
+        "identif": "4221074A011PB0",
+        "view": {
+            "klUniPK": {
+                "type": -3,
+                "code": 10
+            },
+            "lex1": "Œ¡€◊Õ¿ﬂ »Õ‘Œ–Ã¿÷»ﬂ",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652693000,
+            "active": true
+        },
+        "sysDocType": {
+            "klUniPK": {
+                "type": -2,
+                "code": 8
+            },
+            "lex1": "‘Œ–Ã¿ 19-20 (œ–Œœ»— ¿, ¬€œ»— ¿)",
+            "lex2": "ASB",
+            "lex3": "ADDRESS",
+            "dateBegin": 1240650451000,
+            "active": true
+        },
+        "surname": "¬≈Õ√”–¿",
+        "name": "¿ÀÀ¿",
+        "sname": "Õ» ŒÀ¿≈¬Õ¿",
+        "sex": {
+            "klUniPK": {
+                "type": 32,
+                "code": 21000002
+            },
+            "lex1": "∆≈Õ— »…",
+            "lex2": "∆",
+            "lex3": "2",
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "citizenship": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "sysOrgan": {
+            "klUniPK": {
+                "type": -5,
+                "code": 26
+            },
+            "lex1": "¿—¡ √”¬ƒ Ã»Õ√Œ–»—œŒÀ ŒÃ¿",
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240652953000,
+            "active": true
+        },
+        "bdate": "19741022",
+        "dsdDateRec": null,
+        "docSery": "MP",
+        "docNum": "0826129",
+        "regNum": null,
+        "docDateIssue": 959634000000,
+        "docAppleDate": 1109282400000,
+        "dateRec": 1109605354000,
+        "ateAddress": null,
+        "expireDate": null,
+        "aisPasspDocStatus": null,
+        "identifCheckResult": null,
+        "countryB": {
+            "klUniPK": {
+                "type": 8,
+                "code": 11200001
+            },
+            "lex1": "–≈—œ”¡À» ¿ ¡≈À¿–”—‹",
+            "lex2": "–›—œ”¡À≤ ¿ ¡≈À¿–”—‹",
+            "lex3": "BLR",
+            "dateBegin": 1026155763000,
+            "active": true
+        },
+        "areaB": null,
+        "regionB": null,
+        "typeCityB": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityB": "Ã»Õ— ",
+        "docType": {
+            "klUniPK": {
+                "type": 37,
+                "code": 54100032
+            },
+            "lex1": "œ¿—œŒ–“",
+            "lex2": "œ¿ÿœ¿–“",
+            "lex3": null,
+            "dateBegin": 1240652701000,
+            "active": true
+        },
+        "docOrgan": "Œ “ﬂ¡–‹— Œ≈ –”¬ƒ √.Ã»Õ— ¿",
+        "contryL": {
+            "klUniPK": {
+                "type": 8,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": "0",
+            "dateBegin": 1010743746000,
+            "active": true
+        },
+        "areaL": {
+            "klUniPK": {
+                "type": 1,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240650452000,
+            "active": true
+        },
+        "regionL": {
+            "klUniPK": {
+                "type": 29,
+                "code": 11800120
+            },
+            "lex1": "œ≈–¬ŒÃ¿…— »…",
+            "lex2": "œ≈–ÿ¿Ã¿…— ≤",
+            "lex3": null,
+            "dateBegin": 1240651585000,
+            "active": true
+        },
+        "typeCityL": {
+            "klUniPK": {
+                "type": 35,
+                "code": 11100001
+            },
+            "lex1": "√",
+            "lex2": "√",
+            "lex3": null,
+            "dateBegin": 1240652688000,
+            "active": true
+        },
+        "cityL": {
+            "klUniPK": {
+                "type": 7,
+                "code": 11906424
+            },
+            "lex1": "Ã»Õ— ",
+            "lex2": "Ã≤Õ— ",
+            "lex3": null,
+            "dateBegin": 1240652388000,
+            "active": true
+        },
+        "typeStreetL": {
+            "klUniPK": {
+                "type": 38,
+                "code": 11700003
+            },
+            "lex1": "”À",
+            "lex2": "¬”À",
+            "lex3": null,
+            "dateBegin": 1240650491000,
+            "active": true
+        },
+        "streetL": {
+            "klUniPK": {
+                "type": 34,
+                "code": 11400724
+            },
+            "lex1": "—≈ƒ€’ ¬.ﬂ.",
+            "lex2": "—ﬂƒ€’ ¬.ﬂ.",
+            "lex3": null,
+            "dateBegin": 1240651064000,
+            "active": true
+        },
+        "house": "4",
+        "korps": null,
+        "app": "59",
+        "organDoc": {
+            "klUniPK": {
+                "type": 24,
+                "code": 17606007
+            },
+            "lex1": "œ≈–¬ŒÃ¿…— »… –Œ¬ƒ √.Ã»Õ— ¿",
+            "lex2": "œ≈–ÿ¿Ã¿…— ≤ –¿”— √.Ã≤Õ— ¿",
+            "lex3": null,
+            "dateBegin": 1240651602000,
+            "active": false
+        },
+        "workPlace": null,
+        "workPosition": null,
+        "docIssueOrgan": {
+            "klUniPK": {
+                "type": 24,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1240650467000,
+            "active": true
+        },
+        "surnameBel": null,
+        "nameBel": null,
+        "snameBel": null,
+        "surnameEn": null,
+        "nameEn": null,
+        "areaBBel": null,
+        "regionBBel": null,
+        "cityBBel": null,
+        "villageCouncil": {
+            "klUniPK": {
+                "type": 98,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "intracityRegion": {
+            "klUniPK": {
+                "type": 99,
+                "code": 0
+            },
+            "lex1": null,
+            "lex2": null,
+            "lex3": null,
+            "dateBegin": 1337000897000,
+            "active": true
+        },
+        "form19_20": null,
+        "dsdAddressLive": {
+            "dsdAddressLiveBase": "dsdAddressLive",
+            "pid": 2000000000004635953,
+            "areaL": "Ã»Õ— ",
+            "areaObjNum": 17030,
+            "regionL": "œ≈–¬ŒÃ¿…— »…",
+            "regionObjNum": 17037,
+            "villageCouncil": null,
+            "vilCouncilObjNum": 0,
+            "typeCityL": "„.",
+            "cityL": "Ã»Õ— ",
+            "typeStreetL": "”À",
+            "streetL": "—≈ƒ€’",
+            "house": "4",
+            "korps": null,
+            "app": "59",
+            "ateObjectNum": 17030,
+            "ateElementUid": 20430,
+            "ateAddrNum": 0
+        },
+        "getPassportDate": null,
+        "images": [],
+        "addressLast": null,
+        "status": null
+    }
+]

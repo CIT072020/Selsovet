@@ -263,11 +263,11 @@ begin
         Result[i+1]:=a.pValue[i]; // c_sok[i];
       end;
     end else begin
-      FLastError:='Ошибка вызова функции GetSOK ('+GetError(n)+')';
+      FLastError:='Ошибка вызова функции ZChannel GetSOK ('+GetError(n)+')';
       Result:='';
     end;
   end else begin
-    FLastError:='Ошибка вызова функции GetSOK';
+    FLastError:='Ошибка вызова функции ZChannel GetSOK';
     Result:='';
   end;
 end;
@@ -310,12 +310,12 @@ begin
         if FDebug
           then StrToFile('sign.p7s', Result);
       end else begin
-        FLastError:='Ошибка вызова функции Sign ('+GetError(i)+')';
+        FLastError:='Ошибка вызова функции ZChannel Sign ('+GetError(i)+')';
         Result:='';
       end;
     end;
   end else begin
-    FLastError:='Ошибка вызова функции Sign (библиотека не загружена)';
+    FLastError:='Ошибка вызова функции ZChannel Sign (библиотека не загружена)';
     Result:='';
   end;
 end;
@@ -352,12 +352,12 @@ begin
           Result[i+1]:=c_sign[i];
         end;
       end else begin
-        FLastError:='Ошибка вызова функции Hash ('+GetError(i)+')';
+        FLastError:='Ошибка вызова функции ZChannel Hash ('+GetError(i)+')';
         Result:='';
       end;
     end;
   end else begin
-    FLastError:='Ошибка вызова функции Hash';
+    FLastError:='Ошибка вызова функции ZChannel Hash';
     Result:='';
   end;
 end;
@@ -376,7 +376,7 @@ begin
       end;
     end;
   end else begin
-    FLastError:='Ошибка вызова функции Verify';
+    FLastError:='Ошибка вызова функции ZChannel Verify';
     Result:=-1;
   end;
 end;
@@ -395,7 +395,7 @@ begin
       end;
     end;
   end else begin
-    FLastError:='Ошибка вызова функции Verify1';
+    FLastError:='Ошибка вызова функции ZChannel Verify1';
     Result:=-1;
   end;
 end;

@@ -208,7 +208,7 @@ begin
   nLoad:=0;
   FExit:=false;
   nn:=0;
-  GlobalTask.LogFile.WriteToLogFile('Начало загрузки списка ИН.');
+  GlobalTask.WriteToLogFile('Начало загрузки списка ИН.');
   for i:=VarArrayLowBound(arr,1) to VarArrayHighBound(arr,1) do begin
     c := inttostr(i)+'=  ';
     sError:='';
@@ -262,7 +262,7 @@ begin
   lbZagr.Caption:='Загружкно '+IntToStr(nLoad);
   lbProp.Caption:='Пропущено '+IntToStr(nProp);
   Application.ProcessMessages;
-  GlobalTask.LogFile.WriteToLogFile('Окончание загрузки списка собственников из БТИ.');
+  GlobalTask.WriteToLogFile('Окончание загрузки списка собственников из БТИ.');
   xl:=null;
 end;
 

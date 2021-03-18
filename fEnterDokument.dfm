@@ -1,35 +1,43 @@
 inherited fmEnterDokument: TfmEnterDokument
-  Left = 558
-  Top = 300
+  Left = 569
+  Top = 319
   ActiveControl = edDOK_TYPE
   Caption = #1044#1072#1085#1085#1099#1077' '#1086' '#1076#1086#1082#1091#1084#1077#1085#1090#1077
-  ClientWidth = 346
+  ClientHeight = 188
+  ClientWidth = 366
   OldCreateOrder = True
   Position = poOwnerFormCenter
   PixelsPerInch = 96
   TextHeight = 13
   object Label69: TLabel [0]
-    Left = 169
+    Left = 208
     Top = 52
-    Width = 12
-    Height = 13
+    Width = 13
+    Height = 16
     Caption = #1086#1090
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
   end
   inherited Panel1: TPanel
-    Width = 346
+    Top = 144
+    Width = 366
     TabOrder = 5
     inherited btOk: TBitBtn
-      Left = 131
+      Left = 151
       Caption = #1047#1072#1087#1080#1089#1072#1090#1100
     end
     inherited btCancel: TBitBtn
-      Left = 238
+      Left = 258
     end
   end
   object edDOK_NAME: TDBEditEh
     Left = 19
     Top = 79
-    Width = 307
+    Width = 334
     Height = 24
     HelpContext = 999
     AutoSize = False
@@ -42,7 +50,7 @@ inherited fmEnterDokument: TfmEnterDokument
       end>
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
@@ -52,15 +60,15 @@ inherited fmEnterDokument: TfmEnterDokument
   object edDOK_TYPE: TDBComboBoxEh
     Left = 19
     Top = 15
-    Width = 308
-    Height = 24
+    Width = 334
+    Height = 26
     HelpContext = 888
     DataField = 'DOK_TYPE'
     DataSource = DataSource
     EditButtons = <>
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
@@ -70,15 +78,15 @@ inherited fmEnterDokument: TfmEnterDokument
   object edDOK_SERIA: TDBEditEh
     Left = 19
     Top = 47
-    Width = 33
-    Height = 24
+    Width = 51
+    Height = 26
     CharCase = ecUpperCase
     DataField = 'DOK_SERIA'
     DataSource = DataSource
     EditButtons = <>
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
@@ -86,16 +94,16 @@ inherited fmEnterDokument: TfmEnterDokument
     Visible = True
   end
   object edDOK_NOMER: TDBEditEh
-    Left = 66
+    Left = 85
     Top = 47
-    Width = 89
-    Height = 24
+    Width = 110
+    Height = 26
     DataField = 'DOK_NOMER'
     DataSource = DataSource
     EditButtons = <>
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
@@ -103,16 +111,16 @@ inherited fmEnterDokument: TfmEnterDokument
     Visible = True
   end
   object edDOK_DATE: TDBDateTimeEditEh
-    Left = 195
+    Left = 233
     Top = 47
-    Width = 107
-    Height = 24
+    Width = 120
+    Height = 26
     DataField = 'DOK_DATE'
     DataSource = DataSource
     EditButtons = <>
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     Kind = dtkDateEh
@@ -191,6 +199,6 @@ inherited fmEnterDokument: TfmEnterDokument
   object DataSource: TDataSource
     DataSet = tb
     Left = 16
-    Top = 112
+    Top = 72
   end
 end

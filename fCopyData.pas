@@ -70,6 +70,7 @@ type
     property IdBase : String read FIdBase write SetIdBase;
 
     function CopyData:Boolean;
+    procedure SetPosOP;
     function SeekAnyFileDocArxiv(strPath:String):Boolean;
 
     function  CopyListFiles(lCheckArxiv:Boolean=false) : Boolean;
@@ -384,6 +385,14 @@ begin
     end;
   end;
 end;
+//-----------------------------------
+procedure TfmCopyData.SetPosOP;
+begin
+  OpenMessageX:=0;
+  OpenMessageY:=0;
+//  OpenMessageX:=-1;
+//  OpenMessageY:=250;
+end;
 //-----------------------------------------------------------------
 function TfmCopyData.CopyData:Boolean;
 var
@@ -393,11 +402,19 @@ var
   lOk,l : Boolean;
 //  nTypeBackup : Integer;
 begin
+  if not FAutoBackup and Restore then begin
+    s := '';
+    s := s + 'ВНИМАНИЕ!'#13; // + Chr(13)+
+    s := s + 'Информация в базе будет заменена резервной копией.'#13;
+    s := s + 'Если Вы уверены в необходимости проведения операции,'#13;
+    s := s + 'введите слово ДА в поле ввода'#13;
+    if not OkWarning(s)
+      then exit;
+  end;
   dNow:=Date;
   dFullNow:=Now;
   lOk := true;
-                        
-  try      
+  try
 //  EnabledAllForms( self, false);
 //  DisableMainForm;
   if FAutoBackup and not Restore then begin  // проверка необходимости резервного автокопирования
@@ -408,8 +425,9 @@ begin
 //    Application.OnMessage := DropMessageMouse;
     //--- ВОСТАНОВЛЕНИЕ ----------------------------------------------------------------------
     if Restore then begin
-      OpenMessage(' Предварительное копирование файлов ...','',10);
-      GlobalTask.LogFile.WriteToLogFile('Начало восстановления из резервной копии:'+FDirSource);
+      SetPosOP;
+      OpenMessage(' Предварительное копирование файлов ...       ','',10);
+      GlobalTask.WriteToLogFile('Начало восстановления из резервной копии:'+FDirSource);
       dmBase.CloseBase;
       Application.ProcessMessages;
       Sleep(100);
@@ -421,10 +439,10 @@ begin
       FDirDesc := FDirTmp+'\';
       Application.ProcessMessages;
       Sleep(100);
-      lOk := CopyListFiles(true);  // true - проверить на наличие архива
+      lOk:=CopyListFiles(true);  // true - проверить на наличие архива
       if lOk and FRunUpdateBeforeRestore then begin
    //     ChangeMessage(' Тестовое открытие ...');
-        lOk := OpenTablesDict( FDirTmp+'\'+NAME_DICT );
+        lOk:=OpenTablesDict( FDirTmp+'\'+NAME_DICT );
       end;
       CloseMessage();
       //-----------------------------
@@ -437,11 +455,13 @@ begin
             // копирование из временной папки в папку базы
             FDirSource := FDirTmp+'\';
             FDirDesc   := strDesc;
+            SetPosOP;
             OpenMessage(PadRStr(' Копирование файлов ... ',40,' '),'',10);
-            lOk := CopyListFiles;
+            lOk:=CopyListFiles;
           end;
         end else begin
           // тестовое открытие базы после копирования во временную папку
+          SetPosOP;
           OpenMessage(PadRStr(' Тестовое открытие ...',40,' '),'',10);
           FDirSource := FDirTmp+'\';
           FDirDesc   := strDesc;
@@ -449,7 +469,7 @@ begin
           if lOk then begin
             // копирование из временной папки в папку базы
             ChangeMessage(' Копирование файлов ...   ');
-            lOk := CopyListFiles;
+            lOk:=CopyListFiles;
             s := CheckSleshN(FDirDesc)+'date_auto_backup';
             if FileExists(s) then begin
               DeleteFile(s);
@@ -463,30 +483,37 @@ begin
       s:='';
       l:=true;
       if lOk and IsDocArxiv then begin
+        ChangeMessage(' Прикрепленные файлы ...   ');
         l:=CopyParams(COPY_DOCARXIV, Restore,s);
         if s<>'' then begin
-          GlobalTask.LogFile.WriteToLogFile(s);
+          GlobalTask.WriteToLogFile(s);
           if not l
             then ss:=s;
         end;
       end;
       if lOk and cbRestoreParams.Checked then begin
+        ChangeMessage(' Сервисные файлы ...   ');
         l:=CopyParams(COPY_PARAMS, Restore, s);
         if s<>'' then begin
-          GlobalTask.LogFile.WriteToLogFile(s);
+          GlobalTask.WriteToLogFile(s);
           if not l
             then if ss='' then ss:=s else ss:=ss+chr(13)+s;
         end;
       end;
-      if not l and (ss<>'') then strErr:=ss;
-      lOk:=true;
-
-      GlobalTask.LogFile.WriteToLogFile('Успешное завершение копирования из резервной копии.');
+      if not l and (ss<>'') then begin
+        strErr:=ss;
+        lOk:=false;
+      end;
+      if lOk then begin
+        GlobalTask.WriteToLogFile('Успешное завершение копирования из резервной копии.');
+      end else begin
+        GlobalTask.WriteToLogFile('Ошибка восстановления из резервной копии.'+#13#10+strErr);
+      end;
       CloseMessage();
 
       if dmBase.OpenBase
-        then GlobalTask.LogFile.WriteToLogFile('Успешная установка базы после восстановления.')
-        else GlobalTask.LogFile.WriteToLogFile('ОШИБКА при установке базы после восстановления.');
+        then GlobalTask.WriteToLogFile('Успешная установка базы после восстановления.')
+        else GlobalTask.WriteToLogFile('ОШИБКА при установке базы после восстановления.');
 
     //--- КОПИРОВАНИЕ ----------------------------------------------------------------------
     end else begin
@@ -516,8 +543,9 @@ begin
         {$ENDIF}
         // если база не пуста
         if lOk then begin
+          SetPosOP;
           OpenMessage(PadRStr(' Подготовка базы ...  ',40,' '),'Резервное копирование',10);
-          GlobalTask.LogFile.WriteToLogFile('Начало автоматического резервного копирования по пути:'+FDirDesc);
+          GlobalTask.WriteToLogFile('Начало автоматического резервного копирования по пути:'+FDirDesc);
           dmBase.CloseBase;
           ChangeMessage(' Копирование файлов ... ');
           strSource := FDirSource;  // откуда копировать
@@ -545,17 +573,18 @@ begin
         end;
      //---------- резервное копирование  --------------------------------------------------------
       end else begin
+        SetPosOP;
         OpenMessage(PadRStr(' Подготовка базы ...  ',40,' '),'Резервное копирование',10);
         if ANSIUpperCase(Right(FDirDesc,12))='КОПИЯДАННЫХ\'
           then s := Copy(FDirDesc,1,Length(FDirDesc)-12)
           else s := FDirDesc;
         GlobalTask.SetLastValueAsString('PATH_BACKUP', s);
         dmBase.CloseBase;
-        GlobalTask.LogFile.WriteToLogFile('Начало резервного копирования по пути:'+FDirDesc);
+        GlobalTask.WriteToLogFile('Начало резервного копирования по пути:'+FDirDesc);
         GlobalTask.SetLastValueAsDate('LAST_BACKUP_COPY', Date);
         ChangeMessage(' Копирование файлов ...       ');
-        lOk := CopyListFiles;
-        if lOk then CopyParams(COPY_ALL, Restore,s);
+        lOk:=CopyListFiles;
+        if lOk then lOk:=CopyParams(COPY_ALL, Restore,strErr);
         dmBase.OpenBase;
       end;
     end;
@@ -576,7 +605,7 @@ begin
 
   if lOk then begin
     if not Restore then begin
-      GlobalTask.LogFile.WriteToLogFile('Успешное завершение резервного копирования.');
+      GlobalTask.WriteToLogFile('Успешное завершение резервного копирования.');
     end;
     if not FAutoBackup then begin
       ShowMessage(' Копирование файлов успешно завершено.');
@@ -606,7 +635,7 @@ begin
     if FileExists(strDir+'DocArxiv.zip') then begin
       Result:=true;
     end;
-  end else begin                       
+  end else begin
     strDir:=Copy(FDirSource,1,Length(FDirSource)-1);
     i:=LastPos('\',strDir);
     if i>0 then begin
@@ -620,6 +649,7 @@ end;
 //------------------------------------------------------------------------
 function TfmCopyData.CopyParams(nType:Integer; lRestore:Boolean; var sSoob:String) : Boolean;
 var
+  nSizeF, nSizeD:Int64;
   arrFiles:TArrStrings;
   FileAttrs : Integer;
   i,j,n : Integer;
@@ -659,6 +689,7 @@ begin
   {$IFDEF SMDO}
     arrFiles[2]:='SMDO.INI';
   {$ENDIF}
+  //--------- ВОССТАНОВЛЕНИЕ -------------------------------------------------------
   if lRestore then begin
     strDir     := '';
     strDirWork := '';
@@ -727,10 +758,11 @@ begin
           if lArxiv then begin
             if FileExists(strDir+'DocArxiv.zip') then begin
               strDirDocArxiv:=FDirTmp+'\DocArxiv';
-              ForceDirectories(strDirDocArxiv);
+              ForceDirectories(strDirDocArxiv);       
               Zip.FileName:=strDir+'DocArxiv.zip';
               Zip.BaseDir :=strDirDocArxiv;
               try
+                GlobalTask.WriteToLogFile('Извлечение из архива '+Zip.FileName+' в '+strDirDocArxiv);
                 Zip.OpenArchive;
                 Zip.ExtractFiles('*.*');
               except
@@ -750,18 +782,21 @@ begin
               s:=CheckSleshN(ExtractFilePath(Application.ExeName))+'DocArxiv';
               ClearDir(s,true);
               ForceDirectories(s);
+              GlobalTask.WriteToLogFile('Копирование '+strDirDocArxiv+' в '+s);
               CopyDir(strDirDocArxiv, s);
             end else begin
               sSoob:='Папка с прикрепленными файлами пуста';
               Result:=false;
             end;
           end;
+          if sSoob<>'' then GlobalTask.WriteToLogFile(sSoob);
           if lArxiv
             then ClearDir(FDirTmp,true);
         end;
       end;
 
     end;
+  //--------- РЕЗЕРВНОЕ КОПИРОВАНИЕ -------------------------------------------------------
   end else begin
     i := Pos('КОПИЯДАННЫХ', ANSIUpperCase(FDirDesc));
     if i > 0 then begin
@@ -793,29 +828,46 @@ begin
       for j:=Low(arrFiles) to High(arrFiles) do begin
         strFile:=GlobalTask.PathService+arrFiles[j];
         if FileExists(strFile) then begin
-          CopyOneFile( strFile, strDir+arrFiles[j]);
-        end;       
+          Result:=CopyOneFile( strFile, strDir+arrFiles[j]);
+        end;
       end;
-      s:=CheckSleshN(ExtractFilePath(Application.ExeName))+'DocArxiv';
-      DeleteFile(strDir+'DocArxiv.zip');
-      if IsDocArxiv and (GetFolderSize(s)>0) then begin
-        ChangeMessage('Дополнительные файлы ...');
-        Zip.CompressionLevel:=clNone;     // без сжатия
-        Zip.FileName := strDir+'DocArxiv.zip';
-        Zip.BaseDir  := s;
-        Zip.ExclusionMasks.Clear;
-        Zip.FileMasks.Clear;
-        Zip.ExclusionMasks.Add('*.eml');
-        Zip.ExclusionMasks.Add('*.xml');
-        Zip.FileMasks.Add('*.*');
-        Zip.OpenArchive(fmCreate);
-//        Zip.AddFiles('*.*');
-        Zip.AddFiles;
-        Zip.CloseArchive;
-        Zip.ExclusionMasks.Clear;
-        Zip.FileMasks.Clear;
-//        CopyOneFile( strFile, strDir+arrFiles[j]);
-//        CopyDir(CheckSleshN(ExtractFilePath(Application.ExeName))+'DocArxiv' , strDirDocArxiv);
+     if not Result then sSoob:='Ошибка копирования сервисных файлов';
+      if Result then begin
+        s:=CheckSleshN(ExtractFilePath(Application.ExeName))+'DocArxiv';
+        DeleteFile(strDir+'DocArxiv.zip');
+        if IsDocArxiv and (GetFolderSize(s)>0) then begin
+          ChangeMessage('Прикрепленные файлы ...');
+          Zip.CompressionLevel:=clFastest; //clNone без сжатия
+          ForceDirectories(FDirTmp);
+          Zip.FileName:=FDirTmp+'\DocArxiv.zip';  // !!!  Архивируем во временной папке    17.03.2021
+  //        Zip.FileName := strDir+'DocArxiv.zip';
+          Zip.BaseDir:=s;
+          Zip.ExclusionMasks.Clear;
+          Zip.FileMasks.Clear;
+          Zip.ExclusionMasks.Add('*.eml');
+          Zip.ExclusionMasks.Add('*.xml');
+          Zip.FileMasks.Add('*.*');
+          Zip.OpenArchive(fmCreate);
+  //        Zip.AddFiles('*.*');
+          Zip.AddFiles;
+          Zip.CloseArchive;
+          Zip.ExclusionMasks.Clear;
+          Zip.FileMasks.Clear;
+
+          nSizeF:=GetFileSize(Zip.FileName);
+          nSizeD:=DiskFreeEx(strDir);
+          if nSizeF>nSizeD then begin
+            if Problem('На диске не достаточно места для файла DocArxiv.zip ('+IntToStr(Trunc(nSizeF/(1024*1024)))+'МВ). Продолжить ?')
+              then Result:=true
+              else Result:=false;
+          end;
+          if Result
+            then Result:=CopyOneFile(Zip.FileName, strDir+'DocArxiv.zip');
+          DeleteFile(Zip.FileName);
+          if not Result then sSoob:='Ошибка копирования прикрепленных файлов';
+  //        CopyOneFile( strFile, strDir+arrFiles[j]);
+  //        CopyDir(CheckSleshN(ExtractFilePath(Application.ExeName))+'DocArxiv' , strDirDocArxiv);
+        end;
       end;
       //------------------------------------------
     end;
@@ -883,12 +935,15 @@ var
   sr :  TSearchRec;
   lOk : Boolean;
   strVerCur, strVerOld, s : String;
+  nVerCur, nVerOld:Integer;
 begin
-  Result := false;
+  Result:=false;
   FListSource.Clear;
-  strPathS := CheckSleshN( edPath.Text );
-  strVerCur := dmBase.GetVersionBase(nil);
-  lOk := true;
+  strPathS:=CheckSleshN( edPath.Text );
+  strVerCur:=dmBase.GetVersionBase(nil);
+  nVerCur:=StrToIntDef(DelCharsR(strVerCur,'.'),0);
+  nVerOld:=0;
+  lOk:=true;
   if AutoBackup then begin
     n := ChoiceAutoBackup;
     if n = 0 then lOk := false;
@@ -934,6 +989,7 @@ begin
           Query.Open;
           strVerOld := Trim(Query.FieldByName('Version_Major').AsString+'.'+
                             Query.FieldByName('Version_Minor').AsString);
+          nVerOld:=StrToIntDef(DelCharsR(strVerOld,'.'),0);
           Query.Close;
         except
           strErr := 'Невозможно определить версию резервной копии.';
@@ -942,19 +998,24 @@ begin
         ConnectSource.Disconnect;
       end;
       if lOk then begin
-        if strVerOld <> strVerCur then begin
-          strErr := '';
-          s := '';
-          s := s + 'ВНИМАНИЕ!'#13; // + Chr(13)+
-          s := s + 'Версия базы резервной копии не соответствует'#13;
-          s := s + 'версии текущей базы.'#13;
-          s := s + 'Если Вы хотите реорганизовать резервную копию'#13;
-          s := s + 'введите слово ДА в поле ввода.'#13;
-          s := s + 'Иначе восстановление не будет произведено.'#13;
-          if OkWarning(s) then begin
-            FRunUpdateBeforeRestore := true;
+        if strVerOld<>strVerCur then begin
+          if (nVerCur>0) and (nVerOld>0) and (nVerOld>nVerCur) then begin
+            PutError('Версия резервной копии базы <'+strVerOld+'> больше текущей версии <'+strVerCur+'>. Восстановление невозможно!');
+            lOk:=false;
           end else begin
-            lOk := false;
+            strErr := '';
+            s := '';
+            s := s + 'ВНИМАНИЕ!'#13; // + Chr(13)+
+            s := s + 'Версия базы резервной копии <'+strVerOld+'> не соответствует'#13;
+            s := s + 'версии текущей базы <'+strVerCur+'>.'#13;
+            s := s + 'Если Вы хотите реорганизовать резервную копию'#13;
+            s := s + 'введите слово ДА в поле ввода.'#13;
+            s := s + 'Иначе восстановление не будет произведено.'#13;
+            if OkWarning(s) then begin
+              FRunUpdateBeforeRestore := true;
+            end else begin
+              lOk := false;
+            end;
           end;
         end;
       end;
@@ -1306,6 +1367,7 @@ end;
 //----------------------------------------------------------------------------
 procedure TfmCopyData.Button1Click(Sender: TObject);
 begin
+  SetPosOP;
   OpenMessage('Архивирование ...', '', 10);
   RunZipBase(ExtractFilePath(dmBase.AdsConnection.ConnectPath), 'D:\111');
   CloseMessage;

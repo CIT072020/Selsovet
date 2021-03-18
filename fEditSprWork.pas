@@ -17,6 +17,7 @@ type
     TBItemSetSMDO: TTBItem;
     procedure TBItemAddSMDOClick(Sender: TObject);
     procedure TBItemSetSMDOClick(Sender: TObject);
+    procedure GridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
   private
     { Private declarations }
     FRange : Integer;
@@ -49,7 +50,7 @@ begin
     st:=SaveSostTable(dmBase.SprWork, false, false);
     fmEdit:= TfmEditSprWork.Create(Application.MainForm);
     fmEdit.OpisEdit:=Opis;
-    dmBase.SprWork.Filter:='';                
+    dmBase.SprWork.Filter:='';
     fmEdit.DataSet := dmBase.SprWork;
     Param := TParamsEditSpr.Create;
     Param.OnBeforeSave:=nil; //fmEdit.BeforeSaveSprWork;
@@ -64,6 +65,9 @@ begin
     fmEdit.LoadFromIni( Globaltask.iniFile('SPR'),'FormSpr.SprWork');
     fmEdit.LoadParams;
     GlobalTask.CurrentOpisEdit.SetKeyForm(fmEdit, nil);
+
+    fmEdit.Grid.FieldColumns['SMDOCODE'].ReadOnly:=true;  // !!!
+
     {$IFDEF POST}
       try
         fmEdit.Grid.FieldColumns['IS_KORR'].Visible:=false;
@@ -181,6 +185,7 @@ begin
       f.edFName.Text:='';
       f.edSMDO.Text:='';
       f.edCorrType.Value:=9;
+      f.ID:=-1;
     end else begin
       f.edName.Text := ds.FieldByName('NAME').AsString;
       f.edFName.Text := ds.FieldByName('FNAME').AsString;
@@ -195,6 +200,7 @@ begin
       f.edSOATO.Text := ds.FieldByName('SOATO').AsString;
       f.edNomer.Value := ds.FieldByName('NOMER').Value;
       f.edCorrType.Value := ds.FieldByName('CORR_TYPE').Value;
+      f.ID:=ds.FieldByName('ID').AsInteger;
       {$IFDEF POST}
         f.cbKorr.Checked:=true;
         f.cbTerr.Checked:=true;
@@ -332,22 +338,50 @@ var
   v : Variant;
   arrRec : TCurrentRecord;
   ds:TDataSet;
+  sSMDO,sID:String;
+  nCount:Integer;
 begin
   ds:=Grid.DataSource.DataSet;
   if not (ds.Eof and ds.Bof) then begin
+    sID:=Trim(ds.FieldByName('ID').AsString);
+    if sID='' then begin
+      PutError('Невозможно выполнить операцию (ID="")');
+      exit;
+    end else begin
+      sID:=' and id<>'+sID;
+    end;
     SetLength(arrRec,1);
     Opis := GlobalTask.CurrentOpisEdit.GetSprOpisA('LOOKUP_SPRSMDO_NAME');
     if Opis<>nil then begin
       v:=null;
       if Opis.ChoiceFromSprEx(grid, v, arrRec, nil) and (v<>null) then begin
         if v <> null then begin
-          EditDataSet(ds);
-          ds.FieldByName('SMDOCODE').AsString:=GetValueFieldEx(arrRec, 'SMDOCODE', '');
-          PostDataSet(ds);
+          sSMDO:=GetValueFieldEx(arrRec, 'SMDOCODE', '0');
+          try
+            dmBase.WorkQuery.SQL.Text:='SELECT count(*) FROM СпрМестРаботы WHERE smdocode='+QStr(sSMDO)+sID;
+            dmBase.WorkQuery.Open;
+            nCount:=dmBase.WorkQuery.Fields[0].AsInteger;
+            dmBase.WorkQuery.Close;
+          except
+            nCount:=0;
+          end;
+          if nCount>0 then begin
+            PutError('Выбраннвя организация '+sSmdo+' уже существует в справочнике.');
+          end else begin
+            EditDataSet(ds);
+            ds.FieldByName('SMDOCODE').AsString:=GetValueFieldEx(arrRec, 'SMDOCODE', '');
+            PostDataSet(ds);
+          end;
         end;
       end;
     end;
   end;
+end;
+
+procedure TfmEditSprWork.GridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
+begin
+  if Column.ReadOnly
+    then Background:=clInfoBk;
 end;
 
 end.

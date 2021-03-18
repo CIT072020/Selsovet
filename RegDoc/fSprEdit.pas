@@ -5,7 +5,7 @@ uses
    ImgList, DBGrids, Grids, ExtCtrls, ComCtrls, ToolWin, ActnList, StdCtrls, DB,
    ElTree, ElXPThemedControl,
    DBGridEh,
-   AdsTable,
+   AdsTable, FuncPr, FuncEh,
    mFindInt, {<<MessageDlgR}
    mExport,
    fExpDs,
@@ -78,6 +78,18 @@ type
       procedure acEditExecute(Sender: TObject);
       procedure acFindExecute(Sender: TObject);
       procedure acFindClearExecute(Sender: TObject);
+      procedure tvTreeDragOver(Sender, Source: TObject; X, Y: Integer;   State: TDragState; var Accept: Boolean);
+      procedure tvTreeDragDrop(Sender, Source: TObject; X, Y: Integer);
+      procedure tvTreeDragTargetChange(Sender: TObject; Item: TElTreeItem;  ItemRect: TRect; X, Y: Integer);
+      procedure tvTreeEndDrag(Sender, Target: TObject; X, Y: Integer);
+      procedure tvTreeStartDrag(Sender: TObject;   var DragObject: TDragObject);
+      procedure dgTableKeyDown(Sender: TObject; var Key: Word;  Shift: TShiftState);
+    procedure tvTreeEnter(Sender: TObject);
+    procedure tvTreeExit(Sender: TObject);
+    procedure dgTableEnter(Sender: TObject);
+    procedure dgTableExit(Sender: TObject);
+    procedure tvTreeKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
    private
       FDBItem: TDBItem;
       FTableView: TTableView;
@@ -111,6 +123,8 @@ type
       FIsFilter: Boolean;
       // если, установлено условие отбора, до в данном свойстве хранится старый фильтр
       FOldFilter: string;
+      // будем выбирать папку
+      FChoiceFolder:Boolean;
    private
       procedure WMSysCommand(var Msg: TWMSysCommand); message WM_SYSCOMMAND;
       procedure WMActivateApp(var Msg: TWMActivateApp); message WM_ACTIVATEAPP;
@@ -137,20 +151,23 @@ type
       procedure ClearTableView(TableView: TTableView);
       procedure DoSelectRow;
       procedure ToggleEdit(Edit: Boolean);
+      procedure SetNewParentFolder;
       procedure ChangeCaption;
-      procedure UpdateButtons;
+      procedure UpdateButtons(ToTree:Boolean=false);
       function FindIdNode(Id: Integer): TElTreeItem;
       procedure AdjustPosition;
       procedure DoFind(Column: TColumnEh);
+      function  ItemIsFolder(Item: TElTreeItem):Boolean;
+
    end;
 
 procedure EditSpr(DBItem: TDBItem; AdmOnlyRead: Boolean);
-function SelectSprValue(DBItem: TDBItem; var KeyValue: string; KeyFieldName: string): Boolean;
+function SelectSprValue(DBItem: TDBItem; var KeyValue: string; KeyFieldName: string; sTableFilterCh:String=''): Boolean;
 
 implementation
 uses
    mDoc2Sel;
-   
+
 {$R *.DFM}
 
 const
@@ -170,9 +187,16 @@ const
    II_LeftPanel       =12;  // переключатель видимости левой панели
 
 procedure EditSpr(DBItem: TDBItem; AdmOnlyRead: Boolean);
+var
+  lDrag:Boolean;
 begin
+   lDrag:=false;
+   if DBItem.Name='SP_FILELIST' then begin   // !!!    vadim
+     lDrag:=true;
+   end;
    with TfmSprEdit.Create(nil) do begin
       try
+         FChoiceFolder:=false;
          FAdmOnlyRead:=AdmOnlyRead;
          AdjustPosition;
          SetDBItem(DBItem, '', False);
@@ -180,6 +204,7 @@ begin
          UpdateButtons;
          FFormLayout:=InitLayout(DBItem.LayoutList, 'TfmSprEdit_EDIT');
          LoadLayout(FFormLayout);
+         tvTree.DragAllowed:=lDrag;
          ShowModal;
          SaveLayout(FFormLayout);
          ClearTableView(FTableView);
@@ -192,31 +217,63 @@ begin
    end;
 end;
 
-function SelectSprValue(DBItem: TDBItem; var KeyValue: string; KeyFieldName: string): Boolean;
+function SelectSprValue(DBItem: TDBItem; var KeyValue: string; KeyFieldName: string; sTableFilterCh:String): Boolean;
 var
    GetField: TField;
+   lFolder:Boolean;
+   curFilterCh:String;
 begin
    Result:=False;
    with TfmSprEdit.Create(nil) do begin
       try
+         FChoiceFolder:=false;
+         if FIsTree and (Pos('CHOICE_FOLDER', KeyValue)>0) then begin
+           KeyValue:=StringReplace(KeyValue, 'CHOICE_FOLDER', '', []);
+           FChoiceFolder:=true;
+           spLeft.Visible:=false;
+           dgTable.Visible:=false;
+           tvTree.Align:=alClient;
+         end;
          AdjustPosition;
+         if sTableFilterCh<>'' then begin
+           curFilterCh:=DBItem.TableFilterCh;
+           if sTableFilterCh='*'
+             then DBItem.TableFilterCh:=''
+             else DBItem.TableFilterCh:=sTableFilterCh;
+         end;
          SetDBItem(DBItem, KeyValue, True);
          FTableView:=InitTableView(DBItem.ViewList, CSprSelectTableView);
          FFormLayout:=InitLayout(DBItem.LayoutList, 'TfmSprEdit_SELECT');
          LoadLayout(FFormLayout);
          // всегда показываем боковую панель
          ToggleTreePanel(FIsTree);
+         tvTree.DragAllowed:=false;
          if ShowModal=mrOk then begin
-            if (not FIsTree) or (FIsNode.AsInteger=iLeaf) or FDBItem.HaveStyle(bsAllSelable) then begin
-               // NB: может не стоит каждый раз искать это поле
-               GetField:=FDBItem.Table.FindField(KeyFieldName);
-               if GetField<>nil then begin
+            if FChoiceFolder and FIsTree then begin
+              if FIsNode.AsInteger=iNode then begin
+                GetField:=FDBItem.Table.FindField(KeyFieldName);
+                if GetField<>nil then begin
                   KeyValue:=GetField.AsString;
                   Result:=True;
-               end;
+                end;
+              end;
+            end else begin
+              if (not FIsTree) or (FIsNode.AsInteger=iLeaf) or FDBItem.HaveStyle(bsAllSelable) then begin
+                 // NB: может не стоит каждый раз искать это поле
+                 GetField:=FDBItem.Table.FindField(KeyFieldName);
+                 if GetField<>nil then begin
+                   KeyValue:=GetField.AsString;
+                   Result:=True;
+                 end;
+              end;
             end;
          end;
-         SaveLayout(FFormLayout);
+         if not FChoiceFolder then begin
+           SaveLayout(FFormLayout);
+         end;
+         if sTableFilterCh<>'' then begin
+           DBItem.TableFilterCh:=curFilterCh;
+         end;
          ClearTableView(FTableView);
          {**}FDataSet.Filter:=DBItem.TableFilter;
          {**}FDataSet.Filtered:=DBItem.TableFilter<>'';
@@ -358,6 +415,9 @@ begin
          tbToggleEdit.Enabled:=False;
       end;
    end;
+
+//   paTop.Visible:=true;  // !!!
+
    ChangeCaption;
    //--UpdateButtons;
 end;
@@ -445,9 +505,12 @@ begin
       if Id<>-1 then FDataSet.Filter:=Format('%s AND (%s)', [FDBItem.TableFilter, S])
       else FDataSet.Filter:=FDBItem.TableFilter;
    end
-   else begin
+   else begin                                      
       if Id<>-1 then FDataSet.Filter:=S
       else FDataSet.Filter:='';
+   end;
+   if FSelectValue and (FDBItem.TableFilterCh<>'') and (not FDBItem.HaveStyle(bsClearFilter) or FSelectValue) then begin
+     FDataSet.Filter:='('+FDataSet.Filter+') and '+FDBItem.TableFilterCh;
    end;
    FDataSet.Filtered:=FDataSet.Filter<>'';
 end;
@@ -465,8 +528,20 @@ end;
 procedure TfmSprEdit.DeleteRecord;
 var
    RootNode: TElTreeItem;
+   lDeleteNode:Boolean;
+   s,ss:String;
 begin
-   if (not FDBItem.HaveStyle(bsConfirmDelete)) or (MessageDlgR('Удалить текущую запись?', mtConfirmation, [mbYes, mbNo], 0)=mrYes) then begin
+   if FIsTree and (FIsNode.AsInteger=iNode) then begin
+     try
+       ss:=FDataSet.FieldByName(FName.FieldName).AsString;
+       s:='Удалить папку "'+ss+'" ?';
+     except
+       s:='Удалить текущую папку ?';
+     end;
+   end else begin
+     s:='Удалить текущую запись ?';
+   end;
+   if (not FDBItem.HaveStyle(bsConfirmDelete)) or (MessageDlgR(s, mtConfirmation, [mbYes, mbNo], 0)=mrYes) then begin
       if FIsTree then begin
          FDBItem.Control.IsNode:=FIsNode.AsInteger;
          FDBItem.Control.ParentId:=FCurId;
@@ -479,16 +554,18 @@ begin
                FDataSet.Filter:=FDBItem.TableFilter;
                FDataSet.Filtered:=FDBItem.TableFilter<>'';
             end;}
-            FDBItem.DeleteCurrentRecord(skTable);
-            if RootNode.GetPrevSibling<>nil then begin
-               FCurId:=RootNode.GetPrevSibling.Tag;
-            end
-            else begin
-               FCurId:=RootNode.Parent.Tag;
+            lDeleteNode:=FDBItem.DeleteCurrentRecord(skTable);
+            if lDeleteNode then begin
+              if RootNode.GetPrevSibling<>nil then begin
+                 FCurId:=RootNode.GetPrevSibling.Tag;
+              end
+              else begin
+                 FCurId:=RootNode.Parent.Tag;
+              end;
+              RootNode.Delete;
+              SetTreeFilter(FCurId);
+              BuildTree(FindIdNode(FCurId), FCurId);
             end;
-            RootNode.Delete;
-            SetTreeFilter(FCurId);
-            BuildTree(FindIdNode(FCurId), FCurId);
          finally
             FDataSet.EnableControls;
          end;
@@ -690,6 +767,13 @@ begin
    Item.ImageIndex:=II_FolderOpen;
 end;
 
+function TfmSprEdit.ItemIsFolder(Item: TElTreeItem):Boolean;
+begin
+  if (Item.ImageIndex=II_FolderOpen) or (Item.ImageIndex=II_FolderClose)
+    then result:=true
+    else result:=false;
+end;
+
 procedure TfmSprEdit.dgTableDblClick(Sender: TObject);
 begin
    DoSelectRow;
@@ -800,6 +884,120 @@ begin
    if Key=#13 then begin
       DoSelectRow;
    end;
+end;
+
+procedure TfmSprEdit.dgTableKeyDown(Sender: TObject; var Key: Word;  Shift: TShiftState);
+begin
+  if (Key=VK_F3) and (Shift=[]) then begin
+    with dgTable do begin
+      if Selection.DataCellSelected(Columns[0].Index,DataSource.Dataset.Bookmark) then begin
+        Selection.Rows.CurrentRowSelected:=false;
+        Selection.Refresh;
+      end else begin
+        Selection.Rows.CurrentRowSelected:=true;
+        Selection.Refresh;
+      end;
+    end;
+    Key:=VK_DOWN;
+  end else if (Key=VK_F3) and (Shift=[ssCtrl]) then begin
+    dgTable.Selection.Clear;
+    dgTable.Selection.Refresh;
+    Key:=0;
+  end else if (Key=VK_F4) and (Shift=[]) then begin
+//    SetNewParentFolder;
+  end;
+end;
+procedure TfmSprEdit.tvTreeKeyDown(Sender: TObject; var Key: Word;  Shift: TShiftState);
+begin
+  if (Key=VK_F4) and (Shift=[]) then begin
+    SetNewParentFolder;
+  end;
+end;
+
+// !!! РАБОТАЕТ ТОЛЬКО СО СПРАВОЧНИКОМ  SprDocFileList !!!
+procedure TfmSprEdit.SetNewParentFolder;
+var
+  arrB:TArrStrings;
+  sB,KeyValue,s,ss:String;
+  i,nNewParent:Integer;
+  l:Boolean;
+begin
+  if (tvTree.ItemFocused=nil) or not FIsTree or (FDBItem.Name<>'SP_FILELIST')
+    then exit;
+  SelectionToArr(dgTable, arrB);
+  if Length(arrB)>0 then begin
+    nNewParent:=tvTree.ItemFocused.Tag;
+    FDataSet.CheckBrowseMode;
+    FDataSet.DisableControls;
+    sB:=FDataSet.Bookmark;
+    l:=FDataSet.Filtered;
+    FDataSet.Filtered:=false;
+    dgTable.Selection.Clear;
+    try
+      s:='';
+      for i:=Low(arrB) to High(arrB) do begin
+        FDataSet.Bookmark:=arrB[i];
+        s:=s+FDataSet.FieldByName('FILE_IND').AsString+', ';
+      end;
+      if FDataSet.Locate('ID', nNewParent, []) then begin
+        ss:=FDataSet.FieldByName('NAME').AsString;
+      end;
+      if Problem('Переместить строки с индексами: "'+s+'" в папку "'+ss+'" ?') then begin
+        for i:=Low(arrB) to High(arrB) do begin
+          FDataSet.Bookmark:=arrB[i];
+          FDataSet.Edit;
+          FDataSet.FieldByName('PARENT_ID').AsInteger:=nNewParent;
+          FDataSet.Post;
+        end;
+      end;
+    finally
+      FDataSet.Filtered:=l;
+      sB:=FDataSet.Bookmark;
+      FDataSet.EnableControls;
+    end;
+  end;
+  {
+  if Length(arrB)>0 then begin
+    KeyValue:='CHOICE_FOLDER';
+    if SelectSprValue(FDBItem, KeyValue, 'ID') then begin
+      nNewParent:=StrToIntDef(KeyValue,0);
+      if nNewParent>0 then begin
+        FDataSet.CheckBrowseMode;
+        sB:=FDataSet.Bookmark;
+        try
+          s:='';
+          for i:=Low(arrB) to High(arrB) do begin
+            FDataSet.Bookmark:=arrB[i];
+            s:=s+FDataSet.FieldByName('FILE_IND').AsString+', ';
+          end;
+          s:=Copy(s,1,Length(s)-2);
+          if FDataSet.Locate('ID', nNewParent, []) then begin
+            ss:=FDataSet.FieldByName('NAME').AsString;
+          end;
+          if Problem('Переместить строки с индексами:'+s+' в папку "'+ss+'" ?') then begin
+            for i:=Low(arrB) to High(arrB) do begin
+              FDataSet.Bookmark:=arrB[i];
+              FDataSet.Edit;
+              FDataSet.FieldByName('PARENT_ID').AsInteger:=nNewParent;
+              FDataSet.Post;
+            end;
+          end;
+        finally
+          sB:=FDataSet.Bookmark;
+        end;
+      end;
+    end;
+  end;
+  }
+//    ShowMessage(inttostr(length(arrB)));
+{
+  FDataSet.DisableControls;
+
+    ss:='отмеченной';
+    OpenMessage(' Соберем информацию для регистрации ...','',0);
+    for i:=0 to Length(arrB)-1 do begin
+      Query.Bookmark:=arrB[i];
+}
 end;
 
 procedure TfmSprEdit.DoSelectRow;
@@ -923,9 +1121,15 @@ begin
    end;
 end;
 
-procedure TfmSprEdit.UpdateButtons;
+procedure TfmSprEdit.UpdateButtons(ToTree:Boolean);
 begin
-   acDelete.Enabled:=FIsEdit and not FDBItem.IsEmpty(skTable);
+//было  acDelete.Enabled:=FIsEdit and not FDBItem.IsEmpty(skTable);
+//стало  vadim
+   if ToTree then begin  //
+     acDelete.Enabled:=false;
+   end else begin
+     acDelete.Enabled:=FIsEdit and not FDBItem.IsEmpty(skTable);
+   end;
    acAdd.Enabled:=FIsEdit;
    acUp.Enabled:=FIsEdit and not FDBItem.IsEmpty(skTable);
    acDown.Enabled:=FIsEdit and not FDBItem.IsEmpty(skTable);
@@ -1036,7 +1240,7 @@ begin
       ModalResult:=mrOk;
    end;
 end;
-                                        
+
 procedure TfmSprEdit.AdjustPosition;
 begin
    btCancel.Left:=paBottom.ClientWidth-btCancel.Width-(btCancel.Width div 7);
@@ -1208,5 +1412,125 @@ begin
       end;}
    end;
 end;
+
+procedure TfmSprEdit.tvTreeDragOver(Sender, Source: TObject; X, Y: Integer;  State: TDragState; var Accept: Boolean);
+Var
+  Node : TElTreeItem;
+begin
+  Node:=tvTree.ItemFocused;
+  if (Node<>nil) and ItemIsFolder(Node) then begin
+    Accept:=true;
+  end;
+end;
+
+procedure TfmSprEdit.tvTreeDragDrop(Sender, Source: TObject; X, Y: Integer);
+var
+  T1,T2,sr : TElTreeItem;
+//  HT: THitTests;
+  nIDs, nIDd:Integer;
+  sB,s:String;
+  lOk:Boolean;
+begin
+  T1:=tvTree.Selected;
+  if T1 = nil then Exit;
+//  HT := tvTree.GetHitTestInfoAt(X, Y);
+  T2 := tvTree.GetNodeAt(X, Y);
+//  if (htNowhere in HT) then T2:=Nil;
+  if (T2<>Nil) and ItemIsFolder(T2) then begin
+    nIDs:=t1.Tag;
+    nIDd:=t2.Tag;
+//    showmessage(sender.ClassName+'  '+Source.ClassName+' selected('+t1.Text+'  id='+inttostr(t1.Tag)+') to('+t2.Text+'  id='+inttostr(t2.Tag)+')');
+    sB:=FDataSet.Bookmark;
+    try
+      if FDataSet.Locate('ID', nIDs, []) then begin
+        //  ---------подчинение должно изменится------------      -не сам в себя-
+        if (FDataSet.FieldByName('PARENT_ID').AsInteger<>nIDd) and (nIDs<>nIDd) and Problem('Переместить папку "'+t1.Text+'" в папку "'+t2.Text+'" ?') then begin
+          lOk:=true;
+          try
+            T1.MoveTo(T2);
+          except
+//          EElTreeError
+            lOk:=false;
+            PutError('Ошибка перемещения!');
+          end;
+          if lOk then begin
+            FDataSet.CheckBrowseMode;
+            FDataSet.Edit;
+            FDataSet.FieldByName('PARENT_ID').AsInteger:=nIDd;
+            FDataSet.Post;
+          end;
+        end;
+      end;
+    finally
+      FDataSet.Bookmark:=sB;
+    end;
+  end;
+end;
+
+procedure TfmSprEdit.tvTreeDragTargetChange(Sender: TObject; Item: TElTreeItem; ItemRect: TRect; X, Y: Integer);
+//var
+//  T1,T2 : TElTreeItem;
+//  s:String;
+begin
+{
+  T1 := Item;
+  T2 := tvTree.GetNodeAt(X, Y);
+  s:='3  ->';
+  if t1<>nil then begin
+    s:=s+'  item: '+t1.Text+' id='+inttostr(t1.Tag);
+  end;
+  if t2<>nil then begin
+    s:=s+'    xy: '+t2.Text+' id='+inttostr(t2.Tag);
+  end;
+  laCaption.Caption:=s;
+  }
+end;
+
+procedure TfmSprEdit.tvTreeEndDrag(Sender, Target: TObject; X, Y: Integer);
+//var
+//  T1,T2 : TElTreeItem;
+//  s:String;
+begin
+{
+  T2 := tvTree.GetNodeAt(X, Y);
+  s:='nil';
+  if t2<>nil then begin
+    s:=t2.Text+'  id='+inttostr(t2.Tag);
+  end;
+  laCaption.Caption:='2 '+inttostr(x)+','+inttostr(y)+'  '+s;
+  }
+end;
+
+procedure TfmSprEdit.tvTreeStartDrag(Sender: TObject; var DragObject: TDragObject);
+begin
+ {
+  if DragObject<>nil then begin
+    laCaption.Caption:='1 '+DragObject.GetName+'  '+DragObject.ClassName+'  '+Sender.ClassName;
+  end else begin
+    laCaption.Caption:='1 begin  '+Sender.ClassName;
+  end;
+  }
+end;
+
+procedure TfmSprEdit.tvTreeEnter(Sender: TObject);
+begin
+//  UpdateButtons(true);
+end;
+
+procedure TfmSprEdit.tvTreeExit(Sender: TObject);
+begin
+//  UpdateButtons;
+end;
+
+procedure TfmSprEdit.dgTableEnter(Sender: TObject);
+begin
+//  UpdateButtons;
+end;
+
+procedure TfmSprEdit.dgTableExit(Sender: TObject);
+begin
+//  UpdateButtons;
+end;
+
 
 end.

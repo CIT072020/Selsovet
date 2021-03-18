@@ -114,6 +114,49 @@ type
     TBSubmenuGroup: TTBSubmenuItem;
     saveDialog: TSaveDialog;
     TBItemWriteSavedFilter: TTBItem;
+    TBDock24: TTBDock;
+    TBToolbarMenu24: TTBToolbar;
+    TBItemAddDok24: TTBItem;
+    TBItemEdit24: TTBItem;
+    TBItemDelDok24: TTBItem;
+    TBItemPreView24: TTBItem;
+    TBItemPrint24: TTBItem;
+    TBItemGrantSprav24: TTBItem;
+    TBItemExport24: TTBItem;
+    TBItemFlt24: TTBItem;
+    TBItemRepeatFilter24: TTBItem;
+    TBItemClrFlt24: TTBItem;
+    TBItemOrder24: TTBItem;
+    TBSeparatorItem24_5: TTBSeparatorItem;
+    TBSeparatorItem24_6: TTBSeparatorItem;
+    TBSeparatorIskl24_1: TTBSeparatorItem;
+    TBItemAddOtbor24: TTBItem;
+    TBItemIsklOtbor24: TTBItem;
+    TBItemWriteSavedFilter24: TTBItem;
+    TBSeparatorItem24_8: TTBSeparatorItem;
+    TBItemQuery24: TTBItem;
+    TBItemGrupOne24: TTBItem;
+    TBItemCount24: TTBItem;
+    TBItemSum24: TTBItem;
+    TBItemRefresh24: TTBItem;
+    TBItemSetUpGrid24: TTBItem;
+    TBItemDesignReport24: TTBItem;
+    TBItemClose24: TTBItem;
+    TBExcelReport24: TTBSubmenuItem;
+    TBSubmenuTmp24: TTBSubmenuItem;
+    TBItemDelayRegister24: TTBItem;
+    TBItemPrintGrid24: TTBItem;
+    TBSubmenuPunkts24: TTBSubmenuItem;
+    TBSubSysFlt24: TTBSubmenuItem;
+    TBItemSysFlt24: TTBItem;
+    TBSubChoiceFlt24: TTBSubmenuItem;
+    TBSubmenuGroup24: TTBSubmenuItem;
+    TBSeparatorIskl24_2: TTBSeparatorItem;
+    TBItemPokaz24: TTBItem;
+    TBItemYear24: TTBItem;
+    TBSeparatorItem24_10: TTBSeparatorItem;
+    TBItemLastSvid24: TTBItem;
+    TBSubItemRun24: TTBSubmenuItem;
     procedure TBItemCloseClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -243,6 +286,7 @@ type
     FListPar  : TStringList;
     FNewSQL   : String;
     FRun:Boolean;
+    FRunExport:Boolean;
     FInterObj : Boolean;   // разные объекты в журнале
 //    FWhere    : String;
     FID       : String;
@@ -278,6 +322,7 @@ type
     procedure CheckMouseMessage(var Msg: tagMSG; var Handled: Boolean);
     function  SetSysFilter(vPar:Variant):Boolean; virtual;
     procedure SetListParEditForm; virtual;
+    procedure SetListParAddForm; virtual;
     procedure SetRole; virtual;
     procedure SaveToIni; virtual;
     procedure LoadFromIni; virtual;
@@ -311,6 +356,12 @@ type
     procedure AddRunDelete;
 
     function  LoadQuery : Boolean; virtual;
+
+    procedure PrepareMenu; virtual;
+    procedure CheckTbItems;
+    procedure AfterCheckTbItems; virtual;
+
+
     function  IsGurnOchered : Boolean;
     function  IsGurnAdres : Boolean;
 
@@ -375,6 +426,8 @@ type
     function CreateAdditiveWhere(strAddSQL : String) : String;
     procedure AddWhereEvent(Sender:TFilterInterface; SQL:TStringList);
 
+    function ClrFltEnabled:Boolean;
+    procedure SetClearFilter(lSet:Boolean);
     function IsDateFiks:Boolean;
     function IsSetFilter:Boolean;
     function CreateAdditiveWhere2Refresh:Boolean;
@@ -402,6 +455,7 @@ type
     function IsSetUserFilter:Boolean; virtual;
     procedure BeforeClearFilter; virtual;
     procedure ClearFilter;
+    procedure SetQueryFiltered(l:Boolean);
     procedure CheckAddOtbor;
 
     procedure RunTest; virtual;
@@ -423,6 +477,10 @@ type
     procedure WriteSavedFilter;
     procedure CreateParSavedFilter(sl:TStringList); virtual;
     function ReadParSavedFilter(sl:TStringList):Boolean; virtual;
+
+    procedure VisibleItem(TBItem: TTBCustomItem; lSet:Boolean);
+    procedure VisibleItems(arrControls: array of TVarRec; lSet:Boolean);
+    procedure EnableItem(TBItem: TTBCustomItem; lSet:Boolean);
 
     class function EnableOpen : Boolean; virtual;
     procedure CreateForAll;
@@ -616,9 +674,11 @@ begin
   FEvents.LoadEvents2(strNameSect+s, TBSubItemRun,false);
 //  FEvents := TUserEvents.Create;
 //  FEvents.LoadEvents(strNameSect, TBSubItemRun);
-  TBSubItemRun.Visible:=TBSubItemRun.Count>0;
+  VisibleItem(TBSubItemRun, (TBSubItemRun.Count>0) );
+//  TBSubItemRun.Visible:=TBSubItemRun.Count>0;
   if not FEnableWrite then begin
-    TBSubItemRun.Visible := false;
+//    TBSubItemRun.Visible := false;
+    VisibleItem(TBSubItemRun, false);
   end;
 end;
 
@@ -1065,13 +1125,17 @@ begin
   if Role.SystemAdmin  then begin
     N2.Visible:=true;
     pmSQL.Visible:=true;
-    TBItemSetUpGrid.Visible:=true;
-    TBItemDesignReport.Visible:=true;
+    VisibleItem(TBItemSetUpGrid, true);
+    VisibleItem(TBItemDesignReport, true);
+//    TBItemSetUpGrid.Visible:=true;
+//    TBItemDesignReport.Visible:=true;
   end else begin
     N2.Visible:=false;
     pmSQL.Visible:=false;
-    TBItemSetUpGrid.Visible:=false;
-    TBItemDesignReport.Visible:=false;
+    VisibleItem(TBItemSetUpGrid, false);
+    VisibleItem(TBItemDesignReport, false);
+//    TBItemSetUpGrid.Visible:=false;
+//    TBItemDesignReport.Visible:=false;
   end;
 //  if not FEnableWrite then begin
 //    TBItemDelDok.Enabled := false;
@@ -1095,7 +1159,7 @@ var
 begin
   if iniLocal<>nil then begin
     iniLocal.EraseSection(KodGurnal+'.VISIBLE_POKAZ');
-    for j:=0 to FPokaz.Count-1 do begin
+    for j:=0 to FPokaz.Count-1 do begin             
       if Integer(FPokaz.Objects[j])=1 then begin
         iniLocal.WriteString(KodGurnal+'.VISIBLE_POKAZ',FPokaz.Names[j],'1');
       end;
@@ -1181,7 +1245,457 @@ begin
 //    then dmbase.AdsConnection.Execute('EXECUTE PROCEDURE sp_EnableQueryLogging(''QueryLog'', false, false, 0, '''');');
 
 end;
+//--------------------------------------------------------------------
+function TfmGurnal.LoadQuery : Boolean;
+var
+//  strFields,strFrom,strWhere,strWhereAll,strWhereUser,
+  strSect,strFilter,strFrom,s,ss,strPokaz : String;
+  strKod,strTip,strP : String;
+  i,j,m : Integer;
+  sl : TStringList;
+  arr : TArrStrings;
+  lCS,lAdd : Boolean;
+  nCheckOrder:Integer;
+  sTypeOrder:String;
+  ini:TSasaIniFile;
+begin
+  Result:=InitGurnal;
+  if not Result then exit;
+  FCheckGodGurnal:=false;
+  FCheckEmptyGurnal:=false;
+  FSelectionIsSet:=false;
+  FCurGodGurnal:=-1;
+  FNewSQL:='';
+  strKod := KodGurnal;
+  FOrderList     := nil;
+  SetLength(FArrChangeType,0);
+  if iniGurnal=nil then begin
+    try
+      iniGurnal := TSasaIniFile.Create(GlobalTask.PathService+KodGurnal+'.ini');
+    except
+      Result:=false;
+      PutError(' Ошибка загрузки файла описания журналов. ',self);
+    end;
+  end;
+  if iniLocal=nil
+    then iniLocal:=GlobalTask.iniFile('LOCAL');
+  //---------------------------------------
+  strSect := 'FIELDS_ORDERBY';
+  sl := TStringList.Create;
+  iniGurnal.ReadSectionValues(strSect,sl);
+  for i:=0 to sl.Count-1 do begin
+    s  := Trim(sl.Names[i]);
+    ss := sl.Values[sl.Names[i]];
+    j:=Pos('.',s);
+    lAdd:=true;
+    {$IFDEF OCHERED}
+      if IsGurnOchered then begin
+        if dmBase.OblBase  then begin
+          if (Copy(s,1,2)='a.') or (Copy(s,1,2)='u.')
+            then lAdd:=false;
+        end else begin
+          if Pos('SOATO', ANSIUpperCase(s))>0
+            then lAdd:=false;
+        end;
+      end;
+    {$ELSE}
+      if IsGurnOchered then begin
+        if Pos('SOATO', ANSIUpperCase(s))>0
+          then lAdd:=false;
+      end;
+    {$ENDIF}
+    if lAdd then begin
+      if j > 0 then begin
+        StrToArr(ss,arr,',',false);   // 0-Caption 1-FieldType 2-CS
+        if Length(arr)>2 then begin
+          lCS := (ANSIUpperCase(Copy(arr[2],1,1))='T');
+          FFilterJurnal.AddOrder(Trim(arr[0]), Copy(s,1,j-1), Copy(s,j+1,100),
+                    GetKindFromString(arr[1]), lCS);
+        end else begin
+          PutError(' Ошибка чтения описания полей для ORDER BY ',self);
+        end;
+      end else begin
+        StrToArr(ss,arr,',',false);   // 0-Caption 1-FieldType 2-CS
+        if Length(arr)>2 then begin
+          lCS := (ANSIUpperCase(Copy(arr[2],1,1))='T');
+          FFilterJurnal.AddOrder(Trim(arr[0]), '', s,
+                    GetKindFromString(arr[1]), lCS);
+        end else begin
+          PutError(' Ошибка чтения описания полей для ORDER BY ',self);
+        end;
+  //      PutError(' Ошибка чтения описания полей для ORDER BY ');
+      end;
+    end;
+  end;
+  InitOrderBy;
+  FFilterJurnal.DefaultWhere   := '';
+//  FFilterJurnal.AdditiveWhere  := '';
+  FFilterJurnal.DefaultOrderBy := '';
 
+  if (TypeEditObj = dmBase.TypeObj_Nasel) or (TypeEditObj = dmBase.TypeObj_Lich) then begin
+    FTypeVisibleMens:=GlobalTask.GetLastValueAsInteger(KodGurnal+'_TYPEVISIBLEMENS');
+    FRed:=GlobalTask.GetLastValueAsBoolean(KodGurnal+'_RED');
+    FBlue:=GlobalTask.GetLastValueAsBoolean(KodGurnal+'_BLUE');
+    FGreen1:=GlobalTask.GetLastValueAsBoolean(KodGurnal+'_GREEN1');
+    FGreen2:=GlobalTask.GetLastValueAsBoolean(KodGurnal+'_GREEN2');
+    FUnderline:=GlobalTask.GetLastValueAsBoolean(KodGurnal+'_UNDERLINE');
+    FOldCopyMen:=GlobalTask.GetLastValueAsBoolean(KodGurnal+'_OLDCOPYMEN');
+    FRiap:=GlobalTask.GetLastValueAsBoolean(KodGurnal+'_RIAP');
+  end;
+
+  //---------------------------------------
+  strSect := 'QUERY';
+  sl.Free;
+//  FWhere := '';
+  if Result then begin
+    sl := TStringList.Create;
+    Query.DatabaseName:=GlobalTask.MainDataBaseName;
+    iniGurnal.ReadSectionValues(strSect,sl);
+    for i:=0 to sl.Count-1 do begin
+      if Copy(sl.Names[i],1,3)='SQL' then begin
+        s := Trim(sl.ValueFromIndex[i]);
+        if Copy(sl.Names[i],4,1)='_' then begin
+          ss:=Trim(Copy(sl.Names[i],5,20));
+          //---- !!!  если строка не для текущей программы, то игнорируем ее !!! -------
+          if ss<>fmMain.IDProg
+            then s:='';
+          //----------------------------------------------------------------------------
+        end;
+        if s<>'' then begin
+          if Copy(s,1,1)='"'   then s:=Copy(s,2,Length(s));
+          if RightStr(s,1)='"' then s:=Copy(s,1,Length(s)-1);
+          s:=Trim(s);
+          {$IFDEF OCHERED}
+            if dmBase.OblBase and IsGurnOchered then begin
+              if Pos('LEFT JOIN БАЗАДОМОВ', ANSIUpperCase(s))>0 then begin
+                s:='';
+              end;
+              if Pos('LEFT JOIN СПРУЛИЦ', ANSIUpperCase(s))>0 then begin
+                s:='';
+              end;
+            end;
+          {$ELSE}
+//            if IsGurnOchered then begin
+//              if Pos('LEFT JOIN НАСЕЛЕНИЕ N', ANSIUpperCase(s))>0 then begin
+//                s:=s+' and n.date_fiks='+QStr(CURRENT_SOST);
+//              end;
+//            end;
+          {$ENDIF}
+          if s<>'' then begin
+            Query.SQL.Add(s);
+            j:=Pos('WHERE', ANSIUpperCase(s));
+            if j > 0 then begin
+              s:=Copy(s,j+5,Length(s));
+//          FWhere := s;
+              FFilterJurnal.DefaultWhere := s;
+            end;
+            j:=Pos('ORDER BY', ANSIUpperCase(s));
+            if j>0 then begin
+              s:=Copy(s,j+8,Length(s));
+              FFilterJurnal.DefaultOrderBy := s;
+            end;
+          end;
+        end;
+      end;
+    end;
+    sl.Free;
+    strFrom := iniGurnal.ReadString(strSect,'TABLENAME','');
+    nCheckOrder:=iniGurnal.ReadInteger(strSect,'CHECK_ORDER',0);
+
+    FCheckEmptyGurnal:=iniGurnal.ReadBool(strSect,'CHECK_EMPTY',false);  // !!!
+    FCheckGodGurnal:=false;
+    {$IFDEF ZAGS}
+      FCheckGodGurnal:=GlobalTask.ParamAsBoolean('CHECK_GOD'); // в параметрах загса установлен параметр CHECK_GOD=true
+      if FCheckGodGurnal then begin
+        // для журнала доступна установка "года"
+        if Pos(IntToStr(TypeEditObj), ';'+GlobalTask.ParamAsString('CHECK_GOD_V')+';')>0 then begin
+          FCurGodGurnal:=fmMain.YearFiks;
+          if FCurGodGurnal=1 then FCurGodGurnal:=YearOf(Date);
+          if FCurGodGurnal=0 then
+            FCheckGodGurnal:=false;
+        end else begin
+          FCheckGodGurnal:=false;
+        end;
+      end;
+      {
+      if FFilterJurnal.DefaultWhere=''
+        then  FFilterJurnal.DefaultWhere:=getYearWhere
+        else  FFilterJurnal.DefaultWhere:=FFilterJurnal.DefaultWhere+'('+getYearWhere+')';
+      }
+    {$ELSE}
+
+    {$ENDIF}
+    VisibleItem(TBItemYear, false);
+//    TBItemYear.Visible:=false;
+
+    if (strFrom <> '') and (nCheckOrder>0) then begin
+    // !!!  CheckOrderBy(KodGurnal:String,nCheckOrder:Integer,var SQL:String):Boolean; virtual;
+      if IsGurnAdres then begin
+        j:=GlobalTask.ParamAsInteger('CH_ADRES');
+        // если j=0 сортировка по коду
+        if j=1 then begin
+          FFilterJurnal.DefaultOrderBy:=StringReplace(FFilterJurnal.DefaultOrderBy, 'a.punkt', 'p.nomer',[]);
+          Query.SQL.Text:=ChangeOrderBy(Query.SQL.Text, FFilterJurnal.DefaultOrderBy);
+        end;
+      end else if nCheckOrder=1 then begin
+        sTypeOrder:=GlobalTask.ParamAsString('GURNAL_DATEIZM'); // KEY_SORT_GURN (0-Год+Номер 1-Дата изменения 2-Дата+Номер)
+        if sTypeOrder='0' then begin            // год + номер
+//          if FCheckGodGurnal then begin
+//            Query.SQL.Text := ChangeOrderBy(Query.SQL.Text, 'nomer DESC');
+//            FFilterJurnal.DefaultOrderBy := 'nomer DESC';
+//          end;
+        end else if sTypeOrder='1' then begin   // дата изменения
+          Query.SQL.Text := ChangeOrderBy(Query.SQL.Text, 'dateizm desc');
+          FFilterJurnal.DefaultOrderBy := 'dateizm DESC';
+        end else if sTypeOrder='2' then begin   // дата записи + номер записи
+          Query.SQL.Text := ChangeOrderBy(Query.SQL.Text, 'datez desc, nomer desc');
+          FFilterJurnal.DefaultOrderBy := 'datez desc, nomer desc';
+        end;
+      end else if nCheckOrder=2 then begin
+        if IsGurnOchered then begin
+          sTypeOrder:=GlobalTask.ParamAsString('OCHERED_ORDER');
+          //0=номер в очереди
+          //1=дата заявления
+          //2=фамилия
+          if (sTypeOrder='0') or (sTypeOrder='') then begin
+
+          end else begin
+            if sTypeOrder='1' then begin
+              FFilterJurnal.DefaultOrderBy := 'dec_date DESC';
+              Query.SQL.Text := ChangeOrderBy(Query.SQL.Text, FFilterJurnal.DefaultOrderBy);
+            end else if sTypeOrder='2' then begin
+              FFilterJurnal.DefaultOrderBy := 'n.familia';
+              Query.SQL.Text := ChangeOrderBy(Query.SQL.Text, FFilterJurnal.DefaultOrderBy);
+            end else if sTypeOrder='3' then begin
+              FFilterJurnal.DefaultOrderBy := 'oc.n_delo';
+              Query.SQL.Text := ChangeOrderBy(Query.SQL.Text, FFilterJurnal.DefaultOrderBy);
+            end;
+          end;
+        end;
+      end;
+    end;
+    // поля для полнотекстового поиска
+    FFTSFields:=iniGurnal.ReadString(strSect,'FTS_FIELDS','');
+
+    strFilter  := iniGurnal.ReadString(strSect,'FILTER','');
+//    s := iniGurnal.ReadString(strSect,'ADDITIVE_WHERE','');
+//    CharDel(s,'"');
+//    FFilterJurnal.AdditiveWhere  := s;
+
+    s:=CreateAdditiveWhere(getAdditiveWhere);
+//    WriteToDebug([s]);
+//    WriteToDebug([Query.SQL.Text,'---']);
+    if s<>'' then begin
+      Query.SQL.Text := ChangeWhere(Query.SQL.Text, s, false);
+    end;
+//    WriteToDebug([Query.SQL.Text,'---']);
+
+    FID := iniGurnal.ReadString(strSect,'ID','ID');
+
+    iniGurnal.ReadSectionValues('ENABLE_POKAZ',FPokaz);
+    if FPokaz.Count>0 then begin
+      strPokaz:='';
+      for j:=0 to FPokaz.Count-1 do begin
+        FPokaz.Objects[j] := Pointer(0);
+        m := Pos('#', FPokaz.Names[j]);
+        if m=0 then begin
+          s :=FPokaz.Names[j];
+        end else begin
+          s := Copy(FPokaz.Names[j],m+1,50);
+        end;
+//        if dmBase.SprProperty.Locate( 'TYPEOBJ;KOD', VarArrayOf([TypeEditObj,s]), [] ) then begin
+        strP:='';
+        if dmBase.SprProperty.Locate( 'KOD', s, [] ) then begin
+          strTip := Trim(dmBase.SprProperty.FieldByName('Tip').AsString);
+          if (dmBase.SprProperty.FieldByName('OpisEdit').AsString<>'') then begin
+            strP := ','+QStr('')+' POKAZ_';
+          end else if (strTip='I') or (strTip='N') then begin
+            strP := ',0 POKAZ_';
+          end else begin
+            strP := ','+QStr('')+' POKAZ_';
+          end;
+        end;
+        if strP<>''
+          then strPokaz := strPokaz + strP + FPokaz.Names[j];
+      end;
+      Query.SQL.Text := StringReplace(Query.SQL.Text,'&POKAZ&',strPokaz,[rfReplaceAll]);
+      sl := TStringList.Create;
+
+      ini:=GlobalTask.iniFile('LOCAL');
+      ini.ReadSectionValues(KodGurnal+'.VISIBLE_POKAZ',sl);
+      for i:=0 to sl.Count-1 do begin
+        s  := Trim(sl.Names[i]);
+        ss := sl.Values[sl.Names[i]];
+        if ss='1' then begin   // показатель доступен
+          for j:=0 to FPokaz.Count-1 do begin
+            if FPokaz.Names[j]=s then begin
+              FPokaz.Objects[j] := Pointer(1);
+            end;
+          end;
+        end;
+      end;
+      sl.Free;
+    end;
+    {
+    strFields  := iniGurnal.ReadString(strKod,'FIELDS','ID,TYPEDOK,DATED');
+    strWhere   := iniGurnal.ReadString(strKod,'WHERE','');
+    strWhereAll:= iniGurnal.ReadString(strKod,'WHERE_ALL','');
+    strWhereUser:= iniGurnal.ReadString(strKod,'WHERE_'+GlobalTask.UserID,'');
+    }
+
+    FSourceTable := '';
+    if strFrom<>'' then begin
+      FSourceTable := strFrom;
+    end;
+  //  Query.ReadOnly :=true;
+
+    try
+      TmpQuery.SQL.Add('try DROP TABLE '+GetNameTmpIdTable+'; catch all end;');
+      TmpQuery.SQL.Add('try CREATE TABLE '+GetNameTmpIdTable+' (ID Integer, KOLVO Integer); catch all end;');
+      TmpQuery.SQL.Add('DELETE FROM '+GetNameTmpIdTable+';');
+      TmpQuery.ExecSQL;
+    except
+      on E:Exception do begin
+        PutError('Ошибка создания временной таблицы: '+#13+E.Message,self);
+      end;
+    end;
+
+    try
+
+      if FFilterJurnal.GetDefaultWhere<>FFilterJurnal.DefaultWhere then begin
+        Query.SQL.Text := ChangeWhere(Query.SQL.Text, FFilterJurnal.GetDefaultWhere, false);
+      end;
+//      MemoWrite('last.sql',Query.SQL.Text);
+      SetQueryDateFiks( DateFiks, true );  // !!! выполняется Query.Open !!!
+
+      if strFilter<>'' then begin
+        Query.Filter:=strFilter;
+        Query.Filtered:=true;
+      end;
+
+    except
+      on E:Exception do begin
+        Result := false;
+        FErrorOpen:=true;
+        Screen.Cursor := crDefault;
+        Query.Close;
+        PutError(E.Message,self);
+        GlobalTask.WriteToLogFile('Журнал '+KodGurnal+', Ошибка открытия запроса: '+E.Message+chr(13)+chr(10)+Query.SQL.Text);
+      end;
+    end;
+    SetCaptionGurnal;
+    if Result
+      then GlobalTask.WriteToLogFile('Открытие журнала '+KodGurnal+' ('+Caption+')');
+  end;
+end;
+//------------------------------------------------------------------------------
+procedure TfmGurnal.PrepareMenu;
+begin
+  CheckTbItems;
+end;
+//--------------------------------------------------------
+procedure TfmGurnal.AfterCheckTbItems;
+begin
+//
+end;
+//--------------------------------------------------------
+procedure TfmGurnal.CheckTbItems;
+var
+  s:String;
+  i,j,m:Integer;
+  item:TTBCustomItem;
+  sm:TTBSubmenuItem;
+//  n:INteger;
+begin
+  if not EnabledMenu24 then begin
+    TBDock.Visible:=true;
+    TBDock24.Visible:=false;
+    Application.ProcessMessages;
+    exit;
+  end;
+//  n:=GetTickCount;
+  TBDock.BeginUpdate;
+  TBDock24.BeginUpdate;
+  TBToolbarMenu24.BeginUpdate;
+  for i:=0 to TBToolbarMenu.Items.Count-1 do begin
+    item:=TBToolbarMenu.Items[i];
+    s:=TBToolbarMenu.Items[i].Name+'24';
+    for j:=0 to TBToolbarMenu24.Items.Count-1 do begin
+      if MySameText(s, TBToolbarMenu24.Items[j].Name ) then begin
+        if TBToolbarMenu24.Items[j].Visible<>item.Visible
+          then TBToolbarMenu24.Items[j].Visible:=item.Visible;
+        if TBToolbarMenu24.Items[j].Enabled<>item.Enabled
+          then TBToolbarMenu24.Items[j].Enabled:=item.Enabled;
+        TBToolbarMenu24.Items[j].Hint:=item.Hint;
+        TBToolbarMenu24.Items[j].OnClick:=item.OnClick;
+        TBToolbarMenu24.Items[j].Tag:=Integer(Pointer(item));
+        item.Tag:=Integer(Pointer(TBToolbarMenu24.Items[j]));
+        if item is TTBSubmenuItem then begin
+          sm:=TTBSubmenuItem(item);
+          for m:=0 to sm.Count-1 do begin
+            if sm.Items[m].Images=nil
+              then sm.Items[m].Images:=sm.Images;
+          end;
+
+          TTBSubmenuItem(TBToolbarMenu24.Items[j]).LinkSubitems:=item; // Clear;
+          {
+          TTBSubmenuItem(TBToolbarMenu24.Items[j]).:=
+          for m:=0 to sm.Count-1 do begin
+            TTBSubmenuItem(TBToolbarMenu24.Items[j]).Add(sm.Items[m]);
+          end;
+          }
+          {
+  TbItemVerno := TTbItem.Create(TBSubmenuRun);
+  TbItemVerno.Caption:='Запись верна';
+  TbItemVerno.OnClick:=Event_TrueAkt;
+  TBSubmenuRun.Add(TbItemVerno);
+          }
+        end;
+      end;
+    end;
+  end;
+  AfterCheckTbItems;
+  TBToolbarMenu24.EndUpdate;
+  if Menu24(2) then begin
+    TBDock24.Visible:=true;
+    TBDock.Visible:=false;
+  end else begin
+    TBDock24.Visible:=false;
+    TBDock.Visible:=true;
+  end;
+
+  TBDock.EndUpdate;
+  TBDock24.EndUpdate;
+  Application.ProcessMessages;
+//  Showmessage(inttostr(GetTickCount-n));
+end;
+//-------------------------------------------
+procedure TfmGurnal.VisibleItem(TBItem: TTBCustomItem; lSet:Boolean);
+begin
+  TBItem.Visible:=lSet;
+  if (TBItem.Tag>0)
+    then TTBCustomItem(TBItem.Tag).Visible:=lSet;
+end;
+//------------------------------------------
+procedure TfmGurnal.VisibleItems(arrControls: array of TVarRec; lSet:Boolean);
+var
+  i : Integer;
+begin
+  for i:=Low(arrControls) to High(arrControls) do begin
+    with arrControls[i] do begin
+      if VObject is TTBCustomItem
+        then TTBCustomItem(VObject).Visible:=lSet;
+    end;
+  end;
+end;
+//-------------------------------------------
+procedure TfmGurnal.EnableItem(TBItem: TTBCustomItem; lSet:Boolean);
+begin
+  TBItem.Enabled:=lSet;
+  if (TBItem.Tag>0)
+    then TTBCustomItem(TBItem.Tag).Enabled:=lSet;
+end;                
+//--------------------------------------------------------
 procedure TfmGurnal.CheckOper(var s:String);
 var
   ss:String;
@@ -1476,15 +1990,9 @@ begin
     TBItemDelayRegister.Visible:=true;
     TBItemDelayRegister.Visible:=false;
 }
-  TBItemWriteSavedFilter.Visible:=false;
+  VisibleItems([TBItemAddDok, TBItemGrantSprav, TBItemWriteSavedFilter, TBItemIsklOtbor, TBItemAddOtbor,
+                TBItemSum, TBSeparatorIskl1, TBSeparatorIskl2, TBItemYear], false);
 
-  TBItemIsklOtbor.Visible:=false;
-  TBItemAddOtbor.Visible:=false;
-  TBItemSum.Visible:=false;
-
-  TBSeparatorIskl1.Visible:=false;
-  TBSeparatorIskl2.Visible:=false;
-  TBItemYear.Visible:=false;
   FEnableAll:=false;
   FRegisterNotRequired:=false;  // доступность установки значения "взаимодействие с ГИС РН не требуется"
   FBookmarkDel:=false;
@@ -1523,6 +2031,7 @@ begin
   FFirstID:=false;  // =true для алфавитной книги
   FIgnoreCheck:=false; // =true для реестра населения
   FRun:=false;
+  FRunExport:=false;
   FPokaz := TStringList.Create;
   FListPar := TStringList.Create;
   FSubType := '';
@@ -1532,7 +2041,8 @@ begin
   FFilterInterface.OnSelectFindValue:=FilterChoiceSpr;
 
   dmBase.SetDefaultParam( Query );
-  TBItemClrFlt.Enabled:=false;
+  EnableItem(TBItemClrFlt, false);
+//  TBItemClrFlt.Enabled:=false;
   SetRole;
   FNewSQL:='';
   FEvents:=nil;
@@ -1759,6 +2269,12 @@ begin
     Result := 'SELECT * FROM AktOpek '+AliasOpeka+' WHERE '+#13;
   end else if TypeEditObj = _TypeObj_SMDOPost then begin
     Result := 'SELECT * FROM SMDOPost '+AliasSMDO+' WHERE '+#13;
+  end else if TypeEditObj = _TypeObj_QueryGIS then begin
+    Result := 'SELECT * FROM QueryGIS '+AliasQueryGIS+' WHERE '+#13;
+  end else if (TypeEditObj = _TypeObj_RegDogN) then begin
+    Result := 'SELECT * FROM RegDogN '+AliasRegDogN+' WHERE typeobj=103'+#13;
+  end else if (TypeEditObj = _TypeObj_RegDogN2) then begin
+    Result := 'SELECT * FROM RegDogN '+AliasRegDogN+' WHERE typeobj=104'+#13;
   end else if TypeEditObj = dmBase.TypeObj_ZAdopt then begin
     Result := 'SELECT * FROM AktAdopt '+AliasZAdopt+' WHERE '+#13;
   end else if TypeEditObj = dmBase.TypeObj_ZRast then begin
@@ -1832,7 +2348,8 @@ begin
     FNewSQL := strSQL;
     Refresh(true);
     FNewSQL:='';
-    TBItemClrFlt.Enabled:=true;
+    EnableItem(TBItemClrFlt, true);
+//    TBItemClrFlt.Enabled:=true;
     CheckAddOtbor;
   end;
 end;
@@ -1988,6 +2505,27 @@ begin
     FilterInterface.UseYear := false;
     FilterInterface.MainTableName  := 'SMDOPost';
     FilterInterface.MainTableAlias := AliasSMDO;
+  end else if TypeEditObj = _TypeObj_QueryGIS then begin
+    strCaption := 'Запросы в ГИС РН';
+    strDir := 'QueryGIS';
+    strAl := AliasQueryGIS;
+    FilterInterface.UseYear := false;
+    FilterInterface.MainTableName  := 'QueryGIS';
+    FilterInterface.MainTableAlias := AliasQueryGIS;
+  end else if TypeEditObj = _TypeObj_RegDogN then begin
+    strCaption := 'Регистрация договоров найма';
+    strDir := 'RegDogN';
+    strAl := AliasRegDogN;
+    FilterInterface.UseYear := false;
+    FilterInterface.MainTableName  := 'RegDogN';
+    FilterInterface.MainTableAlias := AliasRegDogN;
+  end else if TypeEditObj = _TypeObj_RegDogN2 then begin
+    strCaption := 'Регистрация договоров найма';
+    strDir := 'RegDogN2';
+    strAl := AliasRegDogN;
+    FilterInterface.UseYear := false;
+    FilterInterface.MainTableName  := 'RegDogN';
+    FilterInterface.MainTableAlias := AliasRegDogN;
   end else if TypeEditObj = dmBase.TypeObj_ZUstOtc then begin
     strCaption := 'Акты установления отцовства';
     strDir := 'АктыУстОтцовства';
@@ -2147,7 +2685,7 @@ begin
    if (Sender<>nil) and (Sender is TComponent) then begin
       GroupName:=FilterInterface.GroupNameList[TComponent(Sender).Tag];
       if not GroupName.IsFolder then begin
-         FilterInterface.RunGroupBy(GroupName.FullFileName, TBItemClrFlt.Enabled);
+         FilterInterface.RunGroupBy(GroupName.FullFileName, ClrFltEnabled);
       end;
    end;         
 end;
@@ -2230,13 +2768,27 @@ begin
   end;
 end;
 //-------------------------------------------------------------------
+function TfmGurnal.ClrFltEnabled:Boolean;
+begin
+  if TBDock.Visible
+    then Result:=TBItemClrFlt.Enabled
+    else Result:=TBItemClrFlt24.Enabled;
+end;
+//-------------------------------------------------------------------
+// установить доступность TBItemClrFlt
+procedure TfmGurnal.SetClearFilter(lSet:Boolean);
+begin
+  TBItemClrFlt.Enabled:=lSet;
+  TBItemClrFlt24.Enabled:=lSet;
+end;
+//-------------------------------------------------------------------
 // в текущем фильтре используется поле date_fiks
 function TfmGurnal.IsDateFiks:Boolean;
 var
   s:String;
 begin
   Result:=false;
-  if TBItemClrFlt.Enabled or FCheckDateFiks then begin // установлен фильтр
+  if ClrFltEnabled or FCheckDateFiks then begin // установлен фильтр
     s := FilterInterface_CurrentSQL;
 //    s := FilterInterface.GetCurrentSQL;   @@@
     if (Pos('DATE_FIKS=''', ANSIUpperCase(s))>0) or  (Pos('DATE_FIKS=:DATE_FIKS', ANSIUpperCase(s))>0) then begin
@@ -2248,7 +2800,7 @@ end;
 function TfmGurnal.IsSetFilter:Boolean;
 begin
   Result:=false;
-  if TBItemClrFlt.Enabled then begin // установлен фильтр
+  if ClrFltEnabled then begin // установлен фильтр
     Result:=true;
   end;
 end;
@@ -2378,347 +2930,6 @@ function TfmGurnal.IsGurnAdres : Boolean;
 begin
   Result:=(UpperCase(KodGurnal)='FMGURNALADRES');
 end;
-//--------------------------------------------------------------------
-function TfmGurnal.LoadQuery : Boolean;
-var
-//  strFields,strFrom,strWhere,strWhereAll,strWhereUser,
-  strSect,strFilter,strFrom,s,ss,strPokaz : String;
-  strKod,strTip,strP : String;
-  i,j,m : Integer;
-  sl : TStringList;
-  arr : TArrStrings;
-  lCS,lAdd : Boolean;
-  nCheckOrder:Integer;
-  sTypeOrder:String;
-  ini:TSasaIniFile;
-begin
-  Result:=InitGurnal;
-  if not Result then exit;
-  FCheckGodGurnal:=false;
-  FCheckEmptyGurnal:=false;
-  FSelectionIsSet:=false;
-  FCurGodGurnal:=-1;
-  FNewSQL:='';
-  strKod := KodGurnal;
-  FOrderList     := nil;
-  SetLength(FArrChangeType,0);
-  if iniGurnal=nil then begin
-    try
-      iniGurnal := TSasaIniFile.Create(GlobalTask.PathService+KodGurnal+'.ini');
-    except
-      Result:=false;
-      PutError(' Ошибка загрузки файла описания журналов. ',self);
-    end;
-  end;
-  if iniLocal=nil
-    then iniLocal:=GlobalTask.iniFile('LOCAL');
-  //---------------------------------------
-  strSect := 'FIELDS_ORDERBY';
-  sl := TStringList.Create;
-  iniGurnal.ReadSectionValues(strSect,sl);
-  for i:=0 to sl.Count-1 do begin
-    s  := Trim(sl.Names[i]);
-    ss := sl.Values[sl.Names[i]];
-    j:=Pos('.',s);
-    lAdd:=true;
-    {$IFDEF OCHERED}
-      if IsGurnOchered then begin
-        if dmBase.OblBase  then begin
-          if (Copy(s,1,2)='a.') or (Copy(s,1,2)='u.')
-            then lAdd:=false;
-        end else begin
-          if Pos('SOATO', ANSIUpperCase(s))>0
-            then lAdd:=false;
-        end;
-      end;
-    {$ELSE}
-      if IsGurnOchered then begin
-        if Pos('SOATO', ANSIUpperCase(s))>0
-          then lAdd:=false;
-      end;
-    {$ENDIF}
-    if lAdd then begin
-      if j > 0 then begin
-        StrToArr(ss,arr,',',false);   // 0-Caption 1-FieldType 2-CS
-        if Length(arr)>2 then begin
-          lCS := (ANSIUpperCase(Copy(arr[2],1,1))='T');
-          FFilterJurnal.AddOrder(Trim(arr[0]), Copy(s,1,j-1), Copy(s,j+1,100),
-                    GetKindFromString(arr[1]), lCS);
-        end else begin
-          PutError(' Ошибка чтения описания полей для ORDER BY ',self);
-        end;
-      end else begin
-        StrToArr(ss,arr,',',false);   // 0-Caption 1-FieldType 2-CS
-        if Length(arr)>2 then begin
-          lCS := (ANSIUpperCase(Copy(arr[2],1,1))='T');
-          FFilterJurnal.AddOrder(Trim(arr[0]), '', s,
-                    GetKindFromString(arr[1]), lCS);
-        end else begin
-          PutError(' Ошибка чтения описания полей для ORDER BY ',self);
-        end;
-  //      PutError(' Ошибка чтения описания полей для ORDER BY ');
-      end;
-    end;
-  end;
-  InitOrderBy;
-  FFilterJurnal.DefaultWhere   := '';
-//  FFilterJurnal.AdditiveWhere  := '';
-  FFilterJurnal.DefaultOrderBy := '';
-
-  if (TypeEditObj = dmBase.TypeObj_Nasel) or (TypeEditObj = dmBase.TypeObj_Lich) then begin
-    FTypeVisibleMens:=GlobalTask.GetLastValueAsInteger(KodGurnal+'_TYPEVISIBLEMENS');
-    FRed:=GlobalTask.GetLastValueAsBoolean(KodGurnal+'_RED');
-    FBlue:=GlobalTask.GetLastValueAsBoolean(KodGurnal+'_BLUE');
-    FGreen1:=GlobalTask.GetLastValueAsBoolean(KodGurnal+'_GREEN1');
-    FGreen2:=GlobalTask.GetLastValueAsBoolean(KodGurnal+'_GREEN2');
-    FUnderline:=GlobalTask.GetLastValueAsBoolean(KodGurnal+'_UNDERLINE');
-    FOldCopyMen:=GlobalTask.GetLastValueAsBoolean(KodGurnal+'_OLDCOPYMEN');
-    FRiap:=GlobalTask.GetLastValueAsBoolean(KodGurnal+'_RIAP');
-  end;
-
-  //---------------------------------------
-  strSect := 'QUERY';
-  sl.Free;
-//  FWhere := '';
-  if Result then begin
-    sl := TStringList.Create;
-    Query.DatabaseName:=GlobalTask.MainDataBaseName;
-    iniGurnal.ReadSectionValues(strSect,sl);
-    for i:=0 to sl.Count-1 do begin
-      if Copy(sl.Names[i],1,3)='SQL' then begin
-        s := Trim(sl.ValueFromIndex[i]);
-        if Copy(sl.Names[i],4,1)='_' then begin
-          ss:=Trim(Copy(sl.Names[i],5,20));
-          //---- !!!  если строка не для текущей программы, то игнорируем ее !!! -------
-          if ss<>fmMain.IDProg
-            then s:='';
-          //----------------------------------------------------------------------------
-        end;
-        if s<>'' then begin
-          if Copy(s,1,1)='"'   then s:=Copy(s,2,Length(s));
-          if RightStr(s,1)='"' then s:=Copy(s,1,Length(s)-1);
-          s:=Trim(s);
-          {$IFDEF OCHERED}
-            if dmBase.OblBase and IsGurnOchered then begin
-              if Pos('LEFT JOIN БАЗАДОМОВ', ANSIUpperCase(s))>0 then begin
-                s:='';
-              end;
-              if Pos('LEFT JOIN СПРУЛИЦ', ANSIUpperCase(s))>0 then begin
-                s:='';
-              end;
-            end;
-          {$ELSE}
-//            if IsGurnOchered then begin
-//              if Pos('LEFT JOIN НАСЕЛЕНИЕ N', ANSIUpperCase(s))>0 then begin
-//                s:=s+' and n.date_fiks='+QStr(CURRENT_SOST);
-//              end;
-//            end;
-          {$ENDIF}
-          if s<>'' then begin
-            Query.SQL.Add(s);
-            j:=Pos('WHERE', ANSIUpperCase(s));
-            if j > 0 then begin
-              s:=Copy(s,j+5,Length(s));
-//          FWhere := s;
-              FFilterJurnal.DefaultWhere := s;
-            end;
-            j:=Pos('ORDER BY', ANSIUpperCase(s));
-            if j>0 then begin
-              s:=Copy(s,j+8,Length(s));
-              FFilterJurnal.DefaultOrderBy := s;
-            end;
-          end;
-        end;
-      end;
-    end;
-    sl.Free;
-    strFrom := iniGurnal.ReadString(strSect,'TABLENAME','');
-    nCheckOrder:=iniGurnal.ReadInteger(strSect,'CHECK_ORDER',0);
-
-    FCheckEmptyGurnal:=iniGurnal.ReadBool(strSect,'CHECK_EMPTY',false);  // !!!
-    FCheckGodGurnal:=false;
-    {$IFDEF ZAGS}
-      FCheckGodGurnal:=GlobalTask.ParamAsBoolean('CHECK_GOD'); // в параметрах загса установлен параметр CHECK_GOD=true
-      if FCheckGodGurnal then begin
-        // для журнала доступна установка "года"
-        if Pos(IntToStr(TypeEditObj), ';'+GlobalTask.ParamAsString('CHECK_GOD_V')+';')>0 then begin
-          FCurGodGurnal:=fmMain.YearFiks;
-          if FCurGodGurnal=1 then FCurGodGurnal:=YearOf(Date);
-          if FCurGodGurnal=0 then
-            FCheckGodGurnal:=false;
-        end else begin
-          FCheckGodGurnal:=false;
-        end;
-      end;
-      {
-      if FFilterJurnal.DefaultWhere=''
-        then  FFilterJurnal.DefaultWhere:=getYearWhere
-        else  FFilterJurnal.DefaultWhere:=FFilterJurnal.DefaultWhere+'('+getYearWhere+')';
-      }
-    {$ELSE}
-
-    {$ENDIF}
-    TBItemYear.Visible:=false;
-
-    if (strFrom <> '') and (nCheckOrder>0) then begin
-    // !!!  CheckOrderBy(KodGurnal:String,nCheckOrder:Integer,var SQL:String):Boolean; virtual;
-      if IsGurnAdres then begin
-        j:=GlobalTask.ParamAsInteger('CH_ADRES');
-        // если j=0 сортировка по коду
-        if j=1 then begin
-          FFilterJurnal.DefaultOrderBy:=StringReplace(FFilterJurnal.DefaultOrderBy, 'a.punkt', 'p.nomer',[]);
-          Query.SQL.Text:=ChangeOrderBy(Query.SQL.Text, FFilterJurnal.DefaultOrderBy);
-        end;
-      end else if nCheckOrder=1 then begin
-        sTypeOrder:=GlobalTask.ParamAsString('GURNAL_DATEIZM'); // KEY_SORT_GURN (0-Год+Номер 1-Дата изменения 2-Дата+Номер)
-        if sTypeOrder='0' then begin            // год + номер
-//          if FCheckGodGurnal then begin
-//            Query.SQL.Text := ChangeOrderBy(Query.SQL.Text, 'nomer DESC');
-//            FFilterJurnal.DefaultOrderBy := 'nomer DESC';
-//          end;
-        end else if sTypeOrder='1' then begin   // дата изменения
-          Query.SQL.Text := ChangeOrderBy(Query.SQL.Text, 'dateizm desc');
-          FFilterJurnal.DefaultOrderBy := 'dateizm DESC';
-        end else if sTypeOrder='2' then begin   // дата записи + номер записи
-          Query.SQL.Text := ChangeOrderBy(Query.SQL.Text, 'datez desc, nomer desc');
-          FFilterJurnal.DefaultOrderBy := 'datez desc, nomer desc';
-        end;
-      end else if nCheckOrder=2 then begin
-        if IsGurnOchered then begin
-          sTypeOrder:=GlobalTask.ParamAsString('OCHERED_ORDER');
-          //0=номер в очереди
-          //1=дата заявления
-          //2=фамилия
-          if (sTypeOrder='0') or (sTypeOrder='') then begin
-
-          end else begin
-            if sTypeOrder='1' then begin
-              FFilterJurnal.DefaultOrderBy := 'dec_date DESC';
-              Query.SQL.Text := ChangeOrderBy(Query.SQL.Text, FFilterJurnal.DefaultOrderBy);
-            end else if sTypeOrder='2' then begin
-              FFilterJurnal.DefaultOrderBy := 'n.familia';
-              Query.SQL.Text := ChangeOrderBy(Query.SQL.Text, FFilterJurnal.DefaultOrderBy);
-            end else if sTypeOrder='3' then begin
-              FFilterJurnal.DefaultOrderBy := 'oc.n_delo';
-              Query.SQL.Text := ChangeOrderBy(Query.SQL.Text, FFilterJurnal.DefaultOrderBy);
-            end;
-          end;
-        end;
-      end;
-    end;
-    // поля для полнотекстового поиска
-    FFTSFields:=iniGurnal.ReadString(strSect,'FTS_FIELDS','');
-
-    strFilter  := iniGurnal.ReadString(strSect,'FILTER','');
-//    s := iniGurnal.ReadString(strSect,'ADDITIVE_WHERE','');
-//    CharDel(s,'"');
-//    FFilterJurnal.AdditiveWhere  := s;
-
-    s:=CreateAdditiveWhere(getAdditiveWhere);
-//    WriteToDebug([s]);
-//    WriteToDebug([Query.SQL.Text,'---']);
-    if s<>'' then begin
-      Query.SQL.Text := ChangeWhere(Query.SQL.Text, s, false);
-    end;
-//    WriteToDebug([Query.SQL.Text,'---']);
-
-    FID := iniGurnal.ReadString(strSect,'ID','ID');
-
-    iniGurnal.ReadSectionValues('ENABLE_POKAZ',FPokaz);
-    if FPokaz.Count>0 then begin
-      strPokaz:='';
-      for j:=0 to FPokaz.Count-1 do begin
-        FPokaz.Objects[j] := Pointer(0);
-        m := Pos('#', FPokaz.Names[j]);
-        if m=0 then begin
-          s :=FPokaz.Names[j];
-        end else begin
-          s := Copy(FPokaz.Names[j],m+1,50);
-        end;
-//        if dmBase.SprProperty.Locate( 'TYPEOBJ;KOD', VarArrayOf([TypeEditObj,s]), [] ) then begin
-        strP:='';
-        if dmBase.SprProperty.Locate( 'KOD', s, [] ) then begin
-          strTip := Trim(dmBase.SprProperty.FieldByName('Tip').AsString);
-          if (dmBase.SprProperty.FieldByName('OpisEdit').AsString<>'') then begin
-            strP := ','+QStr('')+' POKAZ_';
-          end else if (strTip='I') or (strTip='N') then begin
-            strP := ',0 POKAZ_';
-          end else begin
-            strP := ','+QStr('')+' POKAZ_';
-          end;
-        end;
-        if strP<>''
-          then strPokaz := strPokaz + strP + FPokaz.Names[j];
-      end;
-      Query.SQL.Text := StringReplace(Query.SQL.Text,'&POKAZ&',strPokaz,[rfReplaceAll]);
-      sl := TStringList.Create;
-
-      ini:=GlobalTask.iniFile('LOCAL');
-      ini.ReadSectionValues('VISIBLE_POKAZ',sl);
-      for i:=0 to sl.Count-1 do begin
-        s  := Trim(sl.Names[i]);
-        ss := sl.Values[sl.Names[i]];
-        if ss='1' then begin   // показатель доступен
-          for j:=0 to FPokaz.Count-1 do begin
-            if FPokaz.Names[j]=s then begin
-              FPokaz.Objects[j] := Pointer(1);
-            end;
-          end;
-        end;
-      end;
-      sl.Free;
-    end;
-    {
-    strFields  := iniGurnal.ReadString(strKod,'FIELDS','ID,TYPEDOK,DATED');
-    strWhere   := iniGurnal.ReadString(strKod,'WHERE','');
-    strWhereAll:= iniGurnal.ReadString(strKod,'WHERE_ALL','');
-    strWhereUser:= iniGurnal.ReadString(strKod,'WHERE_'+GlobalTask.UserID,'');
-    }
-
-    FSourceTable := '';
-    if strFrom<>'' then begin
-      FSourceTable := strFrom;
-    end;
-  //  Query.ReadOnly :=true;
-
-    try
-      TmpQuery.SQL.Add('try DROP TABLE '+GetNameTmpIdTable+'; catch all end;');
-      TmpQuery.SQL.Add('try CREATE TABLE '+GetNameTmpIdTable+' (ID Integer, KOLVO Integer); catch all end;');
-      TmpQuery.SQL.Add('DELETE FROM '+GetNameTmpIdTable+';');
-      TmpQuery.ExecSQL;
-    except
-      on E:Exception do begin
-        PutError('Ошибка создания временной таблицы: '+#13+E.Message,self);
-      end;
-    end;
-
-    try
-
-      if FFilterJurnal.GetDefaultWhere<>FFilterJurnal.DefaultWhere then begin
-        Query.SQL.Text := ChangeWhere(Query.SQL.Text, FFilterJurnal.GetDefaultWhere, false);
-      end;
-      MemoWrite('last.sql',Query.SQL.Text);
-      SetQueryDateFiks( DateFiks, true );  // !!! выполняется Query.Open !!!
-
-      if strFilter<>'' then begin
-        Query.Filter:=strFilter;
-        Query.Filtered:=true;
-      end;
-
-    except
-      on E:Exception do begin
-        Result := false;
-        FErrorOpen:=true;
-        Screen.Cursor := crDefault;
-        Query.Close;
-        PutError(E.Message,self);
-        GlobalTask.WriteToLogFile('Журнал '+KodGurnal+', Ошибка открытия запроса: '+E.Message+chr(13)+chr(10)+Query.SQL.Text);
-      end;
-    end;
-    SetCaptionGurnal;
-  end;
-end;
-
 //------------------------------------------------------------------------------
 procedure TfmGurnal.FullRefresh(lReopen:Boolean; strOrderBy:String; ID:String);
 var
@@ -2743,7 +2954,8 @@ begin
     FNewSQL := strSQL;
     Refresh(true, ID);
     FNewSQL:='';
-    TBItemClrFlt.Enabled:=true;
+    EnableItem(TBItemClrFlt, true);
+//    TBItemClrFlt.Enabled:=true;
     CheckAddOtbor;
   end else begin
     Refresh(true, ID);
@@ -2909,11 +3121,11 @@ begin
   FRun:=true;
   try         
 
-  if not Query.FieldByName('ID').IsNull then begin
+  if not Query.FieldByName('ID').IsNull and (QuestDel<>'') then begin
   //  PrintTable.ShowReport;
     SetLength(arr,0);
     SelectionToArr(Grid,arr);
-    strErr:='';                              
+    strErr:='';
     lQuest:=true;
     if Length(arr)=0 then begin
       if CheckDelete(strErr,lQuest) then begin
@@ -3037,7 +3249,7 @@ begin
     Result:=false;   // FRun уже включет, ничего не меняем
   end else begin
     FRun:=true;
-    Result:=true;    // значение устанавливалось, значит нужно будет сбросить
+    Result:=true;    // значение устанавилось, значит нужно будет сбросить
   end;
 end;
 procedure TfmGurnal.RestRun(lSet:Boolean);
@@ -3166,9 +3378,11 @@ begin
 //     CurValue.Free;
    end;
    if Length(strFilter)>0 then begin
-     Query.Filter := strFilter;
-     Query.Filtered := true;
-     TBItemClrFlt.Enabled:=true;
+     GlobalTask.WriteToLogFile(KodGurnal+' set filter='+strFilter, nil, LOG_SQL);  // LOG_FILTER ???
+     Query.Filter:=strFilter;
+     Query.Filtered:=true;
+     EnableItem(TBItemClrFlt, true);
+//     TBItemClrFlt.Enabled:=true;
    end;
    if CurValue<>nil
      then CurValue.Free;
@@ -3207,6 +3421,13 @@ begin
  // !!!
 end;
 //----------------------------------------------------------
+procedure TfmGurnal.SetQueryFiltered(l:Boolean);
+begin
+  Query.Filtered:=l;
+  if l
+    then GlobalTask.WriteToLogFile(KodGurnal+' set filter='+Query.Filter, nil, LOG_SQL);
+end;
+
 procedure TfmGurnal.ClearFilter;
 var
   strSQL : String;
@@ -3224,7 +3445,8 @@ begin
   Query.OnFilterRecord := nil;
   Refresh(true);
   FNewSQL:='';
-  TBItemClrFlt.Enabled:=false;
+  EnableItem(TBItemClrFlt, false);
+//  TBItemClrFlt.Enabled:=false;
   CheckAddOtbor;
 end;
 
@@ -3287,7 +3509,8 @@ begin
     FNewSQL := strSQL;
     Refresh(true);
     FNewSQL:='';
-    TBItemClrFlt.Enabled:=true;
+    EnableItem(TBItemClrFlt, true);
+//    TBItemClrFlt.Enabled:=true;
     CheckAddOtbor;
   end;
 
@@ -3327,7 +3550,8 @@ begin
       FNewSQL := strSQL;
       Refresh(true);
       FNewSQL:='';
-      TBItemClrFlt.Enabled:=true;
+      EnableItem(TBItemClrFlt, true);
+//      TBItemClrFlt.Enabled:=true;
       CheckAddOtbor;
     end;
   end;
@@ -3368,7 +3592,8 @@ begin
       FNewSQL := strSQL;
       Refresh(true);
       FNewSQL:='';
-      TBItemClrFlt.Enabled:=true;
+      EnableItem(TBItemClrFlt, true);
+//      TBItemClrFlt.Enabled:=true;
       CheckAddOtbor;
     end;
   end;
@@ -3380,10 +3605,15 @@ begin
 end;
 //-----------------------------------------
 procedure TfmGurnal.CheckAddOtbor;
+var
+  l:Boolean;
 begin
   if TBItemIsklOtbor.Visible then begin
-    TBItemAddOtbor.Enabled:=TBItemClrFlt.Enabled and FSeekAsQuery_Active;
-    TBItemIsklOtbor.Enabled:=TBItemClrFlt.Enabled and FSeekAsQuery_Active;
+    l:=ClrFltEnabled and FSeekAsQuery_Active;
+    EnableItem(TBItemAddOtbor, l);
+    EnableItem(TBItemIsklOtbor, l);
+//    TBItemAddOtbor.Enabled:=TBItemClrFlt.Enabled and FSeekAsQuery_Active;
+//    TBItemIsklOtbor.Enabled:=TBItemClrFlt.Enabled and FSeekAsQuery_Active;
   end;
 end;
 
@@ -3536,11 +3766,15 @@ procedure TfmGurnal.QueryAfterScroll(DataSet: TDataSet);
 begin
   if not FRun then begin
     if Query.Eof and Query.Bof then begin
-      TBItemEdit.Enabled:=false;
-      TBItemDelDok.Enabled:=false;
+      EnableItem(TBItemEdit, false);
+      EnableItem(TBItemDelDok, false);
+//      TBItemEdit.Enabled:=false;
+//      TBItemDelDok.Enabled:=false;
     end else begin
-      TBItemEdit.Enabled:=true;
-      TBItemDelDok.Enabled:=FEnableWrite and not FDemo;
+      EnableItem(TBItemEdit, true);
+      EnableItem(TBItemDelDok, FEnableWrite and not FDemo);
+//      TBItemEdit.Enabled:=true;
+//      TBItemDelDok.Enabled:=FEnableWrite and not FDemo;
     end;
   end;
 end;
@@ -3548,7 +3782,8 @@ end;
 procedure TfmGurnal.UpdateActions;
 begin
   inherited;
-  TBItemRepeatFilter.Enabled := TBItemClrFlt.Enabled;
+  EnableItem(TBItemRepeatFilter, ClrFltEnabled);
+//  TBItemRepeatFilter.Enabled := TBItemClrFlt.Enabled;
   AddUpdateActions;
 end;
 
@@ -3598,7 +3833,7 @@ end;
 //-----------------------------------------------------------
 procedure TfmGurnal.TBItemQueryClick(Sender: TObject);
 begin
-  FFilterInterface.EditCurrentGroupBy( TBItemClrFlt.Enabled );
+  FFilterInterface.EditCurrentGroupBy( ClrFltEnabled );
   FilterInterface.BuildGroupMenu2(TBSubmenuGroup, OnMenuGroupClick);
 end;
 
@@ -3613,7 +3848,7 @@ begin
     end else begin
       sField:=Grid.SelectedField.FieldName;
     end;
-    FFilterInterface.ShowFieldGroupBy(sField, TBItemClrFlt.Enabled,Grid.Columns[Grid.SelectedIndex].Width);
+    FFilterInterface.ShowFieldGroupBy(sField, ClrFltEnabled, Grid.Columns[Grid.SelectedIndex].Width);
     FilterInterface.BuildGroupMenu2(TBSubmenuGroup, OnMenuGroupClick);
   end;
 end;
@@ -3626,6 +3861,7 @@ end;
 procedure TfmGurnal.QueryBeforeOpen(DataSet: TDataSet);
 begin
   Screen.Cursor := crHourGlass;
+  GlobalTask.WriteToLogFile(KodGurnal+' '+Query.SQL.Text, nil, LOG_SQL);
 end;
 
 procedure TfmGurnal.TBItemExportClick(Sender: TObject);
@@ -3634,12 +3870,13 @@ var
   sl:TStringList;
 begin
   FRun:=true;
+  FRunExport:=true;
   sl:=TStringList.Create;
   GetBookmark(sl);
   try
     CheckExport;
     strBookmark:=Query.Bookmark;
-    ExportDataSet('Экспорт', Query, efRtf, [], GetFolderMyDocument, False, False, ExportColumns, sl);
+    ExportDataSet('Экспорт;'+KodGurnal, Query, efRtf, [], GetFolderMyDocument, False, False, ExportColumns, sl);
     try
       Query.Bookmark:=strBookmark;
     except
@@ -3647,6 +3884,7 @@ begin
     end;
   finally
     FRun:=false;
+    FRunExport:=false;
     sl.Free;
   end;
 end;                                                     
@@ -3739,6 +3977,10 @@ begin
 end;
 
 procedure TfmGurnal.SetListParEditForm;
+begin
+  FListPar.Clear;
+end;
+procedure TfmGurnal.SetListParAddForm;
 begin
   FListPar.Clear;
 end;
@@ -3986,7 +4228,7 @@ begin
       itDop.OnClick:=Event_Check_Corr_GRN;
       TBSubSysFlt.Add(itDop);
     end;
-      
+
   end;
   {$ENDIF}
 end;
@@ -3996,7 +4238,8 @@ begin
   Query.OnFilterRecord := nil;
   Query.Filter   := 'EDIT_GIS=1';
   Query.Filtered := true;
-  TBItemClrFlt.Enabled:=true;
+  EnableItem(TBItemClrFlt, true);
+//  TBItemClrFlt.Enabled:=true;
 end;
 //----------------------------------------------------------------------
 procedure TfmGurnal.Event_POLE_GRN_1(Sender: TObject);
@@ -4004,7 +4247,8 @@ begin
   Query.OnFilterRecord := nil;
   Query.Filter   := 'pole_grn=1000';
   Query.Filtered := true;
-  TBItemClrFlt.Enabled:=true;
+  EnableItem(TBItemClrFlt, true);
+//  TBItemClrFlt.Enabled:=true;
 end;
 //----------------------------------------------------------------------
 procedure TfmGurnal.Event_POLE_GRN_2(Sender: TObject);
@@ -4012,7 +4256,8 @@ begin
   Query.OnFilterRecord := nil;
   Query.Filter   := 'pole_grn>=2000 and pole_grn<3000';
   Query.Filtered := true;
-  TBItemClrFlt.Enabled:=true;
+  EnableItem(TBItemClrFlt, true);
+//  TBItemClrFlt.Enabled:=true;
 end;
 //----------------------------------------------------------------------
 procedure TfmGurnal.Event_POLE_GRN_3(Sender: TObject);
@@ -4020,7 +4265,8 @@ begin
   Query.OnFilterRecord := nil;
   Query.Filter   := 'pole_grn>=3000 and pole_grn<4000';
   Query.Filtered := true;
-  TBItemClrFlt.Enabled:=true;
+  EnableItem(TBItemClrFlt, true);
+//  TBItemClrFlt.Enabled:=true;
 end;
 //----------------------------------------------------------------------
 procedure TfmGurnal.Event_POLE_GRN_0(Sender: TObject);
@@ -4028,7 +4274,8 @@ begin
   Query.OnFilterRecord := nil;
   Query.Filter   := 'pole_grn<1000 or Empty(pole_grn)';
   Query.Filtered := true;
-  TBItemClrFlt.Enabled:=true;
+  EnableItem(TBItemClrFlt, true);
+//  TBItemClrFlt.Enabled:=true;
 end;
 //----------------------------------------------------------------------
 procedure TfmGurnal.Event_RunDelete(Sender: TObject);
@@ -4036,7 +4283,7 @@ var
   n:Integer;
   cur:TCursor;
 begin
-  if TBItemClrFlt.Enabled then begin
+  if ClrFltEnabled then begin
     if Problem(QuestDelFlt+' ?',mtConfirmation,self) then begin
       cur:=Screen.Cursor;
       Screen.Cursor:=crHourGlass;
@@ -4197,7 +4444,7 @@ begin
   end;
   ChoiceLoadedAdres(s, ss,dmBase.AdsConnection, formChoiceAdres);  // !!! исп-ся как константа alias 'a'
   if s<>'' then begin
-    FFilter_Punkt:='('+s+')';
+    FFilter_Punkt:='('+s+')';                
     SetGlobalFilterPunkt(FFilter_Punkt);
 //    FValues_Punkt:=f.GetValues;
     CreateAdditiveWhere2Refresh;
@@ -4332,15 +4579,16 @@ end;
 //---------------------------------------------------------------------------------------
 procedure TfmGurnal.TBItemAddDokClick(Sender: TObject);
 var
-  slPar:TStringList;
+//  slPar:TStringList;
   sID:String;
 begin
   if TBItemAddDok.Visible then begin
     FRun:=true;
     try
       if BeforeEdit then begin
-        slPar:=nil;
-        if fmMain.EditDokument(nil, GetTypeEditObj, '-1', slPar, false, KodGurnal) then begin
+//        slPar:=nil;
+        SetListParAddForm;   // заполнить FListPar
+        if fmMain.EditDokument(nil, GetTypeEditObj, '-1', FListPar, false, KodGurnal) then begin
           if IDLastDok>0
             then sID:=IntToStr(IDLastDok)
             else sID:='';
@@ -5275,6 +5523,8 @@ begin
       it.Caption:=sl.Strings[i];
       it.OnClick:=Event_OpenSavedFilter;
       it.Name:='TBITEM_SV_FLT_'+IntToStr(i);
+      if sub.Images<>nil
+        then it.Images:=sub.Images;
       sub.Add(it);
     end;
     sub.Visible:=true;

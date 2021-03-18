@@ -4,7 +4,7 @@ object fmShablon: TfmShablon
   AutoScroll = False
   Caption = #1064#1072#1073#1083#1086#1085#1099' '#1074#1074#1086#1076#1072
   ClientHeight = 374
-  ClientWidth = 585
+  ClientWidth = 823
   Color = clBtnFace
   Constraints.MinHeight = 300
   Constraints.MinWidth = 500
@@ -24,13 +24,18 @@ object fmShablon: TfmShablon
   object Grid: TDBGridEh
     Left = 0
     Top = 54
-    Width = 585
+    Width = 823
     Height = 320
     Align = alClient
     AutoFitColWidths = True
     DataSource = DataSource
     DrawMemoText = True
     Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
     FooterColor = clWindow
     FooterFont.Charset = DEFAULT_CHARSET
     FooterFont.Color = clWindowText
@@ -38,6 +43,7 @@ object fmShablon: TfmShablon
     FooterFont.Name = 'Tahoma'
     FooterFont.Style = []
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete]
+    ParentFont = False
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -51,7 +57,7 @@ object fmShablon: TfmShablon
         FieldName = 'NAME'
         Footers = <>
         Title.Caption = #1047#1085#1072#1095#1077#1085#1080#1077
-        Width = 428
+        Width = 658
       end
       item
         EditButtons = <>
@@ -63,7 +69,7 @@ object fmShablon: TfmShablon
   object TBDock1: TTBDock
     Left = 0
     Top = 0
-    Width = 585
+    Width = 823
     Height = 54
     AllowDrag = False
     FixAlign = True

@@ -1,6 +1,6 @@
 object fmSeekAkt: TfmSeekAkt
-  Left = 361
-  Top = 144
+  Left = 516
+  Top = 228
   Width = 913
   Height = 603
   ActiveControl = edFamilia
@@ -65,27 +65,27 @@ object fmSeekAkt: TfmSeekAkt
   TextHeight = 13
   object pnSeek: TPanel
     Left = 0
-    Top = 26
+    Top = 34
     Width = 897
-    Height = 209
+    Height = 214
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
     object lbName: TLabel
-      Left = 20
+      Left = 23
       Top = 41
-      Width = 23
-      Height = 13
+      Width = 26
+      Height = 16
       Caption = #1048#1084#1103
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
     end
     object lbPol: TLabel
-      Left = 316
+      Left = 322
       Top = 46
       Width = 22
       Height = 13
@@ -99,20 +99,20 @@ object fmSeekAkt: TfmSeekAkt
       Visible = False
     end
     object lbDateR1: TLabel
-      Left = 20
+      Left = 23
       Top = 102
-      Width = 107
-      Height = 13
+      Width = 121
+      Height = 16
       Caption = #1044#1072#1090#1072' '#1088#1086#1078#1076#1077#1085#1080#1103'  '#1089
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
     end
     object lbDateR2: TLabel
-      Left = 256
+      Left = 262
       Top = 102
       Width = 14
       Height = 13
@@ -125,20 +125,20 @@ object fmSeekAkt: TfmSeekAkt
       ParentFont = False
     end
     object lbYear: TLabel
-      Left = 20
+      Left = 23
       Top = 132
-      Width = 103
-      Height = 13
+      Width = 118
+      Height = 16
       Caption = #1043#1086#1076' '#1079#1072#1087#1080#1089#1080' '#1072#1082#1090#1072' '#1089
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
     end
     object Label8: TLabel
-      Left = 239
+      Left = 245
       Top = 132
       Width = 14
       Height = 13
@@ -153,44 +153,44 @@ object fmSeekAkt: TfmSeekAkt
     object Label7: TLabel
       Left = 20
       Top = 190
-      Width = 111
-      Height = 13
+      Width = 125
+      Height = 16
       Caption = #1054#1088#1075#1072#1085' '#1088#1077#1075#1080#1089#1090#1088#1072#1094#1080#1080
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
     end
     object Label1: TLabel
-      Left = 20
+      Left = 23
       Top = 13
-      Width = 50
-      Height = 13
+      Width = 60
+      Height = 16
       Caption = #1060#1072#1084#1080#1083#1080#1103
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
     end
     object Label2: TLabel
-      Left = 20
+      Left = 23
       Top = 73
-      Width = 56
-      Height = 13
+      Width = 62
+      Height = 16
       Caption = #1054#1090#1095#1077#1089#1090#1074#1086
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
     end
     object Bevel1: TBevel
-      Left = 279
+      Left = 285
       Top = 7
       Width = 4
       Height = 24
@@ -245,15 +245,15 @@ object fmSeekAkt: TfmSeekAkt
       OnClick = imZAGSClick
     end
     object edFamilia: TDBEditEh
-      Left = 147
+      Left = 153
       Top = 7
       Width = 123
-      Height = 24
+      Height = 26
       Hint = #1076#1083#1103' '#1087#1086#1080'c'#1082#1072' '#1087#1086' '#1095#1072#1089#1090#1080' '#1084#1086#1078#1085#1086' '#1079#1072#1082#1086#1085#1095#1080#1090#1100' '#1089#1080#1084#1074#1086#1083#1086#1084'  *  '
       EditButtons = <>
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -13
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
@@ -262,14 +262,14 @@ object fmSeekAkt: TfmSeekAkt
       OnChange = edFamiliaChange
     end
     object edName: TDBEditEh
-      Left = 147
+      Left = 153
       Top = 36
       Width = 123
-      Height = 24
+      Height = 26
       EditButtons = <>
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -13
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
@@ -277,14 +277,14 @@ object fmSeekAkt: TfmSeekAkt
       Visible = True
     end
     object edOtch: TDBEditEh
-      Left = 147
+      Left = 153
       Top = 66
       Width = 123
-      Height = 24
+      Height = 26
       EditButtons = <>
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -13
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
@@ -292,7 +292,7 @@ object fmSeekAkt: TfmSeekAkt
       Visible = True
     end
     object edPol: TDBComboBoxEh
-      Left = 347
+      Left = 353
       Top = 40
       Width = 46
       Height = 24
@@ -313,14 +313,14 @@ object fmSeekAkt: TfmSeekAkt
       Visible = False
     end
     object edDateR1: TDBDateTimeEditEh
-      Left = 147
+      Left = 153
       Top = 96
       Width = 97
-      Height = 24
+      Height = 26
       EditButtons = <>
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -13
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
       Kind = dtkDateEh
@@ -329,14 +329,14 @@ object fmSeekAkt: TfmSeekAkt
       Visible = True
     end
     object edDateR2: TDBDateTimeEditEh
-      Left = 282
+      Left = 288
       Top = 96
       Width = 97
-      Height = 24
+      Height = 26
       EditButtons = <>
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -13
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
       Kind = dtkDateEh
@@ -362,17 +362,17 @@ object fmSeekAkt: TfmSeekAkt
       end
     end
     object edYear1: TDBNumberEditEh
-      Left = 147
+      Left = 153
       Top = 126
       Width = 78
-      Height = 24
+      Height = 26
       DecimalPlaces = 0
       EditButton.Style = ebsUpDownEh
       EditButton.Visible = True
       EditButtons = <>
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -13
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
       MaxValue = 3000.000000000000000000
@@ -382,16 +382,16 @@ object fmSeekAkt: TfmSeekAkt
       Visible = True
     end
     object edYear2: TDBNumberEditEh
-      Left = 263
+      Left = 269
       Top = 126
       Width = 78
-      Height = 24
+      Height = 26
       EditButton.Style = ebsUpDownEh
       EditButton.Visible = True
       EditButtons = <>
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -13
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
       MaxValue = 3000.000000000000000000
@@ -466,10 +466,10 @@ object fmSeekAkt: TfmSeekAkt
       Visible = False
     end
     object edOrgan: TDBLookupComboboxEh
-      Left = 147
+      Left = 163
       Top = 186
       Width = 558
-      Height = 21
+      Height = 26
       EditButtons = <
         item
           Hint = #1042#1099#1073#1088#1072#1090#1100' '#1086#1088#1075#1072#1085' '#1047#1040#1043#1057
@@ -504,7 +504,7 @@ object fmSeekAkt: TfmSeekAkt
         end>
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
-      Font.Height = -13
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
       KeyField = 'ID'
@@ -621,7 +621,7 @@ object fmSeekAkt: TfmSeekAkt
       end
     end
     object cbHist: TDBCheckBoxEh
-      Left = 285
+      Left = 291
       Top = 10
       Width = 132
       Height = 17
@@ -633,7 +633,7 @@ object fmSeekAkt: TfmSeekAkt
       Visible = False
     end
     object cbAll: TCheckBox
-      Left = 306
+      Left = 312
       Top = 66
       Width = 130
       Height = 17
@@ -668,73 +668,73 @@ object fmSeekAkt: TfmSeekAkt
     Left = 0
     Top = 0
     Width = 897
-    Height = 26
+    Height = 34
     object TBToolbar1: TTBToolbar
       Left = 0
       Top = 0
       DockPos = 0
       DockRow = 1
-      Images = fmMain.ImageList
+      Images = fmMain.ImageList24
       ProcessShortCuts = True
       Stretch = True
       TabOrder = 0
       object LoadButton: TTBItem
         Caption = #1042#1099#1073#1088#1072#1090#1100
         DisplayMode = nbdmImageAndText
-        ImageIndex = 26
+        ImageIndex = 91
         Visible = False
       end
       object OpenButton: TTBItem
         Caption = #1054#1090#1082#1088#1099#1090#1100
         DisplayMode = nbdmImageAndText
-        ImageIndex = 33
+        ImageIndex = 31
         ShortCut = 16397
         OnClick = OpenButtonClick
       end
       object TBItemExport: TTBItem
         Caption = #1069#1082#1089#1087#1086#1088#1090
         DisplayMode = nbdmImageAndText
-        ImageIndex = 96
+        ImageIndex = 38
         OnClick = TBItemExportClick
       end
       object FindButton: TTBItem
         Caption = #1055#1086#1080#1089#1082'    '
         DisplayMode = nbdmImageAndText
-        ImageIndex = 7
+        ImageIndex = 21
         ShortCut = 115
         OnClick = FindButtonClick
       end
       object StopButton: TTBItem
         Caption = #1057#1090#1086#1087'      '
         DisplayMode = nbdmImageAndText
-        ImageIndex = 20
+        ImageIndex = 99
         OnClick = StopButtonClick
       end
       object TBItemCheckZAGS: TTBItem
         Caption = #1054#1088#1075#1072#1085#1099' '#1088#1077#1075#1080#1089#1090#1088#1072#1094#1080#1080
         DisplayMode = nbdmImageAndText
         Hint = #1042#1099#1073#1088#1072#1090#1100' '#1086#1088#1075#1072#1085#1099' '#1088#1077#1075#1080#1089#1090#1088#1072#1094#1080#1080
-        ImageIndex = 105
+        ImageIndex = 100
         OnClick = TBItemCheckZAGSClick
       end
       object TBItemCount: TTBItem
         Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086
         DisplayMode = nbdmImageAndText
         Hint = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086
-        ImageIndex = 102
+        ImageIndex = 65
         OnClick = TBItemCountClick
       end
       object ExitButton: TTBItem
         Caption = #1042#1099#1093#1086#1076'    '
         DisplayMode = nbdmImageAndText
-        ImageIndex = 62
+        ImageIndex = 66
         OnClick = ExitButtonClick
       end
       object TBItemLog: TTBItem
         Caption = #1051#1086#1075' '
         DisplayMode = nbdmImageAndText
         Hint = #1051#1086#1075' '#1088#1072#1073#1086#1090#1099
-        ImageIndex = 28
+        ImageIndex = 101
         ShortCut = 123
         OnClick = TBItemLogClick
       end
@@ -755,9 +755,9 @@ object fmSeekAkt: TfmSeekAkt
   end
   object GridZAGS: TDBGridEh
     Left = 0
-    Top = 264
+    Top = 280
     Width = 569
-    Height = 282
+    Height = 266
     Align = alLeft
     AllowedOperations = [alopUpdateEh]
     DataSource = DataSource2
@@ -802,16 +802,16 @@ object fmSeekAkt: TfmSeekAkt
   end
   object pnZAGS: TPanel
     Left = 0
-    Top = 235
+    Top = 248
     Width = 897
-    Height = 29
+    Height = 32
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 5
     Visible = False
     object SpeedButton1: TSpeedButton
       Left = 8
-      Top = 5
+      Top = 6
       Width = 18
       Height = 18
       Hint = #1057#1085#1103#1090#1100' '#1074#1089#1077' '#1086#1090#1084#1077#1090#1082#1080
@@ -827,14 +827,14 @@ object fmSeekAkt: TfmSeekAkt
     end
     object ed: TDBEditEh
       Left = 35
-      Top = 1
+      Top = 2
       Width = 182
-      Height = 24
+      Height = 26
       Hint = #1063#1072#1089#1090#1100' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1103' '#1086#1088#1075#1072#1085#1072' '#1088#1077#1075#1080#1089#1090#1088#1072#1094#1080#1080
       EditButtons = <>
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -13
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
@@ -845,9 +845,9 @@ object fmSeekAkt: TfmSeekAkt
   end
   object Grid: TDBGridEh
     Left = 569
-    Top = 264
+    Top = 280
     Width = 328
-    Height = 282
+    Height = 266
     Align = alClient
     DataSource = DataSource
     Flat = True

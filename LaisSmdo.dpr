@@ -158,11 +158,6 @@ begin
   MemCheckLogFileName := 'F:\Projects\SelSovet\MemLog.txt';
   MemChk;
   {$ENDIF}
-//  GlobalTask.LogFile.MaxSize:=1000000;
-  GlobalTask.LogFile.IncDateTime := true;
-  GlobalTask.LogFile.DateTimeFormatStr := 'dd.mm.yyyy hh:nn  ';
-  GlobalTask.LogFile.LoggingActive := GlobalTask.ParamAsBoolean('LOG_ACTIVE');
-  GlobalTask.LogFile.LogFileName   := CheckSleshN(GlobalTask.PathWorkDir)+'LogFile.txt';
 
   strUser     :='';
   strPassword :='';
@@ -192,12 +187,9 @@ begin
   fmMain.IDProg := 'POST';
   GlobalTask.SetWorkParam('TYPEBASE','POST');
 
-  fmMain.Log_WriteException        := GlobalTask.ParamAsBoolean('LOG_EXCEPTION');
-  fmMain.Log_WriteOwner            := GlobalTask.ParamAsBoolean('LOG_OWNER');
-
   Application.OnException := fmMain.MyHandleException;
   GlobalTask.OnUpdateParams := fmMain.UpdateParamsEvent;
-//  GlobalTask.OnAfterSaveParams := fmMain.AfterSaveParamsEvent;
+  GlobalTask.OnAfterSaveParams := fmMain.AfterSaveParamsEvent;
   GlobalTask.OnBeforeSaveParams := fmMain.BeforeSaveParamsEvent;
 //  ShowMessage('Create Splash');
   fmSplash := TfmSplash.Create(nil);
@@ -215,7 +207,7 @@ begin
   end;
 //  ShowMessage('After Create dmBase');
 
-  if not dmBase.CheckPathBase then begin
+  if not dmBase.CheckPathBase then begin   // установаливается NameFileParamTask и создается TaskParam !!!
     lOk := false;
     lExit := true;
   end else begin
@@ -223,6 +215,16 @@ begin
     lOk := true;
   end;
 //  ShowMessage('After Check Path Base');
+
+//  GlobalTask.LogFile.MaxSize:=1000000;
+  fmMain.Log_WriteException        := GlobalTask.ParamAsBoolean('LOG_EXCEPTION');
+  fmMain.Log_WriteOwner            := GlobalTask.ParamAsBoolean('LOG_OWNER');
+
+  GlobalTask.LogFile.IncDateTime := true;
+  GlobalTask.LogFile.DateTimeFormatStr := 'dd.mm.yyyy hh:nn  ';
+  GlobalTask.LogFile.LoggingActive:=dmBase.LogActive; //  !!!  читается из SysParams.ini
+  GlobalTask.FLogTypes:=dmBase.LogTypes;                //  !!!  читается из SysParams.ini
+  GlobalTask.LogFile.LogFileName   := CheckSleshN(GlobalTask.PathWorkDir)+'LogFile.txt';
 
   while lOk do begin
     i:=fmSplash.Left+100;
@@ -243,8 +245,9 @@ begin
       if dmBase.OpenConnect(strErr) then begin
         Role.SystemAdmin := false;
         lOk := false;
+        GlobalTask.WriteToLogFile('>>>>Начат сеанс пользователя '+strUser+'; версия: ПО '+GetVersionProgram(5)+', базы '+dmBase.GetVersionBase(dmBase.AdsConnection));
+        GlobalTask.WriteToLogFile(strUser, nil, LOG_SQL);
         dmBase.SimpleDisconnect;
-
 
         if dmBase.FullOpen(dmBase.GlobalPar.RelConnectPath, dmBase.GlobalPar.RelSharedConnectPath ) then begin
 
@@ -386,12 +389,9 @@ begin
     dmBase.SprRazdel   := fmMain.mtSprRazdel;
     dmBase.SprProperty := fmMain.mtSprProperty;
 //  GlobalTask.TypeWinEditSpr:=twMDI;
-    GlobalTask.LogFile.WriteToLogFile('Начат сеанс пользователя '+strUser);
     {$IFDEF USE_TEMPLATE}
       fmMain.TemplateInterface.DefaultScript := GlobalTask.Script;
       fmMain.TemplateInterface.DefaultDatabaseName := 'dmBase.AdsConnection';
-//      fmMain.TemplateInterface.OutputDir   := GlobalTask.PathWorkDir+'\'; // GetFolderMyDocument+'\';
-
       fmMain.TemplateInterface.OutputDir := GetFolderMyDocument+'\';
       fmMain.TemplateInterface.TemplateDir     := GlobalTask.PathTemplate+'\';
       fmMain.TemplateInterface.UserTemplateDir := GlobalTask.PathTemplate+'_\';
@@ -410,7 +410,6 @@ begin
 
     if (dmBase.LastDatabaseError=0) and (strErr='') then begin
 
-      fmMain.SetRole;
 //!!!      fmMain.CheckFormMen;  // для того чтобы fmMen и dmMen никогда небыли nil
       SMDO:=TSMDO.Create;
       SMDO.Demo:=GlobalTask.DemoVersion;
@@ -457,6 +456,8 @@ begin
             then fmMain.DocRecord.AdmOnlyRead:=true;
         {$ENDIF}
       end;
+      fmMain.SetRole;
+
       SMDO.CheckEnabledPost;
 
       fmMain.CheckSubMenu;   // для отключение пустых подменю

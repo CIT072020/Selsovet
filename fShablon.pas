@@ -5,9 +5,9 @@ interface
 {$I Task.inc}
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,SasaDbGrid, FuncPr, fmStringSeek,
+  Windows, Messages, StrUtils, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,SasaDbGrid, FuncPr, fmStringSeek,
   DbGrids, Grids, DBGridEh, StdCtrls, Mask, DBCtrlsEh, ExtCtrls, dBase, Db, fMain, fRecordGrid, Metatask, OpisEdit, uTypes,
-  mFindInt,
+  mFindInt, uProject,
   TB2Item, TB2Dock, TB2Toolbar;
 
 const
@@ -19,7 +19,12 @@ const
 
     // не используется
       SHABLON_NOT_DOK=2222;       // причина не предоставления документа
-      SHABLON_NAME_ZAGS=1111;
+      SHABLON_NAME_ZAGS=2223;
+      SHABLON_IMNS=2224;
+      SHABLON_CANCEL_DOG=2225;
+      SHABLON_UCH_TYPE_OWN=2226;
+
+
       SHABLON_DOKUMENT = 101;  //Документ удостоверяющий личность
       SHABLON_NATION   = 102;  //Отметка о национальности
       SHABLON_OTEC     = 103;  //Запись сведений об отце
@@ -237,7 +242,10 @@ const
         SHABLON_SM_PIS_PRICH=27;  // !!! KeyList.ini KEY_SM_PIS_PRICH  filter=kod=@SHABLON_SM_PIS_PRICH !!!
         SHABLON_NOT_DOK=28;       // причина не предоставления документа
         SHABLON_DOK_LIC=29;       // доп. документы лицевого счета + KEY_LIC_TYPEDOK
-        SHABLON_MAX=29;
+        SHABLON_IMNS=30;          // налоговые инспекции      16.12.2020
+        SHABLON_CANCEL_DOG=31;    // причина прекращения договора найма  16.12.2020
+        SHABLON_UCH_TYPE_OWN=32;  // адрес, закладка участок реквизит UCH_TYPEOWNER
+        SHABLON_MAX=32;
       {$ENDIF}
 
     {$ENDIF}
@@ -248,6 +256,7 @@ type
   TRecShablon=record
     Name:String;
     Kod:Integer;
+    KeyList:String;
     Modify:Boolean;
   end;
 
@@ -320,15 +329,23 @@ begin
 end;
 
 function CheckTypeShablon(s:String):String;
-begin             
+var
+  n,i:Integer;
+begin                     
   {$IF Defined(ZAGS) or Defined(LAIS) or Defined(GKH) }
   if s<>'' then begin
     Result:=StringReplace(s, '@SHABLON_SM_PIS_PRICH', inttostr(SHABLON_SM_PIS_PRICH), [rfReplaceAll, rfIgnoreCase]);
     Result:=StringReplace(Result, '@SHABLON_PRICH_PER', inttostr(SHABLON_PRICH_PER), [rfReplaceAll, rfIgnoreCase]);
     {$IF Defined(LAIS) or Defined(GKH) }
       Result:=StringReplace(Result, '@SHABLON_DOK_LIC', inttostr(SHABLON_DOK_LIC), [rfReplaceAll, rfIgnoreCase]);
+      Result:=StringReplace(Result, '@SHABLON_IMNS', inttostr(SHABLON_IMNS), [rfReplaceAll, rfIgnoreCase]);
+      Result:=StringReplace(Result, '@SHABLON_CANCEL_DOG', inttostr(SHABLON_CANCEL_DOG), [rfReplaceAll, rfIgnoreCase]);
+      Result:=StringReplace(Result, '@SHABLON_UCH_TYPE_OWN', inttostr(SHABLON_UCH_TYPE_OWN), [rfReplaceAll, rfIgnoreCase]);
     {$ELSE}
       Result:=StringReplace(Result, '@SHABLON_DOK_LIC', '0' , [rfReplaceAll, rfIgnoreCase]);
+      Result:=StringReplace(Result, '@SHABLON_IMNS', '0', [rfReplaceAll, rfIgnoreCase]);
+      Result:=StringReplace(Result, '@SHABLON_CANCEL_DOG', '0', [rfReplaceAll, rfIgnoreCase]);
+      Result:=StringReplace(Result, '@SHABLON_UCH_TYPE_OWN', '0', [rfReplaceAll, rfIgnoreCase]);
     {$IFEND}
   end;
   {$ELSE}
@@ -336,8 +353,22 @@ begin
     Result:=StringReplace(s, '@SHABLON_SM_PIS_PRICH', '0', [rfReplaceAll, rfIgnoreCase]);
     Result:=StringReplace(Result, '@SHABLON_PRICH_PER', '0', [rfReplaceAll, rfIgnoreCase]);
     Result:=StringReplace(Result, '@SHABLON_DOK_LIC', '0' , [rfReplaceAll, rfIgnoreCase]);
+    Result:=StringReplace(Result, '@SHABLON_IMNS', '0', [rfReplaceAll, rfIgnoreCase]);
+    Result:=StringReplace(Result, '@SHABLON_CANCEL_DOG', '0', [rfReplaceAll, rfIgnoreCase]);
+    Result:=StringReplace(Result, '@SHABLON_UCH_TYPE_OWN', '0', [rfReplaceAll, rfIgnoreCase]);
   end;
   {$IFEND}
+  //---  если не нашли нужный "@SHABLON_ ..."  просто заменим его на "0" -----------------
+  n:=Pos('@SHABLON_',Result);    //
+  if n>0 then begin
+    i:=PosEx(' ',Result,n+1);
+    if (i>0) and (i<Length(Result)) then begin
+      Result:=Copy(Result,1,n-1)+'0'+Copy(Result,i,Length(Result));
+    end else begin
+      Result:=Copy(Result,1,n-1)+'0';
+    end;
+  end;
+  //------------------------------------------------------------------------------------
 end;
 
 procedure EditShablon;
@@ -357,7 +388,7 @@ end;
 function _ChoiceFromShablon( nID : Integer; var lClear:Boolean; var nResult:Integer; strValue:String; var lModify:Boolean ) : String;
 var
   fmShablon: TfmShablon;
-  i,nInd:Integer;
+  nInd:Integer;
 begin
   lModify:=false;
   lClear:=false;
@@ -451,27 +482,29 @@ begin
     then ModifyShablon:=true;
 end;
 //------------------------------------------------------------------------------------------
+// может необходимо перепрочитать cписки значений KEY_...
 procedure TfmShablon.CheckModify;
 var
   i:Integer;
-  Opis:TOpisEdit;
-  opSpr : TSprItem;
-begin
+//  opSpr : TSprItem;
+begin        
+  // переделать на цикл с проверкой (arrShablon[i].KeyList<>'') !!!
   for i:=Low(arrShablon) to High(arrShablon) do begin
     if arrShablon[i].Modify then begin
       {$IF Defined(ZAGS) or Defined(LAIS) }
         if arrShablon[i].Kod=SHABLON_SM_PIS_PRICH then begin
-          Opis:=GlobalTask.CurrentOpisEdit.GetListOpisA('KEY_SM_PIS_PRICH');
-          if Opis<>nil then Opis.KeyListFromDataSet:=true;
+          CheckKeyListOpis('KEY_SM_PIS_PRICH');   // uProject.pas
         end;
       {$IFEND}
       {$IF Defined(LAIS) or Defined(GKH) }
         if arrShablon[i].Kod=SHABLON_DOK_LIC then begin
-          opSpr:=fmMain.FltSprList.ByName('KEY_LIC_TYPEDOK');
-          Opis:=GlobalTask.CurrentOpisEdit.GetListOpisA('KEY_LIC_TYPEDOK');
-          GlobalTask.CurrentOpisEdit.ReloadOpis(Opis);
-          opSpr.KeyList.Assign( Opis.KeyList );
-          opSpr.NameList.Assign( Opis.Items );
+          CheckKeyListOpis('KEY_LIC_TYPEDOK');   // uProject.pas
+        end else if arrShablon[i].Kod=SHABLON_IMNS then begin
+          CheckKeyListOpis('KEY_IMNS');   // uProject.pas
+        end else if arrShablon[i].Kod=SHABLON_UCH_TYPE_OWN then begin
+          CheckKeyListOpis('KEY_UCH_TYPE_OWN');   // uProject.pas
+        end else if arrShablon[i].Kod=SHABLON_CANCEL_DOG then begin
+          CheckKeyListOpis('KEY_OSN_CAN_DOG');   // uProject.pas
         end;
      {$IFEND}
     end;
@@ -481,7 +514,6 @@ end;
 procedure TfmShablon.FormCreate(Sender: TObject);
 var
   i:Integer;
-  s:String;
 begin
   dmBase.Shablon.BeforePost := ShablonBeforePost;
   DataSource.DataSet := dmBase.Shablon;
@@ -539,6 +571,7 @@ var
 begin
   for i:=1 to SHABLON_MAX do begin
     arrShablon[i].Kod:=-1;
+    arrShablon[i].KeyList:='';
     arrShablon[i].Modify:=false;
   end;
   i:=1;
@@ -610,9 +643,13 @@ begin
         arrShablon[i].Kod:=SHABLON_ISP_DECL_BRAK; arrShablon[i].Name:='Отметка об исполнении заявления'; Inc(i,1);    //  25
         arrShablon[i].Kod:=SHABLON_OTKAZ_REG;     arrShablon[i].Name:='Дополнительный текст для регистрации';    Inc(i,1);   // 26
         arrShablon[i].Kod:=SHABLON_DOK_LIC;       arrShablon[i].Name:='Дополнительные документы в лицевом счете';    Inc(i,1); // 27
+        arrShablon[i].Kod:=SHABLON_IMNS;          arrShablon[i].Name:='Инспекции МНС'; Inc(i,1);  //  30
+        arrShablon[i].Kod:=SHABLON_CANCEL_DOG;    arrShablon[i].Name:='Основание прекращения договора найма'; Inc(i,1);    // 31
+        arrShablon[i].Kod:=SHABLON_UCH_TYPE_OWN;  arrShablon[i].Name:='Признак участка'; Inc(i,1);  //  32    Свойство у площади участка
       {$ENDIF}
-      arrShablon[i].Kod:=SHABLON_SM_PIS_PRICH;  arrShablon[i].Name:='Причина письменного заявления в з/а о смерти'; Inc(i,1);  //
+      arrShablon[i].Kod:=SHABLON_SM_PIS_PRICH;  arrShablon[i].Name:='Причина письменного заявления в з/а о смерти'; arrShablon[i].KeyList:='KEY_SM_PIS_PRICH'; Inc(i,1);  //
       arrShablon[i].Kod:=SHABLON_NOT_DOK;       arrShablon[i].Name:='Причина отсутствия документа'; Inc(i,1);    //
+
 
     {$ENDIF}
   {$IFEND}
@@ -648,8 +685,6 @@ begin
 end;
 
 function TfmShablon.GetKod(nInd:Integer): Integer;
-var
-  i:Integer;
 begin
   Result:=-1;
   if nInd<=Length(arrShablon)
@@ -694,8 +729,10 @@ end;
 procedure TfmShablon.TBItemDelClick(Sender: TObject);
 var
   lDel:Boolean;
-  n:Integer;
   s:String;
+  {$IF Defined(ZAGS) or Defined(LAIS) }
+  n:Integer;
+  {$IFEND}
 begin
  if Grid.DataSource.DataSet.Eof and Grid.DataSource.DataSet.Bof then begin
    Beep;
@@ -726,6 +763,36 @@ begin
          if dmBase.WorkQuery.Fields[0].AsInteger>0 then begin
            lDel:=false;
            s:='(документы лиц.счета)';
+         end;
+         closeMessage;
+     end else if arrShablon[edNameShablon.ItemIndex+1].Kod=SHABLON_IMNS then begin
+         OpenMessage('Проверка наличия данных ...');
+         n:=Grid.DataSource.DataSet.FieldByName('ID').AsInteger;
+         dmBase.WorkQuery.SQL.text:='select top 1 imns from RegDogN where imns='+InttoStr(n);
+         dmBase.WorkQuery.Open;
+         if dmBase.WorkQuery.Fields[0].AsInteger>0 then begin
+           lDel:=false;
+           s:='(регистрация договоров найма)';
+         end;
+         closeMessage;
+     end else if arrShablon[edNameShablon.ItemIndex+1].Kod=SHABLON_UCH_TYPE_OWN then begin
+         OpenMessage('Проверка наличия данных ...');
+         n:=Grid.DataSource.DataSet.FieldByName('ID').AsInteger;
+         dmBase.WorkQuery.SQL.text:='select top 1 house_id from БазаДомов where house_id='+InttoStr(n);
+         dmBase.WorkQuery.Open;
+         if dmBase.WorkQuery.Fields[0].AsInteger>0 then begin
+           lDel:=false;
+           s:='(база домов)';
+         end;
+         closeMessage;
+     end else if arrShablon[edNameShablon.ItemIndex+1].Kod=SHABLON_CANCEL_DOG then begin
+         OpenMessage('Проверка наличия данных ...');
+         n:=Grid.DataSource.DataSet.FieldByName('ID').AsInteger;
+         dmBase.WorkQuery.SQL.text:='select top 1 osnov_cancel from RegDogN where osnov_cancel='+InttoStr(n);
+         dmBase.WorkQuery.Open;
+         if dmBase.WorkQuery.Fields[0].AsInteger>0 then begin
+           lDel:=false;
+           s:='(регистрация договоров найма)';
          end;
          closeMessage;
      end;

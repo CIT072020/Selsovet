@@ -677,6 +677,13 @@ type
     TBItemRefreshCOC: TTBItem;
     acSaveCert: TAction;
     TBItemSaveCert: TTBItem;
+    TBItemEditUrl: TTBItem;
+    acReQueryGis: TAction;
+    TBItemQueryGis24: TTBItem;
+    TBItemQueryGis: TTBItem;
+    acQueryGis: TAction;
+    TBItemReQueryGis: TTBItem;
+    TBSeparatorItem46: TTBSeparatorItem;
     procedure acSetParametersExecute(Sender: TObject);
     procedure acAdminParametersExecute(Sender: TObject);
 
@@ -924,6 +931,9 @@ type
     procedure TBItemPropUsersClick(Sender: TObject);
     procedure acRefreshCOCExecute(Sender: TObject);
     procedure acSaveCertExecute(Sender: TObject);
+    procedure TBItemEditUrlClick(Sender: TObject);
+    procedure acReQueryGisExecute(Sender: TObject);
+    procedure acQueryGisExecute(Sender: TObject);
   private
     { Private declarations }
     FRunActivate : Boolean;
@@ -1102,12 +1112,17 @@ var
 
 const
   IL_BRAK=51;   // индекс в ImageList для брака
+  IL_SMERT=82;  // индекс в ImageList для смертей
   IL_ROGD=83;   // индекс в ImageList для рождений
   IL_CH_MEN=2;  //
+
   IL_ADD_CHILD=119;
   IL_ADD_MEN=119;
+  IL_ADD=119;
   IL_DEL_CHILD=120;
   IL_DEL_MEN=120;
+  IL_DEL=120;
+
   IL_RESH_SUD=19;  // решение суда
   IL_DECL_IZM=97;
   IL_DECL_IZM_21=150;
@@ -1125,9 +1140,9 @@ uses fPropertyObj, fAbout, fOperFind, fEditSpr, fChoiceZAGS2, fParamsFTP,
      NewDialogs, uFilter, fmDosFileView, mAdsObj,
      fZapisBrak, fZapisRogd, fGurnZRogd, fZapisSmert, fGurnZSmert,
      fZapisBrakV, fZapisRogdV, fZapisSmertV, fRastBrak,
-     fZapisUstOtc, fGurnZUstOtc,
+     fZapisUstOtc, fGurnZUstOtc, fQueryGISUN,
      fZapisUstMat, fGurnZUstMat, uSock,
-     fZapisAdopt, fGurnZAdopt,
+     fZapisAdopt, fGurnZAdopt, fGurnQueryGis,
      fGurnUZRogd, fGurnUZUstOtc, fGurnUZSmert, fGurnUZAdopt,
      fLogon, uProjectAll,
      fZapisChName, fGurnZChName,
@@ -1497,8 +1512,8 @@ begin
 //   ActionList2RTF(ActionList,GlobalTask.PathService+'act_list.rtf');
 //   ImageList2RTF(ImageList,GlobalTask.PathService+'img_list.rtf');
 // end;
- ClearDir(ExtractFilePath(Application.ExeName)+'$TEMP$',true);
- GlobalTask.LogFile.WriteToLogFile('Завершен сеанс пользователя.');
+ ClearDir(ExtractFilePath(Application.ExeName)+NameTmpDir(2),true);
+ GlobalTask.WriteToLogFile('Завершен сеанс пользователя.');
  FEventsWordReports.Free;
  FEventsBlankReports.Free;
  FEventsBlankZAGSReports.Free;
@@ -2892,13 +2907,20 @@ function TfmMain.EditDokument(ds: TDataSet; TypeObj: Integer; strFieldID : Strin
 var
   nID : Integer;
   strID : String;
-//  Date_Fiks : TDateTime;
   l,lVosstan : Boolean;
   arr:TCurrentRecord;
+procedure CheckVosstan; // определение восстановленной записи
+begin
+  if (ds<>nil) and (ds.FindField('VOSSTAN')<>nil)
+    then lVosstan:=ds.FieldByName('VOSSTAN').AsBoolean;
+  if (slPar<>nil) and (slPar.Count>0)
+    then lVosstan:=(slPar.Values['VOSSTAN']='1');
+end;
 begin
   IDLastDok:=0;
   Result := false;
   SetLength(arr,0);
+  lVosstan:=false;
 
   if strFieldID=''
     then strFieldID:='ID';
@@ -2909,41 +2931,21 @@ begin
     strID:=ds.FieldByName(strFieldID).AsString;
     nID:=ds.FieldByName(strFieldID).AsInteger;
   end;
-  if ds=nil then begin
-//    Date_Fiks:=dmBase.GetDateCurrentSost;
-    if (slPar<>nil) and (slPar.Count>0) then begin
-      lVosstan:=(slPar.Values['VOSSTAN']='1');
-    end else begin
-      lVosstan:=false;
-    end;
-  end else begin
-//    if ds.FindField('DATE_FIKS')<>nil
-//      then Date_Fiks:=ds.FieldByName('DATE_FIKS').AsDateTime
-//      else Date_Fiks:=0;
-    if ds.FindField('VOSSTAN')<>nil
-      then lVosstan:=ds.FieldByName('VOSSTAN').AsBoolean
-      else lVosstan:=false;
-  end;
-  //------------------ лицевой счет -----------------------------------------------------
-  if TypeObj = dmBase.TypeObj_Lich then begin
-  //------------------ человек -----------------------------------------------------
-  end else if TypeObj = dmBase.TypeObj_Nasel then begin
-  //------------------ адрес -----------------------------------------------------
-  end else if TypeObj = dmBase.TypeObj_Adres then begin
-  //------------------ паспорт -----------------------------------------------------
-  end else if TypeObj = dmBase.TypeObj_Passport then begin
-  //----------------------------------------------------------------------
-  end else if TypeObj = dmBase.TypeObj_PassportViza then begin
-  //------------------ заявление на брак -----------------------------------------------------
+  //--------- запрос из регистра -----------------------------
+  if TypeObj = _TypeObj_QueryGIS then begin
+    {$IFDEF QUERY_GIS}
+      Result:=RunQueryGISUN(nID, nil);
+    {$ENDIF}
   end else if TypeObj = dmBase.TypeObj_DBrak then begin
     if not (strID='') then begin
 //      nID := ds.FieldByName(strFieldID).AsInteger;
       Result := EditDeclBrak(nID);
     end;
-  //------------------ запись акта о браке -----------------------------------------------------
+  //------- запись акта о браке --------------------------------
   end else if TypeObj = dmBase.TypeObj_ZBrak then begin
     if not (strID='') then begin
 //      nID := ds.FieldByName(strFieldID).AsInteger;
+      CheckVosstan;
       if not lVosstan then begin
         result := EditZapisBrak(nID,false,slPar);
       end else begin
@@ -2981,6 +2983,7 @@ begin
   end else if TypeObj = dmBase.TypeObj_ZRogd then begin
     if not (strID='') then begin
 //      nID := ds.FieldByName(strFieldID).AsInteger;
+      CheckVosstan;
       if not lVosstan then begin
         Result := EditZapisRogd(nID,nil,false,slPar);
       end else begin
@@ -2991,6 +2994,7 @@ begin
   end else if TypeObj = dmBase.TypeObj_ZSmert then begin
     if not (strID='') then begin
 //      nID := ds.FieldByName(strFieldID).AsInteger;
+      CheckVosstan;
       if not lVosstan then begin
         Result := EditZapisSmert(nID,l,false,slPar);
 //        if l then begin
@@ -3225,6 +3229,7 @@ begin
           Gurnal.KodGurnal := Gurnal.Name;
         end;
         Gurnal.DateFiks := fmMain.DateFiks;
+        Gurnal.PrepareMenu;
         if Gurnal.LoadQuery then begin
           Gurnal.LoadFromIni;
           Globaltask.CurrentOpisEdit.SetKeyForm(Gurnal,nil);
@@ -3391,7 +3396,8 @@ begin
   TBItemJurnOper.Enabled    := lEnabled;
   TBItemVigrRIAP.Enabled    := lEnabled;
   {$IFDEF GISUN}
-    acGisynParams.Visible:=lEnabled;
+    acGisynParams.Visible:=true;
+    acGisynParams.Enabled:=lEnabled;
   {$ELSE}
     acGisynParams.Visible:=false;
   {$ENDIF}
@@ -3516,6 +3522,17 @@ end;
 procedure TfmMain.acRePassportVizaExecute(Sender: TObject);
 begin
 //  ShowGurnal(TfmGurnPassportViza, 'fmGurnPassportViza');
+end;
+
+procedure TfmMain.acReQueryGisExecute(Sender: TObject);
+begin
+// запросы в ГИС РН
+  ShowGurnal(TfmGurnQueryGis, 'fmGurnQueryGis');
+end;
+
+procedure TfmMain.acQueryGisExecute(Sender: TObject);
+begin
+  RunAction(acQueryGis);
 end;
 
 procedure TfmMain.acReRogdExecute(Sender: TObject);
@@ -3739,6 +3756,8 @@ begin
     //----------------------------
     end else if Action=acZRast then begin
       EditRastBrak( -1, false, slPar );
+    end else if Action=acQueryGis then begin
+      RunQueryGISUN(-1,nil);
     end else if Action=acZAdopt then begin
       EditZapisAdopt( -1, false, slPar );
     end else if Action=acDeclChName then begin
@@ -4071,7 +4090,7 @@ begin
       end;
     end;
   end;
-  GlobalTask.LogFile.WriteToLogFile(s+E.Message);
+  GlobalTask.WriteToLogFile(s+E.Message);
   if (E is EADSDatabaseError) then begin
     if (EADSDatabaseError(E).ACEErrorCode=7057) and (EADSDatabaseError(E).TableName<>'') then begin
       s := 'Таблица: '+EADSDatabaseError(E).TableName+' ';
@@ -4502,6 +4521,7 @@ var
   strErr,sUpd:string;
   i:Integer;
   lPath:Boolean;
+  dMax:TDateTime;
 begin
   Application.ProcessMessages;
   for i:=0 to Screen.FormCount-1 do begin
@@ -4542,22 +4562,20 @@ begin
 
     Application.ProcessMessages;
 
-    {
-    if GlobalTask.ParamAsBoolean('CHECK_UPDATE') and (Gisun.DownloadUrl<>'') then begin
-      cur:=Screen.Cursor;
-      Screen.Cursor:=crHourGlass;
-      OpenMessage('Проверка обновления ...','',10);
-      s:=Gisun.CheckUpdateProg(NAME_UPDATE_PROG,strErr);
-      CloseMessage;
-      Screen.Cursor:=cur;
-      if s<>'' then begin
-        ShowMessage('Доступно обновление '+Gisun.NameUpdate+'.');
+    if TBItemBackup.Enabled then begin
+      dMax:=GlobalTask.GetLastValueAsDate('LAST_BACKUP_COPY', false);
+      if (dMax=0) then begin
+        dMax:=Date;
+        GlobalTask.SetLastValueAsDate('LAST_BACKUP_COPY', dMax);
+      end;
+      if (IncMonth(Date,-1)>dMax) then begin
+        AddNotifyProg(fmMain, 'Выполните резервную копию базы', false, true,0,0);
       end;
     end;
-    }
     if IsActiveGISUN and not Role.SystemAdmin then begin
       if dmBase.GetCountIN <= 10 then begin
-        ShowMessage('Зарезервируйте идентификационные номера для записей актов о рождении.');
+//        ShowMessage('Зарезервируйте идентификационные номера для записей актов о рождении.');
+        AddNotifyProg(fmMain, 'Зарезервируйте идентификационные номера для записей актов о рождении', false, true,0,0);
         acQueryListINExecute(nil);
       end;
     end;
@@ -6395,16 +6413,23 @@ begin
   if s<>''
     then ShowMessage(s);
 end;
-
+//------------------------------------------
+procedure TfmMain.TBItemEditUrlClick(Sender: TObject);
+begin
+  Gisun.EditUrlCOC;
+end;
+//----------------------------------------------
 procedure TfmMain.acSaveCertExecute(Sender: TObject);
 begin
   Gisun.SaveCertToSChannel;
 end;
 //---------------------
+{
 procedure TfmMain.TBItemLoadSysSprClick(Sender: TObject);
 begin
   RunLoadSysSpr(pn);
 end;
+}
 
 initialization
   ListGurnal := TStringList.Create;

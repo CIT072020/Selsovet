@@ -35,16 +35,15 @@ type
     edRnGor: TDBComboBoxEh;
     procedure FormCreate(Sender: TObject);
     procedure edULEditButtons0Click(Sender: TObject; var Handled: Boolean);
-    procedure tbDomNAME_ADRESGetText(Sender: TField; var Text: String;
-      DisplayText: Boolean);
+    procedure tbDomNAME_ADRESGetText(Sender: TField; var Text: String;   DisplayText: Boolean);
     procedure edPunktChange(Sender: TObject);
     procedure cbNotULClick(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;    Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
     procedure btOkClick(Sender: TObject);
     procedure cbNotDomClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     FClearKey : Boolean;
@@ -68,7 +67,7 @@ type
 
 implementation
 
-uses fAddUL;
+uses fAddUL, fMain;
 
 var
   fmAddAdres: TfmAddAdres;
@@ -226,10 +225,11 @@ begin
 end;
 
 procedure TfmAddAdres.FormCreate(Sender: TObject);
-{$IFDEF GKH}
 var
+{$IFDEF GKH}
   i:Integer;
 {$ENDIF}
+  strFilter:String;
 begin
   {$IFDEF GKH}
     if not IsAccountRnGor then begin
@@ -245,11 +245,26 @@ begin
   {$ENDIF}
   QueryUL.Open;
 //  tbDom.Open;
+
+  if fmMain.DateFiks=dmBase.GetDateCurrentSost then begin
+    strFilter:='Empty(date_death)';
+  end else begin
+    strFilter:='Empty(date_death) or date_death>='+QStr(DTOS(fmMain.DateFiks,tdClipper));
+  end;
+  dmBase.LookUpPunkt.Filter:=strFilter;
+  dmBase.LookUpPunkt.Filtered:=true;
+
   edPunktChange(nil);
   FClearKey := false;
   FAdd := false;
   FError:='';
   FResult:=2;
+end;
+
+procedure TfmAddAdres.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  dmBase.LookUpPunkt.Filtered:=false;
+  dmBase.LookUpPunkt.Filter:='';
 end;
 
 // соберем все отдельно стоящие дома или населенный пункт без улиц

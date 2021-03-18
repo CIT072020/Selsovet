@@ -1,6 +1,6 @@
 inherited fmTalonPrib: TfmTalonPrib
-  Left = 156
-  Top = 81
+  Left = 461
+  Top = 217
   Caption = #1058#1072#1083#1086#1085' '#1087#1088#1080#1073#1099#1090#1080#1103
   ClientHeight = 691
   ClientWidth = 737
@@ -47,6 +47,9 @@ inherited fmTalonPrib: TfmTalonPrib
       inherited TBItemPerekl: TTBItem
         Visible = False
       end
+      inherited TBItemHistCorr: TTBItem
+        ImageIndex = 161
+      end
       inherited TBItemShablon: TTBItem
         Visible = True
       end
@@ -73,6 +76,9 @@ inherited fmTalonPrib: TfmTalonPrib
       Height = 33
       Align = alTop
       TabOrder = 0
+      DesignSize = (
+        737
+        33)
       object Label38: TLabel
         Left = 13
         Top = 9
@@ -86,9 +92,18 @@ inherited fmTalonPrib: TfmTalonPrib
         Font.Style = [fsBold]
         ParentFont = False
       end
+      object ImageGISUN: TImage
+        Left = 706
+        Top = 6
+        Width = 20
+        Height = 20
+        Anchors = [akTop, akRight]
+        Transparent = True
+        Visible = False
+      end
       object edDate_SOST: TDBDateTimeEditEh
         Left = 127
-        Top = 5
+        Top = 3
         Width = 119
         Height = 26
         DataField = 'DATE_SOST'
@@ -105,8 +120,8 @@ inherited fmTalonPrib: TfmTalonPrib
         Visible = True
       end
       object edTypeReg: TDBComboBoxEh
-        Left = 402
-        Top = 5
+        Left = 375
+        Top = 3
         Width = 316
         Height = 26
         DataField = 'TYPEREG'
@@ -136,7 +151,7 @@ inherited fmTalonPrib: TfmTalonPrib
         Caption = #1063#1072#1089#1090#1100' 1'
         object pnLast: TPanel
           Left = 0
-          Top = 382
+          Top = 383
           Width = 729
           Height = 171
           Align = alTop
@@ -532,7 +547,7 @@ inherited fmTalonPrib: TfmTalonPrib
           object edOrgan: TDBEditEh
             Left = 231
             Top = 1
-            Width = 436
+            Width = 486
             Height = 26
             DataField = 'ORGAN'
             DataSource = dsDokument
@@ -605,7 +620,7 @@ inherited fmTalonPrib: TfmTalonPrib
         end
         object pnLic: TPanel
           Left = 0
-          Top = 324
+          Top = 325
           Width = 729
           Height = 58
           Align = alTop
@@ -722,7 +737,7 @@ inherited fmTalonPrib: TfmTalonPrib
         end
         object pnNewLic: TPanel
           Left = 0
-          Top = 293
+          Top = 294
           Width = 729
           Height = 31
           Align = alTop
@@ -825,7 +840,7 @@ inherited fmTalonPrib: TfmTalonPrib
           Left = 0
           Top = 0
           Width = 729
-          Height = 293
+          Height = 294
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 0
@@ -977,7 +992,7 @@ inherited fmTalonPrib: TfmTalonPrib
           object TextAdres: TvchDBText
             Left = 179
             Top = 270
-            Width = 435
+            Width = 480
             Height = 18
             Color = clWhite
             DataField = 'ADRES_ID'
@@ -1418,7 +1433,7 @@ inherited fmTalonPrib: TfmTalonPrib
           object edUdost: TDBComboBoxEh
             Left = 12
             Top = 110
-            Width = 281
+            Width = 350
             Height = 24
             DataField = 'PASP_UDOST'
             DataSource = dsDokument
@@ -1623,9 +1638,9 @@ inherited fmTalonPrib: TfmTalonPrib
             end
           end
           object btAdres: TBitBtn
-            Left = 627
+            Left = 673
             Top = 268
-            Width = 31
+            Width = 30
             Height = 22
             Hint = #1042#1099#1073#1088#1072#1090#1100' '#1072#1076#1088#1077#1089' '#1087#1088#1086#1087#1080#1089#1082#1080
             TabOrder = 14
@@ -2988,9 +3003,22 @@ inherited fmTalonPrib: TfmTalonPrib
       FieldName = 'SS_O'
       Size = 30
     end
+    object DokumentATE_ID: TIntegerField
+      FieldName = 'ATE_ID'
+    end
+    object DokumentEVA_ID: TIntegerField
+      FieldName = 'EVA_ID'
+    end
+    object DokumentPOLE_GRN: TIntegerField
+      FieldName = 'POLE_GRN'
+    end
   end
   inherited frDBDokument: TfrDBDataSet
     Left = 448
+    Top = 74
+  end
+  inherited HistZAGS: TkbmMemTable
+    Left = 344
     Top = 74
   end
   inherited SvidPovtor: TkbmMemTable
@@ -3134,7 +3162,7 @@ inherited fmTalonPrib: TfmTalonPrib
   end
   object dsOtnosh: TDataSource
     DataSet = dmBase.SprOtnosh
-    Left = 348
+    Left = 396
     Top = 207
   end
 end

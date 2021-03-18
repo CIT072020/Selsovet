@@ -81,6 +81,7 @@ begin
       fmMyNotify.BringToFront;
     except
     end;
+    Application.ProcessMessages;
   end;
 end;
 //-------------------------------------------------------------------

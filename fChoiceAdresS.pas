@@ -33,24 +33,21 @@ type
     tbDomKV: TAdsStringField;
     tbDomTIP: TIntegerField;
     tbDomNAME_ADRES: TStringField;
-    tbPunkt: TAdsTable;
     tbDomNOT_DOM: TBooleanField;
     tbDomDOM1: TAdsStringField;
     tbDomDOM2: TAdsStringField;
     tbDomSPEC_UCH: TBooleanField;
     procedure FormCreate(Sender: TObject);
     procedure edULEditButtons0Click(Sender: TObject; var Handled: Boolean);
-    procedure edDomEditButtons0Click(Sender: TObject;
-      var Handled: Boolean);
-    procedure tbDomNAME_ADRESGetText(Sender: TField; var Text: String;
-      DisplayText: Boolean);
+    procedure edDomEditButtons0Click(Sender: TObject;   var Handled: Boolean);
+    procedure tbDomNAME_ADRESGetText(Sender: TField; var Text: String;   DisplayText: Boolean);
     procedure edPunktChange(Sender: TObject);
     procedure cbNotULClick(Sender: TObject);
     procedure btOkClick(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;      Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     FClearKey : Boolean;
@@ -83,12 +80,22 @@ begin
   end else begin
     strFilter:='Empty(date_death) or date_death>='+QStr(DTOS(fmMain.DateFiks,tdClipper));
   end;
+  dmBase.LookUpPunkt.Filter:=strFilter;
+  dmBase.LookUpPunkt.Filtered:=true;
+  {
   tbPunkt.Filter:=strFilter;
   tbPunkt.Open;
   tbPunkt.Filtered:=true;
+  }
   edPunktChange(nil);
   FClearKey := false;
 end;
+
+procedure TfmChoiceAdresS.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  dmBase.LookUpPunkt.Filtered:=false;
+  dmBase.LookUpPunkt.Filter:='';
+end;         
 
 // соберем все отдельно сто€щие дома или населенный пункт без улиц
 // Query.SQL.Text := 'SELECT * FROM Ѕазаƒомов WHERE PUNKT='+InttoStr(ti.ID)+
@@ -163,8 +170,7 @@ begin
   end;
 end;
 
-procedure TfmChoiceAdresS.tbDomNAME_ADRESGetText(Sender: TField;
-  var Text: String; DisplayText: Boolean);
+procedure TfmChoiceAdresS.tbDomNAME_ADRESGetText(Sender: TField; var Text: String; DisplayText: Boolean);
 begin
   Text := dmBase.getDom(tbDom,true)
   {
@@ -180,7 +186,7 @@ begin
     if Text = '' then Text := 'кв. '+tbDomKV.AsString
                  else Text := Text + ', кв. '+tbDomKV.AsString;
   end;
-  }                                  
+  }
 end;
 
 procedure TfmChoiceAdresS.edPunktChange(Sender: TObject);
@@ -293,6 +299,7 @@ begin
   if not tbDom.Active   then  tbDom.Active   := true;
   if not QueryUL.Active then  QueryUL.Active := true;
 end;
+
 
 initialization
   fmChoiceAdresS := nil;

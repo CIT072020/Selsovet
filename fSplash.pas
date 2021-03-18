@@ -32,7 +32,7 @@ var
   fmSplash: TfmSplash;
 
 const
-  last_year = '2020';
+  last_year = '2021';
   name_org  = ' "ЦИТ Белстата"';
 
 implementation

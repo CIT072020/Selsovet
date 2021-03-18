@@ -588,17 +588,18 @@ end;
 procedure TfmLichSchet.btDelMenClick(Sender: TObject);
 var
   strErr:String;
-  strID:String;
+  sDel,strID:String;
   lDel:Boolean;
+  nIdMen:Integer;
 begin
   if dsMens.DataSet.RecordCount=0 then exit;
   SetParamForMens;
   if Problem('   Удалить человека с лицевого счета ?   ',mtConfirmation,self) then begin
     strID:=dsMens.DataSet.FieldByName('ID').AsString;
-
+    nIDMen:=0;
     // лицевой счет не новый, и челоек был прочитан из базы
     if strID<>'' then begin
-      if dmBase.CheckDeleteMen(fmMain.DateFiks, StrToInt(strID), strErr, dLich.dmMens.GetFIO) then begin
+      if dmBase.CheckDeleteMen(fmMain.DateFiks, StrToInt(strID), strErr, dLich.dmMens.GetFIO, nIDMen) then begin
         lDel:=true;
       end else begin
         if Problem(strErr+#13+' Удалить человека ?',mtConfirmation,self)
@@ -609,7 +610,10 @@ begin
       lDel:=true;
     end;
     if lDel then begin
-      TdmLichSchet(Dokument).slDelMens.Add( dsMens.DataSet.FieldByName('ID').AsString );
+      sDel:=dsMens.DataSet.FieldByName('ID').AsString;
+      if nIDMen>0
+        then sDel:=sDel+'='+IntToStr(nIdMen);
+      TdmLichSchet(Dokument).slDelMens.Add(sDel);
       QueryExit := true;
       // удалим из текущего списка собственников
       while dLich.tbHouseOwners.Locate('KOD;TYPEKOD', VarArrayOf([StrToInt(strID),OWNER_NASEL]), []) do begin
@@ -751,7 +755,7 @@ procedure TfmLichSchet.btChoiceMenClick(Sender: TObject);
 var
 //  v : Variant;
   arrRec : TCurrentRecord;
-  nID,n,m:Integer;
+  nID,n,m, nLicID:Integer;
   lFirst,lCopyMen:Boolean;
   slPar:TStringList;
   par:TParamsChoiceMen;
@@ -765,7 +769,12 @@ begin
     par:=TParamsChoiceMen.Create;
     par.lEnabledCopyMen:=true;
     if ChoiceMenEx( edLichSchet, '', 'empty(dates)', arrRec, par) then begin
-      nID := GetValueField(arrRec, 'ID');
+      nID:=GetValueField(arrRec, 'ID');
+      try
+        nLicID:=GetValueFieldEx(arrRec, 'LIC_ID', 0);
+      except
+        nLicID:=0;
+      end;
       dDateS:=GetValueFieldEx(arrRec, 'DATES', 0);
   //    lPropis := GetValueFieldEx(arrRec,'PROPIS',true);
   //    lPresent:= GetValueFieldEx(arrRec,'PRESENT',true);
@@ -783,7 +792,14 @@ begin
         end else begin
           slPar:=nil;
         end;
+        if GetValueFieldEx(arrRec, '_COPYMEN', false)=true
+          then lCopyMen:=true
+          else lCopyMen:=false;
         dLich.dmMens.ReadOneMen(nID,false,slPar);
+        // выбранный человек является главой другого лицевого счета и мы не копируем !!!
+        if not lCopyMen and dLich.dmMens.mtDokumentFIRST.AsBoolean and (nLicID>0) then begin
+          TdmLichSchet(Dokument).slCheckFirst.Add(InttoStr(nLicID));
+        end;
         slPar.Free;
 
         dLich.dmMens.LicID:=m;
@@ -795,12 +811,9 @@ begin
         dLich.dmMens.mtDokumentLIC_ID.AsInteger:=m;
         dLich.dmMens.mtDokumentADRES_ID.AsInteger:=dLich.mtDokumentADRES_ID.AsInteger;
         //------- если копирует красного человека создадим новый ID  ------
-        if GetValueFieldEx(arrRec, '_COPYMEN', false)=true then begin
-          lCopyMen:=true;
-//          nNewID:=dmBase.GetNewID(dmBase.TypeObj_Nasel);  // ID для сторой копии человека
+        if lCopyMen then begin
           // прочитанный человек остается под старым ID, а у человека из базы нужно будет менять призаписи лиц. счета
           TdmLichSchet(Dokument).slChangeIDMens.Add(IntToStr(nID)+'=***'); //  новый ID запросим при записи
-//        dmBase.ChangeIDMen(dLich.dmMens.mtDokumentID.AsInteger, nID);   при записи лицевого
         end;
         dLich.FNewMen:=true;
         //-------------------------------------------------------------------
@@ -1405,6 +1418,7 @@ begin
 
   fmMain.FOpenLic:=true;
   if IsShowEdit then begin
+    EditDataSet(dLich.mtDokument);
     if ShowModal=mrOk then begin
       Result := true;
     end;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DATASETS VERSION="1">
-  <SPR-2 ONE_RECORD="0" RECORD_COUNT="38">
+  <SPR-2 ONE_RECORD="0" RECORD_COUNT="55">
     <row>
       <TYPESPR>-2</TYPESPR>
       <EXTCODE>0</EXTCODE>
@@ -56,53 +56,8 @@
     </row>
     <row>
       <TYPESPR>-2</TYPESPR>
-      <EXTCODE>22</EXTCODE>
-      <LEX1>КЛАССИФИКАТОРЫ</LEX1>
-      <PARENT>0</PARENT>
-      <EXTTYPE>-2</EXTTYPE>
-      <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2008-07-22</BEGINDATE>
-    </row>
-    <row>
-      <TYPESPR>-2</TYPESPR>
-      <EXTCODE>0100</EXTCODE>
-      <LEX1>РЕГИСТРАЦИЯ РОЖДЕНИЯ</LEX1>
-      <PARENT>0</PARENT>
-      <EXTTYPE>-2</EXTTYPE>
-      <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2008-08-18</BEGINDATE>
-    </row>
-    <row>
-      <TYPESPR>-2</TYPESPR>
-      <EXTCODE>0200</EXTCODE>
-      <LEX1>УСТАНОВЛЕНИЕ ОТЦОВСТВА</LEX1>
-      <PARENT>0</PARENT>
-      <EXTTYPE>-2</EXTTYPE>
-      <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2008-08-18</BEGINDATE>
-    </row>
-    <row>
-      <TYPESPR>-2</TYPESPR>
-      <EXTCODE>0300</EXTCODE>
-      <LEX1>РЕГИСТРАЦИЯ БРАКА</LEX1>
-      <PARENT>0</PARENT>
-      <EXTTYPE>-2</EXTTYPE>
-      <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2008-08-18</BEGINDATE>
-    </row>
-    <row>
-      <TYPESPR>-2</TYPESPR>
-      <EXTCODE>0400</EXTCODE>
-      <LEX1>РЕГИСТРАЦИЯ СМЕРТИ</LEX1>
-      <PARENT>0</PARENT>
-      <EXTTYPE>-2</EXTTYPE>
-      <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2008-08-18</BEGINDATE>
-    </row>
-    <row>
-      <TYPESPR>-2</TYPESPR>
-      <EXTCODE>0500</EXTCODE>
-      <LEX1>РАСТОРЖЕНИЕ БРАКА</LEX1>
+      <EXTCODE>0700</EXTCODE>
+      <LEX1>ПЕРЕМЕНА ФАМИЛИИ (ИМЕНИ, ОТЧЕСТВА)</LEX1>
       <PARENT>0</PARENT>
       <EXTTYPE>-2</EXTTYPE>
       <ACTIVE>1</ACTIVE>
@@ -119,8 +74,44 @@
     </row>
     <row>
       <TYPESPR>-2</TYPESPR>
-      <EXTCODE>0700</EXTCODE>
-      <LEX1>ПЕРЕМЕНА ФАМИЛИИ (ИМЕНИ, ОТЧЕСТВА)</LEX1>
+      <EXTCODE>0500</EXTCODE>
+      <LEX1>РАСТОРЖЕНИЕ БРАКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-08-18</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>0400</EXTCODE>
+      <LEX1>РЕГИСТРАЦИЯ СМЕРТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-08-18</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>0300</EXTCODE>
+      <LEX1>РЕГИСТРАЦИЯ БРАКА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-08-18</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>0200</EXTCODE>
+      <LEX1>УСТАНОВЛЕНИЕ ОТЦОВСТВА</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-08-18</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>0100</EXTCODE>
+      <LEX1>РЕГИСТРАЦИЯ РОЖДЕНИЯ</LEX1>
       <PARENT>0</PARENT>
       <EXTTYPE>-2</EXTTYPE>
       <ACTIVE>1</ACTIVE>
@@ -137,86 +128,12 @@
     </row>
     <row>
       <TYPESPR>-2</TYPESPR>
-      <EXTCODE>83</EXTCODE>
-      <LEX1>НАЗНАЧЕНИЕ ПЕНСИИ</LEX1>
+      <EXTCODE>22</EXTCODE>
+      <LEX1>КЛАССИФИКАТОРЫ</LEX1>
       <PARENT>0</PARENT>
       <EXTTYPE>-2</EXTTYPE>
       <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2012-08-08</BEGINDATE>
-    </row>
-    <row>
-      <TYPESPR>-2</TYPESPR>
-      <EXTCODE>33</EXTCODE>
-      <LEX1>ПОЛУЧЕНИЕ РАЗРЕШЕНИЯ НА ПОСТОЯННОЕ ПРОЖИВАНИЕ</LEX1>
-      <LEX2>ФОРМА 1-ПРПП</LEX2>
-      <PARENT>0</PARENT>
-      <EXTTYPE>-2</EXTTYPE>
-      <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2012-09-13</BEGINDATE>
-    </row>
-    <row>
-      <TYPESPR>-2</TYPESPR>
-      <EXTCODE>34</EXTCODE>
-      <LEX1>АННУЛИРОВАНИЕ РАЗРЕШЕНИЯ НА ПОСТОЯННОЕ ПРОЖИВАНИЕ</LEX1>
-      <LEX2>ФОРМА 2-АР</LEX2>
-      <PARENT>0</PARENT>
-      <EXTTYPE>-2</EXTTYPE>
-      <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2012-09-13</BEGINDATE>
-    </row>
-    <row>
-      <TYPESPR>-2</TYPESPR>
-      <EXTCODE>86</EXTCODE>
-      <LEX1>ОБСЛУЖИВАЕМАЯ ОРГАНИЗАЦИЯ</LEX1>
-      <PARENT>0</PARENT>
-      <EXTTYPE>-2</EXTTYPE>
-      <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2013-01-21</BEGINDATE>
-    </row>
-    <row>
-      <TYPESPR>-2</TYPESPR>
-      <EXTCODE>87</EXTCODE>
-      <LEX1>ДОГОВОР НА ОБСЛУЖИВАНИЕ</LEX1>
-      <PARENT>0</PARENT>
-      <EXTTYPE>-2</EXTTYPE>
-      <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2013-01-21</BEGINDATE>
-    </row>
-    <row>
-      <TYPESPR>-2</TYPESPR>
-      <EXTCODE>88</EXTCODE>
-      <LEX1>ЗАПРОС НА ПРЕДОСТАВЛЕНИЕ ИНФОРМАЦИИ</LEX1>
-      <PARENT>0</PARENT>
-      <EXTTYPE>-2</EXTTYPE>
-      <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2013-02-13</BEGINDATE>
-    </row>
-    <row>
-      <TYPESPR>-2</TYPESPR>
-      <EXTCODE>89</EXTCODE>
-      <LEX1>ПРЕДОСТАВЛЕНИЕ ИНФОРМАЦИИ</LEX1>
-      <PARENT>0</PARENT>
-      <EXTTYPE>-2</EXTTYPE>
-      <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2013-02-13</BEGINDATE>
-    </row>
-    <row>
-      <TYPESPR>-2</TYPESPR>
-      <EXTCODE>90</EXTCODE>
-      <LEX1>ИСКЛЮЧЕНИЕ/ВОССТАНОВЛЕНИЕ ИНФОРМАЦИИ</LEX1>
-      <PARENT>0</PARENT>
-      <EXTTYPE>-2</EXTTYPE>
-      <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2013-06-13</BEGINDATE>
-    </row>
-    <row>
-      <TYPESPR>-2</TYPESPR>
-      <EXTCODE>91</EXTCODE>
-      <LEX1>ПЕРЕДАЧА/ВОССТАНОВЛЕНИЕ (АРХИВ)</LEX1>
-      <PARENT>0</PARENT>
-      <EXTTYPE>-2</EXTTYPE>
-      <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2013-06-13</BEGINDATE>
+      <BEGINDATE>2008-07-22</BEGINDATE>
     </row>
     <row>
       <TYPESPR>-2</TYPESPR>
@@ -229,21 +146,12 @@
     </row>
     <row>
       <TYPESPR>-2</TYPESPR>
-      <EXTCODE>93</EXTCODE>
-      <LEX1>УЧЕНАЯ СТЕПЕНЬ</LEX1>
+      <EXTCODE>99</EXTCODE>
+      <LEX1>FSZN</LEX1>
       <PARENT>0</PARENT>
       <EXTTYPE>-2</EXTTYPE>
       <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2014-04-09</BEGINDATE>
-    </row>
-    <row>
-      <TYPESPR>-2</TYPESPR>
-      <EXTCODE>94</EXTCODE>
-      <LEX1>УЧЕНОЕ ЗВАНИЕ</LEX1>
-      <PARENT>0</PARENT>
-      <EXTTYPE>-2</EXTTYPE>
-      <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2014-04-09</BEGINDATE>
+      <BEGINDATE>2014-05-22</BEGINDATE>
     </row>
     <row>
       <TYPESPR>-2</TYPESPR>
@@ -280,15 +188,6 @@
       <EXTTYPE>-2</EXTTYPE>
       <ACTIVE>1</ACTIVE>
       <BEGINDATE>2014-04-09</BEGINDATE>
-    </row>
-    <row>
-      <TYPESPR>-2</TYPESPR>
-      <EXTCODE>99</EXTCODE>
-      <LEX1>FSZN</LEX1>
-      <PARENT>0</PARENT>
-      <EXTTYPE>-2</EXTTYPE>
-      <ACTIVE>1</ACTIVE>
-      <BEGINDATE>2014-05-22</BEGINDATE>
     </row>
     <row>
       <TYPESPR>-2</TYPESPR>
@@ -343,6 +242,261 @@
       <EXTTYPE>-2</EXTTYPE>
       <ACTIVE>1</ACTIVE>
       <BEGINDATE>2016-11-02</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>90</EXTCODE>
+      <LEX1>ИСКЛЮЧЕНИЕ/ВОССТАНОВЛЕНИЕ ИНФОРМАЦИИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2013-06-13</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>91</EXTCODE>
+      <LEX1>ПЕРЕДАЧА/ВОССТАНОВЛЕНИЕ (АРХИВ)</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2013-06-13</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>93</EXTCODE>
+      <LEX1>УЧЕНАЯ СТЕПЕНЬ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2014-04-09</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>94</EXTCODE>
+      <LEX1>УЧЕНОЕ ЗВАНИЕ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2014-04-09</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>86</EXTCODE>
+      <LEX1>ОБСЛУЖИВАЕМАЯ ОРГАНИЗАЦИЯ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2013-01-21</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>87</EXTCODE>
+      <LEX1>ДОГОВОР НА ОБСЛУЖИВАНИЕ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2013-01-21</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>88</EXTCODE>
+      <LEX1>ЗАПРОС НА ПРЕДОСТАВЛЕНИЕ ИНФОРМАЦИИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2013-02-13</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>89</EXTCODE>
+      <LEX1>ПРЕДОСТАВЛЕНИЕ ИНФОРМАЦИИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2013-02-13</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>83</EXTCODE>
+      <LEX1>НАЗНАЧЕНИЕ ПЕНСИИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2012-08-08</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>33</EXTCODE>
+      <LEX1>ПОЛУЧЕНИЕ РАЗРЕШЕНИЯ НА ПОСТОЯННОЕ ПРОЖИВАНИЕ</LEX1>
+      <LEX2>ФОРМА 1-ПРПП</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2012-09-13</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>34</EXTCODE>
+      <LEX1>АННУЛИРОВАНИЕ РАЗРЕШЕНИЯ НА ПОСТОЯННОЕ ПРОЖИВАНИЕ</LEX1>
+      <LEX2>ФОРМА 2-АР</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2012-09-13</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>106</EXTCODE>
+      <LEX1>ДАННЫЕ ОБ ИНВАЛИДНОСТИ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2019-03-14</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>0</EXTCODE>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-06-09</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>2</EXTCODE>
+      <LEX1>ФОРМА 1ГР(ПРИОБРЕТЕНИЕ ГРАЖДАНСТВА)</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-06-09</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>3</EXTCODE>
+      <LEX1>ФОРМА 2ГР(УТРАТА ГРАЖДАНСТВА)</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-06-09</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>8</EXTCODE>
+      <LEX1>ФОРМА 19-20 (ПРОПИСКА, ВЫПИСКА)</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-06-09</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>10</EXTCODE>
+      <LEX1>ПАСПОРТ (МАШИНОЧИТАЕМЫЕ ДОКУМЕНТЫ)</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2008-06-09</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>33</EXTCODE>
+      <LEX1>ПОЛУЧЕНИЕ РАЗРЕШЕНИЯ НА ПОСТОЯННОЕ ПРОЖИВАНИЕ</LEX1>
+      <LEX2>ФОРМА 1-ПРПП</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2012-09-13</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>34</EXTCODE>
+      <LEX1>АННУЛИРОВАНИЕ РАЗРЕШЕНИЯ НА ПОСТОЯННОЕ ПРОЖИВАНИЕ</LEX1>
+      <LEX2>ФОРМА 2-АР</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2012-09-13</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>124</EXTCODE>
+      <LEX1>Биометрический вид на жительство в Республике Беларусь лица без гражданства</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-20</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>125</EXTCODE>
+      <LEX1>Биометрический паспорт гражданина Республики Беларусь</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-20</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>126</EXTCODE>
+      <LEX1>Биометрический дипломатический паспорт гражданина Республики Беларусь</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-26</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>127</EXTCODE>
+      <LEX1>Биометрический служебный паспорт гражданина Республики Беларусь</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-26</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>128</EXTCODE>
+      <LEX1>Биометрический проездной документ Республики Беларусь</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-26</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>129</EXTCODE>
+      <LEX1>Проездной документ (Конвенция от 28 июля 1951 года?)</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-26</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>123</EXTCODE>
+      <LEX1>Биометрический вид на жительство в Республике Беларусь иностранного гражданина</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-11</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>121</EXTCODE>
+      <LEX1>ВОДИТЕЛЬСКОЕ УДОСТОВЕРЕНИЕ</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-06-03</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>-2</TYPESPR>
+      <EXTCODE>122</EXTCODE>
+      <LEX1>Идентификационная карта гражданина Республики Беларусь</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>-2</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-06-03</BEGINDATE>
     </row>
   </SPR-2>
 </DATASETS>

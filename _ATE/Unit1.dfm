@@ -1,7 +1,7 @@
 object Form1: TForm1
   Left = 434
   Top = 147
-  Width = 1194
+  Width = 1358
   Height = 638
   Caption = 'Form1'
   Color = clBtnFace
@@ -17,10 +17,10 @@ object Form1: TForm1
   TextHeight = 13
   object PageControl1: TPageControl
     Left = 0
-    Top = 140
-    Width = 1178
-    Height = 460
-    ActivePage = tsAdres
+    Top = 88
+    Width = 1342
+    Height = 512
+    ActivePage = tsEva
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
@@ -29,8 +29,8 @@ object Form1: TForm1
       object edDebug: TMemo
         Left = 0
         Top = 0
-        Width = 1170
-        Height = 432
+        Width = 1334
+        Height = 484
         Align = alClient
         Lines.Strings = (
           '')
@@ -43,8 +43,8 @@ object Form1: TForm1
       object DBGridEh1: TDBGridEh
         Left = 0
         Top = 0
-        Width = 1170
-        Height = 483
+        Width = 1334
+        Height = 484
         Align = alClient
         DataSource = DataSource1
         FooterColor = clWindow
@@ -130,14 +130,158 @@ object Form1: TForm1
           end>
       end
     end
+    object tsEva: TTabSheet
+      Caption = 'EVA'
+      ImageIndex = 2
+      object DBGridEh3: TDBGridEh
+        Left = 0
+        Top = 0
+        Width = 1334
+        Height = 443
+        Align = alClient
+        DataSource = DataSource3
+        FooterColor = clWindow
+        FooterFont.Charset = DEFAULT_CHARSET
+        FooterFont.Color = clWindowText
+        FooterFont.Height = -11
+        FooterFont.Name = 'Tahoma'
+        FooterFont.Style = []
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghRowHighlight, dghDialogFind]
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        Columns = <
+          item
+            EditButtons = <>
+            FieldName = 'SOATO'
+            Footers = <>
+            Width = 81
+          end
+          item
+            EditButtons = <>
+            FieldName = 'ATE_ID'
+            Footers = <>
+          end
+          item
+            EditButtons = <>
+            FieldName = 'NAME_OBL'
+            Footers = <>
+            Width = 101
+          end
+          item
+            EditButtons = <>
+            FieldName = 'NAME_RN'
+            Footers = <>
+            Width = 96
+          end
+          item
+            EditButtons = <>
+            FieldName = 'NAME_SS'
+            Footers = <>
+            Width = 119
+          end
+          item
+            EditButtons = <>
+            FieldName = 'NAME_GAT'
+            Footers = <>
+            Width = 81
+          end
+          item
+            EditButtons = <>
+            FieldName = 'NAME_NP'
+            Footers = <>
+            Width = 147
+          end
+          item
+            EditButtons = <>
+            FieldName = 'VID_ID'
+            Footers = <>
+            Width = 42
+          end
+          item
+            EditButtons = <>
+            FieldName = 'VID_NAME'
+            Footers = <>
+            Width = 131
+          end
+          item
+            EditButtons = <>
+            FieldName = 'EVA_ID'
+            Footers = <>
+          end
+          item
+            EditButtons = <>
+            FieldName = 'NAME'
+            Footers = <>
+            Width = 239
+          end
+          item
+            EditButtons = <>
+            FieldName = 'NAME_B'
+            Footers = <>
+            Width = 92
+          end
+          item
+            EditButtons = <>
+            FieldName = 'DATE_REG'
+            Footers = <>
+            Width = 76
+          end>
+      end
+      object Panel2: TPanel
+        Left = 0
+        Top = 443
+        Width = 1334
+        Height = 41
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 1
+        object BitBtn5: TBitBtn
+          Left = 29
+          Top = 9
+          Width = 124
+          Height = 25
+          Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' EVA'
+          TabOrder = 0
+          OnClick = BitBtn5Click
+        end
+        object edGrafE: TEdit
+          Left = 179
+          Top = 8
+          Width = 140
+          Height = 27
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          Text = 'A2:M91000'
+        end
+        object BitBtn6: TBitBtn
+          Left = 369
+          Top = 9
+          Width = 137
+          Height = 25
+          Caption = #1055#1077#1088#1077#1075#1088#1091#1079#1080#1090#1100' '#1074' SysSpr'
+          TabOrder = 2
+          OnClick = BitBtn6Click
+        end
+      end
+    end
     object tsAdres: TTabSheet
       Caption = #1040#1076#1088#1077#1089#1072
-      ImageIndex = 2
+      ImageIndex = 3
       object DBGridEh2: TDBGridEh
         Left = 0
         Top = 0
-        Width = 1170
-        Height = 432
+        Width = 1334
+        Height = 443
         Align = alClient
         DataSource = DataSource2
         FooterColor = clWindow
@@ -238,13 +382,45 @@ object Form1: TForm1
             Footers = <>
           end>
       end
+      object Panel3: TPanel
+        Left = 0
+        Top = 443
+        Width = 1334
+        Height = 41
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 1
+        object BitBtn4: TBitBtn
+          Left = 13
+          Top = 9
+          Width = 124
+          Height = 25
+          Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1072#1076#1088#1077#1089#1072
+          TabOrder = 0
+          OnClick = BitBtn4Click
+        end
+        object edGrafA: TEdit
+          Left = 165
+          Top = 7
+          Width = 140
+          Height = 27
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          Text = 'A2:Z3000'
+        end
+      end
     end
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1178
-    Height = 140
+    Width = 1342
+    Height = 88
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 1
@@ -284,7 +460,7 @@ object Form1: TForm1
       OnClick = BitBtn1Click
     end
     object cbAll: TCheckBox
-      Left = 710
+      Left = 630
       Top = 14
       Width = 157
       Height = 17
@@ -294,7 +470,7 @@ object Form1: TForm1
       TabOrder = 1
     end
     object edGraf: TEdit
-      Left = 885
+      Left = 805
       Top = 10
       Width = 140
       Height = 27
@@ -305,10 +481,10 @@ object Form1: TForm1
       Font.Style = []
       ParentFont = False
       TabOrder = 2
-      Text = 'A2:K70000'
+      Text = 'A2:K76000'
     end
     object cbIndex: TComboBox
-      Left = 884
+      Left = 804
       Top = 42
       Width = 145
       Height = 27
@@ -338,7 +514,7 @@ object Form1: TForm1
       OnClick = BitBtn2Click
     end
     object cbOnlyActive: TCheckBox
-      Left = 710
+      Left = 630
       Top = 55
       Width = 157
       Height = 17
@@ -356,7 +532,7 @@ object Form1: TForm1
       OnClick = BitBtn3Click
     end
     object cbAllCat: TCheckBox
-      Left = 710
+      Left = 630
       Top = 30
       Width = 157
       Height = 17
@@ -364,28 +540,19 @@ object Form1: TForm1
       TabOrder = 7
       OnClick = cbOnlyActiveClick
     end
-    object BitBtn4: TBitBtn
-      Left = 21
-      Top = 105
-      Width = 124
-      Height = 25
-      Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1072#1076#1088#1077#1089#1072
-      TabOrder = 8
-      OnClick = BitBtn4Click
-    end
-    object edGrafA: TEdit
-      Left = 885
-      Top = 104
-      Width = 140
-      Height = 27
+    object edExcel: TEdit
+      Left = 1028
+      Top = 11
+      Width = 201
+      Height = 26
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 9
-      Text = 'A2:Z3000'
+      TabOrder = 8
+      Text = 'Excel.Application'
     end
   end
   object AdsConnection1: TAdsConnection
@@ -416,8 +583,8 @@ object Form1: TForm1
   end
   object DataSource1: TDataSource
     DataSet = ATE
-    Left = 76
-    Top = 152
+    Left = 188
+    Top = 256
   end
   object AdsConnection2: TAdsConnection
     ConnectPath = 'E:\Projects\Selsovet7\Spr\SysSpr.add'
@@ -431,6 +598,7 @@ object Form1: TForm1
   end
   object AteSys: TAdsTable
     DatabaseName = 'AdsConnection2'
+    StoreActive = False
     AdsConnection = AdsConnection2
     TableName = 'ATE'
     Left = 100
@@ -448,7 +616,30 @@ object Form1: TForm1
   end
   object DataSource2: TDataSource
     DataSet = Adresa
-    Left = 156
-    Top = 137
+    Left = 260
+    Top = 225
+  end
+  object EVA: TAdsTable
+    StoreActive = False
+    AdsConnection = AdsConnection1
+    Exclusive = True
+    TableName = 'EVA.dbf'
+    TableType = ttAdsCDX
+    Left = 152
+    Top = 48
+  end
+  object DataSource3: TDataSource
+    DataSet = EVA
+    Left = 268
+    Top = 284
+  end
+  object EvaSys: TAdsTable
+    DatabaseName = 'AdsConnection2'
+    IndexName = 'ADS_DEFAULT'
+    StoreActive = False
+    AdsConnection = AdsConnection2
+    TableName = 'EVA'
+    Left = 100
+    Top = 297
   end
 end

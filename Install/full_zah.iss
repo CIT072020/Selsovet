@@ -155,8 +155,8 @@ Filename: "{app}\ZAH.exe"; Description: "Учет захоронений"; Flags: nowait postin
 root:HKCU;subkey:"Software\VCBOUS"; Flags: uninsdeletekeyifempty
 root:HKCU;subkey:"Software\VCBOUS\ZAH"; Flags: uninsdeletekey
 root:HKCU;subkey:"Software\VCBOUS\ZAH";valuetype:string;valuename:"installpath";valuedata:"{app}"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\ZAH";valuetype:string;valuename:"version";valuedata:"5.0.0"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\ZAH";valuetype:string;valuename:"update";valuedata:"26"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\ZAH";valuetype:string;valuename:"version";valuedata:"5.1.0"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\ZAH";valuetype:string;valuename:"update";valuedata:"27"; Flags: uninsdeletevalue
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\LastUpdate"

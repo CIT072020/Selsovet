@@ -7,7 +7,7 @@ interface
 uses
    Classes, SysUtils, Controls, Dialogs, IniFiles, ComCtrls, DB, Menus, Windows,
    ShellApi, Messages, DateUtils, Graphics, Variants,
-   ROPasScript, uPSRuntime, uPSCompiler, FuncPr,
+   ROPasScript, uPSRuntime, uPSCompiler, FuncPr, fChoiceNomen,
    {$IFDEF SMDO}  uSMDO, {$ENDIF}
    DBGridEh, DBCtrlsEh, DBLookupEh,
    AdsTable, kbmMemTable, ZipForge, uProject, uProjectAll, uUtilFiles,
@@ -1574,6 +1574,8 @@ end;
 procedure TDocRecordInterface.EditSpr(Name: string);
 begin
    EditSpr(FSprDBItems.ByName(Name));
+   if Name='SP_FILELIST'
+     then fmChoiceNomen_Refresh:=true;
 end;
 
 procedure TDocRecordInterface.UpdateSpr(SprItem: TDBItem);
@@ -3861,9 +3863,30 @@ begin
 end;
 
 function TDocFile.OnBeforeNewRecord(Sender: TDBItem): Boolean;
+var
+  ds:TDataSet;
+  sB:String;
 begin
    Result:=True;
-   LastOrder:=DBItem.GetLastOrder(skEdit);
+   ds:=DBItem.EditTable;
+   sB:=ds.Bookmark;
+   ds.First;
+   ds.DisableControls;
+   try
+     while not ds.Eof do begin
+       if SameText(ds.FieldByName('NAME').AsString, ExtractFileName(FileName)) then begin
+         PutError('Файл с именем "'+ExtractFileName(FileName)+'" уже существует в списке!');
+         Result:=false;
+         break;
+       end;
+       ds.Next;
+     end;
+   finally
+     ds.Bookmark:=sB;
+     ds.EnableControls;
+   end;
+   if Result
+     then LastOrder:=DBItem.GetLastOrder(skEdit);
 end;
 
 procedure TDocFile.OnSetDefaultValue(Sender: TDBItem);
@@ -3910,12 +3933,21 @@ end;
 }
 function TDocFile.SetAttachFile: Boolean;
 var
-   AttachName: string;
+   AttachName, sB: string;
    Zip: TZipForge;
    Wait: TfmWait;
 begin
    DBItem.EditTable.CheckBrowseMode;
    Result:=False;
+   {
+   sB:=DBItem.EditTable.Bookmark;
+   if DBItem.EditTable.Locate('NAME', ExtractFileName(FFileName), [loCaseInsensitive]) then begin
+     PutError('Файл с именем "'+ExtractFileName(FFileName)+'" уже существует!');
+     DBItem.EditTable.Bookmark:=sB;
+     exit;
+   end;
+   DBItem.EditTable.Bookmark:=sB;
+   }
    case EditField['STORE_KIND'].AsInteger of
       // только ссылка на файл
       stOnlyLink: begin
@@ -3945,7 +3977,7 @@ begin
                end;
             end;
          end;
-      end;
+       end;
       // в базе
       stInBase:;
    end;
@@ -3957,7 +3989,7 @@ end;
 
 function TDocFile.getTempPath(lCreate:Boolean):String;
 begin
-  Result:=ExtractFilePath(Application.ExeName)+'$temp$\';
+  Result:=ExtractFilePath(Application.ExeName)+NameTmpDir(2)+'\'; // см. uProject.pas    '$temp$\';
   if lCreate and not DirectoryExists(Result) then begin
     ForceDirectories(Result);
   end;
@@ -4907,6 +4939,8 @@ begin
       'REG_NUM',     GetLastRegNum(FDocType, FGroupId)+1,
       'NOT_EXP',     False         // не учитывать
    ]);
+   //попробуем расчитать индекс
+//   EditField['REG_IND'].AsString:=GetRegInd(FDocType, FGroupId, 'ADMIN_NOMER', true);
 end;
 
 procedure TAdmProcDoc.OnBeforeUpdateRecord(Sender: TDBItem; IsNew: Boolean);
@@ -5035,14 +5069,15 @@ begin
                      sl.Add(S);
                      if FieldItem.DBItem.Table.Locate(FieldItem.FieldName, KeyValues, []) then begin
                         if IsTree and (IsNode=iNode) then begin
-                           DlgResult:=MessageDlgR(Format('Нельзя удалить запись "%s"!'#13#10'Данное значение использовалось при регистрации документов.', [DBItem.NameField.AsString]), mtWarning, [mbOk, mbCancel], 0);
+                           DlgResult:=MessageDlgR(Format('Нельзя удалить запись "%s"!'#13#10'Данное значение использовалось при регистрации документов.', [DBItem.NameField.AsString]), mtWarning, [mbOk], 0);
+//                           DlgResult:=MessageDlgR(Format('Нельзя удалить запись "%s"!'#13#10'Данное значение использовалось при регистрации документов.', [DBItem.NameField.AsString]), mtWarning, [mbOk, mbCancel], 0);
                         end
                         else begin
                            DlgResult:=MessageDlgR('Нельзя удалить текущую запись!'#13#10'Данное значение использовалось при регистрации документов.', mtWarning, [mbOk], 0);
                         end;
                         Result:=False;
                         Break;
-                     end;
+                     end;                
                   end;
                end;
             end;

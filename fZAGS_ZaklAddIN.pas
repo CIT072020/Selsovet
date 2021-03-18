@@ -379,6 +379,12 @@ begin
   //SetPanelPovtor(tsPovtor, cbPovtor, Label41, Label42);
   TBSubmenuGISUN.Visible:=false;
 //  ImageGISUN.Visible := false;
+
+  edD1_DOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edD2_DOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;
+  edD1_DOK_TYPE.DropDownBox.Width:=TYPEDOK_WIDTH;  // utypes.pas
+  edD2_DOK_TYPE.DropDownBox.Width:=TYPEDOK_WIDTH;
+
 end;
 
 destructor TfmZAGS_ZaklAddIN.Destroy;

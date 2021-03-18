@@ -1,6 +1,6 @@
 object fmChoiceAdresS: TfmChoiceAdresS
-  Left = 398
-  Top = 251
+  Left = 441
+  Top = 248
   BorderStyle = bsDialog
   Caption = #1042#1099#1073#1077#1088#1080#1090#1077' '#1072#1076#1088#1077#1089
   ClientHeight = 146
@@ -15,6 +15,7 @@ object fmChoiceAdresS: TfmChoiceAdresS
   OldCreateOrder = False
   Position = poMainFormCenter
   ShowHint = True
+  OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
@@ -156,7 +157,7 @@ object fmChoiceAdresS: TfmChoiceAdresS
   end
   object cbNotUL: TDBCheckBoxEh
     Left = 347
-    Top = 43
+    Top = 46
     Width = 94
     Height = 17
     Caption = #1073#1077#1079' '#1091#1083#1080#1094#1099
@@ -197,8 +198,8 @@ object fmChoiceAdresS: TfmChoiceAdresS
     Visible = True
   end
   object dsPunkt: TDataSource
-    DataSet = tbPunkt
-    Left = 16
+    DataSet = dmBase.LookUpPunkt
+    Left = 216
     Top = 96
   end
   object dsUL: TDataSource
@@ -397,16 +398,6 @@ object fmChoiceAdresS: TfmChoiceAdresS
   object dsDom: TDataSource
     DataSet = tbDom
     Left = 144
-    Top = 96
-  end
-  object tbPunkt: TAdsTable
-    DatabaseName = 'dmBase.AdsConnection'
-    IndexName = 'PR_KEY'
-    StoreActive = False
-    AdsConnection = dmBase.AdsConnection
-    AdsTableOptions.AdsIndexPageSize = 512
-    TableName = #1057#1087#1088#1053#1072#1089#1055#1091#1085#1082#1090#1086#1074
-    Left = 184
     Top = 96
   end
 end

@@ -279,17 +279,23 @@ end;
 //------------------------------------------------------------------------------
 function GetNameAsPol(sName:String;sPol:String):String;
 var
-  s:String;
+  s,sType:String;
 begin
+  sType:='';
+  if Length(sPol)>1 then begin // !!!
+    sType:=Copy(sPol,2,1);
+    sPol:=Copy(sPol,1,1);
+  end;
   Result:=Trim(sName);
   s:=ANSILowerCase(Result);
   if s='родившегося' then begin
     if sPol='Ж'  then Result:='родившейся' else if sPol='' then Result:=s+'(ейся)';
-    if sPol='Ж+' then Result:='родившуюся' else if sPol='' then Result:=s+'(уюся)';
+    if (sPol='Ж') and (sType='+') then Result:='родившуюся';
   end else if s='родился' then begin
     if sPol='Ж'  then Result:='родилась'; // else if sPol='' then Result:=s+'(асьейся)';
   end else if s='проживающего' then begin
     if sPol='Ж' then Result:='проживающей' else if sPol='' then Result:=s+'(ей)';
+    if (sType='2') and (sPol='М') then Result:='проживающему';
   end else if s='разведен' then begin
     if sPol='Ж' then Result:='разведена' else if sPol='' then Result:=s+'(а)';
   end else if s='гражданином' then begin
@@ -307,16 +313,22 @@ begin
   end else if s='он' then begin
     if sPol='Ж' then Result:='она' else if sPol='' then Result:='он(а)';
   end else if s='зарегистрирован' then begin
-    if sPol='Ж' then Result:=s+'а' else if sPol='' then Result:=s+'(а)';
+    if sType='2' then begin
+      if sPol='М' then Result:=s+'ному' else Result:=s+'ной';
+    end else begin
+      if sPol='Ж' then Result:=s+'а' else if sPol='' then Result:=s+'(а)';
+    end;
   end else if s='уроженец' then begin
     if sPol='Ж' then Result:='уроженка' else if sPol='' then Result:=s+'(ка)';
   end else if s='умершего' then begin
     if sPol='Ж' then Result:='умершей' else if sPol='' then Result:=s+'(ки)';
-    if sPol='Ж+' then Result:='умершую' else if sPol='' then Result:=s+'(ую)';
+    if (sPol='Ж') and (sType='+') then Result:='умершую' else if sPol='' then Result:=s+'(ую)';
   end else if s='снят' then begin
     if sPol='Ж' then Result:='снята' else if sPol='' then Result:=s+'(а)';
   end else if s='вернулся' then begin
     if sPol='Ж' then Result:='вернулась' else if sPol='' then Result:=s+'(а)';
+  end else if s='ему' then begin
+    if sPol='Ж' then Result:='ей' else if sPol='' then Result:=s+'(ей)';
   end else if s='убыл' then begin
     if sPol='Ж' then Result:=s+'а' else if sPol='' then Result:=s+'(а)';
   end;
@@ -447,7 +459,7 @@ begin
                ' от '+DatePropis(ds.Fld('SUDRESH').AsDateTime,TYPE_DATE_SPRAV)+
                ', вступившего в законную силу '+DatePropis(ds.Fld('SUDSILA').AsDateTime,TYPE_DATE_SPRAV);
     end else if ds.Fld('TYPE_RAST').AsInteger=3 then begin
-      Result:=Result+' расторгнут на основании записи акта о расторжении брака № '+ds.Fld('R_NOMER').AsString+' совершенной '+
+      Result:=Result+' расторгнут на основании записи акта о расторжении брака № '+ds.Fld('R_NOMER').AsString+', совершенной '+
          DatePropis(ds.Fld('R_DATE').AsDateTime,TYPE_DATE_SPRAV)+' в '+ds.Fld('R_ZAGS').AsString+'.';
     end else if ds.Fld('TYPE_RAST').AsInteger=1 then begin
       Result:=Result+' прекращен в связи со смертью '+s3+', запись акта о смерти № '+
@@ -483,7 +495,7 @@ begin
     end else if ds.Fld('TYPE_RAST').AsInteger=3 then begin
       fld:=ds.Fld('R_ZAGS_B');
       if fld=nil then  fld:=ds.Fld('R_ZAGS');
-      Result:=Result+' скасаваны на падставе: запісу акта аб скасаванні шлюбу № '+ds.Fld('R_NOMER').AsString+' здзейсненага '+
+      Result:=Result+' скасаваны на падставе: запісу акта аб скасаванні шлюбу № '+ds.Fld('R_NOMER').AsString+', здзейсненага '+
               DatePropisBel(ds.Fld('R_DATE').AsDateTime,TYPE_DATE_SPRAV)+' у '+fld.AsString+'.';
     end else if ds.Fld('TYPE_RAST').AsInteger=1 then begin
       fld:=ds.Fld('S_ZAGS_B');
@@ -591,9 +603,10 @@ begin
   end else if nType=7 then begin   // паспорт
     Result:=m.PasportToStr(0);
   end else if nType=8 then begin   // паспорт+ном.идент.
-    s:=m.Fld('LICH_NOMER').AsString;
-    if s<>'' then s:=s+', ';
-    Result:=s+m.PasportToStr(0);
+    Result:=m.PasportToStr(0);
+    s:=Trim(m.Fld('LICH_NOMER').AsString);
+    if s<>'' 
+      then Result:=Result+', '+s+', ';
   end;
   if nType=4 then begin
     s := m.getDolg;
@@ -827,674 +840,6 @@ function getStrPropis : String;
 begin
   Result:=getStrPropis2(GlobalTask.ParamAsBoolean('OTSUT_VIBOR'),GlobalTask.ParamAsBoolean('TMPPR_VIBOR'));
 end;
-
-//---------------------------------------------------
-procedure SpiskiViborEx(nType:Integer);
-var
-  sl,slPar: TStringList;
-  HeadList: TStringList;
-  WidthList: TStringList;
-  f  : TfmParamQuest;
-  j,n,nUch,ns,nIDUch  : Integer;
-  d,d1 : TDateTime;
-  sSort,strNameUch,s,strDate,strSQL,strErr,ss,sss,sRusGr,sAdr,sAdr2 : String;
-  nYear,nMonth,nDay : Word;
-  SprUch,tb,q : TDataSet;                    
-  lA4,lFIO1,lAdresFromLic,lCheckAddAdres : Boolean;
-begin
-  // включать граждан россии в списки
-  if GlobalTask.ParamAsBoolean('RUSGR_VIBOR') then begin
-    sRusGr:='n.citizen=643 or';
-  end else begin
-    sRusGr:='';
-  end;
-
-  SprUch := dbGetDataSet('dmBase.SprIzbUch') ;
-  SprUch.First;
-  if not SprUch.Eof then begin
-    n := SprUch.Fld('NOMER').AsInteger;
-  end else begin
-    PutError(' Заполните справочник избирательных участков ! ');
-    exit;
-  end;
-  sl:=TStringList.Create;
-  slPar:=TStringList.Create;
-  HeadList:=TStringList.Create;
-  WidthList:=TStringList.Create;
-  tb := dbCreateMemTable('NOMER,Char,20;FIO,Char,100;DATER,Char,25;MESTO,Char,200;'+
-        'TYR1,Char,5;TYR2,Char,5;TYR3,Char,5;TYR4,Char,5;ROSP,Char,10;','');
-  f := TfmParamQuest.Create(nil);
-  f.Caption := 'Введите параметры';
-//  f.StepY:=17;
-//  f.Flat:=false;
-  f.AddParamEx(GlobalTask.ParamAsDate('DATE_VIBOR'), 'Дата выборов' , 'DATEVZ' ,'TYPE=DATE');
-//  f.AddParamEx(n      , 'Избирательный участок' , 'IZBUCH','TYPE=LOOKUP~DESC=LOOKUP_SPRIZBUCH~WIDTH=400');
-  f.AddParamEx(n      , 'Избирательный участок' , 'IZBUCH','');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('NAME_SPIS_GR'), 'Название СПИСКА' , 'SPISOK','TYPE=STRING~WIDTH=500');
-  f.AddParamEx(1, 'Тип сортировки' , 'SORT','TYPE=LIST~DESC=KEY_SORTIZB~WIDTH=300');
-  f.AddParamEx(1, 'Формат' , 'FORMAT','TYPE=LIST~DESC=KEY_FORMAT_SPIS~WIDTH=100');
-  f.AddParamEx(false, 'ФИО в одну сроку' , 'FIO_ONE','');
-  f.AddParamEx(GlobalTask.GetLastValueAsBoolean('ADD_ADRES'), 'Проверять адрес жит. для выборов' , 'ADD_ADRES','');
-
-  f.AddButtons('Выполнить~Отказ',0);
-  n  := f.ShowQuest;
-  try
-  if n = 1 then begin
-    lAdresFromLic:=false;         //     !!!
-    d  := f.GetValue('DATEVZ','D');
-    ns := f.GetValue('SORT','I');
-    if f.GetValue('FORMAT','I')=1 
-      then lA4:=true 
-      else lA4:=false;
-    lFIO1:=f.GetValue('FIO_ONE','B');
-    lCheckAddAdres:=f.GetValue('ADD_ADRES','B');
-    GlobalTask.SetLastValueAsString('NAME_SPIS_GR', f.GetValue('SPISOK','S'));
-    GlobalTask.SetLastValueAsDate('DATE_VIBOR', d);
-    GlobalTask.SetLastValueAsBoolean('ADD_ADRES', lCheckAddAdres);
-    DecodeDate(d,nYear,nMonth,nDay);
-    nYear := nYear-18;
-    nUch := f.GetValue('IZBUCH','N');
-    f.Free;
-    d1 := EncodeDate(nYear,nMonth,nDay);
-    strDate := DateToSQL(d);
-    if not dbLocate(SprUch,'NOMER',[nUch],'') then begin
-      PutError(' Не выбран избирательный участок !');
-    end else begin
-      if ParamAsInteger('CH_ADRES')=0 
-        then sSort:='d.punkt'
-        else sSort:='s.nomer';
-      //---- определим сортировать или нет нас. пункты по номеру -----
-//      q:=dbOpenSQL('SELECT count(*) as nnn FROM СпрНасПунктов WHERE nomer is null','');
-//      if q.Fld('nnn').AsInteger=0 then sSort:='s.nomer' else sSort:='d.punkt';
-//      dbClose(q);
-      //---------------------------------------------------------------
-      if lCheckAddAdres then begin
-        sAdr:=' LEFT JOIN БазаДомов d ON d.date_fiks=n.date_fiks and d.id=ifnull(n.adres_id_git,n.adres_id) ';
-        sAdr2:='n.adres_id';
-      end else begin
-        if lAdresFromLic  then begin  // !!!
-          sAdr:=' LEFT JOIN БазаДомов d ON d.date_fiks=l.date_fiks and d.id=l.adres_id ';
-          sAdr2:='l.adres_id';
-        end else begin
-          sAdr:=' LEFT JOIN БазаДомов d ON d.date_fiks=n.date_fiks and d.id=n.adres_id ';
-          sAdr2:='n.adres_id';
-        end;
-      end;
-      strNameUch := SprUch.Fld('NAME').AsString;
-      nIDUch := SprUch.Fld('ID').AsInteger;
-      s := SprUch.Fld('PUNKTS').AsString;
-      ss:= GetFieldWhere(s,'id');
-//      s := GetFieldWhere2(s,'d.Punkt',SprUch.Fld('UL').AsString,'d.ul');
-      s := GetWherePunktUlDom(nIDUch,s,'d.Punkt',SprUch.Fld('UL').AsString,'d.ul',dbGetDataSet('dmBase.SprIzbUch2'), false);
-//      s := GetFieldWhere(s,'d.Punkt');
-      strSQL := 'SELECT s.nomer, familia, n.name name1, otch, dater, lic_id, d.punkt, '+sAdr2+', n.adres_id_git, 1 ppp, u.name, d.dom, d.dom1, d.dom2, d.korp, d.kv '+
-        ' FROM Население n '+
-        ' LEFT JOIN ЛицевыеСчета l ON l.date_fiks=n.date_fiks and l.id=n.lic_id '+
-        sAdr+   // LEFT JOIN БазаДомов
-        ' LEFT JOIN СпрНасПунктов s ON d.punkt=s.id '+
-        ' LEFT JOIN СпрУлиц u ON u.id=d.ul '+
-        ' WHERE n.date_fiks='+QStr('1899-12-30')+' and ( '+sRusGr+' n.citizen=112 or n.citizen is null ) and '+
-        ' (n.notselect is null or n.notselect=false) and (n.adres_id is not null and n.adres_id>0) and '+
-        getStrPropis+' and '+
-        ' (TIMESTAMPDIFF(SQL_TSI_YEAR,n.DATER,'+strDate+')>18 '+
-        ' or (TIMESTAMPDIFF(SQL_TSI_YEAR,n.DATER,'+strDate+'))=18 and '+
-        ' dater<='+DateToSQL(d1)+' ) and ('+ s + ') ';
-      if ns<>4 then begin
-        strSQL:=strSQL+'   union all '+
-        ' SELECT nomer, '+QStr(' ')+', name as name1, '+QStr(' ')+', CURDATE( ), 0, id as punkt, 0, 0, 0,'+QStr('')+','+QStr('')+','+QStr('')+','+QStr('')+','+QStr('')+','+QStr('')+
-        ' FROM СпрНасПунктов WHERE '+ss+' ';
-      end;
-      if ns=1 then begin
-        strSQL := strSQL+' ORDER BY '+sSort+',familia,name1';
-      end else if ns=2 then begin
-        strSQL := strSQL+' ORDER BY '+sSort+',ppp,u.name,d.dom1,d.dom2,d.korp,d.kv';
-      end else if ns=3 then begin
-        strSQL := strSQL+' ORDER BY '+sSort+',ppp,u.name,familia';
-      end else begin
-        strSQL := strSQL+' ORDER BY familia,name1';
-      end;
-//      writedebug(strSQL);
-      OpenMessage(' Формирование списка избирателей ... ','',10);
-      q:=dbOpenSQL(strSQL,'');
-      tb.Open;
-      n := 1;
-      s := '1234567890';
-      j := 10;
-      while not q.Eof do begin
-        tb.Append;
-        if q.Fld('adres_id').AsInteger=0 then begin
-          tb.Fld('MESTO').AsString:='\b\fs28\qc '+q.Fld('name1').AsString+'\b0';
-          s := q.Fld('name1').AsString;
-          j := Length(s);
-        end else begin
-          tb.Fld('NOMER').AsString:='\fs20\qr '+IntToStr(n);
-          if lFIO1 then sss:=' ' else sss:='\par ';
-          if lA4 
-             then  tb.Fld('FIO').AsString:='\b\fs28\qc '+FirstUpper(q.Fld('Familia').AsString)+sss+
-                       FirstUpper(q.Fld('Name1').AsString)+' '+FirstUpper(q.Fld('Otch').AsString)+'\b0'
-             else  tb.Fld('FIO').AsString:='\b\fs28\qc '+FirstUpper(q.Fld('Familia').AsString)+sss+
-                       FirstUpper(q.Fld('Name1').AsString)+' '+FirstUpper(q.Fld('Otch').AsString)+'\b0';
-          if StrToInt(FormatDateTime('yyyy',q.Fld('DateR').AsDateTime))<>nYear then begin
-            tb.Fld('DATER').AsString:='\qc '+FormatDateTime('yyyy',q.Fld('DateR').AsDateTime)
-          end else begin
-            s := FormatDateTime('dd.mm.yyyy',q.Fld('DateR').AsDateTime);
-            tb.Fld('DATER').AsString:='\qc '+Copy(s,1,6)+'\par '+Copy(s,7,4);
-          end;
-          if lCheckAddAdres and (q.Fld('adres_id_git').AsString<>'') then begin
-            tb.Fld('MESTO').AsString:=dmBase.AdresFromID(EncodeDate(1899,12,30),q.Fld('adres_id_git').AsString,false);
-          end else begin
-            tb.Fld('MESTO').AsString:=dmBase.AdresFromID(EncodeDate(1899,12,30),q.Fld('adres_id').AsString,false);
-          end;
-          if Copy(tb.Fld('MESTO').AsString,1,j)=s 
-            then tb.Fld('MESTO').AsString:=Copy(tb.Fld('MESTO').AsString,j+2,200);
-          tb.Fld('TYR1').AsString:=' \par\par ';
-          tb.Post;
-          n:=n+1;
-        end;
-        q.Next;
-      end;
-      dbClose(q);
-      if lA4 
-        then StartPrint(sl, poLandscape, pfA4)
-        else StartPrint(sl, poLandscape, pfA3);
-      PrintString(sl, '\qc СПИСОК\par ', 0, 14, true, False, False);
-      PrintString(sl, '\qc '+GlobalTask.GetLastValueAsString('NAME_SPIS_GR')+' \par\par ', 0, 14, true, False, False);
-      PrintString(sl, '\qc '+DatePropis(d,2)+' \par\par ', 0, 14, False, False, true);
-      PrintString(sl, 'Участок для голосования № '+IntToStr(nUch)+'      '+strNameUch+' \par\par\par\par ', 0, 12, False, False, true);
-
-      if lA4 then begin
-        HeadList.Add('\fs18 № п/п|\fs18 1');
-        HeadList.Add('\fs18 Фамилия, имя, отчество|\fs18 2');
-        HeadList.Add('\fs18 Год рождения|\fs18 3');
-        if nType=1  then begin
-          HeadList.Add('\fs18 Место жительства|\fs18 4');
-          HeadList.Add('\fs18 Подпись избирателя при получении бюллетеня|\fs18 в первом туре выборов|\fs18 5');
-          HeadList.Add('\fs18 Подпись избирателя при получении бюллетеня|\fs18 во втором туре голосования|\fs18 6');
-          HeadList.Add('\fs18 Подпись избирателя при получении бюллетеня|\fs18 в первом туре повторных выборов|\fs18 7');
-          HeadList.Add('\fs18 Подпись избирателя при получении бюллетеня|\fs18 во втором туре голосования повторных выборов|\fs18 8');
-          HeadList.Add('\fs18 Примечание|9');
-          StrToStrings('30;240;55;190;85;85;85;85;70', WidthList, ';');   // 9 граф
-        end else begin
-          HeadList.Add('\fs18 Место жительства (место пребывания)|\fs18 4');
-          HeadList.Add('\fs18 Подпись избирателя при получении бюллетеня|\fs18 при проведении основных выборов|\fs18 5');
-          HeadList.Add('\fs18 Подпись избирателя при получении бюллетеня|\fs18 при проведении повторных выборов|\fs18 6');
-          HeadList.Add('\fs18 Примечание|7');
-          StrToStrings('30;250;55;270;100;100;120', WidthList, ';');   // 7 граф
-        end;
-      end else begin
-        HeadList.Add('№ п/п|1');
-        HeadList.Add('Фамилия, имя, отчество|2');
-        HeadList.Add('Год рождения|3');
-        HeadList.Add('Место жительства|4');
-        if nType=1  then begin
-          HeadList.Add('Подпись избирателя при получении бюллетеня|в первом туре выборов|5');
-          HeadList.Add('Подпись избирателя при получении бюллетеня|во втором туре голосования|6');
-          HeadList.Add('Подпись избирателя при получении бюллетеня|в первом туре повторных выборов|7');
-          HeadList.Add('Подпись избирателя при получении бюллетеня|во втором туре голосования повторных выборов|8');
-          HeadList.Add('Примечание|9');
-          StrToStrings('50;270;80;300;130;130;130;130;130', WidthList, ';');   // 9 граф
-        end else begin
-          HeadList.Add('Подпись избирателя при получении бюллетеня|при проведении основных выборов|5');
-          HeadList.Add('Подпись избирателя при получении бюллетеня|при проведении повторных выборов|6');
-          HeadList.Add('Примечание|7');
-          StrToStrings('50;380;80;350;150;150;150', WidthList, ';');   // 9 граф
-        end;    
-      end;
-
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      if nType=1 then begin
-        slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-        slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      end;
-      PrintTable(sl, tb, HeadList, WidthList, slPar, 0, 12);
-
-      PrintString(sl, ' \par\par ', 0, 12, false, false, false);
-
-      PrintString(sl, 'Председатель местного исполнительного и распорядительного органа     __________                    ____________________ \par ', 0, 12, false, false, false);
-      PrintString(sl, '(глава местной администрации)', 0, 12, false, false, false);
-      PrintString(sl, StringOfChar(' ',72)+'(подпись)'+StringOfChar(' ',44)+'(инициалы, фамилия) \par\par ', 0, 8, false, false, false);
-
-      PrintString(sl, 'Председатель участковой комиссии'+StringOfChar(' ',42)+'__________                    ____________________ \par ', 0, 12, false, false, false);
-      PrintString(sl, StringOfChar(' ',123)+'(подпись)'+StringOfChar(' ',43)+'(инициалы, фамилия) \par\par ', 0, 8, false, false, false);
-
-      PrintString(sl, 'Секретарь участковой комиссии'+StringOfChar(' ',46)+'__________                    ____________________ \par ', 0, 12, false, false, false);
-      PrintString(sl, StringOfChar(' ',123)+'(подпись)'+StringOfChar(' ',43)+'(инициалы, фамилия) \par ', 0, 8, false, false, false);
-
-      if FinishPrint(GetFolderMyDocument+'\СписокИзбирателей'+IntToStr(nUch)+'.doc', sl, True, strErr) then begin
-        if ParamAsBoolean('SHOW_WRITE_DOK') 
-          then ShellExt(GetFolderMyDocument+'\СписокИзбирателей'+IntToStr(nUch)+'.doc')
-      end else begin
-        PutError(strErr);
-      end;
-      tb.Close;
-      CloseMessage;
-    end;
-  end else begin
-    f.Free;
-  end;
-  finally
-    tb.Free;
-    sl.Free;
-    slPar.Free;
-    HeadList.Free;
-    WidthList.Free;
-  end;
-end;
-//---------------------------------------------------
-//   списки на выборы президента
-procedure SpiskiVibor;
-begin
- SpiskiViborEx(1);
-end;
-//   списки на парламентские выборы
-procedure SpiskiViborParl;
-begin
- SpiskiViborEx(2);
-end;
-
-//---------------------------------------------------------------------
-//   списки на местные выборы
-//---------------------------------------------------------------------
-procedure SpiskiViborMestn;
-var
-  sl,slPar: TStringList;
-  HeadList: TStringList;
-  WidthList,slWidth: TStringList;
-  f  : TfmParamQuest;
-  i,j,n,nUch,ns,nIDUch,nGR,mm  : Integer;
-  d,d1 : TDateTime;
-  s1,s2,s3,sss,sSI,ssort,strNameOkr,strNameUch,s,strDate,strSQL,strErr,ss,sRusGr,sAdr,sAdr2 : String;
-  nYear,nMonth,nDay : Word;
-  SprUch,tb,q : TDataSet;
-  lA4,lFIO1,lAdresFromLic,lCheckAddAdres,lAddObl,lGor : Boolean;
-  sRN,sGOR,sOBL,sMesto,sDefGor,sDefRn,sDefObl:String;
-  lGKH,lNamePunkt:Boolean;
-begin
-  // включать граждан россии в списки
-  if GlobalTask.ParamAsBoolean('RUSGR_VIBOR') then begin
-    sRusGr:='n.citizen=643 or';
-  end else begin
-    sRusGr:='';
-  end;
-
-  SprUch := dbGetDataSet('dmBase.SprIzbUch') ;
-  SprUch.First;
-  if not SprUch.Eof then begin
-    n := SprUch.Fld('NOMER').AsInteger;
-  end else begin
-    PutError(' Заполните справочник избирательных участков ! ');
-    exit;
-  end;
-  sl:=TStringList.Create;
-  slPar:=TStringList.Create;
-  HeadList:=TStringList.Create;
-  WidthList:=TStringList.Create;
-  tb := dbCreateMemTable('NOMER,Char,15;FIO,Char,100;DATER,Char,15;MESTO,Char,200;'+
-        'OKR1,Char,15;OKR2,Char,15;OKR3,Char,15;ROSP1,Char,5;ROSP2,Char,10;PRIM,Char,10;','');
-  f := TfmParamQuest.Create(nil);
-  f.Caption := 'Введите параметры';
-//  f.StepY:=17;
-//  f.Flat:=false;
-  f.AddParamEx(GlobalTask.ParamAsDate('DATE_VIBOR'), 'Дата выборов' , 'DATEVZ' ,'TYPE=DATE');
-//  f.AddParamEx(n      , 'Избирательный участок' , 'IZBUCH','TYPE=LOOKUP~DESC=LOOKUP_SPRIZBUCH~WIDTH=400');
-  f.AddParamEx(n , 'Избирательный участок' , 'IZBUCH','WIDTH=50');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('NAME_SPIS_GR_M'), 'Название СПИСКА' , 'SPISOK','TYPE=STRING~WIDTH=500');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('NAME_OBL_SOV'), 'областной Совет депутатов' , 'OBL_SOV','TYPE=STRING~WIDTH=500');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('NAME_RAI_SOV'), 'районный(городской) Совет депутатов' , 'RAI_SOV','TYPE=STRING~WIDTH=500');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('NAME_SEL_SOV'), 'сельский Совет депутатов' , 'SEL_SOV','TYPE=STRING~WIDTH=500');
-  f.AddParamEx(1, 'Тип сортировки' , 'SORT','TYPE=LIST~DESC=KEY_SORTIZB~WIDTH=300');
-  f.AddParamEx(1, 'Формат' , 'FORMAT','TYPE=LIST~DESC=KEY_FORMAT_SPIS~WIDTH=100');
-  f.AddParamEx(false, 'ФИО в одну сроку' , 'FIO_ONE','');
-  f.AddParamEx(1, '№ первого в списке' , 'FIRST_NOMER','WIDTH=50');
-  f.AddParamEx(GlobalTask.GetLastValueAsInteger('NNN_OBL'), '№ окр. для обл. совета по умолчанию' , 'NNN_OBL','WIDTH=50');
-  f.AddParamEx(GlobalTask.GetLastValueAsInteger('NNN_RN'), '№ окр. для район. совета по умолчанию' , 'NNN_RN','WIDTH=50');
-  f.AddParamEx(GlobalTask.GetLastValueAsInteger('NNN_GOR'), '№ окр. для гор. совета по умолчанию' , 'NNN_GOR','WIDTH=50');
-  f.AddParamEx(GlobalTask.GetLastValueAsBoolean('ADD_ADRES'), 'Проверять адрес жит. для выборов' , 'ADD_ADRES','');
-  f.AddParamEx(GlobalTask.GetLastValueAsBoolean('ADD_NAMEPUNKT'), 'Печать в адресе названия нас. пункта' , 'ADD_NAMEPUNKT','');
-//  f.AddParamEx(GlobalTask.GetLastValueAsInteger('NNN_SS'), 'Номер окр. для совета' , 'NNN_SS','WIDTH=50');
-
-//  f.AddParamEx(0, 'Сумма', '4','FORMAT=### ### ### ###.##');
-//  f.AddParamEx(2, 'List', '4','TYPE=LIST~DESC=KEY_TYPE_OBJ~WIDTH=100');
-//  f.AddParamEx(6, 'Spr', '5','TYPE=SPR~DESC=LOOKUP_EDIZM~WIDTH=50~DOPSHOW=NAME');
-  if IdProg()='GKH' then lGKH:=true else lGKH:=false;
-  lAddObl:=false;
-  lGor:=false;
-  f.AddButtons('Выполнить~Отказ',0);
-  n  := f.ShowQuest;
-  try
-  if n = 1 then begin
-    lAdresFromLic:=false;         //     !!!
-    lCheckAddAdres:=f.GetValue('ADD_ADRES','B');
-    lNamePunkt:=f.GetValue('ADD_NAMEPUNKT','B');
-    if ParamAsInteger('CH_ADRES')=0 
-      then sSort:='d.punkt'
-      else sSort:='s.nomer';
-
-    if lCheckAddAdres then begin
-      sAdr:=' LEFT JOIN БазаДомов d ON d.date_fiks=n.date_fiks and d.id=ifnull(n.adres_id_git,n.adres_id) ';
-      sAdr2:='n.adres_id';
-    end else begin
-      if lAdresFromLic  then begin  // !!!
-        sAdr:=' LEFT JOIN БазаДомов d ON d.date_fiks=l.date_fiks and d.id=l.adres_id ';
-        sAdr2:='l.adres_id';
-      end else begin
-        sAdr:=' LEFT JOIN БазаДомов d ON d.date_fiks=n.date_fiks and d.id=n.adres_id ';
-        sAdr2:='n.adres_id';
-      end;
-    end;
-
-    //---- определим сортировать или нет нас. пункты по номеру -----
-//    q:=dbOpenSQL('SELECT count(*) as nnn FROM СпрНасПунктов WHERE nomer is null','');
-//    if q.Fld('nnn').AsInteger=0 then sSort:='s.nomer' else sSort:='d.punkt';
-//    dbClose(q);
-    //---------------------------------------------------------------
-
-    d  := f.GetValue('DATEVZ','D');
-    ns := f.GetValue('SORT','I');
-    if f.GetValue('FORMAT','I')=1 
-      then lA4:=true 
-      else lA4:=false;
-    lFIO1:=f.GetValue('FIO_ONE','B');
-    n:= f.GetValue('FIRST_NOMER','I');
-    GlobalTask.SetLastValueAsString('NAME_SPIS_GR_M', f.GetValue('SPISOK','S'));
-    GlobalTask.SetLastValueAsString('NAME_OBL_SOV', f.GetValue('OBL_SOV','S'));
-    GlobalTask.SetLastValueAsString('NAME_RAI_SOV', f.GetValue('RAI_SOV','S'));
-    GlobalTask.SetLastValueAsString('NAME_SEL_SOV', f.GetValue('SEL_SOV','S'));
-    GlobalTask.SetLastValueAsInteger('NNN_OBL', f.GetValue('NNN_OBL','I'));
-    GlobalTask.SetLastValueAsInteger('NNN_RN', f.GetValue('NNN_RN','I'));
-    GlobalTask.SetLastValueAsInteger('NNN_GOR', f.GetValue('NNN_GOR','I'));
-    GlobalTask.SetLastValueAsBoolean('ADD_ADRES', lCheckAddAdres);
-    GlobalTask.SetLastValueAsBoolean('ADD_NAMEPUNKT', lNamePunkt);
-//    GlobalTask.SetLastValueAsInteger('NNN_SS', f.GetValue('NNN_SS','I'));
-    GlobalTask.SetLastValueAsDate('DATE_VIBOR', d);
-    DecodeDate(d,nYear,nMonth,nDay);
-    if GlobalTask.GetLastValueAsInteger('NNN_GOR')<>0 
-      then lGor:=true;
-    if not lGor and (GlobalTask.GetLastValueAsInteger('NNN_OBL')<>0) 
-      then lAddObl:=true;
-    if lGKH then begin
-      lAddObl:=true;
-      lGor:=true;
-    end;
-
-    // ширины граф таблицы
-    slWidth:=TStringList.Create;
-    if not lA4 then begin
-      StrToStrings('50;270;80;300;90;90;90;130;130;100', slWidth, ';');      // 10 граф
-    end else begin
-      if lGKH then begin
-        StrToStrings('30;240;60;220;40;40;40;90;90;65', slWidth, ';')  // 10 граф
-      end else begin
-        if lAddObl or lGor
-          then  StrToStrings('30;240;60;220;40;40;65;85;85;65', slWidth, ';')  // 10 граф
-          else  StrToStrings('30;240;60;220;60;65;90;90;70', slWidth, ';');    // 9  граф
-      end;
-    end;
-
-    nYear := nYear-18;
-    nUch := f.GetValue('IZBUCH','N');
-    f.Free;
-    d1 := EncodeDate(nYear,nMonth,nDay);
-    strDate := DateToSQL(d);
-    if not dbLocate(SprUch,'NOMER',[nUch],'') then begin
-      PutError(' Не выбран избирательный участок !');
-    end else begin
-      j:=0;
-      while (SprUch.Fld('NOMER').AsInteger=nUch) and not SprUch.Eof do begin 
-        j:=j+1;
-        SprUch.Next
-      end;
-      dbLocate(SprUch,'NOMER',[nUch],'');
-
-      while (SprUch.Fld('NOMER').AsInteger=nUch) and not SprUch.Eof do begin // <---------
-
-        strNameUch := SprUch.Fld('NAME').AsString;
-        strNameOkr := SprUch.Fld('NAME').AsString;
-        nIDUch := SprUch.Fld('ID').AsInteger;
-        s := SprUch.Fld('PUNKTS').AsString;
-        ss:= GetFieldWhere(s,'id');
-  //      s := GetFieldWhere2(s,'d.Punkt',SprUch.Fld('UL').AsString,'d.ul');
-        s := GetWherePunktUlDom(nIDUch,s,'d.Punkt',SprUch.Fld('UL').AsString,'d.ul',dbGetDataSet('dmBase.SprIzbUch2'), false);
-  //      s := GetFieldWhere(s,'d.Punkt');
-        strSQL := 'SELECT s.nomer,familia, n.name name1, otch, dater, lic_id, d.punkt, '+sAdr2+', n.adres_id_git, 1 ppp, u.name, d.dom, d.dom1, d.dom2, d.korp, d.kv '+
-          ' FROM Население n '+
-          ' LEFT JOIN ЛицевыеСчета l ON l.date_fiks=n.date_fiks and l.id=n.lic_id '+
-          sAdr+  // LEFT JOIN БазаДомов
-          ' LEFT JOIN СпрНасПунктов s ON d.punkt=s.id '+
-          ' LEFT JOIN СпрУлиц u ON u.id=d.ul '+
-          ' WHERE n.date_fiks='+QStr('1899-12-30')+' and ( '+sRusGr+' n.citizen=112 or n.citizen is null ) and '+
-          ' (n.notselect is null or n.notselect=false) and (n.adres_id is not null and n.adres_id>0) and '+
-          getStrPropis+' and '+
-          ' (TIMESTAMPDIFF(SQL_TSI_YEAR,n.DATER,'+strDate+')>18 '+
-          ' or (TIMESTAMPDIFF(SQL_TSI_YEAR,n.DATER,'+strDate+'))=18 and '+
-          ' dater<='+DateToSQL(d1)+' ) and ('+ s + ') '
-        if ns<>4 then begin
-          strSQL:=strSQL+'   union all '+
-          ' SELECT nomer,'+QStr(' ')+', name name1, '+QStr(' ')+', CURDATE( ), 0, id as punkt, 0, 0, 0,'+QStr('')+', '+QStr('')+','+QStr('')+','+QStr('')+','+QStr('')+','+QStr('')+
-          ' FROM СпрНасПунктов WHERE '+ss+' ';
-        end;
-        if ns=1 then begin
-          strSQL := strSQL+' ORDER BY '+sSort+',familia,name1';
-        end else if ns=2 then begin
-          strSQL := strSQL+' ORDER BY '+sSort+',ppp,u.name,d.dom1,d.dom2,d.korp,d.kv';
-        end else if ns=3 then begin
-          strSQL := strSQL+' ORDER BY '+sSort+',ppp,u.name,familia';
-        end else begin
-          strSQL := strSQL+' ORDER BY familia,name1';
-        end;
-//        writedebug(strSQL);
-        OpenMessage(' Формирование списка избирателей ... ','',10);
-        q:=dbOpenSQL(strSQL,'');
-        tb.Open;
-
-        if j>1 then begin
-          tb.Append;
-          tb.Fld('MESTO').AsString:='\b\fs28\qc '+strNameOkr +'\b0';
-          tb.Post;
-        end;
-        i:=GlobalTask.GetLastValueAsInteger('NNN_RN');
-        if i<1 then sDefRn:='' else sDefRn:=IntToStr(i);
-        i:=GlobalTask.GetLastValueAsInteger('NNN_OBL');
-        if i<1 then sDefObl:='' else sDefObl:=IntToStr(i);
-        i:=GlobalTask.GetLastValueAsInteger('NNN_GOR');
-        if i<1 then sDefGor:='' else sDefGor:=IntToStr(i);
-
-        s := '1234567890';
-        j := 10;
-        while not q.Eof do begin
-          tb.Append;
-          if q.Fld('adres_id').AsInteger=0 then begin
-            tb.Fld('MESTO').AsString:='\b\fs28\qc '+q.Fld('name1').AsString+'\b0';
-            s := q.Fld('name1').AsString;
-            j := Length(s);
-          end else begin
-            if SprUch.Fld('OKRUG_RN').AsString=''  then sRN:=sDefRn   else sRN:=SprUch.Fld('OKRUG_RN').AsString;
-            if SprUch.Fld('OKRUG_GOR').AsString='' then sGor:=sDefGor else sGor:=SprUch.Fld('OKRUG_GOR').AsString;
-            if SprUch.Fld('OKRUG_OBL').AsString='' then sObl:=sDefObl else sObl:=SprUch.Fld('OKRUG_OBL').AsString;
-            sSI:=SprUch.Fld('OKRUG').AsString;
-
-            tb.Fld('NOMER').AsString:='\qr '+IntToStr(n);
-            if lFIO1 then sss:=' ' else sss:='\par ';
-
-            if IdProg()='GKH' then begin
-              s1:=sObl;
-              s2:=sRN;
-              s3:=sGOR;
-            end else begin
-              if lGor then begin
-                s1:=sRN;
-                s2:=sGOR;
-                s3:=sSI;
-              end else begin
-                if lAddObl then begin
-                 s1:=sOBL;
-                 s2:=sRN;
-                 s3:=sSI;
-                end else begin
-                  s1:=sRN;
-                  s2:=sSI;
-                  s3:='';
-                end;
-              end;
-            end;
-
-            tb.Fld('OKR1').AsString:='\qc '+s1;
-            tb.Fld('OKR2').AsString:='\qc '+s2;
-            tb.Fld('OKR3').AsString:='\qc '+s3;
-
-            tb.Fld('FIO').AsString:='\b\fs28\qc '+FirstUpper(q.Fld('Familia').AsString)+sss+
-                                     FirstUpper(q.Fld('Name1').AsString)+' '+FirstUpper(q.Fld('Otch').AsString)+'\b0';
-
-            if StrToInt(FormatDateTime('yyyy',q.Fld('DateR').AsDateTime))<>nYear 
-              then tb.Fld('DATER').AsString:='\qc '+FormatDateTime('yyyy',q.Fld('DateR').AsDateTime)
-              else tb.Fld('DATER').AsString:='\qc '+FormatDateTime('dd.mm.yyyy',q.Fld('DateR').AsDateTime);
-            if lCheckAddAdres and (q.Fld('adres_id_git').AsString<>'') then begin
-              sMesto:=dmBase.AdresFromID(EncodeDate(1899,12,30),q.Fld('adres_id_git').AsString,false);
-            end else begin
-              sMesto:=dmBase.AdresFromID(EncodeDate(1899,12,30),q.Fld('adres_id').AsString,false);
-            end;
-            if not lNamePunkt then begin
-              mm:=Pos(',',sMesto);
-              if mm>0 then begin
-                sMesto:=Trim(Copy(sMesto,mm+1,300));
-              end;
-            end;
-            tb.Fld('MESTO').AsString:=sMesto;
-//            if Copy(tb.Fld('MESTO').AsString,1,j)=s 
-//              then tb.Fld('MESTO').AsString:=Copy(tb.Fld('MESTO').AsString,j+2,200);
-  //          tb.Fld('OKR1').AsString:=' \par\par ';
-            tb.Post;
-            n:=n+1;
-          end;
-          q.Next;
-        end;
-        dbClose(q);
-  
-        SprUch.Next;
-  
-      end; // <---------------------------------------
-
-      if GlobalTask.GetLastValueAsInteger('NNN_OBL')>0 
-        then s1:=GlobalTask.GetLastValueAsString('NNN_OBL')
-        else s1:='   ';
-      if GlobalTask.GetLastValueAsInteger('NNN_RN')>0 
-        then s2:=GlobalTask.GetLastValueAsString('NNN_RN')
-        else s2:='   ';
-
-      if lA4 
-        then  StartPrint(sl, poLandscape, pfA4)
-        else  StartPrint(sl, poLandscape, pfA3);
-  //    PrintString(sl, UpperCase(NameOrg('Б',''))+'\par ', 0, 12, False, False, False);
-  //    PrintString(sl, UpperCase(NameOrg('',''))+'\par ', 0, 12, False, False, False);
-  //    PrintString(sl, '\ldblquote   '+IntToStr(nDay)+'  \rdblquote   '+GetMonthPropis(GlobalTask.CurrentDate,'Р')+'   '+IntToStr(nYear)+' №___\par\par ', 0, 12, False, False, False);
-//StringOfChar(' ',120)+
-      PrintString(sl, '\qc '+DatePropis(d,2)+' \par\par ', 0, 12, False, False, true);
-      PrintString(sl, '\qc СПИСОК\par ', 0, 14, true, False, False);
-      PrintString(sl, '\qc '+GlobalTask.GetLastValueAsString('NAME_SPIS_GR_M')+' \par\par ', 0, 14, true, False, False);
-      PrintString(sl, 'Участок для голосования № '+IntToStr(nUch)+'      '+strNameUch+' \par\par ', 0, 12, False, False, true);
-      PrintString(sl, 'избирательный округ № '+s1+'     по выборам  '+ GlobalTask.GetLastValueAsString('NAME_OBL_SOV')+' \par ', 0, 12, false, false, true);
-      PrintString(sl, '   (наименование избирательного округа по выборам депутата областного Совета депутатов) \par\par ', 0, 8, false, false, false);
-      PrintString(sl, 'избирательный округ № '+s2+'     по выборам  '+ GlobalTask.GetLastValueAsString('NAME_RAI_SOV')+' \par ', 0, 12, false, false, true);
-      PrintString(sl, '   (наименование избирательного округа по выборам депутата районного, городского Совета депутатов) \par\par ', 0, 8, false, false, false);
-      PrintString(sl, 'избирательный округ №            по выборам  '+ GlobalTask.GetLastValueAsString('NAME_SEL_SOV')+' \par ', 0, 12, false, false, true);
-      PrintString(sl, '   (наименование избирательного округа по выборам депутата городского(города районного подчинения) поселкового, сельского Совета депутатов) \par\par\par ', 0, 8, false, false, false);
-
-//      PrintString(sl, '   (наименование избирательного округа по выборам депутата областного Совета депутатов)'+StringOfChar(' ',200)+'(наименование областного Совета депутатов) \par ', 0, 8, false, false, false);
-      for i:=0 to slWidth.Count-1 do begin
-        WidthList.Add(slWidth.Strings[i]);
-      end;
-      sss:='Номер избирательного округа по выборам депутатов местных Советов депутатов';
-      if lA4 then begin
-        HeadList.Add('\fs18 № п/п|\fs18 1');
-        HeadList.Add('\fs18 Фамилия, имя, отчество|\fs18 2');
-        HeadList.Add('\fs18 Год рождения|\fs18 3');
-        HeadList.Add('\fs18 Место жительства|\fs18 4');
-        nGr:=5;
-        if lAddObl then begin
-          HeadList.Add('\fs18 '+sss+'|\fs18 област- ного Совета|\fs18 '+IntToStr(nGR));
-          nGR:=nGR+1;
-        end;
-        HeadList.Add('\fs18 '+sss+'|\fs18 район- ного Совета|\fs18 '+IntToStr(nGR));
-        nGR:=nGR+1
-        if lGor then begin
-          HeadList.Add('\fs18 '+sss+'|\fs18 город- ского Совета|\fs18 '+IntToStr(nGR));
-          nGR:=nGR+1;
-        end;
-        if not lGKH then begin
-          HeadList.Add('\fs18 '+sss+'|\fs18 поселкового или сельского Совета|\fs18 '+IntToStr(nGR));
-          nGR:=nGR+1;
-        end;
-        HeadList.Add('\fs18 Подпись избирателя при получении бюллетеня|\fs18 при проведении основных выборов|\fs18 '+IntToStr(nGR));
-        nGR:=nGR+1;
-        HeadList.Add('\fs18 Подпись избирателя при получении бюллетеня|\fs18 при проведении повторных выборов|\fs18 '+IntToStr(nGR));
-        nGR:=nGR+1;
-        HeadList.Add('\fs18 Примечание|\fs18 '+IntToStr(nGR));
-      end else begin
-        HeadList.Add('№ п/п|1');
-        HeadList.Add('Фамилия, имя, отчество|2');
-        HeadList.Add('Год рождения|3');
-        HeadList.Add('Место жительства|4');
-        if lAddObl then begin
-          HeadList.Add(sss+'|областного Совета|6');
-          HeadList.Add(sss+'|районного Совета|5');
-        end else begin
-          HeadList.Add(sss+'|районного Совета|5');
-          HeadList.Add(sss+'|городского Совета|6');
-        end;
-        if lGor 
-          then HeadList.Add(sss+'|городского Совета|7')
-          else HeadList.Add(sss+'|поселкового или сельского Совета|7');
-        HeadList.Add('Подпись избирателя при получении бюллетеня|при проведении основных выборов|8');
-        HeadList.Add('Подпись избирателя при получении бюллетеня|при проведении повторных выборов|9');
-        HeadList.Add('Примечание|10');
-      end;
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs\fs28');
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      if not lA4 or lAddObl or lGor then slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      slPar.Add('\clvertalc\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrb\brdrs\clbrdrr\brdrs');
-      PrintTable(sl, tb, HeadList, WidthList, slPar, 0, 12);
-      PrintString(sl, ' \par\par ', 0, 12, false, false, false);
-      PrintString(sl, 'Председатель  ___________________________ участковой избирательной комиссии \par\par ', 0, 12, false, false, false);
-      PrintString(sl, '№ ______ по выборам депутатов местных Советов депутатов Республики Беларусь   __________                      ____________________ \par ', 0, 12, false, false, false);
-      PrintString(sl, StringOfChar(' ',142)+'(подпись)'+StringOfChar(' ',45)+'(инициалы, фамилия) \par\par ', 0, 8, false, false, false);
-      PrintString(sl, 'Секретарь        ___________________________ участковой избирательной комиссии \par\par ', 0, 12, false, false, false);
-      PrintString(sl, '№ ______ по выборам депутатов местных Советов депутатов Республики Беларусь   __________                      ____________________ \par ', 0, 12, false, false, false);
-      PrintString(sl, StringOfChar(' ',142)+'(подпись)'+StringOfChar(' ',45)+'(инициалы, фамилия) \par ', 0, 8, false, false, false);
-
-      if FinishPrint(GetFolderMyDocument+'\СписокИзбирателей'+IntToStr(nUch)+'.doc', sl, True, strErr) then begin
-        if ParamAsBoolean('SHOW_WRITE_DOK') 
-          then ShellExt(GetFolderMyDocument+'\СписокИзбирателей'+IntToStr(nUch)+'.doc')
-      end else begin
-        PutError(strErr);
-      end;
-      tb.Close;
-      CloseMessage;
-    end;
-    slWidth.Free;
-  end else begin
-    f.Free;
-  end;
-  finally
-    tb.Free;
-    sl.Free;
-    slPar.Free;
-    HeadList.Free;
-    WidthList.Free;
-  end;
-end;
-
 //----------------------------------------------------------------
 // приглашение на прием    ОЧЕРЕДЬ
 function PriglashPriem(DateFiks: TDateTime; LicID, PID: Word):Boolean;
@@ -1883,202 +1228,6 @@ begin
   end;
 end;
 
-//------------------------------------
-//----- различные СПИСКИ -------------
-//------------------------------------
-function ListPripis_UserForm:boolean;
-var
-  f:TfmParamQuest;
-  n:Integer;
-  sUch:String;
-begin
-  Result:=false;
-  f := TfmParamQuest.Create(nil);
-  f.Caption := 'Введите параметры';
-  n := StrToInt(FormatDateTime('YYYY', GlobalTask.CurrentDate))-16;
-  f.AddParamEx(n , 'Год рождения', 'YEAR','TYPE=LIST~DESC=KEY_YEARS');
-  f.AddParamEx(true , 'Только мужчины', 'ONLYM','');
-  f.AddParamEx(true , 'Включать временно отсутствующих', 'VREM','');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('N_PRIZ_UCH') , 'Номер призывного участка', 'PRIZ_UCH','WIDTH=100');
-  f.AddButtons('Выполнить~Отказ',0);
-  n:=f.ShowQuest;
-  if n = 1 then begin
-    GlobalTask.SetLastValueAsString('N_PRIZ_UCH', f.GetValue('PRIZ_UCH','S'));
-    SetGlobalVar('PRIZ_UCH',f.GetValue('PRIZ_UCH','C'));
-    SetGlobalVar('YEAR',f.GetValue('YEAR','C'));
-    SetGlobalVar('ONLYM',f.GetValue('ONLYM','L'));
-    SetGlobalVar('VREM',f.GetValue('VREM','L'));
-    Result:=true;
-  end;
-  f.Free;
-end;
-function ListPripis(DateFiks: TDateTime; LicID, PID: Word):boolean;
-var
-   ds,q:TDataSet;
-   strSQL,strID,s,ss : String;
-begin
-  Result:=true;
-  ds:=GetTemplateDataSet('MAIN');
-  if ds<>nil then begin
-    if not ds.Active then ds.Open;
-    ds.Edit;
-    ds.Fld('SHTAMP').AsString := GetShtampSpr();
-    ds.Fld('DATESOST').AsString := DatePropis(NOW,2);
-    ds.Fld('GODR').AsString := getGlobalvar('YEAR');
-    ds.Fld('PRIZ_UCH').AsString := getGlobalvar('PRIZ_UCH');
-    s:='';
-    if getGlobalvar('ONLYM') then begin
-      s:=' and pol='+QStr('М');
-    end;
-    ds.Fld('RUKOV').AsString :=DolgRukov()+'             '+FIORukov();
-    ds.Post;
-    ds:=GetTemplateDataSet('TABLSOST');
-    ss:=' and '+getStrPropis2(getGlobalvar('VREM'),false);
-    strSQL := 'SELECT id, familia, name, otch, dater, lic_id, adres_id '+
-        ' FROM Население n '+Chr(13)+
-        ' WHERE n.date_fiks='+QStr('1899-12-30')+' and dater is not null and Year(dater)='+getGlobalvar('YEAR')+ss+s+Chr(13)+
-        ' ORDER BY familia,name,otch ';
-    OpenMessage(' Формирование списка ... ','',10);
-    q:=dbOpenSQL(strSQL,'');
-    while not q.Eof do begin
-      ds.Append;
-      ds.Fld('FIO').AsString:=q.Fld('Familia').AsString+' '+q.Fld('Name').AsString+' '+q.Fld('Otch').AsString;
-      ds.Fld('MESTOR').AsString:=dmBase.getMenWork(DateFiks,q.Fld('ID').AsString);
-      if ds.Fld('MESTOR').AsString=''
-        then ds.Fld('MESTOR').AsString:=dmBase.getMenStud(DateFiks,q.Fld('ID').AsString);
-//      ds.Fld('MESTOR').AsString:=datePropis(q.Fld('DATER').AsDateTime,1)+' '+ds.Fld('MESTOR').AsString;
-      ds.Fld('MESTOG').AsString:=dmBase.AdresFromID(DateFiks,q.Fld('adres_id').AsString,false);
-      ds.Fld('OTMETKA').AsString:='';
-      ds.Post;
-      q.Next;
-    end;
-    dbClose(q);
-    CloseMessage;
-  end;
-end;
-//---------------------------------------------------
-// дети прод на территории
-function ListDetiProg_UserForm:boolean;
-var
-  f:TfmParamQuest;
-  n:Integer;
-begin
-  Result:=false;
-  f := TfmParamQuest.Create(nil);
-  f.Caption := 'Введите параметры';
-  f.AddParamEx(GlobalTask.GetLastValueAsDate('DATE_LIST'), 'На дату' , 'DATE_LIST' ,'TYPE=DATE');
-  f.AddParamEx(0, 'Начальный возраст' , 'VOZR1' ,'WIDTH=50');
-  f.AddParamEx(17, 'Конечный возраст' , 'VOZR2' ,'WIDTH=50');
-  f.AddParamEx(GlobalTask.GetLastValueAsInteger('PUNKT'),'Населенный пункт', 'PUNKT','TYPE=LOOKUP~DESC=LOOKUP_PUNKT~WIDTH=150');
-  f.AddParamEx(false , 'Включать временно отсутствующих', 'NOT_PRESENT','');
-  f.AddParamEx(true  , 'Заполнять учебное заведение', 'YES_UCH','');
-  f.AddButtons('Выполнить~Отказ',0);
-  n:=f.ShowQuest;
-  if n = 1 then begin
-    GlobalTask.SetLastValueAsInteger('PUNKT', f.GetValue('PUNKT','I'));
-    GlobalTask.SetLastValueAsInteger('VOZR1', f.GetValue('VOZR1','I'));
-    GlobalTask.SetLastValueAsInteger('VOZR2', f.GetValue('VOZR2','I'));
-    GlobalTask.SetLastValueAsDate('DATE_LIST', f.GetValue('DATE_LIST','D'));
-    GlobalTask.SetLastValueAsBoolean('NOT_PRESENT', f.GetValue('NOT_PRESENT','L'));
-    SetGlobalVar('NAME_PUNKT',f.GetValueAsText('PUNKT'));
-    SetGlobalVar('YES_UCH',f.GetValue('YES_UCH','L'));
-    Result:=true;
-  end;
-  f.Free;
-end;
-function ListDetiProg(DateFiks: TDateTime; LicID, PID: Word):boolean;
-var
-   ds,q,dsR:TDataSet;
-   strSQL,strID,s,sVozr,sNameVozr : String;
-   nPunkt,nVozr1,nVozr2:Integer;
-   dSost:TDateTime;
-   lUch:Boolean;
-begin
-  Result:=true;
-  ds:=GetTemplateDataSet('MAIN');
-  if ds<>nil then begin
-    if not ds.Active then ds.Open;
-    ds.Edit;
-    nPunkt:=GlobalTask.GetLastValueAsInteger('PUNKT');
-    if nPunkt<=0 
-      then s:=''
-      else s:=' and d.punkt='+IntToStr(nPunkt);
-    // только присутствующих
-    if not GlobalTask.GetLastValueAsBoolean('NOT_PRESENT') then begin
-      s:=s+' and n.present=true';
-    end;
-    dSost:= GlobalTask.GetLastValueAsDate('DATE_LIST');
-    nVozr1:= GlobalTask.GetLastValueAsInteger('VOZR1');
-    if nVozr1<0 then nVozr1:=0;
-    nVozr2:= GlobalTask.GetLastValueAsInteger('VOZR2');
-    if nVozr1<0 then nVozr2:=0;
-    sNameVozr:='';
-    if nVozr1<>0 then sNameVozr:=' от '+IntToStr(nVozr1);
-    if nVozr2<>0 then sNameVozr:=sNameVozr+' до '+IntToStr(nVozr2);
-    if sNameVozr<>'' then sNameVozr:=' ( '+sNameVozr+' лет включительно ) ';
-
-    sVozr:='';
-    if nVozr1<=0 then sVozr:='' else sVozr:=' GetVozrast('+DateToSQL(dSost)+',n.dater)>='+IntToStr(nVozr1);
-    if nVozr2>0 then begin
-      if sVozr<>'' then sVozr:=sVozr+' and ';
-      sVozr:=sVozr+' GetVozrast('+DateToSQL(dSost)+',n.dater)<='+IntToStr(nVozr2);
-    end;
-    if sVozr<>'' then sVozr:=' and '+sVozr;
-    lUch := GetGlobalVar('YES_UCH');
-    ds.Fld('NAME_PUNKT').AsString := GetGlobalVar('NAME_PUNKT');
-    ds.Fld('VOZRAST').AsString := sNameVozr;
-
-    ds.Fld('SHTAMP').AsString := GetShtampSpr();
-    ds.Fld('DATESOST').AsString := datePropis(dSost,3);
-    ds.Fld('DOLG_RUK').AsString :=DolgRukov();
-    ds.Fld('FIO_RUK').AsString :=FIORukov();
-    ds.Post;
-    ds:=GetTemplateDataSet('TABLSOST');
-    strSQL := 'SELECT n.id, familia, name, otch, dater, pol, adres_id, pa_id, ma_id, kurs '+
-        ' FROM Население n '+
-        ' LEFT JOIN БазаДомов d ON d.date_fiks=n.date_fiks and d.id=n.adres_id '+
-        ' WHERE n.date_fiks='+QStr('1899-12-30')+' and n.propis=true and n.candelete=false '+
-          sVozr+s+
-        ' ORDER BY familia,name,otch ';
-//        ' GetVozrast('+DateToSQL(dSost)+',n.dater)<18 '+s+
-//    writedebug(strSQL);
-    OpenMessage(' Формирование списка ... ','',10);
-    q:=dbOpenSQL(strSQL,'');
-    while not q.Eof do begin
-      ds.Append;
-      ds.Fld('FIO').AsString:=q.Fld('Familia').AsString+' '+q.Fld('Name').AsString+' '+q.Fld('Otch').AsString;
-      if lUch then begin
-        ds.Fld('NAME_UCH').AsString:=dmBase.getMenStud(DateFiks,q.Fld('ID').AsString);
-        if q.Fld('kurs').AsString<>'' 
-          then ds.Fld('NAME_UCH').AsString:=q.Fld('kurs').AsString+'кл. '+ds.Fld('NAME_UCH').AsString;
-      end;
-      ds.Fld('MESTOG').AsString:=dmBase.AdresFromID(DateFiks,q.Fld('adres_id').AsString,false);
-      s:='';
-      dsR:=dmBase.getMen(dateFiks,q.Fld('ma_id').AsString);
-      if dsR<>nil then begin
-        s:=dsR.Fld('Familia').AsString+' '+dsR.Fld('Name').AsString+' '+dsR.Fld('Otch').AsString;
-      end;
-      dsR:=dmBase.getMen(dateFiks,q.Fld('pa_id').AsString);
-      if dsR<>nil then begin
-        if s<>'' then s:=s+chr(13);
-        s:=s+dsR.Fld('Familia').AsString+' '+dsR.Fld('Name').AsString+' '+dsR.Fld('Otch').AsString;
-      end;
-      ds.Fld('RODIT').AsString:=s;
-      ds.Fld('POL').AsString:=q.Fld('POL').AsString;
-      ds.Fld('DATER').AsString:=DatePropis(q.Fld('DATER').AsDateTime,3);
-      ds.Fld('OTMETKA').AsString:='';
-      ds.Post;
-      q.Next;
-    end;
-    dbClose(q);
-    CloseMessage;
-  end;
-end;
-
-//------------------------------------
-//---------- end списки
-//------------------------------------
-
 //------------------------ sprWord
 // Архивная справка о рождении  (ф1, ф2, для постановки на учет по жилью)
 function SPR_ARXIV_ROGD(DateFiks: TDateTime; LicID, PID: Word):boolean;
@@ -2108,8 +1257,7 @@ begin
 //     ds.Fld('ARX_ADRESAT').AsString   := DokZAGS.Fld('ARX_ADRESAT').AsString;
      ds.Fld('NAME').AsString :=GetPadeg(GlobalTask.ParamAsString('NAME'),'Р');
      ds.Fld('FIOP').AsString :=GetPadegFIO3(DokZAGS.Fld('FAMILIA').AsString,DokZAGS.Fld('NAME').AsString,DokZAGS.Fld('OTCH').AsString,DokZAGS.Fld('POL').AsString,'В');
-     ds.Fld('DATER').AsString:=DatePropis(DokZAGS.Fld('DATER').AsDateTime,TYPE_DATE_SPRAV);
-     ds.Fld('DATER').AsString:=GetNameAsPol('родившегося',DokZAGS.Fld('POL').AsString+'+')+' '+ds.Fld('DATER').AsString;
+     ds.Fld('DATER').AsString:=GetNameAsPol('родившегося',DokZAGS.Fld('POL').AsString+'+')+' '+DatePropis(DokZAGS.Fld('DATER').AsDateTime,TYPE_DATE_SPRAV);
      PAR1:=GetTemplateParam('PAR1');
      //------ !!! -----------
      fldAdr:=DokZAGS.Fld('ADRESAT'); 
@@ -2163,7 +1311,7 @@ begin
        result:=false;
      end;
      s:=Trim(DokZags.Fld('IZMEN').AsString);
-     if s='' then s:=getResource('SPR_ROGD_IZM',nType) else s:=s+'.';
+     if s='' then s:=getResource('SPR_ROGD_IZM',nType) else if Right(s,1)<>'.' then s:=s+'.';
      if DokZAGS.Fld('ON_DATE_LR')<>nil then begin // !!!
        if not DokZAGS.Fld('ON_DATE_LR').IsNull 
          then s:=s+CRLF+getResource('SPR_ON_LR',nType)+' '+DatePropis(DokZAGS.Fld('ON_DATE_LR').AsDateTime,TYPE_DATE_SPRAV);
@@ -2216,16 +1364,21 @@ begin
 // ds.Fld('NAME').AsString := GetPadeg(GlobalTask.ParamAsString('NAME'),'Р'); 
      ds.Fld('FIOP').AsString   := GetPadegFIO3(DokZAGS.Fld('FAMILIA').AsString,DokZAGS.Fld('NAME').AsString,DokZAGS.Fld('OTCH').AsString,DokZAGS.Fld('POL').AsString,'И');
      if (YearOf(NOW)>2015) and (DokZAGS.Fld('IDENTIF').AsString<>'') then begin
-       ds.Fld('FIOP').AsString:=ds.Fld('FIOP').AsString+', '+getResource('IN',nType)+': '+DokZAGS.Fld('IDENTIF').AsString+', ';
+       ds.Fld('FIOP').AsString:=ds.Fld('FIOP').AsString+', '+getResource('IN',nType)+': '+DokZAGS.Fld('IDENTIF').AsString+',';
      end;
      if DokZAGS.Fld('ONLYGOD').AsBoolean
        then ds.Fld('DATER').AsString := DatePropis(DokZAGS.Fld('DATER').AsDateTime,7)+'г.'
        else ds.Fld('DATER').AsString := DatePropis(DokZAGS.Fld('DATER').AsDateTime,6);
 
      ds.Fld('DATEZ').AsString := DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,6);
-// ds.Fld('DATEZ').AsString := FormatDateTime('YYYY',DokZAGS.Fld('DATEZ').AsDateTime);
-     ds.Fld('SPRAV_DATE').AsString := DatePropis(NOW,TYPE_DATE_SPRAV);
      ds.Fld('NOMER').AsString := DokZAGS.Fld('NOMER').AsString;
+     ds.Fld('SPRAV_DATE').AsString:=DatePropis(Now,TYPE_DATE_SPRAV);
+     if DokZAGS.Fld('VOSSTAN').AsBoolean then begin
+       ds.Fld('SPRAV_NOMER').AsString:='';
+     end else begin
+//       ds.Fld('SPRAV_DATE').AsString:=DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,TYPE_DATE_SPRAV);
+       ds.Fld('SPRAV_NOMER').AsString:=DokZAGS.Fld('SPRAV_NOMER').AsString;
+     end;
      // 1-белорусски,краткое   2-падеж    NameZAGS('БК','Р')
      ds.Fld('ORGAN_ZAGS').AsString := DokZAGS.NameZAGS2('','Т');
      ds.Fld('MESTOR').AsString := DokZAGS.GetAdres2('GOSUD,FNAME;+OBL,B_OBL;RAION;GOROD,B_GOROD;',3);     
@@ -2282,15 +1435,17 @@ begin
      end else begin
       ds.Fld('ROD').AsString := 'родившуюся' ;
      end;
-// ds.Fld('NAME').AsString := GetPadeg(GlobalTask.ParamAsString('NAME'),'Т'); 
      ds.Fld('FIOP').AsString   := GetPadegFIO3(DokZAGS.Fld('FAMILIA').AsString,DokZAGS.Fld('NAME').AsString,DokZAGS.Fld('OTCH').AsString,DokZAGS.Fld('POL').AsString,'В');
      ds.Fld('DATER').AsString := DatePropis(DokZAGS.Fld('DATER').AsDateTime,6);
      ds.Fld('DATEZ').AsString := DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,6);
-// ds.Fld('DATEZ').AsString := FormatDateTime('YYYY',DokZAGS.Fld('DATEZ').AsDateTime);
-     ds.Fld('SPRAV_DATE').AsString := DatePropis(NOW,TYPE_DATE_SPRAV);
-//     ds.Fld('SPRAV_DATE').AsString := DokZAGS.Fld('SPRAV_DATE').AsString;
-// ds.Fld('SPRAV_NOMER').AsString := DokZAGS.Fld('SPRAV_NOMER').AsString;
      ds.Fld('NOMER').AsString := DokZAGS.Fld('NOMER').AsString;
+     ds.Fld('SPRAV_DATE').AsString:=DatePropis(Now,TYPE_DATE_SPRAV);
+     if DokZAGS.Fld('VOSSTAN').AsBoolean then begin
+       ds.Fld('SPRAV_NOMER').AsString:='';
+     end else begin
+//       ds.Fld('SPRAV_DATE').AsString:=DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,TYPE_DATE_SPRAV);
+       ds.Fld('SPRAV_NOMER').AsString:=DokZAGS.Fld('SPRAV_NOMER').AsString;
+     end;
      // 1-белорусски,краткое   2-падеж    NameZAGS('БК','Р')
      ds.Fld('ORGAN_ZAGS').AsString := DokZAGS.NameZAGS2('','П');
      ds.Fld('MESTOR').AsString := DokZAGS.GetAdres2('GOSUD,FNAME;+OBL,B_OBL;RAION;GOROD,B_GOROD;',3);     
@@ -2419,8 +1574,8 @@ begin
      if (YearOf(NOW)>2015) then begin
        ds.Fld('FIOP').AsString:=ds.Fld('FIOP').AsString+', '+getResource('IN',nType)+': ';
        if DokZAGS.Fld('LICH_NOMER').AsString=''
-         then ds.Fld('FIOP').AsString:=ds.Fld('FIOP').AsString+getResource('NONE',nType)+', '
-         else ds.Fld('FIOP').AsString:=ds.Fld('FIOP').AsString+DokZAGS.Fld('LICH_NOMER').AsString+', ';
+         then ds.Fld('FIOP').AsString:=ds.Fld('FIOP').AsString+getResource('NONE',nType)+','
+         else ds.Fld('FIOP').AsString:=ds.Fld('FIOP').AsString+DokZAGS.Fld('LICH_NOMER').AsString+',';
      end;
 
      ds.Fld('DateS').AsString := DatePropisEX(DokZAGS.Fld('DateS').AsDateTime,6,DokZAGS.Fld('ONLYGOD').AsInteger);
@@ -2838,7 +1993,7 @@ begin
      ds.Fld('ARX_NOMER').AsString := DokZAGS.Fld('ARX_NOMER').AsString;
      ds.Fld('NOMER').AsString := DokZAGS.Fld('NOMER').AsString;
      // 1-белорусски,краткое   2-падеж    NameZAGS('БК','Р')
-     ds.Fld('ORGAN_ZAGS').AsString := DokZAGS.NameZAGS2('','И');
+     ds.Fld('ORGAN_ZAGS').AsString := DokZAGS.NameZAGS2('','П');
      ds.Fld('F').AsString := GetPadegFIO(DokZAGS.Fld('FAMILIAposle').AsString,DokZAGS.Fld('POL').AsString,'И');
      ds.Fld('I').AsString := GetPadegFIO(DokZAGS.Fld('NAMEposle').AsString,DokZAGS.Fld('POL').AsString,'И');
      ds.Fld('O').AsString := GetPadegFIO(DokZAGS.Fld('OTCHposle').AsString,DokZAGS.Fld('POL').AsString,'И');
@@ -2920,9 +2075,11 @@ end;
 function ZAGS_SprOtsut(DateFiks: TDateTime; LicID, PID: Word):boolean;
 var
    ds,dsRast: TDataSet;
-   sPol,sPol2,s,ss,s3,Strin : String;      
+   sPol,sPol2,s,ss,s3,Strin,sKrat : String;      
    nType:Integer;
 begin
+//   sKrat:='<.>';
+   sKrat:='';  // !!!  возможно нужно анализировать параметр !!!   '' или '<.>'
    result:=true;
    ds:=GetTemplateDataSet('MAIN');
    if ds<>nil then begin
@@ -2934,10 +2091,10 @@ begin
      if sPol='М' then sPol2:='Ж' else sPol2:='М';
      if nType=1 then begin // на бел. языке
        ds.Fld('ROGD').AsString      := GetNameAsPolBel('які нарадзіўся',sPol)+' '+
-                                       DatePropisBel(DokZAGS.Fld('DATER').AsDateTime,TYPE_DATE_SPRAV)+', месца нараджэння: '+
-                                       DokZAGS.GetAdres2('<B>RG_GOSUD,FNAME_B;+RG_OBL,RG_B_OBL;RG_RAION;RG_GOROD,RG_B_GOROD;',1);     
+                                       DatePropisBel(DokZAGS.Fld('DATER').AsDateTime,TYPE_DATE_SPRAV)+' у '+
+                                       DokZAGS.GetAdres2(sKrat+'<B>RG_GOSUD,FNAME_B;+RG_OBL,RG_B_OBL;RG_RAION;RG_GOROD,RG_B_GOROD;',1);     
        ds.Fld('MESTO_GIT').AsString := 'і пастаянна пражывае па адрасе: '+
-                                       DokZAGS.GetAdres2('<B>GT_GOSUD,FNAME_B;+GT_OBL,GT_B_OBL;GT_RAION;GT_GOROD,GT_B_GOROD;GT_GOROD_R',1);     
+                                       DokZAGS.GetAdres2(sKrat+'<B>GT_GOSUD,FNAME_B;+GT_OBL,GT_B_OBL;GT_RAION;GT_GOROD,GT_B_GOROD;GT_GOROD_R',1);     
        ds.Fld('ZAV').AsString       := GetNameAsPolBel('заяўніка',sPol);
        if DokZAGS.Fld('GRAG').AsString='999'
          then ds.Fld('GRAG').AsString := 'асобы без грамадзянства' 
@@ -2963,12 +2120,17 @@ begin
        ds.Fld('DOLG_RUK_ZAGS').AsString :=DokZAGS.Fld('DOLG_RUKOV_B').AsString;
        ds.Fld('RUKOV').AsString :=DokZAGS.Fld('RUKOV_B').AsString;
      end else begin
-       ds.Fld('ROGD').AsString      := GetNameAsPol('родившегося',sPol)+' '+
-                                       DatePropis(DokZAGS.Fld('DATER').AsDateTime,TYPE_DATE_SPRAV)+', место рождения: '+
-                                       DokZAGS.GetAdres('RG_GOSUD,FNAME;RG_OBL,RG_B_OBL;RG_RAION;RG_GOROD,RG_B_GOROD;',1);     
-       ds.Fld('MESTO_GIT').AsString := GetNameAsPol('проживающего',sPol)+' по адресу: '+
-                                       DokZAGS.GetAdres('GT_GOSUD,FNAME;GT_OBL,GT_B_OBL;GT_RAION;GT_GOROD,GT_B_GOROD;GT_GOROD_R',1);     
-       ds.Fld('ZAV').AsString       := GetNameAsPol('заявителя',sPol);
+       ds.Fld('ROGD').AsString:=GetNameAsPol('родившегося',sPol)+' '+
+                                DatePropis(DokZAGS.Fld('DATER').AsDateTime,TYPE_DATE_SPRAV)+' в '+
+                                DokZAGS.GetAdres2(sKrat+'RG_GOSUD,FNAME;+RG_OBL,RG_B_OBL;RG_RAION;RG_GOROD,RG_B_GOROD;',3);     
+       if DokZAGS.Fld('GT_GOSUD').AsInteger=defGrag then begin
+         ds.Fld('MESTO_GIT').AsString:=GetNameAsPol('проживающего',sPol)+' в Республике Беларусь по адресу: '+
+                                       DokZAGS.GetAdres2(sKrat+';GT_OBL,GT_B_OBL;GT_RAION;GT_GOROD,GT_B_GOROD;GT_GOROD_R',3);     
+       end else begin
+         ds.Fld('MESTO_GIT').AsString:=GetNameAsPol('проживающего',sPol)+' по адресу: '+
+                                       DokZAGS.GetAdres2(sKrat+'GT_GOSUD,FNAME;GT_OBL,GT_B_OBL;GT_RAION;GT_GOROD,GT_B_GOROD;GT_GOROD_R',3);     
+       end;
+       ds.Fld('ZAV').AsString:=GetNameAsPol('заявителя',sPol);
 
        Strin:='гражданина';
      //  if DokZAGS.Fld('GRAG').AsString<>'112' then begin 
@@ -2988,7 +2150,7 @@ begin
          ss:=Trim(dsRast.Fld('B_ZAGS').AsString);
          if ss='' then ss:=GetPadeg(GlobalTask.ParamAsString('NAME'),'Р');
          s:=chr(13)+chr(9)+'В документах архива '+ss;
-         s:=s+' имеется на хранении запись акта о заключении брака № '+dsRast.Fld('B_NOMER').AsString+' совершенная '+
+         s:=s+' имеется на хранении запись акта о заключении брака № '+dsRast.Fld('B_NOMER').AsString+' составленная '+
             DatePropis(dsRast.Fld('B_DATE').AsDateTime,TYPE_DATE_SPRAV)+' в отношении '+ 
             ds.Fld('GRAG').AsString+' '+GetPadegFIO(dsRast.Fld('LICO').AsString,sPol,'Р')+' и '+GetPadegFIO(dsRast.Fld('SUPRUG').AsString,sPol2,'Р')+'.'+chr(13)+chr(9);
          ss:=GetBrakRast(DokZAGS.GetTable('tbRast'),'#','','');
@@ -3150,7 +2312,7 @@ begin
 
      ds.Fld('SOOB').AsString := Replace_CRLF(DokZAGS.Fld('SOOB').AsString);
      if DokZAGS.Fld('IS_IZMEN').AsBoolean then begin
-       ds.Fld('IS_IZMEN').AsString:= 'При разрешении на перемену, выданном вышестоящим органом загса, необходимо внести изменения в следующие записи актов гражданского состояния:';
+       ds.Fld('IS_IZMEN').AsString:= 'При разрешении на перемену, выданном '+getPadeg(GlobalTask.ParamAsString('VIS_ORGAN'),'Т')+', необходимо внести изменения в следующие записи актов гражданского состояния:';
        ds.Fld('IZMEN').AsString := Replace_CRLF(DokZAGS.Fld('IZMEN').AsString);
      end;
      ds.Fld('DATEZ').AsString := DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,DP_MAIN);
@@ -3190,9 +2352,9 @@ begin
      s:='';
      if DokZAGS.Fld('IS_IZMEN').AsBoolean  then s:='изменений';
      if DokZAGS.Fld('IS_DOPOLN').AsBoolean then ss:='дополнений' else ss:='';
-     if ss<>'' then if s='' then s:=ss else s:=s+','+ss;
+     if ss<>'' then if s='' then s:=ss else s:=s+', '+ss;
      if DokZAGS.Fld('IS_ISPRAV').AsBoolean then ss:='исправлений' else ss:='';
-     if ss<>'' then if s='' then s:=ss else s:=s+','+ss;
+     if ss<>'' then if s='' then s:=ss else s:=s+', '+ss;
      ds.Fld('CHECK_IZM').AsString:=s;
 
      ds.Fld('PROSIT').AsString := Replace_CRLF2(DokZAGS.Fld('PROSIT').AsString,l);
@@ -3719,7 +2881,7 @@ begin
      if sp='М' then ss:='усыновлении' else ss:='удочерении'; 
      s:=s+NameOrg('','И')+' извещает суд об исполнении решения суда от '+DatePropis(DokZAGS.Fld('SUD_DATE').AsDateTime,5)+', вступившего в законную силу '+
         DatePropis(DokZAGS.Fld('SUD_DATEV').AsDateTime,5)+' и по заявлению '+DokZags.FIO2('ON_','М','Р')+' об '+ss+' '+DokZags.FIO2('DO;E',sp,'Р')+'.'+CRLF;
-     s:=s+DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,5)+' составлена запись акта об '+ss+' № '+DokZAGS.Fld('NOMER').AsString+' на '+DokZags.FIO2('DO;E',sp,'Р')+' '+
+     s:=s+DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,5)+' составлена запись акта об '+ss+' №'+chr(160)+DokZAGS.Fld('NOMER').AsString+' на '+DokZags.FIO2('DO;E',sp,'Р')+' '+
         NameOrg('','Т')+' и по заявлению '+DokZags.FIO2('ON_','М','Р')+' от '+DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,5);
      ds.Fld('TEXT1').AsString:=s;
      ds.Fld('DOLG_RUK_ZAGS').AsString :=Zags_Sprav_Dolg;
@@ -3889,10 +3051,15 @@ begin
      if DokZAGS.Fld('ADRESAT')=nil then begin   // из акта
        ds.Fld('DOLG_RUK_ZAGS').AsString :=Zags_Sprav_Dolg;
        ds.Fld('RUKOV').AsString :=Zags_Sprav_FIO;
+       ds.Fld('NOMER').AsString :=DokZAGS.Fld('NOMER').AsString;
+       ds.Fld('DATEZ').AsString:=DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,6);
+       ds.Fld('ORGAN_ZAGS').AsString:=DokZAGS.NameZAGS2('','П');
      end else begin
        ds.Fld('DOLG_RUK_ZAGS').AsString :=DokZAGS.Fld('DOLG_RUKOV').AsString;
        ds.Fld('RUKOV').AsString :=DokZAGS.Fld('RUKOV').AsString;
-       ds.Fld('NOMER').AsString :=DokZAGS.Fld('NOMER').AsString;
+       ds.Fld('NOMER').AsString :=DokZAGS.Fld('ZAP_NOMER').AsString;
+       ds.Fld('DATEZ').AsString:=DatePropis(DokZAGS.Fld('ZAP_DATE').AsDateTime,6);
+       ds.Fld('ORGAN_ZAGS').AsString:=DokZAGS.Fld('NAME_ZAGS').AsString;
      end;
      ds.Post;
    end;
@@ -3918,12 +3085,16 @@ begin
      if DokZAGS.Fld('ADRESAT')=nil then begin   // из акта
        ds.Fld('DOLG_RUK_ZAGS').AsString :=Zags_Sprav_Dolg;
        ds.Fld('RUKOV').AsString :=Zags_Sprav_FIO;
+       ds.Fld('NOMER').AsString :=DokZAGS.Fld('NOMER').AsString;
+       ds.Fld('DATEZ').AsString:=DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,6);
+       ds.Fld('ORGAN_ZAGS').AsString:=DokZAGS.NameZAGS2('','П');
      end else begin
        ds.Fld('DOLG_RUK_ZAGS').AsString :=DokZAGS.Fld('DOLG_RUKOV').AsString;
        ds.Fld('RUKOV').AsString :=DokZAGS.Fld('RUKOV').AsString;
-       ds.Fld('NOMER').AsString :=DokZAGS.Fld('NOMER').AsString;
+       ds.Fld('NOMER').AsString :=DokZAGS.Fld('ZAP_NOMER').AsString;
+       ds.Fld('DATEZ').AsString:=DatePropis(DokZAGS.Fld('ZAP_DATE').AsDateTime,6);
+       ds.Fld('ORGAN_ZAGS').AsString:=DokZAGS.Fld('NAME_ZAGS').AsString;
      end;
-
      ds.Post;
    end;
 end;
@@ -3948,7 +3119,6 @@ begin
      end else begin
        ds.Fld('DOLG_RUK_ZAGS').AsString :=DokZAGS.Fld('DOLG_RUKOV').AsString;
        ds.Fld('RUKOV').AsString :=DokZAGS.Fld('RUKOV').AsString;
-       ds.Fld('NOMER').AsString :=DokZAGS.Fld('NOMER').AsString;
      end;
 
      ds.Post;
@@ -3985,10 +3155,15 @@ begin
      if fldAdr=nil then begin   // из акта
        ds.Fld('DOLG_RUK_ZAGS').AsString :=Zags_Sprav_Dolg;
        ds.Fld('RUKOV').AsString :=Zags_Sprav_FIO;
+       ds.Fld('NOMER').AsString :=DokZAGS.Fld('NOMER').AsString;
+       ds.Fld('DATEZ').AsString:=DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,6);
+       ds.Fld('ORGAN_ZAGS').AsString:=DokZAGS.NameZAGS2('','П');
      end else begin
        ds.Fld('DOLG_RUK_ZAGS').AsString :=DokZAGS.Fld('DOLG_RUKOV').AsString;
        ds.Fld('RUKOV').AsString :=DokZAGS.Fld('RUKOV').AsString;
-       ds.Fld('NOMER').AsString :=DokZAGS.Fld('NOMER').AsString;
+       ds.Fld('NOMER').AsString :=DokZAGS.Fld('B_NOMER').AsString;
+       ds.Fld('DATEZ').AsString:=DatePropis(DokZAGS.Fld('B_DATE').AsDateTime,6);
+       ds.Fld('ORGAN_ZAGS').AsString:=DokZAGS.Fld('NAME_ZAGS').AsString;
      end;
      ds.Post;
    end;
@@ -4023,10 +3198,15 @@ begin
      if DokZAGS.Fld('ADRESAT')=nil then begin   // из акта
        ds.Fld('DOLG_RUK_ZAGS').AsString :=Zags_Sprav_Dolg;
        ds.Fld('RUKOV').AsString :=Zags_Sprav_FIO;
+       ds.Fld('NOMER').AsString :=DokZAGS.Fld('NOMER').AsString;
+       ds.Fld('DATEZ').AsString:=DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,6);
+       ds.Fld('ORGAN_ZAGS').AsString:=DokZAGS.NameZAGS2('','П');
      end else begin
        ds.Fld('DOLG_RUK_ZAGS').AsString :=DokZAGS.Fld('DOLG_RUKOV').AsString;
        ds.Fld('RUKOV').AsString :=DokZAGS.Fld('RUKOV').AsString;
-       ds.Fld('NOMER').AsString :=DokZAGS.Fld('NOMER').AsString;
+       ds.Fld('NOMER').AsString :=DokZAGS.Fld('ZAP_NOMER').AsString;
+       ds.Fld('DATEZ').AsString:=DatePropis(DokZAGS.Fld('ZAP_DATE').AsDateTime,6);
+       ds.Fld('ORGAN_ZAGS').AsString:=DokZAGS.Fld('NAME_ZAGS').AsString;
      end;
      ds.Post;
    end;
@@ -4057,10 +3237,15 @@ begin
      if fldAdr=nil then begin   // из акта
        ds.Fld('DOLG_RUK_ZAGS').AsString :=Zags_Sprav_Dolg;
        ds.Fld('RUKOV').AsString :=Zags_Sprav_FIO;
+       ds.Fld('NOMER').AsString :=DokZAGS.Fld('NOMER').AsString;
+       ds.Fld('DATEZ').AsString:=DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,6);
+       ds.Fld('ORGAN_ZAGS').AsString:=DokZAGS.NameZAGS2('','П');
      end else begin
        ds.Fld('DOLG_RUK_ZAGS').AsString :=DokZAGS.Fld('DOLG_RUKOV').AsString;
        ds.Fld('RUKOV').AsString :=DokZAGS.Fld('RUKOV').AsString;
-       ds.Fld('NOMER').AsString :=DokZAGS.Fld('NOMER').AsString;
+       ds.Fld('NOMER').AsString :=DokZAGS.Fld('ZAP_NOMER').AsString;
+       ds.Fld('DATEZ').AsString:=DatePropis(DokZAGS.Fld('ZAP_DATE').AsDateTime,6);
+       ds.Fld('ORGAN_ZAGS').AsString:=DokZAGS.Fld('NAME_ZAGS').AsString;
      end;
      ds.Post;
    end;
@@ -4085,10 +3270,15 @@ begin
      if DokZAGS.Fld('ADRESAT')=nil then begin   // из акта
        ds.Fld('DOLG_RUK_ZAGS').AsString :=Zags_Sprav_Dolg;
        ds.Fld('RUKOV').AsString :=Zags_Sprav_FIO;
+       ds.Fld('NOMER').AsString :=DokZAGS.Fld('NOMER').AsString;
+       ds.Fld('DATEZ').AsString:=DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,6);
+       ds.Fld('ORGAN_ZAGS').AsString:=DokZAGS.NameZAGS2('','П');
      end else begin
        ds.Fld('DOLG_RUK_ZAGS').AsString :=DokZAGS.Fld('DOLG_RUKOV').AsString;
        ds.Fld('RUKOV').AsString :=DokZAGS.Fld('RUKOV').AsString;
-       ds.Fld('NOMER').AsString :=DokZAGS.Fld('NOMER').AsString;
+       ds.Fld('NOMER').AsString :=DokZAGS.Fld('ZAP_NOMER').AsString;
+       ds.Fld('DATEZ').AsString:=DatePropis(DokZAGS.Fld('ZAP_DATE').AsDateTime,6);
+       ds.Fld('ORGAN_ZAGS').AsString:=DokZAGS.Fld('NAME_ZAGS').AsString;
      end;
      ds.Post;
    end;
@@ -5048,7 +4238,8 @@ begin
      ds.Fld('Adres').AsString := adr.GetAdres+' '+FirstCharUpper(Raion_Name('Р'))+' '+FirstCharUpper(Obl_Name('Р'));
      ds.Fld('FIO_SEK').AsString := FIOSecretar();
      ds.Fld('DOLG_SEK').AsString := DolgSecretar();
-
+     ds.Fld('FIO_RUK').AsString := FIORukov();
+     ds.Fld('DOLG_RUK').AsString := DolgRukov();
      if m.Fld('POL').AsString='М' then begin
 //        ds.Fld('ONO').AsString := 'он' ;
         ds.Fld('Zarm').AsString := 'зарегистрирован' ;
@@ -5194,204 +4385,6 @@ begin
      ds.Fld('TYPESOBSTV').AsString:=strGR+addWordKv(adr);
      ds.Fld('SOBSTV').AsString:=s+' '+strSobstv;
      ds.Post;
-   end;
-end;
-
-//-------------------------------------------------------------------------
-// Справка о месте жительства и составе семьи
-function SprMGS(DateFiks: TDateTime; LicID, PID: Word):boolean;
-var
-   ds, spr, dsDeti: TDataSet;
-   ps,d,v,k: String;
-   m : TMens;
-   adr : TAdresLic;
-   s,strKomu,strPol,strPol2,strPol3,strErr,strEG,
-   strAdres,strSobstv,strTypeSobstv,strGR, strPlosh : String;
-   nID,nn : Integer;
-   sOtnosh :String;
-   strNanim,strYear,sPadeg,sAdd1,sAdd2 : String;
-   lAsGKX:Boolean;
-begin
-   result:=true;
-   ds:=GetTemplateDataSet('MAIN');
-   lAsGKX:=ParamAsBoolean('SPRMGS_GKX');  // в соотв. с постановлением ЖКХ
-   if ds<>nil then begin
-     if not ds.Active then ds.Open;
-     ds.Edit;
-     m := LicSchet.Mens;
-     adr := LicSchet.Adres;
-     strKomu := m.FIO;
-     strYear:='';
-     if lAsGKX then begin
-       sAdd1:='Выдана '+GetNameAsPol('гражданину',m.Fld('POL').AsString)+' ';
-       sAdd2:='в том, что '+GetNameAsPol('он',m.Fld('POL').AsString)+' действительно ';
-       sPadeg:='Д';
-     end else begin
-       sAdd1:='';
-       sAdd2:='';
-       sPadeg:='И';
-       if m.Fld('DATER').AsString<>'' then begin
-         if GetTemplateParam('PAR2')='2' then begin
-           strYear := ', '+DatePropis(m.Fld('DATER').AsDateTime,3);
-         end else begin
-           strYear := ', '+FormatDateTime('yyyy',m.Fld('DATER').AsDateTime)+' г.р.';
-         end;
-       end;
-     end;
-     strGR:='';
-     ds.Fld('SHTAMP').AsString := GetShtampSpr();
-     ds.Fld('TEKU_DATE').AsString := FormatDateTime('dd.mm.yyyy',NOW);
-     ds.Fld('NomerLS').AsString := LicSchet.Fld('NOMER').AsString;
-     ds.Fld('PLOSH_ALL').AsString := LicSchet.Fld('@PLOSH_ALL').AsString;
-     ds.Fld('PLOSH_GIL').AsString := LicSchet.Fld('@PLOSH_GIL').AsString;
-     ds.Fld('Komu').AsString := sAdd1+GetPadegFIO3(m.Familia,m.Name,m.Otch,m.Fld('POL').AsString,sPadeg)+strYear;
-//     ds.Fld('Komu').AsString := sAdd1+GetPadegFIO(strKomu,m.Fld('POL').AsString,sPadeg)+strYear;
-     if GetTemplateParam('PAR2')='2' then begin
-       ds.Fld('NAME_DATER').AsString := 'Дата рождения';
-       ds.Fld('DATER').AsString := DatePropis(m.Fld('DATER').AsDateTime,3);
-     end else begin
-       ds.Fld('NAME_DATER').AsString := 'Год рождения';
-       ds.Fld('DATER').AsString := DatePropis(m.Fld('DATER').AsDateTime,7);
-     end;
-     ds.Fld('Adres').AsString := adr.GetAdres+' '+FirstCharUpper(Raion_Name('Р'))+' '+FirstCharUpper(Obl_Name('Р'));
-
-     WritePodpis(ds, StrToInt(GetTemplateParam('PAR1')) );
-
-     WriteMenToSpr(m,ds);
-     ds.Fld('Zarm').AsString:=sAdd2+ds.Fld('Zarm').AsString;
-
-//     ds.Fld('TYPEHOUSE').AsString :=GetTypeHouse(LicSchet.Fld('OWN_HOUSE').AsBoolean,LicSchet.Fld('TYPEHOUSE').AsString,'частный дом');
-     ds.Fld('TYPEHOUSE').AsString:=GetPredst(LicSchet.Fld('PREDST').AsString,'частный дом','NAME2');
- 
-     ds.Post;
-     ds:=GetTemplateDataSet('TABLSOST');
-     nID := m.Fld('ID_INTERNAL').AsInteger;
-     sOtnosh := m.Fld('OTNOSH').AsString;
-     m.First;
-     nn:=0;
-     strNanim:='';
-     while not m.Eof do begin
-       if m.Fld('ID_INTERNAL').AsString=LicSchet.Fld('FIRST').AsString then begin
-         strNanim := m.FIO; // наниматель
-       end;
-       if AddMenToSprav(m,nID) then begin
-         nn:=nn+1;
-         ds.Append;
-         ds.Fld('NN').AsString  := IntToStr(nn)+'.';
-         ds.Fld('FIO').AsString := m.FIO;
-         if GetTemplateParam('PAR2')='2' then begin
-           ds.Fld('DATER').AsString := DatePropis(m.Fld('DATER').AsDateTime,3);
-         end else begin
-           ds.Fld('DATER').AsString := DatePropis(m.Fld('DATER').AsDateTime,7);
-         end;
-         ds.Fld('OTNOS').AsString := GetOtnoshMen(nID,sOtnosh,m,true);
-         ds.Post;
-       end;
-       m.Next;
-     end;
-     m.First;
-
-     ds:=GetTemplateDataSet('MAIN');
-     ds.Edit;
-
-     s:='является';
-     strTypeSobstv:=CheckOwners(adr,s,strSobstv,strNanim);
-     ds.Fld('TYPESOBSTV').AsString:=strTypeSobstv+addWordKv(adr);
-     ds.Fld('NANIM').AsString:=s+' '+strSobstv;
-
-     ds.Post;
-
-   end;
-end;
-
-//=== адрес ================================
-// Справка о месте жительства и составе семьи
-function SprMGS_Adres(DateFiks: TDateTime; LicID, PID: Word):boolean;
-var
-   ds, spr, dsDeti: TDataSet;
-   ps,d,v,k: String;
-   m : TMens;
-   adr : TAdresLic;
-   s,strKomu,strPol,strPol2,strPol3,strErr,strEG,
-   strAdres,strSobstv,strGR, strPlosh : String;
-   nID,nn : Integer;
-   sOtnosh :String;
-   strNanim,strYear,sPadeg,sAdd1,sAdd2 : String;
-   lAsGKX:Boolean;
-begin
-   result:=true;
-   lAsGKX:=ParamAsBoolean('SPRMGS_GKX');  // в соотв. с постановлением ЖКХ
-   ds:=GetTemplateDataSet('MAIN');
-   if ds<>nil then begin
-     if not ds.Active then ds.Open;
-     ds.Edit;
-     adr := Adres;
-     m := adr.Mens;
-     strKomu := m.FIO;
-     strYear:='';
-     if lAsGKX then begin
-       sAdd1:='Выдана '+GetNameAsPol('гражданину',m.Fld('POL').AsString)+' ';
-       sAdd2:='в том, что '+GetNameAsPol('он',m.Fld('POL').AsString)+' действительно ';
-       sPadeg:='Д';
-     end else begin
-       sAdd1:='';
-       sAdd2:='';
-       sPadeg:='И';
-       if m.Fld('DATER').AsString<>'' then begin
-         strYear := ', '+FormatDateTime('yyyy',m.Fld('DATER').AsDateTime)+' г.р.';
-       end;
-     end;
-     strGR:='';
-     ds.Fld('SHTAMP').AsString := GetShtampSpr();
-     ds.Fld('TEKU_DATE').AsString := FormatDateTime('dd.mm.yyyy',NOW);
-     ds.Fld('NomerLS').AsString := adr.ListLicSchet;
-     ds.Fld('PLOSH_ALL').AsString := adr.Fld('PLOSH_ALL').AsString;
-     ds.Fld('PLOSH_GIL').AsString := adr.Fld('PLOSH_GIL').AsString;
-     ds.Fld('Komu').AsString := sAdd1+GetPadegFIO3(m.Familia,m.Name,m.Otch,m.POL,sPadeg)+strYear;
-//     ds.Fld('Komu').AsString := sAdd1+GetPadegFIO(strKomu,m.Fld('POL').AsString,sPadeg)+strYear;
-     ds.Fld('DATER').AsString := DatePropis(m.Fld('DATER').AsDateTime,7);
-     ds.Fld('NAME_DATER').AsString := 'Год рождения';
-     ds.Fld('Adres').AsString := adr.GetAdres+' '+FirstCharUpper(Raion_Name('Р'))+' '+FirstCharUpper(Obl_Name('Р'));
-
-     WritePodpis(ds,14);
-
-     WriteMenToSpr(m,ds);
-     ds.Fld('Zarm').AsString:=sAdd2+ds.Fld('Zarm').AsString;
-
-     ds.Fld('TYPEHOUSE').AsString:=GetPredst(Adres.Fld('PREDST').AsString,'частный дом','NAME');
-  
-     ds.Post;
-     ds:=GetTemplateDataSet('TABLSOST');
-     nID := m.Fld('ID_INTERNAL').AsInteger;
-     sOtnosh := m.Fld('OTNOSH').AsString;
-     m.First;
-     nn:=0;
-
-     strNanim:='';
-     while not m.Eof do begin
-       if AddMenToSprav(m,nID) then begin
-         nn:=nn+1;
-         ds.Append;
-         ds.Fld('NN').AsString  := IntToStr(nn)+'.';
-         ds.Fld('FIO').AsString := m.FIO;
-         ds.Fld('DATER').AsString := DatePropis(m.Fld('DATER').AsDateTime,7);
-         ds.Fld('OTNOS').AsString := GetOtnoshMen(nID,sOtnosh,m,true);
-         ds.Post;
-       end;
-       m.Next;
-     end;
-     m.First;
-
-     ds:=GetTemplateDataSet('MAIN');
-     ds.Edit;
-
-     s:='является';
-     strGR:=CheckOwners(adr,s,strSobstv,strNanim);
-     ds.Fld('TYPESOBSTV').AsString:=strGR+addWordKv(adr);
-     ds.Fld('NANIM').AsString:=s+' '+strSobstv;
-
-     ds.Post;
-
    end;
 end;
 
@@ -5784,7 +4777,7 @@ begin
 //     ds.Fld('SHTAMP').AsString := GetShtampSpr();
      ds.Fld('PUNKT').AsString := adr.Punkt;
      ds.Fld('UL').AsString := adr.Ulica;
-     ds.Fld('DOM').AsString := adr.Dom;
+     ds.Fld('DOM').AsString := adr.Fld('DOM').AsString; //!!! иногда бывают глюки adr.Dom;
      ds.Fld('DATE_LIKV').AsString := sDate;
      ds.Fld('GOD_POST').AsString := adr.Fld('GOD_VOZV').AsString;
      ds.Fld('MAT_STEN').AsString := AnsiLowerCase(SeekValueSpr('SprMatSten','ID',adr.Fld('MAT_STEN').AsString,'NAME'));
@@ -5970,7 +4963,7 @@ begin
      strKomu := m.FIO;
      adr := LicSchet.Adres;
      strGR:='';
-     ds.Fld('PRIL').AsString := getPril(2,'PRIL_GKH28',14);  // 2-печать полностью
+     ds.Fld('PRIL').AsString := getPril(2,'PRIL_GKH28',12);  // 2-печать полностью
      ds.Fld('SHTAMP').AsString := GetShtampSpr();
      ds.Fld('TEKU_DATE').AsString := FormatDateTime('dd.mm.yyyy',NOW);
      ds.Fld('Komu').AsString := GetPadegFIO(strKomu,m.Fld('POL').AsString,'И');
@@ -5984,17 +4977,17 @@ begin
      WritePodpis(ds,4);
 
      if m.Fld('POL').AsString='М' then begin
-        ds.Fld('Grag').AsString := 'гражданину';
+        ds.Fld('Grag').AsString := 'Гражданин';
         ds.Fld('ONO').AsString := 'он';
         ds.Fld('Vkl').AsString := 'включен' ;
         ds.Fld('Proj').AsString := 'проживает' ;
-        ds.Fld('Zarm').AsString := 'зарегистрирован' ;
+        ds.Fld('Zarm').AsString := 'зарегистрированный' ;
       end else begin
-        ds.Fld('Grag').AsString := 'гражданке';
+        ds.Fld('Grag').AsString := 'Гражданка';
         ds.Fld('ONO').AsString := 'она';
         ds.Fld('Vkl').AsString := 'включена' ;
         ds.Fld('Proj').AsString := 'проживает' ;
-        ds.Fld('Zarm').AsString := 'зарегистрирована' ;
+        ds.Fld('Zarm').AsString := 'зарегистрированная' ;
       end;
 
      if m.TypeReg=MESTO_GIT then begin
@@ -6036,7 +5029,7 @@ var
    s,strPol,strPol2,strPol3,strErr,strEG,
    strAdres,strSobstv,strGR, strPlosh : String;
    nID,nn : Integer;
-   sOtnosh :String;
+   cPol,sOtnosh :String;
 begin
    result:=true;
    ds:=GetTemplateDataSet('MAIN');
@@ -6048,7 +5041,9 @@ begin
      strGR:='';
      ds.Fld('SHTAMP').AsString := GetShtampSpr();
      ds.Fld('TEKU_DATE').AsString := FormatDateTime('dd.mm.yyyy',NOW);
-     ds.Fld('Komu').AsString := GetPadegFIO3(m.Familia,m.Name,m.Otch,m.POL,'И');
+     cPol:=m.Fld('POL').AsString;
+     ds.Fld('Grag').AsString:=GetNameAsPol('гражданину',cPol);
+     ds.Fld('Komu').AsString:=GetPadegFIO3(m.Familia,m.Name,m.Otch,m.POL,'Д');
 //     ds.Fld('Komu').AsString := GetPadegFIO(strKomu,m.Fld('POL').AsString,'И');
      ds.Fld('Adres').AsString := adr.GetAdres+' '+FirstCharUpper(Raion_Name('Р'))+' '+FirstCharUpper(Obl_Name('Р'));
      ds.Fld('NAME').AsString := GetPadeg(GlobalTask.ParamAsString('NAME'),'Р');
@@ -6056,17 +5051,9 @@ begin
 
      WritePodpis(ds,6);
 
-     if m.Fld('POL').AsString='М' then begin
-        ds.Fld('ONO').AsString := 'ему' ;
-        ds.Fld('Vkl').AsString := 'включен' ;
-        ds.Fld('Proj').AsString := 'проживает' ;
-        ds.Fld('Zarm').AsString := 'зарегистрирован' ;
-      end else begin
-        ds.Fld('ONO').AsString := 'ей' ;
-        ds.Fld('Vkl').AsString := 'включена' ;
-        ds.Fld('Proj').AsString := 'проживает' ;
-        ds.Fld('Zarm').AsString := 'зарегистрирована' ;
-      end;
+     ds.Fld('ONO').AsString:=GetNameAsPol('ему',cPol);
+     ds.Fld('Proj').AsString:=GetNameAsPol('проживающего',cPol+'2');
+     ds.Fld('Zarm').AsString:=GetNameAsPol('зарегистрирован',cPol+'2');
 
 //     if (m.Fld('DATE_SROK').AsString='') and (m.Fld('PROPIS').AsBoolean=true) then begin
      if m.TypeReg=MESTO_GIT then begin
@@ -6192,8 +5179,10 @@ begin
          ds.Fld('ADD_TEXT').AsString := 'Изменения, исправления, дополнения в запись акта о рождении не'+chr(160)+'вносились.';
        end;
        if GetTemplateParam('PAR1')='2' then begin
-         ds.Fld('ADD_TEXT').AsString := 'Запись об отце произведена на основании заявления матери, не'+chr(160)+'состоящей в браке, в соответствии со статьёй 55 Кодекса Республики Беларусь о браке и семье.';
-         ds.Fld('ADD_TEXT2').AsString := chr(13)+'Изменения, исправления, дополнения в запись акта о рождении не'+chr(160)+'вносились.';
+         if DokZAGS.Fld('VOSSTAN').AsBoolean
+           then ds.Fld('ADD_TEXT').AsString:=''
+           else ds.Fld('ADD_TEXT').AsString:='Запись об отце произведена на основании заявления матери, не'+chr(160)+'состоящей в браке, в соответствии со статьёй 55 Кодекса Республики Беларусь о браке и семье.'+chr(13);
+         ds.Fld('ADD_TEXT2').AsString:='Изменения, исправления, дополнения в запись акта о рождении не'+chr(160)+'вносились.';
        end;
      end else begin
        ds.Fld('ADD_TEXT').AsString := DokZAGS.Fld('IZMEN').AsString;
@@ -6202,225 +5191,7 @@ begin
    end;
 end;
 
-  // Акт обследования материально-бытового положения (старый)
-function AktMBP(DateFiks: TDateTime; LicID, PID: Word):boolean;
-var
-   ds,spr, dsDeti: TDataSet;
-   ps,d,v,k: String;
-   m : TMens;
-   adr : TAdresLic;
-   s,strPol,strPol2,strPol3,strErr,strEG,
-   strAdres,strSobstv,strGR, strPlosh : String;
-   nID,nn : Integer;
-   sOtnosh :String;
-begin
-   result:=true;
-   ds:=GetTemplateDataSet('MAIN');
-   if ds<>nil then begin
-     if not ds.Active then ds.Open;
-     ds.Edit;
-     m := LicSchet.Mens;
-     adr := LicSchet.Adres;
-//     strKomu := m.FIO;
-     nID:=m.Fld('ID_INTERNAL').AsInteger;
-     sOtnosh := m.Fld('OTNOSH').AsString;
-
-     strGR:='';
-     ds.Fld('TEKU_DATE').AsString := DatePropis(now,4);
-     ds.Fld('Komu').AsString := GetPadegFIO3(m.Familia,m.Name,m.Otch,m.POL,'И');
-//     ds.Fld('Komu').AsString := GetPadegFIO(strKomu,m.Fld('POL').AsString,'И');
-     ds.Fld('KomuR').AsString := GetPadegFIO3(m.Familia,m.Name,m.Otch,m.POL,'Р');
-//     ds.Fld('KomuR').AsString := GetPadegFIO(strKomu,m.Fld('POL').AsString,'Р');
-     ds.Fld('DATER').AsString := DatePropis(m.Fld('DATER').AsDateTime,3);
-     ds.Fld('Adres').AsString := adr.GetAdres+' '+FirstCharUpper(Raion_Name('Р'))+' '+FirstCharUpper(Obl_Name('Р'));
-     ds.Fld('WORK_NAME').AsString := m.getWork;
-     ds.Fld('NameOrgP').AsString := NameOrg('','Р');
-     ds.Fld('PLOSH_GIL').AsString := LicSchet.Fld('PLOSH_GIL').AsString;
-     ds.Fld('KOL_KOMN').AsString := LicSchet.Fld('KOL_KOMN').AsString;
-
-//Животноводство
-     if LicSchet.Fld('KOROVA').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('KOR').AsString := 'Коровы - '+LicSchet.Fld('KOROVA').AsString+'.';
-     end; 
-     if LicSchet.Fld('TELKI1').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('TEL').AsString := 'Молодняк до года - '+LicSchet.Fld('TELKI1').AsString+'.';
-     end; 
-     if LicSchet.Fld('SVINI').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('SVIN').AsString := 'Свиньи - '+LicSchet.Fld('SVINI').AsString+'.';
-     end; 
-     if LicSchet.Fld('OVCI').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('OVCI').AsString := 'Овцы - '+LicSchet.Fld('OVCI').AsString+'.';
-     end; 
-     if LicSchet.Fld('KOZI').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('KOZI').AsString := 'Козы - '+LicSchet.Fld('KOZI').AsString+'.';
-     end; 
-     if LicSchet.Fld('LOSHADI').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('LOSH').AsString := 'Лошади (кони) - '+LicSchet.Fld('LOSHADI').AsString+'.';
-     end; 
-     if LicSchet.Fld('PTICA').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('PTIC').AsString := 'Птица - '+LicSchet.Fld('PTICA').AsString+'.';
-     end; 
-     if LicSchet.Fld('KROL').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('KROL').AsString := 'Кролики - '+LicSchet.Fld('KROL').AsString+'.';
-     end; 
-     if LicSchet.Fld('PCHELI').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('PCHEL').AsString := 'Пчелосемьи (штук) - '+LicSchet.Fld('PCHELI').AsString+'.';
-     end; 
-     ds.Fld('TYPEHOUSE').AsString:=GetTypeHouse(LicSchet.Fld('OWN_HOUSE').AsBoolean,LicSchet.Fld('TYPEHOUSE').AsString,
-                                   'Собственный дом');
-     ds.Post;
-     ds:=GetTemplateDataSet('TABLSOST');
-     m.First;
-     while not m.Eof do begin
-       if AddMenToSprav(m,nID) then begin
-         ds.Append;
-         ds.Fld('FIO').AsString := m.FIO;
-         ds.Fld('DATER').AsString := DatePropis(m.Fld('DATER').AsDateTime,3);
-         ds.Fld('OTNOS').AsString := GetOtnoshMen(nID,sOtnosh,m,true);
-         ds.Fld('Punkt').AsString := adr.Punkt;
-         ds.Fld('WORK_NAME').AsString := m.getWork;
-         ds.Post;
-       end;
-       m.Next;
-     end;
-     m.First;
-   end;
-end;
-
-  // Акт обследования материально-бытового положения пенсионера, инвалида, ребенка-инвалида
-function AktOBP(DateFiks: TDateTime; LicID, PID: Word):boolean;
-var
-   ds,spr, dsDeti: TDataSet;
-   ps,d,v,k: String;
-   m : TMens;
-   adr : TAdresLic;
-   s,strPol,strPol2,strPol3,strErr,strEG,
-   strAdres,strSobstv,strGR, strPlosh : String;
-   nID : Integer;
-   sOtnosh :String;
-   nn : Extended;
-
-begin
-   result:=true;
-   ds:=GetTemplateDataSet('MAIN');
-   if ds<>nil then begin
-     if not ds.Active then ds.Open;
-     ds.Edit;
-     m := LicSchet.Mens;
-     adr := LicSchet.Adres;
-     strGR:='';
-     ds.Fld('TEKU_DATE').AsString := FormatDateTime('dd.mm.yyyy',NOW);
-     ds.Fld('Komu').AsString := GetPadegFIO3(m.Familia,m.Name,m.Otch,m.POL,'И');
-//     ds.Fld('Komu').AsString := GetPadegFIO(strKomu,m.Fld('POL').AsString,'И');
-     ds.Fld('DATER').AsString := DatePropis(m.Fld('DATER').AsDateTime,3);
-     ds.Fld('Adres').AsString := adr.GetAdres+' '+FirstCharUpper(Raion_Name('Р'))+' '+FirstCharUpper(Obl_Name('Р'));
-     ds.Fld('TELEFOND').AsString := LicSchet.Fld('TELEFON').AsString;
-     ds.Fld('TELEFONM').AsString := m.Fld('TELEFON').AsString;
-     ds.Fld('PLOSH_GIL').AsString := LicSchet.Fld('PLOSH_GIL').AsString;
-     ds.Fld('KOL_KOMN').AsString := LicSchet.Fld('KOL_KOMN').AsString;
-
-//Животноводство
-     if LicSchet.Fld('KOROVA').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('KOR').AsString := 'Коровы - '+LicSchet.Fld('KOROVA').AsString+'.';
-     end; 
-     if LicSchet.Fld('TELKI1').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('TEL').AsString := 'Молодняк до года - '+LicSchet.Fld('TELKI1').AsString+'.';
-     end; 
-     if LicSchet.Fld('SVINI').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('SVIN').AsString := 'Свиньи - '+LicSchet.Fld('SVINI').AsString+'.';
-     end; 
-     if LicSchet.Fld('OVCI').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('OVCI').AsString := 'Овцы - '+LicSchet.Fld('OVCI').AsString+'.';
-     end; 
-     if LicSchet.Fld('KOZI').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('KOZI').AsString := 'Козы - '+LicSchet.Fld('KOZI').AsString+'.';
-     end; 
-     if LicSchet.Fld('LOSHADI').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('LOSH').AsString := 'Лошади (кони) - '+LicSchet.Fld('LOSHADI').AsString+'.';
-     end; 
-     if LicSchet.Fld('PTICA').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('PTIC').AsString := 'Птица - '+LicSchet.Fld('PTICA').AsString+'.';
-     end; 
-     if LicSchet.Fld('KROL').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('KROL').AsString := 'Кролики - '+LicSchet.Fld('KROL').AsString+'.';
-     end; 
-     if LicSchet.Fld('PCHELI').AsString='' then begin
-       ds.Fld('JT').AsString :='';
-     end else begin
-       ds.Fld('PCHEL').AsString := 'Пчелосемьи (штук) - '+LicSchet.Fld('PCHELI').AsString+'.';
-     end; 
-
-//Земля
-     if LicSchet.Fld('VSEGO').AsString='' then begin
-       ds.Fld('ZT').AsString :='';
-     end else begin
-     nn := LicSchet.Fld('VSEGO').AsFloat-LicSchet.Fld('POSTR').AsFloat-LicSchet.Fld('PRIUSAD').AsFloat;
-     ds.Fld('ZEML').AsString := 'Участок, предоставленный во временное пользование для огородничества, а также для сенокошения и выпаса скота - '+FormatFloat('####0.####',nn)+'га'+'.';
-     end;
-     if LicSchet.Fld('PRIUSAD').AsString='' then begin
-       ds.Fld('ZT').AsString :='';
-     end else begin
-       ds.Fld('PRIUS').AsString := 'Приусадебный участок - '+LicSchet.Fld('PRIUSAD').AsString+'га'+'.';
-     end; 
-
-     ds.Fld('TYPEHOUSE').AsString:=GetTypeHouse(LicSchet.Fld('OWN_HOUSE').AsBoolean,LicSchet.Fld('TYPEHOUSE').AsString,
-                                   'Собственный дом');
-     ds.Post;
-     ds:=GetTemplateDataSet('TABLSOST');
-     nID := m.Fld('ID_INTERNAL').AsInteger;
-     sOtnosh := m.Fld('OTNOSH').AsString;
-     m.First;
-     while not m.Eof do begin
-       if AddMenToSprav(m,nID) then begin
-         ds.Append;
-         ds.Fld('FIO').AsString := m.FIO;
-         ds.Fld('DATER').AsString := DatePropis(m.Fld('DATER').AsDateTime,7);
-         ds.Fld('OTNOS').AsString := GetOtnoshMen(nID,sOtnosh,m,true);
-         ds.Fld('Punkt').AsString := adr.Punkt;
-         ds.Fld('WORK_NAME').AsString := m.getWork;
-         ds.Post;
-       end;
-       m.Next;
-     end;
-     m.First;
-   end;
-end;
-
-  // Справка (разрешение) о въезде в пограничную зону
+// Справка (разрешение) о въезде в пограничную зону
 function SprPZ(DateFiks: TDateTime; LicID, PID: Word):boolean;
 var
    ds, dsDeti: TDataSet;
@@ -6532,7 +5303,7 @@ begin
        ds.Fld('STR_RB').AsString :=DokZags.getGrag('ONA_GRAG',' '); //SeekValueSpr('СпрСтран','ID',DokZAGS.Fld('ONA_GRAG').AsString,'GNAME')+' '+DokZAGS.Fld('ON_GRAG_ADD').AsString;    
      end;
      ds.Fld('NOMER').AsString := DokZAGS.Fld('NOMER').AsString;
-     ds.Fld('DATEZ').AsString := DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,2);
+     ds.Fld('DATEZ').AsString := DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,6);
 //     ds.Fld('RUKOV').AsString := GlobalTask.ParamAsString('РУК_ЗАГС');
 //     ds.Fld('DOLG_RUK_ZAGS').AsString := GlobalTask.ParamAsString('DOLG_RUK_ZAGS');
       ds.Fld('DOLG_RUK_ZAGS').AsString :=Zags_Sprav_Dolg;
@@ -6995,7 +5766,7 @@ end;
 function IZV_RBD(DateFiks: TDateTime; LicID, PID: Word):boolean;
 var
    ds, spruch,dsDeti: TDataSet;
-   p,s,sp,m,j : String;
+   sIN,p,s,sp,m,j : String;
 begin
    result:=true;
    ds:=GetTemplateDataSet('MAIN');
@@ -7020,6 +5791,11 @@ begin
      end else begin 
        sp:='ONA';
        p:='ж';
+     end;
+     sIN:=DokZAGS.Fld(sp+'_IDENTIF').AsString;
+     if sIN<>'' then begin
+       ds.Fld('INN').AsString:='Идентификационный номер: ';
+       ds.Fld('IN').AsString:=sIN+CRLF;
      end;
      ds.Fld('MJ').AsString:=DokZAGS.GetAdres(StringReplace('@_M_GOSUD,FName;@_M_OBL,@_M_B_OBL;@_M_RAION,@_M_RNGOROD;@_M_GOROD,@_M_B_GOROD;@_M_GOROD_R,ON_M_*','@',sp),1);
      ds.Fld('FIO1').AsString := GetPadegFIO3(DokZAGS.Fld(sp+'_Familia').AsString,DokZAGS.Fld(sp+'_Name').AsString,DokZAGS.Fld(sp+'_Otch').AsString,p,'В');
@@ -7868,25 +6644,32 @@ end;
 // Подтверждение даты регистрации брака
 function PODTV(DateFiks: TDateTime; LicID, PID: Word):boolean;
 var
-   ds, spruch,dsDeti: TDataSet;      
-   s,m,j : String;
+   ds: TDataSet;      
+   s,ss : String;
 begin
    result:=true;
    ds:=GetTemplateDataSet('MAIN');
    if ds<>nil then begin
      if not ds.Active then ds.Open;
      ds.Edit;
-     ds.Fld('ARX_ADRESAT').AsString   := DokZAGS.Fld('ARX_ADRESAT').AsString;
      ds.Fld('NAME').AsString := GetPadeg(GlobalTask.ParamAsString('NAME'),'Р');
      if GetTemplateParam('PAR1')='ZV'   // если заявление
        then ds.Fld('DATEZ').AsString:=DatePropis(DokZAGS.Fld('DATEB').AsDateTime,6)
        else ds.Fld('DATEZ').AsString:=DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,6);
      ds.Fld('FIOP_ON').AsString := GetPadegFIO3(DokZAGS.Fld('ON_Familia').AsString,DokZAGS.Fld('ON_Name').AsString,DokZAGS.Fld('ON_Otch').AsString,'м','Р');
      ds.Fld('FIOP_ONA').AsString := GetPadegFIO3(DokZAGS.Fld('ONA_Familia').AsString,DokZAGS.Fld('ONA_Name').AsString,DokZAGS.Fld('ONA_Otch').AsString,'ж','Р');
+
+     if DokZAGS.Fld('ARX_ADRESAT').AsString='' then begin
+       if DokZAGS.ActiveON = true  then s:='' else s:='A';
+       ss:=GetPadegFIO3(DokZAGS.Fld('ON'+s+'_Familia').AsString,DokZAGS.Fld('ON'+s+'_Name').AsString,DokZAGS.Fld('ON'+s+'_Otch').AsString,'м','И');
+       ds.Fld('ARX_ADRESAT').AsString:=ss+CRLF+DokZAGS.GetAdres2('ON'+s+'_M_GOSUD,FName;ON'+s+'_M_OBL,ON'+s+'_M_B_OBL;ON'+s+'_M_RAION,ON'+s+'_M_RNGOROD;ON'+s+'_M_GOROD,ON'+s+'_M_B_GOROD;ON'+s+'_M_GOROD_R,ON'+s+'_M_*',3);
+     end else begin
+       ds.Fld('ARX_ADRESAT').AsString:=DokZAGS.Fld('ARX_ADRESAT').AsString;
+     end;
      // 1-белорусски,краткое   2-падеж    NameZAGS('БК','Р')
      ds.Fld('ORGAN_ZAGS').AsString := DokZAGS.NameZAGS2('','И');
-      ds.Fld('DOLG_RUK_ZAGS').AsString :=Zags_Sprav_Dolg;
-      ds.Fld('RUKOV').AsString :=Zags_Sprav_FIO;
+     ds.Fld('DOLG_RUK_ZAGS').AsString :=Zags_Sprav_Dolg;
+     ds.Fld('RUKOV').AsString :=Zags_Sprav_FIO;
      ds.Fld('TELEFON').AsString := ParamAsString('TELEFON');
      ds.Fld('TEKU_DATE').AsString := FormatDateTime('dd.mm.yyyy',NOW);
      ds.Post;
@@ -8290,7 +7073,7 @@ begin
    end;
 end;
 
-  // Справка в налоговую (о подсобном хозяйстве) Лицевой счет. + справка (на 1 страницу)
+// Справка в налоговую (о подсобном хозяйстве) Лицевой счет. + справка (на 1 страницу)
 function SpxNalLS(DateFiks: TDateTime; LicID, PID: Word):boolean;
 var
    ds, dsDeti: TDataSet;
@@ -8340,10 +7123,11 @@ begin
       end else begin
         ds.Fld('ON').AsString := 'ей' ;
       end;
-
-     nnn := LicSchet.Fld('VSEGO').AsFloat-LicSchet.Fld('POSTR').AsFloat;  // приусадебный -LicSchet.Fld('PRIUSAD').AsFloat;
-      if nnn>0  then ds.Fld('VSEGO').AsString := FormatFloat('####0.####',nnn)+'га';
-
+     fld:=LicSchet.Fld('VSEGO');
+     if fld<>nil then begin
+       nnn := fld.AsFloat-LicSchet.Fld('POSTR').AsFloat;  // приусадебный -LicSchet.Fld('PRIUSAD').AsFloat;
+       if nnn>0  then ds.Fld('VSEGO').AsString := FormatFloat('####0.####',nnn)+'га';
+     end;
      fld:=ds.FindField('DOLG_PODP1');
      if fld=nil then begin  // для Минска
        if ParamAsString('СПЕЦИАЛИСТ')='' then begin
@@ -8432,42 +7216,14 @@ begin
    end;
 end;
 
-//----- Предписание -------------------------------------
-function Predpis(DateFiks: TDateTime; LicID, PID: Word):boolean;
-var
-   ds: TDataSet;
-   m : TMens;
-   adr : TAdresLic;
-begin
-   Result:=true;
-   ds:=GetTemplateDataSet('MAIN');
-   if ds<>nil then begin
-     if not ds.Active then ds.Open;
-     ds.Edit;
-     m := LicSchet.Mens;
-     adr := LicSchet.Adres;
-     ds.Fld('TEKU_DATE').AsString := FormatDateTime('dd.mm.yyyy',NOW);
-     ds.Fld('Komu').AsString := GetPadegFIO3(m.Familia,m.Name,m.Otch,m.Fld('POL').AsString,'Д');
-//     ds.Fld('Komu').AsString := GetPadegFIO(strKomu,m.Fld('POL').AsString,'Д');
-     ds.Fld('Adres').AsString := adr.GetAdres+' '+FirstCharUpper(Raion_Name('Р')); // +', '+FirstCharUpper(Obl_Name('Р'));
-     ds.Fld('TGOD').AsString := FormatDateTime('yyyy',NOW);
-     if m.Fld('POL').AsString='М' 
-       then ds.Fld('Grag').AsString := 'Гражданину' 
-       else ds.Fld('Grag').AsString := 'Гражданке';
-     ds.Post;
-   end;
-end;
-
   // Повестка ВУС, Повестка призывнику, Повестка гражданину, Почтовая карточка общего вызова
 function POV_vus(DateFiks: TDateTime; LicID, PID: Word):boolean;
 var
-   ds, dsDeti: TDataSet;
-   ps,d,v,k: String;
+   ds:TDataSet;
+   strGr,ps,par1: String;
    m : TMens;
    adr : TAdresLic;
-   s,strPol,strPol2,strPol3,strErr,strEG,
-   strAdres,strSobstv,strGR, strPlosh : String;
-   nID : Integer;
+   nPr : Integer;
 begin
    result:=true;
    ds:=GetTemplateDataSet('MAIN');
@@ -8477,6 +7233,9 @@ begin
      m := Men;
      adr := Men.Adres;
      strGR:='';
+     par1:=GetTemplateParam('PAR1');   // 1-Повестка    3-Повестка гражданину    2-Повестка призывнику  4-Почтовая карточка общего вызова
+     if par1='3' then nPr:=9 else if par1='2' then nPr:=2; 
+     ds.Fld('PRIL').AsString:=getPril(-1,'VOEN_PRIP',nPr);
      ds.Fld('TEKU_DATE').AsString := FormatDateTime('dd.mm.yyyy',NOW);
      ds.Fld('Komu').AsString := GetPadegFIO3(m.Familia,m.Name,m.Otch,m.Fld('POL').AsString,'И');
 //     ds.Fld('Komu').AsString := GetPadegFIO(strKomu,m.Fld('POL').AsString,'И');
@@ -8580,7 +7339,7 @@ begin
    //старый вид РКК
    else begin
       case Doc2Tpl.Field('APP_FORM').AsInteger of
-         stWriting: Result:='DOC_MAIN_RKK_2';
+         stWriting,stElect: Result:='DOC_MAIN_RKK_2';
          stVerbal: Result:='DOC_MAIN_RKK_4';
       else
          Result:='';
@@ -8779,7 +7538,7 @@ begin
       end;
 //      sID:=Doc2Tpl.Field('SIGN_MAN').AsString;
 //  
-    if (Doc2Tpl.Field('SIGN_KIND').AsInteger=1) and ParamAsBoolean('DR_RKK_PASP') and (Doc2Tpl.Field('PROV_NUM').AsString<>'') then
+    if (Doc2Tpl.Field('SIGN_KIND').AsInteger=1) and ParamAsBoolean('DR_RKK_PASP') then
         ds.FieldByName('SIGN_NAME').AsString:=ds.FieldByName('SIGN_NAME').AsString+', '+
            dmBase.GetMenPaspV(Doc2Tpl.Field('PROV_TYPE').AsInteger, Doc2Tpl.Field('PROV_SER').AsString, Doc2Tpl.Field('PROV_NUM').AsString, 
                        Doc2Tpl.Field('PROV_ORG').AsString, Doc2Tpl.Field('PERSON_ID').AsString, Doc2Tpl.Field('PROV_DATE').AsDateTime, 0);

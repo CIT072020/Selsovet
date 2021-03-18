@@ -34,7 +34,7 @@ inherited fmAdres: TfmAdres
       Top = 219
       Width = 961
       Height = 461
-      ActivePage = tsUch
+      ActivePage = tsMCHS
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -540,6 +540,7 @@ inherited fmAdres: TfmAdres
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            OnClick = edPrimClick
           end
         end
       end
@@ -1525,8 +1526,42 @@ inherited fmAdres: TfmAdres
           Align = alClient
           BorderStyle = bsNone
           ParentBackground = True
-          TabOrder = 0
+          TabOrder = 1
           OnResize = sbPropResize
+          object GroupBox3: TGroupBox
+            Left = 0
+            Top = 0
+            Width = 953
+            Height = 215
+            Align = alTop
+            Caption = ' '#1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1072#1103' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 0
+            DesignSize = (
+              953
+              215)
+            object edUchPrim: TDBMemo
+              Left = 5
+              Top = 15
+              Width = 940
+              Height = 194
+              Anchors = [akLeft, akTop, akRight, akBottom]
+              DataField = 'UCH_PRIM'
+              DataSource = dsDokument
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 0
+            end
+          end
         end
         object pnUch: TPanel
           Left = 0
@@ -1535,7 +1570,7 @@ inherited fmAdres: TfmAdres
           Height = 93
           Align = alTop
           BevelOuter = bvNone
-          TabOrder = 1
+          TabOrder = 0
           DesignSize = (
             953
             93)
@@ -1595,7 +1630,7 @@ inherited fmAdres: TfmAdres
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 1
+            TabOrder = 2
             Visible = True
           end
           object edUchDateIskl: TDBDateTimeEditEh
@@ -1614,7 +1649,7 @@ inherited fmAdres: TfmAdres
             Font.Style = []
             Kind = dtkDateEh
             ParentFont = False
-            TabOrder = 4
+            TabOrder = 5
             Visible = True
           end
           object edUchIsklOsnov: TDBEditEh
@@ -1633,7 +1668,7 @@ inherited fmAdres: TfmAdres
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 5
+            TabOrder = 6
             Visible = True
           end
           object edUchDatePred: TDBDateTimeEditEh
@@ -1652,7 +1687,7 @@ inherited fmAdres: TfmAdres
             Font.Style = []
             Kind = dtkDateEh
             ParentFont = False
-            TabOrder = 2
+            TabOrder = 3
             Visible = True
           end
           object edUchFor: TDBComboBoxEh
@@ -1669,7 +1704,7 @@ inherited fmAdres: TfmAdres
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 3
+            TabOrder = 4
             Visible = True
           end
           object edPloshUch: TDBNumberEditEh
@@ -1690,6 +1725,33 @@ inherited fmAdres: TfmAdres
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            Visible = True
+          end
+          object edUchTypeOwner: TDBComboBoxEh
+            Left = 316
+            Top = 5
+            Width = 381
+            Height = 24
+            DataField = 'UCH_TYPEOWNER'
+            DataSource = dsDokument
+            EditButtons = <
+              item
+                Style = ebsEllipsisEh
+                OnClick = edUchTypeOwnerEditButtons0Click
+              end>
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Items.Strings = (
+              '1111111111'
+              '2222222222')
+            KeyItems.Strings = (
+              '1'
+              '2')
+            ParentFont = False
+            TabOrder = 1
             Visible = True
           end
         end
@@ -2593,8 +2655,8 @@ inherited fmAdres: TfmAdres
     Top = 378
   end
   inherited dsStran: TDataSource
-    Left = 460
-    Top = 345
+    Left = 324
+    Top = 369
   end
   inherited dsTypeGorod: TDataSource
     Left = 528
@@ -2630,8 +2692,8 @@ inherited fmAdres: TfmAdres
   object dsHouseOwners: TDataSource
     DataSet = dmAdres.tbHouseOwners
     OnDataChange = dsHouseOwnersDataChange
-    Left = 404
-    Top = 378
+    Left = 388
+    Top = 402
   end
   object ImageList: TImageList
     Left = 644

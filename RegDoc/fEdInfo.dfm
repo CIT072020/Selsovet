@@ -4,7 +4,7 @@ object fmEdInfo: TfmEdInfo
   BorderStyle = bsDialog
   Caption = #1060#1086#1088#1084#1072' '#1091#1095#1077#1090#1072' '#1074#1099#1076#1072#1085#1085#1099#1093' '#1089#1087#1088#1072#1074#1086#1082' ('#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074')'
   ClientHeight = 452
-  ClientWidth = 716
+  ClientWidth = 717
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -131,7 +131,7 @@ object fmEdInfo: TfmEdInfo
   object bvTop: TBevel
     Left = 10
     Top = 24
-    Width = 679
+    Width = 698
     Height = 7
     Shape = bsTopLine
   end
@@ -151,7 +151,7 @@ object fmEdInfo: TfmEdInfo
   object bvProvDoc: TBevel
     Left = 349
     Top = 146
-    Width = 337
+    Width = 356
     Height = 7
     Shape = bsTopLine
   end
@@ -214,7 +214,7 @@ object fmEdInfo: TfmEdInfo
     WordWrap = True
   end
   object laPersonId: TLabel
-    Left = 448
+    Left = 438
     Top = 191
     Width = 115
     Height = 13
@@ -236,7 +236,7 @@ object fmEdInfo: TfmEdInfo
   object bvSign: TBevel
     Left = 83
     Top = 73
-    Width = 603
+    Width = 626
     Height = 7
     Shape = bsTopLine
   end
@@ -256,7 +256,7 @@ object fmEdInfo: TfmEdInfo
   object tbaEditRec: TToolBar
     Left = 0
     Top = 0
-    Width = 716
+    Width = 717
     Height = 22
     AutoSize = True
     Caption = 'tbaEditRec'
@@ -377,7 +377,7 @@ object fmEdInfo: TfmEdInfo
   object deAdrPhone: TDBEditEh
     Left = 557
     Top = 83
-    Width = 129
+    Width = 146
     Height = 24
     DataField = 'ADR_PHONE'
     EditButtons = <>
@@ -410,7 +410,7 @@ object fmEdInfo: TfmEdInfo
   object dcAppForm: TDBComboBoxEh
     Left = 557
     Top = 34
-    Width = 129
+    Width = 145
     Height = 24
     DataField = 'APP_FORM'
     EditButtons = <>
@@ -667,7 +667,7 @@ object fmEdInfo: TfmEdInfo
   object deProvDate: TDBDateTimeEditEh
     Left = 606
     Top = 157
-    Width = 90
+    Width = 96
     Height = 24
     DataField = 'PROV_DATE'
     EditButtons = <>
@@ -684,7 +684,7 @@ object fmEdInfo: TfmEdInfo
   object deProvOrg: TDBEditEh
     Left = 110
     Top = 185
-    Width = 323
+    Width = 309
     Height = 24
     DataField = 'PROV_ORG'
     EditButtons = <>
@@ -725,9 +725,9 @@ object fmEdInfo: TfmEdInfo
     ValueUnchecked = 'False'
   end
   object dePersonId: TDBEditEh
-    Left = 584
+    Left = 569
     Top = 185
-    Width = 102
+    Width = 131
     Height = 24
     DataField = 'PERSON_ID'
     EditButtons = <>

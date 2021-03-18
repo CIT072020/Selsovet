@@ -36,7 +36,8 @@ end;
 function TfmGurnZAdopt.LoadQuery: Boolean;
 begin
   Result := inherited LoadQuery;
-  TBSubSysFlt.Visible:=false;
+//  TBSubSysFlt.Visible:=false;
+  VisibleItem(TBSubSysFlt, false);
 end;
 
 procedure TfmGurnZAdopt.GridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);

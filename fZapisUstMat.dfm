@@ -96,7 +96,7 @@ inherited fmZapisUstMat: TfmZapisUstMat
       Top = 34
       Width = 825
       Height = 531
-      ActivePage = tsChild
+      ActivePage = tsFaser
       Align = alClient
       TabOrder = 1
       OnChange = pcChange
@@ -1723,7 +1723,7 @@ inherited fmZapisUstMat: TfmZapisUstMat
           ParentFont = False
           TabOrder = 25
           object Label69: TLabel
-            Left = 473
+            Left = 554
             Top = 30
             Width = 12
             Height = 13
@@ -1769,7 +1769,7 @@ inherited fmZapisUstMat: TfmZapisUstMat
           object edON_DOK_TYPE: TDBComboBoxEh
             Left = 21
             Top = 23
-            Width = 269
+            Width = 334
             Height = 26
             DataField = 'ON_DOK_TYPE'
             DataSource = dsDokument
@@ -1784,9 +1784,9 @@ inherited fmZapisUstMat: TfmZapisUstMat
             Visible = True
           end
           object edON_DOK_SERIA: TDBEditEh
-            Left = 331
+            Left = 384
             Top = 23
-            Width = 33
+            Width = 41
             Height = 26
             CharCase = ecUpperCase
             DataField = 'ON_DOK_SERIA'
@@ -1802,9 +1802,9 @@ inherited fmZapisUstMat: TfmZapisUstMat
             Visible = True
           end
           object edON_DOK_NOMER: TDBEditEh
-            Left = 376
+            Left = 436
             Top = 23
-            Width = 89
+            Width = 107
             Height = 26
             DataField = 'ON_DOK_NOMER'
             DataSource = dsDokument
@@ -1819,9 +1819,9 @@ inherited fmZapisUstMat: TfmZapisUstMat
             Visible = True
           end
           object edON_DOK_DATE: TDBDateTimeEditEh
-            Left = 492
+            Left = 575
             Top = 23
-            Width = 107
+            Width = 120
             Height = 26
             DataField = 'ON_DOK_DATE'
             DataSource = dsDokument

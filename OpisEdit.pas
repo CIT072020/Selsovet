@@ -156,6 +156,7 @@ type
      ListIndex    : TStringList;   // список сортировок дл€ переключени€
      AddConst :Boolean;
      LastError:String;
+     CurValue:Variant;
      constructor Create;
      destructor  Destroy; override;
      property    CheckDeleteSpr:Boolean read FCheckDeleteSpr write SetCheckDeleteSpr;
@@ -349,6 +350,7 @@ end;
 constructor TOpisEdit.Create;
 begin
   inherited;
+  CurValue:=null;
   AddConst:=false;
   NameSort := '';
   UpDownField:='';
@@ -1380,6 +1382,11 @@ begin
       if lShowError then
         PutError('Ќе найден DataSet с именем '+cNameTable+' (ListOpisEdit.GetSprOpis)');
     end else begin
+      if cFilter<>'' then begin
+        Opis.FDataSet.Filtered:=false;
+        Opis.FDataSet.Filter:=cFilter;
+        Opis.FDataSet.Filtered:=true;
+      end;
       if Opis.FDataSet is TAdsTable then begin
         Opis.Table := Opis.FDataSet as TAdsTable;
         Opis.TypeDataSet := dsExistTable;
@@ -2011,8 +2018,7 @@ begin
   end;
 end;
 //-------------------------------------------------------------------------
-class procedure TEvents.Column_UpdateData(Sender: TObject;
-  var Text: String; var Value: Variant; var UseText, Handled: Boolean);
+class procedure TEvents.Column_UpdateData(Sender: TObject; var Text: String; var Value: Variant; var UseText, Handled: Boolean);
 var
   cc : TColumnEh;
   Opis : TOpisEdit;
@@ -2123,7 +2129,7 @@ begin
               v := OpisEdit.CheckMultiSelect(ComboEdit.Field,v);
               ComboEdit.Field.Value := v;
               ComboEdit.Value:=ComboEdit.Field.Value; // вставил дл€ того, чтобы вызывалось событие OnUpdateData у DbEditEh
-            end else begin    
+            end else begin
               if not OpisEdit.ValuePlus then curValue:=null;
               EventsWriteField(ComboEdit.Field,v,curValue, OpisEdit.MultiSelectDelim); //ComboEdit.Field.Value := v;
               ComboEdit.Value:=ComboEdit.Field.Value; // вставил дл€ того, чтобы вызывалось событие OnUpdateData у DbEditEh
@@ -2147,8 +2153,7 @@ begin
 //  end;
 end;
 
-class procedure TEvents.EditButtons_OnDown(Sender: TObject; TopButton: Boolean;
-                                   var AutoRepeat, Handled: Boolean);
+class procedure TEvents.EditButtons_OnDown(Sender: TObject; TopButton: Boolean; var AutoRepeat, Handled: Boolean);
 begin
 end;
 

@@ -109,7 +109,8 @@ inherited fmZAGS_ZaklAddIN: TfmZAGS_ZaklAddIN
         Visible = True
       end
       inherited TBToolbarOrgan: TTBToolbar
-        Left = 299
+        Left = 833
+        Top = 22
       end
     end
   end
@@ -1243,7 +1244,7 @@ inherited fmZAGS_ZaklAddIN: TfmZAGS_ZaklAddIN
       object edD1_DOK_TYPE: TDBComboBoxEh
         Left = 14
         Top = 19
-        Width = 303
+        Width = 378
         Height = 26
         DataField = 'D1_DOK_TYPE'
         DataSource = dsDokument
@@ -1330,7 +1331,7 @@ inherited fmZAGS_ZaklAddIN: TfmZAGS_ZaklAddIN
       object edD2_DOK_TYPE: TDBComboBoxEh
         Left = 420
         Top = 19
-        Width = 303
+        Width = 378
         Height = 26
         DataField = 'D2_DOK_TYPE'
         DataSource = dsDokument

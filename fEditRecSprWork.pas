@@ -137,43 +137,52 @@ var
   Opis : TOpisEdit;
   v : Variant;
   arrRec : TCurrentRecord;
-  sBook,sSMDO,s,ss:String;
-  nID:Integer;
+  sID,sBook,sSMDO,s,ss:String;
+  nCount,nID:Integer;
 begin
+  if ID=0 then begin
+    PutError('Невозможно выполнить операцию (ID=0)');
+    exit;
+  end else if ID=-1 then begin  // новая запись
+    sID:='';
+  end else begin
+    sID:=' and id<>'+IntToStr(ID);
+  end;
   SetLength(arrRec,1);
   Opis := GlobalTask.CurrentOpisEdit.GetSprOpisA('LOOKUP_SPRSMDO_NAME');
   if Opis<>nil then begin
     v:=edSMDO.Text;
     if Opis.ChoiceFromSprEx(edSMDO, v, arrRec, nil) and (v<>null) then begin
-      if v <> null then begin     
+      if v <> null then begin
         sSMDO:=GetValueFieldEx(arrRec, 'SMDOCODE', '');
-        dsOrg.DisableControls;
-        sBook:=dsOrg.Bookmark;
         try
-          if dsOrg.Locate('SMDOCODE', sSMDO, [loCaseInsensitive]) then begin
-            PutError('Выбраннвя организация уже существует в справочнике.');
-          end else begin
-            edSMDO.Text:=sSMDO;
-            if edName.Text='' then begin
-              edFName.Text:=GetValueFieldEx(arrRec, 'NAME', '');
-              edName.Text:=GetValueFieldEx(arrRec, 'shortname', '');
-              edTel.Text:=GetValueFieldEx(arrRec, 'phone', '');
-              edEmail.Text:=GetValueFieldEx(arrRec, 'email', '');
-              edFax.Text:=GetValueFieldEx(arrRec, 'fax', '');
-              edAbonent.Text:=GetValueFieldEx(arrRec, 'abonentbox', '');
-              edPostIndex.Text:=GetValueFieldEx(arrRec, 'postindex', '');
-              edSOATO.Text:=GetValueFieldEx(arrRec, 'soato', '');
-              edAdres.Text:=GetValueFieldEx(arrRec, 'street', '');
-              s:=GetValueFieldEx(arrRec, 'home', '');
-              if s<>'' then s:=', д.'+s;
-              ss:=GetValueFieldEx(arrRec, 'corpus', '');
-              if ss<>'' then s:=s+', корп.'+ss;
-              if s<>'' then  edAdres.Text:=edAdres.Text+s;
-            end;
+          dmBase.WorkQuery.SQL.Text:='SELECT count(*) FROM СпрМестРаботы WHERE smdocode='+QStr(sSMDO)+sID;
+          dmBase.WorkQuery.Open;
+          nCount:=dmBase.WorkQuery.Fields[0].AsInteger;
+          dmBase.WorkQuery.Close;
+        except
+          nCount:=0;
+        end;
+        if nCount>0 then begin
+          PutError('Выбранная организация '+sSmdo+' уже существует в справочнике.');
+        end else begin
+          edSMDO.Text:=sSMDO;
+          if edName.Text='' then begin
+            edFName.Text:=GetValueFieldEx(arrRec, 'NAME', '');
+            edName.Text:=GetValueFieldEx(arrRec, 'shortname', '');
+            edTel.Text:=GetValueFieldEx(arrRec, 'phone', '');
+            edEmail.Text:=GetValueFieldEx(arrRec, 'email', '');
+            edFax.Text:=GetValueFieldEx(arrRec, 'fax', '');
+            edAbonent.Text:=GetValueFieldEx(arrRec, 'abonentbox', '');
+            edPostIndex.Text:=GetValueFieldEx(arrRec, 'postindex', '');
+            edSOATO.Text:=GetValueFieldEx(arrRec, 'soato', '');
+            edAdres.Text:=GetValueFieldEx(arrRec, 'street', '');
+            s:=GetValueFieldEx(arrRec, 'home', '');
+            if s<>'' then s:=', д.'+s;
+            ss:=GetValueFieldEx(arrRec, 'corpus', '');
+            if ss<>'' then s:=s+', корп.'+ss;
+            if s<>'' then  edAdres.Text:=edAdres.Text+s;
           end;
-        finally
-          dsOrg.Bookmark:=sBook;
-          dsOrg.EnableControls;
         end;
       end;
     end;

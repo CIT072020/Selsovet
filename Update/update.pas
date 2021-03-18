@@ -625,6 +625,14 @@ begin
   ChangeMessage(' онтроль базы ...');
 
   if Result=0 then begin
+    ds:=dbOpenSQL('SELECT Count(*) FROM global','');
+    if ds.Fields.Fields[0].AsInteger=0 then begin
+      lUpdate:=true;
+    end;
+    dbClose(ds);
+    if lUpdate then dbExecuteSQL('INSERT INTO global (id_base, main_base, sysid) values ( 0, true, NewIDString() )');
+  end;
+  if Result=0 then begin
     lUpdate := false;
     ds := dbOpenSQL('SELECT Count(*) FROM SprDocSubj','');
     if ds.Fields.Fields[0].AsInteger=0 then begin
@@ -949,6 +957,16 @@ begin
     except
     end;
   end;
+  if (Result=0)  and (TypeBase='SELSOVET') and arrCheck[32] then begin
+    dbExecuteSQL('UPDATE RegDogN SET TYPEOBJ=103 WHERE TYPEOBJ is null;'+
+                 'UPDATE RegDogN SET NANIM_TYPE=1 WHERE NANIM_TYPE is null;');
+  end;
+  if (Result=0)  and (TypeBase='SELSOVET') and arrCheck[33] then begin
+    dbExecuteSQL('UPDATE RegDogN SET unlim=false WHERE unlim is null;');
+    dbExecuteSQL('UPDATE —прЌасѕунктов SET ate_id=s.ate_id FROM —прЌасѕунктов p INNER JOIN sysspr.—пр—оато s ON s.id=p.kod; ');
+    dbExecuteSQL('UPDATE —прЌасѕунктов SET not_riap=false WHERE not_riap is null; ');
+    dbExecuteSQL('UPDATE VUS SET vus_iskl=false WHERE vus_iskl is null;');
+  end;
   if (Result=0) and arrCheck[11] then begin
     dbExecuteSQL('UPDATE —прћест–аботы set is_gosud=false where is_gosud is null');
     dbExecuteSQL('UPDATE —прћест–аботы set IS_GILFOND=false where IS_GILFOND is null');
@@ -1059,6 +1077,8 @@ begin
         if (nVer<300) then arrCheck[9]:=true;  // UpdatingObj  SM_B_RESP  B_RESP
         if (nVer<311) then arrCheck[11]:=true; // 
         if (nVer<320) then arrCheck[12]:=true; // исправление ошибки даты сверки таблицы VUS и изменение размера полей дом,корп,кв
+        if (nVer<329) then arrCheck[32]:=true; // TYPEOBJ RegDogN
+        if (nVer<330) then arrCheck[33]:=true; // UNLIM RegDogN
       end else if (TypeBase='GKH') then begin
         if (nVer<200) then arrCheck[25]:=true;
         if (nVer<262) then arrCheck[28]:=true;

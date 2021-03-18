@@ -1,8 +1,8 @@
 object fmPrintGrid: TfmPrintGrid
-  Left = 217
-  Top = 137
+  Left = 354
+  Top = 231
   BorderStyle = bsDialog
-  Caption = 'Печать '
+  Caption = #1055#1077#1095#1072#1090#1100' '
   ClientHeight = 302
   ClientWidth = 477
   Color = clBtnFace
@@ -22,7 +22,7 @@ object fmPrintGrid: TfmPrintGrid
     Width = 477
     Height = 105
     Align = alTop
-    Caption = ' Заголовок '
+    Caption = ' '#1047#1072#1075#1086#1083#1086#1074#1086#1082' '
     TabOrder = 0
     object edTitle: TDBEditEh
       Left = 4
@@ -42,7 +42,7 @@ object fmPrintGrid: TfmPrintGrid
     Width = 477
     Height = 152
     Align = alTop
-    Caption = ' Графы для печати '
+    Caption = ' '#1043#1088#1072#1092#1099' '#1076#1083#1103' '#1087#1077#1095#1072#1090#1080' '
     TabOrder = 1
     object chListGraf: TCheckListBox
       Left = 2
@@ -59,8 +59,8 @@ object fmPrintGrid: TfmPrintGrid
     Top = 269
     Width = 90
     Height = 25
-    Hint = 'Выполнить печать'
-    Caption = 'Выполнить'
+    Hint = #1042#1099#1087#1086#1083#1085#1080#1090#1100' '#1087#1077#1095#1072#1090#1100
+    Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
     Default = True
     TabOrder = 2
     OnClick = btOkClick
@@ -79,7 +79,7 @@ object fmPrintGrid: TfmPrintGrid
     Top = 269
     Width = 90
     Height = 25
-    Caption = 'Выход'
+    Caption = #1042#1099#1093#1086#1076
     TabOrder = 3
     Kind = bkCancel
   end
@@ -88,8 +88,8 @@ object fmPrintGrid: TfmPrintGrid
     Top = 269
     Width = 76
     Height = 25
-    Hint = 'Настройка принтера'
-    Caption = 'Настройка '
+    Hint = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1087#1088#1080#1085#1090#1077#1088#1072
+    Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '
     TabOrder = 4
     OnClick = Button1Click
   end
@@ -98,24 +98,24 @@ object fmPrintGrid: TfmPrintGrid
     Top = 269
     Width = 84
     Height = 25
-    Hint = 'Отменить печать всех граф'
-    Caption = 'Очистить все'
+    Hint = #1054#1090#1084#1077#1085#1080#1090#1100' '#1087#1077#1095#1072#1090#1100' '#1074#1089#1077#1093' '#1075#1088#1072#1092
+    Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1074#1089#1077
     TabOrder = 5
     OnClick = Button2Click
   end
   object PrintGrid: TPrintDBGridEh
     Options = [pghFitGridToPageWidth]
-    Page.BottomMargin = 1
-    Page.LeftMargin = 1
-    Page.RightMargin = 1
-    Page.TopMargin = 1
+    Page.BottomMargin = 1.000000000000000000
+    Page.LeftMargin = 1.000000000000000000
+    Page.RightMargin = 1.000000000000000000
+    Page.TopMargin = 1.000000000000000000
     PageFooter.Font.Charset = DEFAULT_CHARSET
     PageFooter.Font.Color = clWindowText
     PageFooter.Font.Height = -11
     PageFooter.Font.Name = 'Tahoma'
     PageFooter.Font.Style = []
     PageFooter.RightText.Strings = (
-      'стр. &[Page] из &[Pages]')
+      #1089#1090#1088'. &[Page] '#1080#1079' &[Pages]')
     PageHeader.Font.Charset = DEFAULT_CHARSET
     PageHeader.Font.Color = clWindowText
     PageHeader.Font.Height = -11

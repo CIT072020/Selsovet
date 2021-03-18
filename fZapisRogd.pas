@@ -854,7 +854,7 @@ begin
     fmZapisRogd.IsCreateForm:=false;
 
   //  fmZapisRogd.writetodebug([inttostr(nID)+' '+inttostr(gettickcount)]);
-//    Globaltask.LogFile.WriteToLogFile(inttostr(gettickcount));
+//    Globaltask.WriteToLogFile(inttostr(gettickcount));
     fmZapisRogd.AssignPar(slPar);
     fmZapisRogd.TBItemUstOtc.Visible:=false;
     fmZapisRogd.TBItemAdopt.Visible:=false;
@@ -990,7 +990,7 @@ begin
   FCheckLookupField:=false;   // так как все поля (область,район,город) переделаны на DbEditEh.MRUList;
   FNewSved:=DefaultNewSved;       // сведения по новому;
   FCheckKeyGrid:=true;
-  TypeObj := dmBase.TypeObj_ZRogd;
+  TypeObj:=_TypeObj_ZRogd;
   FUpdatingObj:=GetUpdatingObj(TypeObj);
 
   CreateButtonAddGrag(edON_GRAG);
@@ -1387,6 +1387,12 @@ begin
     then FQueryINChild:=true
     else FQueryINChild:=false;
   TbItemQueryIN.Checked:=FQueryINChild;
+
+  edON_DOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edONA_DOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;
+  edON_DOK_TYPE.DropDownBox.Width:=TYPEDOK_WIDTH;  // utypes.pas
+  edONA_DOK_TYPE.DropDownBox.Width:=TYPEDOK_WIDTH;
+
 //  FTrueSpecSved:=false;
 
 //  AddButton_ChoiceSpec([edRukov,edRukov_Sv,edSpec]);  для выбора из справочника
@@ -1805,7 +1811,7 @@ var
   d : TDateTime;
   nIdChild : Integer;
   lCheckEn, lAdd,lBeAdd,lErr : Boolean;
-  strLich,sKodOtnosh,strIDFirst,sBookmarkChild,sOn_ID,sONA_ID,sLic_ID : String;
+  oldInd,strLich,sKodOtnosh,strIDFirst,sBookmarkChild,sOn_ID,sONA_ID,sLic_ID : String;
   nCurNomer:Integer;
   recID:TID;
   {$ENDIF}
@@ -1976,19 +1982,37 @@ begin
       sOna_ID:='';
       sLic_ID:='';
       //----------- попробуем найти родителей --------------------
-      if (DokumentON_IDENTIF.AsString<>'') and (DokumentON_ID.AsString='') then begin
-        if dmBase.tbMens.Locate('DATE_FIKS;LICH_NOMER', VarArrayOf([dmBase.GetDateCurrentSost, DokumentON_IDENTIF.AsString]),[]) then begin
-          sOn_ID:=dmBase.tbMens.FieldByName('ID').AsString;
-          if DokumentLICH_ID.AsString=''
-            then sLic_ID:=dmBase.tbMens.FieldByName('LIC_ID').AsString;    // лицевой счет папы
+      oldInd:=dmBase.tbMens.IndexFieldNames;
+      dmBase.tbMens.IndexFieldNames:='DATE_FIKS;LICH_NOMER';
+      try
+        if (DokumentON_IDENTIF.AsString<>'') and (DokumentON_ID.AsString='') then begin
+          dmBase.tbMens.SetRange([dmBase.GetDateCurrentSost, DokumentON_IDENTIF.AsString],[dmBase.GetDateCurrentSost, DokumentON_IDENTIF.AsString]);
+          while not dmBase.tbMens.Eof do begin
+            if dmBase.tbMens.FieldByName('NEW_ID').AsInteger=0 then begin  // не копия
+              sOn_ID:=dmBase.tbMens.FieldByName('ID').AsString;
+              if DokumentLICH_ID.AsString=''
+                then sLic_ID:=dmBase.tbMens.FieldByName('LIC_ID').AsString;    // лицевой счет папы
+            end;
+            dmBase.tbMens.Next;
+          end;
+          dmBase.tbMens.CancelRange;
         end;
-      end;
-      if (DokumentONA_IDENTIF.AsString<>'') and (DokumentONA_ID.AsString='') then begin
-        if dmBase.tbMens.Locate('DATE_FIKS;LICH_NOMER', VarArrayOf([dmBase.GetDateCurrentSost, DokumentONA_IDENTIF.AsString]),[]) then begin
-          sOna_ID:=dmBase.tbMens.FieldByName('ID').AsString;
-          if (DokumentLICH_ID.AsString='')
-            then sLic_ID:=dmBase.tbMens.FieldByName('LIC_ID').AsString;   // лицевой счет мамы
+
+        if (DokumentONA_IDENTIF.AsString<>'') and (DokumentONA_ID.AsString='') then begin
+          dmBase.tbMens.SetRange([dmBase.GetDateCurrentSost, DokumentONA_IDENTIF.AsString],[dmBase.GetDateCurrentSost, DokumentONA_IDENTIF.AsString]);
+          while not dmBase.tbMens.Eof do begin
+            if dmBase.tbMens.FieldByName('NEW_ID').AsInteger=0 then begin  // не копия
+              sOna_ID:=dmBase.tbMens.FieldByName('ID').AsString;
+              if DokumentLICH_ID.AsString=''
+                then sLic_ID:=dmBase.tbMens.FieldByName('LIC_ID').AsString;    // лицевой счет мамы
+            end;
+            dmBase.tbMens.Next;
+          end;
+          dmBase.tbMens.CancelRange;
         end;
+      finally
+        dmBase.tbMens.CancelRange;
+        dmBase.tbMens.IndexFieldNames:=oldInd;
       end;
       if (sOn_ID<>'') or (sOna_ID<>'') or (sLic_ID<>'') then begin
         if sOn_ID<>''  then DokumentON_ID.AsString:=sOn_ID;
@@ -2785,7 +2809,7 @@ var
   Pol:TPol;
   SOATO:TSOATO;
 begin
-  if ChoiceMen( edON_Familia, Trim(edON_FAMILIA.Text), 'POL='+QStr('М'), arrRec) then begin
+  if ChoiceMen( edON_Familia, Trim(edON_FAMILIA.Text), 'POL='+QStr('М')+' and (new_id=0 or empty(new_id))', arrRec) then begin
       old := Screen.Cursor;
       Screen.Cursor := crHourGlass;
       lCheck:=dbDisableControls(Dokument);
@@ -2883,7 +2907,7 @@ var
   Pol:TPol;
 //  SOATO:TSOATO;
 begin
-  if ChoiceMen( edONA_Familia, Trim(edONA_FAMILIA.Text), 'POL='+QStr('Ж'), arrRec) then begin
+  if ChoiceMen( edONA_Familia, Trim(edONA_FAMILIA.Text), 'POL='+QStr('Ж')+' and (new_id=0 or empty(new_id))', arrRec) then begin
       old := Screen.Cursor;
       Screen.Cursor := crHourGlass;
       lCheck:=dbDisableControls(Dokument);
@@ -3416,9 +3440,6 @@ procedure TfmZapisRogd.edTypeSpr1Change(Sender: TObject);
 //  s1,s2 : string;
 begin
 //  if (edTypeSpr.ItemIndex > -1) and not IsReadDokument then begin
-
-//    s1:=GetPadegFIO(DokumentON_FamiliaP.Asstring+' '+DokumentON_Name.Asstring+' '+DokumentON_Otch.Asstring,'м','Т');
-//    s2:=GetPadegFIO(DokumentONA_FamiliaP.Asstring+' '+DokumentONA_Name.Asstring+' '+DokumentONA_Otch.Asstring,'ж','Т');
 
 //    if edTypeSpr.ItemIndex=1 then begin   // форма № 2
 //      edAddTextArx.Text := 'Запись об отце произведена на основании заявления матери, не состоящей в браке, '+
@@ -4577,7 +4598,7 @@ begin
         ATE:=dmBase.GetATEAkt(Dokument, 'GOSUD,FName;OBL,B_OBL;RAION;GOROD,B_GOROD', '{NOT_RNGOR}{SS}{CHOICE}');
 //        lbATE.Caption:=ATE.error+ATE.kod+chr(13)+chr(10)+ate.namec+' '+ate.name;
         Dokument.Edit;
-        if ATE.ATE_ID>0 then begin
+        if (CategoryType(ATE.Category)=CATEGORY_PUNKT) and (ATE.ATE_ID>0) then begin
           DokumentSOATO_ID.AsInteger:=ATE.ATE_ID;
           if (Copy(ATE.Kod,2,1)='4') or (Copy(ATE.Kod,1,1)='5') then begin
             s:='';   // область не нужна
@@ -4622,7 +4643,7 @@ begin
           DokumentB_GOROD.AsString:=sTypePunkt;
         end else begin
           DokumentSOATO_ID.AsInteger:=0;
-          DokumentATE_FULLNAME.AsString:='';
+          DokumentATE_FULLNAME.AsString:=ATE.Error;
         end;
         PostDataSet(Dokument);
         CheckATE;
@@ -5190,7 +5211,7 @@ begin
         try
           if ChoiceFromLookupSpr('LOOKUP_LIST_IN', 'IDENTIF', true,ENG_edIDENTIF) then begin
             dmBase.AdsConnection.Execute('DELETE FROM BaseProp WHERE typeobj='+IntToStr(_TypeObj_IN)+' and pokaz='+QStr('IN')+' and value='+QStr(ENG_edIDENTIF.Text));
-            GlobalTask.LogFile.WriteToLogFile('Выдан зарезервированный #ИН '+QStr(ENG_edIDENTIF.Text));
+            GlobalTask.WriteToLogFile('Выдан зарезервированный #ИН '+QStr(ENG_edIDENTIF.Text));
           end;
         finally
           UnLockOperation(_TypeOper_ChoiceIN);

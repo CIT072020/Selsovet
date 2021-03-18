@@ -84,7 +84,7 @@ Source: "E:\Projects\Selsovet7\Report3\Опека_*.fr3"; DestDir: "{app}\Report3"; F
 ;Source: "E:\Projects\Selsovet7\Report3\report_stru3.ini"; DestDir: "{app}\Report3"; Flags: ignoreversion; Components: program
 Source: "E:\Projects\SelSovet7\Report\reportsOPEKA.ini"; DestDir: "{app}\Report"; Flags: ignoreversion
 Source: "E:\Projects\SelSovet7\Template\Список выгруженных людей.doc"; DestDir: "{app}\Template"; Flags: ignoreversion
-Source: "E:\Projects\Selsovet7\Service\*.*"; DestDir: "{app}\Service"; Excludes: "*.xml,*smdo*.*,fmGurn*.ini,*.pas,GISUN*.ini,OpisFilter*.ini,UserEvents.ini,Obrabotka.ini,ParamPost.tsk,*ZAH.*,*Ochered.*,*ZAGS.*,*OCH.*,*GKH.*,MRUList.ini,Actions.ini,Parameters.tsk,NewParams.tsk,*.bak"; Flags: ignoreversion; Components: program
+Source: "E:\Projects\Selsovet7\Service\*.*"; DestDir: "{app}\Service"; Excludes: "*.xml,*smdo*.*,fmGurn*.ini,*.pas,GISUN*.ini,OpisFilter*.ini,UserEvents.ini,Obrabotka.ini,ParamPost.tsk,*Post.*,*ZAH.*,*Ochered.*,*ZAGS.*,*OCH.*,*GKH.*,MRUList.ini,Actions.ini,Parameters.tsk,NewParams.tsk,*.bak"; Flags: ignoreversion; Components: program
 Source: "E:\Projects\Selsovet7\Service\fmGurnZOpeka.ini"; DestDir: "{app}\Service";  Flags: ignoreversion; Components: program
 Source: "E:\Projects\Selsovet7\Install\Default\minsk.pas";DestDir: "{app}\Service"; Flags: ignoreversion;
 Source: "E:\Projects\Selsovet7\Install\Default\personal.pas"; DestDir: "{app}\Service"; Flags: ignoreversion; Components: program
@@ -141,8 +141,8 @@ Filename: "{app}\Opeka.exe"; Description: "Опека и попечительство"; Flags: nowai
 root:HKCU;subkey:"Software\VCBOUS"; Flags: uninsdeletekeyifempty
 root:HKCU;subkey:"Software\VCBOUS\OPEKA"; Flags: uninsdeletekey
 root:HKCU;subkey:"Software\VCBOUS\OPEKA";valuetype:string;valuename:"installpath";valuedata:"{app}"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\OPEKA";valuetype:string;valuename:"version";valuedata:"5.0.0"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\OPEKA";valuetype:string;valuename:"update";valuedata:"25"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\OPEKA";valuetype:string;valuename:"version";valuedata:"5.2.0"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\OPEKA";valuetype:string;valuename:"update";valuedata:"27"; Flags: uninsdeletevalue
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\LastUpdate"

@@ -1,3 +1,36 @@
+
+procedure CheckSprZah;
+var
+  ds:TDataSet;
+  n:Integer;
+  strSQL:String;
+begin
+  ds:=dbOpenSQL('select count(*) as kolvo from SprZah where (ate=0) or ((ate>0) and ate not in (select ate_id from sysspr.ate))','');
+  if ds<>nil then begin
+    n:=ds.Fld('KOLVO').AsInteger;
+    dbClose(ds);
+    if n>0 then begin  // необходима проверка справочника SprZAH
+      strSQL:=
+          'try '+
+          '  drop table #update_zah; '+
+          'catch all '+
+          'end; '+
+          'select id, '+
+          '  iif(ate_punkt=0 or ate_punkt is null,iif(ate_ss=0 or ate_ss is null, iif(ate_rn=0 or ate_rn is null, ate_obl, ate_rn),ate_ss),ate_punkt) ate, '+
+          '  ate_obl,ate_rn,ate_ss,ate_punkt, name, name_path '+
+          '  into #update_zah '+
+          '  from sysspr.gisun_sprzah '+
+          '  where ate_punkt=0 or ate_punkt is null  '+
+          '  order by id; '+
+          'update sprZah set sprZah.ate=u.ate from #update_zah u where sprZah.id_gis=cast(u.id as SQL_INTEGER);';
+      dbExecuteSQL(strSQL);
+      if dbLastError()<>'' then begin
+        ShowMessage( 'Ошибка выполнения скрипта SprZAH: '+dbLastError() );
+      end;
+    end;
+  end;
+end;
+
 procedure _CreateN_Delo(ds:TDataSet);
 var
   s:String;
@@ -981,6 +1014,10 @@ begin
                  'UPDATE БазаДомов SET dom=Right(''       ''+Trim(dom),7) WHERE dom is not null;'+
                  'UPDATE БазаДомов SET korp=Right(''       ''+Trim(korp),7) WHERE korp is not null;');
   end;
+  if (Result=0)  and (TypeBase='SELSOVET') and arrCheck[32] then begin
+    dbExecuteSQL('UPDATE RegDogN SET TYPEOBJ=103 WHERE TYPEOBJ is null;'+
+                 'UPDATE RegDogN SET NANIM_TYPE=1 WHERE NANIM_TYPE is null;');
+  end;
 end;
 
 function BeforeUpdate : Integer;
@@ -1053,6 +1090,7 @@ begin
         if (nVer<288) then arrCheck[31]:=true;  // TYPE_SN  DATEDOK_UST
         if (nVer<289) then arrCheck[26]:=true;
         if (nVer<320) then arrCheck[12]:=true;
+        if (nVer<329) then arrCheck[32]:=true;  // TYPEOBJ RegDogN
       end else if (TypeBase='GKH') then begin
         if (nVer<200) then arrCheck[25]:=true;
         if (nVer<262) then arrCheck[28]:=true;

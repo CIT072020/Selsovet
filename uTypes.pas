@@ -52,7 +52,9 @@ type
     Raion:String;
     Raion_B:String;
     RnGorod:String;
+    RnGorod_B:String;
     SS:String;
+    SS_B:String;
     Error:String;
     Active:Boolean;
     idObl:Integer;
@@ -119,7 +121,17 @@ var
   //------------------------
 
 const
+  // запись в лог GlobalTask.WriteToLogFile
+  LOG_DEF=0;
+  LOG_SQL=1;    // SQL запрос
+  LOG_FILTER=2; // set filter
+  LOG_COPY=3; // копирование файлов
+  LOG_ADD=4;  // создание записи
+  LOG_EDIT=5; // корректировка записи
+  LOG_DEL=6;  // удаление записи
 
+  TYPEDOK_ROWS=20;
+  TYPEDOK_WIDTH=550;
 {$IFDEF ADD_VEDOM_ARXIV}
   VEDOM_ARXIV=true;
 {$ELSE}
@@ -619,6 +631,9 @@ const
  _TypeObj_Spr=100;
  _TypeObj_SprDocSubjG_=101;
  _TypeObj_QueryGIS=102;   // запрос в регистр персональных данных
+ _TypeObj_RegDogN=103;    // регистрация договоров найма граждан
+ _TypeObj_RegDogN2=104;   // регистрация договоров найма юр. лиц
+ _TypeObj_AteEva=105;     // соответствие спр. улиц программы и классифокатора ЭВА
 
  ERR_REG_GIS='Нельзя запросить данные для зарегистрированной записи.';
 

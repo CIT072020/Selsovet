@@ -20,7 +20,7 @@ uses
   fSimpleD, uCheckbase, fParamQuest,ShellAPI, fLogon,
   {$IFDEF USE_TEMPLATE}  mTempl, mTplInt, {$ENDIF}
   {$IFDEF GISUN} uGisun, {$ENDIF}
-  {$IFDEF SMDO} uSMDO, fGurnSMDO, uAvest, fSMDODoc, {$ENDIF}      // СМДО
+  {$IFDEF SMDO} uSMDO, fGurnSMDO, AvCryptMail, uAvest, fSMDODoc, {$ENDIF}      // СМДО
   buttons, act2rtf, sasadbgrid, RKP, fRunObrab, OpisEdit,uTypes,
  {$IFDEF VER150} Variants, {$ENDIF}
  {$IFDEF USE_FR3} MainLibFR3, frxAdsComponents, modify_components, {frx2xto30,}
@@ -30,7 +30,7 @@ uses
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdFTP, IdException, IdFTPCommon,
   ComCtrls, ZipForge, IdAntiFreezeBase, IdAntiFreeze, NativeXML, IdHTTP,
   RxGIF, Animate, GIFCtrl, IdThreadComponent, frxExportXLS, frxExportBIFF,
-  frxBarcode, RXShell;
+  frxBarcode, RXShell, cxGraphics;
 
 type
   TFormGurnal = class of TfmGurnal;
@@ -566,7 +566,6 @@ type
     TBItem77: TTBItem;
     lbSost: TStaticText;
     acLoadClass: TAction;
-    ImageList1: TImageList;
     TBSeparatorItem21: TTBSeparatorItem;
     TBItemVigrZah: TTBItem;
     TBItemZagrZah: TTBItem;
@@ -609,6 +608,16 @@ type
     acReQueryGis: TAction;
     TBSeparatorItem8: TTBSeparatorItem;
     TBItemQueryGis: TTBItem;
+    acReRegDogN: TAction;
+    TBItemRegDogN: TTBItem;
+    ImageList24: TcxImageList;
+    acReRegDogN2: TAction;
+    TBItemRegDogN2: TTBItem;
+    TBSubmenuIRun: TTBSubmenuItem;
+    TBItemEditUrlAvest: TTBItem;
+    TBItemCOCFromAvest: TTBItem;
+    acDeloToVedomArx: TAction;
+    acNomenToVedomArx: TAction;
     procedure acSetParametersExecute(Sender: TObject);
     procedure acAdminParametersExecute(Sender: TObject);
 
@@ -715,7 +724,6 @@ type
     procedure acPropHouseExecute(Sender: TObject);
     procedure acSprOwnersExecute(Sender: TObject);
     procedure acReOwnersExecute(Sender: TObject);
-    procedure acEditIsporExecute(Sender: TObject);
     procedure acSprFamilyExecute(Sender: TObject);
     procedure acSprPerevodExecute(Sender: TObject);
     procedure acRunAutoRestoreExecute(Sender: TObject);
@@ -821,7 +829,7 @@ type
     procedure acSMDORunWebLoadSprExecute(Sender: TObject);
     procedure lbSostClick(Sender: TObject);
     procedure lbSostDblClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
@@ -841,17 +849,22 @@ type
     procedure imgNewPostClick(Sender: TObject);
     procedure TimerNewPostTimer(Sender: TObject);
     procedure acSaveCertExecute(Sender: TObject);
-    procedure TBItemNomekToVedomArxClick(Sender: TObject);
-    procedure TBItemDeloToVedomArxClick(Sender: TObject);
     procedure TBItemNew2Click(Sender: TObject);
     procedure TBItemLoadSysSprClick(Sender: TObject);
     procedure acReQueryGisExecute(Sender: TObject);
+    procedure acReRegDogNExecute(Sender: TObject);
+    procedure acReRegDogN2Execute(Sender: TObject);
+    procedure TBItemCOCFromAvestClick(Sender: TObject);
+    procedure TBItemEditUrlAvestClick(Sender: TObject);
+    procedure acNomenToVedomArxExecute(Sender: TObject);
+    procedure acDeloToVedomArxExecute(Sender: TObject);
 //  protected
 //    procedure CreateParams(var Params: TCreateParams);
   private
     { Private declarations }
     FCountIdle: Integer;
     FYearFiks: Integer;
+    FEnabledEVA:Boolean;
     VistaAltFix:TVistaAltFix;
     FRunActivate : Boolean;
     FDateFiks: TDateTime;
@@ -875,6 +888,7 @@ type
     procedure SetLog_WriteOwner(const Value: Boolean);
     function GetXMLZAH:String;
     procedure SetYearFiks(const Value: Integer);
+    procedure SetEnabledEVA(const Value: Boolean);
 
     {$IFDEF USE_TEMPLATE}
     procedure SetTemplateInterface(const Value: TTemplateInterface);
@@ -916,6 +930,7 @@ type
     property TemplateInterface : TTemplateInterface read FTemplateInterface write SetTemplateInterface;
     {$ENDIF}
     property YearFiks : Integer read FYearFiks write SetYearFiks;
+    property EnabledEVA : Boolean read FEnabledEVA write SetEnabledEVA;
     property DateFiks : TDateTime read FDateFiks write SetDateFiks;
     property FltOpList  : TOperList read FFltOpList write SetFltOpList;
     property FltSprList : TSprList read FFltSprList write SetFltSprList;
@@ -985,9 +1000,14 @@ type
     procedure OnExportEditSpr(Sender : TObject);
     procedure OnCheckEnableEditSpr(Opis:TOpisEdit; var nEnabled:Integer);
 //    procedure BeforeDeleteSprUL( Grid : TSasaDbGrid; var lDel : Boolean);
+
     procedure BeforeDeleteSprPunkt( Grid : TSasaDbGrid; var lDel : Boolean);
     procedure EditRecordSprNames( Grid : TSasaDbGrid; lAdd : Boolean; Ic : TIcon);
     procedure BeforeDeleteSprNames( Grid : TSasaDbGrid; var lDel : Boolean);
+    procedure EditRecordSprPunkt( Grid:TSasaDbGrid; lAdd:Boolean; Ic:TIcon);
+    procedure SprPunkt_GridGetCellParams1(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
+    procedure SprPunkt_GridGetCellParams2(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
+
     procedure SprPunkt_GridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
     procedure SprOch_GridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
     procedure SprSeria_GridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
@@ -1057,6 +1077,7 @@ var
 
 const
   IL_BRAK=51;   // индекс в ImageList для брака
+  IL_SMERT=82;  // индекс в ImageList для смертей
   IL_ROGD=83;   // индекс в ImageList для рождений
   IL_CH_MEN=2;  //
 
@@ -1071,6 +1092,7 @@ const
   IL_DEL_CHILD=120; //88;
   IL_DEL_MEN=120;   //88;
   IL_DEL=120; //88;
+  IL_SET_SOOTV=122;
 
   IL_DATE=56;
   IL_REG_DOC=56;
@@ -1097,12 +1119,13 @@ uses fPropertyObj, fAbout, fOperFind, fEditSpr, fChoiceZAGS,
      fDeclRegistr, fParamsFTP, uSynapseObj,
      fTalonPrib, fGurnTalonPrib, mAdsObj, mDoc2Sel, mDRecData, uFuncRegDoc,
      fTalonUbit, fGurnTalonUbit, fDeclBrak, fActions, ifpii_dbfunc, uCreateXML, u2zags,
-     fGurnPassportViza, fGurnOwners, fEditPerevod, fSimpleSeek,
+     fGurnPassportViza, fGurnOwners, fEditPerevod, fSimpleSeek, fEditRecSprPunkt,
      fSetPassword, fCopyData, fOpisTables, SelLibFr, uProject, fExpDs, mExport, fSeekBase,
      fAdres, dAdres, uObjectsScript, fIzbUch, fPropHouse, fAddSobstv, fWarning, fAccountSvid, uFindBase, fmChList,
      fPrintSSS, fShablon, fChoiceNasel, fTableGurnal, fRegGISUN, fListSvid, {fAlfavitZAGS,} fLoadLic, DsiWin32, mVerInfo,
      {$IFDEF SMDO} fSMDOZagrSpr, {$ENDIF}      // СМДО
-     fGurnQueryGis, fQueryGisun, fEditMemo, fSetPropUsers, fChoiceAdres, uOcheredToXML;
+     fGurnQueryGis, fQueryGisun, fGurnRegDogN, fGurnRegDogN2, fRegDogN,
+     fEditMemo, fSetPropUsers, fChoiceAdres, uOcheredToXML, Masks;
 
 {$R *.DFM}
 
@@ -1113,6 +1136,7 @@ begin
     GlobalTask.SetEditEventParameter('KOD', EditSOATO_SS, SOATO_GetText, nil);
     GlobalTask.SetEditEventParameter('VXOD_NOMER', Event_EditFormNomer, nil, nil);
     GlobalTask.SetEditEventParameter('ISXOD_NOMER', Event_EditFormNomer, nil, nil);
+    GlobalTask.SetEditEventParameter('ADMIN_NOMER', Event_EditFormNomer, nil, nil);
     GlobalTask.EditParameters;
   end else if Role.CheckSubSystem(SS_LOCALPAR)=ptFull then begin // доступна корректировака локальных параметров
     GlobalTask.OnlyLocalParams:=true;
@@ -1245,6 +1269,7 @@ begin
       PutError(' Ошибка обновления справочника должностных лиц');
     end;
   end;
+  SetRole;
 end;
 
 //--------------------------------------------------------------------
@@ -1388,6 +1413,7 @@ begin
     frxHTMLExport:=TfrxHTMLExport.Create(self);
     frxRTFExport:= TfrxRTFExport.Create(self);
   {$ENDIF}
+  FEnabledEVA:=false;
   FCountIdle:=0;
   FYearFiks:=0;
   FOpenLic:=false;
@@ -1400,11 +1426,6 @@ begin
   TBToolWindowS.DockPos:=2000;
   CreateNotifyProg('');
 
-  //------ ведомственный архив --
-  TBSeparatorVedArx.Visible:=VEDOM_ARXIV;       // uTypes.pas
-  TBItemNomekToVedomArx.Visible:=VEDOM_ARXIV;
-  TBItemDeloToVedomArx.Visible:=VEDOM_ARXIV;
-  //-----------------------------
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
@@ -1432,10 +1453,10 @@ begin
 //   ActionList2RTF(ActionList,GlobalTask.PathService+'act_list.rtf');
 //   ImageList2RTF(ImageList,GlobalTask.PathService+'img_list.rtf');
 // end;
- ClearDir(ExtractFilePath(Application.ExeName)+'$TEMP$',true);
+ ClearDir(ExtractFilePath(Application.ExeName)+NameTmpDir(2),true);
  try
    if (GlobalTask<>nil) and (GlobalTask.LogFile<>nil)
-     then GlobalTask.LogFile.WriteToLogFile('Завершен сеанс пользователя.');
+     then GlobalTask.WriteToLogFile('Завершен сеанс пользователя.');
  except         
  end;
  FEventsWordReports.Free;
@@ -1443,7 +1464,6 @@ begin
  FEventsBlankZAGSReports.Free;
                 
  fmMain := nil;
-
 
  // dmLichSchet.Free;
  // fmLichSchet.Free;
@@ -1983,6 +2003,95 @@ begin
   end;
 end;
 }
+//------------ справочник населенных пунктов ----------------
+procedure TfmMain.acSprPunktExecute(Sender: TObject);
+var
+  Param  : TParamsEditSpr;
+begin
+  Param := nil;
+  Param := TParamsEditSpr.Create;
+  Param.OnEditRecord := EditRecordSprPunkt;
+  Param.OnGetCellParams := SprPunkt_GridGetCellParams;
+  Param.Quest_Delete:='   Удалить населенный пункт из базы ?   ';
+  Param.OnBeforeDelete := BeforeDeleteSprPunkt;
+
+  Param.Col1:='ATE_ID';
+  Param.GetCellParams_Col1:=SprPunkt_GridGetCellParams1;
+  Param.Col2:='EVA_ID';
+  Param.GetCellParams_Col2:=SprPunkt_GridGetCellParams2;
+
+  Globaltask.EditSpr('EDIT_PUNKT', Param);
+  dmBase.SprPunkt.IndexName:='PR_KEY';
+  {$IFDEF OBR_GRAG}
+    DocRecord.UpdateSpr('SP_PLACE');
+  {$ENDIF}
+  dmBase.LookUpPunkt.Close;
+  dmBase.LookUpPunkt.AdsCloseSQLStatement;
+  dmBase.LookUpPunkt.Open;
+  dmBase.WorkQuery.SQL.Text:='SELECT count(*) FROM СпрНасПунктов WHERE typepunkt is null or name is null';
+  try
+    dmBase.WorkQuery.Open;
+    if dmBase.WorkQuery.Fields[0].AsInteger>0 then begin
+      PutError(' Не у всех населенных пунктов заполнено наименование или тип');
+    end;
+  finally
+    dmBase.WorkQuery.Close;
+  end;
+end;
+
+procedure TfmMain.EditRecordSprPunkt( Grid:TSasaDbGrid; lAdd:Boolean; Ic:TIcon);
+var
+  strID : String;
+  ds : TDataSet;
+begin
+  ds := Grid.DataSource.DataSet;
+  if (ds.State = dsEdit) or (ds.State = dsInsert) then begin
+    ds.Cancel;
+  end;
+  EditRecord_SprPunkt(Grid, ds, lAdd, Ic);
+end;
+
+procedure TfmMain.SprPunkt_GridGetCellParams1(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
+var
+  ATE:TATE;
+  s:String;
+begin
+  if not EditMode and (Params.Text<>'') then begin
+    ATE.ATE_ID:=StrToIntDef(Params.Text,0);
+    if ATE.ATE_ID>0 then begin
+      s:=FullNameFromATE(ATE,0,', ');
+      if s=''
+        then Params.Text:='неизвестный код '+Params.Text
+        else Params.Text:=s;
+    end else begin
+      Params.Text:='';
+    end;
+  end;
+end;
+
+procedure TfmMain.SprPunkt_GridGetCellParams2(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
+//var
+//  nEVA:Integer;
+//  s:String;
+begin
+{
+  if not EditMode and (Params.Text<>'') then begin
+    nEVA:=StrToIntDef(Params.Text,0);
+    if nEva>0 then begin
+      if dmBase.Eva.Locate('ATE_ID;ID', VarArrayOf([dmbase.SprPunkt.FieldByName('ATE_ID').AsInteger, nEva]), []) then begin
+        if dmBase.EvaVid.Locate('ID', dmBase.Eva.FieldByName('VID_ID'), []) then begin
+        end;
+      end;
+      if s=''
+        then Params.Text:='неизвестный код '+Params.Text
+        else Params.Text:=s;
+    end else begin
+      Params.Text:='';
+    end;
+  end;
+}
+end;
+
 procedure TfmMain.SprPunkt_GridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
 var
   ds:TDataSet;
@@ -2012,36 +2121,6 @@ begin
   end;
   if not ds.FieldByName('DATE_DEATH').IsNull
     then Background:=clInfoBk;
-end;
-
-//------------ справочник населенных пунктов ----------------
-procedure TfmMain.acSprPunktExecute(Sender: TObject);
-var
-  Param  : TParamsEditSpr;
-begin
-  Param := nil;
-  Param := TParamsEditSpr.Create;
-  Param.OnGetCellParams := SprPunkt_GridGetCellParams;
-  Param.Quest_Delete:='   Удалить населенный пункт из базы ?   ';
-  Param.OnBeforeDelete := BeforeDeleteSprPunkt;
-  Globaltask.EditSpr('EDIT_PUNKT', Param);
-  dmBase.SprPunkt.IndexName:='PR_KEY';
-  {$IFDEF OBR_GRAG}
-    DocRecord.UpdateSpr('SP_PLACE');
-  {$ENDIF}
-  dmBase.LookUpPunkt.Close;
-  dmBase.LookUpPunkt.AdsCloseSQLStatement;
-  dmBase.LookUpPunkt.Open;
-
-  dmBase.WorkQuery.SQL.Text:='SELECT count(*) FROM СпрНасПунктов WHERE typepunkt is null or name is null';
-  try
-    dmBase.WorkQuery.Open;
-    if dmBase.WorkQuery.Fields[0].AsInteger>0 then begin
-      PutError(' Не у всех населенных пунктов заполнено наименование или тип');
-    end;
-  finally
-    dmBase.WorkQuery.Close;
-  end;
 end;
 
 procedure TfmMain.BeforeDeleteSprPunkt( Grid : TSasaDbGrid; var lDel : Boolean);
@@ -2079,22 +2158,7 @@ begin
     PutError('  Удаление разрешено только с главного компьютера. ');
   end;
 end;
-
-procedure TfmMain.acEditIsporExecute(Sender: TObject);
-begin
-{
-  dmBase.IsporSvid.IndexName := 'EDIT_KEY';
-  dmBase.IsporSvid.SetRange([SVID_ISPOR],[SVID_ISPOR]);
-  dmBase.IsporSvid.BeforePost := dmBase.BeforePost_IsporSvid;
-  try
-    Globaltask.EditSpr('EDIT_ISPORSVID', nil);
-  finally
-    dmBase.IsporSvid.BeforePost:=nil;
-    dmBase.IsporSvid.CancelRange;
-  end;
-}
-end;
-
+//------ серии свидетельств
 procedure TfmMain.acSeriaSvidExecute(Sender: TObject);
 var
   Param  : TParamsEditSpr;
@@ -2453,12 +2517,12 @@ var
   n,m:Integer;
   s,ss,sCert:String;
 //  par:TXMLParams;
-  sl:TStringList;
-  v:Variant;
-  lOk:Boolean;
+//  sl:TStringList;
+//  v:Variant;
+//  lOk:Boolean;
  // arr:TArrSmallAdres;
- guid:TGUID;
- FileRead: TFileStream;
+// guid:TGUID;
+// FileRead: TFileStream;
 // fs:TFormatSettings;
 // sn:TSynapseObj;
 // XL,sh:Variant;
@@ -2467,23 +2531,49 @@ var
   l:Boolean;
 //  XMLDokument:TNativeXml;
 //  node:TXMLNode;
-  d:TDateTime;
-  res:DWORD;
-  p:PChar;
-  fl : FLASHWINFO;
-  da:TRegdoc2XML;
-  fs:TFormatSettings;
+  d1,d2:TDateTime;
+//  res:DWORD;
+//  p:PChar;
+//  fl : FLASHWINFO;
+//  da:TRegdoc2XML;
+//  fs:TFormatSettings;
   i:Integer;
+  hSession: AvCmHc;
+//  hMycert:AvCmHcert;
+  w, res: DWORD;
+  bt:Byte;
 const
   PPP_CONST='bd3141f9aed34f62a74c8a093a0b2ba9';
 begin
-
   if not Role.SystemAdmin then exit;
 
-  sl:=TStringList.Create;     
-  RunQueryGISUN(-1, sl);
-  sl.Free;
-  exit;
+  {
+  res:=Avest. ActivateSession(hSession,true);
+  if res=AVCMR_SUCCESS then begin
+    res:=Avest.ActivateSession(hSession,true);
+  end;
+  Showmessage(inttostr(res)+' '+avest.ErrorInfo(res));
+  }
+    {
+  s:='265';
+  while InputQuery('Дело', 'Номер дела', s) do begin
+    m:=dmBase.GetDateDelo(1, strtoint(s), d1,d2, ss);
+    ShowMessage(inttostr(m)+'   '+datetostr(d1)+'   '+datetostr(d2)+'   '+ss);
+  end;
+  }
+  {
+  //  кодирование + запись
+  s:=XorEncode(PPP_CONST, 'NOT=WW1234567,QQQQQ,');
+//  s:=XorEncode(PPP_CONST, 'NOT=WW1234567,700085892,');
+  dmBase.ExecuteSQL('UPDATE help SET text='+QStr(s)+' WHERE kod=''ADD63''', dmBase.AdsSharedConnection);
+  // чтение
+  dmBase.WorkQueryS.SQL.text:='SELECT text FROM help WHERE kod=''ADD63''';
+  dmBase.WorkQueryS.Open;
+  s:=XorDecode(PPP_CONST, trim(dmBase.WorkQueryS.Fields[0].AsString));
+  dmBase.WorkQueryS.Close;
+  ShowMessage(s);
+  }
+
   {
   sl:=TStringList.Create;
   try
@@ -3262,7 +3352,7 @@ begin
   SystemProg.SetCurObj(0,recID);
   SystemProg.SetRunProcedure(0,0);
 
-  IDLastDok:=0;     
+  IDLastDok:=0;
   Result := false;
   lNew := false;
   if strFieldID=''
@@ -3470,6 +3560,14 @@ begin
         fmVidGit:=nil;
       end;
     end;
+  //----------------------------------------------------------------------
+  end else if TypeObj = _TypeObj_QueryGIS then begin
+    {$IFDEF QUERY_GIS}
+      Result:=RunQueryGISUN(nID, nil);
+    {$ENDIF}
+  //----------------------------------------------------------------------
+  end else if (TypeObj = _TypeObj_RegDogN) or (TypeObj = _TypeObj_RegDogN2) then begin
+    Result:=EditRegDogN(nID, slPar);
   //----------------------------------------------------------------------
   end else if TypeObj = dmBase.TypeObj_PassportViza then begin
 //    if not (ds.FieldByName('ID').AsString='') then begin
@@ -3711,6 +3809,7 @@ begin
         Gurnal.DateFiks := fmMain.DateFiks;
         if Gurnal.LoadQuery then begin
           Gurnal.LoadFromIni;
+          Gurnal.PrepareMenu;
           Globaltask.CurrentOpisEdit.SetKeyForm(Gurnal,nil);
           ListGurnal.AddObject(strName, Gurnal);
         end else begin
@@ -3760,7 +3859,7 @@ end;
 
 procedure TfmMain.SetRole;
 var
-  lEnabled : Boolean;
+  l,lEnabled : Boolean;
   i : Integer;
   s,sName:String;
 begin
@@ -3793,6 +3892,13 @@ begin
   end else begin
     acSMDOEditParams.Visible:=false;
   end;
+
+  //------ ведомственный архив --
+  l:=( (Role.Status=rsAdmin) or (Role.CheckSubSystem(SS_OBRACH)=ptFull) ) and GlobalTask.ParamAsBoolean('VEDOM_ARX');
+  acDeloToVedomArx.Visible:=l;
+  acNomenToVedomArx.Visible:=l;
+  TBSeparatorVedArx.Visible:=l;
+  //-----------------------------
 
   if EnableReport then begin
     acDesignReport.Visible := true;
@@ -3940,16 +4046,25 @@ begin
   ShowGurnal(TfmGurnPassport, 'fmGurnPassport');
 end;
 
-
 procedure TfmMain.acRePassportVizaExecute(Sender: TObject);
 begin
   ShowGurnal(TfmGurnPassportViza, 'fmGurnPassportViza');
 end;
 
+// запросы в ГИС РН
 procedure TfmMain.acReQueryGisExecute(Sender: TObject);
 begin
-// запросы в ГИС РН
   ShowGurnal(TfmGurnQueryGis, 'fmGurnQueryGis');
+end;
+// регистрация договоров найма  1.8
+procedure TfmMain.acReRegDogNExecute(Sender: TObject);
+begin
+  ShowGurnal(TfmGurnRegDogN, 'fmGurnRegDogN');
+end;
+// регистрация договоров найма  8.2
+procedure TfmMain.acReRegDogN2Execute(Sender: TObject);
+begin
+  ShowGurnal(TfmGurnRegDogN2, 'fmGurnRegDogN2');
 end;
 
 procedure TfmMain.acReRogdExecute(Sender: TObject);
@@ -4428,12 +4543,16 @@ begin
   end;
   f.edYear.Value := nYear;
   dmBase.WorkQuery.Close;
-  lOk := f.ShowModal=mrOk;
-  if f.edYear.Value <> null then begin
-    nYear := f.edYear.Value;
+  lOk:=(f.ShowModal=mrOk);
+  if f.edYear.Value<>null then begin
+    nYear:=f.edYear.Value;
   end;
-  lCreateCur := f.ckCurSost.Checked;  // восстановить текущее состояние базы
+  lCreateCur:=f.ckCurSost.Checked;  // восстановить текущее состояние базы
   f.Free;
+//  if not lCreateCur and (nYear>YearOf(Date())) then begin
+//    lOk:=false;
+//    PutError('Нельзя создать состояние базы "на 1 января '+IntToStr(nYear)+'г", год еще не наступил.')
+//  end;
   if lOk then begin
     if lCreateCur then begin
       strCaption := ' Вы хотите восстановить "текущее" состояние базы из состояния на '+'1 января '+IntToStr(nYear)+' года ? '
@@ -4452,7 +4571,7 @@ var
   f : TfmDeleteFiks;
   lOk : Boolean;
   nYear : Word;
-  strDate : String;
+  s,strDate : String;
   d : TDateTime;
 begin
   nYear := 0;
@@ -4471,13 +4590,21 @@ begin
   end;
   dmBase.WorkQuery.Active := false;
   f.edYear.ItemIndex := -1;
-  lOk := f.ShowModal=mrOk;
+  lOk:=f.ShowModal=mrOk;
   if f.edYear.ItemIndex>-1 then begin
     nYear := StrToInt(f.edYear.KeyItems[f.edYear.ItemIndex]);
   end;
   f.Free;
   if lOk and (nYear>0) then begin
-    if Problem(' Удалить состояние базы на 1 января '+IntToStr(nYear)+' года ? ') then begin
+    s := '';
+    s := s + 'ВНИМАНИЕ!'#13;
+    s := s + 'Вы хотите удалить архивное состояние базы'#13;
+    s := s + 'на 1 января '+IntToStr(nYear)+' года.'+#13;
+    s := s + 'Если Вы уверены в необходимости проведения операции,'#13;
+    s := s + 'введите слово ДА в поле ввода'#13;
+    lOk:=OkWarning(s);
+    if lOk then begin
+//    if Problem(' Удалить состояние базы на 1 января '+IntToStr(nYear)+' года ? ') then begin
       strDate := IntToStr(nYear)+'-01-01';
       dmBase.DeleteSostBase( STOD(strDate, tdAds) );
       if DateFiks = STOD(strDate, tdAds) then begin
@@ -4668,7 +4795,7 @@ begin
       end;
     end;
   end;
-  GlobalTask.LogFile.WriteToLogFile(s+E.Message);
+  GlobalTask.WriteToLogFile(s+E.Message);
   if (E is EADSDatabaseError) then begin
     if (EADSDatabaseError(E).ACEErrorCode=7057) and (EADSDatabaseError(E).TableName<>'') then begin
       s := 'Таблица: '+EADSDatabaseError(E).TableName+' ';
@@ -5222,6 +5349,7 @@ var
 begin
   if not FRunActivate then begin
 //    pn.Visible:=true;
+    FRunActivate := true;
 
     Application.ProcessMessages;
     if dmBase.LastDatabaseError=0 then begin
@@ -5241,48 +5369,8 @@ begin
       {$ENDIF}
     end;
          
-    FRunActivate := true;
 //    CheckAndRunSprSMDO;
 
-    {$IFDEF UPDATE_SYNA}
-      if Globaltask.ParamAsBoolean('CHECK_UPDATE') then begin
-        PostMessage(Handle,WM_CHECKUPDATE,0,0);
-        {
-        oUpdate:=TSynapseObj.Create(pn);
-        oUpdate.FCheckMessages:=true;
-        oUpdate.FCheckSpr:=Globaltask.ParamAsBoolean('SMDO_NSI_CH');
-        oUpdate.FThread:=true;
-        if oUpdate.CheckUpdate then begin
-          AddNotifyProg(fmMain, 'Доступно обновление программы № '+IntToStr(oUpdate.FUpdate), false, true,0,0);
-        end;
-        if oUpdate.FDateSprOrgSMDO>0 then begin
-          dMax:=getMaxCreateDateSpr('smdosprorg'); // default 'smdosprorg'
-          dMax:=Max(dMax, GlobalTask.GetLastValueAsDate('LAST_UPDATE_SPRORG',false));
-          if oUpdate.FDateSprOrgSMDO>dMax then
-            AddNotifyProg(fmMain, 'Доступно обновление справочника организаций СМДО от '+FormatDateTime('dd.mm.yyyy г.',oUpdate.FDateSprOrgSMDO), false, true,0,0);
-        end;
-        if oUpdate.FDateSprVidDokSMDO>0 then begin
-          dMax:=getMaxCreateDateSpr('smdosprviddok'); // default 'smdosprorg'
-          dMax:=Max(dMax, GlobalTask.GetLastValueAsDate('LAST_UPDATE_SPRVIDDOK',false));
-          if oUpdate.FDateSprVidDokSMDO>dMax then
-            AddNotifyProg(fmMain, 'Доступно обновление справочника видов документов СМДО от '+FormatDateTime('dd.mm.yyyy г.',oUpdate.FDateSprVidDokSMDO), false, true,0,0);
-        end;
-        if oUpdate.FMessages<>''
-          then CheckMessagesProg(oUpdate.FMessages);
-        }
-      end;
-    {$ELSE}
-      s:='?';
-      sUpd:=CheckUpdate(IdFTP1, false, false, 0, false, s, lPath);
-      if sUpd<>'' then begin
-        AddNotifyProg(fmMain, 'Доступно обновление программы № '+sUpd+#13#10+'(Сервис->Дополнительно->Скачать обновление программы)', false, true,0,0);
-  //      ShowMessage('Доступно обновление программы № '+sUpd)
-      end;
-      if s<>'' then begin
-        MessagesProg:=s;  // !!!
-        CheckMessagesProg(MessagesProg);  // !!!   обработка сообщений из файла messages
-      end;
-    {$ENDIF}
     if dmBase.LastDatabaseError=0 then begin
       if TBItemBackup.Enabled then begin
         dMax:=GlobalTask.GetLastValueAsDate('LAST_BACKUP_COPY', false);
@@ -5292,9 +5380,8 @@ begin
         end;
         if (IncMonth(Date,-1)>dMax) then begin
           AddNotifyProg(fmMain, 'Выполните резервную копию базы', false, true,0,0);
-        end;  
+        end;
       end;
-      {$IFDEF LAIS}
       if GlobalTask.ParamAsBoolean('HINT_NEW_SOST') then begin
         lShow:=false;
         if FormatDateTime('mm',Date)='01' then begin
@@ -5307,7 +5394,6 @@ begin
           ShowMessage('  Не забудьте в январе создать состояние базы.  '); //#13'После создания всех '); !!!
         end;
       end;
-      {$ENDIF}
       if IsActiveGISUN and not Role.SystemAdmin then begin
         if dmBase.GetCountIN <= 3 then begin
           AddNotifyProg(fmMain, 'Зарезервируйте идентификационные номера для записей актов о рождении', false, true,0,0);
@@ -5315,6 +5401,22 @@ begin
           acQueryListINExecute(nil);
         end;
       end;
+      {$IFDEF UPDATE_SYNA}
+        if Globaltask.ParamAsBoolean('CHECK_UPDATE') then begin
+          PostMessage(Handle,WM_CHECKUPDATE,0,0);
+        end;
+      {$ELSE}
+        s:='?';
+        sUpd:=CheckUpdate(IdFTP1, false, false, 0, false, s, lPath);
+        if sUpd<>'' then begin
+          AddNotifyProg(fmMain, 'Доступно обновление программы № '+sUpd+#13#10+'(Сервис->Дополнительно->Скачать обновление программы)', false, true,0,0);
+    //      ShowMessage('Доступно обновление программы № '+sUpd)
+        end;
+        if s<>'' then begin
+          MessagesProg:=s;  // !!!
+          CheckMessagesProg(MessagesProg);  // !!!   обработка сообщений из файла messages
+        end;
+      {$ENDIF}
     end;
   end;
 end;
@@ -6007,7 +6109,7 @@ begin
         n:=2;
       end;
     end;
-    if lErr then GlobalTask.LogFile.WriteToLogFile('Ошибка подключения к серверу обновлений '+IdFTP1.Host+'   ['+IntToStr(nErrCode)+'] '+sErr);
+    if lErr then GlobalTask.WriteToLogFile('Ошибка подключения к серверу обновлений '+IdFTP1.Host+'   ['+IntToStr(nErrCode)+'] '+sErr);
   end;
 
   if lShow
@@ -7567,31 +7669,31 @@ begin
   end;
 end;
 //--------------------------------------------------------------------------
-procedure TfmMain.Button1Click(Sender: TObject);
-var
-  s:String;
-  ds:TDataSet;
+procedure TfmMain.Button5Click(Sender: TObject);
+//var
+//  s:String;
+//  ds:TDataSet;
 begin
-  s:='TYPESPR,Integer;EXTCODE,Char,12;LEX1,Char,250;LEX2,Char,250;LEX3,Char,100;PARENT,Char,10;EXTTYPE,Integer;Active,Logical;'+
-     'BEGINDATE,Date,0;ENDDATE,Date,0;';
-  ds:=dbCreateMemTable(s,'');
-  ds.Open;
-  Fds:=ds;
+//  s:='TYPESPR,Integer;EXTCODE,Char,12;LEX1,Char,250;LEX2,Char,250;LEX3,Char,100;PARENT,Char,10;EXTTYPE,Integer;Active,Logical;'+
+//     'BEGINDATE,Date,0;ENDDATE,Date,0;';
+//  ds:=dbCreateMemTable(s,'');
+//  ds.Open;
+//  Fds:=ds;
+
 end;
 //--------------------------------------------------------------------------
 procedure TfmMain.Button2Click(Sender: TObject);
-var
-  d2xml:TDataSet2XML;
+//var
+//  d2xml:TDataSet2XML;
 begin
-  ds2xml:=TDataSets2XML.Create;
-  d2xml:=ds2xml.DS_Add(Fds,false);
-  d2xml.NameRoot:='SPR134';
-  if FileExists(d2xml.NameRoot+'.xml') then begin
-    if ds2xml.FileToXML(d2xml.NameRoot+'.xml') then begin
-      ds2xml.XMLToData;
-    end;
-  end;
-//  DataSource1.DataSet:=fds;
+//  ds2xml:=TDataSets2XML.Create;
+//  d2xml:=ds2xml.DS_Add(Fds,false);
+//  d2xml.NameRoot:='SPR134';
+//  if FileExists(d2xml.NameRoot+'.xml') then begin
+//    if ds2xml.FileToXML(d2xml.NameRoot+'.xml') then begin
+//      ds2xml.XMLToData;
+//    end;
+//  end;
 end;
 //--------------------------------------------------------------------------
 procedure TfmMain.Button3Click(Sender: TObject);
@@ -7629,9 +7731,15 @@ begin
   RunZagrZAH;
 end;
 
+procedure TfmMain.SetEnabledEVA(const Value: Boolean);
+begin
+  FEnabledEVA:=Value;
+//  GlobalTask.SetWorkParam('YEARFIKS', FYearFiks);
+end;
+
 procedure TfmMain.SetYearFiks(const Value: Integer);
 begin
-  FYearFiks := Value;
+  FYearFiks:=Value;
   GlobalTask.SetWorkParam('YEARFIKS', FYearFiks);
 end;
 
@@ -7707,25 +7815,42 @@ begin
     then SMDO.CheckMail_Syna;
 end;
 
+procedure TfmMain.TBItemCOCFromAvestClick(Sender: TObject);
+var
+  n:Integer;
+  s:String;
+begin
+  n:=Avest.RefreshCOC(getURLCOC, true, s, true);
+  if s<>''
+    then ShowMessage(s);
+end;
+
+procedure TfmMain.TBItemEditUrlAvestClick(Sender: TObject);
+begin
+  Gisun.EditUrlCOC;
+end;
+
 procedure TfmMain.acSaveCertExecute(Sender: TObject);
 begin
   Gisun.SaveCertToSChannel;
 end;
 //--- Ведомственный архив -------------------------------------------------------
-procedure TfmMain.TBItemNomekToVedomArxClick(Sender: TObject);
+procedure TfmMain.acNomenToVedomArxExecute(Sender: TObject);
 begin
   NomekToVedomArx;
 end;
-//---------------------
-procedure TfmMain.TBItemDeloToVedomArxClick(Sender: TObject);
+
+procedure TfmMain.acDeloToVedomArxExecute(Sender: TObject);
 begin
   DeloToVedomArx;
 end;
+
 //---------------------
 procedure TfmMain.TBItemLoadSysSprClick(Sender: TObject);
 begin
   RunLoadSysSpr(pn);
 end;
+
 
 initialization
   ListGurnal := TStringList.Create;

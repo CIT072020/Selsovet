@@ -202,6 +202,7 @@ inherited fmGurnNasel: TfmGurnNasel
           #1060#1072#1084#1080#1083#1080#1103
           #1051#1080#1094'. '#1089#1095#1077#1090
           #1044#1077#1090#1080
+          #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086
           #1055#1088#1086#1080#1079#1074#1086#1083#1100#1085#1099#1081
           #1076#1083#1103' '#1052#1080#1085#1090#1088#1091#1076#1072)
       end
@@ -209,13 +210,16 @@ inherited fmGurnNasel: TfmGurnNasel
   end
   inherited Grid: TSasaDBGrid
     Width = 1052
-    Height = 369
+    Height = 343
     OnGetCellParams = GridGetCellParams
     OnKeyDown = GridKeyDown
     Color1 = 3251505
   end
   inherited StBar: TStatusBar
     Top = 395
+    Width = 1052
+  end
+  inherited TBDock24: TTBDock
     Width = 1052
   end
   inherited Query: TAdsQuery

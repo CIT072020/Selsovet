@@ -7,7 +7,7 @@ interface
 uses
    Windows, Classes, SysUtils, Graphics, ActiveX, DB, Forms, ImgList, Controls, FuncPr, MetaTask, uTypes,
    {$IFDEF GIS_THREAD} TasksEx, AsyncCalls, {$ENDIF}
-   Dialogs, StdCtrls, ExtCtrls, ShellApi, ComObj, Messages, TypInfo, mPermit,
+   Dialogs, StdCtrls, ExtCtrls, ShellApi, ComObj, Messages, TypInfo, mPermit, uPadegFIO,
    {$IFDEF ADD_WS_LOCAL}
      mLocal, wsLocal,
    {$ENDIF}
@@ -729,12 +729,13 @@ function TRegInt.GetMartialStatus(data: TPersonalData_; sPar:String):TMartialSta
 var
   i:Integer;
   doc:TRegDocument;
-  s,ss,sZAGS_A,sZAGS_S:String;
+  s,ss,sZAGS_A,sZAGS_S,sPol:String;
   lFIO,lSuprugDeath:Boolean;
 begin
   if Pos('<FIO>', sPar)>0  then lFIO:=true  else lFIO:=false;
   Result.Status:=0;  // нет данных
   Result.Text:='нет данных';
+  Result.NameStatus:='';
   Result.FIO:='';
   Result.Doc:='';
   lSuprugDeath:=false;
@@ -743,17 +744,19 @@ begin
   if data.family<>nil then begin
     if data.family.martial_status<>nil then begin
       if (data.family.husband<>nil) then begin  // муж
+        sPol:='м';
         Result.FIO:=data.family.husband.person_data.last_name+' '+data.family.husband.person_data.name_+' '+
               data.family.husband.person_data.patronymic;
         if data.family.husband.person_data.status.code<>ST_ACTIVE
           then lSuprugDeath:=true;
       end else if (data.family.wife<>nil) then begin  // жена
-        Result.FIO:=data.family.wife.person_data.last_name+' '+data.family.wife.person_data.name_+' '+
-              data.family.wife.person_data.patronymic;
+        sPol:='ж';
+        Result.FIO:=FirstUpper(data.family.wife.person_data.last_name+' '+data.family.wife.person_data.name_+' '+
+              data.family.wife.person_data.patronymic);
         if data.family.wife.person_data.status.code<>ST_ACTIVE
           then lSuprugDeath:=true;
-      end;
-      if (Result.FIO<>'') and lFIO then s:=' c '+Result.FIO else s:='';
+      end;                                 
+      if (Result.FIO<>'') and lFIO then s:=' c '+GetPadegFIO(Result.FIO, sPol, 'т') else s:='';
 //      data.family.martial_status.cert_data.invalid_mrg_date  // дата решения суда о призаннии брака недействительным
 //      data.family.martial_status.cert_data.dvc_date          // дата решения суда о расторжении брака
       sZAGS_S:='';
@@ -773,7 +776,7 @@ begin
                 Result.Doc:='решение суда о расторжении брака';
                 Result.Status:=22;  // расторгнут по суду
               end;
-              Result.Text:='решение суда №'+doc.Number+' от '+DatePropis(doc.DateIssue,3)+'г. '+doc.AuthorName;
+              Result.Text:='решение суда №'+doc.Number+' от '+DatePropis(doc.DateIssue,3)+'г '+doc.AuthorName;
             //---- тип докум.: свидетельство, автор: справочник органов ЗАГС
             end else if (doc.TypeSpr=ctSvidType) and (doc.AuthorSpr=ctZags) then begin
 // 1 свид. о расторжении брака I-ЛЮ № 0093439 выд. отдел загса администрации Новобелицкого района г. Гомеля
@@ -785,7 +788,7 @@ begin
               end else if doc.TypeID=DOK_SVID_BRAK then begin
                 ss:='о браке';
               end;
-              sZAGS_S:='св-во '+ss+' '+doc.Seria+' №'+doc.Number+' от '+DatePropis(doc.DateIssue,3)+'г.';
+              sZAGS_S:='св-во '+ss+' '+doc.Seria+' №'+doc.Number+' от '+DatePropis(doc.DateIssue,3)+'г';
             //---- тип докум.: актовая запись, автор: справочник органов ЗАГС
             end else if (doc.TypeSpr=ctActType) and (doc.AuthorSpr=ctZags) then begin
               if doc.TypeID=ctActType_ZBrak then begin
@@ -800,15 +803,17 @@ begin
                 Result.NameStatus:='брак'+s+' расторгнут';
                 Result.Status:=21;  // расторгнут в ЗАГС
               end;
-              sZAGS_A:='з/а №'+doc.Number+' от '+DatePropis(doc.DateIssue,3)+'г.';
+              sZAGS_A:='з/а №'+doc.Number+' от '+DatePropis(doc.DateIssue,3)+'г';
             end;
             Result.Organ:=doc.AuthorName;
           end;
         end;
       end;
       if (Result.Status=10) or (Result.Status=21) then begin  // орган принятия ЗАГС
-        if sZAGS_S<>'' then sZAGS_S:=sZAGS_S+', ';
-        Result.Text:=sZAGS_S+sZAGS_A+' '+doc.AuthorName;
+//        if sZAGS_S<>'' then sZAGS_S:=sZAGS_S+', ';
+        if sZAGS_A='' then ss:=sZAGS_S else ss:=sZAGS_A;
+//        Result.Text:=sZAGS_S+sZAGS_A+' '+doc.AuthorName;
+        Result.Text:=ss+' '+doc.AuthorName;  //   !!! doc.AuthorName надо брать для каждого документа свое !!!
       end else if (Result.Status=11) then begin // вдовец(а)
         Result.Text:=''; // нет записи акта о смерти
         Result.Doc:='';
@@ -1169,6 +1174,9 @@ begin
             end;
             FCoverMessageId:=FGisun.CoverMessageId;  //ID сообщения ответа
             FCoverMessageTime:=Now; //FGisun.CoverMessageTime;//время сообщения ответа
+//  ???             registerResponse.cover.message_time;
+//  ???             registerResponse.cover.message_id;
+
             if lOk then begin
                Result:=rrOk;
                Output:=CreateOutputTable(akGetPersonalData); //akGetPersonIdentif
@@ -1351,6 +1359,8 @@ begin
                   FLog.Add('!ОШИБКА: не совпадают идентификаторы сообщений')
                end;
                //
+               FCoverMessageId:=Copy(registerResponse.cover.message_id,2,36);     //GUID сообщения ответа
+               FCoverMessageTime:=registerResponse.cover.message_time.AsDateTime; //время сообщения ответа
                Table:=FTableList.Find(False, akGetPersonalData, opGet);
                Input.First;
                while not Input.Eof do begin
@@ -2452,7 +2462,7 @@ var
       end;
    end;
 
-   procedure SetOrganName;
+   procedure SetClassNameLex;
    var
       Field: TField;
       c: wsGisun.Classifier;
@@ -2461,16 +2471,26 @@ var
       if DataField.AsString='0' then begin
          Field:=DataSet.FindField(DataField.FieldName+'_LEX');
          if (Field<>nil) and (Trim(Field.AsString)<>'') then begin
-            c:=wsGisun.Classifier(GetObject(Root, PropInfo));
-            SetLength(lexema, 1);
-            lexema[0]:=wsGisun.value.Create;
-            lexema[0].Text:=Trim(Field.AsString);
-            lexema[0].lang:='RU';
-            c.lexema:=lexema;
+           //------ RU ----------___------------------------------
+           c:=wsGisun.Classifier(GetObject(Root, PropInfo));
+           SetLength(lexema, 1);
+           lexema[0]:=wsGisun.value.Create;
+           lexema[0].Text:=Trim(Field.AsString);
+           lexema[0].lang:='ru';
+           {
+           //------ BE -------------------------------------------
+           Field:=DataSet.FindField(DataField.FieldName+'_LEX_B');
+           if (Field<>nil) and (Trim(Field.AsString)<>'') then begin
+             SetLength(lexema, 2);
+             lexema[1]:=wsGisun.value.Create;
+             lexema[1].Text:=Trim(Field.AsString);
+             lexema[1].lang:='be';
+           end;
+           }
+           c.lexema:=lexema;
          end;
       end;
    end;
-
 begin
    Result:=False;
    First:=Root;
@@ -2582,10 +2602,10 @@ begin
                                   end;
                                   if (Root is wsGisun.Document) then begin    // !!!
                                     SetOrdProp(GetObject(Root, PropInfo), 'Type_', n);
-                                    SetOrganName;
+                                    SetClassNameLex;
                                   end else if (Root is wsGisun.ActData) then begin
                                     SetOrdProp(GetObject(Root, PropInfo), 'Type_', n);
-                                    SetOrganName;
+                                    SetClassNameLex;
                                   end else begin
                                     SetOrdProp(GetObject(Root, PropInfo), 'Type_', n);
                                   end;
@@ -2600,6 +2620,7 @@ begin
                                  SetOrdProp(GetObject(Root, PropInfo), 'Type_', ctStatus);
                                end else if SameText(PropName, 'country_b') then begin
                                  SetOrdProp(GetObject(Root, PropInfo), 'Type_', ctCountry);
+                                 //SetClassNameLex;
                                end else if SameText(PropName, 'type_city_b') then begin
                                  SetOrdProp(GetObject(Root, PropInfo), 'Type_', ctTypeCity);
                                end else if SameText(PropName, 'death_cause') then begin

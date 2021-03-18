@@ -24,9 +24,9 @@ type
     firstDate : String;
     lastDate : String;
     Name : String;
-	NameBel : String;
+    NameBel : String;
     Soato : String;
-	Shtamp : String;
+    Shtamp : String;
     ID : String;
     PathXml : String;
     PathReport : String;
@@ -211,7 +211,10 @@ begin
          end;
 
          if arrSrc[i] = 'adres' then begin
-           script := script + 'trim(isnull(ar.ONA_OBL,'''')) + '','' + trim(isnull(ar.ONA_RAION,'''')) + '','' + trim(isnull(stp.NAME,'''')) +  trim(isnull(ar.ONA_GOROD,'''')) + '','' + trim(isnull(ar.ONA_GOROD_R,'''')) '+getKV('ar.ONA_DOM','ar.ONA_KORP','ar.ONA_KV')+' as ' + arrDst[i];
+//           script := script + 'trim(isnull(ar.ONA_OBL,'''')) + '','' + iif(ar.ONA_B_RN=false,'''',trim(isnull(ar.ONA_RAION,''''))+'','') + iif(substring(ar.ona_soato,5,1)=''8'',trim(ate2s.name)+'' с/с,'','''') + trim(isnull(stp.NAME,'''')) + trim(isnull(ar.ONA_GOROD,'''')) + '',''  + iif(ar.ONA_B_RN=false,trim(isnull(ar.ONA_RAION,''''))+'','','''') + trim(isnull(ar.ONA_GOROD_R,'''')) '+getKV('ar.ONA_DOM','ar.ONA_KORP','ar.ONA_KV')+' as ' + arrDst[i];
+           script := script + 'iif(ar.ONA_OBL is null,'''', trim(isnull(ar.ONA_OBL,''''))+'' обл.''+'','') + iif(ar.ONA_B_RN=false,'''',trim(isnull(ar.ONA_RAION,''''))+'','') + iif(substring(ar.ona_soato,5,1)=''8'',trim(ate2s.name)+'' с/с,'','''') + '+
+             ' trim(isnull(stp.NAME,'''')) + trim(isnull(ar.ONA_GOROD,'''')) + '','' '+
+             ' + iif(ar.ONA_B_RN=false,trim(isnull(ar.ONA_RAION,''''))+'','','''') + trim(isnull(ar.ONA_GOROD_R,'''')) '+getKV('ar.ONA_DOM','ar.ONA_KORP','ar.ONA_KV')+' as ' + arrDst[i];
            flag := true;
          end;
 
@@ -236,6 +239,7 @@ begin
     'LEFT JOIN SprNames ss ON ar.ID_ZAGS = ss.ID ' +
     'LEFT JOIN SysSpr.ATE ate1 ON ss.soato=ate1.kod ' +
     'LEFT JOIN SysSpr.ATE ate2 ON ar.ona_soato=ate2.kod ' +
+    'LEFT JOIN SysSpr.ATE ate2s ON substring(ar.ona_soato,1,7)+''000''=ate2s.kod ' +
     'LEFT JOIN SysSpr.TypePunkt stp ON ar.ONA_B_GOROD = stp.ID ' +
     'WHERE CONVERT(YEAR(ar.DATEZ), SQL_VARCHAR) = ' + '''' + parYear + '''' +
     ' AND CONVERT(MONTH(ar.DATEZ), SQL_VARCHAR) = ' + '''' + parMonth + '''' +
@@ -312,7 +316,8 @@ begin
           flag := true;
         end;
         if arrSrc[i] = 'adres' then begin
-          script := script + 'trim(isnull(sr.GT_OBL,'''')) + '','' + trim(isnull(sr.GT_RAION,'''')) + '','' + trim(isnull(stp.NAME,''''))  + trim(isnull(sr.GT_GOROD,'''')) + '','' + trim(isnull(sr.GT_GOROD_R,'''')) '+getKV('sr.GT_DOM','sr.GT_KORP','sr.GT_KV')+' as ' + arrDst[i];
+          script := script + 'iif(sr.GT_OBL is null,'''',trim(isnull(sr.GT_OBL,''''))+'' обл.'') + '','' + iif(sr.GT_B_RN=false,'''',trim(isnull(sr.GT_RAION,''''))+'','') + iif(substring(sr.soato,5,1)=''8'',trim(ate2s.name)+'' с/с,'','''')+ '+
+              'trim(isnull(stp.NAME,''''))  + trim(isnull(sr.GT_GOROD,'''')) + '','' + iif(sr.GT_B_RN=false,trim(isnull(sr.GT_RAION,''''))+'','','''') + trim(isnull(sr.GT_GOROD_R,'''')) '+getKV('sr.GT_DOM','sr.GT_KORP','sr.GT_KV')+' as ' + arrDst[i];
           flag := true;
         end;
         if arrSrc[i] = 'name1' then begin
@@ -339,6 +344,7 @@ begin
     'LEFT JOIN SprNames ss ON sr.ID_ZAGS = ss.ID ' +
     'LEFT JOIN SysSpr.ATE ate1 ON ss.soato=ate1.kod ' +
     'LEFT JOIN SysSpr.ATE ate2 ON sr.soato=ate2.kod ' +
+    'LEFT JOIN SysSpr.ATE ate2s ON substring(sr.soato,1,7)+''000''=ate2s.kod ' +
     'LEFT JOIN SysSpr.TypePunkt stp ON sr.GT_B_GOROD = stp.ID ' +
     'WHERE CONVERT(YEAR(sr.DATEZ), SQL_VARCHAR) = ' + '''' + parYear + '''' +
     ' AND CONVERT(MONTH(sr.DATEZ), SQL_VARCHAR) = ' + '''' + parMonth + '''' +
@@ -410,12 +416,15 @@ begin
           'CONVERT(zb.ONA_GRAG, SQL_VARCHAR)  as ' + arrDst[i];
           flag := true;
         end;
-  		if arrSrc[i] = 'm_adres' then begin
-          script := script + 'trim(isnull(zb.ON_M_OBL,'''')) + '','' + trim(isnull(zb.ON_M_RAION,'''')) + '','' + trim(isnull(stp.NAME,'''')) + trim(isnull(zb.ON_M_GOROD,'''')) + '','' + trim(isnull(zb.ON_M_GOROD_R,'''')) '+getKV('zb.ON_M_DOM','zb.ON_M_KORP','zb.ON_M_KV')+' as ' + arrDst[i];
+	      if arrSrc[i] = 'm_adres' then begin
+          script := script + 'iif(zb.ON_M_OBL is null,'''', trim(isnull(zb.ON_M_OBL,''''))+'' обл.''+'','') + iif(zb.ON_M_B_RN=false,'''',trim(isnull(zb.ON_M_RAION,''''))+'','') + iif(substring(zb.on_soato,5,1)=''8'',trim(ate2s.name)+'' с/с,'','''')+ '+
+            'trim(isnull(stp.NAME,'''')) + trim(isnull(zb.ON_M_GOROD,'''')) + '','' +  iif(zb.ON_M_B_RN=false,trim(isnull(zb.ON_M_RAION,''''))+'','','''') + trim(isnull(zb.ON_M_GOROD_R,'''')) '+getKV('zb.ON_M_DOM','zb.ON_M_KORP','zb.ON_M_KV')+' as ' + arrDst[i];
           flag := true;
         end;
-	  	if arrSrc[i] = 'w_adres' then begin
-          script := script + 'trim(isnull(zb.ONA_M_OBL,'''')) + '','' + trim(isnull(zb.ONA_M_RAION,'''')) + '','' + trim(isnull(stp2.NAME,'''')) + trim(isnull(zb.ONA_M_GOROD,'''')) + '','' + trim(isnull(zb.ONA_M_GOROD_R,'''')) '+getKV('zb.ONA_M_DOM','zb.ONA_M_KORP','zb.ONA_M_KV')+' as ' + arrDst[i];
+        if arrSrc[i] = 'w_adres' then begin
+//          script := script + 'trim(isnull(zb.ONA_M_OBL,'''')) + '','' + trim(isnull(zb.ONA_M_RAION,'''')) + '','' + iif(substring(zb.ona_soato,5,1)=''8'',trim(ate3s.name)+'' с/с,'','''')+ trim(isnull(stp2.NAME,'''')) + trim(isnull(zb.ONA_M_GOROD,'''')) + '','' + trim(isnull(zb.ONA_M_GOROD_R,'''')) '+getKV('zb.ONA_M_DOM','zb.ONA_M_KORP','zb.ONA_M_KV')+' as ' + arrDst[i];
+          script := script + 'iif(zb.ONA_M_OBL is null,'''', trim(isnull(zb.ONA_M_OBL,''''))+'' обл.''+'','') + iif(zb.ONA_M_B_RN=false,'''',trim(isnull(zb.ONA_M_RAION,''''))+'','') + iif(substring(zb.ona_soato,5,1)=''8'',trim(ate3s.name)+'' с/с,'','''')+ '+
+            'trim(isnull(stp2.NAME,'''')) + trim(isnull(zb.ONA_M_GOROD,'''')) + '','' +  iif(zb.ONA_M_B_RN=false,trim(isnull(zb.ONA_M_RAION,''''))+'','','''') + trim(isnull(zb.ONA_M_GOROD_R,'''')) '+getKV('zb.ONA_M_DOM','zb.ONA_M_KORP','zb.ONA_M_KV')+' as ' + arrDst[i];
           flag := true;
         end;
         if arrSrc[i] = 'name' then begin
@@ -459,7 +468,7 @@ begin
         if i < n then
           script := script + ', ';
         if (i = n) and (not flag) then
-          script := script + 'ar.' +arrSrc[i] + ' as ' + arrDst[i];
+          script := script + 'zb.' +arrSrc[i] + ' as ' + arrDst[i];
     end;
 
     if SortType = 1 then
@@ -476,6 +485,8 @@ begin
     'LEFT JOIN SysSpr.ATE ate1 ON so.soato=ate1.kod ' +
     'LEFT JOIN SysSpr.ATE ate2 ON zb.on_soato=ate2.kod ' +
     'LEFT JOIN SysSpr.ATE ate3 ON zb.ona_soato=ate3.kod ' +
+    'LEFT JOIN SysSpr.ATE ate2s ON substring(zb.on_soato,1,7)+''000''=ate2s.kod ' +
+    'LEFT JOIN SysSpr.ATE ate3s ON substring(zb.ona_soato,1,7)+''000''=ate3s.kod ' +
     'LEFT JOIN SysSpr.TypePunkt stp ON zb.ON_M_B_GOROD = stp.ID ' +
     'LEFT JOIN SysSpr.TypePunkt stp2 ON zb.ONA_M_B_GOROD = stp2.ID ' +
     'WHERE CONVERT(YEAR(zb.DATEZ), SQL_VARCHAR) = ' + '''' + parYear + '''' +
@@ -552,12 +563,16 @@ begin
           ' CONVERT(DAYOFMONTH(ISNULL(ar.SUD_SILA,ar.SUD_DATE)), SQL_VARCHAR)) ' + ' as ' + arrDst[i];
           flag := true;
         end;
-    		if arrSrc[i] = 'm_adres' then begin
-          script := script + 'trim(isnull(ar.ON_M_OBL,'''')) + '','' + trim(isnull(ar.ON_M_RAION,'''')) + '','' + trim(isnull(stp.NAME,'''')) + trim(isnull(ar.ON_M_GOROD,'''')) + '','' + trim(isnull(ar.ON_M_GOROD_R,'''')) '+getKV('ar.ON_M_DOM','ar.ON_M_KORP','ar.ON_M_KV')+' as ' + arrDst[i];
+        if arrSrc[i] = 'm_adres' then begin
+//          script := script + 'trim(isnull(ar.ON_M_OBL,'''')) + '','' + trim(isnull(ar.ON_M_RAION,'''')) + '','' + iif(substring(ar.on_soato,5,1)=''8'',trim(ate2s.name)+'' с/с,'','''')+ trim(isnull(stp.NAME,'''')) + trim(isnull(ar.ON_M_GOROD,'''')) + '','' + trim(isnull(ar.ON_M_GOROD_R,'''')) '+getKV('ar.ON_M_DOM','ar.ON_M_KORP','ar.ON_M_KV')+' as ' + arrDst[i];
+          script := script + 'iif(ar.ON_M_OBL is null,'''', trim(isnull(ar.ON_M_OBL,''''))+'' обл.''+'','') + iif(ar.ON_M_B_RN=false,'''',trim(isnull(ar.ON_M_RAION,''''))+'','') + iif(substring(ar.on_soato,5,1)=''8'',trim(ate2s.name)+'' с/с,'','''')+ '+
+            'trim(isnull(stp.NAME,'''')) + trim(isnull(ar.ON_M_GOROD,'''')) + '','' +  iif(ar.ON_M_B_RN=false,trim(isnull(ar.ON_M_RAION,''''))+'','','''') + trim(isnull(ar.ON_M_GOROD_R,'''')) '+getKV('ar.ON_M_DOM','ar.ON_M_KORP','ar.ON_M_KV')+' as ' + arrDst[i];
           flag := true;
         end;
-     		if arrSrc[i] = 'w_adres' then begin
-          script := script + 'trim(isnull(ar.ONA_M_OBL,'''')) + '','' + trim(isnull(ar.ONA_M_RAION,'''')) + '',''+ trim(isnull(stp2.NAME,''''))  + trim(isnull(ar.ONA_M_GOROD,'''')) + '','' + trim(isnull(ar.ONA_M_GOROD_R,'''')) '+getKV('ar.ONA_M_DOM','ar.ONA_M_KORP','ar.ONA_M_KV')+' as ' + arrDst[i];
+        if arrSrc[i] = 'w_adres' then begin
+//          script := script + 'trim(isnull(ar.ONA_M_OBL,'''')) + '','' + trim(isnull(ar.ONA_M_RAION,'''')) + '',''+ iif(substring(ar.ona_soato,5,1)=''8'',trim(ate3s.name)+'' с/с,'','''')+ trim(isnull(stp2.NAME,''''))  + trim(isnull(ar.ONA_M_GOROD,'''')) + '','' + trim(isnull(ar.ONA_M_GOROD_R,'''')) '+getKV('ar.ONA_M_DOM','ar.ONA_M_KORP','ar.ONA_M_KV')+' as ' + arrDst[i];
+          script := script + 'iif(ar.ONA_M_OBL is null,'''', trim(isnull(ar.ONA_M_OBL,''''))+'' обл.''+'','') + iif(ar.ONA_M_B_RN=false,'''',trim(isnull(ar.ONA_M_RAION,''''))+'','') + iif(substring(ar.ona_soato,5,1)=''8'',trim(ate3s.name)+'' с/с,'','''')+ '+
+            'trim(isnull(stp2.NAME,'''')) + trim(isnull(ar.ONA_M_GOROD,'''')) + '','' +  iif(ar.ONA_M_B_RN=false,trim(isnull(ar.ONA_M_RAION,''''))+'','','''') + trim(isnull(ar.ONA_M_GOROD_R,'''')) '+getKV('ar.ONA_M_DOM','ar.ONA_M_KORP','ar.ONA_M_KV')+' as ' + arrDst[i];
           flag := true;
         end;
         if arrSrc[i] = 'name' then begin
@@ -612,6 +627,8 @@ begin
     'LEFT JOIN SysSpr.ATE ate1 ON ss.soato=ate1.kod ' +
     'LEFT JOIN SysSpr.ATE ate2 ON ar.on_soato=ate2.kod ' +
     'LEFT JOIN SysSpr.ATE ate3 ON ar.ona_soato=ate3.kod ' +
+    'LEFT JOIN SysSpr.ATE ate2s ON substring(ar.on_soato,1,7)+''000''=ate2s.kod ' +
+    'LEFT JOIN SysSpr.ATE ate3s ON substring(ar.ona_soato,1,7)+''000''=ate3s.kod ' +
     'LEFT JOIN SysSpr.TypePunkt stp ON ar.ON_M_B_GOROD = stp.ID ' +
     'LEFT JOIN SysSpr.TypePunkt stp2 ON ar.ONA_M_B_GOROD = stp2.ID ' +
     'WHERE CONVERT(YEAR(ar.DATEZ), SQL_VARCHAR) = ' + '''' + parYear + '''' +

@@ -1,10 +1,10 @@
 inherited fmMen: TfmMen
-  Left = 462
-  Top = 97
+  Left = 443
+  Top = 142
   Caption = #1063#1077#1083#1086#1074#1077#1082
-  ClientHeight = 742
+  ClientHeight = 783
   ClientWidth = 834
-  Constraints.MinHeight = 780
+  Constraints.MinHeight = 740
   Constraints.MinWidth = 850
   Icon.Data = {
     0000010001001010100000000000280100001600000028000000100000002000
@@ -42,12 +42,12 @@ inherited fmMen: TfmMen
   end
   inherited sb: TScrollBox
     Width = 834
-    Height = 697
+    Height = 738
     object pc: TPageControl
       Left = 0
       Top = 87
       Width = 834
-      Height = 610
+      Height = 651
       ActivePage = tsOchered
       Align = alClient
       TabOrder = 0
@@ -59,7 +59,7 @@ inherited fmMen: TfmMen
           Left = 0
           Top = 311
           Width = 826
-          Height = 74
+          Height = 71
           Align = alTop
           Caption = ' '#1054#1073#1088#1072#1079#1086#1074#1072#1085#1080#1077' '
           Font.Charset = DEFAULT_CHARSET
@@ -461,17 +461,17 @@ inherited fmMen: TfmMen
         end
         object Panel1: TPanel
           Left = 0
-          Top = 508
+          Top = 470
           Width = 826
-          Height = 74
+          Height = 153
           Align = alClient
           BevelOuter = bvNone
-          TabOrder = 7
+          TabOrder = 5
           object gbLgot: TGroupBox
             Left = 0
             Top = 0
             Width = 377
-            Height = 74
+            Height = 153
             Align = alLeft
             Caption = ' '#1051#1100#1075#1086#1090#1099' '
             Font.Charset = DEFAULT_CHARSET
@@ -486,7 +486,7 @@ inherited fmMen: TfmMen
             Left = 377
             Top = 0
             Width = 449
-            Height = 74
+            Height = 153
             Align = alClient
             Caption = ' '#1055#1088#1080#1079#1085#1072#1082#1080' '
             Font.Charset = DEFAULT_CHARSET
@@ -1009,7 +1009,7 @@ inherited fmMen: TfmMen
           end
           object edUdost: TDBComboBoxEh
             Left = 11
-            Top = 11
+            Top = 10
             Width = 318
             Height = 24
             DataField = 'PASP_UDOST'
@@ -1043,26 +1043,32 @@ inherited fmMen: TfmMen
             Visible = True
           end
         end
-        object gbPens: TGroupBox
+        object pnAdd: TPanel
           Left = 0
-          Top = 429
+          Top = 382
           Width = 826
-          Height = 45
+          Height = 88
           Align = alTop
-          Caption = ' '#1055#1077#1085#1089#1080#1086#1085#1077#1088' '
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 5
-          object Label21: TLabel
-            Left = 16
-            Top = 21
-            Width = 18
+          TabOrder = 4
+          object Label122: TLabel
+            Left = 14
+            Top = 64
+            Width = 179
             Height = 13
-            Caption = #1058#1080#1087
+            Caption = #1059#1076#1086#1089#1090#1086#1074#1077#1088#1077#1085#1080#1077' '#1086' '#1087#1088#1072#1074#1077'  '#1085#1072' '#1083#1100#1075#1086#1090#1099
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label21: TLabel
+            Left = 14
+            Top = 38
+            Width = 54
+            Height = 13
+            Caption = #1055#1077#1085#1089#1080#1086#1085#1077#1088
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -1071,8 +1077,8 @@ inherited fmMen: TfmMen
             ParentFont = False
           end
           object Label23: TLabel
-            Left = 282
-            Top = 21
+            Left = 382
+            Top = 38
             Width = 72
             Height = 13
             Caption = #1053#1086#1084#1077#1088' '#1082#1085#1080#1078#1082#1080
@@ -1084,8 +1090,8 @@ inherited fmMen: TfmMen
             ParentFont = False
           end
           object Label24: TLabel
-            Left = 498
-            Top = 21
+            Left = 598
+            Top = 38
             Width = 68
             Height = 13
             Caption = #1044#1072#1090#1072' '#1074#1099#1093#1086#1076#1072
@@ -1096,10 +1102,54 @@ inherited fmMen: TfmMen
             Font.Style = []
             ParentFont = False
           end
+          object lbpapa: TLabel
+            Left = 14
+            Top = 10
+            Width = 26
+            Height = 13
+            Caption = #1054#1090#1077#1094
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+          end
+          object lbMama: TLabel
+            Left = 384
+            Top = 10
+            Width = 26
+            Height = 13
+            Caption = #1052#1072#1090#1100
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+          end
+          object edUdostLgot: TDBEditEh
+            Left = 229
+            Top = 60
+            Width = 580
+            Height = 24
+            HelpContext = 999
+            DataField = 'UDOST_LGOT'
+            DataSource = dsDokument
+            EditButtons = <>
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 5
+            Visible = True
+          end
           object edPENS_TIP: TDBLookupComboboxEh
-            Left = 47
-            Top = 15
-            Width = 213
+            Left = 91
+            Top = 32
+            Width = 254
             Height = 24
             DataField = 'PENS_TIP'
             DataSource = dsDokument
@@ -1115,12 +1165,12 @@ inherited fmMen: TfmMen
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 0
+            TabOrder = 2
             Visible = True
           end
           object edPENS_KNIGA: TDBEditEh
-            Left = 368
-            Top = 15
+            Left = 468
+            Top = 32
             Width = 110
             Height = 24
             DataField = 'PENS_KNIGA'
@@ -1132,12 +1182,12 @@ inherited fmMen: TfmMen
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 1
+            TabOrder = 3
             Visible = True
           end
           object edPENS_DATE: TDBDateTimeEditEh
-            Left = 581
-            Top = 15
+            Left = 681
+            Top = 32
             Width = 110
             Height = 24
             DataField = 'PENS_DATE'
@@ -1150,54 +1200,13 @@ inherited fmMen: TfmMen
             Font.Style = []
             Kind = dtkDateEh
             ParentFont = False
-            TabOrder = 2
+            TabOrder = 4
             Visible = True
-          end
-        end
-        object gbParent: TGroupBox
-          Left = 0
-          Top = 385
-          Width = 826
-          Height = 44
-          Align = alTop
-          Caption = ' '#1056#1086#1076#1080#1090#1077#1083#1080' '
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 4
-          object lbpapa: TLabel
-            Left = 18
-            Top = 20
-            Width = 26
-            Height = 13
-            Caption = #1054#1090#1077#1094
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-          end
-          object lbMama: TLabel
-            Left = 384
-            Top = 20
-            Width = 26
-            Height = 13
-            Caption = #1052#1072#1090#1100
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
           end
           object edPapa: TDBEditEh
             Left = 60
-            Top = 14
-            Width = 245
+            Top = 4
+            Width = 280
             Height = 24
             Color = clInfoBk
             DataField = 'PA_FIO'
@@ -1262,8 +1271,8 @@ inherited fmMen: TfmMen
           end
           object edMama: TDBEditEh
             Left = 426
-            Top = 14
-            Width = 245
+            Top = 4
+            Width = 280
             Height = 24
             Color = clInfoBk
             DataField = 'MA_FIO'
@@ -1324,39 +1333,6 @@ inherited fmMen: TfmMen
             ParentFont = False
             ReadOnly = True
             TabOrder = 1
-            Visible = True
-          end
-        end
-        object pnUdostLgot: TPanel
-          Left = 0
-          Top = 474
-          Width = 826
-          Height = 34
-          Align = alTop
-          TabOrder = 6
-          object Label122: TLabel
-            Left = 5
-            Top = 8
-            Width = 179
-            Height = 13
-            Caption = #1059#1076#1086#1089#1090#1086#1074#1077#1088#1077#1085#1080#1077' '#1086' '#1087#1088#1072#1074#1077'  '#1085#1072' '#1083#1100#1075#1086#1090#1099
-          end
-          object edUdostLgot: TDBEditEh
-            Left = 229
-            Top = 4
-            Width = 553
-            Height = 24
-            HelpContext = 999
-            DataField = 'UDOST_LGOT'
-            DataSource = dsDokument
-            EditButtons = <>
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 0
             Visible = True
           end
         end
@@ -1790,7 +1766,7 @@ inherited fmMen: TfmMen
           Left = 0
           Top = 437
           Width = 826
-          Height = 145
+          Height = 186
           Align = alClient
           Caption = ' '#1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1072#1103' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '
           Font.Charset = DEFAULT_CHARSET
@@ -1802,12 +1778,12 @@ inherited fmMen: TfmMen
           TabOrder = 7
           DesignSize = (
             826
-            145)
+            186)
           object edAdd_Info: TDBEditEh
             Left = 7
             Top = 14
             Width = 812
-            Height = 124
+            Height = 165
             HelpContext = 999
             Anchors = [akLeft, akTop, akRight, akBottom]
             AutoSize = False
@@ -2879,7 +2855,7 @@ inherited fmMen: TfmMen
         ImageIndex = 3
         DesignSize = (
           826
-          582)
+          623)
         object Label34: TLabel
           Left = 7
           Top = 66
@@ -2956,21 +2932,21 @@ inherited fmMen: TfmMen
         end
         object Label48: TLabel
           Left = 8
-          Top = 251
+          Top = 247
           Width = 168
           Height = 13
           Caption = #1052#1077#1089#1090#1086' '#1078#1080#1090#1077#1083#1100#1089#1090#1074#1072' ('#1087#1088#1077#1073#1099#1074#1072#1085#1080#1103')'
         end
         object Label56: TLabel
           Left = 8
-          Top = 306
+          Top = 302
           Width = 79
           Height = 13
           Caption = #1044#1077#1090#1080'/'#1088#1086#1076#1080#1090#1077#1083#1080
         end
         object Label63: TLabel
           Left = 6
-          Top = 438
+          Top = 461
           Width = 178
           Height = 13
           Caption = #1044#1072#1090#1072' '#1089#1086#1089#1090#1072#1074#1083#1077#1085#1080#1103', '#1082#1086#1088#1088#1077#1082#1090#1080#1088#1086#1074#1082#1080
@@ -3016,7 +2992,7 @@ inherited fmMen: TfmMen
         end
         object Label67: TLabel
           Left = 6
-          Top = 382
+          Top = 377
           Width = 84
           Height = 13
           Caption = #1054#1089#1086#1073#1099#1077' '#1086#1090#1084#1077#1090#1082#1080
@@ -3050,15 +3026,15 @@ inherited fmMen: TfmMen
           Caption = #1057#1086#1089#1090#1072#1074
         end
         object Label107: TLabel
-          Left = 334
-          Top = 438
+          Left = 254
+          Top = 405
           Width = 54
           Height = 13
           Caption = #1042#1086#1077#1085#1082#1086#1084#1072#1090
         end
         object Label121: TLabel
           Left = 629
-          Top = 251
+          Top = 247
           Width = 44
           Height = 13
           Caption = #1058#1077#1083#1077#1092#1086#1085
@@ -3071,14 +3047,14 @@ inherited fmMen: TfmMen
         end
         object Label123: TLabel
           Left = 8
-          Top = 279
+          Top = 275
           Width = 87
           Height = 13
           Caption = #1057#1091#1087#1088#1091#1075#1072' ('#1089#1091#1087#1088#1091#1075')'
         end
         object Label126: TLabel
           Left = 8
-          Top = 331
+          Top = 327
           Width = 482
           Height = 13
           Caption = 
@@ -3093,21 +3069,21 @@ inherited fmMen: TfmMen
         end
         object Label57: TLabel
           Left = 6
-          Top = 410
+          Top = 405
           Width = 107
           Height = 13
           Caption = #1044#1072#1090#1072' '#1087#1088#1080#1077#1084#1072' '#1085#1072' '#1091#1095#1077#1090
         end
         object Label59: TLabel
-          Left = 240
-          Top = 410
-          Width = 105
+          Left = 7
+          Top = 433
+          Width = 115
           Height = 13
-          Caption = #1044#1072#1090#1072' '#1089#1085#1103#1090#1080#1103' '#1089' '#1091#1095#1077#1090#1072
+          Caption = #1044#1072#1090#1072' '#1089#1085#1103#1090#1080#1103' '#1089' '#1091#1095#1077#1090#1072'  ('
         end
         object Label61: TLabel
-          Left = 475
-          Top = 410
+          Left = 348
+          Top = 433
           Width = 120
           Height = 13
           Caption = #1050#1091#1076#1072' '#1091#1073#1099#1083' '#1080' '#1086#1089#1085#1086#1074#1072#1085#1080#1077
@@ -3125,114 +3101,6 @@ inherited fmMen: TfmMen
           Width = 85
           Height = 13
           Caption = #1059#1095'. '#1086#1073#1088#1072#1079#1086#1074#1072#1085#1080#1103
-        end
-        object gbDateSV: TGroupBox
-          Left = 768
-          Top = 432
-          Width = 55
-          Height = 28
-          Caption = ' '#1044#1072#1090#1099' '#1089#1074#1077#1088#1086#1082' '
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 37
-          Visible = False
-          object Label42: TLabel
-            Left = 12
-            Top = 18
-            Width = 13
-            Height = 13
-            Caption = #1042#1050
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label43: TLabel
-            Left = 12
-            Top = 59
-            Width = 86
-            Height = 13
-            Caption = #1089' '#1082#1072#1088#1090'. '#1087#1088#1086#1087#1080#1089#1082#1080
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label44: TLabel
-            Left = 12
-            Top = 102
-            Width = 55
-            Height = 13
-            Caption = #1089' '#1092#1086#1088#1084#1086#1081' 2'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-          end
-          object edDateSV_VK: TDBDateTimeEditEh
-            Left = 12
-            Top = 33
-            Width = 110
-            Height = 24
-            DataField = 'DATESV_VK'
-            DataSource = dsDokument
-            EditButtons = <>
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            Kind = dtkDateEh
-            ParentFont = False
-            TabOrder = 0
-            Visible = True
-          end
-          object edDateSV_LIC: TDBDateTimeEditEh
-            Left = 12
-            Top = 76
-            Width = 110
-            Height = 24
-            DataField = 'DATESV_LIC'
-            DataSource = dsDokument
-            EditButtons = <>
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            Kind = dtkDateEh
-            ParentFont = False
-            TabOrder = 1
-            Visible = True
-          end
-          object edDateSV_F2: TDBDateTimeEditEh
-            Left = 12
-            Top = 119
-            Width = 110
-            Height = 24
-            DataField = 'DATESV_F2'
-            DataSource = dsDokument
-            EditButtons = <>
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            Kind = dtkDateEh
-            ParentFont = False
-            TabOrder = 2
-            Visible = True
-          end
         end
         object edGruppa: TDBComboBoxEh
           Left = 87
@@ -3376,7 +3244,7 @@ inherited fmMen: TfmMen
         end
         object gbWorkVUS: TGroupBox
           Left = 2
-          Top = 169
+          Top = 166
           Width = 821
           Height = 71
           Anchors = [akLeft, akTop, akRight]
@@ -3546,10 +3414,10 @@ inherited fmMen: TfmMen
           end
         end
         object gbKomiss: TGroupBox
-          Left = 790
-          Top = 532
-          Width = 33
-          Height = 23
+          Left = 712
+          Top = 452
+          Width = 89
+          Height = 30
           Anchors = [akLeft, akTop, akRight]
           Caption = 
             ' '#1057#1086#1089#1090#1086#1103#1085#1080#1077' '#1079#1076#1086#1088#1086#1074#1100#1103' ('#1076#1083#1103' '#1074#1086#1077#1085#1085#1086#1086#1073#1103#1079#1072#1085#1085#1099#1093', '#1075#1086#1076#1085#1099#1093' '#1082' '#1074#1086#1077#1085#1085#1086#1081' '#1089#1083#1091#1078#1073 +
@@ -3622,8 +3490,8 @@ inherited fmMen: TfmMen
             ParentFont = False
           end
           object edDateKomiss: TDBDateTimeEditEh
-            Left = 9
-            Top = 18
+            Left = 1
+            Top = 10
             Width = 110
             Height = 24
             DataField = 'KOMISS_DATE'
@@ -3748,7 +3616,7 @@ inherited fmMen: TfmMen
         end
         object edSostSem: TDBEditEh
           Left = 111
-          Top = 301
+          Top = 297
           Width = 709
           Height = 24
           Anchors = [akLeft, akTop, akRight]
@@ -3803,7 +3671,7 @@ inherited fmMen: TfmMen
           Width = 38
           Height = 38
           Anchors = [akLeft, akTop, akRight]
-          TabOrder = 38
+          TabOrder = 37
           Visible = False
           object Label58: TLabel
             Left = 9
@@ -3881,8 +3749,8 @@ inherited fmMen: TfmMen
           end
         end
         object edDateSost: TDBDateTimeEditEh
-          Left = 200
-          Top = 432
+          Left = 221
+          Top = 455
           Width = 110
           Height = 24
           HelpContext = 999
@@ -3954,7 +3822,7 @@ inherited fmMen: TfmMen
         end
         object edSpec: TDBLookupComboboxEh
           Left = 104
-          Top = 376
+          Top = 371
           Width = 217
           Height = 24
           DataField = 'SPEC'
@@ -3974,7 +3842,7 @@ inherited fmMen: TfmMen
         end
         object edSpecText: TDBEditEh
           Left = 342
-          Top = 376
+          Top = 371
           Width = 478
           Height = 24
           Anchors = [akLeft, akTop, akRight]
@@ -4060,7 +3928,7 @@ inherited fmMen: TfmMen
         end
         object edAdresGit: TDBEditEh
           Left = 189
-          Top = 245
+          Top = 241
           Width = 423
           Height = 24
           Color = clInfoBk
@@ -4114,9 +3982,9 @@ inherited fmMen: TfmMen
           ValueUnchecked = 'False'
         end
         object edVoenkom: TDBLookupComboboxEh
-          Left = 401
-          Top = 432
-          Width = 419
+          Left = 323
+          Top = 399
+          Width = 497
           Height = 24
           Anchors = [akLeft, akTop, akRight]
           DataField = 'VOENKOM'
@@ -4148,7 +4016,7 @@ inherited fmMen: TfmMen
           ListField = 'NAME'
           ListSource = dsVoenkom
           ParentFont = False
-          TabOrder = 30
+          TabOrder = 28
           Visible = True
         end
         object edZvan2: TDBComboBoxEh
@@ -4171,7 +4039,7 @@ inherited fmMen: TfmMen
         end
         object edAGitTel: TDBEditEh
           Left = 687
-          Top = 245
+          Top = 241
           Width = 134
           Height = 24
           DataField = 'AGIT_TEL'
@@ -4188,7 +4056,7 @@ inherited fmMen: TfmMen
         end
         object edSuprug: TDBEditEh
           Left = 111
-          Top = 273
+          Top = 269
           Width = 306
           Height = 24
           DataField = 'SUPRUG'
@@ -4252,7 +4120,7 @@ inherited fmMen: TfmMen
         end
         object edGitRodstv: TDBEditEh
           Left = 9
-          Top = 347
+          Top = 343
           Width = 811
           Height = 24
           Anchors = [akLeft, akTop, akRight]
@@ -4269,9 +4137,9 @@ inherited fmMen: TfmMen
           Visible = True
         end
         object edDatePr: TDBDateTimeEditEh
-          Left = 125
-          Top = 404
-          Width = 100
+          Left = 126
+          Top = 399
+          Width = 110
           Height = 24
           DataField = 'PRIB_DATE'
           DataSource = dsDokument
@@ -4287,9 +4155,9 @@ inherited fmMen: TfmMen
           Visible = True
         end
         object edDateUb: TDBDateTimeEditEh
-          Left = 357
-          Top = 404
-          Width = 100
+          Left = 222
+          Top = 427
+          Width = 110
           Height = 24
           DataField = 'UBIT_DATE'
           DataSource = dsDokument
@@ -4301,13 +4169,13 @@ inherited fmMen: TfmMen
           Font.Style = []
           Kind = dtkDateEh
           ParentFont = False
-          TabOrder = 28
+          TabOrder = 29
           Visible = True
         end
         object edUbit: TDBEditEh
-          Left = 608
-          Top = 404
-          Width = 212
+          Left = 479
+          Top = 427
+          Width = 338
           Height = 24
           Anchors = [akLeft, akTop, akRight]
           DataField = 'UBIT_TEXT'
@@ -4319,12 +4187,12 @@ inherited fmMen: TfmMen
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
-          TabOrder = 29
+          TabOrder = 30
           Visible = True
         end
         object edSuprugDateR: TDBDateTimeEditEh
           Left = 442
-          Top = 273
+          Top = 269
           Width = 120
           Height = 24
           DataField = 'SUPRUG_DATER'
@@ -4438,20 +4306,20 @@ inherited fmMen: TfmMen
         end
         object pnGrid: TPanel
           Left = 0
-          Top = 454
+          Top = 480
           Width = 826
-          Height = 128
+          Height = 143
           Anchors = [akLeft, akTop, akRight, akBottom]
           BevelOuter = bvNone
           TabOrder = 32
           DesignSize = (
             826
-            128)
+            143)
           object gbDeti: TGroupBox
             Left = 1
-            Top = 5
+            Top = 2
             Width = 821
-            Height = 121
+            Height = 139
             Anchors = [akLeft, akTop, akRight, akBottom]
             Caption = ' '#1054#1090#1084#1077#1090#1082#1080' '#1086' '#1089#1074#1077#1088#1082#1077' '#1076#1072#1085#1085#1099#1093' '
             Font.Charset = DEFAULT_CHARSET
@@ -4463,12 +4331,12 @@ inherited fmMen: TfmMen
             TabOrder = 0
             DesignSize = (
               821
-              121)
+              139)
             object GridSverki: TDBGridEh
               Left = 7
               Top = 15
               Width = 762
-              Height = 98
+              Height = 116
               Anchors = [akLeft, akTop, akRight, akBottom]
               DataSource = dsSverki
               Flat = True
@@ -4555,7 +4423,7 @@ inherited fmMen: TfmMen
               Left = 773
               Top = 15
               Width = 46
-              Height = 104
+              Height = 122
               Align = alRight
               BevelOuter = bvNone
               Font.Charset = DEFAULT_CHARSET
@@ -4567,7 +4435,7 @@ inherited fmMen: TfmMen
               TabOrder = 1
               object btAddSv: TBitBtn
                 Left = 8
-                Top = 0
+                Top = 1
                 Width = 28
                 Height = 28
                 Hint = #1044#1086#1073#1072#1074#1080#1090#1100
@@ -4576,7 +4444,7 @@ inherited fmMen: TfmMen
               end
               object btDelSv: TBitBtn
                 Left = 8
-                Top = 39
+                Top = 34
                 Width = 28
                 Height = 28
                 Hint = #1059#1076#1072#1083#1080#1090#1100
@@ -4586,6 +4454,18 @@ inherited fmMen: TfmMen
             end
           end
         end
+        object cbIskl: TDBCheckBoxEh
+          Left = 126
+          Top = 432
+          Width = 91
+          Height = 17
+          Caption = #1080#1089#1082#1083#1102#1095#1077#1085'  )'
+          DataField = 'VUS_ISKL'
+          DataSource = dsDokument
+          TabOrder = 38
+          ValueChecked = 'True'
+          ValueUnchecked = 'False'
+        end
       end
       object tsOchered: TTabSheet
         Caption = #1054#1095#1077#1088#1077#1076#1100' '#1085#1072' '#1078#1080#1083#1100#1077
@@ -4594,7 +4474,7 @@ inherited fmMen: TfmMen
           Left = 0
           Top = 185
           Width = 826
-          Height = 397
+          Height = 438
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
@@ -4602,7 +4482,7 @@ inherited fmMen: TfmMen
             Left = 784
             Top = 0
             Width = 42
-            Height = 397
+            Height = 438
             Align = alRight
             BevelOuter = bvNone
             TabOrder = 0
@@ -4638,8 +4518,8 @@ inherited fmMen: TfmMen
             Left = 0
             Top = 0
             Width = 784
-            Height = 397
-            ActivePage = TabSheet1
+            Height = 438
+            ActivePage = tsSobst
             Align = alClient
             HotTrack = True
             TabOrder = 1
@@ -4651,7 +4531,7 @@ inherited fmMen: TfmMen
                 Left = 0
                 Top = 0
                 Width = 776
-                Height = 369
+                Height = 410
                 Align = alClient
                 DataSource = dsOcheredResh
                 DrawMemoText = True
@@ -4834,7 +4714,7 @@ inherited fmMen: TfmMen
                 Left = 0
                 Top = 0
                 Width = 776
-                Height = 339
+                Height = 380
                 Align = alClient
                 AllowedOperations = [alopUpdateEh]
                 BorderStyle = bsNone
@@ -4930,7 +4810,7 @@ inherited fmMen: TfmMen
               end
               object Panel3: TPanel
                 Left = 0
-                Top = 339
+                Top = 380
                 Width = 776
                 Height = 30
                 Align = alBottom
@@ -5026,8 +4906,8 @@ inherited fmMen: TfmMen
               object GridOchered: TDBGridEh
                 Left = 0
                 Top = 0
-                Width = 775
-                Height = 324
+                Width = 776
+                Height = 304
                 Align = alClient
                 DataSource = dsOcheredLgot
                 DrawMemoText = True
@@ -5097,8 +4977,8 @@ inherited fmMen: TfmMen
               end
               object Panel7: TPanel
                 Left = 0
-                Top = 324
-                Width = 775
+                Top = 304
+                Width = 776
                 Height = 25
                 Align = alBottom
                 Font.Charset = DEFAULT_CHARSET
@@ -5129,12 +5009,12 @@ inherited fmMen: TfmMen
               ImageIndex = 3
               DesignSize = (
                 776
-                369)
+                410)
               object edDoks: TDBEditEh
                 Left = 0
                 Top = 1
                 Width = 775
-                Height = 359
+                Height = 400
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoSize = False
                 DataField = 'OCHERED_DOK'
@@ -5673,18 +5553,18 @@ inherited fmMen: TfmMen
                 Left = 0
                 Top = 229
                 Width = 776
-                Height = 140
+                Height = 181
                 Align = alClient
                 BevelOuter = bvNone
                 TabOrder = 4
                 DesignSize = (
                   776
-                  140)
+                  181)
                 object edPrim: TDBMemo
                   Left = 2
                   Top = 3
                   Width = 770
-                  Height = 136
+                  Height = 177
                   Anchors = [akLeft, akTop, akRight, akBottom]
                   DataField = 'OCHERED_PRIM'
                   DataSource = dsDokument
@@ -5790,8 +5670,8 @@ inherited fmMen: TfmMen
               object GridSobstv: TDBGridEh
                 Left = 0
                 Top = 0
-                Width = 775
-                Height = 349
+                Width = 776
+                Height = 410
                 Align = alClient
                 DataSource = dsSobst
                 DrawMemoText = True
@@ -7208,7 +7088,7 @@ inherited fmMen: TfmMen
     end
   end
   inherited StBar: TStatusBar
-    Top = 723
+    Top = 764
     Width = 834
     Panels = <
       item
@@ -7264,8 +7144,8 @@ inherited fmMen: TfmMen
     Top = 401
   end
   inherited dsTypeGorod: TDataSource
-    Left = 608
-    Top = 370
+    Left = 624
+    Top = 346
   end
   object dsSprPostOch: TDataSource
     Left = 300
@@ -7289,8 +7169,8 @@ inherited fmMen: TfmMen
   object dsOcheredLgot: TDataSource
     DataSet = dmMen.tbOcheredLgot
     OnDataChange = dsOcheredLgotDataChange
-    Left = 129
-    Top = 341
+    Left = 137
+    Top = 325
   end
   object dsVoenkom: TDataSource
     DataSet = dmBase.SprVoenkom
@@ -7310,7 +7190,7 @@ inherited fmMen: TfmMen
   object dsSverki: TDataSource
     DataSet = dmMen.tbSverki
     OnDataChange = dsSverkiDataChange
-    Left = 37
+    Left = 117
     Top = 644
   end
 end

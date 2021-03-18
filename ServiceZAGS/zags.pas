@@ -1,6 +1,73 @@
 
 
 //---------------------------------------------------------------
+// Обработка заявлений о браке
+procedure RunDeclToAZ; 
+var
+  q,ds,dsDecl,dsBrak:TDataSet;
+  nAll,nCh,nAdd,nAktID:Integer;
+  l,lOk,lFind:Boolean;
+  s:String;
+begin
+  if not Problem('Выполнить привязку заявлений к записям акта о браке ?') then exit;
+  dsDecl:=dbGetDataSet('dmBase.tbDeclBrak');
+  dsBrak:=dbGetDataSet('dmBase.tbZapisBrak');
+  q:=dbGetDataSet('fmGurnDBrak.Query');
+  q.First;
+  l:=dbDisableControls(q);
+  nCh:=0;
+  nAdd:=0;
+  nAll:=0;
+//  OpenMessage('Выполнение обработки ...','',10);
+  writedebug('Выполнение обработки');
+  while not q.Eof do begin
+    if dbLocate(dsDecl, 'ID',[q.Fld('ID').AsInteger], '') then begin
+      nAll:=nAll+1;
+      nAktID:=dsDecl.Fld('BRAK_ID').AsInteger;
+      lOk:=false;
+      lFind:=false;
+      if nAktID>0 then begin
+        if dbLocate(dsBrak, 'ID',[nAktID], '') then begin  // нашли запись акта по ID
+          lFind:=true;
+          if (dsDecl.Fld('ON_FAMILIA').AsString=dsBrak.Fld('ON_FAMILIA').AsString) and (dsDecl.Fld('ONA_FAMILIA').AsString=dsBrak.Fld('ONA_FAMILIA').AsString) and 
+             (dsDecl.Fld('ON_NAME').AsString=dsBrak.Fld('ON_NAME').AsString) and (dsDecl.Fld('ONA_NAME').AsString=dsBrak.Fld('ONA_NAME').AsString) and
+             (dsDecl.Fld('ON_OTCH').AsString=dsBrak.Fld('ON_OTCH').AsString) and (dsDecl.Fld('ONA_OTCH').AsString=dsBrak.Fld('ONA_OTCH').AsString) then begin
+            lOk:=true;
+          end;
+        end; 
+      end;
+      if not lOk then begin
+        s:='SELECT ID,NOMER,DATEZ,ONA_FAMILIA,ONA_NAME,ONA_OTCH,ONA_DATER FROM ЗаключениеБраков WHERE ON_FAMILIA='+QStr(dsDecl.Fld('ON_FAMILIA').AsString)+' and ON_DATER='+DateToSQL(dsDecl.Fld('ON_DATER').AsDateTime)+' and '+
+           'ONA_FAMILIA='+QStr(dsDecl.Fld('ONA_FAMILIA').AsString)+' and ONA_NAME='+QStr(dsDecl.Fld('ONA_NAME').AsString)+
+           ' and ONA_OTCH='+QStr(dsDecl.Fld('ONA_OTCH').AsString)+' and ONA_DATER='+DateToSQL(dsDecl.Fld('ONA_DATER').AsDateTime)+' ORDER BY DATEZ DESC';
+//        writedebug(s);
+        ds:=dbOpenSQL(s,'');
+        if (ds.Fld('ID').AsInteger>0) and not ds.Fld('DATEZ').IsNull and not ds.Fld('NOMER').IsNull then begin
+//          writedebug('>>>  '+ds.Fld('ONA_FAMILIA').AsString+' '+ds.Fld('ONA_NAME').AsString+' '+ds.Fld('ONA_OTCH').AsString+' '+ds.Fld('ONA_DATER').AsString);
+          dsDecl.Edit;
+          dsDecl.Fld('BRAK_ID').AsInteger:=ds.Fld('ID').AsInteger;
+          dsDecl.Fld('OTMETKA_ISP').AsString:='з/а №'+ds.Fld('NOMER').AsString+' от '+DatePropis(ds.Fld('DATEZ').AsDateTime,3);
+          dsDecl.Post;
+          writedebug('заявление №'+dsDecl.Fld('NOMER').AsString+' от '+DatePropis(dsDecl.Fld('DATEZ').AsDateTime,3)+'  =>   '+dsDecl.Fld('OTMETKA_ISP').AsString);
+          if lFind or (nAktID>0) 
+            then nCh:=nCh+1 
+            else nAdd:=nAdd+1;
+        end;
+        dbClose(ds);
+      end;
+    end;
+    q.Next;
+  end;
+  q.First;
+  dbEnableControls(q,l);
+//  CloseMessage;
+  writedebug('Окончание обработки');
+  writedebug('Просмотрено записей: '+IntToStr(nAll));
+  writedebug('Изменено отметок: '+IntToStr(nCh));
+  writedebug('Добавлено отметок: '+IntToStr(nAdd));
+end;
+
+//---------------------------------------------------------------
 // Предварительная запись на брак
 function REPORT_PredBrak(n:Integer):String; 
 begin

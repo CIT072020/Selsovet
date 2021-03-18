@@ -2250,26 +2250,42 @@ var
   lCopy:Boolean;
   dCreate, dLastA, dModifi:TDateTime;
 begin
-  lCopy:=false;
+  lCopy:=true;
   sFileName:=NormDir(sFileName);
   sFile:=ExtractFileName(sFileName);
   sFileReal:=Trim(sFile);  // !!!   добавлено 21.08.2017
-
-  //--- !!! ------------------------------------------------------------------------
-  // $$$ заменить на dmBase.AddFileToSMDO(SMDO,sFileName,nPostID)
-  sPath:=SMDO.GetPathAttach(1, nPostID);
-  sPathReal:=SMDO.GetPathAttach(0, nPostID);
-  if FileExists(sPathReal+sFileReal) then DeleteFile(sPathReal+sFileReal);
-  if CopyFile(PChar(sFileName), PChar(sPathReal+sFileReal), true) then begin
-    lCopy := true;
-  end else begin
-    PutError('ќшибка копировани€ файла : '+#13+'  '+
-           sFileName+#13+' в '+
-           sPathReal+sFile+#13+
-           IntToStr(GetLastError)+' ('+SysErrorMessage(GetLastError)+') ');
+  s:=tbFiles.Bookmark;
+  tbFiles.DisableControls;
+  try
+    tbFiles.First;
+    while not tbFiles.Eof do begin
+      if MySameText(sFileReal,tbFilesNAME.AsString) then begin
+        PutError('‘айл с именем "'+sFileReal+'" уже существует в сообщении !',Self);
+        lCopy:=false;
+      end;
+      tbFiles.Next;
+    end;
+    tbFiles.Bookmark:=s;
+  finally
+    tbFiles.EnableControls;
   end;
-  //--- !!! ------------------------------------------------------------------------
-
+  if lCopy then begin
+    //--- !!! ------------------------------------------------------------------------
+    // $$$ заменить на dmBase.AddFileToSMDO(SMDO,sFileName,nPostID)
+    sPath:=SMDO.GetPathAttach(1, nPostID);
+    sPathReal:=SMDO.GetPathAttach(0, nPostID);
+    if FileExists(sPathReal+sFileReal) then DeleteFile(sPathReal+sFileReal);
+    if CopyFile(PChar(sFileName), PChar(sPathReal+sFileReal), true) then begin
+      lCopy := true;
+    end else begin
+      lCopy:=false;
+      PutError('ќшибка копировани€ файла : '+#13+'  '+
+             sFileName+#13+' в '+
+             sPathReal+sFile+#13+
+             IntToStr(GetLastError)+' ('+SysErrorMessage(GetLastError)+') ');
+    end;
+    //--- !!! ------------------------------------------------------------------------
+  end;
   if lCopy then begin
     QueryExit:=true;
     tbFiles.Append;
@@ -2669,7 +2685,7 @@ begin
         DokumentPAR_IDNUMBER.AsString:=FieldByName('IDNUMBER').AsString;
         DokumentPAR_PARMSG.AsString:=FieldByName('PAR_PARMSG').AsString;
         DokumentPAR_PARORG.AsString:=sSmdoCode;
-        DokumentPAR_REGDATE.AsString:='';
+        DokumentPAR_REGDATE.AsString:='';    
         if sRegNumber='' then begin
           DokumentPAR_REGNUMBER.AsString:=FieldByName('ADR_REGNUMBER').AsString;
           d:=FieldByName('ADR_REGDATE').AsDateTime;
@@ -3469,7 +3485,7 @@ var
   arrRec : TCurrentRecord;
   i,nID:Integer;
   nPostID, nParentID:Integer;
-  sDate,sFile:String;
+  sDate,sFile,sCode:String;
 begin
   SetLength(arrRec,1);
   Opis := GlobalTask.CurrentOpisEdit.GetSprOpisA('LOOKUP_SMDOPOST');
@@ -3483,8 +3499,11 @@ begin
     if not Role.SystemAdmin
       then sDate:=' and datepost>CTOTS('+QStr(FormatDateTime(dmBase.AdsSettings.DateFormat+' hh:nn:ss',IncMonth(Now,-1)))+')'
       else sDate:='';
+    if (DokumentSMDOCODE.AsString<>'') and (DokumentSMDOCODE.AsString<>DELIVER_KEY)
+      then sCode:=' and SMDOCODE='+QStr(DokumentSMDOCODE.AsString)
+      else sCode:='';
     // вход€щее или исход€щее сообщение, не уведомление, не ошибочное за последний мес€ц
-    dmBase.SMDOPost.Filter:='SUBJ_TYPE='+IntToStr(nType)+' and MSG_TYPE>0 and SUBJ_ERROR=false'+sDate;
+    dmBase.SMDOPost.Filter:='SUBJ_TYPE='+IntToStr(nType)+' and MSG_TYPE>0 '+sDate+sCode;
     dmBase.SMDOPost.Filtered:=true;
     try
       if Opis.ChoiceFromSprEx(nil, v, arrRec, nil) and (v<>null) then begin

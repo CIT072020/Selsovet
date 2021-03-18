@@ -54,8 +54,10 @@ type
     FAddDateR  : Boolean;
     FAddDateP  : Boolean;
     FAddLgot   : Boolean;
+    FAddPrizn  : Boolean;
     FAddIN     : Boolean;
     FAddPasp   : Boolean;
+    FAddWork   : Boolean;
     FAddFirst  : Boolean;
     FAddAllMens:Boolean;
 
@@ -114,8 +116,10 @@ begin
   FAddOtnosh := false;
   FAddDateR  := false;
   FAddLgot   := false;
+  FAddPrizn  := false;
   FAddIN     := false;
   FAddPasp   := false;
+  FAddWork   := false;
   FAddDateP  := false;
   FAddFirst  := false;
   FAddAllMens:= false;
@@ -211,7 +215,7 @@ begin
       old := Screen.Cursor;
       Screen.Cursor := crHourGlass;
       OpenMessage(' Подождите пожалуйста ... ','Перенумерация',10);
-      GlobalTask.LogFile.WriteToLogFile('Начало перенумерании базы лицевых счетов');
+      GlobalTask.WriteToLogFile('Начало перенумерании базы лицевых счетов');
       try
         while not Query.Eof do begin
           dsLich:=dmBase.GetLichSchet( DateFiks, Query.FieldByName('ID').AsString);
@@ -230,7 +234,7 @@ begin
         dbEnableControls(Query,lCheck);
         Refresh(true);
       end;
-      GlobalTask.LogFile.WriteToLogFile('Окончание перенумерании базы лицевых счетов');
+      GlobalTask.WriteToLogFile('Окончание перенумерании базы лицевых счетов');
     end;
   end;
 end;
@@ -283,7 +287,7 @@ begin
       old := Screen.Cursor;
       Screen.Cursor := crHourGlass;
       OpenMessage(' Подождите пожалуйста ... ','Расчет',10);
-      GlobalTask.LogFile.WriteToLogFile('Начало расчета реквизита "всего земли"');
+      GlobalTask.WriteToLogFile('Начало расчета реквизита "всего земли"');
       dmBase.WorkQuery.SQL.Text:=sSQL;
       dmBase.WorkQuery.ParamByName('par').DataType:=ftInteger;
       //showmessage(inttostr(dmBase.WorkQuery.ParamCount));
@@ -308,7 +312,7 @@ begin
         dbEnableControls(Query,lCheck);
         Refresh(true);
       end;
-      GlobalTask.LogFile.WriteToLogFile('Окончание расчета реквизита "всего земли", рассчитано '+IntToStr(n)+' лицевых счетов');
+      GlobalTask.WriteToLogFile('Окончание расчета реквизита "всего земли", рассчитано '+IntToStr(n)+' лицевых счетов');
     end;
   end;
   slFields.Free;
@@ -380,7 +384,7 @@ begin
         sss:=' and id in ('+ss+')';
       end;
       //---------------------
-      GlobalTask.LogFile.WriteToLogFile('Удаление закладки "Показатели" базы лицевых счетов');
+      GlobalTask.WriteToLogFile('Удаление закладки "Показатели" базы лицевых счетов');
       try
         strSQL:='DELETE FROM БазаСвойствОбъектов WHERE date_fiks=''1899-12-30'' and ';
         s:='';
@@ -391,7 +395,7 @@ begin
         end;
         strSQL:=dmBase.CheckDateFiksSQL(strSQL, DateFiks);
         strSQL:=strSQL+'('+Copy(s,5,Length(s))+') '+sss;
-        GlobalTask.LogFile.WriteToLogFile(strSQL);
+        GlobalTask.WriteToLogFile(strSQL);
 //        showmessage(strSQL);
         try
           dmBase.AdsConnection.Execute(strSQL);
@@ -413,10 +417,10 @@ begin
         Screen.Cursor := old;
       end;
       if sErr<>'' then begin
-        GlobalTask.LogFile.WriteToLogFile(sErr);
+        GlobalTask.WriteToLogFile(sErr);
         PutError(sErr);
       end;
-//      GlobalTask.LogFile.WriteToLogFile('Окончание удаления закладки "Показатели" базы лицевых счетов');
+//      GlobalTask.WriteToLogFile('Окончание удаления закладки "Показатели" базы лицевых счетов');
     end;
   end;
   f.Free;
@@ -469,7 +473,7 @@ begin
       end else begin
         tbProp.Active := true;
       end;
-      GlobalTask.LogFile.WriteToLogFile('Расчет закладок базы лицевых счетов');
+      GlobalTask.WriteToLogFile('Расчет закладок базы лицевых счетов');
       CreateProgress('Подождите пожалуйста ...','Расчет',Query.RecordCount);
       lCheck := dbDisableControls(Query);
       Query.First;
@@ -500,7 +504,7 @@ begin
         Query.First;
         dbEnableControls(Query,lCheck);
       end;
-      GlobalTask.LogFile.WriteToLogFile('Окончание расчета закладок базы лицевых счетов');
+      GlobalTask.WriteToLogFile('Окончание расчета закладок базы лицевых счетов');
     end;
   end;
 }
@@ -576,7 +580,7 @@ begin
         Query.Filter := 'FAMILIA='+QStr(strFilter+'*');
       end;
 
-      Query.Filtered := true;
+      SetQueryFiltered(true);
     end;
     Query.EnableControls;
   end;
@@ -620,7 +624,7 @@ begin
         old:=Screen.Cursor;
         Screen.Cursor:=crHourGlass;
         try
-          Query.Filtered := true;
+          SetQueryFiltered(true);
         finally
           Screen.Cursor:=old;
         end;
@@ -645,7 +649,7 @@ begin
           old:=Screen.Cursor;
           Screen.Cursor:=crHourGlass;
           try
-            Query.Filtered := true;
+            Query.Filtered:=true;
           finally
             Screen.Cursor:=old;
           end;
@@ -731,8 +735,9 @@ begin
  }
     end;
     TmpQuery.SQL.Text:=StringReplace( sSQL, '&tmp&', GetNameTmpIdTable, [rfReplaceAll]);
+    GlobalTask.WriteToLogFile(KodGurnal+' create find: '+TmpQuery.SQL.Text, nil, LOG_SQL);
     TmpQuery.ExecSQL;
-    SetFilter;            
+    SetFilter;
     CloseMessage;
   except
     on E:Exception do begin
@@ -852,37 +857,10 @@ begin
 end;                                 
 
 procedure TfmGurnAlfKn.GridColumnsGetLgot(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
-//var
-//  d : TDateTime;
-//  i : Integer;
 begin
-  if Query.FieldByName('FIRST').AsString<>'' then begin
-//    d := Query.FieldByName('DATE_FIKS').AsDateTime;
-//    i := Query.FieldByName('FIRST').AsInteger;
-    Params.Text:=dmBase.LgotMen(dmBase.tbMensLgot, Query.FieldByName('DATE_FIKS').AsDateTime,
-                                      Query.FieldByName('FIRST').AsString, ', ');
-    {
-    dmBase.tbMensLgot.CancelRange;
-    try
-      dmBase.tbMensLgot.IndexFieldNames := 'DATE_FIKS;ID;KOD';
-      dmBase.tbMensLgot.SetRange([d,i],[d,i]);
-      if not dmBase.tbMensLgot.Eof then begin
-        Params.Text := '';
-        while not dmBase.tbMensLgot.Eof do begin
-          if dmBase.SprLgot.Locate('ID',dmBase.tbMensLgot.FieldByName('KOD').AsString,[]) then begin
-            Params.Text := Params.Text + dmBase.SprLgot.FieldByName('NAME').AsString+', ';
-          end;
-          dmBase.tbMensLgot.Next;
-        end;
-        if Params.Text<>'' then Params.Text:=Copy(Params.Text,1,Length(Params.Text)-2);
-      end else begin
-        Params.Text := '';
-      end;
-    finally
-      dmBase.tbMensLgot.CancelRange;
-    end;
-   }
-  end;
+  if Query.FieldByName('FIRST').AsString<>''
+    then Params.Text:=dmBase.LgotMen(dmBase.tbMensLgot, Query.FieldByName('DATE_FIKS').AsDateTime, Query.FieldByName('FIRST').AsString, ', ')
+    else Params.Text:='';
 end;
 
 procedure TfmGurnAlfKn.SaveToIni;
@@ -897,8 +875,10 @@ begin
   ini.WriteBool(KodGurnal+'.Add','ADD_OTNOSH_MENS',FAddOtnosh);
   ini.WriteBool(KodGurnal+'.Add','ADD_DATER_MENS',FAddDateR);
   ini.WriteBool(KodGurnal+'.Add','ADD_LGOT_MENS',FAddLgot);
+  ini.WriteBool(KodGurnal+'.Add','ADD_PRIZN_MENS',FAddPrizn);
   ini.WriteBool(KodGurnal+'.Add','ADD_IN_MENS',FAddIN);
   ini.WriteBool(KodGurnal+'.Add','ADD_PASP_MENS',FAddPasp);
+  ini.WriteBool(KodGurnal+'.Add','ADD_WORK_MENS',FAddWork);
   ini.WriteBool(KodGurnal+'.Add','ADD_DATEP_MENS',FAddDateP);
   ini.WriteBool(KodGurnal+'.Add','ADD_FIRST_MENS',FAddFirst);
   ini.WriteBool(KodGurnal+'.Add','ADD_ALL_MENS',FAddAllMens);
@@ -923,8 +903,10 @@ begin
   FAddDateR  := ini.ReadBool(KodGurnal+'.Add','ADD_DATER_MENS',false);
   FAddDateP  := ini.ReadBool(KodGurnal+'.Add','ADD_DATEP_MENS',false);
   FAddLgot   := ini.ReadBool(KodGurnal+'.Add','ADD_LGOT_MENS',false);
+  FAddPrizn  := ini.ReadBool(KodGurnal+'.Add','ADD_PRIZN_MENS',false);
   FAddIN     := ini.ReadBool(KodGurnal+'.Add','ADD_IN_MENS',false);
   FAddPasp   := ini.ReadBool(KodGurnal+'.Add','ADD_PASP_MENS',false);
+  FAddWork   := ini.ReadBool(KodGurnal+'.Add','ADD_WORK_MENS',false);
   FAddFirst  := ini.ReadBool(KodGurnal+'.Add','ADD_FIRST_MENS',false);
   FAddAllMens:= ini.ReadBool(KodGurnal+'.Add','ADD_ALL_MENS',false);
   CreateParAddMen;
@@ -964,7 +946,9 @@ begin
   if FAddDateP  then  FParAdd:=FParAdd+'DATEP;';
   if FAddIN     then  FParAdd:=FParAdd+'IN;';
   if FAddLgot   then  FParAdd:=FParAdd+'LGOT;';
+  if FAddPrizn  then  FParAdd:=FParAdd+'PRIZN;';
   if FAddPasp   then  FParAdd:=FParAdd+'PASP;';
+  if FAddWork   then  FParAdd:=FParAdd+'WORK;';
   if FAddFirst  then  FParAdd:=FParAdd+'FIRST;';
   if FAddAllMens then FParAdd:=FParAdd+'ALL;';
 end;
@@ -979,144 +963,7 @@ var
 begin
 // FParAdd ';OTN;DATER;DATEP;IN;PASP;LGOT;ALL;FIRST'
 //------------------------------------------------------------------------------------------------------------
-  Params.Text:=dmBase.ListMensLic(Query.FieldByName('ID').AsString, Query.FieldByName('FIRST').AsInteger, FTypeCountMens, FParAdd, #13#10, nil);
- {
-  s:='';
-  if FVisibleListMens then begin
-    strLicID := Query.FieldByName('ID').AsString;
-    if strLicID<>'' then begin
-      with dmBase do begin
-      tbMens.CancelRange;
-      tbMens.IndexName := 'LIC_KEY';
-      try
-        c1 := FTypeCountMens[1];
-        c2 := FTypeCountMens[2];
-        c3 := FTypeCountMens[3];
-
-        strType:=FTypeCountMens;
-        lVozr:=false;
-        nVozr1:=-1;
-        nVozr2:=-1;
-        nTrud:=-1;
-        i:=Pos(';',strType);
-        if i>0 then begin  // передан возраст: 000;0-18
-          s:=Copy(strType,i+1,Length(strType));
-          strType:=Copy(strType,1,i-1);
-          if s<>'' then begin
-            lVozr:=true;
-            j:=Pos('#',s);
-            if j=0 then begin
-              if Copy(s,1,4)='TRUD' then begin    //   0-младше труд  1-труд  2-старше труд  3-не трудосп
-                nTrud:=StrToIntDef(Copy(s,5,1),2);
-                nVozr1:=999;
-              end else begin
-                nVozr1:=StrToInt(s);
-              end;
-            end else begin
-              ss:=Trim(Copy(s,1,j-1));
-              if ss<>''
-                then nVozr1:=StrToInt(ss);
-              ss:=Trim(Copy(s,j+1,100));
-              if ss<>''
-                then nVozr2:=StrToInt(ss);
-            end;
-          end;
-        end;
-        s:='';
-        // !!! будет включать в список людей всех !!!
-        if FAddAllMens
-          then lVozr:=false;
-        //-------------------------------------------
-//        lOk:=false;
-        tbMens.SetRange([DateFiks,strLicID],[DateFiks,strLicID]);
-        while not tbMens.Eof do begin
-          if (tbMens.FieldByName('CANDELETE').IsNull or not tbMens.FieldByName('CANDELETE').AsBoolean) and
-             (FAddFirst or (Query.FieldByName('FIRST').AsInteger<>tbMens.FieldByName('ID').AsInteger)) then begin
-            lOk :=false;
-            lOk1:=false;
-            lOk2:=false;
-            lOk3:=false;
-
-            if (c1='0') or ((c1='1') and tbMens.FieldByName('PRESENT').AsBoolean) or
-               ((c1='2') and not tbMens.FieldByName('PRESENT').AsBoolean)
-              then lOk1 := true;
-
-            if (c2='0') or ((c2='1') and (tbMens.FieldByName('DATEP').AsString<>'')) or
-               ((c2='2') and (tbMens.FieldByName('DATEP').AsString=''))
-              then lOk2 := true;
-
-            if (c3='0') or ((c3='1') and (tbMens.FieldByName('PROPIS').AsBoolean=true)) or
-               ((c3='2') and (tbMens.FieldByName('PROPIS').AsBoolean=false))
-              then lOk3 := true;
-
-            if lOk1 and lOk2 and lOk3 then begin
-              if lVozr then begin
-                lOk:=false;
-                if not tbMens.FieldByName('DATER').IsNull then begin
-                  if nTrud>-1 then begin
-                    n:=Trud(GetCurDate,tbMens.FieldByName('DATER').AsDateTime, tbMens.FieldByName('POL').AsString);
-                    if nTrud=3 then begin
-                      lOk:=((n=0) or (n=2));    // нетрудоспособ.
-                    end else begin
-                      lOk:=(n=nTrud);
-                    end;
-                  end else begin
-                    nVozr:=GetCountYear(GetCurDate,tbMens.FieldByName('DATER').AsDateTime);
-                    if nVozr1=-1 then begin
-                      if (nVozr>=0) and (nVozr<=nVozr2) then lOk := true;
-                    end else if nVozr2=-1 then begin
-                      if (nVozr>=nVozr1) then lOk := true;
-                    end else begin
-                      if (nVozr>=nVozr1) and (nVozr<=nVozr2) then lOk := true;
-                    end;
-                  end;
-                end;
-              end else begin
-                lOk:=true;
-              end;
-            end;
-            if lOk then begin
-              if FAddOtnosh and (tbMens.FieldByName('OTNOSH').AsString<>'') then begin
-                if dmBase.SprOtnosh.Locate('ID', tbMens.FieldByName('OTNOSH').AsString,[])
-                  then ss := ANSILowerCase(dmBase.SprOtnosh.FieldByName('NAME').AsString)+' '
-                  else ss := '';
-              end else begin
-                ss := '';
-              end;
-              s := s + ss+tbMens.FieldByName('FAMILIA').AsString+' '+
-                       tbMens.FieldByName('NAME').AsString+' '+
-                       tbMens.FieldByName('OTCH').AsString;//', ';
-              if FAddDateR and (tbMens.FieldByName('DATER').AsString<>'') then begin
-                 s := s + ' ' + FormatDateTime('dd.mm.yyyy',tbMens.FieldByName('DATER').AsDateTime)+'г.р.';
-              end;
-              if FAddDateP and (tbMens.FieldByName('DATEP').AsString<>'') then begin
-                 s := s + ' ' + FormatDateTime('dd.mm.yyyy',tbMens.FieldByName('DATEP').AsDateTime);
-              end;
-              if FAddIN and (tbMens.FieldByName('LICH_NOMER').AsString<>'') then begin
-                 s := s + ' ' + tbMens.FieldByName('LICH_NOMER').AsString;
-              end;
-              if FAddPasp and (tbMens.FieldByName('PASP_NOMER').AsString<>'') then begin
-                 p:=dmBase.PasportMen(tbMens.FieldByName('DATE_FIKS').AsDateTime,tbMens.FieldByName('ID').AsString);
-                 s:=s+' '+dmBase.PasportToText(p,0);
-              end;
-              if FAddLgot then begin
-                 s := s+ ' ' + dmBase.LgotMen(dmBase.tbMensLgot, Query.FieldByName('DATE_FIKS').AsDateTime,
-                                              tbMens.FieldByName('ID').AsString, ', ');
-              end;
-              s:=s+#13#10;
-            end;
-          end;
-          tbMens.Next;
-        end;
-      finally
-        tbMens.CancelRange;
-      end;
-      end;
-    end;
-    if s<>'' then s:=Copy(s,1,Length(s)-2);
-  end;
-  Params.Text := s;
-  }
+  Params.Text:=dmBase.ListMensLic(Query.FieldByName('ID').AsString, Query.FieldByName('FIRST').AsInteger, FTypeCountMens, FParAdd, IIFS(FRunExport, #13#10, ', '), nil);
 end;
 
 procedure TfmGurnAlfKn.CheckCountMens;
@@ -1159,34 +1006,37 @@ var
   i,j,nVozr1,nVozr2:Integer;
   s,ss:String;
   l:Boolean;
+  f : TfmTypeCountMens;
 begin
-  fmTypeCountMens := TfmTypeCountMens.Create(nil);
-  fmTypeCountMens.cbShow.Checked:=FVisibleCountMens;
-  fmTypeCountMens.cbListMens.Checked:=FVisibleListMens;
-  fmTypeCountMens.cbOwners.Checked:=FVisibleOwners;
-  fmTypeCountMens.cbOtnosh.Checked:=FAddOtnosh;
-  fmTypeCountMens.cbDateR.Checked:=FAddDateR;
-  fmTypeCountMens.cbDateP.Checked:=FAddDateP;
-  fmTypeCountMens.cbLgot.Checked:=FAddLgot;
-  fmTypeCountMens.cbIN.Checked:=FAddIN;
-  fmTypeCountMens.cbPasp.Checked:=FAddPasp;
-  fmTypeCountMens.cbAddFirst.Checked:=FAddFirst;
-  fmTypeCountMens.cbAllMens.Checked:=FAddAllMens;
-  fmTypeCountMens.cbUnionFIO.Checked:=FUnionFIO;
-  fmTypeCountMens.cbUnionAdres.Checked:=FUnionAdres;
+  f := TfmTypeCountMens.Create(nil);
+  f.cbShow.Checked:=FVisibleCountMens;
+  f.cbListMens.Checked:=FVisibleListMens;
+  f.cbOwners.Checked:=FVisibleOwners;
+  f.cbOtnosh.Checked:=FAddOtnosh;
+  f.cbDateR.Checked:=FAddDateR;
+  f.cbDateP.Checked:=FAddDateP;
+  f.cbLgot.Checked:=FAddLgot;
+  f.cbPrizn.Checked:=FAddPrizn;
+  f.cbIN.Checked:=FAddIN;
+  f.cbPasp.Checked:=FAddPasp;
+  f.cbWork.Checked:=FAddWork;
+  f.cbAddFirst.Checked:=FAddFirst;
+  f.cbAllMens.Checked:=FAddAllMens;
+  f.cbUnionFIO.Checked:=FUnionFIO;
+  f.cbUnionAdres.Checked:=FUnionAdres;
   if FTypeCountMens='' then begin
-    fmTypeCountMens.rbPresent.ItemIndex :=1;
-    fmTypeCountMens.rbZareg.ItemIndex   :=0;
-    fmTypeCountMens.rbPropis.ItemIndex  :=0;
+    f.rbPresent.ItemIndex :=1;
+    f.rbZareg.ItemIndex   :=0;
+    f.rbPropis.ItemIndex  :=0;
 //'    fmTypeCountMens.cbNotVozr.Checked   :=true;
-    fmTypeCountMens.cbVozr.ItemIndex:=0;
+    f.cbVozr.ItemIndex:=0;
   end else begin
-    fmTypeCountMens.rbPresent.ItemIndex := StrToInt(Copy(FTypeCountMens,1,1));
-    fmTypeCountMens.rbPropis.ItemIndex  := StrToInt(Copy(FTypeCountMens,2,1));
-    fmTypeCountMens.rbZareg.ItemIndex   := StrToInt(Copy(FTypeCountMens,3,1));
+    f.rbPresent.ItemIndex := StrToInt(Copy(FTypeCountMens,1,1));
+    f.rbPropis.ItemIndex  := StrToInt(Copy(FTypeCountMens,2,1));
+    f.rbZareg.ItemIndex   := StrToInt(Copy(FTypeCountMens,3,1));
     if Pos(';',FTypeCountMens)>0 then begin
 //      fmTypeCountMens.cbNotVozr.Checked:=false;
-      fmTypeCountMens.cbVozr.ItemIndex:=0;
+      f.cbVozr.ItemIndex:=0;
       s:=FTypeCountMens;
       nVozr1:=-2;
       nVozr2:=-2;
@@ -1195,9 +1045,9 @@ begin
         s:=Copy(s,i+1,Length(s));
         if s<>'' then begin
           if Copy(s,1,4)='TRUD' then begin
-            fmTypeCountMens.cbVozr.ItemIndex:=StrToIntDef(Copy(s,5,1),2)+2;
+            f.cbVozr.ItemIndex:=StrToIntDef(Copy(s,5,1),2)+2;
           end else begin
-            fmTypeCountMens.cbVozr.ItemIndex:=1;
+            f.cbVozr.ItemIndex:=1;
             j:=Pos('#',s);
             if j=0 then begin
               nVozr1:=StrToInt(s);
@@ -1215,52 +1065,52 @@ begin
         end;
       except
 //        fmTypeCountMens.cbNotVozr.Checked:=true;
-        fmTypeCountMens.cbVozr.ItemIndex:=0;
+        f.cbVozr.ItemIndex:=0;
         nVozr1:=-2;
         nVozr2:=-2;
       end;
-      if nVozr1>-2 then fmTypeCountMens.edVozr1.Value:=nVozr1;
-      if nVozr2>-2 then fmTypeCountMens.edVozr2.Value:=nVozr2;
-      if fmTypeCountMens.edVozr1.Value=-1 then fmTypeCountMens.edVozr1.Text:='';
-      if fmTypeCountMens.edVozr2.Value=-1 then fmTypeCountMens.edVozr2.Text:='';
+      if nVozr1>-2 then f.edVozr1.Value:=nVozr1;
+      if nVozr2>-2 then f.edVozr2.Value:=nVozr2;
+      if f.edVozr1.Value=-1 then f.edVozr1.Text:='';
+      if f.edVozr2.Value=-1 then f.edVozr2.Text:='';
     end else begin
-      fmTypeCountMens.cbVozr.ItemIndex:=0;
+      f.cbVozr.ItemIndex:=0;
 //      fmTypeCountMens.cbNotVozr.Checked:=true;
     end;
   end;
-  if fmTypeCountMens.ShowModal=mrOk then begin
-    FTypeCountMens := IntToStr(fmTypeCountMens.rbPresent.ItemIndex)+
-                      IntToStr(fmTypeCountMens.rbPropis.ItemIndex)+
-                      IntToStr(fmTypeCountMens.rbZareg.ItemIndex);
+  if f.ShowModal=mrOk then begin
+    FTypeCountMens := IntToStr(f.rbPresent.ItemIndex)+IntToStr(f.rbPropis.ItemIndex)+IntToStr(f.rbZareg.ItemIndex);
 //    if not fmTypeCountMens.cbNotVozr.Checked then begin
-    if fmTypeCountMens.cbVozr.ItemIndex>0 then begin
-      if fmTypeCountMens.cbVozr.ItemIndex>1 then begin
-        FTypeCountMens:=FTypeCountMens+';TRUD'+IntToStr(fmTypeCountMens.cbVozr.ItemIndex-2);
+    if f.cbVozr.ItemIndex>0 then begin
+      if f.cbVozr.ItemIndex>1 then begin
+        FTypeCountMens:=FTypeCountMens+';TRUD'+IntToStr(f.cbVozr.ItemIndex-2);
       end else begin
-        if (fmTypeCountMens.edVozr1.Text<>'') or (fmTypeCountMens.edVozr2.Text<>'') then begin
-          FTypeCountMens:=FTypeCountMens+';'+fmTypeCountMens.edVozr1.Text+'#'+fmTypeCountMens.edVozr2.Text;
+        if (f.edVozr1.Text<>'') or (f.edVozr2.Text<>'') then begin
+          FTypeCountMens:=FTypeCountMens+';'+f.edVozr1.Text+'#'+f.edVozr2.Text;
         end;
       end;
     end;
 
-    FVisibleCountMens := fmTypeCountMens.cbShow.Checked;
-    FVisibleListMens  := fmTypeCountMens.cbListMens.Checked;
-    FVisibleOwners    := fmTypeCountMens.cbOwners.Checked;
+    FVisibleCountMens := f.cbShow.Checked;
+    FVisibleListMens  := f.cbListMens.Checked;
+    FVisibleOwners    := f.cbOwners.Checked;
 
-    FAddOtnosh        := fmTypeCountMens.cbOtnosh.Checked;
-    FAddDateR         := fmTypeCountMens.cbDateR.Checked;
-    FAddDateP         := fmTypeCountMens.cbDateP.Checked;
-    FAddLgot          := fmTypeCountMens.cbLgot.Checked;
-    FAddIN            := fmTypeCountMens.cbIN.Checked;
-    FAddPasp          := fmTypeCountMens.cbPasp.Checked;
-    FAddFirst         := fmTypeCountMens.cbAddFirst.Checked;
-    FAddAllMens       := fmTypeCountMens.cbAllMens.Checked;
+    FAddOtnosh        := f.cbOtnosh.Checked;
+    FAddDateR         := f.cbDateR.Checked;
+    FAddDateP         := f.cbDateP.Checked;
+    FAddLgot          := f.cbLgot.Checked;
+    FAddPrizn         := f.cbPrizn.Checked;
+    FAddIN            := f.cbIN.Checked;
+    FAddPasp          := f.cbPasp.Checked;
+    FAddWork          := f.cbWork.Checked;
+    FAddFirst         := f.cbAddFirst.Checked;
+    FAddAllMens       := f.cbAllMens.Checked;
     CreateParAddMen;
 
-    FUnionFIO         := fmTypeCountMens.cbUnionFIO.Checked;
-    FUnionAdres       := fmTypeCountMens.cbUnionAdres.Checked;
+    FUnionFIO         := f.cbUnionFIO.Checked;
+    FUnionAdres       := f.cbUnionAdres.Checked;
 
-    fmTypeCountMens.Free;
+    f.Free;
     l:=dbDisableControls(Query);
     CheckCountMens;
     CheckPropertyGridColumns;
@@ -1270,7 +1120,7 @@ begin
     dbEnableControls(Query,l);
 //    Refresh(true);
   end else begin
-    fmTypeCountMens.Free;
+    f.Free;
   end;
 end;
 

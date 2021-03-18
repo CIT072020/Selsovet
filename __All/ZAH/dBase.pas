@@ -452,6 +452,7 @@ type
 
     procedure ClearIdBase;
     function GetIdBase(var nCountZnak:Integer) : Integer;
+    function GetSysIdBase: String;
     function IsMainBase:Boolean;
     function IsDistributeBase: Boolean;  // база распределенная ?
 
@@ -4088,7 +4089,26 @@ begin
     Result:=FIdBase;
   end;
 end;
-
+//----------------------------------------------------------------
+function TdmBase.GetSysIdBase: String;
+begin
+  Result:='';
+  if AdsConnection.IsConnected then begin
+    WorkQuery.Close;
+    WorkQuery.SQL.Text:='SELECT sysid FROM global';
+    try
+      WorkQuery.Open;
+      Result:=Trim(WorkQuery.Fields[0].AsString);
+      WorkQuery.Close;
+      if Result='' then begin
+//        AdsConnection.Execute('UPDATE global set sysid=Replace(NewIDString(),''-'','''')');
+        AdsConnection.Execute('UPDATE global set sysid=NewIDString()');
+        Result:=GetSysIdBase;
+      end;
+    except
+    end;
+  end;
+end;
 //-----------------------------------------------------------
 function TdmBase._CalcID(nID,nIdBase,nCountZn:Integer) : Integer;
 begin
@@ -4883,7 +4903,7 @@ end;
 procedure TdmBase.WriteLogDeleteDok(ds: TDataSet; nTypeObj:Integer);
 begin
 //  if (ds.FindField('NOMER')<>nil) and (ds.FindField('DATEZ')<>nil) then
-  GlobalTask.LogFile.WriteToLogFile('Удаление информации: книга '+ds.FieldByName('BOOK').AsString+' запись №'+ds.FieldByName('NOMER').AsString+' от '+
+  GlobalTask.WriteToLogFile('Удаление информации: книга '+ds.FieldByName('BOOK').AsString+' запись №'+ds.FieldByName('NOMER').AsString+' от '+
   FormatDateTime('dd.mm.yyyy',ds.FieldByName('DATEZ').AsDateTime)+'  ИН:'+ds.FieldByName('LICH_NOMER').AsString);
 end;
 
@@ -5276,7 +5296,7 @@ begin
     tbDelObj.Post;
     DeleteUpdating(nTypeObj, strID);
   except
-    GlobalTask.LogFile.WriteToLogFile('Ошибка записи информации об удалении ('+IntToStr(nTypeObj)+','+strID+')  '+strKomm);
+    GlobalTask.WriteToLogFile('Ошибка записи информации об удалении ('+IntToStr(nTypeObj)+','+strID+')  '+strKomm);
   end;
 end;
 //---------------------------------------------------------------
@@ -5302,7 +5322,7 @@ begin
 //       Format('%s,%d,%s,CURRENT_TIMESTAMP(0),''%s'',%s,%d,''%s'')',[strID,nTypeObj, IIFS(lNewObj,'true','false'),UserID,
 //                                                              IIFS(lBeforeGrn,'true','false'),nValueGrn,strKomm]));
   except
-    GlobalTask.LogFile.WriteToLogFile('Ошибка записи информации о корректировке ('+IntToStr(nTypeObj)+','+InttoStr(nID)+')  '+strKomm);
+    GlobalTask.WriteToLogFile('Ошибка записи информации о корректировке ('+IntToStr(nTypeObj)+','+InttoStr(nID)+')  '+strKomm);
   end;
 end;
 
@@ -5388,8 +5408,8 @@ begin
     WorkQuery.Active := false;
     {$IFNDEF DEBUG}
     if lCreateCur
-      then GlobalTask.LogFile.WriteToLogFile('Создание текущего состояния базы из состояния на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года')
-      else GlobalTask.LogFile.WriteToLogFile('Создание состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года');
+      then GlobalTask.WriteToLogFile('Создание текущего состояния базы из состояния на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года')
+      else GlobalTask.WriteToLogFile('Создание состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года');
     if lCreateCur
       then OpenMessage( 'Создание текущего состояния базы из состояния на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года', '')
       else OpenMessage( 'Создание состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года', '');
@@ -5554,7 +5574,7 @@ begin
         Application.ProcessMessages;
         //---------------------------------------------------------------------------------
       end;
-      GlobalTask.LogFile.WriteToLogFile('Создание успешно завершено.');
+      GlobalTask.WriteToLogFile('Создание успешно завершено.');
     finally
       {$IFNDEF DEBUG}
       CloseMessage;
@@ -5591,7 +5611,7 @@ begin
   end;
   WorkQuery.Active := false;
   if lOk then begin
-    GlobalTask.LogFile.WriteToLogFile('Удаление состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года');
+    GlobalTask.WriteToLogFile('Удаление состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года');
     OpenMessage( 'Удаление состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года', '');
     try
       WorkQuery.Active := false;
@@ -5634,7 +5654,7 @@ begin
       end;
       //-------------------------------------------------------------------------
       if Result then
-        GlobalTask.LogFile.WriteToLogFile('Удаление успешно завершено.');
+        GlobalTask.WriteToLogFile('Удаление успешно завершено.');
     finally
       CloseMessage;
     end;
@@ -6544,7 +6564,7 @@ begin
   end else begin
     Result:=false;
     try
-      GlobalTask.LogFile.WriteToLogFile('IsDirBase: Папка с базой  '+strDir+' недоступна');
+      GlobalTask.WriteToLogFile('IsDirBase: Папка с базой  '+strDir+' недоступна');
     except
     end;
     if GlobalPar.PingBase and (stADS_REMOTE in GlobalPar.ServerTypes) then begin
@@ -6575,8 +6595,8 @@ begin
       end;
       try
        if Result
-         then GlobalTask.LogFile.WriteToLogFile('IsDirBase: Папка с базой  '+strDir+' соединение установлено')
-         else GlobalTask.LogFile.WriteToLogFile('IsDirBase: Папка с базой  '+strDir+' ошибка соединения '+sErr);
+         then GlobalTask.WriteToLogFile('IsDirBase: Папка с базой  '+strDir+' соединение установлено')
+         else GlobalTask.WriteToLogFile('IsDirBase: Папка с базой  '+strDir+' ошибка соединения '+sErr);
       except
       end;
     end;
@@ -6722,7 +6742,7 @@ begin
       if FileExists(strDir+'version') then begin
         if MemoRead(strDir+'version', strMainVersion) then begin
           if strMainVersion<>'' then begin
-            strVersion := GetVersionProgram;
+            strVersion := GetVersionProgram(5);
             try
               nVersion     := StrToInt(StringReplace(strVersion,'.','',[rfReplaceAll]));
               nMainVersion := StrToInt(StringReplace(strMainVersion,'.','',[rfReplaceAll]));

@@ -2468,7 +2468,7 @@ begin
       FForm.FLastError := strErr;
     end;
   end else begin
-//    GlobalTask.LogFile.WriteToLogFile('печать свидельства '++'без проведения.');
+//    GlobalTask.WriteToLogFile('печать свидельства '++'без проведения.');
   end;
   if Result then begin
     {$IFDEF GISUN}

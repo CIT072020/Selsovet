@@ -1,3 +1,13 @@
-15.01.2020 11:03   Не найдена таблица: СПРЛЬГОТНИКОВ
-15.01.2020 11:03   Не найдена таблица: ЛИЦЕВЫЕСЧЕТА
-15.01.2020 11:05  IsDirBase: Папка с базой  E:\Projects\Selsovet7\Data\Base.add недоступна
+IsDirBase: Папка с базой  E:\Projects\Selsovet7\Data\Base.add недоступна
+28.01.2021 11:33  IsDirBase: Папка с базой  E:\Projects\Selsovet7\Data\SelSovet.add недоступна
+IsDirBase: Папка с базой  E:\Projects\Selsovet7\Data\Base.add недоступна
+IsDirBase: Папка с базой  E:\Projects\Selsovet7\Data\Base.add недоступна
+IsDirBase: Папка с базой  E:\Projects\Selsovet7\Data\Base.add недоступна
+02.02.2021 09:07  IsDirBase: Папка с базой  E:\Projects\Selsovet7\Data\SelSovet.add недоступна
+IsDirBase: Папка с базой  E:\Projects\Selsovet7\Data\Base.add недоступна
+02.02.2021 16:46  IsDirBase: Папка с базой  E:\Projects\Selsovet7\Data\SelSovet.add недоступна
+03.02.2021 10:13  IsDirBase: Папка с базой  E:\Projects\Selsovet7\Data\Base.add недоступна
+IsDirBase: Папка с базой  E:\Projects\Selsovet7\Data\Base.add недоступна
+IsDirBase: Папка с базой  E:\Projects\Selsovet7\Data\Base.add недоступна
+IsDirBase: Папка с базой  E:\Projects\Selsovet7\Data\SelSovet.add недоступна
+IsDirBase: Папка с базой  E:\Projects\Selsovet7\Data\Base.add недоступна

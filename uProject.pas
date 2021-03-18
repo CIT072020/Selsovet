@@ -274,6 +274,8 @@ type
   // вернуть движение человека в строку lTmp=true включая по месту пребывания
   function DvigMen( dPropis:TDateTime; tbMigr:TDataSet; strRazd:String ): String;
   function VibitMen( tbMigr:TDataSet; strType:String; strRazd:String): String;
+
+  function NameTmpDir(nType:Integer):String;
   function CreateTmpPath(nType:Integer=0):String;
 
   function NameFile_Partitions:String;
@@ -286,6 +288,10 @@ type
 
   procedure DisableMainForm;
   procedure EnableMainForm;
+
+  function Menu24(nType:Integer):Boolean;   // размерность иконок 24х24
+  function EnabledMenu24:Boolean;
+
   function GetVersionProgram(nType:Integer) : String;
   procedure EnabledAllForms( f : TForm; value : Boolean);
   procedure CheckRegistry( lMainComp : Boolean );
@@ -414,6 +420,7 @@ type
   {$IFDEF ZAGS}
   procedure LoadRnMyGor(strOpis:String; sSOATO:String; strFilter:String);
   {$ENDIF}
+  procedure CheckKeyListOpis(strOpis:String);
   procedure LoadComboboxFromOpis( ed : TDbComboboxEh; strOpis:String );
   procedure LoadOpisFromSOATO(strOpis:String; sSOATO:String; strFilter:String; nPos:Integer=5; nCount:Integer=3);
   procedure LoadOpisControlHouse;        // загрузить описание KEY_CONTROL_HOUSE  из справочника организаций + два постоянных значения
@@ -545,9 +552,11 @@ var
   FGlobalFilterPunkt:String;
   slWorkDataSet:TStringList;
 
-  IsActiveGISUN:Boolean;
+  IsActiveGISUN:Boolean;   // активна подсистема "Регистр населения"
   IsActiveWorkATE:Boolean;
   IsActiveSubMenuGISUN:Boolean;
+
+  IsActiveGISRU:Boolean;   // активна подсистема "Регистрационный учет"
 
 
   CurGridMens : TDbGridEh;
@@ -665,7 +674,7 @@ uses fMain, dBase, fGurnal, SelLibFr, fSimpleD, QStrings, WinSock, ace, fChoiceA
      {$IFDEF SMDO}
       uSMDO, fSmdoZagrSpr,
      {$ENDIF}
-     fAddAdres,
+     fAddAdres, mFindInt,
      {$IFDEF ADD_MENS_PU} dMen, {$ENDIF}
      StrUtils;
 
@@ -994,7 +1003,8 @@ end;
 function fnCheckParamsSQL(strSQL: String) : String;
 begin
   if Pos('&', strSQL)>0 then begin
-    Result := StringReplace(strSQL, '&typeobj_lic&', intToStr(_TypeObj_Lich), [rfReplaceAll, rfIgnoreCase]);
+    Result := StringReplace(strSQL, '&datefiks&', QStr(DTOS(fmMain.DateFiks,tdAds)),[rfReplaceAll, rfIgnoreCase]);
+    Result := StringReplace(Result, '&typeobj_lic&', intToStr(_TypeObj_Lich), [rfReplaceAll, rfIgnoreCase]);
     Result := StringReplace(Result, '&typeobj_nasel&', intToStr(_TypeObj_Nasel), [rfReplaceAll, rfIgnoreCase]);
     Result := StringReplace(Result, '&typeobj_adres&', intToStr(_TypeObj_Adres), [rfReplaceAll, rfIgnoreCase]);
   end else begin
@@ -1796,12 +1806,15 @@ begin
 end;
 
 function ChoiceAdresEx(nType:Integer; nCurID:Integer; var nLicID:Integer):Integer;
+{$IFDEF ADD_MENS_PU}
 var
   adr : TAdres;
   strErr,sAdr : String;
   n : Integer;
   lChoiceLic:Boolean;
+{$ENDIF}
 begin
+{$IFDEF ADD_MENS_PU}
   if nLicID>=0
     then lChoiceLic:=true
     else lChoiceLic:=false;
@@ -1836,6 +1849,9 @@ begin
       Result:=adr.AdresID;
     end;
   end;
+{$ELSE}
+  Result:=0;
+{$ENDIF}
 end;
 
 //--------------------------------------------------------------
@@ -2156,6 +2172,24 @@ begin
   if not fmMain.Enabled then begin
     fmMain.Enabled := true;
   end;
+end;
+//---размерность иконок 24х24 ------------------
+// 0-главное меню   1-журнал   2-форма ввода
+function Menu24(nType:Integer):Boolean;
+begin
+  {$IFDEF ZAGS}
+    Result:=fmMain.TBDock24.Visible;
+  {$ELSE}
+    Result:=false;
+  {$ENDIF}
+end;
+function EnabledMenu24:Boolean;
+begin
+  {$IFDEF ZAGS}
+    Result:=true;
+  {$ELSE}
+    Result:=false;
+  {$ENDIF}
 end;
 //----------------------------------------------
 var
@@ -2901,7 +2935,19 @@ begin
   Result:=nil;
   {$ENDIF}
 end;
-
+//---------------------------------------------------------------------
+procedure CheckKeyListOpis(strOpis:String);
+var
+  i:Integer;
+  Opis:TOpisEdit;
+  opSpr:TSprItem;
+begin
+  Opis:=GlobalTask.CurrentOpisEdit.GetListOpisA(strOpis);
+  GlobalTask.CurrentOpisEdit.ReloadOpis(Opis);
+  opSpr:=fmMain.FltSprList.ByName(strOpis);
+  opSpr.KeyList.Assign( Opis.KeyList );
+  opSpr.NameList.Assign( Opis.Items );
+end;
 //---------------------------------------------------------------------
 procedure LoadComboboxFromOpis( ed : TDbComboboxEh; strOpis:String );
 var
@@ -3390,6 +3436,12 @@ begin
   PodpisShtamp:=-1;        // не делать никах телодвижений со штампами
   lDolgAllList:=false;
   if VarIsEmpty(vKod) or VarIsNull(vKod) then exit;
+  try
+    if VarToStr(vKod)='+STAT'  // !!!
+      then vKod:='31';          //  как у нового лицевого счета пока
+  except
+    vKod:='31';
+  end;
   if IsAllDigit(VarToStr(vKod)) then begin
     sField:='ID';
   end else begin
@@ -4636,21 +4688,22 @@ begin
   end;
 end;
 
-//--------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------
+function NameTmpDir(nType:Integer):String;
+begin
+  Result:='Temp';
+  case nType of
+    0,2: Result:='Tmp';
+    1:   Result:='TestPost';
+//    2: Result:='$temp$';   !!!
+  end;
+end;
+//------------------------------------------
 function CreateTmpPath(nType:Integer):String;
 begin
-  Result:='';          
-  if nType=0 then begin
-    Result:=CheckSleshN(ExtractFilePath(Application.ExeName))+'Tmp';
-  end else if nType=1 then begin
-    Result:=CheckSleshN(ExtractFilePath(Application.ExeName))+'TestPost';
-  end else if nType=2 then begin
-    Result:=CheckSleshN(ExtractFilePath(Application.ExeName))+'$temp$';
-  end;
-  if Result<>'' then begin
-    ClearDir(Result,true);
-    ForceDirectories(Result);
-  end;
+  Result:=CheckSleshN(ExtractFilePath(Application.ExeName))+NameTmpDir(nType);
+  ClearDir(Result,true);
+  ForceDirectories(Result);
 end;
 
 //--------------------------------------------
@@ -5040,6 +5093,8 @@ begin
      Result:='ZOpeka';
    end else if nTypeObj=_TypeObj_QueryGis then begin
      Result:='QueryGis';
+   end else if nTypeObj=_TypeObj_RegDogN then begin
+     Result:='RegDogN';
    end else if (nTypeObj>=_TypeObj_UZRogd) and (nTypeObj<=_TypeObj_UZ_Max) then begin
      Result:='' // ??? GurnalRegistr;
    end;
@@ -5970,7 +6025,7 @@ begin
     end;
     if lErr then begin
       LastErrorFTP:='Ошибка подключения к серверу обновлений ['+IntToStr(nErrCode)+'] '+IdFTP.Host+' ('+inttostr(trunc((gettickcount-mmm)/1000))+'сек.) '+#13#10+sErr;
-      GlobalTask.LogFile.WriteToLogFile(StringReplace(LastErrorFTP, #13#10, ' ', [rfReplaceAll]));
+      GlobalTask.WriteToLogFile(StringReplace(LastErrorFTP, #13#10, ' ', [rfReplaceAll]));
     end;
   end;
 
@@ -6293,8 +6348,14 @@ begin
   Result:=true;
   oUpdate:=TSynapseObj.Create(pn);
   oUpdate.FCheckMessages:=true;
-  oUpdate.FCheckSpr:=Globaltask.ParamAsBoolean('SMDO_SPR_CHECK');
-  oUpdate.FThread:=true;
+  {$IFDEF SMDO}
+    oUpdate.FCheckSpr:=Globaltask.ParamAsBoolean('SMDO_SPR_CHECK');
+  {$ELSE}
+    oUpdate.FCheckSpr:=false;
+  {$ENDIF}
+//  oUpdate.FThread:=true;
+  oUpdate.FThread:=(Globaltask.ParamAsStringDef('CHECK_UPDATE_TH','1')='1'); // контроль наличия обновления в потоке или нет
+                                       
   if oUpdate.CheckUpdate then begin
     AddNotifyProg(fmMain, 'Доступно обновление программы № '+IntToStr(oUpdate.FUpdate)+#13#10+'(Сервис->Дополнительно->Скачать обновление программы)', false, true,0,0);
   end;
@@ -6394,12 +6455,13 @@ begin
     dMax:=Max(dMax, GlobalTask.GetLastValueAsDate('LAST_UPDATE_SPRORG',false));
     if oUpdate.FDateSprOrgSMDO>dMax then begin
       lUpdate:=true;
-    end;
+    end;                    
+//    lUpdate:=true;
+//    oUpdate.FThread:=false;
     if lUpdate then begin
       if Problem('Скачать справочник организаций СМДО ?') then begin
         slPar.Add('FILE='+oUpdate.FFileSprOrg);
         oUpdate.FThread:=true;
-  //      oUpdate.FThread:=false;
         oUpdate.GetFileFTP(true,slPar);
         sFile:=CheckSleshN(oUpdate.FOutputDir)+oUpdate.FFileSprOrg;
         if sFile<>'' then begin
@@ -6815,7 +6877,6 @@ begin
     sl.Free;
   end;
 end;
-
 //--------------------------------------------------
 initialization
   MessagesProg:='';
@@ -6830,9 +6891,11 @@ initialization
 
   slWorkDataSet:=TStringList.Create;
 
-  IsActiveGISUN:=false;
+  IsActiveGISUN:=false;   // активна подсистема "Регистр населения"
   IsActiveWorkATE:=false;
   IsActiveSubMenuGISUN:=true;
+
+  IsActiveGISRU:=false;   // активна подсистема "Регистрационный учет"
 
   CurGridMens:=nil;
 

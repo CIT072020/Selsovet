@@ -116,7 +116,7 @@ begin
     fmMenShort.lbAdres.Visible:=false;
     fmMenShort.edAdres.Visible:=false;
     fmMenShort.cbIskl.Visible:=false;
-  {$ENDIF}                                      
+  {$ENDIF}
   l:=dbDisableControls(dmMen.tbSostavSem);
   sBookMark:='';
   if lNew then begin

@@ -1071,6 +1071,11 @@ begin
     CreatefrxDBdataSet(self,tbDeti,'Deti','Общие дети');
   {$ENDIF}
 
+  edON_DOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edONA_DOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;
+  edON_DOK_TYPE.DropDownBox.Width:=TYPEDOK_Width;  // utypes.pas
+  edONA_DOK_TYPE.DropDownBox.Width:=TYPEDOK_Width;
+
 end;
 
 destructor TfmDeclRast.Destroy;
@@ -1470,11 +1475,11 @@ var
 begin
   // в творительном падеже по русски
   if DokumentON_Familia_P.AsString='' then begin
-    s := DokumentON_Familia.AsString+' '+DokumentON_NAME.AsString+' '+DokumentON_OTCH.AsString;
-
     if SvidInPadeg(TypeObj) then begin  // свидетельство в падеже
-      s := GetPadegFIO(s,'м','Т');
+      s := GetPadegFIO3(DokumentON_Familia.AsString, DokumentON_NAME.AsString, DokumentON_OTCH.AsString,'м','Т');
       if not LastSimIsLower(s) then s:=ANSIUpperCase(s);
+    end else begin
+      s := DokumentON_Familia.AsString+' '+DokumentON_NAME.AsString+' '+DokumentON_OTCH.AsString;
     end;
 
     StrToArr(s,arr,' ',false);
@@ -1484,10 +1489,11 @@ begin
     DokumentON_OTCH_P.AsString:=arr[2];
   end;
   if DokumentONA_Familia_P.AsString='' then begin
-    s := DokumentONA_Familia.AsString+' '+DokumentONA_NAME.AsString+' '+DokumentONA_OTCH.AsString;
     if SvidInPadeg(TypeObj) then begin  // свидетельство в падеже
-      s := GetPadegFIO(s,'ж','Т');
+      s:=GetPadegFIO3(DokumentONA_Familia.AsString, DokumentONA_NAME.AsString, DokumentONA_OTCH.AsString,'ж','Т');
       if not LastSimIsLower(s) then s:=ANSIUpperCase(s);
+    end else begin
+      s:=DokumentONA_Familia.AsString+' '+DokumentONA_NAME.AsString+' '+DokumentONA_OTCH.AsString;
     end;
     StrToArr(s,arr,' ',false);
     SetLength(arr,3);
@@ -1497,10 +1503,11 @@ begin
   end;
   // в дательном падеже по русски
   if DokumentON_Familia_PD.AsString='' then begin
-    s := DokumentON_Familia.AsString+' '+DokumentON_NAME.AsString+' '+DokumentON_OTCH.AsString;
     if SvidInPadeg(TypeObj) then begin  // свидетельство в падеже
-      s := GetPadegFIO(s,'м','Д');
+      s := GetPadegFIO3(DokumentON_Familia.AsString, DokumentON_NAME.AsString, DokumentON_OTCH.AsString,'м','Д');
       if not LastSimIsLower(s) then s:=ANSIUpperCase(s);
+    end else begin
+      s := DokumentON_Familia.AsString+' '+DokumentON_NAME.AsString+' '+DokumentON_OTCH.AsString;
     end;
     StrToArr(s,arr,' ',false);
     SetLength(arr,3);
@@ -1509,10 +1516,11 @@ begin
     DokumentON_OTCH_PD.AsString:=arr[2];
   end;
   if DokumentONA_Familia_PD.AsString='' then begin
-    s := DokumentONA_Familia.AsString+' '+DokumentONA_NAME.AsString+' '+DokumentONA_OTCH.AsString;
     if SvidInPadeg(TypeObj) then begin  // свидетельство в падеже
-      s := GetPadegFIO(s,'ж','Д');
+      s:=GetPadegFIO3(DokumentONA_Familia.AsString, DokumentONA_NAME.AsString, DokumentONA_OTCH.AsString,'ж','Д');
       if not LastSimIsLower(s) then s:=ANSIUpperCase(s);
+    end else begin
+      s:=DokumentONA_Familia.AsString+' '+DokumentONA_NAME.AsString+' '+DokumentONA_OTCH.AsString;
     end;
     StrToArr(s,arr,' ',false);
     SetLength(arr,3);

@@ -541,6 +541,16 @@ begin
 }
 
   ChangeMessage('Контроль базы ...');
+
+  if Result=0 then begin
+    ds:=dbOpenSQL('SELECT Count(*) FROM global','');
+    if ds.Fields.Fields[0].AsInteger=0 then begin
+      lUpdate:=true;
+    end;
+    dbClose(ds);
+    if lUpdate then dbExecuteSQL('INSERT INTO global (id_base, main_base, sysid) values ( 0, true, NewIDString() )');
+  end;
+
   if lCheckPerevod then begin
     dbExecuteSQL('DELETE FROM SprPerevod');
     if dbLastError()<>'' then begin
@@ -1014,6 +1024,16 @@ begin
                  'UPDATE БазаДомов SET dom=Right(''       ''+Trim(dom),7) WHERE dom is not null;'+
                  'UPDATE БазаДомов SET korp=Right(''       ''+Trim(korp),7) WHERE korp is not null;');
   end;
+  if (Result=0)  and (TypeBase='SELSOVET') and arrCheck[32] then begin
+    dbExecuteSQL('UPDATE RegDogN SET TYPEOBJ=103 WHERE TYPEOBJ is null;'+
+                 'UPDATE RegDogN SET NANIM_TYPE=1 WHERE NANIM_TYPE is null;');
+  end;
+  if (Result=0)  and (TypeBase='SELSOVET') and arrCheck[33] then begin
+    dbExecuteSQL('UPDATE RegDogN SET unlim=false WHERE unlim is null;');
+    dbExecuteSQL('UPDATE СпрНасПунктов SET ate_id=s.ate_id FROM СпрНасПунктов p INNER JOIN sysspr.СпрСоато s ON s.id=p.kod;');
+    dbExecuteSQL('UPDATE СпрНасПунктов SET not_riap=false WHERE not_riap is null; ');
+    dbExecuteSQL('UPDATE VUS SET vus_iskl=false WHERE vus_iskl is null;');
+  end;
 end;
 
 function BeforeUpdate : Integer;
@@ -1086,7 +1106,9 @@ begin
         if (nVer<288) then arrCheck[31]:=true;  // TYPE_SN  DATEDOK_UST
         if (nVer<289) then arrCheck[26]:=true;
         if (nVer<320) then arrCheck[12]:=true;
-      end else if (TypeBase='GKH') then begin
+        if (nVer<329) then arrCheck[32]:=true;  // TYPEOBJ RegDogN
+        if (nVer<330) then arrCheck[33]:=true; // UNLIM RegDogN
+     end else if (TypeBase='GKH') then begin
         if (nVer<200) then arrCheck[25]:=true;
         if (nVer<262) then arrCheck[28]:=true;
         if (nVer<280) then arrCheck[3]:=true;  // реквизит tel_line DocMain

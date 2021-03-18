@@ -48,15 +48,33 @@ type
     { Private declarations }
   public
     { Public declarations }
+    FAddOtnosh : Boolean;
+    FAddDateR : Boolean;
+    FAddDateP : Boolean;
+    FAddIN : Boolean;
+    FAddLgot : Boolean;
+    FAddPrizn: Boolean;
+    FAddPasp : Boolean;
+    FAddWork :Boolean;
+    FAddCurMen : Boolean;
+    FAddAllMens : Boolean;
+    FTypeCountMens : String;
+    FVisibleCountMens : Boolean;
+    FVisibleListMens  : Boolean;
+    FVisibleOwners    : Boolean;
+
     FVisibleUdostLgot:Boolean;
     FVisibleMR : Boolean;
     FVisiblePrib : Boolean;
+    FVisiblePrizn : Boolean;
 
     FVisibleParent : Boolean;
     FParent_DATER : Boolean;
     FParent_WORK : Boolean;
     FParent_PASP : Boolean;
     FParent_IN : Boolean;
+
+    FParAdd:String;
 
     FVisibleDeti : Boolean;
     FDetiVozr1 : Integer;
@@ -71,7 +89,9 @@ type
     constructor Create(Owner : TComponent); override;
     destructor Destroy; override;
     function  LoadQuery : Boolean; override;
+    procedure CreateParAddMen;
     procedure GridColumnsGetLgot(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
+    procedure GridColumnsGetPrizn(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
     procedure GridColumnsGetAddInfo(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
     procedure GridColumnsGetPaspVidan(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
     procedure GridColumnsGetDeti(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
@@ -79,7 +99,8 @@ type
     function  getAddInfoMen(sID:String):String;
     procedure GridColumnsGetPapa(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
     procedure GridColumnsGetMama(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
-
+    procedure GridColumnsListMens(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
+    procedure GridColumnsCountMens(Sender: TObject;  EditMode: Boolean; Params: TColCellParamsEh);
     procedure Event_CheckErrorMens(Sender: TObject);
     procedure Event_DeleteRegistryMens(Sender: TObject);
     procedure Event_CheckRegistryMens(Sender: TObject);
@@ -114,8 +135,9 @@ const
   TYPESEEK_FIO=0;
   TYPESEEK_LIC=1;
   TYPESEEK_DETI=2;
-  TYPESEEK_ANY=3;
-  TYPESEEK_MINTRUD=4;
+  TYPESEEK_COUNT=3;
+  TYPESEEK_ANY=4;
+  TYPESEEK_MINTRUD=5;
 
 var
   fmGurnNasel: TfmGurnNasel;
@@ -148,6 +170,22 @@ begin
   TBItemWriteSavedFilter.Visible:=true;;
   TBItemWriteSavedFilter.Enabled:=false;
   edSeek.EditButtons[0].Visible:=FSeekEnter;
+
+  FParAdd:='';
+  FTypeCountMens:= '';
+  FVisibleCountMens := false;
+  FVisibleListMens  := false;
+  FVisibleOwners    := false;
+  FAddOtnosh := false;
+  FAddDateR  := false;
+  FAddLgot   := false;
+  FAddPrizn  := false;
+  FAddIN     := false;
+  FAddPasp   := false;
+  FAddWork   := false;
+  FAddDateP  := false;
+  FAddCurMen := true;
+  FAddAllMens:= false;
 
   {$IFDEF GKH}
     TBSubmenuPunkts.Visible:=false;
@@ -259,7 +297,7 @@ begin
       Result:='';
     end else begin
     end;
-  end;  
+  end;
   TBItemIsklOtbor.Enabled:=FSeekAsQuery_Active;
   TBItemAddOtbor.Enabled:=FSeekAsQuery_Active;
   TBItemWriteSavedFilter.Enabled:=FSeekAsQuery_Active;
@@ -268,9 +306,9 @@ end;
 
 //----------------------------------------------------------------
 function TfmGurnNasel.getIDForTmpTable(nType:Integer;strFilter:String):Boolean;
-var
-  slSQL:TStringList;
-  sFam,sName,sOper,sOp,s1,s2,sNot:String;
+var                                    
+  slSQL,slPar:TStringList;
+  sFam,sSQL,sName,sWhere,sOper,sType,sOp,s1,s2,sNot:String;
   sMonth, sYear:String;
   n:Integer;
   lOk,lSeek:Boolean;
@@ -295,7 +333,7 @@ begin
 
     CheckOper(strFilter);
     sOper:=Copy(strFilter,1,1);
-    
+
 //    if (sOper='=') or (sOper='<') or (sOper='>') or (sOper='*')
     if (sOper='=') or (sOper='*') or (sOper='<') or (sOper='>') or (sOper='-')
       then strFilter:=Copy(strFilter,2,Length(strFilter))
@@ -342,6 +380,30 @@ begin
         end;
       end;
 
+    //------- КОЛИЧЕСТВО ---------------------------------------------------
+    end else if (nType=TYPESEEK_COUNT) then begin
+      slPar:=TStringList.Create;
+      n:=Pos(';',FTypeCountMens);
+      if n>0 then begin
+        s1:=Copy(FTypeCountMens,n+1,Length(FTypeCountMens));
+        sType:=Copy(FTypeCountMens,1,n-1);
+        s1:=StringReplace(s1,'#','-',[]);
+        slPar.Add('VOZR='+s1);
+      end else begin
+        sType:=FTypeCountMens;
+      end;
+      sWhere:='lic_id>0 and '+dmBase.CountMens2Where(DateFiks,1,sType,slPar);
+      slPar.Free;
+      sSQL:=sSQL+'INSERT INTO &tmp& (ID) SELECT ID from Население where date_fiks='+DateToSQL(DateFiks)+' and lic_id in '+
+                 '(SELECT lic_id FROM Население WHERE '+sWhere+
+                 ' GROUP BY lic_id HAVING Count(*)'+sOper+strFilter;
+      if (Pos('<',sOper)>0) then begin  // если выбрали операцию меньше отсечем нулевые значения
+         sSQL:=sSQL+ ' and Count(*)>0'
+      end;
+      slSQL.Add(sSQL+ ');');
+      if (strFilter='0') and (Pos('=',sOper)>0) then begin  // для людей без лиц. счета, если ищем "=0"
+        slSQL.Add('INSERT INTO &tmp& (ID) SELECT ID FROM Население WHERE (lic_id=0 or lic_id is null) and date_fiks='+DateToSQL(DateFiks)+';');
+      end;
     //------- ДЕТИ ---------------------------------------------------
     end else if (nType=TYPESEEK_DETI) then begin
       lOk:=false;
@@ -362,7 +424,7 @@ begin
           end;
         end;
       end;
-      if lOk then begin             
+      if lOk then begin
         Query.DisableControls;
         Query.First;
         s1:='';
@@ -446,10 +508,11 @@ begin
     TmpQuery.SQL.Text:=StringReplace( slSQL.Text, '&tmp&', GetNameTmpIdTable, [rfReplaceAll]);
     TmpQuery.SQL.Text:=dmBase.CheckParamsSQL(TmpQuery.SQL.Text);
     slSQL.Free;
-    memowrite('last_tmp.sql',TmpQuery.SQL.Text);
+    s1:=KodGurnal+' create find: '+TmpQuery.SQL.Text;
     TmpQuery.ExecSQL;
     TmpQuery.SQL.Text:='SELECT COUNT(*) FROM '+GetNameTmpIdTable;
     TmpQuery.Open;
+    GlobalTask.WriteToLogFile(s1+', recordcount='+TmpQuery.Fields[0].AsString, nil, LOG_SQL);
     if TmpQuery.Fields[0].AsInteger>0 then  begin
       Result:=true;
     end;
@@ -559,6 +622,7 @@ begin
   FVisibleUdostLgot:=ini.ReadBool(KodGurnal+'.Add','VISIBLE_UL',false);
   FVisibleMR := ini.ReadBool(KodGurnal+'.Add','VISIBLE_MR',false);
   FVisiblePrib := ini.ReadBool(KodGurnal+'.Add','VISIBLE_PRIB',false);
+  FVisiblePrizn:= ini.ReadBool(KodGurnal+'.Add','VISIBLE_PRIZN',false);
 
   FVisibleParent := ini.ReadBool(KodGurnal+'.Add','VISIBLE_PARENT',false);
   FParent_DATER:=ini.ReadBool(KodGurnal+'.Add','PARENT_DATER',false);
@@ -579,11 +643,30 @@ begin
   FUnionAdres:=ini.ReadBool(KodGurnal+'.Add','UNION_ADRES',true);
   FUnionPasp:=ini.ReadBool(KodGurnal+'.Add','UNION_PASP',false);
 
+  FVisibleCountMens := ini.ReadBool(KodGurnal+'.Add','VISIBLE_COUNT_MENS',false);
+  FVisibleListMens  := ini.ReadBool(KodGurnal+'.Add','VISIBLE_LIST_MENS',false);
+//  FVisibleOwners    := ini.ReadBool(KodGurnal+'.Add','VISIBLE_LIST_OWNERS',false);
+  FAddOtnosh := ini.ReadBool(KodGurnal+'.Add','ADD_OTNOSH_MENS',false);
+  FAddDateR  := ini.ReadBool(KodGurnal+'.Add','ADD_DATER_MENS',false);
+  FAddDateP  := ini.ReadBool(KodGurnal+'.Add','ADD_DATEP_MENS',false);
+  FAddLgot   := ini.ReadBool(KodGurnal+'.Add','ADD_LGOT_MENS',false);
+  FAddPrizn  := ini.ReadBool(KodGurnal+'.Add','ADD_PRIZN_MENS',false);
+  FAddIN     := ini.ReadBool(KodGurnal+'.Add','ADD_IN_MENS',false);
+  FAddPasp   := ini.ReadBool(KodGurnal+'.Add','ADD_PASP_MENS',false);
+  FAddWork   := ini.ReadBool(KodGurnal+'.Add','ADD_WORK_MENS',false);
+  FAddCurMen := ini.ReadBool(KodGurnal+'.Add','ADD_CUR_MENS',true);
+  FAddAllMens:= ini.ReadBool(KodGurnal+'.Add','ADD_ALL_MENS',false);
+  FTypeCountMens:=ini.ReadString(KodGurnal+'.Add','TYPE_COUNT_MENS','100');
+  if Length(FTypeCountMens)<3 then FTypeCountMens:='100';
+  CreateParAddMen;
+
   CreateAdditiveWhere(getAdditiveWhere);
 
   for i:=0 to Grid.Columns.Count-1 do begin
     if Grid.Columns[i].FieldName='LGOT' then begin
       Grid.Columns[i].OnGetCellParams := GridColumnsGetLgot;
+    end else if Grid.Columns[i].FieldName='PRIZN' then begin
+      Grid.Columns[i].OnGetCellParams := GridColumnsGetPrizn;
     end else if Grid.Columns[i].FieldName='DETI' then begin
       Grid.Columns[i].OnGetCellParams := GridColumnsGetDeti;
     end else if Grid.Columns[i].FieldName='ADD_INFO' then begin
@@ -594,6 +677,12 @@ begin
       Grid.Columns[i].OnGetCellParams := GridColumnsGetPapa;
     end else if Grid.Columns[i].FieldName='MA_ID' then begin
       Grid.Columns[i].OnGetCellParams := GridColumnsGetMama;
+    end else if Grid.Columns[i].FieldName='LIST_MENS' then begin
+      Grid.Columns[i].OnGetCellParams := GridColumnsListMens;
+    end else if Grid.Columns[i].FieldName='COUNT_MENS' then begin
+      Grid.Columns[i].OnGetCellParams := GridColumnsCountMens;
+//    end else if Grid.Columns[i].FieldName='OWNERS' then begin
+//      Grid.Columns[i].OnGetCellParams := GridColumnsGetOwners;
     end;
   end;
   CheckPropertyUnionFIO;
@@ -622,6 +711,7 @@ begin
   ini.WriteBool(KodGurnal+'.Add','VISIBLE_UL',FVisibleUdostLgot);
   ini.WriteBool(KodGurnal+'.Add','VISIBLE_MR',FVisibleMR);
   ini.WriteBool(KodGurnal+'.Add','VISIBLE_PRIB',FVisiblePrib);
+  ini.WriteBool(KodGurnal+'.Add','VISIBLE_PRIZN',FVisiblePrizn);
   ini.WriteBool(KodGurnal+'.Add','VISIBLE_PARENT',FVisibleParent);
 
   ini.WriteBool(KodGurnal+'.Add','PARENT_DATER',FParent_DATER);
@@ -640,6 +730,20 @@ begin
   ini.WriteBool(KodGurnal+'.Add','UNION_FIO',FUnionFIO);
   ini.WriteBool(KodGurnal+'.Add','UNION_ADRES',FUnionAdres);
   ini.WriteBool(KodGurnal+'.Add','UNION_PASP',FUnionPasp);
+
+  ini.WriteBool(KodGurnal+'.Add','VISIBLE_COUNT_MENS',FVisibleCountMens);
+  ini.WriteBool(KodGurnal+'.Add','VISIBLE_LIST_MENS',FVisibleListMens);
+//  ini.WriteBool(KodGurnal+'.Add','VISIBLE_LIST_OWNERS',FVisibleOwners);
+  ini.WriteBool(KodGurnal+'.Add','ADD_OTNOSH_MENS',FAddOtnosh);
+  ini.WriteBool(KodGurnal+'.Add','ADD_DATER_MENS',FAddDateR);
+  ini.WriteBool(KodGurnal+'.Add','ADD_LGOT_MENS',FAddLgot);
+  ini.WriteBool(KodGurnal+'.Add','ADD_PRIZN_MENS',FAddPrizn);
+  ini.WriteBool(KodGurnal+'.Add','ADD_IN_MENS',FAddIN);
+  ini.WriteBool(KodGurnal+'.Add','ADD_PASP_MENS',FAddPasp);
+  ini.WriteBool(KodGurnal+'.Add','ADD_WORK_MENS',FAddWork);
+  ini.WriteBool(KodGurnal+'.Add','ADD_DATEP_MENS',FAddDateP);
+  ini.WriteBool(KodGurnal+'.Add','ADD_ALL_MENS',FAddAllMens);
+  ini.WriteString(KodGurnal+'.Add','TYPE_COUNT_MENS',FTypeCountMens);
 
   inherited SaveToIni;
 //  ini.WriteInteger(KodGurnal+'.Add','VISIBLEMENS',FVisibleMens);
@@ -963,6 +1067,7 @@ begin
     TYPESEEK_ANY   : Result:='Произвольный пользовательский отбор ';
     TYPESEEK_LIC   : Result:='Номер лицевого счета';
     TYPESEEK_DETI  : Result:='Количество детей на лицевом счете согласно параметров';
+    TYPESEEK_COUNT : Result:='Количество людей на лицевом счете согласно параметров';
   else
     Result:='';
   end;
@@ -1227,32 +1332,16 @@ end;
 
 //----------------------------------------------------------------
 procedure TfmGurnNasel.GridColumnsGetLgot(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
-var
-  d : TDateTime;
-  i : Integer;
 begin
   if Query.FieldByName('ID').AsString<>'' then begin
-    d := Query.FieldByName('DATE_FIKS').AsDateTime;
-    i := Query.FieldByName('ID').AsInteger;
-    dmBase.tbMensLgot.CancelRange;
-    try
-      dmBase.tbMensLgot.IndexFieldNames := 'DATE_FIKS;ID;KOD';
-      dmBase.tbMensLgot.SetRange([d,i],[d,i]);
-      if not dmBase.tbMensLgot.Eof then begin
-        Params.Text := '';
-        while not dmBase.tbMensLgot.Eof do begin
-          if dmBase.SprLgot.Locate('ID',dmBase.tbMensLgot.FieldByName('KOD').AsString,[]) then begin
-            Params.Text := Params.Text + dmBase.SprLgot.FieldByName('NAME').AsString+', ';
-          end;
-          dmBase.tbMensLgot.Next;
-        end;
-        if Params.Text<>'' then Params.Text:=Copy(Params.Text,1,Length(Params.Text)-2);
-      end else begin
-        Params.Text := '';
-      end;
-    finally
-      dmBase.tbMensLgot.CancelRange;
-    end;
+    Params.Text:=dmBase.LgotMen(dmBase.tbMensLgot, Query.FieldByName('DATE_FIKS').AsDateTime, Query.FieldByName('ID').AsString, ', ');
+  end;
+end;
+//----------------------------------------------------------------
+procedure TfmGurnNasel.GridColumnsGetPrizn(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
+begin
+  if Query.FieldByName('ID').AsString<>'' then begin
+    Params.Text:=dmBase.PriznMen(dmBase.tbMensPr, Query.FieldByName('DATE_FIKS').AsDateTime, Query.FieldByName('ID').AsString, ', ');
   end;
 end;
 //----------------------------------------------------------------
@@ -1287,20 +1376,51 @@ begin
     end;
   end;
 end;
+//------------------------------------------------------------------------------------------------------------
+procedure TfmGurnNasel.CreateParAddMen;
+begin
+  FParAdd:=';';
+  if FAddOtnosh  then  FParAdd:=FParAdd+'OTN;';
+  if FAddDateR   then  FParAdd:=FParAdd+'DATER;';
+  if FAddDateP   then  FParAdd:=FParAdd+'DATEP;';
+  if FAddIN      then  FParAdd:=FParAdd+'IN;';
+  if FAddLgot    then  FParAdd:=FParAdd+'LGOT;';
+  if FAddPrizn   then  FParAdd:=FParAdd+'PRIZN;';
+  if FAddPasp    then  FParAdd:=FParAdd+'PASP;';
+  if FAddWork    then  FParAdd:=FParAdd+'WORK;';
+  if FAddCurMen  then  FParAdd:=FParAdd+'FIRST;';
+  if FAddAllMens then FParAdd:=FParAdd+'ALL;';
+end;
+//------------------------------------------------------------------------------------------------------------
+procedure TfmGurnNasel.GridColumnsListMens(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
+var
+  s:String;
+begin
+// FParAdd ';OTN;DATER;DATEP;IN;PASP;LGOT;ALL;FIRST'
+//------------------------------------------------------------------------------------------------------------
+  if FVisibleListMens then begin
+    Params.Text:=dmBase.ListMensLic(Query.FieldByName('LIC_ID').AsString, Query.FieldByName('ID').AsInteger, FTypeCountMens, FParAdd, IIFS(FRunExport, #13#10, ', '), nil);
+  end;
+end;
+//-----------------------------------------------------------
+procedure TfmGurnNasel.GridColumnsCountMens(Sender: TObject;  EditMode: Boolean; Params: TColCellParamsEh);
+begin
+  if FVisibleCountMens then begin
+    Params.Text := IntToStr(dmBase.CountMensEx( DateFiks, Query.FieldByName('LIC_ID').AsString, FTypeCountMens, nil));
+  end;
+end;
 //----------------------------------------------------------------
 procedure TfmGurnNasel.GridColumnsGetMama(Sender: TObject;  EditMode: Boolean; Params: TColCellParamsEh);
 begin
   Params.Text:=getAddInfoMen(Query.FieldByName('MA_ID').AsString);
 //  dmBase.FIOMen(Query.FieldByName('DATE_FIKS').AsDateTime, Query.FieldByName('MA_ID').AsString);
 end;
-
 //----------------------------------------------------------------
 procedure TfmGurnNasel.GridColumnsGetPapa(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
 begin
   Params.Text:=getAddInfoMen(Query.FieldByName('PA_ID').AsString);
 //  Params.Text:=dmBase.FIOMen(Query.FieldByName('DATE_FIKS').AsDateTime, Query.FieldByName('PA_ID').AsString);
 end;
-
 //----------------------------------------------------------------
 procedure TfmGurnNasel.GridColumnsGetDeti(Sender: TObject;  EditMode: Boolean; Params: TColCellParamsEh);
 var
@@ -1422,9 +1542,78 @@ end;
 procedure TfmGurnNasel.TBItemDopGrafClick(Sender: TObject);
 var
   f : TfmTypeGurnalNasel;
+  i,j,nVozr1,nVozr2:Integer;
+  s,ss:String;
 begin
   f := TfmTypeGurnalNasel.Create(nil);
+
+  f.cbShow.Checked:=FVisibleCountMens;
+  f.cbListMens.Checked:=FVisibleListMens;
+  f.cbOtnosh.Checked:=FAddOtnosh;
+  f.cbDateR.Checked:=FAddDateR;
+  f.cbDateP.Checked:=FAddDateP;
+  f.cbLgot.Checked:=FAddLgot;
+  f.cbPrizn.Checked:=FAddPrizn;
+  f.cbIN.Checked:=FAddIN;
+  f.cbPasp.Checked:=FAddPasp;
+  f.cbWork.Checked:=FAddWork;
+  f.cbAllMens.Checked:=FAddAllMens;
+  f.cbAddCurMen.Checked:=FAddCurMen;
+
+  if FTypeCountMens='' then begin
+    f.rbPresent.ItemIndex :=1;
+    f.rbZareg.ItemIndex   :=0;
+    f.rbPropis.ItemIndex  :=0;
+    f.cbVozr.ItemIndex:=0;
+  end else begin
+    f.rbPresent.ItemIndex := StrToInt(Copy(FTypeCountMens,1,1));
+    f.rbPropis.ItemIndex  := StrToInt(Copy(FTypeCountMens,2,1));
+    f.rbZareg.ItemIndex   := StrToInt(Copy(FTypeCountMens,3,1));
+    if Pos(';',FTypeCountMens)>0 then begin
+//      fmTypeCountMens.cbNotVozr.Checked:=false;
+      f.cbVozr.ItemIndex:=0;
+      s:=FTypeCountMens;
+      nVozr1:=-2;
+      nVozr2:=-2;
+      try
+        i:=Pos(';',s);
+        s:=Copy(s,i+1,Length(s));
+        if s<>'' then begin
+          if Copy(s,1,4)='TRUD' then begin
+            f.cbVozr.ItemIndex:=StrToIntDef(Copy(s,5,1),2)+2;
+          end else begin
+            f.cbVozr.ItemIndex:=1;
+            j:=Pos('#',s);
+            if j=0 then begin
+              nVozr1:=StrToInt(s);
+            end else begin
+              ss:=Trim(Copy(s,1,j-1));
+              if ss<>''
+                then nVozr1:=StrToInt(ss)
+                else nVozr1:=-1;
+              ss:=Trim(Copy(s,j+1,100));
+              if ss<>''
+                then nVozr2:=StrToInt(ss)
+                else nVozr2:=-1;
+            end;
+          end;
+        end;
+      except
+//        fmTypeCountMens.cbNotVozr.Checked:=true;
+        f.cbVozr.ItemIndex:=0;
+        nVozr1:=-2;
+        nVozr2:=-2;
+      end;
+      if nVozr1>-2 then f.edVozrC1.Value:=nVozr1;
+      if nVozr2>-2 then f.edVozrC2.Value:=nVozr2;
+      if f.edVozrC1.Value=-1 then f.edVozrC1.Text:='';
+      if f.edVozrC2.Value=-1 then f.edVozrC2.Text:='';
+    end else begin
+      f.cbVozr.ItemIndex:=0;
+    end;
+  end;
   f.cbPrib.Checked:=FVisiblePrib;
+  f.cbPriznMen.Checked:=FVisiblePrizn;
   f.cbUL.Checked:=FVisibleUdostLgot;
   f.cbMR.Checked:=FVisibleMR;
   f.cbParent.Checked:=FVisibleParent;
@@ -1447,7 +1636,32 @@ begin
   f.cbUnionPasp.Checked:=FUnionPasp;
 
   if f.ShowModal=mrOk then begin
+    FTypeCountMens := IntToStr(f.rbPresent.ItemIndex)+IntToStr(f.rbPropis.ItemIndex)+IntToStr(f.rbZareg.ItemIndex);
+    if f.cbVozr.ItemIndex>0 then begin
+      if f.cbVozr.ItemIndex>1 then begin
+        FTypeCountMens:=FTypeCountMens+';TRUD'+IntToStr(f.cbVozr.ItemIndex-2);
+      end else begin
+        if (f.edVozrC1.Text<>'') or (f.edVozrC2.Text<>'') then begin
+          FTypeCountMens:=FTypeCountMens+';'+f.edVozrC1.Text+'#'+f.edVozrC2.Text;
+        end;
+      end;
+    end;
+    FVisibleCountMens := f.cbShow.Checked;
+    FVisibleListMens  := f.cbListMens.Checked;
+//    FVisibleOwners    := f.cbOwners.Checked;
+    FAddOtnosh   :=f.cbOtnosh.Checked;
+    FAddDateR    :=f.cbDateR.Checked;
+    FAddDateP    :=f.cbDateP.Checked;
+    FAddLgot     :=f.cbLgot.Checked;
+    FAddPrizn    :=f.cbPrizn.Checked;
+    FAddIN       :=f.cbIN.Checked;
+    FAddPasp     :=f.cbPasp.Checked;
+    FAddWork     :=f.cbWork.Checked;
+    FAddAllMens  :=f.cbAllMens.Checked;
+    FAddCurMen   :=f.cbAddCurMen.Checked;
+    CreateParAddMen;
     FVisiblePrib := f.cbPrib.Checked;
+    FVisiblePrizn:= f.cbPriznMen.Checked;
     FVisibleUdostLgot:=f.cbUL.Checked;
     FVisibleMR := f.cbMR.Checked;
 
@@ -1494,11 +1708,15 @@ procedure TfmGurnNasel.CheckAddGraf;
 begin
   try
     Grid.FieldColumns['MEN_PRIB_UBIL'].Visible:=FVisiblePrib;
+    Grid.FieldColumns['PRIZN'].Visible:=FVisiblePrizn;
     Grid.FieldColumns['MR_GOROD'].Visible:=FVisibleMR;
     Grid.FieldColumns['PA_ID'].Visible:=FVisibleParent;
     Grid.FieldColumns['MA_ID'].Visible:=FVisibleParent;
     Grid.FieldColumns['DETI'].Visible:=FVisibleDeti;
     Grid.FieldColumns['UDOST_LGOT'].Visible:=FVisibleUdostLgot;
+    Grid.FieldColumns['COUNT_MENS'].Visible:=FVisibleCountMens;
+    Grid.FieldColumns['LIST_MENS'].Visible:=FVisibleListMens;
+//    Grid.FieldColumns['OWNERS'].Visible:=FVisibleOwners;
   except
   end
 end;
@@ -1565,6 +1783,7 @@ begin
     TYPESEEK_FIO : sl.Add('INDEX=FIO');
     TYPESEEK_LIC : sl.Add('INDEX=LIC');
     TYPESEEK_DETI: sl.Add('INDEX=DETI');
+    TYPESEEK_COUNT: sl.Add('INDEX=COUNT');
     TYPESEEK_MINTRUD: sl.Add('INDEX=MINTRUD');
     TYPESEEK_ANY: sl.Add('INDEX=ANY');
   end;
@@ -1587,6 +1806,8 @@ begin
         edFind.ItemIndex:=TYPESEEK_LIC;
       end else if s='DETI' then begin
         edFind.ItemIndex:=TYPESEEK_DETI;
+      end else if s='COUNT' then begin
+        edFind.ItemIndex:=TYPESEEK_COUNT;
       end else if s='MINTRUD' then begin
         edFind.ItemIndex:=TYPESEEK_MINTRUD;
       end else if s='ANY' then begin

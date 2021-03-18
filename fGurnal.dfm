@@ -1,7 +1,7 @@
 object fmGurnal: TfmGurnal
-  Left = 376
-  Top = 183
-  Width = 902
+  Left = 361
+  Top = 196
+  Width = 1171
   Height = 410
   Caption = #1046#1091#1088#1085#1072#1083
   Color = clBtnFace
@@ -109,9 +109,10 @@ object fmGurnal: TfmGurnal
   object TBDock: TTBDock
     Left = 0
     Top = 0
-    Width = 886
+    Width = 1155
     Height = 26
     AllowDrag = False
+    Visible = False
     object TBToolbarMenu: TTBToolbar
       Left = 0
       Top = 0
@@ -126,11 +127,10 @@ object fmGurnal: TfmGurnal
         Hint = #1044#1086#1074#1072#1074#1080#1090#1100' '#1085#1086#1074#1099#1081' '#1076#1086#1082#1091#1084#1077#1085#1090
         ImageIndex = 66
         ShortCut = 45
-        Visible = False
         OnClick = TBItemAddDokClick
       end
       object TBItemEdit: TTBItem
-        Caption = #1050#1086#1088#1088#1077#1082#1090#1080#1088#1086#1074#1082#1072
+        Caption = #1050#1086#1088#1088#1077#1082#1090#1080#1088#1086#1074#1072#1090#1100
         Hint = #1050#1086#1088#1088#1077#1082#1090#1080#1088#1086#1074#1072#1090#1100'  '
         ImageIndex = 33
         ShortCut = 16397
@@ -150,11 +150,13 @@ object fmGurnal: TfmGurnal
         Caption = 'Word '#1086#1090#1095#1077#1090#1099
         Hint = 'Word '#1086#1090#1095#1077#1090#1099
         ImageIndex = 95
+        Images = fmMain.ImageList
       end
       object TBExcelReport: TTBSubmenuItem
         Caption = 'Excel '#1086#1090#1095#1077#1090#1099
         Hint = 'Excel '#1086#1090#1095#1077#1090#1099
         ImageIndex = 25
+        Images = fmMain.ImageList
       end
       object TBItemPreView: TTBItem
         Caption = #1055#1088#1086#1089#1084#1086#1090#1088
@@ -182,11 +184,10 @@ object fmGurnal: TfmGurnal
         Hint = #1042#1099#1076#1072#1090#1100' '#1089#1087#1088#1072#1074#1082#1091
         ImageIndex = 135
         ShortCut = 112
-        Visible = False
         OnClick = TBItemGrantSpravClick
       end
       object TBItemExport: TTBItem
-        Caption = #1042#1099#1075#1088#1091#1079#1082#1072' '#1088#1077#1077#1089#1090#1088#1072
+        Caption = #1042#1099#1075#1088#1091#1079#1080#1090#1100' '#1088#1077#1077#1089#1090#1088
         Hint = #1042#1099#1075#1088#1091#1079#1080#1090#1100' '#1088#1077#1077#1089#1090#1088
         ImageIndex = 96
         OnClick = TBItemExportClick
@@ -206,6 +207,7 @@ object fmGurnal: TfmGurnal
         DropdownCombo = True
         Hint = #1042#1099#1073#1088#1072#1090#1100' '#1085#1072#1089#1077#1083#1077#1085#1085#1099#1077' '#1087#1091#1085#1082#1090#1099
         ImageIndex = 137
+        Images = fmMain.ImageList
         Visible = False
         OnClick = TBSubmenuPunktsClick
         object TBItemClearPunkts: TTBItem
@@ -219,6 +221,7 @@ object fmGurnal: TfmGurnal
         Caption = #1057#1080#1089#1090#1077#1084#1085#1099#1077' '#1086#1090#1073#1086#1088#1099
         Hint = #1057#1080#1089#1090#1077#1084#1085#1099#1077' '#1086#1090#1073#1086#1088#1099
         ImageIndex = 111
+        Images = fmMain.ImageList
       end
       object TBItemSysFlt: TTBItem
         Caption = #1053#1072#1089#1090#1088#1086#1080#1090#1100' '#1089#1080#1089#1090#1077#1084#1085#1099#1081' '#1086#1090#1073#1086#1088
@@ -231,6 +234,7 @@ object fmGurnal: TfmGurnal
         Caption = #1054#1090#1073#1086#1088' '#1087#1086' '#1091#1089#1083#1086#1074#1080#1102
         Hint = #1054#1090#1073#1086#1088' '#1087#1086' '#1091#1089#1083#1086#1074#1080#1102
         ImageIndex = 80
+        Images = fmMain.ImageList
       end
       object TBItemFlt: TTBItem
         Caption = #1057#1086#1079#1076#1072#1090#1100' '#1086#1090#1073#1086#1088
@@ -298,6 +302,7 @@ object fmGurnal: TfmGurnal
       object TBSubmenuGroup: TTBSubmenuItem
         Caption = #1042#1099#1073#1088#1072#1090#1100' '#1075#1088#1091#1087#1087#1080#1088#1086#1074#1082#1091
         ImageIndex = 65
+        Images = fmMain.ImageList
       end
       object TBItemQuery: TTBItem
         Caption = #1047#1072#1087#1088#1086#1089' '#1076#1083#1103' '#1075#1088#1091#1087#1087#1080#1088#1086#1074#1082#1080
@@ -337,6 +342,7 @@ object fmGurnal: TfmGurnal
         HelpContext = 1
         Hint = #1042#1099#1087#1086#1083#1085#1080#1090#1100' '#1086#1073#1088#1072#1073#1086#1090#1082#1091
         ImageIndex = 22
+        Images = fmMain.ImageList
       end
       object TBItemRefresh: TTBItem
         Caption = #1054#1073#1085#1086#1074#1080#1090#1100
@@ -346,7 +352,7 @@ object fmGurnal: TfmGurnal
         OnClick = TBItemRefreshClick
       end
       object TBItemSetUpGrid: TTBItem
-        Caption = #1057#1074#1086#1081#1089#1090#1074#1072
+        Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1088#1077#1077#1089#1090#1088#1072
         Hint = #1057#1074#1086#1081#1089#1090#1074#1072' '#1087#1088#1086#1089#1084#1086#1090#1088#1072' '#1078#1091#1088#1085#1072#1083#1072
         ImageIndex = 23
         OnClick = TBItemSetUpGridClick
@@ -366,15 +372,16 @@ object fmGurnal: TfmGurnal
   end
   object Grid: TSasaDBGrid
     Left = 0
-    Top = 26
-    Width = 886
-    Height = 322
+    Top = 52
+    Width = 1155
+    Height = 296
     Align = alClient
     BorderStyle = bsNone
     Ctl3D = True
     DataSource = DataSource
     DrawMemoText = True
     EditActions = [geaCopyEh, geaSelectAllEh]
+    Flat = True
     FooterColor = clWindow
     FooterFont.Charset = DEFAULT_CHARSET
     FooterFont.Color = clWindowText
@@ -406,7 +413,7 @@ object fmGurnal: TfmGurnal
   object StBar: TStatusBar
     Left = 0
     Top = 348
-    Width = 886
+    Width = 1155
     Height = 24
     Panels = <
       item
@@ -415,6 +422,175 @@ object fmGurnal: TfmGurnal
         Width = 500
       end>
     OnDrawPanel = StBarDrawPanel
+  end
+  object TBDock24: TTBDock
+    Left = 0
+    Top = 26
+    Width = 1155
+    Height = 26
+    AllowDrag = False
+    Visible = False
+    object TBToolbarMenu24: TTBToolbar
+      Left = 0
+      Top = 0
+      Caption = 'TBToolbarMenu24'
+      Images = fmMain.ImageList24
+      TabOrder = 0
+      object TBItemAddDok24: TTBItem
+        Caption = #1044#1086#1073#1072#1074#1080#1090#1100
+        ImageIndex = 30
+      end
+      object TBItemEdit24: TTBItem
+        Caption = #1050#1086#1088#1088#1077#1082#1090#1080#1088#1086#1074#1072#1090#1100
+        ImageIndex = 31
+      end
+      object TBItemDelDok24: TTBItem
+        Caption = #1059#1076#1072#1083#1080#1090#1100
+        ImageIndex = 32
+      end
+      object TBSeparatorItem24_5: TTBSeparatorItem
+      end
+      object TBSubmenuTmp24: TTBSubmenuItem
+        Caption = 'Word '#1086#1090#1095#1077#1090#1099
+        ImageIndex = 33
+      end
+      object TBExcelReport24: TTBSubmenuItem
+        Caption = 'Excel '#1086#1090#1095#1077#1090#1099
+        ImageIndex = 34
+      end
+      object TBItemPreView24: TTBItem
+        Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+        ImageIndex = 35
+      end
+      object TBItemPrint24: TTBItem
+        Caption = #1055#1077#1095#1072#1090#1100
+        ImageIndex = 36
+      end
+      object TBItemPrintGrid24: TTBItem
+        Caption = #1055#1077#1095#1072#1090#1100' '#1088#1077#1077#1089#1090#1088#1072
+        ImageIndex = 20
+        Visible = False
+      end
+      object TBItemGrantSprav24: TTBItem
+        Caption = #1042#1099#1076#1072#1090#1100' '#1089#1087#1088#1072#1074#1082#1091
+        ImageIndex = 37
+      end
+      object TBItemExport24: TTBItem
+        Caption = #1042#1099#1075#1088#1091#1079#1080#1090#1100' '#1088#1077#1077#1089#1090#1088
+        ImageIndex = 38
+      end
+      object TBItemDelayRegister24: TTBItem
+        Caption = #1054#1090#1083#1086#1078#1077#1085#1085#1072#1103' '#1088#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103
+        ImageIndex = 29
+      end
+      object TBSeparatorItem24_6: TTBSeparatorItem
+      end
+      object TBSubmenuPunkts24: TTBSubmenuItem
+        Caption = #1053#1072#1089#1077#1083#1077#1085#1085#1099#1077' '#1087#1091#1085#1082#1082#1090#1099
+        ImageIndex = 39
+      end
+      object TBSubSysFlt24: TTBSubmenuItem
+        Caption = #1057#1080#1089#1090' '#1086#1090#1073#1086#1088#1099
+        ImageIndex = 90
+      end
+      object TBItemSysFlt24: TTBItem
+        Caption = #1053#1072#1089#1090#1088#1086#1080#1090#1100' '#1089#1080#1089#1090#1077#1084#1085#1099#1081' '#1086#1090#1073#1086#1088
+        ImageIndex = 40
+      end
+      object TBSubChoiceFlt24: TTBSubmenuItem
+        Caption = #1054#1090#1073#1086#1088' '#1087#1086' '#1091#1089#1083#1086#1074#1080#1102
+        ImageIndex = 40
+      end
+      object TBItemFlt24: TTBItem
+        Caption = #1057#1086#1079#1076#1072#1090#1100' '#1086#1090#1073#1086#1088
+        ImageIndex = 41
+      end
+      object TBItemRepeatFilter24: TTBItem
+        Caption = #1055#1086#1074#1090#1086#1088#1080#1090#1100' '#1086#1090#1073#1086#1088
+        ImageIndex = 42
+      end
+      object TBItemClrFlt24: TTBItem
+        Caption = #1054#1090#1084#1077#1085#1080#1090#1100' '#1086#1090#1073#1086#1088
+        ImageIndex = 43
+      end
+      object TBItemOrder24: TTBItem
+        Caption = #1055#1086#1088#1103#1076#1086#1082' '#1087#1088#1086#1089#1084#1086#1090#1088#1072
+        ImageIndex = 44
+      end
+      object TBSeparatorIskl24_1: TTBSeparatorItem
+      end
+      object TBItemAddOtbor24: TTBItem
+        Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1074' '#1086#1090#1073#1086#1088
+        ImageIndex = 51
+      end
+      object TBItemIsklOtbor24: TTBItem
+        Caption = #1048#1089#1082#1083#1102#1095#1080#1090#1100' '#1080#1079' '#1086#1090#1073#1086#1088#1072
+        ImageIndex = 52
+      end
+      object TBItemWriteSavedFilter24: TTBItem
+        Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1091#1089#1090#1072#1085#1086#1074#1083#1077#1085#1085#1099#1081' '#1086#1090#1073#1086#1088
+        ImageIndex = 53
+      end
+      object TBSeparatorIskl24_2: TTBSeparatorItem
+      end
+      object TBItemPokaz24: TTBItem
+        Caption = #1055#1086#1082#1072#1079#1072#1090#1077#1083#1080
+        ImageIndex = 54
+        Visible = False
+      end
+      object TBSeparatorItem24_8: TTBSeparatorItem
+      end
+      object TBItemYear24: TTBItem
+        Caption = #1043#1086#1076' '#1087#1088#1086#1089#1084#1086#1090#1088#1072
+        ImageIndex = 96
+      end
+      object TBSubmenuGroup24: TTBSubmenuItem
+        Caption = #1042#1099#1073#1088#1072#1090#1100' '#1075#1088#1091#1087#1087#1080#1088#1086#1074#1082#1091
+        ImageIndex = 60
+      end
+      object TBItemQuery24: TTBItem
+        Caption = #1047#1072#1087#1088#1086#1089' '#1076#1083#1103' '#1075#1088#1091#1087#1087#1080#1088#1086#1074#1082#1080
+        ImageIndex = 62
+      end
+      object TBItemGrupOne24: TTBItem
+        Caption = #1043#1088#1091#1087#1087#1080#1088#1086#1074#1082#1072' '#1087#1086' '#1087#1086#1083#1102
+        ImageIndex = 61
+      end
+      object TBItemCount24: TTBItem
+        Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086
+        ImageIndex = 65
+      end
+      object TBItemSum24: TTBItem
+        Caption = #1057#1091#1084#1084#1072' '#1087#1086' '#1095#1080#1089#1083#1086#1074#1086#1081' '#1075#1088#1072#1092#1077
+        ImageIndex = 69
+      end
+      object TBSeparatorItem24_10: TTBSeparatorItem
+      end
+      object TBItemLastSvid24: TTBItem
+        Caption = #1055#1086#1089#1083#1077#1076#1085#1077#1077' '#1089#1074#1080#1076#1077#1090#1077#1083#1100#1089#1090#1074#1086
+        ImageIndex = 94
+      end
+      object TBSubItemRun24: TTBSubmenuItem
+        Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+        ImageIndex = 25
+      end
+      object TBItemRefresh24: TTBItem
+        Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+        ImageIndex = 98
+      end
+      object TBItemSetUpGrid24: TTBItem
+        Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1088#1077#1077#1089#1090#1088#1072
+        ImageIndex = 63
+      end
+      object TBItemDesignReport24: TTBItem
+        Caption = #1054#1090#1095#1077#1090#1099
+        ImageIndex = 67
+      end
+      object TBItemClose24: TTBItem
+        Caption = #1047#1072#1082#1088#1099#1090#1100
+        ImageIndex = 66
+      end
+    end
   end
   object DataSource: TDataSource
     DataSet = Query
@@ -454,7 +630,7 @@ object fmGurnal: TfmGurnal
     StoreActive = False
     AdsConnection = dmBase.AdsConnection
     Left = 40
-    Top = 208
+    Top = 200
     ParamData = <>
   end
   object ImageListGisun: TImageList

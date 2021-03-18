@@ -1336,7 +1336,7 @@ begin
  ClearDir(ExtractFilePath(Application.ExeName)+'$TEMP$',true);
  try
    if (GlobalTask<>nil) and (GlobalTask.LogFile<>nil)
-     then GlobalTask.LogFile.WriteToLogFile('Завершен сеанс пользователя.');
+     then GlobalTask.WriteToLogFile('Завершен сеанс пользователя.');
  except         
  end;
  FEventsWordReports.Free;
@@ -4239,7 +4239,7 @@ begin
       end;
     end;
   end;
-  GlobalTask.LogFile.WriteToLogFile(s+E.Message);
+  GlobalTask.WriteToLogFile(s+E.Message);
   if (E is EADSDatabaseError) then begin
     if (EADSDatabaseError(E).ACEErrorCode=7057) and (EADSDatabaseError(E).TableName<>'') then begin
       s := 'Таблица: '+EADSDatabaseError(E).TableName+' ';
@@ -5430,7 +5430,7 @@ begin
         n:=2;
       end;
     end;
-    if lErr then GlobalTask.LogFile.WriteToLogFile('Ошибка подключения к серверу обновлений '+IdFTP1.Host+'   ['+IntToStr(nErrCode)+'] '+sErr);
+    if lErr then GlobalTask.WriteToLogFile('Ошибка подключения к серверу обновлений '+IdFTP1.Host+'   ['+IntToStr(nErrCode)+'] '+sErr);
   end;
 
   if lShow

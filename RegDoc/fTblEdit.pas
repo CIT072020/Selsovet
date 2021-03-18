@@ -4,7 +4,7 @@ interface
 uses
    Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FuncPr, FuncEh,
    ImgList, StdCtrls, ActnList, ComCtrls, ToolWin, ExtCtrls, Grids, Menus, DB, mPermit,
-   Buttons, iniFiles,
+   Buttons, iniFiles, Variants,
    ElTree, ElXPThemedControl,
    DBGridEh,
    mExport,
@@ -108,6 +108,9 @@ type
       procedure acSysFilterExecute(Sender: TObject);
       procedure acShowInfoWinExecute(Sender: TObject);
     procedure tbsDesignReportClick(Sender: TObject);
+    procedure tvLookDragDrop(Sender, Source: TObject; X, Y: Integer);
+    procedure tvLookDragOver(Sender, Source: TObject; X, Y: Integer;
+      State: TDragState; var Accept: Boolean);
    private
       procedure WMSysCommand(var Msg: TWMSysCommand); message WM_SYSCOMMAND;
       procedure WMActivateApp(var Msg: TWMActivateApp); message WM_ACTIVATEAPP;
@@ -183,7 +186,7 @@ uses
 {$ENDIF}
 
 {$R *.DFM}
-
+ 
 const
    // используемые картинки
    II_Exit         = 0; // выход (закрыть)
@@ -1173,6 +1176,55 @@ end;
 procedure TfmTblEdit.acShowInfoWinExecute(Sender: TObject);
 begin
    FDBItem.ExecAction;
+end;
+
+//----------------------------------------------------------------------------------------
+procedure TfmTblEdit.tvLookDragDrop(Sender, Source: TObject; X, Y: Integer);
+//var
+//  T1,T2 : TTreeNode;
+//  HT: THitTests;
+begin
+{
+  T1:=TV.Selected;
+  if T1 = nil then Exit;
+  HT := TV.GetHitTestInfoAt(X, Y);
+  T2 := TV.GetNodeAt(X, Y);
+  if (htNowhere in HT) then T2:=Nil;
+  if (T2<>Nil) and (T2.ImageIndex in [imCloseFolder,imOpenFolder]) and (not (htOnLabel in HT)) then begin
+     T1.MoveTo(T2,naAddChildFirst);
+  end else MoveTo(T1,T2);
+}
+end;
+
+procedure TfmTblEdit.tvLookDragOver(Sender, Source: TObject; X, Y: Integer;  State: TDragState; var Accept: Boolean);
+//Var
+//  Node : TElTreeItem;
+//  LookItem: TLookItem;
+begin
+// Node:=tvLook.ItemFocused;
+// if Node<>nil then begin
+//   LookItem:=TLookItem(Node.Data);
+//   if LookItem.IsFolder then begin
+//     Accept:=true;
+//     stComm.Caption:=IntToStr(LookItem.Id)+'  '+VarToStr(LookItem.Value);
+//   end;
+// end;
+
+{
+  with tvLook do begin
+    Accept:=(Sender=Source) and (DropTarget<>Nil);
+    TN:=DropTarget;
+    while Accept and (TN<>Nil) do begin
+       Accept:=TN<>Selected;
+       TN:=TN.Parent;
+    end;
+  end;
+  if Accept then begin
+     with tvLook.DropTarget do
+     if HasChildren and not Expanded and (htOnIcon in tvLook.GetHitTestInfoAt(X, Y))
+     then Expanded:=True;
+  end;
+  }
 end;
 
 end.

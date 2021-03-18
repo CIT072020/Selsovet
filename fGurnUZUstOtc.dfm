@@ -7,9 +7,6 @@ inherited fmGurnUZUstOtc: TfmGurnUZUstOtc
   TextHeight = 13
   inherited TBDock: TTBDock
     inherited TBToolbarMenu: TTBToolbar
-      inherited TBItemAddDok: TTBItem
-        Visible = True
-      end
       object TBItemOpenZUstOtc: TTBItem [3]
         Caption = #1047'/'#1072' '#1086#1073' '#1091#1089#1090#1072#1085#1086#1074#1083#1077#1085#1080#1080' '#1086#1090#1094#1086#1074#1089#1090#1074#1072
         Hint = #1054#1090#1082#1088#1099#1090#1100' '#1079#1072#1087#1080#1089#1100' '#1072#1082#1090#1072' '#1086#1073' '#1091#1089#1090#1072#1085#1086#1074#1083#1077#1085#1080#1080' '#1086#1090#1094#1086#1074#1089#1090#1074#1072
@@ -38,6 +35,14 @@ inherited fmGurnUZUstOtc: TfmGurnUZUstOtc
   end
   inherited Grid: TSasaDBGrid
     OnGetCellParams = GridGetCellParams
+  end
+  inherited TBDock24: TTBDock
+    inherited TBToolbarMenu24: TTBToolbar
+      object TBItemOpenZUstOtc24: TTBItem [3]
+        Caption = #1047'/'#1072' '#1086#1073' '#1091#1089#1090#1072#1085#1086#1074#1083#1077#1085#1080#1080' '#1086#1090#1094#1086#1074#1089#1090#1074#1072
+        ImageIndex = 4
+      end
+    end
   end
   inherited Query: TAdsQuery
     ParamData = <>

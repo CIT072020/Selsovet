@@ -232,7 +232,7 @@ begin
         tbSeek.IndexFieldNames:=OpisInit.IndexFields;
       end;
       if lOk then begin
-        GlobalTask.LogFile.WriteToLogFile('Начало инициализации реквизита "'+ss+'"');
+        GlobalTask.WriteToLogFile('Начало инициализации реквизита "'+ss+'"');
         OpenMessage('Выполнение инициализации... ','',10);
         for i:=0 to slBookmark.Count-1 do begin
           Q.Bookmark:=slBookmark.Strings[i];
@@ -349,7 +349,7 @@ begin
     end;
   finally
     if lOk then begin
-      GlobalTask.LogFile.WriteToLogFile('Окончание инициализации реквизита "'+ss+'"');
+      GlobalTask.WriteToLogFile('Окончание инициализации реквизита "'+ss+'"');
       CloseMessage;
       if lBookmark
         then Q.Bookmark:=slBookmark.Strings[0]

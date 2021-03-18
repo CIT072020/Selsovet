@@ -31,6 +31,8 @@ constructor TfmGurnZUstMat.Create(Owner: TComponent);
 begin
   TypeEditObj := dmBase.TypeObj_ZUstMat;
   inherited;
+  VisibleItems([TBItemAddDok], true);
+  VisibleItems([TBItemGrantSprav], false);
 end;
 
 function TfmGurnZUstMat.LoadQuery: Boolean;

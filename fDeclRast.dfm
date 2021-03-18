@@ -1,12 +1,12 @@
 inherited fmDeclRast: TfmDeclRast
-  Left = 432
-  Top = 185
+  Left = 410
+  Top = 124
   ActiveControl = edNomer
   Caption = #1047#1072#1103#1074#1083#1077#1085#1080#1077' '#1086' '#1088#1072#1089#1090#1086#1088#1078#1077#1085#1080#1080' '#1073#1088#1072#1082#1072
   ClientHeight = 702
-  ClientWidth = 840
+  ClientWidth = 898
   Constraints.MinHeight = 740
-  Constraints.MinWidth = 823
+  Constraints.MinWidth = 914
   Icon.Data = {
     0000010001001010000001001800680300001600000028000000100000002000
     0000010018000000000000030000000000000000000000000000000000000000
@@ -41,7 +41,7 @@ inherited fmDeclRast: TfmDeclRast
   TextHeight = 13
   inherited sp: TSplitter
     Top = 26
-    Width = 840
+    Width = 898
     Visible = False
   end
   object Label22: TLabel [1]
@@ -66,12 +66,12 @@ inherited fmDeclRast: TfmDeclRast
   end
   inherited pnTable: TPanel
     Top = 53
-    Width = 840
+    Width = 898
     Height = 627
     Visible = False
   end
   inherited TBDock: TTBDock
-    Width = 840
+    Width = 898
     inherited TBToolbar: TTBToolbar
       inherited TBSubmenuTmp: TTBSubmenuItem [2]
       end
@@ -148,7 +148,7 @@ inherited fmDeclRast: TfmDeclRast
   end
   inherited sb: TScrollBox
     Top = 53
-    Width = 840
+    Width = 898
     Height = 627
     Align = alClient
     TabOrder = 2
@@ -164,7 +164,7 @@ inherited fmDeclRast: TfmDeclRast
     object pc: TPageControl
       Left = 0
       Top = 35
-      Width = 840
+      Width = 898
       Height = 592
       ActivePage = tsTail1
       Align = alClient
@@ -181,7 +181,7 @@ inherited fmDeclRast: TfmDeclRast
       object tsTail1: TTabSheet
         Caption = #1063#1072#1089#1090#1100' 1'
         DesignSize = (
-          832
+          890
           561)
         object Label1: TLabel
           Left = 8
@@ -1097,7 +1097,7 @@ inherited fmDeclRast: TfmDeclRast
           ValueUnchecked = 'False'
         end
         object btPadeg: TButton
-          Left = 2
+          Left = 60
           Top = 488
           Width = 23
           Height = 22
@@ -1353,7 +1353,7 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object cbBelorus: TDBCheckBoxEh
-          Left = 733
+          Left = 791
           Top = 0
           Width = 97
           Height = 16
@@ -1838,7 +1838,7 @@ inherited fmDeclRast: TfmDeclRast
         Caption = #1063#1072#1089#1090#1100' 2'
         ImageIndex = 1
         DesignSize = (
-          832
+          890
           561)
         object Label24: TLabel
           Left = 8
@@ -1910,7 +1910,7 @@ inherited fmDeclRast: TfmDeclRast
         object Label33: TLabel
           Left = 8
           Top = 214
-          Width = 213
+          Width = 201
           Height = 18
           AutoSize = False
           Caption = #1056#1072#1089#1090#1086#1088#1075#1072#1077#1084#1099#1081' '#1073#1088#1072#1082' '#1079#1072#1082#1083#1102#1095#1077#1085' '#1074
@@ -1923,12 +1923,12 @@ inherited fmDeclRast: TfmDeclRast
           WordWrap = True
         end
         object Label36: TLabel
-          Left = 8
+          Left = 10
           Top = 103
-          Width = 220
+          Width = 195
           Height = 18
           AutoSize = False
-          Caption = '     '#1054#1090#1084#1077#1090#1082#1072' '#1086#1073' '#1091#1087#1083#1072#1090#1077' '#1087#1086#1096#1083#1080#1085#1099
+          Caption = #1054#1090#1084#1077#1090#1082#1072' '#1086#1073' '#1091#1087#1083#1072#1090#1077' '#1087#1086#1096#1083#1080#1085#1099
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -1938,14 +1938,14 @@ inherited fmDeclRast: TfmDeclRast
           WordWrap = True
         end
         object Label69: TLabel
-          Left = 360
+          Left = 406
           Top = 160
           Width = 13
           Height = 16
           Caption = #1086#1090
         end
         object Label70: TLabel
-          Left = 672
+          Left = 746
           Top = 160
           Width = 13
           Height = 16
@@ -2087,7 +2087,7 @@ inherited fmDeclRast: TfmDeclRast
         object edOTMETKA: TDBEditEh
           Left = 78
           Top = 383
-          Width = 743
+          Width = 801
           Height = 69
           Anchors = [akLeft, akTop, akRight]
           AutoSize = False
@@ -2106,9 +2106,9 @@ inherited fmDeclRast: TfmDeclRast
           OnDblClick = TBItemEditMemoClick
         end
         object edON_SEM: TDBNumberEditEh
-          Left = 222
+          Left = 211
           Top = 72
-          Width = 35
+          Width = 46
           Height = 26
           DataField = 'ON_SEM'
           DataSource = dsDokument
@@ -2123,9 +2123,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edONA_SEM: TDBNumberEditEh
-          Left = 539
+          Left = 553
           Top = 72
-          Width = 35
+          Width = 46
           Height = 26
           DataField = 'ONA_SEM'
           DataSource = dsDokument
@@ -2140,7 +2140,7 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edBrak: TDBEditEh
-          Left = 222
+          Left = 211
           Top = 210
           Width = 296
           Height = 26
@@ -2157,9 +2157,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edON_POSHLINA: TDBEditEh
-          Left = 297
+          Left = 298
           Top = 100
-          Width = 191
+          Width = 243
           Height = 26
           Hint = #1050#1074#1080#1090#1072#1085#1094#1080#1103
           DataField = 'ON_POSHLINA'
@@ -2175,9 +2175,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edONA_POSHLINA: TDBEditEh
-          Left = 614
+          Left = 640
           Top = 100
-          Width = 191
+          Width = 243
           Height = 26
           Hint = #1050#1074#1080#1090#1072#1085#1094#1080#1103
           DataField = 'ONA_POSHLINA'
@@ -2193,7 +2193,7 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edON_DOKUMENT: TDBEditEh
-          Left = 222
+          Left = 211
           Top = 183
           Width = 266
           Height = 26
@@ -2210,9 +2210,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edONA_DOKUMENT: TDBEditEh
-          Left = 539
+          Left = 553
           Top = 183
-          Width = 266
+          Width = 330
           Height = 26
           DataField = 'ONA_DOKUMENT'
           DataSource = dsDokument
@@ -2227,9 +2227,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edON_DOK_TYPE: TDBComboBoxEh
-          Left = 222
+          Left = 211
           Top = 127
-          Width = 266
+          Width = 330
           Height = 26
           DataField = 'ON_DOK_TYPE'
           DataSource = dsDokument
@@ -2244,9 +2244,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edON_DOK_SERIA: TDBEditEh
-          Left = 222
+          Left = 211
           Top = 155
-          Width = 33
+          Width = 65
           Height = 26
           CharCase = ecUpperCase
           DataField = 'ON_DOK_SERIA'
@@ -2262,9 +2262,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edON_DOK_NOMER: TDBEditEh
-          Left = 267
+          Left = 290
           Top = 155
-          Width = 83
+          Width = 110
           Height = 26
           DataField = 'ON_DOK_NOMER'
           DataSource = dsDokument
@@ -2279,9 +2279,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edON_DOK_DATE: TDBDateTimeEditEh
-          Left = 379
+          Left = 431
           Top = 155
-          Width = 109
+          Width = 110
           Height = 26
           DataField = 'ON_DOK_DATE'
           DataSource = dsDokument
@@ -2297,9 +2297,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edONA_DOK_SERIA: TDBEditEh
-          Left = 539
+          Left = 553
           Top = 155
-          Width = 33
+          Width = 65
           Height = 26
           CharCase = ecUpperCase
           DataField = 'ONA_DOK_SERIA'
@@ -2315,9 +2315,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edONA_DOK_TYPE: TDBComboBoxEh
-          Left = 539
+          Left = 553
           Top = 127
-          Width = 266
+          Width = 330
           Height = 26
           DataField = 'ONA_DOK_TYPE'
           DataSource = dsDokument
@@ -2332,9 +2332,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edONA_DOK_NOMER: TDBEditEh
-          Left = 579
+          Left = 627
           Top = 155
-          Width = 83
+          Width = 110
           Height = 26
           DataField = 'ONA_DOK_NOMER'
           DataSource = dsDokument
@@ -2349,9 +2349,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edONA_DOK_DATE: TDBDateTimeEditEh
-          Left = 694
+          Left = 773
           Top = 155
-          Width = 109
+          Width = 110
           Height = 26
           DataField = 'ONA_DOK_DATE'
           DataSource = dsDokument
@@ -2367,7 +2367,7 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edON_OBRAZ: TDBComboBoxEh
-          Left = 222
+          Left = 211
           Top = 44
           Width = 266
           Height = 26
@@ -2384,9 +2384,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edONA_OBRAZ: TDBComboBoxEh
-          Left = 539
+          Left = 553
           Top = 44
-          Width = 266
+          Width = 330
           Height = 26
           DataField = 'ONA_OBRAZ'
           DataSource = dsDokument
@@ -2401,7 +2401,7 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edON_SumPoshlina: TDBNumberEditEh
-          Left = 222
+          Left = 211
           Top = 100
           Width = 65
           Height = 26
@@ -2419,7 +2419,7 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edONA_SumPoshlina: TDBNumberEditEh
-          Left = 539
+          Left = 553
           Top = 100
           Width = 65
           Height = 26
@@ -2517,7 +2517,7 @@ inherited fmDeclRast: TfmDeclRast
           OnClick = btRazdelClick
         end
         object edOnPodpis: TDBEditEh
-          Left = 222
+          Left = 211
           Top = 238
           Width = 266
           Height = 26
@@ -2535,7 +2535,7 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edOnaPodpis: TDBEditEh
-          Left = 539
+          Left = 553
           Top = 238
           Width = 266
           Height = 26
@@ -2553,7 +2553,7 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object cbON_VUS: TDBCheckBoxEh
-          Left = 222
+          Left = 191
           Top = 299
           Width = 17
           Height = 17
@@ -2566,9 +2566,9 @@ inherited fmDeclRast: TfmDeclRast
           ValueUnchecked = 'False'
         end
         object edON_Voenkom: TDBLookupComboboxEh
-          Left = 244
+          Left = 211
           Top = 294
-          Width = 272
+          Width = 303
           Height = 26
           DataField = 'ON_VOENKOM'
           DataSource = dsDokument
@@ -2635,7 +2635,7 @@ inherited fmDeclRast: TfmDeclRast
           OnChange = edON_VoenkomChange
         end
         object cbONA_VUS: TDBCheckBoxEh
-          Left = 539
+          Left = 535
           Top = 299
           Width = 17
           Height = 17
@@ -2648,9 +2648,9 @@ inherited fmDeclRast: TfmDeclRast
           ValueUnchecked = 'False'
         end
         object edONA_VOENKOM: TDBLookupComboboxEh
-          Left = 561
+          Left = 553
           Top = 294
-          Width = 256
+          Width = 303
           Height = 26
           DataField = 'ONA_VOENKOM'
           DataSource = dsDokument
@@ -2717,7 +2717,7 @@ inherited fmDeclRast: TfmDeclRast
           OnChange = edONA_VOENKOMChange
         end
         object cbON_SVID: TDBCheckBoxEh
-          Left = 222
+          Left = 191
           Top = 323
           Width = 237
           Height = 17
@@ -2737,7 +2737,7 @@ inherited fmDeclRast: TfmDeclRast
           ValueUnchecked = 'False'
         end
         object DBCheckBoxEh1: TDBCheckBoxEh
-          Left = 539
+          Left = 535
           Top = 323
           Width = 237
           Height = 17
@@ -2757,7 +2757,7 @@ inherited fmDeclRast: TfmDeclRast
           ValueUnchecked = 'False'
         end
         object edON_WORK: TDBEditEh
-          Left = 222
+          Left = 211
           Top = 17
           Width = 266
           Height = 26
@@ -2776,9 +2776,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edONA_WORK: TDBEditEh
-          Left = 539
+          Left = 553
           Top = 17
-          Width = 266
+          Width = 330
           Height = 26
           DataField = 'ONA_WORK'
           DataSource = dsDokument
@@ -2865,9 +2865,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edON_TELEFON: TDBEditEh
-          Left = 222
+          Left = 211
           Top = 266
-          Width = 187
+          Width = 266
           Height = 26
           DataField = 'ON_TELEFON'
           DataSource = dsDokument
@@ -2882,9 +2882,9 @@ inherited fmDeclRast: TfmDeclRast
           Visible = True
         end
         object edONA_TELEFON: TDBEditEh
-          Left = 539
+          Left = 553
           Top = 266
-          Width = 187
+          Width = 266
           Height = 26
           HelpType = htKeyword
           HelpContext = 999
@@ -2941,7 +2941,7 @@ inherited fmDeclRast: TfmDeclRast
         Caption = #1057#1091#1076
         ImageIndex = 2
         DesignSize = (
-          832
+          890
           561)
         object lbSud_Date: TLabel
           Left = 602
@@ -3020,7 +3020,7 @@ inherited fmDeclRast: TfmDeclRast
         object pnDeti: TPanel
           Left = 3
           Top = 82
-          Width = 820
+          Width = 878
           Height = 144
           Anchors = [akLeft, akTop, akRight]
           BevelOuter = bvNone
@@ -3140,12 +3140,12 @@ inherited fmDeclRast: TfmDeclRast
     object pnMain: TPanel
       Left = 0
       Top = 0
-      Width = 840
+      Width = 898
       Height = 35
       Align = alTop
       TabOrder = 0
       DesignSize = (
-        840
+        898
         35)
       object Label27: TLabel
         Left = 8
@@ -3187,7 +3187,7 @@ inherited fmDeclRast: TfmDeclRast
         ParentFont = False
       end
       object ImageSUD: TImage
-        Left = 812
+        Left = 870
         Top = 9
         Width = 20
         Height = 20
@@ -3274,11 +3274,11 @@ inherited fmDeclRast: TfmDeclRast
   end
   inherited StBar: TStatusBar
     Top = 680
-    Width = 840
+    Width = 898
   end
   inherited pnAdd: TPanel
     Top = 29
-    Width = 840
+    Width = 898
   end
   inherited dsDokument: TDataSource
     Left = 560

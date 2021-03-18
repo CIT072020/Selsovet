@@ -664,7 +664,7 @@ var
   p : TPassport;
   strName,s,sID : String;
   ListDeti:TDataSet;
-  slPar:TStringList;
+//  slPar:TStringList;
   ds:TDataSet;
 begin
   if ChoiceMen( TControl(Sender), Trim(edFamilia.Text), '', arrRec) then begin
@@ -719,14 +719,14 @@ begin
         then DokumentTAIL_HOUSE.AsString:=dmBase.ReadPropAsString(fmMain.DateFiks, DokumentADRES_ID.AsInteger, 'PLOSH_ALL')
         else DokumentTAIL_HOUSE.AsString:=s;
 
-      slPar:=TStringList.Create;
-      slPar.Add('VOZR=0-15');
-      DokumentKOLVO_PROG.AsInteger:=dmBase.CountMensAdres(fmMain.DateFiks, DokumentADRES_ID.AsString,'00',nil);
+//      slPar:=TStringList.Create;
+//      slPar.Add('VOZR=0-15');
+      DokumentKOLVO_PROG.AsInteger:=dmBase.CountMensAdres(fmMain.DateFiks, DokumentADRES_ID.AsString,'000',nil);
       if DokumentKOLVO_PROG.AsInteger=0 then DokumentKOLVO_PROG.AsString:='';
-      DokumentKOLVO_DETI.AsInteger:=dmBase.CountMensAdres(fmMain.DateFiks, DokumentADRES_ID.AsString,'00',slPar);
+      DokumentKOLVO_DETI.AsInteger:=dmBase.CountMensAdres(fmMain.DateFiks, DokumentADRES_ID.AsString,'000;0#15',nil);  // от 0 до 15 лет
       if DokumentKOLVO_DETI.AsInteger=0 then DokumentKOLVO_DETI.AsString:='';
 
-      slPar.Free;
+//      slPar.Free;
       ds:=dmBase.GetLichSchet(dmBase.GetDateCurrentSost, DokumentLICH_ID.AsString);
       if ds<>nil then begin
         sID:=ds.FieldByName('FIRST').AsString;

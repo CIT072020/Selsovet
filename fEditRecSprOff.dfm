@@ -1,9 +1,9 @@
 object fmEditRecSprOff: TfmEditRecSprOff
-  Left = 400
-  Top = 229
+  Left = 428
+  Top = 222
   BorderStyle = bsDialog
   Caption = #1044#1086#1083#1078#1086#1089#1090#1085#1086#1077' '#1083#1080#1094#1086
-  ClientHeight = 283
+  ClientHeight = 290
   ClientWidth = 659
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -166,18 +166,18 @@ object fmEditRecSprOff: TfmEditRecSprOff
   end
   object pnBt: TPanel
     Left = 0
-    Top = 242
+    Top = 255
     Width = 659
-    Height = 41
+    Height = 35
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 4
     DesignSize = (
       659
-      41)
+      35)
     object btOk: TBitBtn
       Left = 433
-      Top = 3
+      Top = 6
       Width = 89
       Height = 25
       Anchors = [akTop, akRight]
@@ -205,7 +205,7 @@ object fmEditRecSprOff: TfmEditRecSprOff
     end
     object btCancel: TBitBtn
       Left = 545
-      Top = 3
+      Top = 6
       Width = 89
       Height = 25
       Anchors = [akTop, akRight]
@@ -216,9 +216,9 @@ object fmEditRecSprOff: TfmEditRecSprOff
   end
   object pnTel: TPanel
     Left = 0
-    Top = 157
+    Top = 156
     Width = 659
-    Height = 85
+    Height = 99
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 3
@@ -238,9 +238,9 @@ object fmEditRecSprOff: TfmEditRecSprOff
     object Label10: TLabel
       Left = 9
       Top = 39
-      Width = 83
+      Width = 123
       Height = 16
-      Caption = #1052#1086#1073'. '#1090#1077#1083#1077#1092#1086#1085
+      Caption = #1052#1086#1073#1080#1083#1100#1085#1099#1081' '#1090#1077#1083#1077#1092#1086#1085
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -250,7 +250,7 @@ object fmEditRecSprOff: TfmEditRecSprOff
     end
     object Label12: TLabel
       Left = 9
-      Top = 70
+      Top = 68
       Width = 106
       Height = 16
       Caption = #1053#1086#1084#1077#1088' '#1076#1083#1103' '#1087#1086#1082#1072#1079#1072
@@ -262,7 +262,7 @@ object fmEditRecSprOff: TfmEditRecSprOff
       ParentFont = False
       Visible = False
     end
-    object edTelMob: TDBEditEh
+    object edTelefon: TDBEditEh
       Left = 171
       Top = 3
       Width = 177
@@ -277,9 +277,9 @@ object fmEditRecSprOff: TfmEditRecSprOff
       TabOrder = 0
       Visible = True
     end
-    object edTelefon: TDBEditEh
+    object edTelMob: TDBEditEh
       Left = 171
-      Top = 34
+      Top = 33
       Width = 177
       Height = 26
       HelpContext = 999
@@ -295,7 +295,7 @@ object fmEditRecSprOff: TfmEditRecSprOff
     end
     object edNomer: TDBNumberEditEh
       Left = 171
-      Top = 65
+      Top = 63
       Width = 81
       Height = 26
       DecimalPlaces = 0
@@ -345,7 +345,7 @@ object fmEditRecSprOff: TfmEditRecSprOff
     Left = 0
     Top = 124
     Width = 659
-    Height = 33
+    Height = 32
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 2
@@ -388,8 +388,8 @@ object fmEditRecSprOff: TfmEditRecSprOff
     DatabaseName = 'dmBase.AdsConnection'
     StoreActive = False
     AdsConnection = dmBase.AdsConnection
-    Left = 116
-    Top = 189
+    Left = 132
+    Top = 213
     ParamData = <>
   end
   object QuerySeek: TAdsQuery
@@ -402,8 +402,8 @@ object fmEditRecSprOff: TfmEditRecSprOff
       '   WHERE Substring(SOATO,1,2)='#39'90'#39
       '   ORDER BY ID DESC')
     AdsConnection = dmBase.AdsConnection
-    Left = 117
-    Top = 157
+    Left = 133
+    Top = 141
     ParamData = <>
   end
 end

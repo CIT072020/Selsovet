@@ -398,6 +398,7 @@ begin
    Spr.ExcludeStyle(bsConfirmSave);
    {тест}Spr.IndexList.AddItem('PR_KEY', 'PR_KEY', 'ID', [isPrimary]);
    {тест}Spr.IndexList.AddItem('CODE', 'CODE', 'FILE_IND', []);
+   Spr.TableFilterCh:='empty(date_end)';
    Spr.FieldList.AddItem('ID', 'ID', 'Идентификатор', 'Идентификатор дела', '', '', '', '', 1, [fsServerSide, fsReadOnly], lsNone, ssNone, dkNumber);
    Spr.FieldList.AddItem('PARENT_ID', 'PARENT_ID', '', 'Родитель', 'Идентификатор родительского дела (если 0, то нет родителя)', '', '', '', 2, [fsViewVisible, fsReadOnly], lsNone, ssNone, dkNumber);
    Spr.FieldList.AddItem('IS_NODE', 'IS_NODE', '', 'Признак узла', 'Признак конечного узла (листа дерева), т.е. значения дела, которые могут быть присвоены документам (2 - лист дерева, 1 - узел)', '', '', '', 3, [fsViewVisible, fsReadOnly], lsNone, ssNone, dkNumber);

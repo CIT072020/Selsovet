@@ -1,10 +1,10 @@
 inherited fmEditSign: TfmEditSign
-  Left = 401
-  Top = 212
+  Left = 429
+  Top = 234
   BorderIcons = [biSystemMenu]
   Caption = #1069#1062#1055
   ClientHeight = 427
-  ClientWidth = 707
+  ClientWidth = 878
   Icon.Data = {
     0000010001001010000001002000680400001600000028000000100000002000
     0000010020000000000000040000000000000000000000000000000000000000
@@ -52,9 +52,9 @@ inherited fmEditSign: TfmEditSign
   end
   inherited Panel1: TPanel
     Top = 383
-    Width = 707
+    Width = 878
     inherited btOk: TBitBtn
-      Left = 482
+      Left = 653
       Caption = #1055#1088#1086#1074#1077#1088#1080#1090#1100
       Visible = False
       Glyph.Data = {
@@ -103,7 +103,7 @@ inherited fmEditSign: TfmEditSign
       NumGlyphs = 1
     end
     inherited btCancel: TBitBtn
-      Left = 598
+      Left = 769
       Caption = #1042#1099#1093#1086#1076
       Kind = bkOK
     end
@@ -111,7 +111,7 @@ inherited fmEditSign: TfmEditSign
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 707
+    Width = 878
     Height = 41
     Align = alTop
     BevelOuter = bvNone
@@ -144,7 +144,7 @@ inherited fmEditSign: TfmEditSign
     end
   end
   object Panel3: TPanel
-    Left = 648
+    Left = 819
     Top = 41
     Width = 59
     Height = 342
@@ -303,7 +303,7 @@ inherited fmEditSign: TfmEditSign
   object Grid: TDBGridEh
     Left = 0
     Top = 41
-    Width = 648
+    Width = 819
     Height = 342
     Align = alClient
     AutoFitColWidths = True

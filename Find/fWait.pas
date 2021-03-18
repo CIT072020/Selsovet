@@ -161,7 +161,7 @@ var
    NewHeight: Integer;
    Msg: string;
 begin
-   S:=Caption;
+   S:=Caption;             
    Msg:=laText.Caption;
    R:=Bounds(0, 0, 150, laText.Height);
    DrawText(Canvas.Handle, PChar(Msg), Length(Msg), R, DT_CALCRECT or DT_CENTER or{ DT_WORDBREAK or }DT_VCENTER);

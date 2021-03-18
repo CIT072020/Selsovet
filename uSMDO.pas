@@ -852,7 +852,7 @@ var
  SStrm : TStringStream;
  sUrl,s:String;
  i,nErrCode:Integer;
-begin
+begin             
   Result:=true;
   if FCheckLoadCOC then begin
     if (FUrlCOC<>'') then begin
@@ -862,7 +862,7 @@ begin
         else sUrl:=Copy(FUrlCOC,1,i-1);
       FLastError:='';
       Result:=true;
-      if Pos('HTTP', ANSIUpperCase(sUrl))>0 then begin
+      if Pos('HTTPS', ANSIUpperCase(sUrl))=0 then begin   // !!!
         if lShow
           then OpenMessage(PadCStr('Контроль доступности точек СОС ...',40,' '));
         try
@@ -3115,10 +3115,12 @@ begin
                     dmBase.SMDOFile.FieldByName('PATH').AsString:=GetPathAttach(1,nPostID);   // относительный путь '&BASE&\DocArxiv'
                   end else begin
                     // ??? что делать ???
-                    PutError('Ошибка копирования файла : '+#13+
+                    sss:='Ошибка копирования файла : '+#13+
                             'откуда :'+FTmpPath+s+#13+
                             'куда   :'+sPath+s+#13+
-                            IntToStr(GetLastError)+'('+SysErrorMessage(GetLastError)+')');
+                            IntToStr(GetLastError)+'('+SysErrorMessage(GetLastError)+')';
+                    WriteTextLog(StringReplace(sss, #13, ' ', [rfReplaceAll]));
+                    PutError(sss);
                   end;
                   //--- !!! ---------------------------------------------------------------------------
                   dmBase.SMDOFile.Post;
@@ -5223,6 +5225,7 @@ begin
  f.cbCheckTCP.Checked:=FBeforeCheckTCP;
  f.edPKNCI.Text:=FPKNCI;
  f.edAdresPKNCI.Text:=FAdresPKNCI;
+ f.cbCheckLoadCOC.Checked:=FCheckLoadCOC;
 
  if FVersionXML_OUT=100
    then f.cbVersion.ItemIndex:=-1
@@ -5263,6 +5266,7 @@ begin
    FPKNCI:=f.edPKNCI.Text;
    FAdresPKNCI:=f.edAdresPKNCI.Text;
    FCheckSizeMail:=f.GetSizeChecked;
+   FCheckLoadCOC:=f.cbCheckLoadCOC.Checked;
 
    FTimeAsGMT:=f.cbGMT.Checked;
    FBeforeCheckTCP:=f.cbCheckTCP.Checked;
@@ -5281,6 +5285,7 @@ begin
    Ini.WriteBool('ADMIN', 'CHECK_TCP', FBeforeCheckTCP);
    Ini.WriteInteger('ADMIN', 'CHECK_CERT', FCheckCert);
 
+
    //   Ini.WriteBool('POST', 'DELETING', FDeletingPost);
    Ini.WriteInteger('POST', 'AUTOCHECK', FAutoCheck);
    Ini.WriteInteger('POST', 'CHECK_SIZE_MAIL', FCheckSizeMail);
@@ -5294,6 +5299,7 @@ begin
    Ini.WriteString('POST', 'PASSWORD', XorEncode(PPP_CONST,FPassword));
    Ini.WriteBool('POST', 'CHECK_START', FCheckStart);
    Ini.WriteBool('POST', 'AUTO_REFERRED', FAutoWriteReferred);
+   Ini.WriteBool('POST', 'CHECK_LOAD_COC', FCheckLoadCOC);
 
 //   Ini.WriteBool('POST', 'CHECK_COC_RECEIVE', FRefreshCOCReceive);
    Ini.WriteInteger('POST', 'CHECK_COC', FRefreshCOC);

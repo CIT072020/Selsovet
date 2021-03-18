@@ -33,8 +33,6 @@ type
     FPublicKey:ANSIString;
     FIgnoreCOC:Boolean;
     PAR_IgnoreCOC:Integer;
-    function ActivateSession(var hSession : AvCmHc; lAuth:Boolean) : DWORD;
-    function DeactivateSession(var hSession : AvCmHc) : DWORD;
     procedure SetOnWriteLog(const Value: TWriteTextToLog);
     procedure SetDebug(const Value: Boolean);
   public
@@ -54,6 +52,9 @@ type
     property PublicKey : AnsiString read FPublicKey;
     property OnWriteLog : TWriteTextToLog read FOnWriteLog write SetOnWriteLog;
     property Debug : Boolean read FDebug write SetDebug;
+
+    function ActivateSession(var hSession : AvCmHc; lAuth:Boolean) : DWORD;
+    function DeactivateSession(var hSession : AvCmHc) : DWORD;
 
     procedure SetIgnoreCOC(const Value:Boolean);
     function LoadDLL(sNameDLL:String; var sError:String):Boolean;
@@ -81,6 +82,7 @@ type
 
     function SMDORefreshCOC2(sPath: String; var sErr:String; lAllSoob:Boolean; lShow:Boolean): DWORD;
     function RefreshCOC(sURL:String; lAllSoob:Boolean; var sErr:String; lShow:Boolean):Integer;
+    procedure EditUrlCOC;
 
     function IsRefreshError(n:DWORD):Boolean;
 
@@ -1366,6 +1368,11 @@ begin
     Result:=AVCMR_NOT_IMPLEMENTED;
   end;
   DeactivateSession(hSession);
+end;
+//----------------------------------------------------------
+procedure TAvest.EditUrlCOC;
+begin
+
 end;
 //----------------------------------------------------------
 function TAvest.RefreshCOC(sURL:String; lAllSoob:Boolean; var sErr:String; lShow:Boolean):Integer;

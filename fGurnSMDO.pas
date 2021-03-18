@@ -109,7 +109,6 @@ type
     procedure TBItemReceiveTimerClick(Sender: TObject);
     procedure TBItemMailing3Click(Sender: TObject);
     procedure TBItemInfoMailingClick(Sender: TObject);
-    procedure GridKeyDown(Sender: TObject; var Key: Word;   Shift: TShiftState);
   private
     { Private declarations }
     procedure Event_ShowReceive(nInd:Integer; nCount:Integer);  //TReceiveMailEvent;
@@ -260,6 +259,7 @@ begin
     TBSubmenuReceive.Visible:=SMDO.FPostEnabled;
     TBItemSend.Visible:=SMDO.FPostEnabled;
   end;        
+  VisibleItems([TBItemAddDok], true);
 
 //  TBItemInfoMailing.Visible:=false;  // !!!
 
@@ -932,20 +932,20 @@ begin
         ss:='Сообщение будет удалено'#13'вместе с прикрепленными ФАЙЛАМИ';
       end;
     end else begin
-      ss:='Отмеченные сообщения будут удалены';
+      ss:='Отмеченные сообщения (%d) будут удалены';
       s:=Query.Bookmark;
       for i:=Low(arr) to High(arr) do begin
         Query.Bookmark:=arr[i];
         if (Query.FieldByName('MSG_TYPE').AsInteger<>MSG_TYPE_A) and
            not dmBase.DocMain.Locate('POST_ID', Query.FieldByName('ID').AsInteger, []) then begin
-          ss:='Отмеченные сообщения будут удалены '#13'вместе с прикрепленными ФАЙЛАМИ';
+          ss:='Отмеченные сообщения (%d) будут удалены '#13'вместе с прикрепленными ФАЙЛАМИ';
         end;
       end;
       Query.Bookmark:=s;
     end;
     s := '';
     s := s + 'ВНИМАНИЕ!'#13; // + Chr(13)+
-    s := s + ss+#13;
+    s := s + Format(ss, [Length(arr)])+#13;
     s := s + 'Если Вы уверены в необходимости проведения операции,'#13;
     s := s + 'введите слово ДА в поле ввода'#13;
     Result:=OkWarning(s);
@@ -1379,8 +1379,15 @@ begin
              end;
     end;
   end;
+  if (Key=VK_SPACE) and (Shift=[]) then begin
+    if TBItemInfoMailing.Enabled then begin
+      Key:=0;
+      TBItemInfoMailingClick(nil);
+    end;
+  end;
   inherited;
 end;
+//  Grid.MyUserKeyDown(Sender,Key,Shift);   // !!!   чтобы срабатывали стандартные клавиши из SasaDbGrid
 
 procedure TfmGurnSMDO.cbMailTypeDrawItem(Control: TWinControl; Index: Integer;  Rect: TRect; State: TOwnerDrawState);
 //var
@@ -1522,7 +1529,7 @@ begin
       if Query.FieldByName('SENT').AsInteger<>1
         then AFont.Style:=[fsBold];
       if Query.FieldByName('SMDOCODE').AsString=DELIVER_KEY
-        then AFont.Color:=clMaroon;  // рассылка
+        then AFont.Color:=clGreen; //clMaroon;  // рассылка
     end;
   end;
 end;
@@ -1711,7 +1718,7 @@ begin
     SMDO.FCheckMyOrg:=true;
     RefreshGurnalSMDO;
   end;
-end;                     
+end;
 //--------------------------------------------------------------------
 procedure TfmGurnSMDO.TBSubmenuReceiveClick(Sender: TObject);
 begin
@@ -1736,7 +1743,7 @@ end;
 //--------------------------------------------------------------------
 procedure TfmGurnSMDO.ReceiveMailClick(Sender: TObject; nPost:Integer);
 var
-  d:TDateTime;                              
+  d:TDateTime;
   sErr:String;
   m:Integer;
 begin
@@ -1780,7 +1787,7 @@ begin
         then slMsg:=TStringList(Sender)
         else slMsg:=nil;
       FRun:=true;
-      FRunPost:=SUBJ_OUT;      
+      FRunPost:=SUBJ_OUT;
       d:=Now;
       try
 //        Self.Enabled:=false;
@@ -2406,16 +2413,5 @@ begin
 //
 end;
 
-procedure TfmGurnSMDO.GridKeyDown(Sender: TObject; var Key: Word;  Shift: TShiftState);
-begin
-  if (Key=VK_SPACE) then begin
-    if TBItemInfoMailing.Enabled then begin
-      Key:=0;
-      TBItemInfoMailingClick(nil);
-    end;
-  end;
-end;
 
 end.
-
-

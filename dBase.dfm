@@ -674,9 +674,17 @@ inherited dmBase: TdmBase
   object LookupUL: TAdsQuery
     DatabaseName = 'AdsConnection'
     StoreActive = False
+    SQL.Strings = (
+      'select s.id, trim(isnull(tt.name,'#39#39'))+'#39' '#39'+trim(s.name) as name, '
+      '       trim(s.name)+'#39' '#39'+trim(isnull(tt.name,'#39#39')) as name2, '
+      '       trim(s.name)+'#39' '#39'+trim(isnull(tt.fname,'#39#39')) as name3, '
+      #9'   trim(s.name) as kname'
+      '  from '#1089#1087#1088#1059#1083#1080#1094' s'
+      '  left join '#1057#1087#1088#1058#1080#1087#1059#1083#1080#1094' tt on s.tip=tt.id  '
+      'order by s.name')
     AdsConnection = AdsConnection
-    Left = 512
-    Top = 80
+    Left = 584
+    Top = 376
     ParamData = <>
   end
   object SprRovd: TAdsTable

@@ -7,9 +7,6 @@ inherited fmGurnUZSmert: TfmGurnUZSmert
   TextHeight = 13
   inherited TBDock: TTBDock
     inherited TBToolbarMenu: TTBToolbar
-      inherited TBItemAddDok: TTBItem
-        Visible = True
-      end
       object TBItemOpenZRogd: TTBItem [3]
         Caption = #1047'/'#1072' '#1086' '#1089#1084#1077#1088#1090#1080
         Hint = #1054#1090#1082#1088#1099#1090#1100' '#1079#1072#1087#1080#1089#1100' '#1072#1082#1090#1072' '#1086' '#1089#1084#1077#1088#1090#1080
@@ -38,6 +35,14 @@ inherited fmGurnUZSmert: TfmGurnUZSmert
   end
   inherited Grid: TSasaDBGrid
     OnGetCellParams = GridGetCellParams
+  end
+  inherited TBDock24: TTBDock
+    inherited TBToolbarMenu24: TTBToolbar
+      object TBItemOpenZRogd24: TTBItem [3]
+        Caption = #1047'/'#1072' '#1086' '#1089#1084#1077#1088#1090#1080
+        ImageIndex = 3
+      end
+    end
   end
   inherited Query: TAdsQuery
     ParamData = <>

@@ -39,13 +39,19 @@ type
     pnFilter: TPanel;
     lbType: TLabel;
     edType: TDBComboBoxEh;
+    Button1: TButton;
+    TBItemOpenAkt24: TTBItem;
+    TBItemPrixodSvid24: TTBItem;
+    TBItemDeleteSvid24: TTBItem;
+    TBItemToSS24: TTBItem;
+    TBItemPerexod24: TTBItem;
+    TBItemClearStr24: TTBItem;
+    TBSubmenuNakl24: TTBSubmenuItem;
     procedure FormCreate(Sender: TObject);
     procedure TBItemPrixodSvidClick(Sender: TObject);
     procedure TableBeforePost(DataSet: TDataSet);
-    procedure GridColumns2UpdateData(Sender: TObject; var Text: String;
-      var Value: Variant; var UseText, Handled: Boolean);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure GridColumns2UpdateData(Sender: TObject; var Text: String;  var Value: Variant; var UseText, Handled: Boolean);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;    Shift: TShiftState);
     procedure TBItemDeleteSvidClick(Sender: TObject);
     procedure TBItemPerexodClick(Sender: TObject);
     procedure TBItemToSSClick(Sender: TObject);
@@ -84,6 +90,8 @@ type
     procedure UpdateActions; override;
     procedure BeforeClearFilter; override;
     function BeforeChangeOrder : Boolean; override;
+    procedure PrepareMenu; override;
+
     procedure AfterChangeOrder; override;
 
   end;
@@ -159,10 +167,14 @@ begin
 
   i:=Role.EnableEditTable(Table.TableName,0);
   if (i=0) then begin
-    TBItemPrixodSvid.Enabled := false;
-    TBItemDeleteSvid.Enabled := false;
-    TBItemPerexod.Enabled := false;
-    TBItemToSS.Enabled := false;
+    EnableItem(TBItemPrixodSvid, false);
+    EnableItem(TBItemDeleteSvid, false);
+    EnableItem(TBItemPerexod, false);
+    EnableItem(TBItemToSS, false);
+//    TBItemPrixodSvid.Enabled := false;
+//    TBItemDeleteSvid.Enabled := false;
+//    TBItemPerexod.Enabled := false;
+//    TBItemToSS.Enabled := false;
   end;
 end;
 
@@ -248,7 +260,7 @@ begin
   if FDate=0 then begin
     lDelete:=false;
     s := FOpisSvid.ListOpisEdit.SeekValue(FNameOpis,IntToStr(FTypeSvid),false);
-    if Problem('Вы хотите удалить все свидетельста с типом: <'+s+'>') then begin
+    if Problem('Вы хотите удалить все свидетельста с типом: <'+s+'>', mtConfirmation, self) then begin
       lDelete:=true;
     end;
   end;
@@ -367,7 +379,7 @@ var
 begin
   Table.CheckBrowseMode;
   lRun := false;
-  f := TfmPrixodSvid.Create(nil);
+  f := TfmPrixodSvid.Create(self);
   if f.ShowModal=mrOk then begin
     FDate     := f.Date;
     FTypeSvid := f.TypeSvid;
@@ -470,7 +482,7 @@ begin
   end else begin
     if dmBase.tbDokuments.Locate('ID_AUTO', sNomer ,[]) then begin
       s:=dmBase.tbDokuments.FieldByName('NOMER').AsString;
-      if Problem('Удалить накладную № '+s+' вместе с информацией о выдаче ?') then begin
+      if Problem('Удалить накладную № '+s+' вместе с информацией о выдаче ?', mtConfirmation, self) then begin
         dmBase.AdsConnection.Execute('UPDATE ListSvid SET ID_NAKL=null,ID_ZAGS=null,DATER=null,SOST=0 WHERE ID_NAKL='+sNomer);
         dmBase.DeleteDokument(dmBase.tbDokuments, dmBase.TypeObj_RasxNaklSvid,false);
         Table.Refresh;
@@ -485,7 +497,7 @@ end;
 //-------------------------------------------------------------------------
 procedure TfmListSvid.TBItemClearStrClick(Sender: TObject);
 begin
-  if Problem('Очистить информацию о выдаче ?') then begin
+  if Problem('Очистить информацию о выдаче ?', mtConfirmation, self) then begin
     EditDataSet(Table);
     TableSOST.AsInteger:=0;
     TableDATER.AsString:='';
@@ -541,7 +553,7 @@ var
 begin
   Table.CheckBrowseMode;
   lRun := false;
-  f := TfmDeleteSvid.Create(nil);
+  f := TfmDeleteSvid.Create(self);
   if f.ShowModal=mrOk then begin
     FTypeSvid := f.TypeSvid;
     FOper  := f.GetOper;
@@ -565,7 +577,7 @@ var
 begin
   Table.CheckBrowseMode;
   lRun := false;
-  f := TfmPerexodSvid.Create(nil);
+  f := TfmPerexodSvid.Create(self);
   if f.ShowModal=mrOk then begin
     FDate     := f.Date;
     lRun := true;
@@ -706,15 +718,18 @@ begin
     FRunChange := true;
     try
       if (edType.Value<>null) and (edType.ItemIndex>-1) then begin
-        Table.Filtered:=false;
-        Table.SetRange([edType.KeyItems[edType.ItemIndex]],[edType.KeyItems[edType.ItemIndex]]);
-        TBItemClrFlt.Enabled:=true;
-      end else begin
-        TBItemClrFlt.Enabled:=false;
+        FClearFilterControl:=false;
         ClearFilter;
+        FClearFilterControl:=true;
+        Table.SetRange([edType.KeyItems[edType.ItemIndex]],[edType.KeyItems[edType.ItemIndex]]);
+        EnableItem(TBItemClrFlt, true);
+      end else begin
+        ClearFilter;
+        EnableItem(TBItemClrFlt, false);
       end;
+      SetCaptionGurnal(true,'');
     finally
-    FRunChange := false;
+      FRunChange := false;
     end;
   end;
 end;
@@ -740,8 +755,10 @@ end;
 
 procedure TfmListSvid.BeforeClearFilter;
 begin
-  edType.Value:=null;
-  edType.ItemIndex:=-1;
+  if FClearFilterControl then begin
+    edType.Value:=null;
+    edType.ItemIndex:=-1;
+  end;
   Table.Scoped := false;
   Table.ScopeBegin:='';
   Table.ScopeEnd:='';
@@ -749,6 +766,12 @@ begin
   CurrentFilter:='';
   Table.OnFilterRecord:=nil;
   FSysFltCaption:='';
+end;
+
+procedure TfmListSvid.PrepareMenu;
+begin
+  CheckTbItems;
+  pnFilter.Visible:=true;
 end;
 
 initialization

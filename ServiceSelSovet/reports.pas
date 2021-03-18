@@ -986,14 +986,14 @@ begin
   i := StrToInt(FormatDateTime('YYYY', GlobalTask.CurrentDate))-1;
   f.AddParamEx(i, 'За какой год'    , 'YEAR'    ,'TYPE=LIST~DESC=KEY_YEARS');
   f.AddParamEx(Now, 'Дата формирования' , 'DATEF' ,'TYPE=DATE');
-  f.AddParamEx(0, 'Заключений о внесении изменений (всего)', 'ZAK_ALL','');
-  f.AddParamEx(0, 'Об отказе в изменении', 'ZAK_OTK','');
+//  f.AddParamEx(0, 'Заключений о внесении изменений (всего)', 'ZAK_ALL','');
+//  f.AddParamEx(0, 'Об отказе в изменении', 'ZAK_OTK','');
   f.AddParamEx(0, 'Аннулировано записей актов', 'ANULIR','');
   f.AddParamEx(0, 'Золотых свадеб', 'SVADEB_Z','');
   f.AddParamEx(0, 'Серебряных свадеб', 'SVADEB_S','');
   f.AddParamEx(0, 'Других свадеб', 'SVADEB_D','');
-  f.AddParamEx(0, 'Взыскано госпошлины', 'POSHLINA','');
-  f.AddParamEx(0, 'Дополнительные услуги', 'PLAT','');
+  f.AddParamEx(0, 'Взыскано госпошлины (0-расчет)', 'POSHLINA','');
+  f.AddParamEx(0, 'Дополнительные услуги (0-расчет)', 'PLAT','');
   if IdProg='ZAGS' then begin
     f.AddParamEx(true, 'З\а всех органов загс', 'ALL','');
     f.AddParamEx(false, 'Сформировать файл для портала РИАП', 'RIAP','');
@@ -1007,8 +1007,13 @@ begin
     ds := FindReportTable('ZAGS');
     dbZap(ds);
     ds.Append;
-    ds.Fld('NUM19').AsInteger:=f.GetValue('ZAK_ALL','N');
-    ds.Fld('NUM20').AsInteger:=f.GetValue('ZAK_OTK','N');
+    if IdProg='ZAGS' then begin
+      if f.GetValue('ALL','L')=false
+        then strAddWhere:=' and ID_ZAGS='+GlobalTask.ParamAsString('ID');
+      lRiap:=f.GetValue('RIAP','L'); 
+    end;
+    ds.Fld('NUM19').AsInteger:=0;//f.GetValue('ZAK_ALL','N');   заключений всего
+    ds.Fld('NUM20').AsInteger:=0;//f.GetValue('ZAK_OTK','N');   отказ
     ds.Fld('NUM21').AsInteger:=f.GetValue('ANULIR','N');
     ds.Fld('NUM22').AsInteger:=f.GetValue('SVADEB_Z','N');
     ds.Fld('NUM23').AsInteger:=f.GetValue('SVADEB_S','N');
@@ -1016,11 +1021,6 @@ begin
     ds.Fld('NUM24').AsInteger:=f.GetValue('POSHLINA','N');
     ds.Fld('NUM25').AsInteger:=f.GetValue('PLAT','N');
     ds.Fld('DATE_FORM').AsDateTime:=f.GetValue('DATEF','D');
-    if IdProg='ZAGS' then begin
-      if f.GetValue('ALL','L')=false
-        then strAddWhere:=' and ID_ZAGS='+GlobalTask.ParamAsString('ID');
-      lRiap:=f.GetValue('RIAP','L'); 
-    end;
   end;
   f.Free;
   Result := false;
@@ -1062,8 +1062,38 @@ begin
     dbChangeSQL(q,strSQL,true);
     ds.Fld('NUM8').AsInteger  := q.Fld('ALLO').AsInteger;
     ds.Fld('NUM9').AsInteger  := q.Fld('RESH_SUDA').AsInteger;
-
+    //-------------- пошлина ---------------
+    if ds.Fld('NUM24').AsInteger=0 then begin
+      strSql:='SELECT isNull(SUM_POSHLINA,0) SUMMA FROM ЗаключениеБраков WHERE Year(datez)='+strGod;
+      if IdProg='ZAGS' then begin
+        strSql:=strSQL+
+            ' UNION ALL'+
+            ' SELECT isNull(ON_SUM_POSHLINA,0)+isNull(ONA_SUM_POSHLINA,0) SUMMA FROM AktTermMarriage WHERE Year(datez)='+strGod+
+            ' UNION ALL'+
+            ' SELECT isNull(SUM_POSHLINA,0) SUMMA FROM AktChangeName WHERE Year(datez)='+strGod;
+      end;
+      strSQL:='SELECT SUM(summa) summa FROM ('+strSQL+') aaa';
+      dbChangeSQL(q,strSQL,true);
+      ds.Fld('NUM24').AsFloat:=q.Fld('SUMMA').AsFloat;
+    end;
+    //-------------- доп. услуги ---------------
+    if ds.Fld('NUM25').AsInteger=0 then begin
+      strSql:='SELECT isNull(TARIF,0) SUMMA FROM ЗаключениеБраков WHERE Year(datez)='+strGod+
+              ' UNION ALL'+
+              ' SELECT isNull(TARIF,0) SUMMA FROM АктыРождений WHERE Year(datez)='+strGod;
+      strSQL:='SELECT SUM(summa) summa FROM ('+strSQL+') aaa';
+      dbChangeSQL(q,strSQL,true);
+      ds.Fld('NUM25').AsFloat:=q.Fld('SUMMA').AsFloat;
+    end;
     if IdProg='ZAGS' then begin
+      //--------------- заключения о внесении изменений --------------------------------
+      if (ds.Fld('NUM19').AsInteger=0) then begin  // если не внесли вручную
+        strSQL := 'SELECT Count(*) COUNT_OK, Sum(CASE WHEN OK=false THEN 1 ELSE 0 END) COUNT_NOT '+
+                  ' FROM AddDokZAGS ad WHERE typedok=60 and Year(datez)='+strGod; // + strAddWhere;
+        dbChangeSQL(q,strSQL,true);
+        ds.Fld('NUM19').AsInteger:=q.Fld('COUNT_OK').AsInteger;
+        ds.Fld('NUM20').AsInteger:=q.Fld('COUNT_NOT').AsInteger;
+      end;
       //-------------- перемене имени
       strSQL := 'SELECT Count(*) alli FROM AktChangeName WHERE Year(datez)='+strGod+strAddWhere
       dbChangeSQL(q,strSQL,true);
@@ -1190,12 +1220,12 @@ begin
                 ' sum( iif(sost=4,1,0) ) s4,sum( iif(sost=5,1,0) ) s5, sum( iif(sost=6,1,0) ) s6 '+
                 ' FROM ListSvid l WHERE svid_type='+sl.Strings[i]+'  and dater>='+strDate1 + ' and dater<='+strDate2; //+strAdd;
       dbChangeSQL(q,strSQL,true);
-      ds.Fld('NUM4').AsInteger  := q.Fld('S1').AsInteger;
-      ds.Fld('NUM5').AsInteger  := q.Fld('S2').AsInteger;
-      ds.Fld('NUM6').AsInteger  := q.Fld('S3').AsInteger;
-      ds.Fld('NUM7').AsInteger  := q.Fld('S4').AsInteger;
-      ds.Fld('NUM8').AsInteger  := q.Fld('S5').AsInteger;
-      ds.Fld('NUM9').AsInteger  := q.Fld('S6').AsInteger;
+      ds.Fld('NUM4').AsInteger  := q.Fld('S1').AsInteger;  // первично
+      ds.Fld('NUM5').AsInteger  := q.Fld('S2').AsInteger;  // повторно
+      ds.Fld('NUM6').AsInteger  := q.Fld('S3').AsInteger;  // испорчено
+      ds.Fld('NUM7').AsInteger  := q.Fld('S4').AsInteger;  // утрачено
+      ds.Fld('NUM8').AsInteger  := q.Fld('S5').AsInteger;  // -----
+      ds.Fld('NUM9').AsInteger  := q.Fld('S6').AsInteger;  // выдано в сельисп. (в вых. форме не считается !!!)
       ds.Post;
     end;
     ds.First;
@@ -1461,7 +1491,7 @@ begin
       dbChangeSQL(q,strSQL,true);
       tb.Fld('ISPOR').Asstring := GetListBlank(q);
       if Length(tb.Fld('ISPOR').AsString)>10 then n5:=nn;
-      // утеряно
+      // !!! НЕТ УТЕРЯНО !!!  <=============================================
 //      strSQL := 'SELECT svid_seria, svid_nomer' +
 //                ' FROM ListSvid l WHERE svid_type='+sl.Strings[i]+' and sost=4 and dater>='+strDate1 + ' and dater<='+strDate2+
 //                ' ORDER BY svid_seria,svid_nomer ';

@@ -8,7 +8,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, uTypes,
   fSimple, Db, ComCtrls, TB2Item, TB2Dock, TB2Toolbar, StdCtrls, Mask, Variants, DBFunc,
-  DBCtrlsEh, DBLookupEh, ExtCtrls, TB2ToolWindow, dBase, dAdres, MetaTask, uProject,
+  DBCtrlsEh, DBLookupEh, ExtCtrls, TB2ToolWindow, dBase, dAdres, MetaTask, uProject, fShablon,
   Grids, DBGridEh, SasaDBGrid, Buttons, OpisEdit, FuncPr, fAddSobstv,CreateControls,
   ImgList, RXCtrls, DBCtrls, vchDBCtrls;
 
@@ -146,6 +146,9 @@ type
     GridNalogi: TSasaDBGrid;
     dsNalogi: TDataSource;
     Label28: TLabel;
+    GroupBox3: TGroupBox;
+    edUchPrim: TDBMemo;
+    edUchTypeOwner: TDBComboBoxEh;
     procedure lbTipULGetText(Sender: TObject; var Text: String);
     procedure dsDopPropDataChange(Sender: TObject; Field: TField);
     procedure FormCreate(Sender: TObject);
@@ -189,6 +192,9 @@ type
     procedure GridNalogiColumns9GetCellParams(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
     procedure GridNalogiDblClick(Sender: TObject);
     procedure Label28Click(Sender: TObject);
+    procedure edUchTypeOwnerEditButtons0Click(Sender: TObject;
+      var Handled: Boolean);
+    procedure edPrimClick(Sender: TObject);
   private
     { Private declarations }
     dAdr : TdmAdres;
@@ -377,6 +383,7 @@ begin
   {$ENDIF}
 
   if IsShowEdit then begin
+    EditDataSet(dAdr.mtDokument);
     if ShowModal = mrOk then begin
       Result := true;
     end;
@@ -501,29 +508,33 @@ end;
 
 procedure TfmAdres.btEditMenClick(Sender: TObject);
 begin
-  if GetViewHist then begin
-    EditSobstvHist( TdmAdres(Dokument), false);
-  end else begin
-    EditSobstv( TdmAdres(Dokument).tbHouseOwners, TdmAdres(Dokument).tbHouseOwnersHist, nil, -1, false);
-  end;
+  if dAdr.tbHouseOwners.RecordCount>0 then begin
+    if GetViewHist then begin
+      EditSobstvHist( TdmAdres(Dokument), false);
+    end else begin
+      EditSobstv( TdmAdres(Dokument).tbHouseOwners, TdmAdres(Dokument).tbHouseOwnersHist, nil, -1, false);
+    end;
 //  LoadObjectAdres;
-  QueryExit := true;
+    QueryExit := true;
+  end;
 end;
 
 procedure TfmAdres.btDelMenClick(Sender: TObject);
 begin
-  if GetViewHist then begin
-    if TdmAdres(Dokument).tbHouseOwnersHist.RecordCount>0 then begin
-      if Problem(' Удалить собственника из истории ? ') then begin
-        QueryExit := true;
-        TdmAdres(Dokument).tbHouseOwnersHist.Delete;
+  if dAdr.tbHouseOwners.RecordCount>0 then begin
+    if GetViewHist then begin
+      if TdmAdres(Dokument).tbHouseOwnersHist.RecordCount>0 then begin
+        if Problem(' Удалить собственника из истории ? ') then begin
+          QueryExit := true;
+          TdmAdres(Dokument).tbHouseOwnersHist.Delete;
+        end;
       end;
-    end;
-  end else begin
-    if TdmAdres(Dokument).tbHouseOwners.RecordCount>0 then begin
-      if Problem(' Удалить собственника ? ') then begin
-        QueryExit := true;
-        TdmAdres(Dokument).tbHouseOwners.Delete;
+    end else begin
+      if TdmAdres(Dokument).tbHouseOwners.RecordCount>0 then begin
+        if Problem(' Удалить собственника ? ') then begin
+          QueryExit := true;
+          TdmAdres(Dokument).tbHouseOwners.Delete;
+        end;
       end;
     end;
   end;
@@ -964,6 +975,35 @@ end;
 procedure TfmAdres.Label28Click(Sender: TObject);
 begin
   Label28.Caption:=dmbase.Adres_PunktN+' дом'+dmbase.Adres_NDom+' кв.'+dmbase.Adres_Kv;
+end;
+
+procedure TfmAdres.edUchTypeOwnerEditButtons0Click(Sender: TObject; var Handled: Boolean);
+var
+  nKod:Integer;
+  Opis:TOpisEdit;
+  l:Boolean;
+begin
+  nKod:=ChoiceFromShablonEx(nil, SHABLON_UCH_TYPE_OWN, true, ''); //VarToStr(edUchTypeOwner.Value));
+  l:=dbDisableControls(dAdr.mtDokument);
+  try
+    if ModifyShablon then begin  // fShablon.pas
+      CheckKeyListOpis('KEY_UCH_TYPE_OWN');   // uProject.pas
+      LoadComboboxFromOpis( edUchTypeOwner, 'KEY_UCH_TYPE_OWN');
+    end;
+    if nKod>0 then begin
+      EditDataSet(dAdr.mtDokument);
+      dAdr.mtDokumentUCH_TYPEOWNER.AsInteger:=nKod;
+      QueryExit:=true;
+//      then edUchTypeOwner.Value:=nKod;
+    end;
+  finally
+    dbEnableControls(dAdr.mtDokument,l);
+  end;
+end;
+
+procedure TfmAdres.edPrimClick(Sender: TObject);
+begin
+  EditDataSet(dAdr.mtDokument);
 end;
 
 end.

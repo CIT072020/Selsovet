@@ -1,12 +1,12 @@
 object fmEdAProc: TfmEdAProc
-  Left = 517
-  Top = 206
+  Left = 463
+  Top = 191
   BorderStyle = bsDialog
   Caption = 
     #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1086#1085#1085#1086'-'#1082#1086#1085#1090#1088#1086#1083#1100#1085#1072#1103' '#1092#1086#1088#1084#1072' '#1088#1077#1075#1080#1089#1090#1088#1072#1094#1080#1080' '#1079#1072#1103#1074#1083#1077#1085#1080#1081' '#1079#1072#1080#1085#1090#1077#1088#1077#1089 +
     #1086#1074#1072#1085#1085#1099#1093' '#1083#1080#1094
   ClientHeight = 674
-  ClientWidth = 844
+  ClientWidth = 891
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -26,7 +26,7 @@ object fmEdAProc: TfmEdAProc
   object bvTop: TBevel
     Left = 4
     Top = 24
-    Width = 835
+    Width = 882
     Height = 7
     Shape = bsTopLine
   end
@@ -111,14 +111,14 @@ object fmEdAProc: TfmEdAProc
     Caption = #1048#1085#1076#1077#1082#1089
   end
   object laRegDate: TLabel
-    Left = 341
+    Left = 393
     Top = 38
     Width = 122
     Height = 13
     Caption = #1044#1072#1090#1072' '#1087#1086#1076#1072#1095#1080' '#1079#1072#1103#1074#1083#1077#1085#1080#1103
   end
   object laAppForm: TLabel
-    Left = 590
+    Left = 638
     Top = 38
     Width = 72
     Height = 13
@@ -146,7 +146,7 @@ object fmEdAProc: TfmEdAProc
     Caption = #1040#1076#1088#1077#1089' '#1079#1072#1103#1074#1080#1090#1077#1083#1103
   end
   object laAdrPhone: TLabel
-    Left = 554
+    Left = 601
     Top = 90
     Width = 110
     Height = 13
@@ -188,7 +188,7 @@ object fmEdAProc: TfmEdAProc
     Caption = #1048#1089#1087#1086#1083#1085#1080#1090#1077#1083#1100
   end
   object laExecTerm: TLabel
-    Left = 468
+    Left = 513
     Top = 226
     Width = 87
     Height = 13
@@ -204,7 +204,7 @@ object fmEdAProc: TfmEdAProc
     WordWrap = True
   end
   object laExecDate: TLabel
-    Left = 601
+    Left = 641
     Top = 377
     Width = 95
     Height = 13
@@ -218,7 +218,7 @@ object fmEdAProc: TfmEdAProc
     Caption = #1042#1080#1076' '#1088#1077#1096#1077#1085#1080#1103
   end
   object laAnsInd: TLabel
-    Left = 601
+    Left = 641
     Top = 403
     Width = 78
     Height = 13
@@ -303,28 +303,28 @@ object fmEdAProc: TfmEdAProc
     WordWrap = True
   end
   object laProvSer: TLabel
-    Left = 397
+    Left = 440
     Top = 117
     Width = 31
     Height = 13
     Caption = #1057#1077#1088#1080#1103
   end
   object laProvNum: TLabel
-    Left = 504
+    Left = 570
     Top = 117
     Width = 31
     Height = 13
     Caption = #1053#1086#1084#1077#1088
   end
   object laProvDate: TLabel
-    Left = 663
+    Left = 753
     Top = 117
     Width = 26
     Height = 13
     Caption = #1044#1072#1090#1072
   end
   object laPersonId: TLabel
-    Left = 556
+    Left = 606
     Top = 144
     Width = 141
     Height = 13
@@ -344,8 +344,8 @@ object fmEdAProc: TfmEdAProc
     Caption = #1054#1088#1075#1072#1085
   end
   object laDeloDate: TLabel
-    Left = 407
-    Top = 511
+    Left = 559
+    Top = 512
     Width = 89
     Height = 13
     Caption = #1044#1072#1090#1072' '#1085#1072#1087#1088#1072#1083#1077#1085#1080#1103
@@ -357,10 +357,96 @@ object fmEdAProc: TfmEdAProc
     Height = 13
     Caption = #1057#1086#1089#1090#1072#1074#1080#1083
   end
+  object sbFileID: TSpeedButton
+    Left = 508
+    Top = 507
+    Width = 23
+    Height = 22
+    Hint = #1042#1099#1073#1088#1072#1090#1100' '#1080#1079' '#1076#1077#1088#1077#1074#1072' '#1085#1086#1084#1077#1085#1082#1083#1072#1090#1091#1088#1099
+    Glyph.Data = {
+      36040000424D3604000000000000360000002800000010000000100000000100
+      2000000000000004000000000000000000000000000000000000FF00FF00FF00
+      FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000000000
+      0000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF000000000000000000000000000000000000000000FFFF
+      FF00FFFFFF00FFFFFF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF0000000000FF00FF00FF00FF00FF00FF00000000000000
+      0000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF0000000000FF00FF00FF00FF00FF00FF00000000000000
+      0000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF00000000000000000000000000000000000000000000FF
+      FF0000FFFF0000FFFF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF0000000000FF00FF00FF00FF00FF00FF00000000000000
+      0000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF0000000000FF00FF00FF00FF00FF00FF00000000000000
+      0000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF000000000000000000000000000000000000000000FFFF
+      FF00FFFFFF00FFFFFF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF0000000000FF00FF00FF00FF00FF00FF00000000000000
+      0000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF000000000000000000000000000000000000000000FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF000000000000000000000000000000000000000000FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+    OnClick = sbFileIDClick
+  end
+  object sbFileID2: TSpeedButton
+    Left = 483
+    Top = 507
+    Width = 23
+    Height = 22
+    Hint = #1042#1099#1073#1088#1072#1090#1100' '#1080#1079' '#1090#1072#1073#1083#1080#1094#1099' '
+    Glyph.Data = {
+      36040000424D3604000000000000360000002800000010000000100000000100
+      2000000000000004000000000000000000000000000000000000FF00FF00FF00
+      FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000FF00FF000000
+      0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FF00FF000000
+      0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FF00FF000000
+      0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00840000008400
+      0000FFFFFF0000000000FFFFFF0084000000FFFFFF0000000000FF00FF000000
+      0000FFFFFF0000000000FFFFFF000000000000000000FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FF00FF000000
+      0000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000000000000000FFFFFF008400
+      0000FFFFFF0000000000FFFFFF0084000000FFFFFF0000000000FF00FF000000
+      0000FFFFFF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FF00FF000000
+      0000FFFFFF00000000000000000000000000FFFFFF00FFFFFF00840000008400
+      0000FFFFFF0000000000FFFFFF0084000000FFFFFF0000000000FF00FF000000
+      0000FFFFFF0000000000FFFFFF000000000000000000FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FF00FF000000
+      0000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000000000000000FFFFFF008400
+      0000FFFFFF0000000000FFFFFF0084000000FFFFFF0000000000FF00FF000000
+      0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000FF00FF000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000FF00FF000000
+      0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF
+      0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF000000000000FF00FF000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000FF00FF00FF00
+      FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+    OnClick = sbFileID2Click
+  end
   object tbaEditRec: TToolBar
     Left = 0
     Top = 0
-    Width = 844
+    Width = 891
     Height = 22
     AutoSize = True
     Caption = 'tbaEditRec'
@@ -452,7 +538,7 @@ object fmEdAProc: TfmEdAProc
   object paDocFile: TPanel
     Left = 125
     Top = 536
-    Width = 652
+    Width = 700
     Height = 69
     BevelOuter = bvLowered
     TabOrder = 41
@@ -480,7 +566,7 @@ object fmEdAProc: TfmEdAProc
       TitleFont.Style = []
     end
     object lvDocFile: TListView
-      Left = 404
+      Left = 452
       Top = 1
       Width = 247
       Height = 67
@@ -498,7 +584,7 @@ object fmEdAProc: TfmEdAProc
     end
   end
   object tbaDocFile: TToolBar
-    Left = 788
+    Left = 835
     Top = 536
     Width = 46
     Height = 66
@@ -617,9 +703,9 @@ object fmEdAProc: TfmEdAProc
     OnClick = chbInFileClick
   end
   object dlFileId: TDBLookupComboboxEh
-    Left = 233
+    Left = 805
     Top = 505
-    Width = 137
+    Width = 75
     Height = 24
     DataField = 'LOOKUP_FILE_ID'
     DropDownBox.Columns = <
@@ -643,7 +729,7 @@ object fmEdAProc: TfmEdAProc
     Font.Style = []
     ParentFont = False
     TabOrder = 38
-    Visible = True
+    Visible = False
   end
   object deRegNum: TDBNumberEditEh
     Left = 125
@@ -663,12 +749,19 @@ object fmEdAProc: TfmEdAProc
     Visible = True
   end
   object deRegInd: TDBEditEh
-    Left = 245
+    Left = 231
     Top = 34
-    Width = 80
+    Width = 145
     Height = 24
     DataField = 'REG_IND'
-    EditButtons = <>
+    EditButtons = <
+      item
+        Hint = #1057#1092#1086#1088#1084#1080#1088#1086#1074#1072#1090#1100' '#1079#1085#1072#1095#1077#1085#1080#1077' (Ctrl+))'
+        ShortCut = 0
+        Style = ebsPlusEh
+        Visible = False
+        OnClick = deRegIndEditButtons0Click
+      end>
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -677,9 +770,10 @@ object fmEdAProc: TfmEdAProc
     ParentFont = False
     TabOrder = 2
     Visible = True
+    OnDblClick = deRegIndDblClick
   end
   object deRegDate: TDBDateTimeEditEh
-    Left = 481
+    Left = 529
     Top = 34
     Width = 90
     Height = 24
@@ -696,7 +790,7 @@ object fmEdAProc: TfmEdAProc
     Visible = True
   end
   object dcAppForm: TDBComboBoxEh
-    Left = 684
+    Left = 732
     Top = 34
     Width = 152
     Height = 24
@@ -728,9 +822,9 @@ object fmEdAProc: TfmEdAProc
     Visible = True
   end
   object deSignName: TDBEditEh
-    Left = 440
+    Left = 442
     Top = 59
-    Width = 396
+    Width = 442
     Height = 24
     DataField = 'SIGN_NAME'
     EditButtons = <
@@ -765,7 +859,7 @@ object fmEdAProc: TfmEdAProc
   object deAdrText: TDBEditEh
     Left = 125
     Top = 84
-    Width = 381
+    Width = 440
     Height = 24
     DataField = 'ADR_TEXT'
     EditButtons = <
@@ -799,7 +893,7 @@ object fmEdAProc: TfmEdAProc
     Visible = True
   end
   object deAdrPhone: TDBEditEh
-    Left = 683
+    Left = 731
     Top = 84
     Width = 153
     Height = 24
@@ -863,7 +957,7 @@ object fmEdAProc: TfmEdAProc
     Visible = True
   end
   object chbIsRepeat: TDBCheckBoxEh
-    Left = 632
+    Left = 634
     Top = 171
     Width = 18
     Height = 17
@@ -875,9 +969,9 @@ object fmEdAProc: TfmEdAProc
     OnClick = chbIsRepeatClick
   end
   object deRepeatText: TDBEditEh
-    Left = 655
+    Left = 658
     Top = 167
-    Width = 181
+    Width = 226
     Height = 24
     DataField = 'REPEAT_TEXT'
     EditButtons = <
@@ -913,7 +1007,7 @@ object fmEdAProc: TfmEdAProc
   object dcExecMan: TDBComboBoxEh
     Left = 125
     Top = 220
-    Width = 308
+    Width = 354
     Height = 24
     DataField = 'EXEC_MAN'
     EditButtons = <
@@ -931,7 +1025,7 @@ object fmEdAProc: TfmEdAProc
     Visible = True
   end
   object deExecTerm: TDBDateTimeEditEh
-    Left = 570
+    Left = 615
     Top = 220
     Width = 90
     Height = 24
@@ -967,7 +1061,7 @@ object fmEdAProc: TfmEdAProc
     Visible = True
   end
   object deExecDate: TDBDateTimeEditEh
-    Left = 705
+    Left = 745
     Top = 371
     Width = 90
     Height = 24
@@ -1000,7 +1094,7 @@ object fmEdAProc: TfmEdAProc
     Visible = True
   end
   object deAnsInd: TDBEditEh
-    Left = 705
+    Left = 745
     Top = 397
     Width = 90
     Height = 24
@@ -1084,7 +1178,7 @@ object fmEdAProc: TfmEdAProc
   object DOC_WORK: TDBGridEh
     Left = 125
     Top = 248
-    Width = 676
+    Width = 724
     Height = 114
     AllowedOperations = [alopUpdateEh]
     DrawMemoText = True
@@ -1103,7 +1197,7 @@ object fmEdAProc: TfmEdAProc
     TitleFont.Style = []
   end
   object tbaDocWork: TToolBar
-    Left = 812
+    Left = 859
     Top = 247
     Width = 23
     Height = 110
@@ -1149,7 +1243,7 @@ object fmEdAProc: TfmEdAProc
   object dcAdmProc: TDBComboBoxEh
     Left = 125
     Top = 194
-    Width = 710
+    Width = 758
     Height = 24
     DataField = 'ADM_PROC'
     EditButtons = <
@@ -1168,7 +1262,7 @@ object fmEdAProc: TfmEdAProc
   object dcGroupId: TDBComboBoxEh
     Left = 361
     Top = 614
-    Width = 419
+    Width = 464
     Height = 24
     EditButtons = <
       item
@@ -1187,7 +1281,7 @@ object fmEdAProc: TfmEdAProc
   object deProvOrg: TDBEditEh
     Left = 209
     Top = 138
-    Width = 334
+    Width = 376
     Height = 24
     DataField = 'PROV_ORG'
     EditButtons = <>
@@ -1203,7 +1297,7 @@ object fmEdAProc: TfmEdAProc
   object dcProvType: TDBComboBoxEh
     Left = 166
     Top = 111
-    Width = 219
+    Width = 257
     Height = 24
     DataField = 'PROV_TYPE'
     EditButtons = <>
@@ -1217,9 +1311,9 @@ object fmEdAProc: TfmEdAProc
     Visible = True
   end
   object deProvSer: TDBEditEh
-    Left = 440
+    Left = 483
     Top = 111
-    Width = 49
+    Width = 64
     Height = 24
     DataField = 'PROV_SER'
     EditButtons = <>
@@ -1233,9 +1327,9 @@ object fmEdAProc: TfmEdAProc
     Visible = True
   end
   object deProvNum: TDBEditEh
-    Left = 550
+    Left = 616
     Top = 111
-    Width = 92
+    Width = 110
     Height = 24
     DataField = 'PROV_NUM'
     EditButtons = <>
@@ -1249,7 +1343,7 @@ object fmEdAProc: TfmEdAProc
     Visible = True
   end
   object deProvDate: TDBDateTimeEditEh
-    Left = 705
+    Left = 794
     Top = 111
     Width = 90
     Height = 24
@@ -1266,7 +1360,7 @@ object fmEdAProc: TfmEdAProc
     Visible = True
   end
   object dePersonId: TDBEditEh
-    Left = 708
+    Left = 757
     Top = 138
     Width = 127
     Height = 24
@@ -1282,8 +1376,8 @@ object fmEdAProc: TfmEdAProc
     Visible = True
   end
   object deDeloDate: TDBDateTimeEditEh
-    Left = 517
-    Top = 505
+    Left = 669
+    Top = 506
     Width = 100
     Height = 24
     DataField = 'IN_DELO_DATE'
@@ -1320,6 +1414,34 @@ object fmEdAProc: TfmEdAProc
     ShowHint = True
     TabOrder = 45
     Visible = True
+  end
+  object pnFileID: TPanel
+    Left = 247
+    Top = 506
+    Width = 235
+    Height = 24
+    BevelOuter = bvNone
+    BorderStyle = bsSingle
+    TabOrder = 46
+    object lbFileID: TvchDBText
+      Left = 0
+      Top = 0
+      Width = 231
+      Height = 20
+      Align = alClient
+      Color = clInfoBk
+      DataField = 'FILE_ID'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+      OnClick = lbFileIDClick
+      OnGetText = lbFileIDGetText
+    end
   end
   object alEditRec: TActionList
     Images = dmDocImg.imEditRec

@@ -165,8 +165,8 @@ Filename: "{app}\LaisSMDO.exe"; Description: "À¿»—.—ÃƒŒ"; Flags: nowait postinst
 root:HKCU;subkey:"Software\VCBOUS"; Flags: uninsdeletekeyifempty
 root:HKCU;subkey:"Software\VCBOUS\POST"; Flags: uninsdeletekey
 root:HKCU;subkey:"Software\VCBOUS\POST";valuetype:string;valuename:"installpath";valuedata:"{app}"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\POST";valuetype:string;valuename:"version";valuedata:"1.3.5"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\POST";valuetype:string;valuename:"update";valuedata:"25"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\POST";valuetype:string;valuename:"version";valuedata:"1.3.6"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\POST";valuetype:string;valuename:"update";valuedata:"26"; Flags: uninsdeletevalue
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\LastUpdate"

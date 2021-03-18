@@ -211,7 +211,7 @@ begin
     dmBase.tbMensSobst.Active:=false;
     dmBase.AdsConnection.CloseCachedTables;
     try
-      GlobalTask.LogFile.WriteToLogFile('Удаление списка собственников из БТИ.');
+      GlobalTask.WriteToLogFile('Удаление списка собственников из БТИ.');
       lDel:=false;
       try
         dmBase.AdsConnection.Execute('EXECUTE PROCEDURE sp_ZapTable('+QStr('НаселениеСобств')+')'); //'DELETE FROM НаселениеСобств');
@@ -221,7 +221,7 @@ begin
       if not lDel then begin
         dmBase.AdsConnection.Execute('DELETE FROM НаселениеСобств');
       end;
-      GlobalTask.LogFile.WriteToLogFile('Список собственников из БТИ удален.');
+      GlobalTask.WriteToLogFile('Список собственников из БТИ удален.');
     finally
       dmBase.tbMensSobst.Active:=true;
     end;
@@ -234,7 +234,7 @@ begin
   nLoad:=0;
   FExit:=false;
   nn:=0;
-  GlobalTask.LogFile.WriteToLogFile('Начало загрузки списка собственников из БТИ.');
+  GlobalTask.WriteToLogFile('Начало загрузки списка собственников из БТИ.');
   for i:=VarArrayLowBound(arr,1) to VarArrayHighBound(arr,1) do begin
     c := inttostr(i)+'=  ';
     sError:='';
@@ -308,7 +308,7 @@ begin
   lbZagr.Caption:='Загружкно '+IntToStr(nLoad);
   lbProp.Caption:='Пропущено '+IntToStr(nProp);
   Application.ProcessMessages;
-  GlobalTask.LogFile.WriteToLogFile('Окончание загрузки списка собственников из БТИ.');
+  GlobalTask.WriteToLogFile('Окончание загрузки списка собственников из БТИ.');
   xl:=null;
 end;
 

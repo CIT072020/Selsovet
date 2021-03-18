@@ -149,7 +149,7 @@ var
   n:Integer;
   lZBrak,lBrak,lRogd:Boolean;
   m1,m2,m3:Extended;
-  sSQL:String;
+  sAdd,sSQL:String;
 begin
   fmParam:=TfmParamQuest.Create(nil);
   fmParam.Caption:='Параметры';
@@ -158,6 +158,7 @@ begin
   fmParam.AddParamEx(true, 'Заявления о браке' , 'ZBRAK' ,'');
   fmParam.AddParamEx(true, 'Браки' , 'BRAK' ,'');
   fmParam.AddParamEx(true, 'Рождения' , 'ROGD' ,'');
+  fmParam.AddParamEx(true, 'Только мой загс' , 'ISMY' ,'');
   fmParam.AddButtons('Выполнить~Отказ',0);
   n:=fmParam.ShowQuest;
   if n=1 then begin
@@ -166,27 +167,28 @@ begin
     lZBrak:=fmParam.GetValue('ZBRAK','L');
     lBrak:=fmParam.GetValue('BRAK','L');
     lRogd:=fmParam.GetValue('ROGD','L');
+    if fmParam.GetValue('ISMY','L')
+      then sAdd:=' and id_zags='+GlobalTask.ParamAsString('ID') else sAdd:='';
     OpenMessage('  Расчет ...  ','',10);
     m1:=0;
     m2:=0;
     q:=nil;
     if lBrak then begin
-      q:=dbOpenSQL('SELECT Sum(isNull(TARIF,0)) SUMMA FROM ЗаключениеБраков WHERE datez>='+DateToSQL(Date1)+
-                   ' and datez<='+DateToSQL(Date2),'');
+      q:=dbOpenSQL('SELECT Sum(isNull(TARIF,0)) SUMMA FROM ЗаключениеБраков WHERE datez>='+DateToSQL(Date1)+' and datez<='+DateToSQL(Date2)+sAdd,'');
       m1:=q.Fld('SUMMA').AsFloat;
+      if q<>nil then dbClose(q);
     end;
     if lZBrak then begin
-      q:=dbOpenSQL('SELECT Sum(isNull(TARIF,0)) SUMMA FROM DeclareMarriage WHERE datez>='+DateToSQL(Date1)+
-                   ' and datez<='+DateToSQL(Date2),'');
+      q:=dbOpenSQL('SELECT Sum(isNull(TARIF,0)) SUMMA FROM DeclareMarriage WHERE datez>='+DateToSQL(Date1)+' and datez<='+DateToSQL(Date2)+sAdd,'');
       m3:=q.Fld('SUMMA').AsFloat;
+      if q<>nil then dbClose(q);
     end;
     if lRogd then begin
-      q:=dbOpenSQL('SELECT Sum(isNull(TARIF,0)) SUMMA FROM АктыРождений WHERE datez>='+DateToSQL(Date1)+
-                   ' and datez<='+DateToSQL(Date2),'');
+      q:=dbOpenSQL('SELECT Sum(isNull(TARIF,0)) SUMMA FROM АктыРождений WHERE datez>='+DateToSQL(Date1)+' and datez<='+DateToSQL(Date2)+sAdd,'');
       m2:=q.Fld('SUMMA').AsFloat;
+      if q<>nil then dbClose(q);
     end;
     CloseMessage();
-    if q<>nil then dbClose(q);
     if lZBrak or lBrak or lRogd then begin
       fmParam.Free;
       fmParam:=TfmParamQuest.Create(nil);
@@ -209,7 +211,7 @@ var
   n:Integer;
   lBrak,lZBrak,lRast,lChName:Boolean;
   m1,m2,m3,m4:Extended;
-  sSQL:String;
+  sAdd,sSQL:String;
 begin
   fmParam:=TfmParamQuest.Create(nil);
   fmParam.Caption:='Параметры';
@@ -217,8 +219,11 @@ begin
   fmParam.AddParamEx(Now, 'Конечная дата' , 'DATE2' ,'TYPE=DATE');
   fmParam.AddParamEx(true, 'Заявления о браке' , 'ZBRAK' ,'');
   fmParam.AddParamEx(true, 'Браки' , 'BRAK' ,'');
-  fmParam.AddParamEx(true, 'Разводы' , 'RAST' ,'');
-  fmParam.AddParamEx(true, 'Перемена ФИО' , 'CHNAME' ,'');
+  if IdProg='ZAGS' then begin
+    fmParam.AddParamEx(true, 'Разводы' , 'RAST' ,'');
+    fmParam.AddParamEx(true, 'Перемена ФИО' , 'CHNAME' ,'');
+    fmParam.AddParamEx(true, 'Только мой загс' , 'ISMY' ,'');
+  end;
   fmParam.AddButtons('Выполнить~Отказ',0);
   n:=fmParam.ShowQuest;
   if n=1 then begin
@@ -226,37 +231,37 @@ begin
     Date2:=fmParam.GetValue('DATE2','D');
     lZBrak:=fmParam.GetValue('ZBRAK','L');
     lBrak:=fmParam.GetValue('BRAK','L');
-    lRast:=fmParam.GetValue('RAST','L');
-    lChName:=fmParam.GetValue('CHNAME','L');
+    if IdProg='ZAGS' then begin
+      lRast:=fmParam.GetValue('RAST','L');
+      lChName:=fmParam.GetValue('CHNAME','L');
+      if fmParam.GetValue('ISMY','L')
+        then sAdd:=' and id_zags='+GlobalTask.ParamAsString('ID') else sAdd:='';
+    end else begin
+      lRast:=false;
+      lChName:=false;
+    end;
     OpenMessage('  Расчет ...  ','',10);
     m1:=0;
     m2:=0;
     m3:=0;
     q:=nil;
     if lBrak then begin
-      q:=dbOpenSQL('SELECT Sum(isNull(SUM_POSHLINA,0)) SUMMA FROM ЗаключениеБраков WHERE datez>='+DateToSQL(Date1)+
-                   ' and datez<='+DateToSQL(Date2),'');
+      q:=dbOpenSQL('SELECT Sum(isNull(SUM_POSHLINA,0)) SUMMA FROM ЗаключениеБраков WHERE datez>='+DateToSQL(Date1)+' and datez<='+DateToSQL(Date2)+sAdd,'');
       m1:=q.Fld('SUMMA').AsFloat;
     end;
     if lRast then begin
-      sSQL:='SELECT Sum(isNull(ON_SUM_POSHLINA,0)+isNull(ONA_SUM_POSHLINA,0)) SUMMA FROM AktTermMarriage WHERE datez>='+DateToSQL(Date1)+
-            ' and datez<='+DateToSQL(Date2);
-      if q=nil
-        then q:=dbOpenSQL(sSQL,'')
-        else dbChangeSQL(q, sSQL, true);
+      sSQL:='SELECT Sum(isNull(ON_SUM_POSHLINA,0)+isNull(ONA_SUM_POSHLINA,0)) SUMMA FROM AktTermMarriage WHERE datez>='+DateToSQL(Date1)+' and datez<='+DateToSQL(Date2)+sAdd;
+      if q=nil then q:=dbOpenSQL(sSQL,'') else dbChangeSQL(q, sSQL, true);
       m2:=q.Fld('SUMMA').AsFloat;
     end;
     if lChName then begin
-      sSQL:='SELECT Sum(isNull(SUM_POSHLINA,0)) SUMMA FROM AktChangeName WHERE datez>='+DateToSQL(Date1)+
-                   ' and datez<='+DateToSQL(Date2);
-      if q=nil
-        then q:=dbOpenSQL(sSQL,'')
-        else dbChangeSQL(q, sSQL, true);
+      sSQL:='SELECT Sum(isNull(SUM_POSHLINA,0)) SUMMA FROM AktChangeName WHERE datez>='+DateToSQL(Date1)+' and datez<='+DateToSQL(Date2)+sAdd;
+      if q=nil  then q:=dbOpenSQL(sSQL,'') else dbChangeSQL(q, sSQL, true);
       m3:=q.Fld('SUMMA').AsFloat;
     end;
     if lZBrak then begin
-      q:=dbOpenSQL('SELECT Sum(isNull(SUM_POSHLINA,0)) SUMMA FROM DeclareMarriage WHERE datez>='+DateToSQL(Date1)+
-                   ' and datez<='+DateToSQL(Date2),'');
+      sSQL:='SELECT Sum(isNull(SUM_POSHLINA,0)) SUMMA FROM DeclareMarriage WHERE datez>='+DateToSQL(Date1)+' and datez<='+DateToSQL(Date2)+sAdd;
+      if q=nil  then q:=dbOpenSQL(sSQL,'')  else dbChangeSQL(q, sSQL, true);
       m4:=q.Fld('SUMMA').AsFloat;
     end;
     CloseMessage();
@@ -493,7 +498,7 @@ begin
   dbClose(ds);
 end;
 
-function CheckAdresNoneMen : Boolean;
+function DelAdresNoneMen : Boolean;
 var
   ds : TDataSet;
   strSQL,s : String;
@@ -501,13 +506,12 @@ var
 begin
   Result := true;
   SetScreenCursor('HOURCLASS');
-  ds:=dbOpenSQL('SELECT ROWID,ID FROM Население WHERE propis=false and lic_id>0 and date_fiks='+QStr('1899-12-30'),'');
+  ds:=dbOpenSQL('SELECT ROWID,ID FROM Население WHERE candelete=true and propis=false and lic_id>0 and date_fiks='+QStr('1899-12-30'),'');
   i:=0;
   while not ds.Eof do begin
     s := dmBase.ReadPropAsText(STOD('1899-12-30',''), ds.Fld('ID').AsInteger, 'ADRES_PROP');
-    if s='' then begin
-      dmBase.WriteValueProp('ADRES_PROP','не известен', STOD('1899-12-30',''), ds.Fld('ID').AsInteger,
-                            dmBase.TypeObj_Nasel,ftMemo);
+    if ANSILowerCase(s)='не известен' then begin
+      dmBase.WriteValueProp('ADRES_PROP','', STOD('1899-12-30',''), ds.Fld('ID').AsInteger, dmBase.TypeObj_Nasel,ftMemo);
       i:=i+1;
     end; 	
     ds.Next;
@@ -791,11 +795,18 @@ begin
   end;
 end;
 //--------------------------------------------------------
+function CaptionPasp:String;
+begin
+  if GetGlobalFilterPunkt=''
+    then result:='По всем нас. пунктам'
+    else result:='По отобранным нас. пунктам';
+end;
+//--------------------------------------------------------
 function RaschetPogarPasp:Boolean;
 var
   q,q1,ds,dsL,dsLic:TDataSet;
   n,i:Integer;
-  s,strSQLTrud,strSQL,sKod,sAllInvalid,sInvalidI_II,sInvalidV:String;
+  s,strSQLTrud,strSQL,strSQL_,sKod,sAllInvalid,sInvalidI_II,sInvalidV:String;
   sss,s11,s12,s13,s14,s15,s16,s17:String;
   sDom,sKorp,sFilterPunkt:String;
   d:TDateTime;
@@ -846,7 +857,7 @@ begin
     ' adres_id=&adres& and Trud(curdate(),dater,pol)=1 and  not exists (select kod from НаселениеЛьготы nl where nl.date_fiks=n.date_fiks and nl.id=n.id and (&kod&) )';  		  
   strSQLTrud:=dmBase.CheckDateFiksSQL(strSQLTrud, MaindateFiks);
   strSQLTrud := StringReplace(strSQLTrud, '&kod&', sAllInvalid);
-  OpenMessage(' ____________Расчет паспорта ...        ','',10);
+  OpenMessage(' ____________Расчет паспорта ...        ',CaptionPasp,10);
   AppProcess;     
 
   ds := FindReportTable('ZAGS');
@@ -1090,16 +1101,19 @@ begin
   arr[1]:='ms_api=0';             // не оборудованных API 
   arr[2]:='ms_otopl=false';
   arr[3]:='ms_elpr=false';
-  strSQL:='select l.id lic_id, l.adres_id, a.punkt from ЛицевыеСчета l left join БазаДомов a on l.Date_fiks=a.Date_fiks and l.adres_id=a.id '+
+  strSQL_:='select l.id lic_id, l.adres_id, a.punkt from ЛицевыеСчета l left join БазаДомов a on l.Date_fiks=a.Date_fiks and l.adres_id=a.id '+
           'where l.date_fiks='+QStr(datecursostS)+' and &ssss&  &punkt& ';
-  strSQL:=dmBase.CheckDateFiksSQL(strSQL, MaindateFiks);
+  strSQL_:=dmBase.CheckDateFiksSQL(strSQL_, MaindateFiks);
+//  writedebug(strSQL_+crlf+'=================================');
   for i:=1 to 3 do begin
     s:=IntToStr(i);
-    strSQL:=StringReplace(strSQL, '&ssss&', arr[i])
+    strSQL:=StringReplace(strSQL_, '&ssss&', arr[i])
     strSQL:=StringReplace(strSQL, '&punkt&', sFilterPunkt);
     dbChangeSQL(q,strSQL,true);
+//    writedebug(strSQL+crlf+'---------');
     while not q.Eof do begin
       if dbLocate(ds,'NUM1',[q.Fld('PUNKT').AsInteger],'') then begin
+//        writedebug('NUM'+s+'00');
         ds.Edit;
         dbIncField( ds, 'NUM'+s+'00', 1);      // всего
         sss:='*'+q.Fld('LIC_ID').AsString+'*';
@@ -1167,7 +1181,7 @@ begin
   sFilterPunkt:=GetGlobalFilterPunkt;  //  !!!    использовать    возвращает a.punkt
 
   Result:=true;
-  OpenMessage('  Характеристика жилых помещений ... ','',10);
+  OpenMessage('  Характеристика жилых помещений ... ',CaptionPasp,10);
   AppProcess;
   ds := FindReportTable('ZAGS');
   dbZap(ds);
@@ -1386,6 +1400,87 @@ begin
   CloseMessage();
 //select id, kolvo_sostav from ochered
 end;
+
+procedure getOnaSoato;
+var
+  f:TfmParamQuest;
+  nAte,n:Integer;
+  s:String;
+  sObl,sRn,sNP,sTip:String;
+  ds:TDataSet;
+begin
+  sObl:='Брестская';
+  sRn:='Ленинский';
+  sNP:='Брест';
+  sTip:='1';
+  n:=1;
+  while n=1 do begin
+    f:=TfmParamQuest.Create(nil);
+    f.Caption:='Параметры';
+    f.AddParamEx(sObl, 'Область' , 'OBL' ,'WIDTH=250');
+    f.AddParamEx(sRn, 'Район' , 'RN' ,'WIDTH=250');
+    f.AddParamEx(sNP, 'Город(село)' , 'NP' ,'WIDTH=250');
+    f.AddParamEx(sTip, 'Тип нп' , 'TIP' ,'WIDTH=50');
+    f.AddButtons('Выполнить~Отказ',0);
+    n:=f.ShowQuest;
+    if n=1 then begin
+      sObl:=f.GetValue('OBL','S');
+      sRn:=f.GetValue('RN','S');
+      sNP:=f.GetValue('NP','S');
+      sTip:=Trim(f.GetValue('TIP','S'));
+      nATE:=dmBase.getATEsys(nil,sObl,sRn,'',sNP,'#'+sTip);   // # - не выдавть запрос если более 2 нас.пунктов, + - тип определять из названия
+      if nAte>0 then begin
+        ds:=dmBase.GetDataSet('ATE');
+        if dbLocate(ds,'ATE_ID', [nAte], '') then begin
+          ShowMessage(ds.FieldByName('KOD').AsString);
+        end;
+      end;
+    end;
+    f.Free;
+  end;
+end;
+
+procedure CheckOnaSoato;
+var
+  sSQL,sTb:String;
+  nAte,i:Integer;
+  ds,dsATE:TDataSet;
+begin
+  if LockOperation_(_TypeOper_Obrab,'') then begin
+    OpenMessage('Выполнение ...','',10);                            
+    try
+      dsATE:=dmBase.GetDataSet('ATE');
+      if dsATE=nil then PutError('нет таблицы ATE');
+      for i:=1 to 2 do begin
+        if i=1 then sTb:='ЗаключениеБраков' else sTb:='AktTermMarriage';
+        writedebug('----- '+sTb+' -------');
+        sSQL:= 'SELECT ID,DATEZ,ONA_SOATO,ONA_M_GOSUD,ONA_M_OBL,ON_M_B_RN,ONA_M_RAION,ONA_M_GOROD,ONA_M_B_GOROD '+
+              ' FROM '+sTb+' WHERE Year(datez)=2020 and (ONA_SOATO is null or ONA_SOATO='''') ';
+        ds:=dbOpenSQL(sSQL,'');
+        while not ds.Eof do begin
+          nATE:=dmBase.getATEsys(nil,ds.FieldByName('ONA_M_OBL').AsString,ds.FieldByName('ONA_M_RAION').AsString,'',
+                                     ds.FieldByName('ONA_M_GOROD').AsString,'#'+ds.FieldByName('ONA_M_B_GOROD').AsString);   // # - не выдавть запрос если более 2 нас.пунктов, + - тип определять из названия
+          if nATE>0 then begin
+            if dbLocate(dsAte,'ATE_ID', [nAte], '') then begin
+              dbExecuteSQL('update '+sTb+' set ona_soato='+QStr(dsATE.FieldByName('KOD').asString)+' where id='+ds.FieldByName('ID').AsString)
+              writedebug(dsAte.FieldByName('KOD').AsString);
+            end;
+          end else begin
+            writedebug(ds.FieldByName('ONA_M_OBL').AsString+', '+ds.FieldByName('ONA_M_RAION').AsString+', '+ds.FieldByName('ONA_M_GOROD').AsString);
+          end;
+          ds.next;
+        end;
+        dbClose(ds);
+      end;
+    finally
+      CloseMessage();
+    end;
+    UnLockOperation_(_TypeOper_Obrab);
+  end;
+//select id, kolvo_sostav from ochered
+end;
+
+
 
 
 

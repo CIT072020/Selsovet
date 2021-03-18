@@ -18,7 +18,7 @@ type
   TFormTableGurnal = class of TfmTableGurnal;
 
   TfmTableGurnal = class(TForm)
-    TBDock1: TTBDock;
+    TBDock: TTBDock;
     TBToolbar1: TTBToolbar;
     TBItemExit: TTBItem;
     Grid: TSasaDBGrid;
@@ -30,7 +30,7 @@ type
     TBItemColumnFilter: TTBItem;
     TBToolbarMove: TTBToolbar;
     TBControlItem1: TTBControlItem;
-    DBNavigator: TDBNavigator;
+    DBNavigator1: TDBNavigator;
     PopupMenu1: TPopupMenu;
     N1: TMenuItem;
     TBItemDel: TTBItem;
@@ -44,6 +44,23 @@ type
     TBSubmenuSysFilter: TTBSubmenuItem;
     cbOrderBy: TComboBox;
     TBControlItem3: TTBControlItem;
+    TBDock24: TTBDock;
+    DBNavigator24: TDBNavigator;
+    TBToolbarMenu24: TTBToolbar;
+    TBItemPreview24: TTBItem;
+    TBItemPrint24: TTBItem;
+    TBItemColumnFilter24: TTBItem;
+    TBItemRepeatFilter24: TTBItem;
+    TBItemClrFlt24: TTBItem;
+    TBItemExport24: TTBItem;
+    TBItemCount24: TTBItem;
+    TBItemReport24: TTBItem;
+    TBItemExit24: TTBItem;
+    TBItemDel24: TTBItem;
+    TBItemRefresh24: TTBItem;
+    TBSubmenuRun24: TTBSubmenuItem;
+    TBSubmenuSysFilter24: TTBSubmenuItem;
+    TBToolbarMenu24_2: TTBToolbar;
     procedure TBItemRefreshClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure TBItemExitClick(Sender: TObject);
@@ -80,7 +97,9 @@ type
     { Private declarations }
   public
 //    procedure SetRole;
-    FieldNotSeek:String;  // имена полей поиск по которым недоступен (в верхнем регистре, через ';')
+    FieldNotSeek:String;       // имена полей поиск по которым недоступен (в верхнем регистре, через ';')
+    FFilterFields:TStringList; // поля по которым установлен фильтр
+    FClearFilterControl:Boolean;
     ArrBookmark:TArrStrings;
     slKeyItems:TStringList;
     ExportColumns:TExportColumnList;
@@ -112,8 +131,18 @@ type
     function EnableSeekColumn(Column : TColumnEh) : Boolean; virtual;
     function UserSeekColumn( Column : TColumnEh; var strSeek:String) : Boolean; virtual;
     procedure ClearFilter;
+    procedure CheckFilterFields(sField:String; sFilter:String);
+    function  GetFilterFields:String;
     procedure BeforeReport; virtual;
     procedure AfterReport; virtual;
+
+    procedure CheckTbItems;
+    procedure PrepareMenu; virtual;
+
+    procedure VisibleItem(TBItem: TTBCustomItem; lSet:Boolean);
+    procedure VisibleItems(arrControls: array of TVarRec; lSet:Boolean);
+    procedure EnableItem(TBItem: TTBCustomItem; lSet:Boolean);
+
     function CheckExportColumns:Boolean; virtual;
     function FirstFieldInOrder(sField:String):Boolean;
   end;
@@ -154,6 +183,7 @@ begin
       Gurnal.KodGurnal := Gurnal.Name;
     end;
     Gurnal.LoadFromIni;
+    Gurnal.PrepareMenu;
     Globaltask.CurrentOpisEdit.SetKeyForm(Gurnal,nil);
   end;
   Gurnal.BringToFront;
@@ -165,40 +195,55 @@ var
   n:Integer;
 begin
   slKeyItems:=TStringList.Create;
+  FFilterFields:=TStringList.Create;
   FieldNotSeek:='';
+  FClearFilterControl:=true;
   FSysFltCaption:='';
   FMainCaption:=Caption;
   SetLength(ArrBookmark,0);
   FRunChange:=false;
-  FIndexFieldNames := TStringList.Create;
+  FIndexFieldNames:=TStringList.Create;
   FMainCaption := Caption;
   QuestDel := '  Удалить текущую запись ?  ';
   QuestDelArr := '  Удалить отмеченные записи ?  ';
-  TBItemClrFlt.Enabled := false;
+//  TBItemClrFlt.Enabled := false;
+  EnableItem(TBItemClrFlt, false);
   n:=Role.EnableEditTable(Table.TableName,0);
   if (n=0) then begin
-    TBItemDel.Enabled := false;
+//    TBItemDel.Enabled := false;
+    VisibleItem(TBItemDel, false);
     Table.ReadOnly := true;
   end;
   SetDateEditMask(Table);
   if GlobalTask.CountReport(Self.Name)=0 then begin
-    TBItemPreview.Visible:=false;
-    TBItemPrint.Visible:=false;
+    VisibleItem(TBItemPreview, false);
+    VisibleItem(TBItemPrint, false);
+//    TBItemPreview.Visible:=false;
+//    TBItemPrint.Visible:=false;
   end;
-  TBItemReport.Visible:=Role.SystemAdmin;
+  VisibleItem(TBItemReport, Role.SystemAdmin);
+//  TBItemReport.Visible:=Role.SystemAdmin;
+  if not TBItemDel.Visible and not TBItemDel24.Visible then begin
+    TBItemDel.ShortCut:=0;   //TextToShortCut('Ctrl+'+IntToStr(i+1));
+    TBItemDel24.ShortCut:=0;
+  end;
+  DBNavigator1.Hints.CommaText:='"Первая запись","Предыдущая запись","Следующая запись","Последняя запись","Добавить запись","Удалить запись","Редактировать","Принять изменения","Отменить","Обновить"';
+  DBNavigator24.Hints.CommaText:=DBNavigator1.Hints.CommaText;
 end;
 
 procedure TfmTableGurnal.FormDestroy(Sender: TObject);
 begin
   SetLength(ArrBookmark,0);
-  FIndexFieldNames.Free;
+  FreeAndNil(FIndexFieldNames);
+  FreeAndNil(slKeyItems);
+  FreeAndNil(FFilterFields);
 //  SaveToIni;
 end;
 
 procedure TfmTableGurnal.SaveToIni;
 var
-  ini : TSasaIniFile;      
-begin                                    
+  ini : TSasaIniFile;
+begin
   if KodGurnal<>'' then begin
     ini := GlobalTask.IniFile('FORM');
     CompToIni(Self,ini,KodGurnal,GlobalTask.PropForm,true);
@@ -269,7 +314,10 @@ begin
     if (i>-1) and (i<cbOrderBy.Items.Count) then begin
       cbOrderBy.ItemIndex:=i;
     end;
-    if cbOrderBy.Items.Count=0 then TBToolbar2.Visible:=false;
+    if cbOrderBy.Items.Count=0 then begin
+      TBToolbar2.Visible:=false;
+      TBToolbarMenu24_2.Visible:=false;
+    end;
     CheckPropertyGridColumns;
   end;
   FRunChange := false;
@@ -287,7 +335,6 @@ begin
     FRunChange:=true;
     try
       if (slKeyItems.Count>0) then begin
-//      if (cbOrderBy.KeyItems.Count>0) then begin
         if BeforeChangeOrder then begin
           if (cbOrderBy.ItemIndex>-1) and (cbOrderBy.Text<>'') then begin
             i := cbOrderBy.ItemIndex;
@@ -296,11 +343,11 @@ begin
             i := 0;
           end;
           ClearFilter;
-//          Table.IndexName := cbOrderBy.KeyItems.Strings[i];
-          Table.IndexName := slKeyItems.Strings[i];
+          Table.IndexName:=slKeyItems.Strings[i];
           Table.First;
           AfterChangeOrder;
-          TBItemClrFlt.Enabled:=false;
+          EnableItem(TBItemClrFlt, false);
+          SetCaptionGurnal(true,'');
         end;
       end;
     finally
@@ -318,7 +365,7 @@ begin
     s := FMainCaption;
   end else begin
     s := FMainCaption;
-    if Table.Filter<>''   then s:=s+' (установлен отбор) ';
+    if Table.Filter<>''   then s:=s+' (установлен отбор ['+inttostr(FFilterFields.Count)+'] ) ';
     if FSysFltCaption<>'' then s:=s+' '+FSysFltCaption;
 //    if strAddName='' then strAddName:='без имени';
 //    s := FMainCaption + '( доп. отбор: '+strAddName+' )';
@@ -413,7 +460,7 @@ var
   i:Integer;
 begin
   Table.CheckBrowseMode;
-  if TBItemDel.Enabled then begin
+  if (TBItemDel.Visible or TBItemDel24.Visible) and (TBItemDel.Enabled or TBItemDel24.Enabled) then begin
     SetLength(ArrBookmark,0);
     SelectionToArr(Grid,ArrBookmark);
     if Length(ArrBookmark)=0 then begin
@@ -483,6 +530,28 @@ begin
   end;
 end;
 
+procedure TfmTableGurnal.CheckFilterFields(sField:String; sFilter:String);
+var
+  n:Integer;
+begin
+  n:=FFilterFields.IndexOfName(sField);
+  if n=-1
+    then FFilterFields.Add(sField+'='+sFilter)
+    else FFilterFields.Strings[n]:=sField+'='+sFilter;
+end;
+function TfmTableGurnal.GetFilterFields:String;
+var
+  n:Integer;
+begin
+  Result:='';
+  if FFilterFields.Count=0
+    then exit;
+  for n:=0 to FFilterFields.Count-1 do begin
+    Result:=Result+FFilterFields.ValueFromIndex[n]+' and ';
+  end;
+  Result:=Copy(Result,1,Length(Result)-5);
+end;
+
 procedure TfmTableGurnal.GridTitleBtnClick(Sender: TObject; ACol: Integer; Column: TColumnEh);
 var
   strFilter:String;
@@ -494,10 +563,12 @@ begin
       strFilter:=GridSeekColumn(Column, true, false, nil);
     end;
     if strFilter<>'' then begin
-      LastFilter     := strFilter;
+      CheckFilterFields(Column.FieldName, strFilter);
+      LastFilter     := GetFilterFields; //  strFilter;
       Table.Filter   := GetFullFilter;
       Table.Filtered := true;
-      TBItemClrFlt.Enabled:=true;
+//      TBItemClrFlt.Enabled:=true;
+      EnableItem(TBItemClrFlt, true);
       SetCaptionGurnal(false,'');
     end;
   end;
@@ -507,7 +578,8 @@ procedure TfmTableGurnal.TBItemRepeatFilterClick(Sender: TObject);
 begin
   Table.CheckBrowseMode;
   if LastFilter<>'' then begin
-    TBItemClrFlt.Enabled := true;
+//    TBItemClrFlt.Enabled := true;
+    EnableItem(TBItemClrFlt, true);
     Table.Filter   := GetFullFilter;
     Table.Filtered := true;
     SetCaptionGurnal(false,'');
@@ -518,6 +590,8 @@ procedure TfmTableGurnal.ClearFilter;
 begin
   Table.CheckBrowseMode;
   BeforeClearFilter;
+  LastFilter:='';
+  FFilterFields.Clear;
   if BeginFilter<>'' then begin
     Table.Filter   := BeginFilter;
     Table.Filtered := true;
@@ -531,14 +605,17 @@ procedure TfmTableGurnal.TBItemClrFltClick(Sender: TObject);
 begin
   ClearFilter;
   Refresh;
-  TBItemClrFlt.Enabled:=false;
+//  TBItemClrFlt.Enabled:=false;
+  EnableItem(TBItemClrFlt, false);
 end;
 
 procedure TfmTableGurnal.UpdateActions;
 begin
   inherited;
-  TBItemRepeatFilter.Enabled := LastFilter<>'';
-  TBItemDel.Enabled := not (Table.Eof and Table.Bof);
+//  TBItemRepeatFilter.Enabled := LastFilter<>'';
+  EnableItem(TBItemRepeatFilter, LastFilter<>'');
+//  TBItemDel.Enabled := not (Table.Eof and Table.Bof);
+  EnableItem(TBItemDel, not (Table.Eof and Table.Bof));
 end;
 
 procedure TfmTableGurnal.TBItemColumnFilterClick(Sender: TObject);
@@ -553,10 +630,16 @@ begin
   end;
 end;
 
-procedure TfmTableGurnal.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TfmTableGurnal.FormKeyDown(Sender: TObject; var Key: Word;  Shift: TShiftState);
 begin
-//
+  if (ssCtrl in Shift) and (ssShift in Shift) then begin
+    case Key of
+      32: begin           // Space     
+            ShowMessage('Фильтр: '+Table.Filter+#13#10+FFilterFields.Text);
+            Key:=0;
+          end;
+    end;
+  end;
 end;
 
 procedure TfmTableGurnal.SetBeginFilter(const Value: String);
@@ -748,5 +831,90 @@ begin
     end;
   end;
 end;
+//--------------------------------------------
+procedure TfmTableGurnal.PrepareMenu;
+begin
+  CheckTbItems;
+end;
+//--------------------------------------------
+procedure TfmTableGurnal.CheckTbItems;
+var
+  s:String;
+  i,j,m:Integer;
+  item:TTBCustomItem;
+  sm:TTBSubmenuItem;
+begin
+  if not EnabledMenu24 then begin
+    TBDock.Visible:=true;
+    TBDock24.Visible:=false;
+    exit;
+  end;
+  TBDock.BeginUpdate;
+  TBDock24.BeginUpdate;
+  TBToolbarMenu24.BeginUpdate;
+  for i:=0 to TBToolbar1.Items.Count-1 do begin
+    item:=TBToolbar1.Items[i];
+    s:=TBToolbar1.Items[i].Name+'24';
+    for j:=0 to TBToolbarMenu24.Items.Count-1 do begin
+      if MySameText(s, TBToolbarMenu24.Items[j].Name ) then begin
+        if TBToolbarMenu24.Items[j].Visible<>item.Visible
+          then TBToolbarMenu24.Items[j].Visible:=item.Visible;
+        if TBToolbarMenu24.Items[j].Enabled<>item.Enabled
+          then TBToolbarMenu24.Items[j].Enabled:=item.Enabled;
+        TBToolbarMenu24.Items[j].Hint:=item.Hint;
+//        TBToolbarMenu24.Items[j].OnClick:=item.OnClick;
+        TBToolbarMenu24.Items[j].Tag:=Integer(Pointer(item));
+        item.Tag:=Integer(Pointer(TBToolbarMenu24.Items[j]));
+        if item is TTBSubmenuItem then begin
+          sm:=TTBSubmenuItem(item);
+          for m:=0 to sm.Count-1 do begin
+            if sm.Items[m].Images=nil
+              then sm.Items[m].Images:=sm.Images;
+          end;
+          TTBSubmenuItem(TBToolbarMenu24.Items[j]).LinkSubitems:=item; // Clear;
+        end;
+      end;
+    end;
+  end;
+  TBToolbarMenu24.EndUpdate;
+  if Menu24(2) then begin
+    TBDock24.Visible:=true;
+    TBDock.Visible:=false;
+    cbOrderBy.Parent:=TBToolbarMenu24_2;
+  end else begin
+    TBDock24.Visible:=false;
+    TBDock.Visible:=true;
+  end;
+  TBDock.EndUpdate;
+  TBDock24.EndUpdate;
+end;
+
+//-------------------------------------------
+procedure TfmTableGurnal.VisibleItem(TBItem: TTBCustomItem; lSet:Boolean);
+begin
+  TBItem.Visible:=lSet;
+  if (TBItem.Tag>0)
+    then TTBCustomItem(TBItem.Tag).Visible:=lSet;
+end;
+//------------------------------------------
+procedure TfmTableGurnal.VisibleItems(arrControls: array of TVarRec; lSet:Boolean);
+var
+  i : Integer;
+begin
+  for i:=Low(arrControls) to High(arrControls) do begin
+    with arrControls[i] do begin
+      if VObject is TTBCustomItem
+        then TTBCustomItem(VObject).Visible:=false;
+    end;
+  end;
+end;
+//-------------------------------------------
+procedure TfmTableGurnal.EnableItem(TBItem: TTBCustomItem; lSet:Boolean);
+begin
+  TBItem.Enabled:=lSet;
+  if (TBItem.Tag>0)
+    then TTBCustomItem(TBItem.Tag).Enabled:=lSet;
+end;
+
 
 end.

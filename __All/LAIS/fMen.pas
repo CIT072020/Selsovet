@@ -108,13 +108,6 @@ type
     edDolgNameVUS: TDBEditEh;
     edWorkNameVUS: TDBEditEh;
     Label48: TLabel;
-    gbDateSV: TGroupBox;
-    Label42: TLabel;
-    edDateSV_VK: TDBDateTimeEditEh;
-    Label43: TLabel;
-    edDateSV_LIC: TDBDateTimeEditEh;
-    Label44: TLabel;
-    edDateSV_F2: TDBDateTimeEditEh;
     gbKomiss: TGroupBox;
     edDateKomiss: TDBDateTimeEditEh;
     edKomiss: TDBLookupComboboxEh;
@@ -171,13 +164,6 @@ type
     edPasp_Organ: TDBEditEh;
     Label68: TLabel;
     edDateProp2: TDBDateTimeEditEh;
-    gbPens: TGroupBox;
-    Label21: TLabel;
-    Label23: TLabel;
-    Label24: TLabel;
-    edPENS_TIP: TDBLookupComboboxEh;
-    edPENS_KNIGA: TDBEditEh;
-    edPENS_DATE: TDBDateTimeEditEh;
     ImageSpec: TImage;
     N_F_cbSpec: TDBCheckBoxEh;
     edUdost: TDBComboBoxEh;
@@ -282,11 +268,6 @@ type
     Panel5: TPanel;
     edPrim: TDBMemo;
     gbPrizn: TGroupBox;
-    gbParent: TGroupBox;
-    edPapa: TDBEditEh;
-    edMama: TDBEditEh;
-    lbpapa: TLabel;
-    lbMama: TLabel;
     gbOtkudaPrib: TGroupBox;
     Label103: TLabel;
     Label104: TLabel;
@@ -393,7 +374,7 @@ type
     edWorkTelefonVUS: TDBEditEh;
     Label121: TLabel;
     edAGitTel: TDBEditEh;
-    pnUdostLgot: TPanel;
+    pnAdd: TPanel;
     Label122: TLabel;
     edUdostLgot: TDBEditEh;
     N_F_cbMnogo4: TDBCheckBoxEh;
@@ -434,6 +415,17 @@ type
     dsSverki: TDataSource;
     Label73: TLabel;
     edSuprug2: TDBEditEh;
+    Label21: TLabel;
+    edPENS_TIP: TDBLookupComboboxEh;
+    Label23: TLabel;
+    edPENS_KNIGA: TDBEditEh;
+    Label24: TLabel;
+    edPENS_DATE: TDBDateTimeEditEh;
+    lbpapa: TLabel;
+    edPapa: TDBEditEh;
+    lbMama: TLabel;
+    edMama: TDBEditEh;
+    cbIskl: TDBCheckBoxEh;
     procedure FormShow(Sender: TObject);
     procedure dsMigrDataChange(Sender: TObject; Field: TField);
     procedure edPolChange(Sender: TObject);
@@ -601,6 +593,8 @@ begin
 
   edDateLgotEl.EditButtons[0].Glyph:=ImBtRun.Picture.Bitmap;
   edDateLgotEl.EditButtons[1].Glyph:=ImBtClear.Picture.Bitmap;
+  edUdost.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edUdost.DropDownBox.Width:=TYPEDOK_Width;  // utypes.pas
 
   FSubType:='LIC';
 
@@ -872,6 +866,7 @@ begin
       edDolgNameVUS.Font.Style := [fsBold];
     end;
   end;
+  cbIskl.Enabled:=(edDateUb.Value<>null);
 end;
 
 procedure TfmMen.FormShow(Sender: TObject);
@@ -1142,6 +1137,7 @@ begin
     Screen.OnActiveControlChange:=ActiveControlChanged;
     CheckImageAndFont;
     CheckDecDate;
+    EditDataSet(dmMen.mtDokument);
     if ShowModal = mrOk then begin
       Result := true;
     end;
@@ -1309,7 +1305,9 @@ begin
   if not dmMen.IsReadDokument then begin
     if dmMen.mtDokumentADRES_ID.AsInteger>0 then begin
       TextAdres.Font.Color:=clBlack;
-      Text := dmBase.AdresFromID( Dokument.DateFiks, dmMen.mtDokumentADRES_ID.AsString );
+      if dmMen.EditFromLichSchet  // если корректируем из лицевого счета, то вызываем только для формирования строки адреса
+        then Text:=dmBase.AdresFromIDEx( Dokument.DateFiks, dmMen.mtDokumentADRES_ID.AsString,true,true)
+        else Text:=dmBase.AdresFromID( Dokument.DateFiks, dmMen.mtDokumentADRES_ID.AsString); // дополнительно заполняются переменные Adres_ ...
     end else begin  // для тех кто проживает не в сельском совет
       TextAdres.Font.Color:=clBlue;
       Text := dmMen.GetAddAdresProp;
@@ -1338,7 +1336,7 @@ begin
       if dmMen.mtDokumentEN_ADRES_ID.AsInteger>0 then begin
         TextAdres.Font.Color:=clBlack;
         sBookmark:=dmBase.tbLich.Bookmark;
-        Text := dmBase.AdresFromID( Dokument.DateFiks, dmMen.mtDokumentEN_ADRES_ID.AsString );
+        Text := dmBase.AdresFromIDEx( Dokument.DateFiks, dmMen.mtDokumentEN_ADRES_ID.AsString, true, true );
         if dmMen.mtDokumentEN_LIC_ID.AsInteger>0 then begin
           if dmBase.tbLich.Locate('DATE_FIKS;ID',VarArrayOf([dmMen.DateFiks,dmMen.mtDokumentEN_LIC_ID.AsInteger]),[]) then begin
             s:=dmBase.tbLich.FieldbyName('NOMER').AsString;
@@ -1409,6 +1407,7 @@ end;
 //--------------------------------------------------------------------------------------------------------
 //  choice adres
 //--------------------------------------------------------------------------------------------------------
+//---- 1
 procedure TfmMen.btAdresSimpleClick(Sender: TObject);
 var
   lErr : Boolean;
@@ -1422,13 +1421,14 @@ begin
     dmMen.mtDokument.Edit;
     dmMen.mtDokumentADRES_ID.AsInteger:=fmChoiceAdresS.IDAdres;
     dmMen.mtDokument.Post;
+    dmBase.AdresFromID(Dokument.DateFiks, dmMen.mtDokumentADRES_ID.AsString, false); // заполним переменные Adres_ ...
     if dmMen.EditFromLichSchet then begin
       TdmLichSchet(Dokument).ReadPropAdres(lErr);
     end;
     CheckControl;
   end;
 end;
-
+//---- 2
 procedure TfmMen.btAdresVvodClick(Sender: TObject);
 var
   adr : TAdres;
@@ -1437,7 +1437,7 @@ var
   lErr:Boolean;
 begin
   dsDokument.DataSet.CheckBrowseMode;
-  dmBase.AdresFromID(Dokument.DateFiks, dmMen.mtDokumentADRES_ID.AsString, false);
+  dmBase.AdresFromID(Dokument.DateFiks, dmMen.mtDokumentADRES_ID.AsString, false);    // заполним переменные Adres_ ...
   adr.PunktKod:=dmBase.Adres_PunktKod;
   if dmMen.mtDokumentADRES_ID.AsInteger<=0
     then adr.UlicaInt:=-1
@@ -1461,13 +1461,14 @@ begin
     dmMen.mtDokument.Edit;
     dmMen.mtDokumentADRES_ID.AsInteger:=adr.AdresID;
     dmMen.mtDokument.Post;
+    dmBase.AdresFromID(Dokument.DateFiks, dmMen.mtDokumentADRES_ID.AsString, false);  // заполним переменные Adres_ ...
     if dmMen.EditFromLichSchet then begin
       TdmLichSchet(Dokument).ReadPropAdres(lErr);
     end;
     CheckControl;
   end;
 end;
-
+//---- 3
 procedure TfmMen.btAdresClick(Sender: TObject);
 var
   lErr : Boolean;
@@ -1482,6 +1483,7 @@ begin
     dmMen.mtDokument.Edit;
     dmMen.mtDokumentADRES_ID.AsInteger:=fmChoiceAdres.IDAdres;
     dmMen.mtDokument.Post;
+    dmBase.AdresFromID(Dokument.DateFiks, dmMen.mtDokumentADRES_ID.AsString, false);  // заполним переменные Adres_ ...
     if dmMen.EditFromLichSchet then begin
       TdmLichSchet(Dokument).ReadPropAdres(lErr);
     end;
@@ -1526,6 +1528,7 @@ begin
     if dmMen.mtDokumentADRES_ID_GIT.AsString=''
       then sAdr:=dmMen.mtDokumentADRES_ID.AsString
       else sAdr:=dmMen.mtDokumentADRES_ID_GIT.AsString;
+    dmBase.SaveGlobalAdres; // сохраним переменные Adres_ ...
     dmBase.AdresFromID(Dokument.DateFiks, sAdr, false);
     adr.PunktKod:=dmBase.Adres_PunktKod;
     adr.UlicaInt:=dmBase.Adres_UlKod;
@@ -1547,6 +1550,7 @@ begin
       dmMen.mtDokumentADRES_ID_GIT.AsInteger:=adr.AdresID;
       dmMen.mtDokument.Post;
     end;
+    dmBase.RestGlobalAdres;  // восстановим переменные Adres_ ...
   end;
 end;
 //--------------------------------------------------------------------------------------------------------
@@ -2362,7 +2366,7 @@ begin
     dmMen.mtDokumentAGIT_KV.AsString:='';
 
     dmMen.mtDokumentADD_ADRES_GIT.AsBoolean:=false;
-    dmMen.mtDokumentADRES_GIT.AsString:=dmBase.AdresFromID(fmMain.DateFiks , dmMen.mtDokumentADRES_ID.AsString);
+    dmMen.mtDokumentADRES_GIT.AsString:=dmBase.AdresFromIDEx(fmMain.DateFiks , dmMen.mtDokumentADRES_ID.AsString, true, true);
 
     dmMen.mtDokument.Post;
   end;
@@ -2425,7 +2429,7 @@ begin
   Text:='';
   if dmMen.mtDokumentNEW_ADRES_ID.AsInteger>0 then begin
     TextAdres.Font.Color:=clBlack;
-    Text := dmBase.AdresFromID( Dokument.DateFiks, dmMen.mtDokumentNEW_ADRES_ID.AsString );
+    Text := dmBase.AdresFromIDEx( Dokument.DateFiks, dmMen.mtDokumentNEW_ADRES_ID.AsString, true, true );
   end;
 end;
 
@@ -2616,9 +2620,9 @@ end;
 procedure TfmMen.vchDBText3GetText(Sender: TObject; var Text: String);
 begin
   Text:='';
-  if dmMen.mtDokumentADRES_ID_GIT.AsInteger>0 then begin
+  if (dmMen.mtDokumentADRES_ID_GIT.AsInteger>0) then begin
     TextAdres.Font.Color:=clBlack;
-    Text := dmBase.AdresFromID( Dokument.DateFiks, dmMen.mtDokumentADRES_ID_GIT.AsString );
+    Text := dmBase.AdresFromIDEx( Dokument.DateFiks, dmMen.mtDokumentADRES_ID_GIT.AsString, true, true );
   end;
 end;
 //-----------------------------------------------------------------------

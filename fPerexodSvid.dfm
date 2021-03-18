@@ -1,6 +1,6 @@
 object fmPerexodSvid: TfmPerexodSvid
-  Left = 298
-  Top = 220
+  Left = 430
+  Top = 214
   BorderStyle = bsDialog
   Caption = #1055#1077#1088#1077#1093#1086#1076' '#1085#1072' '#1085#1086#1074#1099#1081' '#1075#1086#1076
   ClientHeight = 193
@@ -12,14 +12,14 @@ object fmPerexodSvid: TfmPerexodSvid
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poMainFormCenter
+  Position = poOwnerFormCenter
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object lbDate: TLabel
     Left = 16
-    Top = 48
-    Width = 89
+    Top = 51
+    Width = 81
     Height = 16
     Caption = #1053#1072' 1 '#1103#1085#1074#1072#1088#1103
     Font.Charset = DEFAULT_CHARSET
@@ -30,10 +30,10 @@ object fmPerexodSvid: TfmPerexodSvid
     ParentFont = False
   end
   object Lb: TLabel
-    Left = 17
-    Top = 76
+    Left = 13
+    Top = 84
     Width = 377
-    Height = 97
+    Height = 95
     AutoSize = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clNavy
@@ -77,15 +77,21 @@ object fmPerexodSvid: TfmPerexodSvid
   object edYear: TDBNumberEditEh
     Left = 136
     Top = 46
-    Width = 76
-    Height = 21
+    Width = 92
+    Height = 26
     DecimalPlaces = 0
     DisplayFormat = '9999'
     EditButton.Style = ebsUpDownEh
     EditButton.Visible = True
     EditButtons = <>
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
     MaxValue = 2000.000000000000000000
     MinValue = 2008.000000000000000000
+    ParentFont = False
     TabOrder = 1
     Visible = True
   end
@@ -94,7 +100,6 @@ object fmPerexodSvid: TfmPerexodSvid
     Top = 96
   end
   object AdsQuery2: TAdsQuery
-    StoreActive = True
     AdsConnection = dmBase.AdsConnection
     Left = 352
     Top = 74

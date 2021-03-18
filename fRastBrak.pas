@@ -1492,6 +1492,11 @@ begin
     ImageGISUN.Visible := false;
   {$ENDIF}
   TBItemHistCorr.Visible:=FUpdatingObj;
+
+  edON_DOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edONA_DOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;
+  edON_DOK_TYPE.DropDownBox.Width:=TYPEDOK_Width;  // utypes.pas
+  edONA_DOK_TYPE.DropDownBox.Width:=TYPEDOK_Width;
 end;
 
 destructor TfmRastBrak.Destroy;
@@ -2198,14 +2203,17 @@ begin
       then s := DokumentON_FamiliaP.AsString
       else s := DokumentON_Familia.AsString;
     if s='' then s:='-';
-    s := s+' '+DokumentON_NAME.AsString+' '+DokumentON_OTCH.AsString;
+//    s := s+' '+DokumentON_NAME.AsString+' '+DokumentON_OTCH.AsString;
     if SvidInPadeg(TypeObj) then begin  // свидетельство в падеже
-      s := GetPadegFIO(s,'м','Д');
+//      s := GetPadegFIO(s,'м','Д');   // подвисало для
+      s := GetPadegFIO3(s, DokumentON_NAME.AsString, DokumentON_OTCH.AsString,'м','Д');
       if not LastSimIsLower(s) then s:=ANSIUpperCase(s);
+    end else begin
+      s:=s+' '+DokumentON_NAME.AsString+' '+DokumentON_OTCH.AsString;
     end;
     StrToArr(s,arr,' ',false);
     SetLength(arr,3);
-    if arr[0]='-'
+      if arr[0]='-'
       then DokumentON_Familia_PD.AsString:=''
       else DokumentON_Familia_PD.AsString:=arr[0];
     DokumentON_NAME_PD.AsString:=arr[1];
@@ -2216,10 +2224,13 @@ begin
       then s := DokumentONA_FamiliaP.AsString
       else s := DokumentONA_Familia.AsString;
     if s='' then s:='-';
-    s := s+' '+DokumentONA_NAME.AsString+' '+DokumentONA_OTCH.AsString;
+//    s := s+' '+DokumentONA_NAME.AsString+' '+DokumentONA_OTCH.AsString;
     if SvidInPadeg(TypeObj) then begin  // свидетельство в падеже
-      s := GetPadegFIO(s,'ж','Д');
+//      s := GetPadegFIO(s,'ж','Д');
+      s := GetPadegFIO3(s, DokumentON_NAME.AsString, DokumentON_OTCH.AsString,'ж','Д');
       if not LastSimIsLower(s) then s:=ANSIUpperCase(s);
+    end else begin
+      s:=s+' '+DokumentONA_NAME.AsString+' '+DokumentONA_OTCH.AsString;
     end;
     StrToArr(s,arr,' ',false);
     SetLength(arr,3);

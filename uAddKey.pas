@@ -19,7 +19,7 @@ function CheckAddKeyEx( strType:String; strSearch : String ) : Boolean;
 var
   s : String;
 begin
-  Result := false;
+  Result:=false;
   if (strSearch<>'') then begin
     if Copy(strSearch,1,1)='S' then begin
       if Copy(strSearch,2,1)<>'' then begin
@@ -43,7 +43,8 @@ begin
         // 3474644
         dmBase.WorkQueryS.SQL.Text:='select top 1 * from addid where system='+QStr(strType)+' and id='+QStr(strSearch);
         dmBase.WorkQueryS.Open;
-        if dmBase.WorkQueryS.FieldByName('SYSTEM').AsString<>'' then Result:=true;
+        if dmBase.WorkQueryS.FieldByName('SYSTEM').AsString<>''
+          then Result:=true;
         dmBase.WorkQueryS.Close;
       end;
     end;

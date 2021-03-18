@@ -17,13 +17,16 @@ inherited fmGurnZBrak: TfmGurnZBrak
   end
   inherited Grid: TSasaDBGrid
     Width = 935
-    Height = 488
+    Height = 454
     OnGetCellParams = GridGetCellParams
   end
   inherited StBar: TStatusBar
     Top = 514
     Width = 935
     OnDrawPanel = nil
+  end
+  inherited TBDock24: TTBDock
+    Width = 935
   end
   inherited Query: TAdsQuery
     ParamData = <>

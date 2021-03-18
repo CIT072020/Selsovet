@@ -8,6 +8,12 @@ begin
 //
 end;
 
+procedure Main_ExcelReport;
+begin
+  slExcelReport.Add('Список пустующих жилых помещений=ExcelListEmptyAdres');
+  slExcelReport.Add('Льготники на оплату ЖКУ=ExcelListLgotEl');
+end;
+
 procedure fmGurnOchered_ExcelReport;
 begin
   slExcelReport.Add('Cписок нуждающихся в улучшении жилищных условий=ListOchered10');
@@ -17,9 +23,17 @@ end;
 
 procedure fmGurnalAdres_ExcelReport;
 begin
-  slExcelReport.Add('Количество дворов в разрезе нас. пунктов=ListCountDvor');
   slExcelReport.Add('Количество проживающих для переписи=ListCountPerepis');
-  slExcelReport.Add('Список для обследование дом.хозяйств (май 2018)=ObsledDomHoz2');
+  slExcelReport.Add('Количество проживающих для переписи(по квартирам)=ListCountPerepisKv');
+  slExcelReport.Add('----------');
+//  slExcelReport.Add('Перепись. Данные по населенным пунктам=ListCountPerepis2');
+//  slExcelReport.Add('----------');
+  slExcelReport.Add('Количество дворов в разрезе нас. пунктов=ListCountDvor');
+  slExcelReport.Add('Список для обследования дом.хозяйств (даты рождений)=ObsledDomHoz4');
+  slExcelReport.Add('Численность скота и птицы=ObsledDomHoz5');
+//  slExcelReport.Add('3 Список для обследования дом.хозяйств (январь 2019)=ObsledDomHoz3');
+  slExcelReport.Add('Список пустующих жилых помещений=ExcelListEmptyAdres');
+  slExcelReport.Add('Льготники на оплату ЖКУ=ExcelListLgotEl');
 end;
 
 const
@@ -47,293 +61,7 @@ begin
   if Result<>'' then Result:=Copy(Result,1,Length(Result)-1);
 end;
 
-procedure ObsledDomHoz1;
-var
- XL:Variant;
- eh:TExcelHelper;
- f:TfmParamQuest;
- n,i,nFirst,nLast,ind:Integer;
- sl : TStringList;
- sRn,sNameExcel,sNameTemp,s,sPath,sSQL,sNPunkt,sPunkt,sLgot:String;
- lOk:Boolean;
- v:Variant;
- q,tb,ds:TDataSet;
-begin
-  f:=TfmParamQuest.Create(nil);
-  f.Caption:='Параметры';
-//  f.AddParamEx(true, 'Вывод домохозяйств с пустыми значениями' , 'ALL','TYPE=BOOLEAN');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('LIST_PUNKT_OBSL'), 'Названия нас. пунктов через запятую(или -)' , 'SPISOK','TYPE=STRING~WIDTH=300');
-//  fmParam.AddParamEx(Now, 'Начальная дата' , 'DATE1' ,'TYPE=DATE');
-// не работает   fmParam.AddParamEx('', 'Район города2' , 'RNGOROD2' ,'TYPE=LIST~DESC=KEY_RN_MYGOR~WIDTH=150');
-  f.AddButtons('Выполнить~Отказ',0);
-  n:=f.ShowQuest;
-  sNPunkt:=Trim(f.GetValue('SPISOK','C'));
-  lOk:=false;
-  if (n=1) and (sNPunkt<>'') then begin
-    lOk:=true;
-    sPunkt:='';
-    sLgot:='';
-    if sNPunkt='-' then begin
-      ds:=dbGetDataSet('dmBase.SprPunkt');
-      ds.First;
-      while not ds.Eof do begin
-        sPunkt:=sPunkt+ds.Fld('ID').AsString+',';
-        ds.Next;
-      end;
-      ds.First;
-    end else begin
-      sl:=TStringList.Create;
-      StrToStrings(sNPunkt, sl, ',');
-      for i:=0 to sl.Count-1 do begin
-        if Trim(sl.Strings[i])<>'' then begin
-          n:=Pos('.', sl.Strings[i]);
-          if n>0 then s:=Copy(sl.Strings[i],n+1,100) else s:=sl.Strings[i];
-          v:=SeekValueSpr('СпрНасПунктов','NAME',Trim(s),'ID');
-          if v=null then v:=0;
-          if v>0 then begin
-            sPunkt:=sPunkt+IntToStr(v)+',';
-          end else begin
-            lOk:=false;
-            PutError('Не найден: '+s);
-          end;
-        end;
-      end;
-      sl.Free;
-    end;
-    sLgot:=KodAllInvalid;
-    if sLgot='' then sLgot:='999';
-  end;
-  if lOk and (sPunkt<>'') then begin
-    XL:=GetOfficeObject('Excel',lOk);
-    if lOk then begin
-      GlobalTask.SetLastValueAsString('LIST_PUNKT_OBSL', sNPunkt);
-      sPunkt:=Copy(sPunkt,1,Length(sPunkt)-1);
-
-      sSQL:=dmBase.LoadSQLEx('Обследование-2018-02_0');
-      sSQL:=StringReplace(sSQL, '&punkt&', sPunkt);
-      MemoWrite('last.sql',sSQL);
-      tb:=dbOpenSQL2MemTable(sSQL,'');
-//      tb := dbCreateMemTable('ADRES,Integer,0;COUNT_ALL,Integer,0;COUNT_INV1,Integer,0;COUNT_INV2,Integer,0;','');
-//      tb.Open;
-      sSQL:=dmBase.LoadSQLEx('Обследование-2018-02_1');
-      sSQL:=StringReplace(sSQL, '&punkt&', sPunkt);
-      sSQL:=StringReplace(sSQL, '&lgot&', sLgot);
-      OpenMessage(' Выполнение выгрузки ...      ','',10);
-      sRn:=ParamAsString('RAION');
-      sNameTemp:='Обследование дом хозяйств.xls';
-      sNameExcel:=sRn+ ' район '+ParamAsString('KNAME')+'.xls';
-//      DeleteFile(GetFileExcel(sNameExcel));
-//      CopyFile(GetFileExcelReport(sNameTemp), GetFileExcel(sNameExcel), false, true, false);
-      XL.WorkBooks.Add(GetFileExcelReport(sNameTemp));
-      q:=dbOpenSQL(sSQL,'');
-      while not q.Eof do begin
-        if dbLocate(tb, 'ADRES', [q.Fld('ADRES_ID').AsInteger],'') then begin
-          tb.Edit;
-          tb.Fld('COUNT_INV1').AsInteger:=q.Fld('INV1').AsInteger;
-          tb.Fld('COUNT_INV2').AsInteger:=q.Fld('INV2').AsInteger;
-          tb.Post;
-        end;
-        q.next;
-      end;
-      sSQL:=dmBase.LoadSQLEx('Обследование-2018-02_2');
-      sSQL:=StringReplace(sSQL, '&punkt&', sPunkt);
-      sSQL:=StringReplace(sSQL, '&lgot&', sLgot);
-      dbChangeSQL(q, sSQL, true);
-      while not q.Eof do begin
-        if dbLocate(tb, 'ADRES', [q.Fld('ADRES_ID').AsInteger],'') then begin
-          tb.Edit;
-          tb.Fld('COUNT_ALL').AsInteger:=q.Fld('COUNT_DETI').AsInteger;
-          tb.Fld('COUNT_NASEL').AsInteger:=q.Fld('COUNT_ALL').AsInteger;
-          tb.Post;
-        end;
-        q.next;
-      end;
-      dbClose(q);
-      tb.First;
-      while not tb.Eof do begin
-        if (tb.Fld('COUNT_NASEL').AsInteger>0)  // or (tb.Fld('COUNT_INV1').AsInteger>0) or (tb.Fld('COUNT_INV2').AsInteger>0) 
-          then tb.Next
-          else tb.Delete;
-      end;
-      tb.First;
-      ind:=dbRecordCount(tb);
-      nFirst:=6;
-      nLast:=6+ind-1;
-  //        XL.Range['A3'].Value:=NameOrg('','');
-      eh:=TExcelHelper.Create;
-      eh.SetSize(ind,18);
-      eh.SetRangeExcel('A'+IntToStr(nFirst),'R'+IntToStr(nLast));
-      ind:=1;
-      n:=0;
-      tb.First;
-      while not tb.Eof do begin
-        eh.SetEl(ind,1, ind);
-//        eh.SetEl(ind,1, tb.Fld('ADRES').AsString);
-        eh.SetEl(ind,2, ParamAsString('KOD'));
-        eh.SetEl(ind,3, tb.Fld('SOATO').AsString);
-        eh.SetEl(ind,4, sRn);
-        eh.SetEl(ind,5, ParamAsString('KNAME'));
-        eh.SetEl(ind,6, tb.Fld('TIP_PUNKT').AsString); // dmBase.GetTailAdres('PUNKTTN'));
-        eh.SetEl(ind,7, tb.Fld('NAME_PUNKT').AsString); //dmBase.GetTailAdres('PUNKTN'));
-        eh.SetEl(ind,8, tb.Fld('TIP_UL').AsString); 
-        eh.SetEl(ind,9, tb.Fld('NAME_UL').AsString);
-        eh.SetEl(ind,10, 'дом');
-        eh.SetEl(ind,11, tb.Fld('DOM').AsString); 
-        eh.SetEl(ind,13, tb.Fld('KV').AsString); 
-        eh.SetEl(ind,14, '');  // ФИО
-        if tb.Fld('COUNT_ALL').AsInteger=0
-          then eh.SetEl(ind,15, '')
-          else eh.SetEl(ind,15, tb.Fld('COUNT_ALL').AsString);
-        if tb.Fld('COUNT_INV1').AsInteger=0
-          then eh.SetEl(ind,16, '')
-          else eh.SetEl(ind,16, tb.Fld('COUNT_INV1').AsString);
-        if tb.Fld('COUNT_INV2').AsInteger=0
-          then eh.SetEl(ind,17, '')
-          else eh.SetEl(ind,17, tb.Fld('COUNT_INV2').AsString);
-        eh.SetEl(ind,18, '');
-        ind:=ind+1;
-        tb.Next;
-      end;
-      CloseMessage;
-      tb.Close;
-      tb.Free;
-      eh.ExportExcel;
-      eh.Free;
-      DeleteFile(GetFileExcel(sNameExcel));
-      XL.ActiveWorkBook.SaveAs(GetFileExcel(sNameExcel));
-//      XL.ActiveWorkBook.SaveAs(GetFileExcel(sNameExcel), xlExcel8); //xlWorkbookDefault);
-//      XL.ActiveWorkBook.Save;
-//      XL.ActiveWorkBook.Close(true);
-      XL.Visible:=true;
-      XL:=null;
-    end;
-  end;
-  f.Free;
-end;
-
-procedure ObsledDomHoz2;
-var
- XL:Variant;
- eh:TExcelHelper;
- f:TfmParamQuest;
- n1,n2,n3,n,i,nFirst,nLast,ind:Integer;
- sl : TStringList;
- sRn,sNameExcel,sNameTemp,s,sPath,sSQL,sNPunkt,sPunkt:String;
- lOk:Boolean;
- v:Variant;
- q,tb,ds:TDataSet;
-begin
-  f:=TfmParamQuest.Create(nil);
-  f.Caption:='Параметры';
-//  f.AddParamEx(true, 'Вывод домохозяйств с пустыми значениями' , 'ALL','TYPE=BOOLEAN');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('LIST_PUNKT_OBSL'), 'Названия нас. пунктов через запятую(или -)' , 'SPISOK','TYPE=STRING~WIDTH=300');
-//  fmParam.AddParamEx(Now, 'Начальная дата' , 'DATE1' ,'TYPE=DATE');
-// не работает   fmParam.AddParamEx('', 'Район города2' , 'RNGOROD2' ,'TYPE=LIST~DESC=KEY_RN_MYGOR~WIDTH=150');
-  f.AddButtons('Выполнить~Отказ',0);
-  n:=f.ShowQuest;
-  sNPunkt:=Trim(f.GetValue('SPISOK','C'));
-  lOk:=false;
-  if (n=1) and (sNPunkt<>'') then begin
-    lOk:=true;
-    sPunkt:='';
-    if sNPunkt='-' then begin
-      ds:=dbGetDataSet('dmBase.SprPunkt');
-      ds.First;
-      while not ds.Eof do begin
-        sPunkt:=sPunkt+ds.Fld('ID').AsString+',';
-        ds.Next;
-      end;
-      ds.First;
-    end else begin
-      sl:=TStringList.Create;
-      StrToStrings(sNPunkt, sl, ',');
-      for i:=0 to sl.Count-1 do begin
-        if Trim(sl.Strings[i])<>'' then begin
-          n:=Pos('.', sl.Strings[i]);
-          if n>0 then s:=Copy(sl.Strings[i],n+1,100) else s:=sl.Strings[i];
-          v:=SeekValueSpr('СпрНасПунктов','NAME',Trim(s),'ID');
-          if v=null then v:=0;
-          if v>0 then begin
-            sPunkt:=sPunkt+IntToStr(v)+',';
-          end else begin
-            lOk:=false;
-            PutError('Не найден: '+s);
-          end;
-        end;
-      end;
-      sl.Free;
-    end;
-  end;
-  if lOk and (sPunkt<>'') then begin
-    XL:=GetOfficeObject('Excel',lOk);
-    if lOk then begin
-      GlobalTask.SetLastValueAsString('LIST_PUNKT_OBSL', sNPunkt);
-      sPunkt:=Copy(sPunkt,1,Length(sPunkt)-1);
-      OpenMessage(' Выполнение выгрузки ...      ','',10);
-
-      sSQL:=dmBase.LoadSQLEx('Обследование2-2018-05');
-      sSQL:=StringReplace(sSQL, '&punkt&', sPunkt);
-      MemoWrite('last.sql',sSQL);
-      tb:=dbOpenSQL2MemTable(sSQL,'');
-      sRn:=ParamAsString('RAION');
-      sNameTemp:='Обследование дом хозяйств2.xls';
-      sNameExcel:=sRn+ ' район '+ParamAsString('KNAME')+'.xls';
-      XL.WorkBooks.Add(GetFileExcelReport(sNameTemp));
-      tb.First;
-      ind:=dbRecordCount(tb);
-      nFirst:=6;
-      nLast:=6+ind-1;
-  //        XL.Range['A3'].Value:=NameOrg('','');
-      eh:=TExcelHelper.Create;
-      eh.SetSize(ind,9);
-      eh.SetRangeExcel('A'+IntToStr(nFirst),'I'+IntToStr(nLast));
-      ind:=1;
-      n:=0;
-      tb.First;
-      n1:=0;
-      n2:=0;
-      n3:=0; 
-      while not tb.Eof do begin
-        eh.SetEl(ind,1, ind);
-        eh.SetEl(ind,2, ParamAsString('KOD'));
-        eh.SetEl(ind,3, tb.Fld('SOATO').AsString);
-        eh.SetEl(ind,4, sRn);
-        s:=ParamAsString('KNAME');
-        n:=Pos(' ',s);
-        if n>0 then s:=Copy(s,1,n-1);
-        eh.SetEl(ind,5, s);
-        eh.SetEl(ind,6, tb.Fld('NAME_PUNKT').AsString); 
-        eh.SetEl(ind,7, tb.Fld('KOLVO_ADRES').AsString); 
-        n1:=n1+tb.Fld('KOLVO_ADRES').AsInteger;
-        eh.SetEl(ind,8, tb.Fld('KOLVO_LIC').AsString); 
-        n2:=n2+tb.Fld('KOLVO_LIC').AsInteger;
-        eh.SetEl(ind,9, tb.Fld('KOLVO_CHILD').AsString); 
-        n3:=n3+tb.Fld('KOLVO_CHILD').AsInteger;
-        ind:=ind+1;
-        tb.Next;
-      end;
-      CloseMessage;
-      tb.Close;
-      tb.Free;
-      eh.ExportExcel;
-      eh.Free;
-      s:=IntToStr(nLast+1);
-      XL.Range['A'+s].Value:='Итого';
-      XL.Range['G'+s].Value:=n1;
-      XL.Range['H'+s].Value:=n2;
-      XL.Range['I'+s].Value:=n3;
-      DeleteFile(GetFileExcel(sNameExcel));
-      XL.ActiveWorkBook.SaveAs(GetFileExcel(sNameExcel));
-//      XL.ActiveWorkBook.SaveAs(GetFileExcel(sNameExcel), xlExcel8); //xlWorkbookDefault);
-//      XL.ActiveWorkBook.Save;
-//      XL.ActiveWorkBook.Close(true);
-      XL.Visible:=true;
-      XL:=null;
-    end;
-  end;
-  f.Free;
-end;
-
+//-----------------------------------
 procedure ListCountPerepis;
 var
   XL:Variant;
@@ -341,10 +69,11 @@ var
   eh:TExcelHelper;
   q,ds:TDataSet;
   nDefCount,n,ind,nFirst,nLast:Integer;
-  s,ss:String;
+  s,ss,sUl:String;
   sDom,sK,sRn,sPunkt,sSQL,sNameExcel:String;
 begin
   if not Problem('Сформировать файл для переписи ?') then exit;
+  {
   sSQL := dmBase.LoadSQLEx('Количество_перепись1');
   OpenMessage(' Выполнение проверки ...      ','',10);
   q:=dbOpenSQL(sSQL,'');
@@ -358,18 +87,19 @@ begin
   end;
   dbClose(q);
   CloseMessage;
-  if sPunkt='' then begin
-    ShowMessage('Отсутствуют нас. пункты с числом жителей больше '+IntToStr(nDefCount)+'. Выгрузка не нужна.');
-  end else begin
-    sPunkt:='('+Copy(sPunkt,1,Length(sPunkt)-4)+')';
+  }
+//  if sPunkt='' then begin
+//    ShowMessage('Отсутствуют нас. пункты с числом жителей больше '+IntToStr(nDefCount)+'. Выгрузка не нужна.');
+//  end else begin
+//    sPunkt:='('+Copy(sPunkt,1,Length(sPunkt)-4)+')';
     XL:=GetOfficeObject('Excel',lOk);
     if lOk then begin
       sNameExcel:='Количество для переписи.xls';
       XL.WorkBooks.Add(GetFileExcelReport(sNameExcel));
       sSQL:=dmBase.LoadSQLEx('Количество_перепись2');
-      sSQL:=StringReplace(sSQL, '1=1', sPunkt);
+//      sSQL:=StringReplace(sSQL, '1=1', sPunkt);
       OpenMessage(' Выполнение выгрузки ...      ','',10);
-      MemoWrite('last.sql',sSQL);
+      MemoWrite('export.sql',sSQL);
       q:=dbOpenSQL(sSQL,'');
       sRn:=ParamAsString('RAION');
       ind:=dbRecordCount(q);
@@ -378,8 +108,8 @@ begin
       XL.Range['A3'].Value:=NameOrg('','');
       XL.Range['A4'].Value:=DatePropis(Now,1);
       eh:=TExcelHelper.Create;
-      eh.SetSize(ind,10);
-      eh.SetRangeExcel('A'+IntToStr(nFirst),'J'+IntToStr(nLast));
+      eh.SetSize(ind,12);
+      eh.SetRangeExcel('A'+IntToStr(nFirst),'L'+IntToStr(nLast));
       ind:=1;
       n:=0;
 
@@ -394,8 +124,14 @@ begin
         eh.SetEl(ind,7, sDom);
         eh.SetEl(ind,8, q.Fld('KORP').AsString);
         if Trim(q.Fld('KORP').AsString)<>'' then sK:=' к.'+Trim(q.Fld('KORP').AsString) else sK:='';
-        eh.SetEl(ind,9, q.Fld('TIP_PUNKT').AsString+' '+q.Fld('PUNKT').AsString+', '+q.Fld('TIP_UL').AsString+' '+q.Fld('UL').AsString+', '+sDom+sK);
+        sUl:=Trim(q.Fld('TIP_UL').AsString+' '+q.Fld('UL').AsString);
+        if sUl<>'' then sUl:=', '+sUl;
+        eh.SetEl(ind,9, q.Fld('TIP_PUNKT').AsString+' '+q.Fld('PUNKT').AsString+sUl+', '+sDom+sK);
         eh.SetEl(ind,10, q.Fld('KOLVO').AsInteger);
+        if q.Fld('OTSUT').AsInteger>0 then
+          eh.SetEl(ind,11, q.Fld('OTSUT').AsInteger);
+        if q.Fld('VREM').AsInteger>0 then
+          eh.SetEl(ind,12, q.Fld('VREM').AsInteger);
         ind:=ind+1;
         q.Next;
       end;
@@ -410,9 +146,166 @@ begin
       XL.Visible:=true;
       XL:=null;
     end;
+//  end;
+end;
+//-----------------------------------
+procedure ListCountPerepisKv;
+var
+  XL:Variant;
+  lOk,l:Boolean;
+  eh:TExcelHelper;
+  q,ds:TDataSet;
+  nDefCount,n,ind,nFirst,nLast:Integer;
+  s,ss,sUl:String;
+  sKv,sDom,sK,sRn,sPunkt,sSQL,sNameExcel:String;
+begin
+  if not Problem('Сформировать файл для переписи (по квартирам) ?') then exit;
+    XL:=GetOfficeObject('Excel',lOk);
+    if lOk then begin
+      sNameExcel:='Количество для переписи кв.xls';
+      XL.WorkBooks.Add(GetFileExcelReport(sNameExcel));
+      sSQL:=dmBase.LoadSQLEx('Количество_перепись3');
+      OpenMessage(' Выполнение выгрузки ...      ','',10);
+      MemoWrite('export.sql',sSQL);
+      q:=dbOpenSQL(sSQL,'');
+      sRn:=ParamAsString('RAION');
+      ind:=dbRecordCount(q);
+      nFirst:=6;
+      nLast:=6+ind-1;
+      XL.Range['A3'].Value:=NameOrg('','');
+      XL.Range['A4'].Value:=DatePropis(Now,1);
+      eh:=TExcelHelper.Create;
+      eh.SetSize(ind,13);
+      eh.SetRangeExcel('A'+IntToStr(nFirst),'M'+IntToStr(nLast));
+      ind:=1;
+      n:=0;
+
+      while not q.Eof do begin
+        eh.SetEl(ind,1, ind);
+        eh.SetEl(ind,2, q.Fld('SOATO').AsString);
+        eh.SetEl(ind,3, q.Fld('TIP_PUNKT').AsString);
+        eh.SetEl(ind,4, q.Fld('PUNKT').AsString);
+        eh.SetEl(ind,5, q.Fld('TIP_UL').AsString);
+        eh.SetEl(ind,6, q.Fld('UL').AsString);
+        sDom:=ANSIUpperCase(Trim(q.Fld('DOM1').AsString)+Trim(q.Fld('DOM2').AsString));
+        eh.SetEl(ind,7, sDom);
+        eh.SetEl(ind,8, q.Fld('KORP').AsString);
+        eh.SetEl(ind,9, q.Fld('KV').AsString);
+        if Trim(q.Fld('KORP').AsString)<>'' then sK:=' к.'+Trim(q.Fld('KORP').AsString) else sK:='';
+        if Trim(q.Fld('KV').AsString)<>''   then sKv:=', кв.'+Trim(q.Fld('KV').AsString) else sKv:='';
+        sUl:=Trim(q.Fld('TIP_UL').AsString+' '+q.Fld('UL').AsString);
+        if sUl<>'' then sUl:=', '+sUl;
+        eh.SetEl(ind,10, q.Fld('TIP_PUNKT').AsString+' '+q.Fld('PUNKT').AsString+sUl+', '+sDom+sK+sKv);
+        eh.SetEl(ind,11, q.Fld('KOLVO').AsInteger);
+        if q.Fld('OTSUT').AsInteger>0 then
+          eh.SetEl(ind,12, q.Fld('OTSUT').AsInteger);
+        if q.Fld('VREM').AsInteger>0 then
+          eh.SetEl(ind,13, q.Fld('VREM').AsInteger);
+        ind:=ind+1;
+        q.Next;
+      end;
+      q.First;
+      CloseMessage;
+
+      eh.ExportExcel;
+      eh.Free;
+      sNameExcel:=sRn+ ' район '+ParamAsString('KNAME')+'.xls';
+      DeleteFile(GetFileExcel(sNameExcel));
+      XL.ActiveWorkBook.SaveAs(GetFileExcel(sNameExcel));
+      XL.Visible:=true;
+      XL:=null;
+    end;
+//  end;
+end;
+//--------------------------------
+{
+procedure ListCountPerepis2;
+var
+ XL:Variant;
+ eh:TExcelHelper;
+ n1,n2,n,i,nLast,nFirst,ind:Integer;
+ sl : TStringList;
+ ssk,sRn,sNameExcel,sNameTemp,s,sPath,sSQL,sNPunkt,sPunkt:String;
+ lOk:Boolean;
+ v:Variant;
+ q,tb,ds:TDataSet;
+begin
+  n:=1; //f.ShowQuest;
+  sNPunkt:='-'; //Trim(f.GetValue('SPISOK','C'));
+  lOk:=false;
+  if (n=1) and (sNPunkt<>'') then begin
+    lOk:=true;
+    sPunkt:='';
+    if sNPunkt='-' then begin
+      ds:=dbGetDataSet('dmBase.SprPunkt');
+      ds.First;
+      while not ds.Eof do begin
+        sPunkt:=sPunkt+ds.Fld('ID').AsString+',';
+        ds.Next;
+      end;
+      ds.First;
+    end else begin
+    end;
+  end;
+  if lOk and (sPunkt<>'') then begin
+    XL:=GetOfficeObject('Excel',lOk);
+    if lOk then begin
+      sPunkt:=Copy(sPunkt,1,Length(sPunkt)-1);
+      OpenMessage(' Выполнение выгрузки ...      ','',10);
+      sSQL:=dmBase.LoadSQLEx('Обследование-2018-12');
+      MemoWrite('last.sql',sSQL);
+      tb:=dbOpenSQL2MemTable(sSQL,'');
+      sRn:=ParamAsString('RAION');
+      sNameTemp:='Cельсовет перепись.xls';
+      sNameExcel:=sRn+ ' район '+ParamAsString('KNAME')+'.xls';
+      XL.WorkBooks.Add(GetFileExcelReport(sNameTemp));
+      tb.First;
+      ind:=dbRecordCount(tb);
+      nFirst:=9;  // !!!
+      nLast:=nFirst+ind-1;
+      eh:=TExcelHelper.Create;
+      eh.SetSize(ind,7);  // !!!
+      eh.SetRangeExcel('A'+IntToStr(nFirst),'G'+IntToStr(nLast));
+      ind:=1;
+      n1:=0;
+      n2:=0;
+      s:=ParamAsString('KNAME');
+      n:=Pos(' ',s);
+      if n>0 then ssk:=Copy(s,1,n-1) else ssk:=s;
+      tb.First;
+      while not tb.Eof do begin
+        eh.SetEl(ind,1, ind);
+        eh.SetEl(ind,2, tb.Fld('SOATO').AsString);
+        eh.SetEl(ind,3, ssk);
+        eh.SetEl(ind,4, tb.Fld('TYPE_PUNKT').AsString); 
+        eh.SetEl(ind,5, tb.Fld('NAME_PUNKT').AsString); 
+        eh.SetEl(ind,6, tb.Fld('KOLVO_P').AsString); 
+        eh.SetEl(ind,7, tb.Fld('KOLVO_O').AsString); 
+        n1:=n1+tb.Fld('KOLVO_P').AsInteger;
+        n2:=n2+tb.Fld('KOLVO_O').AsInteger;
+        ind:=ind+1;
+        tb.Next;
+      end;
+      CloseMessage;
+      tb.Close;
+      tb.Free;
+      eh.ExportExcel;
+      eh.Free;
+      s:=IntToStr(nLast+1);
+      XL.Range['B2'].Value:=sRn;
+      XL.Range['F2'].Value:=ParamAsString('OBL');
+      XL.Range['C8'].Value:='Итого по '+getPadeg(ssk,'Д')+' сельсовету';
+      XL.Range['F8'].Value:=n1;
+      XL.Range['G8'].Value:=n2;
+      DeleteFile(GetFileExcel(sNameExcel));
+      XL.ActiveWorkBook.SaveAs(GetFileExcel(sNameExcel));
+      XL.Visible:=true;
+      XL:=null;
+    end;
   end;
 end;
-
+}
+//--------------------------------
 procedure ListCountDvor;
 var
   XL:Variant;
@@ -422,7 +315,6 @@ var
   n,ind,nFirst,nLast:Integer;
   s,ss:String;
   sSort, sRn,sSQL,sNameExcel:String;
-//  resh:TReshOchMen;
 begin
   XL:=GetOfficeObject('Excel',lOk);
   if lOk then begin
@@ -431,7 +323,7 @@ begin
     sSQL := dmBase.LoadSQLEx('Количество дворов');
     if ParamAsInteger('CH_ADRES')=0 then sSort:='s.id' else sSort:='s.nomer';
     sSQL:=StringReplace(sSQL, '&order_by&', sSort);
-
+    MemoWrite('export.sql',sSQL);
     OpenMessage(' Выполнение запроса ...      ','',10);
     q:=dbOpenSQL(sSQL,'');
     CloseMessage;
@@ -446,21 +338,20 @@ begin
     nLast:=6+ind-1;
     XL.Range['A3'].Value:=NameOrg('','');
     XL.Range['A4'].Value:=DatePropis(Now,1);
-//    XL.Range['C'+IntToStr(nLast+2)].Value:=Ochered_Dolg;
-//    XL.Range['E'+IntToStr(nLast+2)].Value:=Ochered_FIO;
-
     eh:=TExcelHelper.Create;
-    eh.SetSize(ind,5);
-    eh.SetRangeExcel('A'+IntToStr(nFirst),'E'+IntToStr(nLast));
+    eh.SetSize(ind,9);
+    eh.SetRangeExcel('A'+IntToStr(nFirst),'I'+IntToStr(nLast));
     ind:=1;
-    n:=0;
-
     while not q.Eof do begin
       eh.SetEl(ind,1, ind);
       eh.SetEl(ind,2, sRn);
       eh.SetEl(ind,3, q.Fld('TYPEPUNKT').AsString);
       eh.SetEl(ind,4, q.Fld('NAMEPUNKT').AsString);
       eh.SetEl(ind,5, q.Fld('KOLVO').AsInteger);
+      eh.SetEl(ind,6, q.Fld('KOLVO1').AsInteger);
+      eh.SetEl(ind,7, q.Fld('KOLVO2').AsInteger);
+      eh.SetEl(ind,8, q.Fld('KOLVO_MN').AsInteger);
+      eh.SetEl(ind,9, q.Fld('KOLVO0').AsInteger);
       ind:=ind+1;
       q.Next;
     end;
@@ -486,8 +377,9 @@ var
   eh:TExcelHelper;
   q,dsOch,dsOchResh:TDataSet;
   n,ind,nFirst,nLast,nIdOch:Integer;
-  s,ss,sPomech,sSostav,sOsn,sDate,sPredos,sIskl,sID,sSlugeb,sDopOchered,sKolvo:String;
+  sDateDog,s,ss,sPomech,sSostav,sOsn,sDate,sPredos,sIskl,sID,sSlugeb,sDopOchered,sKolvo:String;
   sNameExcel:String;
+  dDatePost:TDateTime;
 //  resh:TReshOchMen;
 begin
   XL:=GetOfficeObject('Excel',lOk);
@@ -561,11 +453,15 @@ begin
 
       sSostav:=dsOch.Fld('KOLVO_SOSTAV').AsString;
       if sSostav<>'' then sSostav:=sSostav+' чел. ';
+      sDateDog:='';
       if nIdOch=0 then begin  // только для общей очереди
         ss:=dmBase.SostavSemToStr(sID, 'OTN;FIO;DATER3', chr(10)); //', ');
         if ss<>'' then begin
           sSostav:=sSostav+chr(10)+ss;
         end;
+      end else begin
+        if not q.Fld('DATE_SROK_DN').IsNull and q.Fld('SIROTA').AsBoolean
+          then sDateDog:=DatePropis(q.Fld('DATE_SROK_DN').AsDateTime,3);
       end;
 
       eh.SetEl(ind,3, sSostav);
@@ -592,6 +488,7 @@ begin
       dmBase.FillReshOch(_resh, q.Fld('ID_POST_RESH').AsInteger);
       sOsn:=_resh.GetTextOsnov(OCH_OSN_UKAZ,false);    // пункт+указ
       sDate:='';
+      dDatePost:=0;
       if (_resh.TIP>-1) and (_resh.DateR>0) then begin
         sDate:=DatePropis(q.Fld('DEC_DATE').AsDateTime,3);
         if not q.Fld('DEC_TIME').IsNull then begin
@@ -599,7 +496,10 @@ begin
         end;
         if _resh.Nomer<>'' then s:=', №'+_resh.Nomer else s:='';
         sDate:=sDate+s;
-        if _resh.DateR>0 then sDate:=sDate+' от '+DatePropis(_resh.DateR,3);
+        if _resh.DateR>0 then begin 
+          dDatePost:=_resh.DateR;
+          sDate:=sDate+' от '+DatePropis(_resh.DateR,3);
+        end;   
       end;
 //      resh.Free;
 
@@ -611,12 +511,16 @@ begin
         eh.SetEl(ind,6,sDate);
       end;
 
-      dmBase.FillReshOch(_resh,q.Fld('ID_SN_RESH').AsInteger);
       sDate:='';
+      sIskl:='';
+      dmBase.FillReshOch(_resh,q.Fld('ID_SN_RESH').AsInteger);
       if (_resh.TIP>-1) and (_resh.Nomer<>'') then begin
-        sIskl:=DatePropis(_resh.DATER,3)+' '+', №'+_resh.Nomer
-        s:=_resh.GetTextOsnov(OCH_OSN_KRAT,true);
-        if s<>'' then sIskl:=sIskl+', '+s;
+        if (dDatePost=0) or (_resh.DATER>dDatePost) then begin   // дата решения о снятии больше даты решения постановки
+          sIskl:=DatePropis(_resh.DATER,3)+' '+', №'+_resh.Nomer
+//          s:=_resh.GetTextOsnov(OCH_OSN_KRAT,true);
+          s:=_resh.GetTextOsnov(OCH_OSN_UKAZ,false);
+          if s<>'' then sIskl:=sIskl+', '+s;
+        end;
       end;
 //      resh.Free;
 
@@ -628,8 +532,8 @@ begin
       end else begin
         eh.SetEl(ind,8, sKolvo);
         eh.SetEl(ind,9, sPredos);
-        eh.SetEl(ind,10, sIskl);
-        eh.SetEl(ind,11, '');
+        eh.SetEl(ind,10, sDateDog); // DATE_SROK_DN
+        eh.SetEl(ind,11, sIskl);
       end;
       ind:=ind+1;
       n:=n+1;
@@ -780,7 +684,7 @@ var
   eh:TExcelHelper;
   q,dsOch,dsHist:TDataSet;
   m1,m2,n,ind,nFirst,nLast,nLenArr,nIdOch,nMax,nOstat,nAll:Integer;
-  s,ss,sss,sFile,sFld:String;
+  sValues,s,ss,sss,sFile,sFld:String;
   sNameExcel,sSQL:String;
   slMens:TStringList;
   sl:TStringList;
@@ -791,25 +695,31 @@ begin
   sFile:=Trim(ParamAsString('KADASTR_FILE'));
   if sFile='' then sFile:='Zapros2';
 
-  if ParamAsBoolean('KADASTR_FILTER') then begin  // выгрузка для кадастрового с учетом отбора или всех
+  q:=dbGetDataSet('fmGurnOchered.Query');
+  q.First;
+  l:=dbDisableControls(q);
+  sValues:=BookmarkCurGurnalToValues('ID',',');
+  if (sValues<>'') or ParamAsBoolean('KADASTR_FILTER') then begin  // выгрузка для кадастрового с учетом отбора или отмеченных
   // было  s:=GetWHERECurGurnal
     // соберем ID и OCHERED_ID
-    q:=dbGetDataSet('fmGurnOchered.Query');
-    l:=dbDisableControls(q);
-    q.First;
     sss:=q.Fld('ochered_id').AsString;
-    ss:='';
-    while not q.Eof do begin
-      ss:=ss+q.Fld('ID').AsString+',';
-      q.Next;
+    if sValues<>'' then begin
+      ss:=sValues;
+    end else begin
+      ss:='';
+      while not q.Eof do begin
+        ss:=ss+q.Fld('ID').AsString+',';
+        q.Next;
+      end;
+      ss:=ss+'-1';
     end;
-    ss:=ss+'-1';
-    q.First;
-    dbEnableControls(q,l);
     s:='oc.ochered_id='+sss+' and oc.id in ('+ss+')'; 
   end else begin
     s:='oc.id_base=0 and oc.ochered_id=0 and oc.iskl=false '; 
   end;
+  q.First;
+  dbEnableControls(q,l);
+
 //    else s:=globaltask.AddWhereCurIdBase('oc.ochered_id=0 and oc.iskl=false ',''); 
 //  writedebug('-----------------');
 //  writedebug(s);
@@ -834,7 +744,7 @@ begin
             ' where '+s+ //oc.ochered_id=0 and oc.iskl=false'+
             ' order by '+ss+',oc.id,NNN,MMM ';
 //    q:=dbOpenSQL2MemTable(sSQL,'');
-    MemoWrite('last.sql',sSQL);
+    MemoWrite('export.sql',sSQL);
     OpenMessage(' Подготовка к формированию списка ...      ','',10);
     try
     q:=dbOpenSQL(sSQL,'');

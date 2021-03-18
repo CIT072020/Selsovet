@@ -114,8 +114,8 @@ IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=1
 MinorVer=3
-Release=5
-Build=25
+Release=6
+Build=26
 Debug=0
 PreRelease=0
 Special=0
@@ -126,13 +126,13 @@ CodePage=1251
 [Version Info Keys]
 CompanyName=Государственное предприятие "ЦИТ Белстата"
 FileDescription=
-FileVersion=1.3.5.25
+FileVersion=1.3.6.26
 InternalName=
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=
 ProductName=
-ProductVersion=1.3.5.25
+ProductVersion=1.3.6.26
 Comments=
 [HistoryLists\hlDebugSourcePath]
 Count=2

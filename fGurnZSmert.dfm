@@ -1,5 +1,5 @@
 inherited fmGurnZSmert: TfmGurnZSmert
-  Left = 16
+  Left = 246
   Top = 122
   Width = 950
   Height = 586
@@ -22,6 +22,7 @@ inherited fmGurnZSmert: TfmGurnZSmert
           Caption = #1047#1072#1076#1077#1088#1078#1082#1072' '#1088#1077#1075#1080#1089#1090#1088#1072#1094#1080#1080' '#1073#1086#1083#1077#1077' 7 '#1076#1085#1077#1081
           Hint = #1047#1072#1076#1077#1088#1078#1082#1072' '#1088#1077#1075#1080#1089#1090#1088#1072#1094#1080#1080' '#1073#1086#1083#1077#1077' 7 '#1076#1085#1077#1081
           ImageIndex = 110
+          Images = fmMain.ImageList
           OnClick = TBItemZaderClick
         end
       end
@@ -29,11 +30,14 @@ inherited fmGurnZSmert: TfmGurnZSmert
   end
   inherited Grid: TSasaDBGrid
     Width = 934
-    Height = 498
+    Height = 472
     OnGetCellParams = GridGetCellParams
   end
   inherited StBar: TStatusBar
     Top = 524
+    Width = 934
+  end
+  inherited TBDock24: TTBDock
     Width = 934
   end
   inherited Query: TAdsQuery

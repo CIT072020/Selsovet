@@ -34,7 +34,7 @@ inherited fmAdres: TfmAdres
       Top = 219
       Width = 961
       Height = 461
-      ActivePage = tsMain
+      ActivePage = tsMCHS
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -540,6 +540,7 @@ inherited fmAdres: TfmAdres
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            OnClick = edPrimClick
           end
         end
       end
@@ -1525,8 +1526,42 @@ inherited fmAdres: TfmAdres
           Align = alClient
           BorderStyle = bsNone
           ParentBackground = True
-          TabOrder = 0
+          TabOrder = 1
           OnResize = sbPropResize
+          object GroupBox3: TGroupBox
+            Left = 0
+            Top = 0
+            Width = 953
+            Height = 215
+            Align = alTop
+            Caption = ' '#1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1072#1103' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 0
+            DesignSize = (
+              953
+              215)
+            object edUchPrim: TDBMemo
+              Left = 5
+              Top = 15
+              Width = 940
+              Height = 194
+              Anchors = [akLeft, akTop, akRight, akBottom]
+              DataField = 'UCH_PRIM'
+              DataSource = dsDokument
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 0
+            end
+          end
         end
         object pnUch: TPanel
           Left = 0
@@ -1535,16 +1570,16 @@ inherited fmAdres: TfmAdres
           Height = 93
           Align = alTop
           BevelOuter = bvNone
-          TabOrder = 1
+          TabOrder = 0
           DesignSize = (
             953
             93)
           object Label8: TLabel
             Left = 8
             Top = 38
-            Width = 90
+            Width = 180
             Height = 16
-            Caption = #1059#1095#1077#1090#1085#1099#1081' '#1085#1086#1084#1077#1088
+            Caption = #1059#1095#1077#1090#1085#1099#1081' ('#1082#1072#1076#1072#1089#1090#1088#1086#1074#1099#1081') '#1085#1086#1084#1077#1088
           end
           object Label2: TLabel
             Left = 8
@@ -1554,21 +1589,21 @@ inherited fmAdres: TfmAdres
             Caption = #1044#1072#1090#1072' '#1080#1089#1082#1083#1102#1095#1077#1085#1080#1103
           end
           object Label3: TLabel
-            Left = 255
+            Left = 339
             Top = 68
             Width = 62
             Height = 16
             Caption = #1086#1089#1085#1086#1074#1072#1085#1080#1077
           end
           object Label5: TLabel
-            Left = 284
+            Left = 397
             Top = 38
             Width = 82
             Height = 16
             Caption = #1087#1088#1077#1076#1086#1089#1090#1072#1074#1083#1077#1085
           end
           object Label25: TLabel
-            Left = 501
+            Left = 614
             Top = 38
             Width = 21
             Height = 16
@@ -1582,9 +1617,9 @@ inherited fmAdres: TfmAdres
             Caption = #1055#1083#1086#1097#1072#1076#1100
           end
           object edUchNomer: TDBEditEh
-            Left = 127
+            Left = 198
             Top = 34
-            Width = 135
+            Width = 183
             Height = 24
             DataField = 'UCH_NOMER'
             DataSource = dsDokument
@@ -1595,11 +1630,11 @@ inherited fmAdres: TfmAdres
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 1
+            TabOrder = 2
             Visible = True
           end
           object edUchDateIskl: TDBDateTimeEditEh
-            Left = 127
+            Left = 198
             Top = 64
             Width = 100
             Height = 24
@@ -1614,11 +1649,11 @@ inherited fmAdres: TfmAdres
             Font.Style = []
             Kind = dtkDateEh
             ParentFont = False
-            TabOrder = 4
+            TabOrder = 5
             Visible = True
           end
           object edUchIsklOsnov: TDBEditEh
-            Left = 331
+            Left = 415
             Top = 64
             Width = 423
             Height = 24
@@ -1633,11 +1668,11 @@ inherited fmAdres: TfmAdres
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 5
+            TabOrder = 6
             Visible = True
           end
           object edUchDatePred: TDBDateTimeEditEh
-            Left = 379
+            Left = 492
             Top = 34
             Width = 100
             Height = 24
@@ -1652,13 +1687,13 @@ inherited fmAdres: TfmAdres
             Font.Style = []
             Kind = dtkDateEh
             ParentFont = False
-            TabOrder = 2
+            TabOrder = 3
             Visible = True
           end
           object edUchFor: TDBComboBoxEh
-            Left = 536
+            Left = 649
             Top = 34
-            Width = 350
+            Width = 292
             Height = 24
             DataField = 'UCH_FOR'
             DataSource = dsDokument
@@ -1669,11 +1704,11 @@ inherited fmAdres: TfmAdres
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 3
+            TabOrder = 4
             Visible = True
           end
           object edPloshUch: TDBNumberEditEh
-            Left = 127
+            Left = 198
             Top = 5
             Width = 100
             Height = 24
@@ -1690,6 +1725,33 @@ inherited fmAdres: TfmAdres
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            Visible = True
+          end
+          object edUchTypeOwner: TDBComboBoxEh
+            Left = 316
+            Top = 5
+            Width = 381
+            Height = 24
+            DataField = 'UCH_TYPEOWNER'
+            DataSource = dsDokument
+            EditButtons = <
+              item
+                Style = ebsEllipsisEh
+                OnClick = edUchTypeOwnerEditButtons0Click
+              end>
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Items.Strings = (
+              '1111111111'
+              '2222222222')
+            KeyItems.Strings = (
+              '1'
+              '2')
+            ParentFont = False
+            TabOrder = 1
             Visible = True
           end
         end
@@ -2070,6 +2132,21 @@ inherited fmAdres: TfmAdres
           F3FF001FF9FE003FFCFC007FFE7803FFFF3003FFFF8003FFFFCC07FFFFFE07FF
           FFFFFFFF}
         Visible = False
+      end
+      object Label28: TLabel
+        Left = 632
+        Top = 8
+        Width = 44
+        Height = 16
+        Caption = 'Label28'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        Visible = False
+        OnClick = Label28Click
       end
       object edTip: TDBComboBoxEh
         Left = 46
@@ -2571,15 +2648,15 @@ inherited fmAdres: TfmAdres
   end
   inherited dsRN: TDataSource
     Left = 408
-    Top = 338
+    Top = 378
   end
   inherited dsGorod: TDataSource
     Left = 464
     Top = 378
   end
   inherited dsStran: TDataSource
-    Left = 460
-    Top = 345
+    Left = 324
+    Top = 369
   end
   inherited dsTypeGorod: TDataSource
     Left = 528
@@ -2615,8 +2692,8 @@ inherited fmAdres: TfmAdres
   object dsHouseOwners: TDataSource
     DataSet = dmAdres.tbHouseOwners
     OnDataChange = dsHouseOwnersDataChange
-    Left = 404
-    Top = 378
+    Left = 388
+    Top = 402
   end
   object ImageList: TImageList
     Left = 644
@@ -3039,7 +3116,7 @@ inherited fmAdres: TfmAdres
   object dsMens: TDataSource
     DataSet = dmMen.mtDokument
     Left = 368
-    Top = 343
+    Top = 375
   end
   object dsResh: TDataSource
     DataSet = dmAdres.tbResh

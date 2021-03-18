@@ -32,7 +32,7 @@
 
 //-------- Условная компиляция для проектов ----------------
 //{$DEFINE ZAGS}
-{$DEFINE LAIS} 
+{$DEFINE LAIS}
 //{$DEFINE POST}
 //{$DEFINE ZAH}
 //{$DEFINE OPEKA}
@@ -62,7 +62,7 @@
 {$DEFINE ADD_MKB10}
 
 {$IF Defined(LAIS) or Defined(POST) }
-//  {$DEFINE ADD_VEDOM_ARXIV}
+  {$DEFINE ADD_VEDOM_ARXIV}
 {$IFEND}
                 
 //ЛАИС.СМДО(POST)
@@ -121,6 +121,7 @@
                 
    {$IFDEF OPEKA}
       {$DEFINE GISUN}
+      {$DEFINE UPDATE_SYNA}
       {$DEFINE ADD_OPEKA}
       {$DEFINE ADD_WS_LOCAL}
       {$UNDEF OBR_GRAG}

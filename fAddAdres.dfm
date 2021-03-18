@@ -1,6 +1,6 @@
 object fmAddAdres: TfmAddAdres
-  Left = 513
-  Top = 285
+  Left = 560
+  Top = 264
   BorderStyle = bsDialog
   Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1072#1076#1088#1077#1089
   ClientHeight = 228
@@ -15,6 +15,7 @@ object fmAddAdres: TfmAddAdres
   OldCreateOrder = False
   Position = poOwnerFormCenter
   ShowHint = True
+  OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress

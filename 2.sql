@@ -1,0 +1,1 @@
+SELECT SUM(summa) summa FROM (SELECT isNull(TARIF,0) SUMMA FROM ЗаключениеБраков WHERE Year(datez)=2020 UNION ALL SELECT isNull(TARIF,0) SUMMA FROM АктыРождений WHERE Year(datez)=2020) aaa

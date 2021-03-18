@@ -18,8 +18,7 @@ type
     procedure rbRnClick(Sender: TObject);
     procedure rbPunktClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;    Shift: TShiftState);
     procedure TBItemOneDetailClick(Sender: TObject);
     procedure rbRnGorClick(Sender: TObject);
   private
@@ -106,8 +105,7 @@ begin
   dmBase.SprPerevod.FieldByName('TIP').AsInteger := FRange;
 end;
 
-procedure TfmEditPerevod.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TfmEditPerevod.FormKeyDown(Sender: TObject; var Key: Word;  Shift: TShiftState);
 begin
   inherited;
   if (Key=49) and (Shift=[]) then begin

@@ -10,11 +10,11 @@ uses
 
 type
   TfmGurnAddDokZAGS = class(TfmGurnal)
-    TBToolWindow1: TTBToolWindow;
-    Label3: TLabel;
-    edFamilia: TDBEditEh;
+    pnFilter: TPanel;
     Label4: TLabel;
     edTip: TDBComboBoxEh;
+    Label3: TLabel;
+    edFamilia: TDBEditEh;
     procedure GridGetCellParams(Sender: TObject; Column: TColumnEh;  AFont: TFont; var Background: TColor; State: TGridDrawState);
     procedure edTipEditButtons0Click(Sender: TObject;  var Handled: Boolean);
     procedure edTipChange(Sender: TObject);
@@ -41,6 +41,7 @@ type
     procedure SaveToIni; override;
     procedure LoadFromIni; override;
     procedure Event_OpenFull(Sender: TObject);
+    procedure PrepareMenu; override;
 
   end;
 
@@ -60,7 +61,8 @@ var
 begin
   TypeEditObj := dmBase.TypeObj_ZAGS_AddDok;
   inherited;
-  TBSubItemRun.Visible:=true;
+//  TBSubItemRun.Visible:=true;
+  VisibleItem(TBSubItemRun, true);
   FInterObj:=true;
   Opis:=GlobalTask.CurrentOpisEdit.GetListOpisA('KEY_ADDDOK_ZAGS');
   if Opis.Items.Count=0 then begin
@@ -83,8 +85,6 @@ function TfmGurnAddDokZAGS.LoadQuery: Boolean;
 var
   i : Integer;
   lOpenFull:Boolean;
-  s:String;
-  c : TColumnEh;
   ini : TSasaIniFile;
   itDop : TTbItem;
 begin
@@ -94,10 +94,12 @@ begin
   lOpenFull:=ini.ReadBool(KodGurnal+'.Add','OPEN_FULL',true);
   if not lOpenFull and (i>-1) and (i<edTip.Items.Count) then begin
     edTip.ItemIndex:=i;
-    TBItemClrFlt.Enabled:=true;   // !!!
+//    TBItemClrFlt.Enabled:=true;   // !!!
+    SetClearFilter(true);
   end else begin
     edTip.ItemIndex:=-1;
-    TBItemClrFlt.Enabled:=false;  // !!!
+//    TBItemClrFlt.Enabled:=false;  // !!!
+    SetClearFilter(false);
 //    SetFilter;
   end;
   FRun:=false;
@@ -111,8 +113,9 @@ begin
   TBSubItemRun.Add(itDop);
   TBItemOpenFull:=itDop;
   TBItemOpenFull.Checked:=lOpenFull;
-  
-  TBSubItemRun.Visible:=true;
+
+//  TBSubItemRun.Visible:=true;
+  VisibleItem(TBSubItemRun, true);
 
   {
   try
@@ -182,7 +185,6 @@ end;
 procedure TfmGurnAddDokZAGS.SetFilter;
 var
   s, strFilter : String;
-  nLen,n : Integer;
 begin
 
   if (edTip.ItemIndex = -1) and (edFamilia.Text = '')  then begin
@@ -235,7 +237,9 @@ begin
 //  SetFilter;
   if not FRun then begin
     CreateAdditiveWhere(getAdditiveWhere);
-    TBItemClrFlt.Enabled:=true;
+//    TBItemClrFlt.Enabled:=true;
+    SetClearFilter(true);
+
     FullRefresh(true);
   end; 
 end;      
@@ -318,6 +322,12 @@ begin
   edFamilia.Text:='';
   edTip.ItemIndex:=-1;
   inherited;
+end;
+//------------------------------------------------------------------------------
+procedure TfmGurnAddDokZAGS.PrepareMenu;
+begin
+  CheckTbItems;
+  pnFilter.Visible:=true;
 end;
 
 end.

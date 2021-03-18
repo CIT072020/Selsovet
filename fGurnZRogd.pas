@@ -38,6 +38,8 @@ var
 
 implementation
 
+uses fMain;
+
 {$R *.DFM}
 
 { TfmGurnZRogd }
@@ -47,6 +49,9 @@ begin
   TypeEditObj := dmBase.TypeObj_ZRogd;
   inherited;
   TBItemGrantSprav.Visible:=true;
+
+  fmMain.ImageList.GetIcon(IL_ROGD, self.Icon );
+
 end;
 
 function TfmGurnZRogd.LoadQuery: Boolean;
@@ -116,6 +121,7 @@ begin
   itDop := TTbItem.Create(TBSubSysFlt);
   itDop.Caption:='Регистрация в торжественной обстановке';
   itDop.OnClick:=Event_RegistTorg;
+  itDop.Images:=TBSubSysFlt.Images;
   TBSubSysFlt.Add(itDop);
 
   CreateSysFlt_GISUN;
@@ -123,8 +129,10 @@ begin
   itDop := TTbItem.Create(TBSubItemRun);
   itDop.Caption:= 'Очистить поле взаимодействия с ГИС РН';
   itDop.OnClick:=Event_ClearPoleGRN;
-  TBSubItemRun.Add(itDop);
-  TBSubItemRun.Visible:=true;
+  itDop.Images:=TBSubItemRun.Images;
+  TBSubItemRun.Add(itDop);      
+  VisibleItem(TBSubItemRun, true);
+//  TBSubItemRun.Visible:=true;
 
 end;
 
@@ -219,7 +227,8 @@ begin
   Query.OnFilterRecord := nil;
   Query.Filter   := 'vosstan=.f. .and. sud_date=stod('+QStr('19000101')+')';
   Query.Filtered := true;
-  TBItemClrFlt.Enabled:=true;
+  EnableItem(TBItemClrFlt, true);
+//  TBItemClrFlt.Enabled:=true;
 end;
 
 procedure TfmGurnZRogd.Event_ManyChildren(Sender: TObject);
@@ -255,7 +264,8 @@ begin
   Query.OnFilterRecord := QueryFilterRecord;
   Query.Filter   := '';
   Query.Filtered := true;
-  TBItemClrFlt.Enabled:=true;
+  EnableItem(TBItemClrFlt, true);
+//  TBItemClrFlt.Enabled:=true;
 end;
 
 procedure TfmGurnZRogd.SetListParEditForm;

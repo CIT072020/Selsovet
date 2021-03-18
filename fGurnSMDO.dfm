@@ -1,8 +1,8 @@
 inherited fmGurnSMDO: TfmGurnSMDO
   Left = 385
-  Top = 159
+  Top = 108
   Width = 1024
-  Height = 600
+  Height = 651
   ActiveControl = Grid
   Caption = #1055#1086#1095#1090#1072' '#1057#1052#1044#1054
   Constraints.MinHeight = 600
@@ -59,7 +59,6 @@ inherited fmGurnSMDO: TfmGurnSMDO
         HelpContext = 1
         Hint = #1044#1086#1073#1072#1074#1080#1090#1100' '#1085#1086#1074#1099#1081' '#1076#1086#1082#1091#1084#1077#1085#1090
         ImageIndex = 150
-        Visible = True
       end
       inherited TBItemEdit: TTBItem
         ImageIndex = 152
@@ -461,16 +460,15 @@ inherited fmGurnSMDO: TfmGurnSMDO
     end
   end
   inherited Grid: TSasaDBGrid
-    Top = 59
+    Top = 85
     Width = 1008
-    Height = 299
+    Height = 324
     OnGetCellParams = GridGetCellParams
-    OnKeyDown = GridKeyDown
     Color1 = clMaroon
   end
   object pnInfo: TPanel [6]
     Left = 0
-    Top = 358
+    Top = 409
     Width = 1008
     Height = 180
     Align = alBottom
@@ -656,7 +654,7 @@ inherited fmGurnSMDO: TfmGurnSMDO
     end
   end
   inherited StBar: TStatusBar
-    Top = 538
+    Top = 589
     Width = 1008
     Panels = <
       item
@@ -667,6 +665,10 @@ inherited fmGurnSMDO: TfmGurnSMDO
           #1085#1080#1077
         Width = 500
       end>
+  end
+  inherited TBDock24: TTBDock
+    Top = 59
+    Width = 1008
   end
   inherited Query: TAdsQuery
     ParamData = <>
@@ -1398,7 +1400,7 @@ inherited fmGurnSMDO: TfmGurnSMDO
     ExtractCorruptedFiles = False
     CompressionLevel = clNormal
     CompressionMode = 6
-    CurrentVersion = '4.03 '
+    CurrentVersion = '6.30 '
     SpanningMode = smNone
     SpanningOptions.AdvancedNaming = True
     SpanningOptions.VolumeSize = vsAutoDetect

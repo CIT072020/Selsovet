@@ -1,7 +1,7 @@
 inherited fmZapisSmert: TfmZapisSmert
-  Left = 367
-  Top = 131
-  ActiveControl = edFamilia
+  Left = 416
+  Top = 124
+  ActiveControl = edSem
   Caption = #1047#1072#1087#1080#1089#1100' '#1072#1082#1090#1072' '#1086' '#1089#1084#1077#1088#1090#1080
   ClientHeight = 725
   ClientWidth = 871
@@ -335,7 +335,7 @@ inherited fmZapisSmert: TfmZapisSmert
       Top = 33
       Width = 871
       Height = 620
-      ActivePage = ts1
+      ActivePage = ts2
       Align = alClient
       MultiLine = True
       TabOrder = 2
@@ -2112,20 +2112,17 @@ inherited fmZapisSmert: TfmZapisSmert
       object ts2: TTabSheet
         Caption = #1063#1072#1089#1090#1100' 2'
         ImageIndex = 1
-        DesignSize = (
-          863
-          592)
         object pnTs2: TPanel
           Left = 0
           Top = 0
-          Width = 866
-          Height = 585
-          Anchors = [akLeft, akTop, akRight]
+          Width = 863
+          Height = 592
+          Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           DesignSize = (
-            866
-            585)
+            863
+            592)
           object Label30: TLabel
             Left = 330
             Top = 264
@@ -2244,9 +2241,9 @@ inherited fmZapisSmert: TfmZapisSmert
             Font.Style = [fsBold]
             ParentFont = False
           end
-          object Label59: TLabel
+          object lbIzmen: TLabel
             Left = 7
-            Top = 502
+            Top = 500
             Width = 63
             Height = 13
             Caption = #1048#1079#1084#1077#1085#1077#1085#1080#1103
@@ -2284,11 +2281,11 @@ inherited fmZapisSmert: TfmZapisSmert
             ParentFont = False
           end
           object lbMestoZ: TLabel
-            Left = 655
-            Top = 409
-            Width = 115
+            Left = 7
+            Top = 517
+            Width = 225
             Height = 13
-            Caption = #1052#1077#1089#1090#1086' '#1079#1072#1093#1086#1088#1086#1085#1077#1085#1080#1103
+            Caption = #1052#1077#1089#1090#1086' '#1079#1072#1093#1086#1088#1086#1085#1077#1085#1080#1103' '#1089#1086' '#1089#1083#1086#1074' '#1079#1072#1103#1074#1080#1090#1077#1083#1103
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -2300,7 +2297,7 @@ inherited fmZapisSmert: TfmZapisSmert
           object lbDolgRuk: TvchDBText
             Left = 6
             Top = 446
-            Width = 630
+            Width = 627
             Height = 17
             Alignment = taRightJustify
             Anchors = [akLeft, akTop, akRight]
@@ -2316,7 +2313,7 @@ inherited fmZapisSmert: TfmZapisSmert
           object lbDolgSpec: TvchDBText
             Left = 6
             Top = 475
-            Width = 630
+            Width = 627
             Height = 17
             Alignment = taRightJustify
             Anchors = [akLeft, akTop, akRight]
@@ -2356,7 +2353,7 @@ inherited fmZapisSmert: TfmZapisSmert
             ParentFont = False
           end
           object edRukov: TDBEditEh
-            Left = 645
+            Left = 642
             Top = 441
             Width = 214
             Height = 26
@@ -2401,7 +2398,7 @@ inherited fmZapisSmert: TfmZapisSmert
           object edWork: TDBEditEh
             Left = 222
             Top = 33
-            Width = 634
+            Width = 631
             Height = 26
             Anchors = [akLeft, akTop, akRight]
             DataField = 'WORK_NAME'
@@ -2436,7 +2433,7 @@ inherited fmZapisSmert: TfmZapisSmert
           object edDecl: TDBEditEh
             Left = 222
             Top = 87
-            Width = 635
+            Width = 632
             Height = 26
             Anchors = [akLeft, akTop, akRight]
             DataField = 'DECL'
@@ -2479,7 +2476,7 @@ inherited fmZapisSmert: TfmZapisSmert
           object edSdanDok: TDBEditEh
             Left = 287
             Top = 198
-            Width = 572
+            Width = 569
             Height = 26
             Anchors = [akLeft, akTop, akRight]
             DataField = 'SDAN_DOK'
@@ -2503,7 +2500,7 @@ inherited fmZapisSmert: TfmZapisSmert
           object edSdanVB: TDBEditEh
             Left = 467
             Top = 257
-            Width = 391
+            Width = 388
             Height = 26
             Anchors = [akLeft, akTop, akRight]
             DataField = 'SDAN_VB'
@@ -2521,7 +2518,7 @@ inherited fmZapisSmert: TfmZapisSmert
           object edZametka: TDBEditEh
             Left = 101
             Top = 316
-            Width = 758
+            Width = 755
             Height = 69
             Anchors = [akLeft, akTop, akRight]
             AutoSelect = False
@@ -2577,10 +2574,10 @@ inherited fmZapisSmert: TfmZapisSmert
             Visible = True
           end
           object edIzmen: TDBEditEh
-            Left = 88
+            Left = 89
             Top = 500
-            Width = 771
-            Height = 83
+            Width = 768
+            Height = 90
             HelpContext = 999
             Anchors = [akLeft, akTop, akRight, akBottom]
             AutoSelect = False
@@ -2601,7 +2598,7 @@ inherited fmZapisSmert: TfmZapisSmert
           end
           object N_F_edCopy: TDBCheckBoxEh
             Left = 9
-            Top = 532
+            Top = 555
             Width = 70
             Height = 17
             Caption = #1050#1086#1087#1080#1103
@@ -2621,7 +2618,7 @@ inherited fmZapisSmert: TfmZapisSmert
           object gbMat: TGroupBox
             Left = 0
             Top = 389
-            Width = 859
+            Width = 657
             Height = 46
             Anchors = [akLeft, akTop, akRight]
             Caption = ' '#1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1084#1072#1090#1077#1088#1080' ('#1079#1072#1087#1086#1083#1085#1103#1077#1090#1089#1103' '#1076#1083#1103' '#1076#1077#1090#1077#1081' '#1076#1086' 1 '#1075#1086#1076#1072' ) '
@@ -2882,7 +2879,7 @@ inherited fmZapisSmert: TfmZapisSmert
           object edDeclDok: TDBEditEh
             Left = 222
             Top = 114
-            Width = 635
+            Width = 632
             Height = 26
             Anchors = [akLeft, akTop, akRight]
             DataField = 'DECL_DOK'
@@ -2904,9 +2901,9 @@ inherited fmZapisSmert: TfmZapisSmert
             Visible = True
           end
           object edMestoZ: TDBEditEh
-            Left = 720
-            Top = 383
-            Width = 114
+            Left = 249
+            Top = 500
+            Width = 606
             Height = 26
             HelpContext = 999
             Anchors = [akLeft, akTop, akRight]
@@ -2948,7 +2945,7 @@ inherited fmZapisSmert: TfmZapisSmert
             OnChange = N_F_cbTypeSpravChange
           end
           object edSpec: TDBEditEh
-            Left = 645
+            Left = 642
             Top = 470
             Width = 214
             Height = 26
@@ -2996,7 +2993,7 @@ inherited fmZapisSmert: TfmZapisSmert
           object edPrichNotDok: TDBEditEh
             Left = 422
             Top = 227
-            Width = 437
+            Width = 434
             Height = 26
             Anchors = [akLeft, akTop, akRight]
             DataField = 'PRICH_NOT_DOK'

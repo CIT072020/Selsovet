@@ -61,6 +61,8 @@ const
   AliasZah         = 'zh';
   AliasOpeka       = 'op';
   AliasSMDO        = 'smd';
+  AliasQueryGis    = 'qg';
+  AliasRegDogN     = 'rd';
 
 type
   TParamFieldFlt = record
@@ -885,6 +887,11 @@ begin
                          AliasBaseProp, [ffkDate,ffkProp], true, false, false, strSprName, Field, 1001, '', //'Дополнительно',
                          '', 'BASEPROP', sekDefault);
 
+      end else if sTable='АКТЫСМЕРТЕЙ' then begin
+        FindFieldItem := FindFieldList.AddNew('FLD_IS_TRUD', 'Trud('+strAliasTable+'.dates, '+strAliasTable+'.dater, '+strAliasTable+'.pol)',
+                         'Трудоспособность', '', strAliasTable, [ffkNumber,ffkSpr],true,false,false,'KEY_TRUD',Field,1352,'',
+                          '', '' ,sekDefault);
+        FindFieldItem.NotGroupBy:=false;
       end else if sTable='AKTTERMMARRIAGE' then begin
         FindFieldItem := FindFieldList.AddNew('FLD_VOZR_VIRT_ON', 'GetVozrast(datez,on_dater)',
                          'Возраст', '', '', [ffkNumber],true,false,false,'',Field,28,'ОН',
@@ -1534,6 +1541,8 @@ end;
 
 //-------------------------------------------------------------------------
 procedure LoadFields(FindFieldList : TFindFieldList; nType : Integer);
+var
+  Field : TFindFieldItem;
 begin
   if nType = dmBase.TypeObj_Lich then begin
     LoadLichSchet(FindFieldList);
@@ -1566,8 +1575,29 @@ begin
     LoadFilterTable('AktZ', AliasZah, FindFieldList,  nil, '','');
   end else if nType = _TypeObj_Opeka then begin
     LoadFilterTable('AktOpek', AliasOpeka, FindFieldList,  nil, '','');
+    AddRekv('Зарегистрирован в ГИС РН',FindFieldList,nil, ADS_LOGICAL, 'iif(pole_grn>=3000,true,false)', '','', 1, '', '');
   end else if nType = _TypeObj_SMDOPost then begin
     LoadFilterTable('SMDOPost', AliasSMDO, FindFieldList,  nil, '','');
+  end else if nType = _TypeObj_QueryGIS then begin
+    LoadFilterTable('QueryGIS', AliasQueryGis, FindFieldList,  nil, '','');
+  end else if nType = _TypeObj_RegDogN then begin
+    LoadFilterTable('RegDogN', AliasRegDogN, FindFieldList,  nil, '','');
+    LoadFilterTable('БазаДомов',AliasAdres,FindFieldList,nil,'','Адрес домовладения',5);
+    Field:=FindFieldList.ByRealName(nil,'DOM1');
+    if Field<>nil then begin
+      Field.Kinds:=Field.Kinds-[ffkString];
+      Field.Kinds:=Field.Kinds+[ffkNumber];
+    end;
+    AddRekv('Договор закончился',FindFieldList,nil, ADS_LOGICAL, 'iif((dater2 is not null and curdate()>=dater2) or (date_cancel is not null and curdate()>=date_cancel),true,false)', '','', 1320, '', '');
+  end else if nType = _TypeObj_RegDogN2 then begin
+    LoadFilterTable('RegDogN', AliasRegDogN, FindFieldList,  nil, '','');
+    LoadFilterTable('БазаДомов',AliasAdres,FindFieldList,nil,'','Адрес домовладения',5);
+    Field:=FindFieldList.ByRealName(nil,'DOM1');
+    if Field<>nil then begin
+      Field.Kinds:=Field.Kinds-[ffkString];
+      Field.Kinds:=Field.Kinds+[ffkNumber];
+    end;
+    AddRekv('Договор закончился',FindFieldList,nil, ADS_LOGICAL, 'iif((dater2 is not null and curdate()>=dater2) or (date_cancel is not null and curdate()>=date_cancel),true,false)', '','', 1320, '', '');
   end else if nType = dmBase.TypeObj_ZUstOtc then begin
     LoadFilterTable('АктыУстОтцовства', AliasZUstOtc, FindFieldList,  nil, '','');
   end else if nType = dmBase.TypeObj_ZUstMat then begin

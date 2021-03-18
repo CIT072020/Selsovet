@@ -1,6 +1,6 @@
 inherited fmEditPerevod: TfmEditPerevod
-  Left = 234
-  Top = 214
+  Left = 417
+  Top = 231
   Caption = #1057#1087#1088#1072#1074#1086#1095#1085#1080#1082' '#1087#1077#1088#1077#1074#1086#1076#1086#1074' '#1085#1072' '#1073#1077#1083#1086#1088#1091#1089#1089#1082#1080#1081
   OldCreateOrder = True
   OnCreate = FormCreate

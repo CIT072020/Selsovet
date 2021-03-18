@@ -1138,6 +1138,11 @@ begin
     CreatefrxDBdataSet(self,tbZapros,'Zapros','запросы');
   {$ENDIF}
 
+  edON_DOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edONA_DOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;
+  edON_DOK_TYPE.DropDownBox.Width:=TYPEDOK_WIDTH;  // utypes.pas
+  edONA_DOK_TYPE.DropDownBox.Width:=TYPEDOK_WIDTH;
+
 end;
 //-----------------------------------------------
 destructor TfmDeclBrak.Destroy;
@@ -1526,8 +1531,6 @@ procedure TfmDeclBrak.edTypeSprChange(Sender: TObject);
 begin
 {
   if (edTypeSpr.ItemIndex > -1) and not IsReadDokument then begin
-    s1:=GetPadegFIO(DokumentON_FamiliaP.Asstring+' '+DokumentON_Name.Asstring+' '+DokumentON_Otch.Asstring,'м','“');
-    s2:=GetPadegFIO(DokumentONA_FamiliaP.Asstring+' '+DokumentONA_Name.Asstring+' '+DokumentONA_Otch.Asstring,'ж','“');
     if edTypeSpr.ItemIndex=0 then begin   // на основании решени€ суда
       edAddTextArx.Text := ' Ѕрак между ' +s1+' и '+s2+ ' расторгнут на основании решени€ суда    '+
       'от      , вступившего в законную силу    ';

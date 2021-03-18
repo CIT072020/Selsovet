@@ -1044,7 +1044,7 @@ begin
     if lOk then begin
 //      ds:=dbGetDataSet('fmGurnZOpeka.Query');
       if nType=1 then begin // выгрузка недееспособных
-        sSQL := 'SELECT * FROM AktOpek WHERE vid=2 and getVozrast(curdate(),dater)<65 and DATE_OTM is null and DATE_OTST is null and DATE_OSV is null'; //ORDER BY familia,name,otch ';
+        sSQL := 'SELECT * FROM AktOpek WHERE vid=2 and getVozrast(curdate(),dater)<65 and DATE_OTM is null'; //ORDER BY familia,name,otch ';
         OpenMessage('Выгрузка недееспособных для Минтруда ...','',10);
         q:=dbOpenSQL(sSQL,'');
         curQuery:=q;

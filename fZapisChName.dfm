@@ -153,7 +153,7 @@ inherited fmZapisChName: TfmZapisChName
       Top = 34
       Width = 831
       Height = 558
-      ActivePage = tsTail1
+      ActivePage = tsTail2
       Align = alClient
       HotTrack = True
       TabOrder = 0

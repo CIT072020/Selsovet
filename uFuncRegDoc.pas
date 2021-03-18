@@ -4,9 +4,9 @@ interface
 
 {$I Task.inc}
 
-uses Windows, Forms,Dialogs, Classes, Messages, SysUtils, Variants, ShellApi,
-     ZipForge, QStrings, db, FuncPr, MetaTask, NativeXML, DateUtils, fEditMemo,
-     mPermit, uUtilFiles, uProject, uProjectAll;
+uses Windows, Forms,Dialogs, Classes, Messages, SysUtils, Variants, ShellApi,DBCtrlsEh,
+     ZipForge, QStrings, db, FuncPr, MetaTask, NativeXML, DateUtils, fEditMemo, fChVigrDelo,
+     uBase, mPermit, uUtilFiles, uProject, uProjectAll;
 
 type
 
@@ -22,7 +22,7 @@ type
      FIsDate:Boolean;
      FDate1:TDateTime;
      FDate2:TDateTime;
-
+     FMainFolder:String;
      FProtokol: TStrings;
      FDebug: TStrings;
      FLastError:String;
@@ -51,7 +51,8 @@ type
      function getTypeDoc(nType:Integer):String;
      function getHeadDoc(nType:Integer):String;
      procedure AddProtokol(sValue:String; lDebug:Boolean=false);
-
+     procedure Event1_UpdateActions(Sender:TObject);
+     procedure Event_OkClick(Sender: TObject);
 
      function ExportSprFileDocList:Boolean;
 
@@ -92,21 +93,28 @@ begin
   da.Free;
 end;
 
+
 procedure DeloToVedomArx;
 var
   da:TRegdoc2XML;
   fs:TFormatSettings;
-  n,nDelo:Integer;
-  f:TfmParamQuest;
+//  n:Integer;
+//  f:TfmParamQuest;
   nYear, nMonth, nDay:Word;
   s,sPath:String;
-  lDate:Boolean;
-  d1,d2:TDateTime;
+//  lDate:Boolean;
+//  d1,d2:TDateTime;
+  par:TVigrDelo;
 begin
+  {
   f:=TfmParamQuest.Create(nil);
+  f.EventUpdateActions:=da.Event1_UpdateActions;
+  f.EventOkClick:=da.Event_OkClick;
   f.Caption := 'Введите значения';
   sPath:=GlobalTask.GetLastValueAsString('PATH_VIGR_DELO');
-  f.AddParamEx(sPath, 'Папка для выгрузки' , 'PATH' ,'TYPE=DIR');
+  if sPath=''
+    then sPath:=ExtractFilePath(Application.ExeName)+'Export\';
+  f.AddParamEx(sPath, 'Папка для выгрузки' , 'PATH' ,'TYPE=DIR~WIDTH=200');
   // [LOOKUP_SPRDOCFILELIST]  DISPLAY=FILE_IND,NAME
   f.AddParamEx(0 , 'Номенклатура' , 'DELO' ,'TYPE=LOOKUP~DESC=LOOKUP_SPRDOCFILELIST~WIDTH=100~BOX=100,500');
   if BeginDateDelo1=0 then begin
@@ -117,46 +125,56 @@ begin
   f.AddParamEx(true, 'Учитывать дату направления в дело', 'ISDATE' ,'TYPE=BOOLEAN');
   f.AddParamEx(BeginDateDelo1, 'Начальная дата', 'DATE1' ,'TYPE=DATE');
   f.AddParamEx(BeginDateDelo2, 'Конечная дата' , 'DATE2' ,'TYPE=DATE');
-  f.AddButtons('Выполнить~Отказ',0);
+  f.AddButtons('<OK>Выполнить~Отказ',0);
   n:=f.ShowQuest;
+  }
   da:=TRegdoc2XML.Create;
-  nDelo:=f.GetValue('DELO','N');
-  sPath:=CheckSleshN(f.GetValue('PATH','S'));
-  lDate:=f.GetValue('ISDATE','L');
-  d1:=f.GetValue('DATE1','D');
-  d2:=f.GetValue('DATE1','D');
-  f.Free;
-  if (sPath<>'') and (n>0) and (nDelo>0) then begin
-    GlobalTask.SetLastValueAsString('PATH_VIGR_DELO',DeleteSlesh(sPath));
-
+  par:=TVigrDelo.Create;
+  if ChoiceVigrDelo(par) and (par.Dir<>'') and (par.Delo>0) then begin
+    par.Save;
+    {
+    nDelo:=f.GetValue('DELO','N');
+    sPath:=CheckSleshN(f.GetValue('PATH','S'));
+    lDate:=f.GetValue('ISDATE','L');
+    d1:=f.GetValue('DATE1','D');
+    d2:=f.GetValue('DATE1','D');
+    }
     SetLength(da.arrTypeDok,2);
-  {  dtPetition=1 обращения граждан;  dtInfo=2 справки;  gtAdmProc=5 административные процедуры  }
+    {  dtPetition=1 обращения граждан;  dtInfo=2 справки;  gtAdmProc=5 административные процедуры  }
     da.arrTypeDok[0]:=gtIncoming;
     da.arrTypeDok[1]:=gtOutgoing;
-    if da.SetPathExport(sPath) then begin;   // !!! брать из параметров
-      OpenMessageEx('Выгрузка в ведомственный архив ...');
+    if da.SetPathExport(par.Dir) then begin;   // !!! брать из параметров
+      OpenMessageEx('Выгрузка для "ЛАИС.АРХИВ" ...');
       try
-        da.FDelo:=nDelo;
-        da.FIsDate:=lDate;
-        da.FDate1:=d1;
-        da.FDate2:=d2;
+        da.FDelo:=par.Delo;
+        da.FIsDate:=par.IsDate;
+        da.FDate1:=par.Date1;
+        da.FDate2:=par.Date2;
         da.DeloToArxiv();
       finally
         CloseMessage();
-      end;
+      end;      
     end;
     if da.FProtokol.Count=0 then begin
-      ShowMessage('Выгрузка успешно завершена');
+      ShowMessage('Выгрузка успешно завершена. Папка "'+da.FMainFolder+'"');
+      if par.OpenFolder
+        then ShellExecute(Application.Handle, PChar('explore'), PChar(da.FPathExport), nil, nil, SW_SHOWNORMAL);
     end else begin
-      s:='<READONLY>'+da.FProtokol.Text;
-      EditMemo(s, 'Ошибки', nil, 800);
+      if da.FProtokol.Count<10 then begin
+        PutError(da.FProtokol.Text);
+      end else begin
+        s:='<READONLY>'+da.FProtokol.Text;
+        EditMemo(s, 'Ошибки', nil, 800);
+      end;  
     end;
     if Role.SystemAdmin then begin
       s:=da.FDebug.Text;
       EditMemo(s, 'Отладка', nil, 800);
     end;
-    da.Free;
   end;
+//  f.Free;
+  da.Free;
+  par.Free;
 end;
 
 //--------------------------------------------------------------
@@ -338,11 +356,13 @@ begin
   if lDebug then
     FDebug.Add(sValue);
 end;
+
 //--------------------------------------------------------------
 function TRegdoc2XML.DeloToArxiv:Boolean;
 var
   dsDelo, dsFiles:TDataSet;
-  sDelo,s,sDate,sFileDoc, sFolder, sPath, sDolg, sFIO:String;
+  dBegin, dEnd : TDateTime;
+  sErr,sSysId,sDocID,sDelo,s,sDate,sFileDoc, sFolder, sPath, sDolg, sFIO:String;
   nNum,i,n:Integer;
   nodeInfo, nodeDocs, nodeDoc, nodeFiles:TXMLNode;
 begin
@@ -354,7 +374,8 @@ begin
     exit;
   end;
 //  sPath:=FPathExport+'Дело от '+FormatDateTime('yyyy-mm-dd',Now)+' '+IntToStr(FDelo)+'\';
-  sPath:=FPathExport+'Дело '+IntToStr(FDelo)+'\';
+  FMainFolder:='Дело '+IntToStr(FDelo);
+  sPath:=FPathExport+FMainFolder+'\';
   ClearDir(sPath,true);
   if not ForceDirectories(sPath) then begin
     AddProtokol('Ошибка создания папки: "'+sPath+'"');
@@ -369,12 +390,18 @@ begin
       exit;
     end;
   end;
-  with dmBase.SprDocFileList do begin
-    Locate('ID', FDelo, []);
-    if FieldByName('DATE_BEGIN').IsNull or FieldByName('DATE_END').IsNull then begin
-      AddProtokol('Не заполнены дата начала и дата завершения дела в номенклатуре дел.');
-      exit;
-    end;
+  sSysId:=dmBase.GetSysIdBase(sErr);
+  if sSysId='' then begin
+    AddProtokol(sErr);
+    exit;
+  end;
+  if dmBase.GetDateDelo(0, FDelo, dBegin, dEnd, s)<2 then begin
+//  with dmBase.SprDocFileList do begin
+//    Locate('ID', FDelo, []);
+//    if FieldByName('DATE_BEGIN').IsNull or FieldByName('DATE_END').IsNull then begin
+    AddProtokol('Не заполнены дата начала и дата завершения дела в номенклатуре дел.');
+    exit;
+//    end;
   end;
   s:='';
   for i:=Low(arrTypeDok) to High(arrTypeDok)
@@ -388,11 +415,12 @@ begin
   end;
   dsFiles:=nil;
   if dsDelo.RecordCount=0 then begin
+    ClearDir(sPath,true);
     AddProtokol('Не найдено документов для выгрузки',true);
   end else begin
     n:=1;
     ClearXml(xmlDelo, FRootDelo);
-    ValueToXML(xmlDelo.Root, 'sysid', dmBase.GetSysIdBase, true, 1);   // UUID / GUID – статистически уникальный 128–битный идентификатор, формируется на стороне системы ВСЭД.
+    ValueToXML(xmlDelo.Root, 'sysid', dmBase.GetSysIdBase(sErr), true, 1);   // UUID / GUID – статистически уникальный 128–битный идентификатор, формируется на стороне системы ВСЭД.
     ValueToXML(xmlDelo.Root, 'sysname', GetNameProgram, true, 1);  // Наименование системы отправителя (ВСЭД).
     ValueToXML(xmlDelo.Root, 'sysversion', GetVersionProgram(2), true, 1);
     nodeInfo:=xmlDelo.Root.NodeNew('info');
@@ -408,14 +436,15 @@ begin
       ValueToXML(nodeInfo, 'name', FieldByName('NAME').AsString);
       ValueToXML(nodeInfo, 'period', FieldByName('ARTICLE').AsString);
       ValueToXML(nodeInfo, 'note', FieldByName('NOTE').AsString);
-      ValueToXML(nodeInfo, 'begin', DateToStr(FieldByName('DATE_BEGIN').AsDateTime));
-      ValueToXML(nodeInfo, 'end', DateToStr(FieldByName('DATE_END').AsDateTime));
+      ValueToXML(nodeInfo, 'begin', DateToStr(dBegin));
+      ValueToXML(nodeInfo, 'end', DateToStr(dEnd));
     end;
     nodeDocs:=xmlDelo.Root.NodeNew('documents');
     nodeInfo:=nil; //  <-------  ниже новая инициализация
     FPathDoc:='';
     nNum:=1;
     while not dsDelo.Eof do begin
+      sDocID:=dsDelo.FieldByName('DOC_ID').AsString;
       nodeDoc:=nodeDocs.NodeNew('document');
       sFolder:='DOC-'+getGuid(false);
       FPathDoc:=sPath+sFolder+'\';
@@ -440,7 +469,7 @@ begin
 //        9.3.17 SourceApproveTs Дата подписания или утверждения документа (YYYY-MM-DD hh:mm:ss)
 
 //???        ValueToXML(nodeInfo, 'AkIndexSED', dsDelo.FieldByName('DOC_ID').AsString); // Внутренний идентификатор дела во внешней системе (от 1 до 300 символов)
-        ValueToXML(nodeInfo, 'IDinSED', dsDelo.FieldByName('DOC_ID').AsString); // Внутренний идентификатор дела во внешней системе (от 1 до 300 символов)
+        ValueToXML(nodeInfo, 'IDinSED', sDocID); // Внутренний идентификатор дела во внешней системе (от 1 до 300 символов)
         ValueToXML(nodeInfo, 'NumberInKeeping', dsDelo.FieldByName('REG_NUM').AsString);  // 9.3.3  NumberInKeeping  Номер документа в деле.
         ValueToXML(nodeInfo, 'IdentificationCode', dsDelo.FieldByName('REG_IND').AsString);  // 9.3.4  IdentificationCode  Регистрационный индекс (№ документа)
         ValueToXML(nodeInfo, 'Title', dsDelo.FieldByName('CONTENT').AsString);     // краткое содержание /9.3.5  Title Заголовок ЭД (не более 1500 символов)
@@ -466,7 +495,7 @@ begin
         nodeFiles:=xmlRKK.Root.NodeNew('files');
         //----------------
 
-        s:='SELECT * FROM DocFile WHERE doc_id='+dsDelo.FieldByName('DOC_ID').AsString+' ORDER BY n_order';
+        s:='SELECT * FROM DocFile WHERE doc_id='+sDocID+' ORDER BY n_order';
         FDebug.Add(s);
         if dsFiles=nil
           then dsFiles:=dmBase.OpenQuery(s)
@@ -479,11 +508,18 @@ begin
       end else begin
         AddProtokol('Ошибка создания папки: "'+sFolder+'"', true);
       end;
+
+      ConnectExecuteM('UPDATE DocMain SET in_arx_date='+DateToSQL(Now)+' WHERE doc_id='+sDocID, s, 2);   // uBase.pas
+      if s<>''
+        then AddProtokol(s,true);
+
       dsDelo.Next;
+
       Inc(n,1);
     end;
     xmlDelo.SaveToFile(sPath+'delo.xml');
     dmBase.FreeQuery(dsFiles);
+    Result:=true;
   end;
   dmBase.FreeQuery(dsDelo);
 end;
@@ -594,4 +630,33 @@ begin
   dx.Free;
 end;
 
+procedure TRegdoc2XML.Event1_UpdateActions(Sender: TObject);
+var
+  f:TfmParamQuest;
+  l:Boolean;
+begin
+  f:=TfmParamQuest(sender);
+  l:=(TDbComboBoxEh(f.getControl(2)).ItemIndex=0);
+  f.getControl(3).Enabled:=l;
+  f.getControl(4).Enabled:=l;
+  f.getST(3).Enabled:=l;
+  f.getST(4).Enabled:=l;
+  f.getButtom(0).Enabled:=(f.GetValue('DELO','N')>0) and (f.GetValue('PATH','')<>'');
+end;
+
+procedure TRegdoc2XML.Event_OkClick(Sender: TObject);
+var
+  f:TfmParamQuest;
+  l:Boolean;
+  dBegin, dEnd :TDateTime;
+  s:String;
+begin
+  f:=TfmParamQuest(sender);
+  if dmBase.GetDateDelo(0, f.GetValue('DELO','N'), dBegin, dEnd, s)<2 then begin
+    PutError('Не заполнены дата начала и дата завершения дела в номенклатуре дел.');
+  end else begin
+    f.SetResultEvent(1); // Ok!
+  end;
+end;
+  
 end.

@@ -120,6 +120,7 @@ Source: "E:\Projects\Selsovet7\TemplateExcel\*.*"; DestDir: "{app}\TemplateExcel
 ;Source: "E:\Projects\Selsovet7\ServiceSelSovet\*.*"; DestDir: "{app}\Service"; Excludes: "NewParams.tsk,ParamZags.tsk,*.bak"; Flags: ignoreversion; Components: program
 Source: "E:\Projects\Selsovet7\Service\*.*"; DestDir: "{app}\Service"; Excludes: "*.xml,smdo*.*,zags.pas,progp.pas,progo.pas,progz.pas,GISUN*.ini,OpisFilter*.ini,personal.pas,MRUList.ini,*Ochered.*,*Och.*,*Opeka.*,*Post.*,*SMDO.*,*GKH.*,*ZAH.*,*Opek.*,*Zags.*,NewParams.tsk,*.bak"; Flags: ignoreversion; Components: program
 Source: "E:\Projects\Selsovet7\Service\*.xml"; DestDir: "{app}\Service"; Flags: ignoreversion; Components: program
+Source: "E:\Projects\Selsovet7\Service\fmGurnOchered.ini"; DestDir: "{app}\Service"; Flags: ignoreversion; Components: program
 Source: "E:\Projects\Selsovet7\Service\fmGurnZOpeka.ini"; DestDir: "{app}\Service"; Flags: ignoreversion; Components: program
 Source: "E:\Projects\Selsovet7\Service\fmGurnSMDO.ini"; DestDir: "{app}\Service"; Flags: ignoreversion; Components: program
 Source: "E:\Projects\Selsovet7\Service\ochered.pas"; DestDir: "{app}\Service"; Flags: ignoreversion; Components: program
@@ -186,8 +187,8 @@ Filename: "{app}\Lais.exe"; Description: "À¿»—"; Flags: nowait postinstall skipi
 root:HKCU;subkey:"Software\VCBOUS"; Flags: uninsdeletekeyifempty
 root:HKCU;subkey:"Software\VCBOUS\LAIS"; Flags: uninsdeletekey
 root:HKCU;subkey:"Software\VCBOUS\LAIS";valuetype:string;valuename:"installpath";valuedata:"{app}"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\LAIS";valuetype:string;valuename:"version";valuedata:"12.3.0"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\LAIS";valuetype:string;valuename:"update";valuedata:"191"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\LAIS";valuetype:string;valuename:"version";valuedata:"12.5.0"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\LAIS";valuetype:string;valuename:"update";valuedata:"193"; Flags: uninsdeletevalue
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\LastUpdate"

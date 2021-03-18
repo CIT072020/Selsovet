@@ -320,7 +320,7 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
       Top = 34
       Width = 868
       Height = 523
-      ActivePage = tsChild
+      ActivePage = tsFaser
       Align = alClient
       TabOrder = 2
       TabStop = False
@@ -1898,15 +1898,41 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
             end
             item
               Glyph.Data = {
-                F6000000424DF600000000000000760000002800000010000000100000000100
-                0400000000008000000000000000000000001000000000000000000000000000
-                8000008000000080800080000000800080008080000080808000C0C0C0000000
-                FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00DDDDDDDDDDDD
-                DDDDDDDDDDDDDDDDDDDDDD00000000000DDDDD09999999990DDDDD0999999999
-                0DDDDD09999F99990DDDDDD0999F9990DDDDDDDD00FFF00DDDDDDDDDDD000DDD
-                DDDDDDDDD07770DDDDDDDDDDD07770DDDDDDDDDDD07770DDDDDDDDDDD00000DD
-                DDDDDDDDDD000DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD}
-              Hint = #1042#1099#1073#1088#1072#1090#1100' '#1072#1082#1090#1086#1074#1091#1102' '#1079#1072#1087#1080#1089#1100' '#1086' '#1088#1086#1078#1076#1077#1085#1080#1080
+                36040000424D3604000000000000360000002800000010000000100000000100
+                2000000000000004000000000000000000000000000000000000FFFFFF00FFFF
+                FF00FCFCFE05FFFFFFA6BCBEF3FF5E64E3FF2D35DBFF1720D8FF161DD7FF1E26
+                D9FF4148DFFF868AE9FFEDEEFBD8FFFFFF24FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00FFFFFE189CA0ECFF181FD9FF0A13D6FF0B14D7FF0B14D7FF0B14D7FF0B14
+                D7FF0B14D7FF0811D6FF4A50E0FFE2E2F812FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00B2C1E4EC0E19D4FF030BD6FF0D16D6FF0C15D6FF0D15D6FF0D15D6FF0D15
+                D6FF0B14D6FF0D16D7FF0000D4FF5665D9BBFFFFFF00FFFFFF00FFFFFF00FFFF
+                FF0082A0E1FF070FD6FF0D16D7FF0D16D6FF1019D6FF0E18D7FF0E17D6FF1018
+                D6FF0E17D5FF0E17D7FF030AD5FF3549DAF9FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00ABC8E3FF1F2ED8FF030AD5FF1019D6FF030AD5FF0007D5FF0008D5FF030B
+                D6FF0C15D6FF1019D6FF0004D4FF627EE0F8FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00E9F2EDFF8099E3FF040BD7FF080FD4FF2533D9FF3B4CDAFF3B4BDAFF2331
+                D9FF0F17D5FF0000D3FF3142DDFFBED5E7F9FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00FFFFFF02F1F4EFE58194E0FF7795E1FFA5C8E5FFA9CFE7FFA9CFE7FFA4C6
+                E4FF819FE1FF5260DBFFC7D0E9F1FCFDF823FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00FFFFFD01DAE3ED7FADD2E6FFACCFE6FF9DCAE7FF7ACAE7FF7ECBE7FF9FC9
+                E7FFAACEE6FFAFD4E6FFE0E8EDBFFFFFFF1EFFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00E0E8ED00A8CAE6FFA0C5E6FFA6C3E3FF9BD5ECFF43A0D7FF4EA7DAFFA1D5
+                EDFFA6C3E2FFA0C5E6FFA9C9E6FFE3E8ED00FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00AACAE6FFADCEEAFFB8DAF4FFB8DAF6FFAFD0EAFF97D4EDFF9BD5EEFFAFD0
+                EAFFB9D9F6FFB8D9F5FFADCFEBFFABCAE7FFFFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00BBD5EBFFBDDDF7FF8094A8FF7C90A2FFBCDAF5FFBBD5ECFFBAD3EBFFBCDB
+                F5FF7D8FA3FF8194A7FFBCDCF7FFBCD6EDF9FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00CDDDEAFFC5E4FCFF7F8D9DFF717F8FFFC2DFF7FFBBD7EFFFBBD6EEFFC4E2
+                F9FF717E8EFF818F9EFFC2E1FBFFD2E0ECFFFFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00DEE6EDFFC6DEF5FFCEE6FBFFCCE5FBFFD0E5F8FFD1E5F8FFD1E6F9FFCFE4
+                F7FFCCE5FBFFCDE6FBFFC4DDF3FFE2EAF1E2FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00F6F7F81FD3E3F2FFCDE3F8FFD5E7F8FFB1CEE6FF528CB1FF5890B5FFB8D3
+                E9FFD4E6F8FFCDE2F7FFD4E3F2D0F7F7F829FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00FEFEFE09EFF3F556DEECFAFFCBE1F3FF1E6291FF004276FF004175FF2D6C
+                97FFD2E6F8FFDCE9F6FFF0F3F430FFFFFF05FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00FFFFFF00FFFEFE03FAFAFB41E9F1F8FFAAC4D7FF8AADC5FF8AADC5FFAFC8
+                D9FFE8EFF6FFF8F9FA32FFFFFE01FFFFFF00FFFFFF00FFFFFF00}
+              Hint = #1042#1099#1073#1088#1072#1090#1100' '#1079#1072#1087#1080#1089#1100' '#1072#1082#1090#1072' '#1086' '#1088#1086#1078#1076#1077#1085#1080#1080
               Style = ebsGlyphEh
               Width = 20
               OnClick = edONA_FamiliaEditButtons1Click
@@ -2118,18 +2144,45 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Top = 461
           Width = 113
           Height = 27
+          Hint = #1054#1090#1082#1088#1099#1090#1100' '#1079#1072#1087#1080#1089#1100' '#1072#1082#1090#1072' '#1086' '#1088#1086#1078#1076#1077#1085#1080#1080
           Caption = #1079'/'#1072' '#1086' '#1088#1086#1078#1076#1077#1085#1080#1080
           TabOrder = 45
           OnClick = btAktRogdClick
           Glyph.Data = {
-            F6000000424DF600000000000000760000002800000010000000100000000100
-            0400000000008000000000000000000000001000000000000000000000000000
-            8000008000000080800080000000800080008080000080808000C0C0C0000000
-            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00DDDDDDDDDDDD
-            DDDDDDDDDDDDDDDDDDDDDD00000000000DDDDD09999999990DDDDD0999999999
-            0DDDDD09999F99990DDDDDD0999F9990DDDDDDDD00FFF00DDDDDDDDDDD000DDD
-            DDDDDDDDD07770DDDDDDDDDDD07770DDDDDDDDDDD07770DDDDDDDDDDD00000DD
-            DDDDDDDDDD000DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD}
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000000000000000000000000000000000000FFFFFF00FFFF
+            FF00FCFCFE05FFFFFFA6BCBEF3FF5E64E3FF2D35DBFF1720D8FF161DD7FF1E26
+            D9FF4148DFFF868AE9FFEDEEFBD8FFFFFF24FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFE189CA0ECFF181FD9FF0A13D6FF0B14D7FF0B14D7FF0B14D7FF0B14
+            D7FF0B14D7FF0811D6FF4A50E0FFE2E2F812FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00B2C1E4EC0E19D4FF030BD6FF0D16D6FF0C15D6FF0D15D6FF0D15D6FF0D15
+            D6FF0B14D6FF0D16D7FF0000D4FF5665D9BBFFFFFF00FFFFFF00FFFFFF00FFFF
+            FF0082A0E1FF070FD6FF0D16D7FF0D16D6FF1019D6FF0E18D7FF0E17D6FF1018
+            D6FF0E17D5FF0E17D7FF030AD5FF3549DAF9FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00ABC8E3FF1F2ED8FF030AD5FF1019D6FF030AD5FF0007D5FF0008D5FF030B
+            D6FF0C15D6FF1019D6FF0004D4FF627EE0F8FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00E9F2EDFF8099E3FF040BD7FF080FD4FF2533D9FF3B4CDAFF3B4BDAFF2331
+            D9FF0F17D5FF0000D3FF3142DDFFBED5E7F9FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF02F1F4EFE58194E0FF7795E1FFA5C8E5FFA9CFE7FFA9CFE7FFA4C6
+            E4FF819FE1FF5260DBFFC7D0E9F1FCFDF823FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFD01DAE3ED7FADD2E6FFACCFE6FF9DCAE7FF7ACAE7FF7ECBE7FF9FC9
+            E7FFAACEE6FFAFD4E6FFE0E8EDBFFFFFFF1EFFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00E0E8ED00A8CAE6FFA0C5E6FFA6C3E3FF9BD5ECFF43A0D7FF4EA7DAFFA1D5
+            EDFFA6C3E2FFA0C5E6FFA9C9E6FFE3E8ED00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00AACAE6FFADCEEAFFB8DAF4FFB8DAF6FFAFD0EAFF97D4EDFF9BD5EEFFAFD0
+            EAFFB9D9F6FFB8D9F5FFADCFEBFFABCAE7FFFFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00BBD5EBFFBDDDF7FF8094A8FF7C90A2FFBCDAF5FFBBD5ECFFBAD3EBFFBCDB
+            F5FF7D8FA3FF8194A7FFBCDCF7FFBCD6EDF9FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00CDDDEAFFC5E4FCFF7F8D9DFF717F8FFFC2DFF7FFBBD7EFFFBBD6EEFFC4E2
+            F9FF717E8EFF818F9EFFC2E1FBFFD2E0ECFFFFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00DEE6EDFFC6DEF5FFCEE6FBFFCCE5FBFFD0E5F8FFD1E5F8FFD1E6F9FFCFE4
+            F7FFCCE5FBFFCDE6FBFFC4DDF3FFE2EAF1E2FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00F6F7F81FD3E3F2FFCDE3F8FFD5E7F8FFB1CEE6FF528CB1FF5890B5FFB8D3
+            E9FFD4E6F8FFCDE2F7FFD4E3F2D0F7F7F829FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FEFEFE09EFF3F556DEECFAFFCBE1F3FF1E6291FF004276FF004175FF2D6C
+            97FFD2E6F8FFDCE9F6FFF0F3F430FFFFFF05FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFEFE03FAFAFB41E9F1F8FFAAC4D7FF8AADC5FF8AADC5FFAFC8
+            D9FFE8EFF6FFF8F9FA32FFFFFE01FFFFFF00FFFFFF00FFFFFF00}
         end
         object btPadeg: TButton
           Left = 512
@@ -2884,14 +2937,14 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           WordWrap = True
         end
         object Label69: TLabel
-          Left = 317
+          Left = 355
           Top = 43
           Width = 12
           Height = 13
           Caption = #1086#1090
         end
         object Label70: TLabel
-          Left = 660
+          Left = 713
           Top = 43
           Width = 12
           Height = 13
@@ -2965,9 +3018,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           OnDblClick = TBItemEditMemoClick
         end
         object edZametka: TDBEditEh
-          Left = 176
+          Left = 156
           Top = 177
-          Width = 673
+          Width = 693
           Height = 62
           Anchors = [akLeft, akTop, akRight]
           AutoSelect = False
@@ -3091,7 +3144,7 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Visible = True
         end
         object Button1: TButton
-          Left = 150
+          Left = 130
           Top = 216
           Width = 17
           Height = 17
@@ -3120,9 +3173,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           OnEnter = edIzvechEnter
         end
         object edON_OBRAZ: TDBComboBoxEh
-          Left = 176
+          Left = 156
           Top = 144
-          Width = 311
+          Width = 334
           Height = 26
           DataField = 'ON_OBRAZ'
           DataSource = dsDokument
@@ -3138,9 +3191,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Visible = True
         end
         object edON_WORK: TDBEditEh
-          Left = 176
+          Left = 156
           Top = 117
-          Width = 311
+          Width = 334
           Height = 26
           DataField = 'ON_WORK'
           DataSource = dsDokument
@@ -3155,9 +3208,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Visible = True
         end
         object edON_DOK_TYPE: TDBComboBoxEh
-          Left = 176
+          Left = 156
           Top = 9
-          Width = 311
+          Width = 334
           Height = 26
           HelpContext = 888
           DataField = 'ON_DOK_TYPE'
@@ -3173,9 +3226,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Visible = True
         end
         object edON_DOK_SERIA: TDBEditEh
-          Left = 176
+          Left = 156
           Top = 36
-          Width = 33
+          Width = 69
           Height = 26
           CharCase = ecUpperCase
           DataField = 'ON_DOK_SERIA'
@@ -3191,9 +3244,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Visible = True
         end
         object edON_DOK_NOMER: TDBEditEh
-          Left = 220
+          Left = 236
           Top = 36
-          Width = 89
+          Width = 110
           Height = 26
           DataField = 'ON_DOK_NOMER'
           DataSource = dsDokument
@@ -3208,9 +3261,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Visible = True
         end
         object edON_DOK_DATE: TDBDateTimeEditEh
-          Left = 338
+          Left = 380
           Top = 36
-          Width = 107
+          Width = 110
           Height = 26
           DataField = 'ON_DOK_DATE'
           DataSource = dsDokument
@@ -3226,9 +3279,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Visible = True
         end
         object edON_DOKUMENT: TDBEditEh
-          Left = 176
+          Left = 156
           Top = 63
-          Width = 311
+          Width = 334
           Height = 26
           DataField = 'ON_DOKUMENT'
           DataSource = dsDokument
@@ -3243,9 +3296,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Visible = True
         end
         object edONA_DOK_TYPE: TDBComboBoxEh
-          Left = 519
+          Left = 514
           Top = 9
-          Width = 311
+          Width = 334
           Height = 26
           DataField = 'ONA_DOK_TYPE'
           DataSource = dsDokument
@@ -3260,9 +3313,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Visible = True
         end
         object edONA_DOK_SERIA: TDBEditEh
-          Left = 519
+          Left = 514
           Top = 36
-          Width = 33
+          Width = 69
           Height = 26
           CharCase = ecUpperCase
           DataField = 'ONA_DOK_SERIA'
@@ -3278,9 +3331,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Visible = True
         end
         object edONA_DOK_NOMER: TDBEditEh
-          Left = 565
+          Left = 596
           Top = 36
-          Width = 89
+          Width = 110
           Height = 26
           DataField = 'ONA_DOK_NOMER'
           DataSource = dsDokument
@@ -3295,9 +3348,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Visible = True
         end
         object edONA_DOK_DATE: TDBDateTimeEditEh
-          Left = 681
+          Left = 738
           Top = 36
-          Width = 107
+          Width = 110
           Height = 26
           DataField = 'ONA_DOK_DATE'
           DataSource = dsDokument
@@ -3313,9 +3366,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Visible = True
         end
         object edONA_DOKUMENT: TDBEditEh
-          Left = 519
+          Left = 514
           Top = 63
-          Width = 311
+          Width = 334
           Height = 26
           DataField = 'ONA_DOKUMENT'
           DataSource = dsDokument
@@ -3330,9 +3383,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Visible = True
         end
         object edON_Voenkom: TDBLookupComboboxEh
-          Left = 176
+          Left = 156
           Top = 90
-          Width = 311
+          Width = 334
           Height = 26
           DataField = 'ON_VOENKOM'
           DataSource = dsDokument
@@ -3399,9 +3452,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Visible = True
         end
         object edONA_WORK: TDBEditEh
-          Left = 519
+          Left = 514
           Top = 117
-          Width = 311
+          Width = 334
           Height = 26
           DataField = 'ONA_WORK'
           DataSource = dsDokument
@@ -3416,9 +3469,9 @@ inherited fmZapisUstOtc: TfmZapisUstOtc
           Visible = True
         end
         object edONA_OBRAZ: TDBComboBoxEh
-          Left = 519
+          Left = 514
           Top = 144
-          Width = 311
+          Width = 334
           Height = 26
           DataField = 'ONA_OBRAZ'
           DataSource = dsDokument

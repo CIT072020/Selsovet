@@ -193,6 +193,40 @@ begin
   end;
 end;
 
+function lvDate(strName : STRING):TDateTime;
+begin
+  Result:=GlobalTask.GetLastValueAsDate(strName);
+end;
+function lvString(strName : STRING):STRING;
+begin
+  Result:=GlobalTask.GetLastValueAsString(strName);
+end;
+function lvInteger(strName : STRING):Integer;
+begin
+  Result:=GlobalTask.GetLastValueAsInteger(strName);
+end;
+function lvBoolean(strName : STRING):Boolean;
+begin
+  Result:=GlobalTask.GetLastValueAsBoolean(strName);
+end;
+
+procedure slvDate(strName : STRING; dVal:TDateTime);
+begin
+  GlobalTask.SetLastValueAsDate(strName,dVal);
+end;
+procedure slvString(strName : STRING; sVal:String);
+begin
+  GlobalTask.SetLastValueAsString(strName,sVal);
+end;
+procedure slvInteger(strName : STRING; nVal:Integer);
+begin
+  GlobalTask.SetLastValueAsInteger(strName,nVal);
+end;
+procedure slvBoolean(strName : STRING; lVal:Boolean);
+begin
+  GlobalTask.SetLastValueAsBoolean(strName,lVal);
+end;
+
 procedure SIRegisterGlobalTask(Cl: TIFPSPascalCompiler);
 begin
   with Cl.AddClassN(cl.FindClass('TOBJECT'), 'TMETATASK') do
@@ -417,6 +451,16 @@ begin
 
   s.AddDelphiFunction('function addToXMLField(fld:TField; sField:String; vValue:Variant; sType:String):Boolean;');
 
+  s.AddDelphiFunction('function lvDate(strName : STRING):TDateTime;');
+  s.AddDelphiFunction('function lvString(strName : STRING):STRING;');
+  s.AddDelphiFunction('function lvInteger(strName : STRING):Integer;');
+  s.AddDelphiFunction('function lvBoolean(strName : STRING):Boolean;');
+
+  s.AddDelphiFunction('procedure slvDate(strName : STRING; dVal : TDateTime);');
+  s.AddDelphiFunction('procedure slvString(strName : STRING; sVal : String);');
+  s.AddDelphiFunction('procedure slvInteger(strName : STRING; nVal : Integer);');
+  s.AddDelphiFunction('procedure slvBoolean(strName : STRING; lVal : Boolean);');
+
 end;
 
 function Q_DelChars2(S: string; Chars: string):String;
@@ -462,6 +506,16 @@ begin
   s.RegisterDelphiFunction(@Q_KeepChars2,'Q_KEEPCHARS', cdRegister);
 
   s.RegisterDelphiFunction(@addToXMLField, 'ADDTOXMLFIELD', cdRegister);
+
+  s.RegisterDelphiFunction(@lvDate, 'LVDATE', cdRegister);
+  s.RegisterDelphiFunction(@lvString, 'LVSTRING', cdRegister);
+  s.RegisterDelphiFunction(@lvInteger, 'LVINTEGER', cdRegister);
+  s.RegisterDelphiFunction(@lvBoolean, 'LVBOOLEAN', cdRegister);
+  s.RegisterDelphiFunction(@slvDate, 'SLVDATE', cdRegister);
+  s.RegisterDelphiFunction(@slvString, 'SLVSTRING', cdRegister);
+  s.RegisterDelphiFunction(@slvInteger, 'SLVINTEGER', cdRegister);
+  s.RegisterDelphiFunction(@slvBoolean, 'SLVBOOLEAN', cdRegister);
+
 end;
 
 end.

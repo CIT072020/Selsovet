@@ -111,7 +111,7 @@ inherited fmZapisAdopt: TfmZapisAdopt
       Top = 35
       Width = 871
       Height = 592
-      ActivePage = tsFaser
+      ActivePage = tsChild
       Align = alClient
       TabOrder = 1
       TabStop = False
@@ -726,7 +726,7 @@ inherited fmZapisAdopt: TfmZapisAdopt
         object edMestoNomer: TDBEditEh
           Left = 172
           Top = 458
-          Width = 48
+          Width = 125
           Height = 26
           DataField = 'REG_NOMER_DO'
           DataSource = dsDokument
@@ -743,7 +743,7 @@ inherited fmZapisAdopt: TfmZapisAdopt
         object edMestoDate: TDBDateTimeEditEh
           Left = 172
           Top = 485
-          Width = 121
+          Width = 125
           Height = 26
           DataField = 'REG_DATE_DO'
           DataSource = dsDokument
@@ -778,7 +778,7 @@ inherited fmZapisAdopt: TfmZapisAdopt
         object edREG_NOMER_POSLE: TDBEditEh
           Left = 524
           Top = 458
-          Width = 48
+          Width = 125
           Height = 26
           DataField = 'REG_NOMER_POSLE'
           DataSource = dsDokument
@@ -795,7 +795,7 @@ inherited fmZapisAdopt: TfmZapisAdopt
         object edREG_DATE_POSLE: TDBDateTimeEditEh
           Left = 524
           Top = 485
-          Width = 121
+          Width = 125
           Height = 26
           DataField = 'REG_DATE_POSLE'
           DataSource = dsDokument
@@ -6612,7 +6612,7 @@ inherited fmZapisAdopt: TfmZapisAdopt
     end
     object DokumentREG_NOMER_DO: TStringField [16]
       FieldName = 'REG_NOMER_DO'
-      Size = 10
+      Size = 25
     end
     object DokumentREG_DATE_DO: TDateField [17]
       FieldName = 'REG_DATE_DO'
@@ -6920,7 +6920,7 @@ inherited fmZapisAdopt: TfmZapisAdopt
     end
     object DokumentREG_NOMER_POSLE: TStringField [102]
       FieldName = 'REG_NOMER_POSLE'
-      Size = 10
+      Size = 25
     end
     object DokumentREG_DATE_POSLE: TDateField [103]
       FieldName = 'REG_DATE_POSLE'

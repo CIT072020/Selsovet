@@ -141,6 +141,9 @@ inherited dmAdres: TdmAdres
     object mtDokumentPLOSH_UCH: TFloatField
       FieldName = 'PLOSH_UCH'
     end
+    object mtDokumentUCH_TYPEOWNER: TIntegerField
+      FieldName = 'UCH_TYPEOWNER'
+    end
     object mtDokumentUCH_NOMER: TStringField
       FieldName = 'UCH_NOMER'
       Size = 18
@@ -156,6 +159,10 @@ inherited dmAdres: TdmAdres
     end
     object mtDokumentUCH_ISKL_OSNOV: TMemoField
       FieldName = 'UCH_ISKL_OSNOV'
+      BlobType = ftMemo
+    end
+    object mtDokumentUCH_PRIM: TMemoField
+      FieldName = 'UCH_PRIM'
       BlobType = ftMemo
     end
     object mtDokumentETAG: TIntegerField

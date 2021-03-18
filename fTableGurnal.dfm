@@ -1,11 +1,11 @@
 object fmTableGurnal: TfmTableGurnal
-  Left = 353
-  Top = 204
+  Left = 429
+  Top = 250
   ActiveControl = Grid
   AutoScroll = False
   Caption = #1058#1072#1073#1083#1080#1095#1085#1099#1081' '#1078#1091#1088#1085#1072#1083
   ClientHeight = 405
-  ClientWidth = 667
+  ClientWidth = 929
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -26,13 +26,14 @@ object fmTableGurnal: TfmTableGurnal
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
-  object TBDock1: TTBDock
+  object TBDock: TTBDock
     Left = 0
     Top = 0
-    Width = 667
-    Height = 26
+    Width = 929
+    Height = 28
+    Visible = False
     object TBToolbar1: TTBToolbar
-      Left = 64
+      Left = 82
       Top = 0
       Caption = 'TBToolbar1'
       DockMode = dmCannotFloat
@@ -133,12 +134,12 @@ object fmTableGurnal: TfmTableGurnal
       ShowHint = True
       TabOrder = 1
       object TBControlItem1: TTBControlItem
-        Control = DBNavigator
+        Control = DBNavigator1
       end
-      object DBNavigator: TDBNavigator
+      object DBNavigator1: TDBNavigator
         Left = 0
-        Top = 0
-        Width = 60
+        Top = 1
+        Width = 78
         Height = 22
         DataSource = DataSource
         VisibleButtons = [nbInsert, nbPost, nbCancel]
@@ -159,7 +160,7 @@ object fmTableGurnal: TfmTableGurnal
       end
     end
     object TBToolbar2: TTBToolbar
-      Left = 321
+      Left = 339
       Top = 0
       AutoResize = False
       Caption = 'TBToolbarOrder'
@@ -176,9 +177,15 @@ object fmTableGurnal: TfmTableGurnal
         Left = 0
         Top = 0
         Width = 278
-        Height = 21
+        Height = 24
         Style = csDropDownList
-        ItemHeight = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ItemHeight = 16
+        ParentFont = False
         TabOrder = 0
         OnChange = cbOrderBy1Change
       end
@@ -186,9 +193,9 @@ object fmTableGurnal: TfmTableGurnal
   end
   object Grid: TSasaDBGrid
     Left = 0
-    Top = 26
-    Width = 667
-    Height = 379
+    Top = 62
+    Width = 929
+    Height = 343
     Align = alClient
     Ctl3D = True
     DataSource = DataSource
@@ -225,6 +232,114 @@ object fmTableGurnal: TfmTableGurnal
     Color1 = clBlack
     Color2 = clBlack
     TypeSave = 0
+  end
+  object TBDock24: TTBDock
+    Left = 0
+    Top = 28
+    Width = 929
+    Height = 34
+    Visible = False
+    object DBNavigator24: TDBNavigator
+      Left = 0
+      Top = 2
+      Width = 90
+      Height = 30
+      DataSource = DataSource
+      VisibleButtons = [nbInsert, nbPost, nbCancel]
+      Align = alLeft
+      DragMode = dmAutomatic
+      Flat = True
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+    end
+    object TBToolbarMenu24: TTBToolbar
+      Left = 90
+      Top = 0
+      Align = alLeft
+      BorderStyle = bsNone
+      Caption = 'TBToolbarMenu24'
+      DockMode = dmCannotFloat
+      DockPos = 90
+      Images = fmMain.ImageList24
+      ParentShowHint = False
+      ProcessShortCuts = True
+      ShowHint = True
+      TabOrder = 1
+      object TBItemPreview24: TTBItem
+        Caption = #1055#1088#1077#1076#1074#1072#1088#1080#1090#1077#1083#1100#1085#1099#1081' '#1087#1088#1086#1089#1084#1086#1090#1088
+        ImageIndex = 35
+        OnClick = TBItemPreviewClick
+      end
+      object TBItemPrint24: TTBItem
+        Caption = #1055#1077#1095#1072#1090#1100
+        ImageIndex = 36
+        OnClick = TBItemPrintClick
+      end
+      object TBItemDel24: TTBItem
+        Caption = #1059#1076#1072#1083#1080#1090#1100' '#1079#1072#1087#1080#1089#1100
+        ImageIndex = 32
+        OnClick = TBItemDelClick
+      end
+      object TBSubmenuSysFilter24: TTBSubmenuItem
+        Caption = #1057#1080#1089#1090#1077#1084#1085#1099#1081' '#1086#1090#1073#1086#1088
+        ImageIndex = 91
+        Visible = False
+      end
+      object TBItemColumnFilter24: TTBItem
+        Caption = #1054#1090#1073#1086#1088
+        ImageIndex = 78
+        OnClick = TBItemColumnFilterClick
+      end
+      object TBItemRepeatFilter24: TTBItem
+        Caption = #1055#1086#1074#1090#1086#1088#1080#1090#1100' '#1086#1090#1073#1086#1088
+        ImageIndex = 42
+        OnClick = TBItemRepeatFilterClick
+      end
+      object TBItemClrFlt24: TTBItem
+        Caption = #1054#1090#1084#1077#1085#1080#1090#1100' '#1086#1090#1073#1086#1088
+        ImageIndex = 43
+        OnClick = TBItemClrFltClick
+      end
+      object TBItemExport24: TTBItem
+        Caption = #1042#1099#1075#1088#1091#1079#1080#1090#1100
+        ImageIndex = 38
+        OnClick = TBItemExportClick
+      end
+      object TBSubmenuRun24: TTBSubmenuItem
+        Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+        ImageIndex = 25
+        Visible = False
+      end
+      object TBItemCount24: TTBItem
+        Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086
+        ImageIndex = 65
+        OnClick = TBItemCountClick
+      end
+      object TBItemRefresh24: TTBItem
+        Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+        ImageIndex = 98
+        OnClick = TBItemRefreshClick
+      end
+      object TBItemReport24: TTBItem
+        Caption = #1054#1090#1095#1077#1090#1099
+        ImageIndex = 67
+        OnClick = TBItemReportClick
+      end
+      object TBItemExit24: TTBItem
+        Caption = #1047#1072#1082#1088#1099#1090#1100
+        ImageIndex = 66
+        OnClick = TBItemExitClick
+      end
+    end
+    object TBToolbarMenu24_2: TTBToolbar
+      Left = 441
+      Top = 0
+      BorderStyle = bsNone
+      Caption = 'TBToolbarMenu24_2'
+      DockPos = 429
+      TabOrder = 2
+    end
   end
   object DataSource: TDataSource
     DataSet = Table

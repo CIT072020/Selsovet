@@ -6,7 +6,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, dbt, ShellApi,
-  DBCtrlsEh, StdCtrls, Mask, Buttons, SasaIniFile, mVerInfo, ZipForge, Db, uProject,
+  DBCtrlsEh, StdCtrls, Mask, Buttons, SasaIniFile, mVerInfo, ZipForge, Db, uProject, uProjectAll,
   adsdata, adsfunc, adstable, adscnnct, MetaTask, FileCtrl, uOcheredToXML,
   uUtilFiles, FuncPr;
 
@@ -144,7 +144,7 @@ begin
       else lOk:=true;
     sTmpPath:='';
     if lOk then begin
-      GlobalTask.LogFile.WriteToLogFile('Начало загрузки файлов очередников ('+inttostr(slFiles.count)+') .');
+      GlobalTask.WriteToLogFile('Начало загрузки файлов очередников ('+inttostr(slFiles.count)+') .');
       imp:=TOchered2XML.Create;
       imp.Protokol.Clear;
       try
@@ -205,7 +205,7 @@ begin
         imp.AddProtokol('Всего загружено: '+intToStr(nCount));
         sFile:=NameFromExe('Протокол_загрузки.txt');
         imp.Protokol.SaveToFile(sFile);
-        GlobalTask.LogFile.WriteToLogFile('Окончание загрузки файлов очередников.');
+        GlobalTask.WriteToLogFile('Окончание загрузки файлов очередников.');
         ShellExecute(Application.Handle, 'Open', PChar(sFile), nil, nil, SW_SHOWNORMAL);
 //      ShowStrings(imp.Protokol,'Протокол загрузки');
         imp.Free;

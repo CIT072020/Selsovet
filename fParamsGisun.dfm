@@ -244,9 +244,9 @@ object fmParamsGisun: TfmParamsGisun
         OnClick = cbURLOtdClick
       end
       object cbCommonMessageSource: TDBCheckBoxEh
-        Left = 374
-        Top = 127
-        Width = 97
+        Left = 415
+        Top = 129
+        Width = 49
         Height = 17
         Caption = #1048#1089#1090#1086#1095#1085#1080#1082' - '#1042#1057#1045#1043#1044#1040' '#1086#1088#1075#1072#1085' '#1089#1086#1079#1076#1072#1074#1096#1080#1081' '#1072#1082#1090#1086#1074#1091#1102' '#1079#1072#1087#1080#1089#1100
         Font.Charset = DEFAULT_CHARSET
@@ -341,6 +341,29 @@ object fmParamsGisun: TfmParamsGisun
         TabOrder = 12
         ValueChecked = 'True'
         ValueUnchecked = 'False'
+      end
+      object cbTypeETSP: TComboBox
+        Left = 371
+        Top = 92
+        Width = 97
+        Height = 24
+        Hint = #1058#1080#1087' '#1080#1089#1087#1086#1083#1100#1079#1091#1077#1084#1086#1081' '#1069#1062#1055
+        Style = csDropDownList
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ItemHeight = 16
+        ItemIndex = 0
+        ParentFont = False
+        TabOrder = 13
+        Text = #1087#1072#1088#1072#1084#1077#1090#1088
+        Visible = False
+        Items.Strings = (
+          #1087#1072#1088#1072#1084#1077#1090#1088
+          #1072#1074#1077#1089#1090
+          #1085#1080#1080' '#1090#1079#1080)
       end
     end
     object GroupBox1: TGroupBox

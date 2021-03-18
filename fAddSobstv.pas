@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, db, uTypes,
   StdCtrls, ExtCtrls, ComCtrls, dAdres, DBCtrlsEh, Mask, Buttons, OpisEdit, fmChList,
   MetaTask, dbFunc, dBase, SasaDbGrid, FuncPr, uFunc
- {$IFDEF VER150} ,Variants {$ENDIF}  ;
+ {$IFDEF VER150} ,Variants, kbmMemTable {$ENDIF}  ;
 
 type
   TfmAddSobstv = class(TForm)
@@ -24,6 +24,10 @@ type
     Label6: TLabel;
     edDateP: TDBDateTimeEditEh;
     edSobstv: TDBEditEh;
+    DataSource: TDataSource;
+    tbOwner: TkbmMemTable;
+    tbOwnerPRIM: TStringField;
+    tbOwnerTAIL: TStringField;
     procedure edSobstvEditButtons0Click(Sender: TObject;
       var Handled: Boolean);
     procedure edSobstvEditButtons1Click(Sender: TObject;
@@ -63,6 +67,10 @@ var
 begin
   fmAddSobstv := TfmAddSobstv.Create(nil);
   try
+    // завели dataset что бы можно было делать Paste в поля PRIM и TAIL 
+    fmAddSobstv.tbOwner.Open;
+    fmAddSobstv.tbOwner.Append;
+
     fmAddSobstv.tbHouseOwners := ds;
     fmAddSobstv.tbHouseOwnersHist := dsHist;
     fmAddSobstv.tbMensLic := dsMensLic;
@@ -74,6 +82,7 @@ begin
     fmAddSobstv.EditModal;
   finally
     fmAddSobstv.tbHouseOwners.EnableControls;
+    fmAddSobstv.tbOwner.Close;
     fmAddSobstv.Free;
   end;
 end;
@@ -115,8 +124,10 @@ begin
 
     if not tbHouseOwners.FieldByName('DATES').IsNull  then edDateS.Value := tbHouseOwners.FieldByName('DATES').AsDateTime;
     if not tbHouseOwners.FieldByName('DATEP').IsNull  then edDateP.Value := tbHouseOwners.FieldByName('DATEP').AsDateTime;
-    edTail.Text := tbHouseOwners.FieldByName('TAIL').AsString;
-    edPrim.Text := tbHouseOwners.FieldByName('PRIM').AsString;
+    tbOwnerPRIM.AsString:=tbHouseOwners.FieldByName('PRIM').AsString;
+    tbOwnerTAIL.AsString:=tbHouseOwners.FieldByName('TAIL').AsString;
+//    edTail.Text := tbHouseOwners.FieldByName('TAIL').AsString;
+//    edPrim.Text := tbHouseOwners.FieldByName('PRIM').AsString;
     edSobstv.EditButtons[0].Visible:=false;
     edSobstv.EditButtons[1].Visible:=false;
     edSobstv.EditButtons[2].Visible:=false;
@@ -134,7 +145,7 @@ begin
       if FAdd then begin
         tbHouseOwners.Append;
       end else begin
-        tbHouseOwners.Edit;
+        EditDataSet(tbHouseOwners);
       end;
       tbHouseOwners.FieldByName('KOD').AsInteger := FIDSobstv;
       if FNasel

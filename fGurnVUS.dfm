@@ -1,5 +1,5 @@
 inherited fmGurnVUS: TfmGurnVUS
-  Left = 139
+  Left = 355
   Top = 121
   Width = 974
   Height = 549
@@ -47,7 +47,7 @@ inherited fmGurnVUS: TfmGurnVUS
       end
     end
     object TBToolWindow1: TTBToolWindow
-      Left = 678
+      Left = 724
       Top = 0
       Caption = 'TBToolWindow'
       ClientAreaHeight = 22
@@ -107,11 +107,14 @@ inherited fmGurnVUS: TfmGurnVUS
   end
   inherited Grid: TSasaDBGrid
     Width = 958
-    Height = 461
+    Height = 435
     OnGetCellParams = GridGetCellParams
   end
   inherited StBar: TStatusBar
     Top = 487
+    Width = 958
+  end
+  inherited TBDock24: TTBDock
     Width = 958
   end
   inherited Query: TAdsQuery

@@ -7,7 +7,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, AddEvents, uProjectAll,
   {$IFDEF SYNA}
-    pingsend,
+    pingsend,         
   {$ENDIF}
   Dialogs, StdCtrls, Buttons, Mask, DBCtrlsEh, CheckLst, ComCtrls, ShellApi, sndkey32, mPermit,
      {$IFDEF EMAIL_INDY}
@@ -98,6 +98,7 @@ type
     cbSizeMail: TCheckBox;
     SpeedButton8: TSpeedButton;
     SpeedButton9: TSpeedButton;
+    cbCheckLoadCOC: TCheckBox;
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormCreate(Sender: TObject);
@@ -152,7 +153,11 @@ end;
 
 procedure TfmParamsSMDO.FormKeyDown(Sender: TObject; var Key: Word;  Shift: TShiftState);
 begin
-  Event_FormKeyDown(Self, FClearKey, Sender, Key, Shift);
+  if ActiveControl=edCOC then begin
+    //
+  end else begin
+    Event_FormKeyDown(Self, FClearKey, Sender, Key, Shift);
+  end;
 end;
 
 procedure TfmParamsSMDO.FormCreate(Sender: TObject);

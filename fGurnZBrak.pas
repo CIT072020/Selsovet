@@ -9,12 +9,9 @@ uses
 
 type
   TfmGurnZBrak = class(TfmGurnal)
-    procedure GridGetCellParams(Sender: TObject; Column: TColumnEh;
-      AFont: TFont; var Background: TColor; State: TGridDrawState);
-    procedure GridColumns0GetCellParams(Sender: TObject; EditMode: Boolean;
-      Params: TColCellParamsEh);
-    procedure GridColumns1GetCellParams(Sender: TObject;
-          EditMode: Boolean; Params: TColCellParamsEh);
+    procedure GridGetCellParams(Sender: TObject; Column: TColumnEh;  AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure GridColumns0GetCellParams(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
+    procedure GridColumns1GetCellParams(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
 
   private
     { Private declarations }
@@ -43,7 +40,8 @@ constructor TfmGurnZBrak.Create(Owner: TComponent);
 begin
   TypeEditObj := dmBase.TypeObj_ZBrak;
   inherited;
-  TBItemGrantSprav.Visible:=true;
+//  TBItemGrantSprav.Visible:=true;
+  VisibleItem(TBItemGrantSprav, true);
 end;
 
 function TfmGurnZBrak.LoadQuery: Boolean;
@@ -126,7 +124,8 @@ begin
   Query.OnFilterRecord := QueryFilterRecord;
   Query.Filter   := '';
   Query.Filtered := true;
-  TBItemClrFlt.Enabled:=true;
+//  TBItemClrFlt.Enabled:=true;
+  SetClearFilter(true);
 end;
 
 procedure TfmGurnZBrak.Event_RegistTorg(Sender: TObject);
@@ -134,7 +133,8 @@ begin
   Query.OnFilterRecord := nil;
   Query.Filter   := 'vosstan=.f. .and. osnov=.t.';
   Query.Filtered := true;
-  TBItemClrFlt.Enabled:=true;
+//  TBItemClrFlt.Enabled:=true;
+  SetClearFilter(true);
 end;
 
 

@@ -227,6 +227,7 @@ begin
     Flb.Visible:=false;
     Flb.Top:=Fpb.Top+1;
     Flb.Left:=Fpb.Left+5;
+    Flb.Anchors:=[akTop,akRight];
     Flb.Font.Size:=8;
     Flb.Font.Style:=[];
     Flb.Caption:='Сохранение файла ...';
@@ -478,10 +479,13 @@ begin
   end else begin
     OpenMessage('Подключение к серверу обновлений ...', '', 10);
   end;
-
+//  sleep(20000);
   try
     if FTPClient.Login and FTPClient.ChangeWorkingDir(rFTP.Dir) then begin
       FTPClient.List(FTPClient.GetCurrentDir,false);
+
+//    raise Exception.Create('!!!!!!! ERROR');
+
       for i:=0 to FTPClient.FtpList.Count-1 do begin
         dFile:=Trunc(FTPClient.FtpList[i].FileTime);
         sFile:=FTPClient.FtpList[i].FileName;

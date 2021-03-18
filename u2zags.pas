@@ -1204,7 +1204,7 @@ begin
                          ' ORDER BY soato, datez, ar.NOMER';
         qMarriages.Open;
       end;
-    end;
+    end;      
     if tbDeath in typeBase then begin
       arrSrc.CommaText := arrSrcD;
    	  arrDst.CommaText := arrDstD;

@@ -13,7 +13,8 @@ uses
    {$ENDIF}
    uProjectAll,
    AdsTable, adsdata, adsfunc,
-   mAdsObj, mDRecInt, fSprEdit, dDocImg, Menus;
+   mAdsObj, mDRecInt, fSprEdit, dDocImg, Menus, ZipForge, Buttons,
+  vchDBCtrls;
 
 type
    TfmEdOut=class(TForm)
@@ -121,6 +122,11 @@ type
     deDeloDate: TDBDateTimeEditEh;
     Label1: TLabel;
     dcCreateMan: TDBComboBoxEh;
+    Zip: TZipForge;
+    pnFileID: TPanel;
+    lbFileID: TvchDBText;
+    sbFileID: TSpeedButton;
+    sbFileID2: TSpeedButton;
       procedure FormCreate(Sender: TObject);
       procedure acOkExecute(Sender: TObject);
       procedure acCancelExecute(Sender: TObject);
@@ -151,6 +157,10 @@ type
     procedure deCheckManEditButtons0Click(Sender: TObject;     var Handled: Boolean);
     procedure dcExecManEditButtons0Click(Sender: TObject;      var Handled: Boolean);
     procedure dcResManEditButtons0Click(Sender: TObject;       var Handled: Boolean);
+    procedure lbFileIDClick(Sender: TObject);
+    procedure lbFileIDGetText(Sender: TObject; var Text: String);
+    procedure sbFileIDClick(Sender: TObject);
+    procedure sbFileID2Click(Sender: TObject);
    private
       FDoc: TOutgoingDoc;
       FIsTableView: Boolean;
@@ -176,13 +186,18 @@ type
       procedure UpdateEnabledAction;
       // изменить позицию управл€ющих элементов
       procedure SetControlPosition;
+      // добавить файлы из вход€щего
+      procedure AddFileFromIn(nDocID : Integer);
+      function Event_ONViewREcord(Sender: TDBItem;  ViewMode: TViewMode): Boolean;
+
+
    public
       property Doc: TOutgoingDoc read FDoc write FDoc;
    end;
 
 implementation
 
-uses dBase;
+uses dBase, fChoiceNomen;
 
 {$R *.dfm}
 
@@ -220,17 +235,43 @@ begin
 end;
 
 procedure TfmEdOut.acFileAddExecute(Sender: TObject);
+var
+//  ds:TDataSet;
+//  sB:String;
+  lOk:Boolean;
 begin
    if odFile.Execute and FileExists(odFile.FileName) then begin
-      FDoc.DocFile.FileName:=odFile.FileName;
-      if FDoc.DocFile.DetailAdd then begin
+     lOk:=true;
+     {
+     ds:=DOC_FILE.DataSource.DataSet;
+     sB:=ds.Bookmark;
+     ds.First;
+     ds.DisableControls;
+     lOk:=true;
+     try
+       while not ds.Eof do begin
+         if SameText(ds.FieldByName('NAME').AsString, ExtractFileName(odFile.FileName)) then begin
+           PutError('‘айл с именем "'+ExtractFileName(odFile.FileName)+'" уже существует в списке!');
+           lOk:=false;
+         end;
+         ds.Next;
+       end;
+     finally
+       ds.Bookmark:=sB;
+       ds.EnableControls;
+     end;
+     }
+     if lOk then begin
+       FDoc.DocFile.FileName:=odFile.FileName;
+       if FDoc.DocFile.DetailAdd then begin
          if FIsTableView then begin
          end
          else begin
             AddFileToListView;
          end;
          UpdateEnabledAction;
-      end;
+       end;
+     end;
    end;
 end;
 
@@ -520,6 +561,9 @@ begin
    if FFormula=''
      then deRegInd.EditButtons[0].Visible:=false
      else deRegInd.Hint:=FFormula;
+
+   lbFileID.DataSource:=dlFileId.DataSource;
+   lbFileID.DataField:='FILE_ID';
 end;
 
 procedure TfmEdOut.SetControlEvent;
@@ -559,6 +603,11 @@ begin
    dlFileId.Enabled:=chbInFile.Checked;
    laDeloDate.Enabled:=chbInFile.Checked;
    deDeloDate.Enabled:=chbInFile.Checked;
+
+   sbFileID.Enabled:=chbInFile.Checked;
+   sbFileID2.Enabled:=chbInFile.Checked;
+   pnFileID.Enabled:=chbInFile.Checked;
+   lbFileID.Enabled:=chbInFile.Checked;
    //laFileVol.Enabled:=chbInFile.Checked;
    //deFileVol.Enabled:=chbInFile.Checked;
    //laFileList.Enabled:=chbInFile.Checked;
@@ -689,6 +738,7 @@ begin
                WriteDateFieldV(FDoc['REQ_DATE'],Query.FieldByName('DOC_DATE').Value);
                if FDoc['SIGN_ORG'].AsInteger=0
                  then FDoc['SIGN_ORG'].AsString:=Query.FieldByName('SIGN_ORG').AsString;
+               AddFileFromIn(Query.FieldByName('DOC_ID').AsInteger);
                CheckReadOnlyReq;
             end;
          finally
@@ -698,6 +748,82 @@ begin
    finally
       Bookmark.Free;
    end;
+end;
+//-----------------------------------------------------------------------
+procedure TfmEdOut.AddFileFromIn(nDocID : Integer);
+var
+  oldST, sErr, sTmpDir, sFileName, sFileArx:String;
+  old:TViewRecordEvent;
+  dsFile:TDataSet;
+  lCopy:Boolean;
+begin
+  sTmpDir:=CheckSleshN(CreateTmpPath(0));
+  with dmBase.DocFile do begin
+    try
+      old:=FDoc.DocFile.DBItem.OnViewRecord;
+      oldST:=GlobalTask.ParamAsString('DR_STORE_KIND');
+      FDoc.DocFile.DBItem.OnViewRecord:=Event_ONViewRecord;
+      GlobalTask.WriteParamAsString('DR_STORE_KIND',IntToStr(stInFolder));  //в специальной папке
+
+      IndexName:='PR_KEY';
+      SetRange([nDocID],[nDocID]);
+      lCopy:=false;
+      if not Eof then begin
+        if Problem('—копировать прикрепленные файлы ?') then begin
+          lCopy:=true;
+        end;
+      end;
+      if lCopy then begin
+        while not Eof do begin
+          sFileName:='';
+          if FieldByName('STORE_KIND').AsInteger=stInFolder then begin
+            sFileArx:=GetDocArxivFolder(sErr,0)+FieldByName('DIR_YEAR').AsString+'\'+FieldByName('DIR_MONTH').AsString+'\'+FieldByName('DIR_NAME').AsString;
+            if FileExists(sFileArx) then begin
+              try
+                Zip.FileName:=sFileArx;
+                Zip.BaseDir:=sTmpDir;
+                Zip.OpenArchive;
+                Zip.ExtractFiles(FieldByName('NAME').AsString);
+                sFileName:=sTmpDir+FieldByName('NAME').AsString;
+              finally
+                Zip.CloseArchive;
+              end;
+            end else begin
+              PutError('‘айл '+FieldByName('NAME').AsString+'('+sFileArx+') не найден в специальной папаке.',Self);
+            end;
+          end else begin
+            sFileName:=NormDir(ChecksleshN(FieldByName('PATH').AsString)+FieldByName('NAME').AsString);
+          end;                               
+          if sFileName<>'' then begin
+            if FileExists(sFileName) then begin
+              //-- ADD FILE --------------------
+              FDoc.DocFile.FileName:=sFileName;
+              FDoc.DocFile.DetailAdd;
+              dsFile:=FDoc.DocFile.DBItem.EditTable;
+              dsFile.CheckBrowseMode;
+              dsFile.Edit;
+              dsFile.FieldByName('SIGNATURE').AsString:=FieldByName('SIGNATURE').AsString;
+              dsFile.FieldByName('SIGNINFO').AsString:=FieldByName('SIGNINFO').AsString;
+              dsFile.Post;
+              AddFileToListView;
+              //--------------------------------
+            end else begin
+              PutError('‘айл '+sFileName+' не найден в исход€щих документах.',Self);
+            end;
+          end;
+          Next;
+        end;
+      end;
+    finally
+      CancelRange;
+      FDoc.DocFile.DBItem.OnViewRecord:=old;
+      GlobalTask.WriteParamAsString('DR_STORE_KIND',oldST);
+    end;
+  end;
+end;
+function TfmEdOut.Event_ONViewRecord(Sender: TDBItem;  ViewMode: TViewMode): Boolean;
+begin
+  Result:=true;
 end;
 //--------------------------------------------------------------------------------------
 procedure TfmEdOut.deReqIndEditButtons1Click(Sender: TObject;  var Handled: Boolean);
@@ -724,12 +850,14 @@ procedure TfmEdOut.deRegIndEditButtons0Click(Sender: TObject; var Handled: Boole
 var
   s,sGrup,sInd:string;
 begin
-  FDoc.DBItem.EditTable.CheckBrowseMode;
-  FDoc.DBItem.EditTable.Edit;
-  if (FDoc['REG_IND'].AsString='') or Problem('—формировать индекс повторно ?') then begin
-    s:=FDoc.GetRegInd(FDoc.DocType,FDoc['GROUP_ID'].AsInteger,'ISXOD_NOMER',false);
-    if s<>'' then
-      FDoc['REG_IND'].AsString:=s;
+  if FFormula<>'' then begin
+    FDoc.DBItem.EditTable.CheckBrowseMode;
+    FDoc.DBItem.EditTable.Edit;
+    if (FDoc['REG_IND'].AsString='') or Problem('—формировать индекс повторно ?') then begin
+      s:=FDoc.GetRegInd(FDoc.DocType,FDoc['GROUP_ID'].AsInteger,'ISXOD_NOMER',false);
+      if s<>'' then
+        FDoc['REG_IND'].AsString:=s;
+    end;
   end;
 end;
 
@@ -783,5 +911,63 @@ begin
   nID:=ChoiceSpecID(dcResMan);
   if nID>0 then FDoc['Res_MAN'].AsInteger:=nID;
 end;
+
+procedure TfmEdOut.lbFileIDGetText(Sender: TObject; var Text: String);
+var
+  n:Integer;
+  d1,d2:TDateTime;
+  s:String;
+  c:TColor;
+begin
+  c:=clWindowText;
+  if dmBase.SprDocFileList.Locate('ID', FDoc['FILE_ID'].AsInteger, []) then begin
+    Text:=dmBase.SprDocFileList.FieldByName('FILE_IND').AsString;
+    lbFileID.Hint:=dmBase.SprDocFileList.FieldByName('NAME').AsString;
+    n:=dmBase.GetDateDelo(1, dmBase.SprDocFileList.FieldByName('ID').AsInteger, d1, d2, s);
+    if (n>0) and (d2>0) then begin
+      Text:=Text+s;
+      c:=clRed;
+      lbFileID.Font.Color:=clRed;
+    end;
+  end else begin
+    Text:='';
+  end;
+  if lbFileID.Font.Color<>c
+    then lbFileID.Font.Color:=c;
+end;
+
+procedure TfmEdOut.sbFileIDClick(Sender: TObject);
+var
+  fi:TFieldItem;
+  KeyValue:String;
+begin
+   fi:=FDoc.DBItem.FieldList.ByName('FILE_ID');
+   if fi<>nil then begin
+     KeyValue:=FDoc['FILE_ID'].AsString;
+     if SelectSprValue(fi.LinkSpr, KeyValue, fi.LinkSpr.CodeFieldName) then begin
+       FDoc.DBItem.EditTable.CheckBrowseMode;
+       FDoc.DBItem.EditTable.Edit;
+       FDoc['FILE_ID'].AsString:=KeyValue;
+     end;
+   end;
+end;
+
+procedure TfmEdOut.sbFileID2Click(Sender: TObject);
+var
+  n:Integer;
+begin
+  n:=ChoiceNomen(1,true,false,'');
+  if n>0 then begin
+    FDoc.DBItem.EditTable.CheckBrowseMode;
+    FDoc.DBItem.EditTable.Edit;
+    FDoc['FILE_ID'].AsInteger:=n;
+  end;
+end;
+
+procedure TfmEdOut.lbFileIDClick(Sender: TObject);
+begin
+  sbFileID2Click(nil);
+end;
+
 
 end.

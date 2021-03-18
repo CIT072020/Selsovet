@@ -810,8 +810,9 @@ begin
         end;
       end;
       if (Result.Status=10) or (Result.Status=21) then begin  // орган принятия ЗАГС
-//        if sZAGS_S<>'' then sZAGS_S:=sZAGS_S+', ';
-        if sZAGS_A='' then ss:=sZAGS_S else ss:=sZAGS_A;
+        if sZAGS_A=''
+          then ss:=sZAGS_S
+          else if sZAGS_S='' then ss:=sZAGS_A else ss:=sZAGS_S+', '+sZAGS_A;
 //        Result.Text:=sZAGS_S+sZAGS_A+' '+doc.AuthorName;
         Result.Text:=ss+' '+doc.AuthorName;  //   !!! doc.AuthorName надо брать для каждого документа свое !!!
       end else if (Result.Status=11) then begin // вдовец(а)
@@ -1142,7 +1143,19 @@ begin
    case ActKind of
       //Запрос на получение персональных данных по ф.и.о.
       akGetPersonIdentif: begin
+//------------------- стало  16.03.2021   по просьбе МВД
+         FGisun.TypeMessageCover:=0;
+         // при запросе данных для захоронений и опеки
+         if (MessageType=QUERY_INFO) or (ActKind=akZah) or (ActKind=akOpeka) or (ActKind=akPopech) then begin
+           old:=FGisun.TypeMessageCover;
+           FGisun.TypeMessageCover:=-2;
+           MessageType:=QUERY_INFO;
+         end;
          registerPersonIdentifRequest:=FGisun.CreateRegisterPersonIdentifRequest(MessageType);
+         FGisun.TypeMessageCover:=0;
+//-------------------
+// было         registerPersonIdentifRequest:=FGisun.CreateRegisterPersonIdentifRequest(MessageType);
+//-------------------
          FRequestMessageId:=registerPersonIdentifRequest.cover.message_id;
          //скопировать данные из входной таблицы в свойства объекта
          Table:=FTableList.Find(True, akGetPersonIdentif, opGet);
@@ -2462,7 +2475,7 @@ var
       end;
    end;
 
-   procedure SetOrganName;
+   procedure SetClassNameLex;
    var
       Field: TField;
       c: wsGisun.Classifier;
@@ -2471,16 +2484,26 @@ var
       if DataField.AsString='0' then begin
          Field:=DataSet.FindField(DataField.FieldName+'_LEX');
          if (Field<>nil) and (Trim(Field.AsString)<>'') then begin
-            c:=wsGisun.Classifier(GetObject(Root, PropInfo));
-            SetLength(lexema, 1);
-            lexema[0]:=wsGisun.value.Create;
-            lexema[0].Text:=Trim(Field.AsString);
-            lexema[0].lang:='RU';
-            c.lexema:=lexema;
+           //------ RU ----------___------------------------------
+           c:=wsGisun.Classifier(GetObject(Root, PropInfo));
+           SetLength(lexema, 1);
+           lexema[0]:=wsGisun.value.Create;
+           lexema[0].Text:=Trim(Field.AsString);
+           lexema[0].lang:='ru';
+           {
+           //------ BE -------------------------------------------
+           Field:=DataSet.FindField(DataField.FieldName+'_LEX_B');
+           if (Field<>nil) and (Trim(Field.AsString)<>'') then begin
+             SetLength(lexema, 2);
+             lexema[1]:=wsGisun.value.Create;
+             lexema[1].Text:=Trim(Field.AsString);
+             lexema[1].lang:='be';
+           end;
+           }
+           c.lexema:=lexema;
          end;
       end;
    end;
-
 begin
    Result:=False;
    First:=Root;
@@ -2592,10 +2615,10 @@ begin
                                   end;
                                   if (Root is wsGisun.Document) then begin    // !!!
                                     SetOrdProp(GetObject(Root, PropInfo), 'Type_', n);
-                                    SetOrganName;
+                                    SetClassNameLex;
                                   end else if (Root is wsGisun.ActData) then begin
                                     SetOrdProp(GetObject(Root, PropInfo), 'Type_', n);
-                                    SetOrganName;
+                                    SetClassNameLex;
                                   end else begin
                                     SetOrdProp(GetObject(Root, PropInfo), 'Type_', n);
                                   end;
@@ -2610,6 +2633,7 @@ begin
                                  SetOrdProp(GetObject(Root, PropInfo), 'Type_', ctStatus);
                                end else if SameText(PropName, 'country_b') then begin
                                  SetOrdProp(GetObject(Root, PropInfo), 'Type_', ctCountry);
+                                 //SetClassNameLex;
                                end else if SameText(PropName, 'type_city_b') then begin
                                  SetOrdProp(GetObject(Root, PropInfo), 'Type_', ctTypeCity);
                                end else if SameText(PropName, 'death_cause') then begin

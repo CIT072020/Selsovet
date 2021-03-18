@@ -95,11 +95,6 @@ begin
              else Result:=Globaltask.ParamAsString('SHTAMP'); 
 end;
 //---------------------------------------------------------------
-function CreateFIO(ds:TDataSet):String;
-begin
-  Result:=ds.Fld('FAMILIA').AsString+' '+ds.Fld('NAME').AsString+' '+ds.Fld('OTCH').AsString;
-end;
-//---------------------------------------------------------------
 function Zags_Akt_Rukov : String;
 begin
   Result:=DokZags.Fld('RUKOV').AsString;
@@ -1311,7 +1306,7 @@ begin
        result:=false;
      end;
      s:=Trim(DokZags.Fld('IZMEN').AsString);
-     if s='' then s:=getResource('SPR_ROGD_IZM',nType) else s:=s+'.';
+     if s='' then s:=getResource('SPR_ROGD_IZM',nType) else if Right(s,1)<>'.' then s:=s+'.';
      if DokZAGS.Fld('ON_DATE_LR')<>nil then begin // !!!
        if not DokZAGS.Fld('ON_DATE_LR').IsNull 
          then s:=s+CRLF+getResource('SPR_ON_LR',nType)+' '+DatePropis(DokZAGS.Fld('ON_DATE_LR').AsDateTime,TYPE_DATE_SPRAV);
@@ -5179,8 +5174,10 @@ begin
          ds.Fld('ADD_TEXT').AsString := 'Изменения, исправления, дополнения в запись акта о рождении не'+chr(160)+'вносились.';
        end;
        if GetTemplateParam('PAR1')='2' then begin
-         ds.Fld('ADD_TEXT').AsString := 'Запись об отце произведена на основании заявления матери, не'+chr(160)+'состоящей в браке, в соответствии со статьёй 55 Кодекса Республики Беларусь о браке и семье.';
-         ds.Fld('ADD_TEXT2').AsString := chr(13)+'Изменения, исправления, дополнения в запись акта о рождении не'+chr(160)+'вносились.';
+         if DokZAGS.Fld('VOSSTAN').AsBoolean
+           then ds.Fld('ADD_TEXT').AsString:=''
+           else ds.Fld('ADD_TEXT').AsString:='Запись об отце произведена на основании заявления матери, не'+chr(160)+'состоящей в браке, в соответствии со статьёй 55 Кодекса Республики Беларусь о браке и семье.'+chr(13);
+         ds.Fld('ADD_TEXT2').AsString:='Изменения, исправления, дополнения в запись акта о рождении не'+chr(160)+'вносились.';
        end;
      end else begin
        ds.Fld('ADD_TEXT').AsString := DokZAGS.Fld('IZMEN').AsString;

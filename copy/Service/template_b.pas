@@ -210,6 +210,12 @@ begin
      ds.Fld('DATEZ').AsString := DatePropisBel(DokZAGS.Fld('DATEZ').AsDateTime,6);
 // ds.Fld('DATEZ').AsString := FormatDateTime('YYYY',DokZAGS.Fld('DATEZ').AsDateTime);
      ds.Fld('SPRAV_DATE').AsString := DatePropisBel(NOW,TYPE_DATE_SPRAV);
+     if DokZAGS.Fld('VOSSTAN').AsBoolean then begin
+       ds.Fld('SPRAV_NOMER').AsString:='';
+     end else begin
+//       ds.Fld('SPRAV_DATE').AsString:=DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,TYPE_DATE_SPRAV);
+       ds.Fld('SPRAV_NOMER').AsString:=DokZAGS.Fld('SPRAV_NOMER').AsString;
+     end;
      ds.Fld('NOMER').AsString := DokZAGS.Fld('NOMER').AsString;
      // 1-белорусски,краткое   2-падеж    NameZAGS('БК','Р')
      ds.Fld('ORGAN_ZAGS').AsString := DokZAGS.NameZAGS2('B','');
@@ -262,6 +268,12 @@ begin
      ds.Fld('DATER').AsString := DatePropisBel(DokZAGS.Fld('DATER').AsDateTime,6);
      ds.Fld('DATEZ').AsString := DatePropisBel(DokZAGS.Fld('DATEZ').AsDateTime,6);
      ds.Fld('SPRAV_DATE').AsString := DatePropisBel(NOW,TYPE_DATE_SPRAV);
+     if DokZAGS.Fld('VOSSTAN').AsBoolean then begin
+       ds.Fld('SPRAV_NOMER').AsString:='';
+     end else begin
+//       ds.Fld('SPRAV_DATE').AsString:=DatePropis(DokZAGS.Fld('DATEZ').AsDateTime,TYPE_DATE_SPRAV);
+       ds.Fld('SPRAV_NOMER').AsString:=DokZAGS.Fld('SPRAV_NOMER').AsString;
+     end;
      ds.Fld('NOMER').AsString := DokZAGS.Fld('NOMER').AsString;
      // 1-белорусски,краткое   2-падеж    NameZAGS('БК','Р')
      ds.Fld('ORGAN_ZAGS').AsString := DokZAGS.NameZAGS2('Б','');

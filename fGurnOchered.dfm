@@ -299,13 +299,17 @@ inherited fmGurnOchered: TfmGurnOchered
     end
   end
   inherited Grid: TSasaDBGrid
-    Top = 59
+    Top = 85
     Width = 885
-    Height = 425
+    Height = 399
     OnGetCellParams = GridGetCellParams
   end
   inherited StBar: TStatusBar
     Top = 484
+    Width = 885
+  end
+  inherited TBDock24: TTBDock
+    Top = 59
     Width = 885
   end
   inherited Query: TAdsQuery

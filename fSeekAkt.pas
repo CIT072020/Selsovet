@@ -767,8 +767,10 @@ begin
     end;
 
   //-----брак и развод ------------------------------------------------------------------------
-  end else if (nType=dmBase.TypeObj_ZBrak) or (nType=dmBase.TypeObj_ZRast) then begin
+  end else if (nType=_TypeObj_ZBrak) or (nType=_TypeObj_ZRast) then begin
     sRetFields:='ID,NOMER,DATEZ,ID_ZAGS,';
+    if nType=_TypeObj_ZBrak
+      then sRetFields:=sRetFields+'VOSSTAN,';
     case nTypeSeek of
       SEEK_ON     : sRetFields:=sRetFields+'ON_FAMILIA,ON_NAME,ON_OTCH,ON_DATER,ON_IDENTIF';
       SEEK_ONA    : sRetFields:=sRetFields+'ONA_FAMILIA,ONA_NAME,ONA_OTCH,ONA_DATER,ONA_IDENTIF';
@@ -973,7 +975,9 @@ var
     Result:=true;
     tbSeek.Append;
     tbSeekID.AsInteger:=Query.FieldByName('ID').AsInteger;
-    if Query.FindField('VOSSTAN')<>nil then tbSeekVOSSTAN.AsBoolean:=Query.FieldByName('VOSSTAN').AsBoolean;
+    if Query.FindField('VOSSTAN')<>nil
+      then tbSeekVOSSTAN.AsBoolean:=Query.FieldByName('VOSSTAN').AsBoolean
+      else tbSeekVOSSTAN.AsBoolean:=false;
     tbSeekNOMER.AsString:=Query.FieldByName('NOMER').AsString;
     tbSeekTYPEAKT.AsInteger:=nType;
     WriteDateField(tbSeekDATEZ, Query.FieldByName('DATEZ'));

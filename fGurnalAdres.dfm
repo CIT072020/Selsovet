@@ -1,6 +1,6 @@
 inherited fmGurnalAdres: TfmGurnalAdres
-  Left = 26
-  Top = 124
+  Left = 396
+  Top = 128
   Width = 966
   Height = 472
   Caption = #1040#1076#1088#1077#1089#1085#1072#1103' '#1082#1085#1080#1075#1072
@@ -103,10 +103,10 @@ inherited fmGurnalAdres: TfmGurnalAdres
         Font.Style = []
         ParentFont = False
       end
-      object edPunkt: TDBLookupComboboxEh
-        Left = 81
-        Top = 4
-        Width = 177
+      object edPunkt2: TDBLookupComboboxEh
+        Left = 843
+        Top = 5
+        Width = 90
         Height = 24
         AlwaysShowBorder = True
         DropDownBox.Rows = 30
@@ -134,8 +134,8 @@ inherited fmGurnalAdres: TfmGurnalAdres
         ListSource = dsPunkt
         ParentFont = False
         TabOrder = 0
-        Visible = True
-        OnChange = edPunktChange
+        Visible = False
+        OnChange = edPunkt2Change
       end
       object edUL: TDBLookupComboboxEh
         Left = 328
@@ -230,16 +230,51 @@ inherited fmGurnalAdres: TfmGurnalAdres
           #1057#1086#1073#1089#1090#1074#1077#1085#1085#1080#1082
           #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086)
       end
+      object edPunkt: TDBComboBoxEh
+        Left = 82
+        Top = 4
+        Width = 181
+        Height = 24
+        DropDownBox.Rows = 20
+        EditButtons = <
+          item
+            Glyph.Data = {
+              C6000000424DC60000000000000076000000280000000A0000000A0000000100
+              0400000000005000000000000000000000001000000000000000000000000000
+              8000008000000080800080000000800080008080000080808000C0C0C0000000
+              FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00888888888800
+              0000008888880800000080088880080000008000880088000000880000088800
+              0000888000888800000088000008880000008000880088000000800888800800
+              00008088888888000000}
+            Style = ebsGlyphEh
+            Width = 16
+            OnClick = edPunktEditButtons0Click
+          end>
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 4
+        Text = 'edPunkt'
+        Visible = True
+        OnChange = edPunktChange
+      end
     end
   end
   inherited Grid: TSasaDBGrid
-    Top = 65
+    Top = 91
     Width = 950
-    Height = 345
+    Height = 319
     OnGetCellParams = GridGetCellParams
   end
   inherited StBar: TStatusBar
     Top = 410
+    Width = 950
+  end
+  inherited TBDock24: TTBDock
+    Top = 65
     Width = 950
   end
   inherited Query: TAdsQuery

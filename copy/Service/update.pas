@@ -1,3 +1,36 @@
+
+procedure CheckSprZah;
+var
+  ds:TDataSet;
+  n:Integer;
+  strSQL:String;
+begin
+  ds:=dbOpenSQL('select count(*) as kolvo from SprZah where (ate=0) or ((ate>0) and ate not in (select ate_id from sysspr.ate))','');
+  if ds<>nil then begin
+    n:=ds.Fld('KOLVO').AsInteger;
+    dbClose(ds);
+    if n>0 then begin  // необходима проверка справочника SprZAH
+      strSQL:=
+          'try '+
+          '  drop table #update_zah; '+
+          'catch all '+
+          'end; '+
+          'select id, '+
+          '  iif(ate_punkt=0 or ate_punkt is null,iif(ate_ss=0 or ate_ss is null, iif(ate_rn=0 or ate_rn is null, ate_obl, ate_rn),ate_ss),ate_punkt) ate, '+
+          '  ate_obl,ate_rn,ate_ss,ate_punkt, name, name_path '+
+          '  into #update_zah '+
+          '  from sysspr.gisun_sprzah '+
+          '  where ate_punkt=0 or ate_punkt is null  '+
+          '  order by id; '+
+          'update sprZah set sprZah.ate=u.ate from #update_zah u where sprZah.id_gis=cast(u.id as SQL_INTEGER);';
+      dbExecuteSQL(strSQL);
+      if dbLastError()<>'' then begin
+        ShowMessage( 'Ошибка выполнения скрипта SprZAH: '+dbLastError() );
+      end;
+    end;
+  end;
+end;
+
 procedure _CreateN_Delo(ds:TDataSet);
 var
   s:String;
@@ -96,7 +129,6 @@ begin
     end;
   end;
 end;
-
 //-----------------------------------------------------------------
 function GetCaseForField(ds:TDataSet; strFieldName:String):String;
 begin
@@ -432,7 +464,39 @@ begin
     sl.Free;
   end;
 end;
-
+//-----------------------------------------
+function CheckDateSverki:Boolean;
+var
+  sSQL:String;
+begin
+  Result:=false;
+  if Problem('Повторно сформировать список дат сверок?') then begin
+    Result:=true;
+    sSQL:=
+      'delete from BaseTextProp where typeobj=3 and pokaz=''SVERKI'';'++Chr(13)+
+      'insert into baseTextProp (TYPEOBJ, ID, DATES, POKAZ, VALUE)  '+
+      'select 3 typeobj, ID, ''1900-01-01'' dates, ''SVERKI'' pokaz, ''NAME=Форма 2''+char(13)+char(10)+''DATE_SV=''+'+
+      '      Trim(convert(Year(DATESV_F2),sql_char))+Trim(IIF(Month(DATESV_F2)<10,''0''+convert(Month(DATESV_F2),sql_char),convert(Month(DATESV_F2),sql_char)))+'+
+      '      Trim(IIF(DayOfMonth(DATESV_F2)<10,''0''+convert(DayOfMonth(DATESV_F2),sql_char),convert(DayOfMonth(DATESV_F2),sql_char)))+char(13)+char(10) value '+
+      '  from vus where DATESV_F2 is not null;'++Chr(13)+
+      'insert into baseTextProp (TYPEOBJ, ID, DATES, POKAZ, VALUE)  '+
+      'select 3 typeobj, ID, ''1900-01-02'' dates, ''SVERKI'' pokaz, ''NAME=Военный комиссариат''+char(13)+char(10)+''DATE_SV=''+'+
+      '      Trim(convert(Year(DATESV_VK),sql_char))+Trim(IIF(Month(DATESV_VK)<10,''0''+convert(Month(DATESV_VK),sql_char),convert(Month(DATESV_VK),sql_char)))+'+
+      '      Trim(IIF(DayOfMonth(DATESV_VK)<10,''0''+convert(DayOfMonth(DATESV_VK),sql_char),convert(DayOfMonth(DATESV_VK),sql_char)))+char(13)+char(10) value'+
+      '  from vus where DATESV_VK is not null; '++Chr(13)+
+      'insert into baseTextProp (TYPEOBJ, ID, DATES, POKAZ, VALUE)  '+
+      'select 3 typeobj, ID, ''1900-01-03'' dates, ''SVERKI'' pokaz, ''NAME=Карточка прописки''+char(13)+char(10)+''DATE_SV=''+'+
+      '      Trim(convert(Year(DATESV_LIC),sql_char))+Trim(IIF(Month(DATESV_LIC)<10,''0''+convert(Month(DATESV_LIC),sql_char),convert(Month(DATESV_LIC),sql_char)))+'+
+      '      Trim(IIF(DayOfMonth(DATESV_LIC)<10,''0''+convert(DayOfMonth(DATESV_LIC),sql_char),convert(DayOfMonth(DATESV_LIC),sql_char)))+char(13)+char(10) value'+
+      '  from vus where DATESV_LIC is not null;'
+    dbExecuteSQL(sSQL);
+    if dbLastError()<>'' then begin
+      ShowMessage( 'Ошибка выполнения скрипта (создание списка дат сверки): '+dbLastError() );
+      Result:=false;
+    end;
+  end;
+end;
+//----------------------------------
 function UpdateChildPrich:Integer;
 var
   ds:TDataSet;
@@ -629,24 +693,6 @@ begin
     Result:=CheckSprOwners;
     if Result=1
       then ShowMessage( 'Ошибка выполнения скрипта (CheckSprOwners): '+dbLastError() );
-  end;
-  if (Result=0) and arrCheck[12] then begin
-    ds := dbOpenSQL('select * from '+SysQuery('system.columns')+' where name='+QStr('PRIZ')+' and parent='+QStr('Население'),'');
-    if ds.RecordCount>0 then begin
-      dbExecuteSQL('UPDATE Население SET priz=false WHERE priz is null');
-      if dbLastError()<>'' then begin
-        ShowMessage( 'Ошибка выполнения скрипта (Население): '+dbLastError() );
-        Result := 1;
-      end;
-    end;
-    dbClose(ds);
-    if Result=0 then begin
-      dbExecuteSQL('UPDATE БазаДомов SET not_dom=false WHERE not_dom is null');
-      if dbLastError()<>'' then begin
-        ShowMessage( 'Ошибка выполнения скрипта (БазаДомов): '+dbLastError() );
-        Result := 1;
-      end;
-    end;
   end;
   if lCheckOchered1 then begin
     if Result=0 then begin
@@ -936,12 +982,41 @@ begin
   if (Result=0) and arrCheck[5] then begin
     dbExecuteSQL('UPDATE SprIzbUch SET active=false WHERE active is null');
   end;
-
+  if (Result=0) and arrCheck[6] then begin
+     dbExecuteSQL('UPDATE SprNames SET zags_selo=false where substring(soato,5,6)=''000000'' or substring(soato,1,1)=''5'' or substring(soato,5,1) in (''5'',''3'',''0'',''4'');'+
+                  'UPDATE SprNames SET zags_selo=true where zags_selo is null;');
+  end;
+  if (Result=0) and arrCheck[7] then begin
+    dbExecuteSQL('UPDATE AktOpek SET is_control=true WHERE is_control is null');
+    dbExecuteSQL('UPDATE AktOpek SET is_mintrud=false WHERE is_mintrud is null');
+  end;
+  if (Result=0) and (TypeBase='ZAGS') and arrCheck[19] then begin
+    dbExecuteSQL('UPDATE DeclareTermMarriage SET type_rast=1');
+  end;
 //  if (Result=0) and arrCheck[4] then begin
 //    Result:=UpdateGosClassObr;
 //  end;
   if (TypeBase='OPEKA') then begin
     Result:=UpdateChildPrich;
+  end;
+  if (Result=0) and arrCheck[30] then begin
+    dbExecuteSQL('UPDATE AktOpek SET DOC_OPEKA_OTM=4 WHERE DOC_OPEKA_OTM is null');
+  end;
+  if (Result=0) and arrCheck[31] then begin
+    dbExecuteSQL('UPDATE AktOpek set type_sn=CASE WHEN date_otm is not null THEN 1 WHEN date_osv is not null THEN 2 WHEN date_otst is not null THEN 3 ELSE 1 END WHERE type_sn is null or TYPE_SN=0;'+
+    'UPDATE AktOpek set date_otm=date_osv WHERE date_osv is not null and type_sn=2;'+
+    'UPDATE AktOpek set nomer_otm=nomer_osv WHERE date_osv is not null and type_sn=2;'+
+    'UPDATE AktOpek set date_otm=date_otst WHERE date_otst is not null and type_sn=3;'+
+    'UPDATE AktOpek set nomer_otm=nomer_otst WHERE date_otst is not null and type_sn=3;');
+  end;
+  if (Result=0) and arrCheck[12] then begin
+    dbExecuteSQL('UPDATE БазаДомов SET kv=Right(''       ''+Trim(kv),7) WHERE kv is not null;'+
+                 'UPDATE БазаДомов SET dom=Right(''       ''+Trim(dom),7) WHERE dom is not null;'+
+                 'UPDATE БазаДомов SET korp=Right(''       ''+Trim(korp),7) WHERE korp is not null;');
+  end;
+  if (Result=0)  and (TypeBase='SELSOVET') and arrCheck[32] then begin
+    dbExecuteSQL('UPDATE RegDogN SET TYPEOBJ=103 WHERE TYPEOBJ is null;'+
+                 'UPDATE RegDogN SET NANIM_TYPE=1 WHERE NANIM_TYPE is null;');
   end;
 end;
 
@@ -966,12 +1041,15 @@ begin
     if (nVer<29) then arrCheck[0]:=true;  // список книг
     if (nVer<44) then arrCheck[2]:=true;  // реквизит uslug
   end else if (TypeBase='OPEKA') then begin
-
+    if (nVer<49) then arrCheck[7]:=true;  // реквизит is_control
+    if (nVer<52) then arrCheck[30]:=true;  // DOC_OPEKA_OTM is null
+    if (nVer<53) then arrCheck[31]:=true;  // TYPE_SN  DATEDOK_UST
   end else if (TypeBase='POST') then begin
     arrCheck[1]:=true;
     if (nVer<220) then arrCheck[3]:=true;  // реквизит tel_line DocMain
     if (nVer<24) then arrCheck[4]:=true;  // спр. госуд. тематик обращений гр.
   end else begin
+    // свободные: 7
     if nVer < 39 then lCheckPerevod:=true;
     if nVer < 43 then lCheckIsporSvid:=true;
     if nVer < 46 then lCheckLicPresent:=true;
@@ -979,7 +1057,6 @@ begin
     if nVer < 104 then arrCheck[9]:=true;
     if nVer < 105 then arrCheck[10]:=true;
     if nVer < 106 then arrCheck[11]:=true;
-    if nVer < 109 then arrCheck[12]:=true;
     if nVer < 113 then arrCheck[13]:=true;
     if nVer < 117 then arrCheck[14]:=true;
     if nVer < 119 then arrCheck[15]:=true;
@@ -990,28 +1067,39 @@ begin
     if nVer < 180 then arrCheck[20]:=true;
     if nVer < 182 then arrCheck[21]:=true;
 //    if nVer < 183 then arrCheck[22]:=true;
-    if (nVer<186) and (TypeBase<>'ZAGS')    then arrCheck[23]:=true;
-    if (nVer<192) and (TypeBase<>'ZAGS')    then arrCheck[24]:=true;
-    if (nVer<192) and (TypeBase='ZAGS')     then arrCheck[26]:=true;
 // ???   if nVer<182 then arrCheck[4]:=true;   // update dateizm в з/а
-    if (TypeBase='SELSOVET') then begin
-      if (nVer<200) then arrCheck[25]:=true;
-      if (nVer<260) then arrCheck[27]:=true;
-      if (nVer<262) then arrCheck[28]:=true;
-      if (nVer<268) then arrCheck[0]:=true;   // список книг
-      if (nVer<278) then arrCheck[2]:=true;   // реквизит uslug
-      if (nVer<280) then arrCheck[3]:=true;   // реквизит tel_line DocMain
-      if (nVer<280) then arrCheck[29]:=true;  // MNS_LPX очистить
-      arrCheck[1]:=true;
-      if (nVer<283) then arrCheck[5]:=true;   
-    end else if (TypeBase='GKH') then begin
-      if (nVer<200) then arrCheck[25]:=true;
-      if (nVer<262) then arrCheck[28]:=true;
-      if (nVer<280) then arrCheck[3]:=true;  // реквизит tel_line DocMain
-      if (nVer<282) then arrCheck[4]:=true;   // спр. госуд. тематик обращений гр.
-    end else if (TypeBase='OCHERED') then begin
-      if (nVer<203) then arrCheck[3]:=true;  // реквизит tel_line DocMain
-      if (nVer<203) then arrCheck[4]:=true;   // спр. госуд. тематик обращений гр.
+    if (TypeBase='ZAGS') then begin
+      if (nVer<192) then arrCheck[26]:=true;
+      if (nVer<209) then arrCheck[6]:=true;  // SprNames поле zags_selo
+      if (nVer<221) then arrCheck[19]:=true;  // 
+    end else begin 
+      if (nVer<186) then arrCheck[23]:=true;
+      if (nVer<192) then arrCheck[24]:=true;
+      if (TypeBase='SELSOVET') then begin
+        if (nVer<200) then arrCheck[25]:=true;
+        if (nVer<260) then arrCheck[27]:=true;
+        if (nVer<262) then arrCheck[28]:=true;
+        if (nVer<268) then arrCheck[0]:=true;   // список книг
+        if (nVer<278) then arrCheck[2]:=true;   // реквизит uslug
+        if (nVer<280) then arrCheck[3]:=true;   // реквизит tel_line DocMain
+        if (nVer<280) then arrCheck[29]:=true;  // MNS_LPX очистить
+        arrCheck[1]:=true;
+        if (nVer<283) then arrCheck[5]:=true;   
+        if (nVer<284) then arrCheck[7]:=true;   // is_control
+        if (nVer<287) then arrCheck[30]:=true;  // DOC_OPEKA_OTM is null
+        if (nVer<288) then arrCheck[31]:=true;  // TYPE_SN  DATEDOK_UST
+        if (nVer<289) then arrCheck[26]:=true;
+        if (nVer<320) then arrCheck[12]:=true;
+        if (nVer<329) then arrCheck[32]:=true;  // TYPEOBJ RegDogN
+      end else if (TypeBase='GKH') then begin
+        if (nVer<200) then arrCheck[25]:=true;
+        if (nVer<262) then arrCheck[28]:=true;
+        if (nVer<280) then arrCheck[3]:=true;  // реквизит tel_line DocMain
+        if (nVer<282) then arrCheck[4]:=true;   // спр. госуд. тематик обращений гр.
+      end else if (TypeBase='OCHERED') then begin
+        if (nVer<203) then arrCheck[3]:=true;  // реквизит tel_line DocMain
+        if (nVer<203) then arrCheck[4]:=true;   // спр. госуд. тематик обращений гр.
+      end;
     end;
   end;
 
@@ -1030,7 +1118,7 @@ begin
   CheckOchered_Before;
 
   Result := 0;
-  if (nVer<241) and (TypeBase='SELSOVET') then begin
+  if (nVer<320) and (TypeBase='SELSOVET') then begin
     dbExecuteSQL('EXECUTE PROCEDURE sp_ZapTable('+QStr('BigHouse')+')');
     if dbLastError()<>'' then begin
       ShowMessage( 'Ошибка выполнения скрипта (Удаление BigHouse): '+dbLastError() );

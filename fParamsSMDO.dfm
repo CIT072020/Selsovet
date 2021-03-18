@@ -4,7 +4,7 @@ object fmParamsSMDO: TfmParamsSMDO
   ActiveControl = edMarsh
   BorderStyle = bsDialog
   Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099' '#1057#1052#1044#1054
-  ClientHeight = 669
+  ClientHeight = 667
   ClientWidth = 513
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,7 +21,7 @@ object fmParamsSMDO: TfmParamsSMDO
   OnKeyPress = FormKeyPress
   DesignSize = (
     513
-    669)
+    667)
   PixelsPerInch = 96
   TextHeight = 13
   object lbMarsh: TLabel
@@ -585,7 +585,7 @@ object fmParamsSMDO: TfmParamsSMDO
   end
   object BitBtn1: TBitBtn
     Left = 293
-    Top = 636
+    Top = 634
     Width = 89
     Height = 25
     Anchors = [akRight, akBottom]
@@ -614,7 +614,7 @@ object fmParamsSMDO: TfmParamsSMDO
   end
   object BitBtn2: TBitBtn
     Left = 405
-    Top = 636
+    Top = 634
     Width = 89
     Height = 25
     Anchors = [akRight, akBottom]
@@ -719,6 +719,7 @@ object fmParamsSMDO: TfmParamsSMDO
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      TabStop = False
       OnClick = Button1Click
     end
     object btDelo: TButton
@@ -735,6 +736,7 @@ object fmParamsSMDO: TfmParamsSMDO
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      TabStop = False
       OnClick = btDeloClick
     end
   end
@@ -811,6 +813,7 @@ object fmParamsSMDO: TfmParamsSMDO
       Hint = #1042#1099#1073#1088#1072#1090#1100' '#1080#1079' '#1089#1087#1088#1072#1074#1086#1095#1085#1080#1082#1072' '#1086#1088#1075#1072#1085#1080#1079#1072#1094#1080#1081' '#1057#1052#1044#1054
       Caption = '...'
       TabOrder = 2
+      TabStop = False
       OnClick = Button2Click
     end
   end
@@ -819,7 +822,7 @@ object fmParamsSMDO: TfmParamsSMDO
     Top = 443
     Width = 498
     Height = 182
-    ActivePage = ts1
+    ActivePage = ts2
     HotTrack = True
     TabOrder = 10
     object ts1: TTabSheet
@@ -827,7 +830,7 @@ object fmParamsSMDO: TfmParamsSMDO
       object lbAutoCheck: TLabel
         Left = 302
         Top = 6
-        Width = 98
+        Width = 84
         Height = 13
         Caption = #1055#1088#1086#1074#1077#1088#1082#1072' '#1087#1086#1095#1090#1099
       end
@@ -1183,7 +1186,7 @@ object fmParamsSMDO: TfmParamsSMDO
         Left = 1
         Top = 2
         Width = 487
-        Height = 151
+        Height = 130
         Anchors = [akLeft, akTop, akRight, akBottom]
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1194,6 +1197,22 @@ object fmParamsSMDO: TfmParamsSMDO
           'edCOC')
         ParentFont = False
         TabOrder = 0
+      end
+      object cbCheckLoadCOC: TCheckBox
+        Left = 5
+        Top = 135
+        Width = 428
+        Height = 17
+        TabStop = False
+        Anchors = [akLeft, akBottom]
+        Caption = #1055#1088#1086#1074#1077#1088#1103#1090#1100' '#1076#1086#1089#1090#1091#1087#1085#1086#1089#1090#1100' URL '#1087#1077#1088#1077#1076' '#1086#1073#1085#1086#1074#1083#1077#1085#1080#1077#1084' '#1057#1054#1057
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
       end
     end
   end

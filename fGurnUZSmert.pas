@@ -12,8 +12,8 @@ type
   TfmGurnUZSmert = class(TfmGurnal)
     TBItemZader: TTBItem;
     TBItemOpenZRogd: TTBItem;
-    procedure GridGetCellParams(Sender: TObject; Column: TColumnEh;
-      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    TBItemOpenZRogd24: TTBItem;
+    procedure GridGetCellParams(Sender: TObject; Column: TColumnEh;  AFont: TFont; var Background: TColor; State: TGridDrawState);
     procedure TBItemZaderClick(Sender: TObject);
     procedure TBItemOpenZRogdClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -54,10 +54,14 @@ constructor TfmGurnUZSmert.Create(Owner: TComponent);
 begin
   TypeEditObj:=_TypeObj_UZSmert;
   inherited;
+  VisibleItems([TBItemQuery, TBItemGrupOne, TBSubmenuGroup, TBItemClrFlt], false);
+  VisibleItems([TBItemAddDok], true);
+  {
   TBItemQuery.Visible:=false;
   TBItemGrupOne.Visible:=false;
   TBSubmenuGroup.Visible:=false;
   TBItemClrFlt.Visible:=false;
+  }
 end;
 
 function TfmGurnUZSmert.LoadQuery: Boolean;
@@ -67,7 +71,10 @@ var
 begin
   Result := inherited LoadQuery;
 
-  TBSubItemRun.Visible:=true;
+  VisibleItems([TBItemAddDok], true);
+
+//  TBSubItemRun.Visible:=true;
+  VisibleItem(TBSubItemRun, true);
   it := TTbItem.Create(TBSubItemRun);
   it.Caption:='Загрузить записи актов';
   it.OnClick:=Event_LoadRogd;
@@ -110,7 +117,8 @@ begin
 //    Query.Filter   := 'datez-dates>'+GlobalTask.ParamAsString('ZADER_SMERT');
 //  end;
   Query.Filtered := true;
-  TBItemClrFlt.Enabled:=true;
+//  TBItemClrFlt.Enabled:=true;
+  SetClearFilter(true);
 end;
 
 procedure TfmGurnUZSmert.CheckPropertyGridColumns;

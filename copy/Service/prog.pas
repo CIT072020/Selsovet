@@ -17,6 +17,9 @@ var
   _resh:TReshOchMen;
 //  curMen:TMens;
 const
+  SIZE_FIELD_DOM=7;
+  OWNER_NASEL=1;
+  OWNER_ORG=2;
   PENS_G='55';  //пенсионный возраст женщин
   PENS_M='60';  //пенсионный возраст мужчин
   strType_Lich = '2';
@@ -124,6 +127,9 @@ begin
 
   TypeBASE:=GlobalTask.GetWorkParam('TYPEBASE');
   if TypeBASE='' then TypeBASE:='SELSOVET';
+
+  GlobalTask.SetWorkParam('TITLE_VIPIS',75);
+
 //  ShowMessage('*'+TypeBase+'*');
 //  ShowMessage(GetPadegIF('Мария Анна','Ивановна', 'Ж', 'Р'));
 //  XL:=GetOfficeObject('Excel',lOk);
@@ -417,7 +423,7 @@ end;
 
 //{$DEFINE ADD_OLD_AKT}
 
-// SubType:  VUS - карточка ВУС,   OCH - очередник,  NAS - из реестра населения,  LIC - из лицевого счета 
+// SubType: LIC(из лицевого счета),OTD   tabs  VUS - карточка ВУС,   OCH - очередник 
 function Men_Report(SubType,Tabs:String) : String;
 begin
   if IDProg1()='O' then begin // OCHERED
@@ -427,9 +433,12 @@ begin
   end else begin
     if (SubType='OTD') and Men.Fld('VUS').AsBoolean then begin
       if (Tabs='') or (Pos('VUS;',Tabs)>0) then begin
-        AddReport('Карточка первичного учета ВУС','&ВУС карточка первичного учета.frf');
-        AddReport('Карточка первичного учета ВУС (формат А4)','&ВУС карточка первичного учетаA4.frf');
-        AddReport('Карточка первичного учета ВУС (160х230)','&ВУС карточка первичного учета 160х230.frf');
+        AddReport('@SECTION','men_report_vus'); // !!!  возможность настраивать видимость отчетов
+        AddReport('Карточка первичного учета ВУС (160х230)','&ВУС карточка первичного учета.fr3');
+        AddReport('Карточка первичного учета ВУС (160х230) (на A4 для обрезки)','&ВУС карточка первичного учетаA4full.fr3');
+        AddReport('Карточка первичного учета ВУС (А5)','&ВУС карточка первичного учетаA5.fr3');
+        AddReport('Карточка первичного учета ВУС (А4)','&ВУС карточка первичного учетаA4.fr3');
+        AddReport('Карточка первичного учета ВУС (старая)','&ВУС карточка первичного учета 160х230.frf');
         AddReport('Алфавитная карточка','&Алфавитная карточка.frf');
       end;
     end;
@@ -484,16 +493,23 @@ var
 begin
   s:=Trim(Men.Fld('Familia').AsString);
   if s<>'' then begin
+   Men.Fld('Familia').AsString:=FirstUpper(s);
+  {
    sl := TStringList.Create;
    StrToStrings(s, sl, ' ');
    if sl.Count=3 then begin
-     Men.Fld('Familia').AsString := Trim(FirstUpper(sl[0]));
-     Men.Fld('Name').AsString := Trim(FirstUpper(sl[1]));
-     Men.Fld('Otch').AsString := Trim(FirstUpper(sl[2]));
+     if Trim(Men.Fld('Name').AsString)='' then begin
+       Men.Fld('Familia').AsString:=Trim(FirstUpper(sl[0]));
+       Men.Fld('Name').AsString:=Trim(FirstUpper(sl[1]));
+       Men.Fld('Otch').AsString:=Trim(FirstUpper(sl[2]));
+     end else begin
+       Men.Fld('Familia').AsString:=FirstUpper(s);
+     end;
    end else begin
-     Men.Fld('Familia').AsString := Trim(FirstUpper(Men.Fld('Familia').AsString));
+     Men.Fld('Familia').AsString:=FirstUpper(s);
    end;
    sl.Free;
+   }
   end;
 end;
 
@@ -603,13 +619,13 @@ begin
     end;
   end;
   if IdProg()='SELSOVET' then begin
-    if strFieldName='VSEGO' then begin
+//    if strFieldName='VSEGO' then begin
 //      if LicSchet.Fld('VSEGO').AsFloat>10 then begin
 //        PutError('Слишком большое значение.');
 //      end;
 //      if (Globaltask.ParamAsString('VER_UCHET')='1') then
 //        if Globaltask.ParamAsFloat('KOEF_PLOD')>0  then LicSchet.Fld('PR_PLOD').AsFloat:= LicSchet.Fld('VSEGO').AsFloat * Globaltask.ParamAsFloat('KOEF_PLOD');
-    end;
+//    end;
     if ParamAsBoolean('SUM_POSEV') then begin  // автосуммирование посевов
       if (Copy(strFieldName,1,5)='POSEV') and (strFieldName<>'POSEV') then begin
         LicSchet.Fld('POSEV').AsFloat := LicSchet.Fld('POSEV_ZERN').AsFloat+
@@ -629,6 +645,7 @@ begin
         LicSchet.Fld('BIG_ENIMAL').AsInteger := LicSchet.Fld('KOROVA').AsInteger+LicSchet.Fld('TELKI1').AsInteger;
       end;
     end;
+    {
     if ParamAsBoolean('CALC_UROG') then begin  // автоматический расчет производства 1
       if strFieldName='POSEV_KART' then begin
         if Globaltask.ParamAsFloat('UROG_KART')>0 then  LicSchet.Fld('PR_KART').AsFloat := LicSchet.Fld('POSEV_KART').AsFloat * Globaltask.ParamAsFloat('UROG_KART');
@@ -646,6 +663,8 @@ begin
         if Globaltask.ParamAsFloat('UROG_KORN')>0 then  LicSchet.Fld('PR_KORNPL').AsFloat:= LicSchet.Fld('POSEV_KORM').AsFloat * Globaltask.ParamAsFloat('UROG_KORN');
       end;
     end;
+    }
+    {
     if ParamAsBoolean('CALC_ZAGOT') then begin  // автоматический расчет производства 2
       lMeat := false;
       lMoloko := false;
@@ -688,6 +707,7 @@ begin
         LicSchet.Fld('MOLOKO').AsFloat:=LicSchet.Fld('KOR_MOLOKO').AsFloat+LicSchet.Fld('KOZ_MOLOKO').AsFloat;
       end;
     end;
+    }
   end;
 end;
 
@@ -759,7 +779,7 @@ begin
     ds.Fld('RUKOV').AsString      := Zags_Sprav_FIO;   
     ds.Fld('SVED').AsString := '3';   
     ds.Fld('POL').AsString := 'М';   
-    ds.Fld('B_RESP').AsBoolean:=true;
+//    ds.Fld('B_RESP').AsBoolean:=true;
     ds.Fld('GOSUD').AsInteger := ParamAsInteger('GOSUD');   
     ds.Fld('OBL').AsString := Parameters('OBL');   
     ds.Fld('RAION').AsString := Parameters('RAION');   
@@ -778,7 +798,6 @@ begin
     ds.Fld('DOLG_RUKOV').AsString := Zags_Sprav_Dolg;   
     ds.Fld('RUKOV').AsString      := Zags_Sprav_FIO;   
     ds.Fld('POL').AsString := 'М';   
-    ds.Fld('SM_B_RESP').AsBoolean:=true;
     ds.Fld('SM_GOSUD').AsInteger := ParamAsInteger('GOSUD');   
     ds.Fld('SM_OBL').AsString := Parameters('OBL');   
     ds.Fld('SM_RAION').AsString := Parameters('RAION');   
@@ -969,12 +988,14 @@ procedure DBrak_AfterCreate;
 var
   ds : TDataSet;
   i : Integer;
+  d:TDateTime;
 begin
 //  ds := dbGetDataSet('fmZapisBrak.Dokument');
   ds := fmMain.GetCurrentDokument;
   if ds<>nil then begin
     ds.Fld('DATEZ').AsDateTime := Now;
-    ds.Fld('DATEB').AsDateTime := GlobalTask.GetLastValueAsDate('LAST_DATEB_DBRAK');
+    d:=GlobalTask.GetLastValueAsDate('LAST_DATEB_DBRAK');
+    if d>0 then ds.Fld('DATEB').AsDateTime:=d;
 
     i := ParamAsInteger('GOSUD');
     if i>0 then begin
@@ -1038,119 +1059,11 @@ begin
   AddReport('Заявление о регистрации брака','&Заявление о регистрации брака.fr3');
   Result := '&LIST&';
 end;
-//---------------------------------------------------------------
-procedure DChName_AfterCreate;
-var
-  ds : TDataSet;
-  i : Integer;
-begin
-//  ds := dbGetDataSet('fmZapisBrak.Dokument');
-  ds := fmMain.GetCurrentDokument;
-  if ds<>nil then begin
-    ds.Fld('DATEZ').AsDateTime := Now;
-//    ds.Fld('DATEB').AsDateTime := GlobalTask.GetLastValueAsDate('LAST_DATEB_DBRAK');
-
-    i := ParamAsInteger('GOSUD');
-    if i>0 then begin
-      ds.Fld('GRAG').AsInteger     := i;   
-    end;
-    ds.Fld('OBL').AsString := Parameters('OBL');   
-    ds.Fld('RAION').AsString := Parameters('RAION');   
-    ds.Fld('GOROD').AsString := Parameters('GOROD');   
-    ds.Fld('GOROD_B').AsString := Parameters('GOROD_B');   
-
-    ds.Fld('M_OBL').AsString := Parameters('OBL');   
-    ds.Fld('M_RAION').AsString := Parameters('RAION');   
-    ds.Fld('M_GOROD').AsString := Parameters('GOROD');   
-    // должность и фио принимающего заявление
-    ds.Fld('SPEC_D').AsString := Parameters('DOLG_SPEC')
-    ds.Fld('SPEC').AsString := Parameters('СПЕЦ_ЗАГС');   
-  
-//    if ParamAsFloat('SUM_POSHLINA')>0  then ds.Fld('SUM_POSHLINA').AsFloat := ParamAsFloat('SUM_POSHLINA'); 
-//    ds.Fld('POSHLINA').AsString := Parameters('POSHLINA'); 
-
-  end;
-end;
-//-------------------------------------------------------
-function DChName_Report : String;     // !!!
-begin
-//  AddReport('Заявление о регистрации брака','&Заявление о регистрации брака.frf');
-  AddReport('Заявление о регистрации перемены фамилии, собственного имени, отчества','&Заявление о регистрации перемены ФИО.fr3');
-  Result := '&LIST&';
-end;
-//-------------------------------------------------------
-procedure DRast_AfterCreate;
-var
-  ds : TDataSet;
-  i : Integer;
-begin
-//  ds := dbGetDataSet('fmZapisBrak.Dokument');
-  ds := fmMain.GetCurrentDokument;
-  if ds<>nil then begin
-    ds.Fld('DATEZ').AsDateTime := Now;
-    ds.Fld('DATEB').AsDateTime := GlobalTask.GetLastValueAsDate('LAST_DATEB_DRAST');
-
-    i := ParamAsInteger('GOSUD');
-    if i>0 then begin
-      ds.Fld('ON_GRAG').AsInteger     := i;   
-      ds.Fld('ONA_GRAG').AsInteger    := i;  
-      ds.Fld('ON_GOSUD').AsInteger    := i;   
-      ds.Fld('ONA_GOSUD').AsInteger   := i;   
-      ds.Fld('ON_M_GOSUD').AsInteger  := i;   
-      ds.Fld('ONA_M_GOSUD').AsInteger := i;   
-    end;
-//    ds.Fld('ON_OBL_B').AsString := Parameters('OBL_B');   
-//    ds.Fld('ON_RAION_B').AsString := Parameters('RAION_B');   
-    ds.Fld('ON_OBL').AsString := Parameters('OBL');   
-    ds.Fld('ON_RAION').AsString := Parameters('RAION');   
-    ds.Fld('ON_GOROD').AsString := Parameters('GOROD');   
-
-//    ds.Fld('ONA_OBL_B').AsString := Parameters('OBL_B');   
-//    ds.Fld('ONA_RAION_B').AsString := Parameters('RAION_B');   
-    ds.Fld('ONA_OBL').AsString := Parameters('OBL');   
-    ds.Fld('ONA_RAION').AsString := Parameters('RAION');   
-    ds.Fld('ONA_GOROD').AsString := Parameters('GOROD');   
-
-    ds.Fld('ON_M_OBL').AsString := Parameters('OBL');   
-    ds.Fld('ON_M_RAION').AsString := Parameters('RAION');   
-    ds.Fld('ON_M_GOROD').AsString := Parameters('GOROD');   
-    ds.Fld('ONA_M_OBL').AsString := Parameters('OBL');   
-    ds.Fld('ONA_M_RAION').AsString := Parameters('RAION');   
-    ds.Fld('ONA_M_GOROD').AsString := Parameters('GOROD');   
-    if IsRnGorod and (Parameters('RN_GOROD')<>'') then begin
-      ds.Fld('ON_M_RNGOROD').AsString  := Parameters('RN_GOROD');   
-      ds.Fld('ONA_M_RNGOROD').AsString := Parameters('RN_GOROD');   
-      ds.Fld('ON_M_RAION').AsString    := '';   
-      ds.Fld('ONA_M_RAION').AsString   := '';   
-    end;
-//    ds.Fld('VOENKOM').AsString := Parameters('ID_VOENKOM');   
-    // должность и фио принимающего заявление
-    ds.Fld('DOLG_RUKOV').AsString := Parameters('DOLG_SPEC')
-    ds.Fld('RUKOV').AsString := Parameters('СПЕЦ_ЗАГС');   
-    ds.Fld('ON_DOK_TYPE').AsString  := '1';   
-    ds.Fld('ONA_DOK_TYPE').AsString := '1';   
-
-    if ParamAsFloat('SUMR_POSHLINA')>0 then begin 
-      ds.Fld('ON_SUM_POSHLINA').AsFloat  := ParamAsFloat('SUMR_POSHLINA'); 
-      ds.Fld('ONA_SUM_POSHLINA').AsFloat := ParamAsFloat('SUMR_POSHLINA'); 
-      ds.Fld('ON_POSHLINA').AsString  := Parameters('POSHLINA'); 
-      ds.Fld('ONA_POSHLINA').AsString := Parameters('POSHLINA'); 
-    end;
-  end;
-end;
-
-function DRast_Report : String;
-begin
-  AddReport('Заявление о регистрации расторжении брака','&Заявление о расторжении брака.fr3');
-  Result := '&LIST&';
-end;
-
 //-------------------------------------------------------
 function IsAktFR3:Boolean;
 begin
   Result:=true;
 end;
-
 //-------------------------------------------------------
 // дополнение к названию формы для актовых записей
 function GetAddNameAkt(lCheckNew:Boolean;var sEXT:String) : String;
@@ -1243,12 +1156,12 @@ begin
       if IdProg='ZAGS' then begin
         AddReport('Выписка о браке','&Выписка о браке.frf');
         if GlobalTask.ParamAsBoolean('SPRAV_BLANK') then begin 
-          AddReport('Архивная справка о браке','&Архивная справка о бракеBLK.frf');
+          AddReport('Архивная справка о браке','&Архивная справка о бракеBLK.fr3');
         end else begin
           AddReport('Архивная справка о браке','&Архивная справка о браке.frf');
         end;
         if GlobalTask.ParamAsBoolean('SPRAV_BEL') then begin 
-          AddReport('Архивная справка о браке (бел.)','&Архивная справка о бракеBLK_BEL.frf');
+          AddReport('Архивная справка о браке (бел.)','&Архивная справка о бракеBLK_BEL.fr3');
         end;
       end;
       {$IFDEF ADD_OLD_AKT}
@@ -1274,6 +1187,9 @@ begin
     AddReport('>Запись акта о браке FR3','&Запись акта о браке.fr3');
     AddReport('>Запись акта о браке FR3 (26.07.2013)','&Запись акта о бракеН.fr3');
     AddReport('>Восстановленная запись акта о браке 3','&Восстановленная запись акта о браке.fr3');
+    AddReport('-------------------------------','&Empty.frf');
+    AddReport('Архивная справка о браке','&Архивная справка о бракеBLK.fr3');
+    AddReport('Архивная справка о браке (бел.)','&Архивная справка о бракеBLK_BEL.fr3');
   end;
   Result := '&LIST&';
 end;
@@ -1337,9 +1253,9 @@ begin
 //      ds.Fld('ONA_VOENKOM').AsString := '';   
     end;
     ds.Fld('OSNOV').AsBoolean := true;   
-    ds.Fld('ON_SEM').AsString := '2';   
+    ds.Fld('ON_SEM').AsString := '2';
     ds.Fld('ONA_SEM').AsString := '2';   
-    if ds.Fld('VOSSTAN').IsNull or not ds.Fld('VOSSTAN').AsBoolean then begin
+    if not IsSimpleVvod and not ds.Fld('VOSSTAN').AsBoolean then begin
       ds.Fld('ON_DOK_TYPE').AsString  := '1';   
       ds.Fld('ONA_DOK_TYPE').AsString := '1';   
     end;
@@ -1378,13 +1294,13 @@ begin
     if IdProg='ZAGS' then begin
       AddReport('Выписка о расторжении брака','&Выписка о расторжении брака.frf');
       if GlobalTask.ParamAsBoolean('SPRAV_BLANK') then begin 
-        AddReport('Архивная справка о расторжении брака','&Архивная справка о расторжении бракаBLK.frf');
+        AddReport('Архивная справка о расторжении брака','&Архивная справка о расторжении бракаBLK.fr3');
       end else begin
         AddReport('Архивная справка о расторжении брака','&Архивная справка о расторжении брака.frf');
       end;
       if GlobalTask.ParamAsBoolean('SPRAV_BEL') then begin 
         AddReport('-------------------------------','&Empty.frf');
-        AddReport('Архивная справка о расторжении брака (бел.)','&Архивная справка о расторжении бракаBLK_BEL.frf');
+        AddReport('Архивная справка о расторжении брака (бел.)','&Архивная справка о расторжении бракаBLK_BEL.fr3');
       end;
     end;
 
@@ -1396,6 +1312,9 @@ begin
     AddReport('-------------------------------','&Empty.frf');
     AddReport('>Свидетельство о расторжении брака FR3','&Свидетельство о расторжении брака.fr3');
     AddReport('>Свидетельство о расторжении брака FR3 на линии','&Свидетельство о расторжении бракаМ.fr3');
+    AddReport('Свидетельство о расторжении брака (старое)','&Свидетельство о расторжении брака(ст).frf');
+    AddReport('Свидетельство о расторжении брака (Витебск)','&Свидетельство о расторжении брака Витебск.frf');
+    AddReport('-------------------------------','&Empty.frf');
     AddReport('>Запись акта о расторжении брака2','&Запись акта о расторжении брака2.frf');
     AddReport('>Запись акта о расторжении брака2_2008','&Запись акта о расторжении брака2_2008.frf');
     AddReport('>Запись акта о расторжении брака_2008','&Запись акта о расторжении брака_2008.frf');
@@ -1403,9 +1322,10 @@ begin
     AddReport('>Запись акта о расторжении бракаАЛБ_2008','&Запись акта о расторжении бракаАЛБ_2008.frf');
     AddReport('>Запись акта о разводе FR3','&Запись акта о расторжении брака.fr3');
     AddReport('>Запись акта о разводе FR3 (26.07.2013)','&Запись акта о расторжении бракаН.fr3');
+    AddReport('-------------------------------','&Empty.frf');
     AddReport('>Архивная справка о расторжении брака','&Архивная справка о расторжении брака.frf');
-    AddReport('>Архивная справка о расторжении брака бланк','&Архивная справка о расторжении бракаBLK.frf');
-    AddReport('>Архивная справка о расторжении брака (бел.)','&Архивная справка о расторжении бракаBLK_BEL.frf');
+    AddReport('>Архивная справка о расторжении брака бланк','&Архивная справка о расторжении бракаBLK.fr3');
+    AddReport('>Архивная справка о расторжении брака (бел.)','&Архивная справка о расторжении бракаBLK_BEL.fr3');
   end;
   Result := '&LIST&';
 end;
@@ -1447,22 +1367,22 @@ begin
       ds.Fld('ONA_M_RAION').AsString := Parameters('RAION');   
       ds.Fld('ONA_M_GOROD').AsString := Parameters('GOROD');   
     end;
-    ds.Fld('ON_SEM').AsString := '1';   
-    ds.Fld('ONA_SEM').AsString := '1';   
     ds.Fld('SPEC').AsString := Parameters('СПЕЦ_ЗАГС');   
     WriteSpecBel('',ds);
     ds.Fld('RUKOV').AsString := Parameters('РУК_ЗАГС');   
     ds.Fld('RUKOV_B').AsString := Parameters('РУК_ЗАГС_Б');   
-    if not ds.Fld('VOSSTAN').AsBoolean then begin
+    if not IsSimpleVvod then begin
+      ds.Fld('ON_SEM').AsString := '1';   
+      ds.Fld('ONA_SEM').AsString := '1';   
       if ParamAsFloat('SUMR_POSHLINA')>0
         then ds.Fld('ON_SUM_POSHLINA').AsFloat := ParamAsFloat('SUMR_POSHLINA'); 
       ds.Fld('ON_POSHLINA').AsString  := Parameters('POSHLINA'); 
       if ParamAsFloat('SUMR_POSHLINA')>0
         then ds.Fld('ONA_SUM_POSHLINA').AsFloat := ParamAsFloat('SUMR_POSHLINA'); 
       ds.Fld('ONA_POSHLINA').AsString := Parameters('POSHLINA'); 
+      ds.Fld('ON_DOK_TYPE').AsString  := '1';   
+      ds.Fld('ONA_DOK_TYPE').AsString := '1';   
     end;
-    ds.Fld('ON_DOK_TYPE').AsString  := '1';   
-    ds.Fld('ONA_DOK_TYPE').AsString := '1';   
   end;
 end;
 
@@ -1540,13 +1460,13 @@ begin
         {$ENDIF}
       end;
       if GlobalTask.ParamAsBoolean('SPRAV_BLANK') then begin 
-        AddReport('Справка о рождении (форма №1)|1','&Справка о регистрации рожденияBLK.frf');
+        AddReport('Справка о рождении (форма №1)|1','&Справка о регистрации рожденияBLK.fr3');
 //        if ds.Fld('SVED').AsString='3' then begin // заявление матери
         if IsZvMat(ds) then begin // заявление матери и не введен отец
-          AddReport('Справка о рождении (форма №2)|2','&Справка о регистрации рожденияBLK.frf');
-          AddReport('Справка о постановке на учет для улучшения жилищных условий|3','&Справка о регистрации рожденияBLK.frf');
+          AddReport('Справка о рождении (форма №2)|2','&Справка о регистрации рожденияBLK.fr3');
+          AddReport('Справка о постановке на учет для улучшения жилищных условий|3','&Справка о регистрации рожденияBLK.fr3');
         end;
-        if sm<>'*' then AddReport(sm,'&Справка о рождении умершего ребенкаBLK.frf');
+        if sm<>'*' then AddReport(sm,'&Справка о рождении умершего ребенкаBLK.fr3');
       end else begin
         AddReport('Справка о рождении (форма №1)|1','&Справка о регистрации рождения.frf');
 //        if ds.Fld('SVED').AsString='3' then begin // заявление матери
@@ -1558,28 +1478,26 @@ begin
       end;
 //      if ds.Fld('SVED').AsString='3' then begin // заявление матери
       if IsZvMat(ds) then begin // заявление матери  и не введен отец
-        AddReport('Заявление о рождении','Заявление о рождении55.fr3');
+        AddReport('Заявление о регистрации рождения','Заявление о рождении55.fr3');
       end else begin
-        AddReport('Заявление о рождении','Заявление о рождении.fr3');
+        AddReport('Заявление о регистрации рождения','Заявление о рождении.fr3');
       end;
       if IdProg='ZAGS' then begin
         AddReport('Выписка о рождении','&Выписка о рождении.frf');
-        if GlobalTask.ParamAsBoolean('SPRAV_BLANK') then begin 
-          AddReport('Архивная справка о рождении','&Архивная справка о рожденииBLK.frf');
-        end else begin
-          AddReport('Архивная справка о рождении','&Архивная справка о рождении.frf');
-        end;
+        if GlobalTask.ParamAsBoolean('SPRAV_BLANK') 
+          then AddReport('Архивная справка о рождении','&Архивная справка о рожденииBLK.fr3')
+          else AddReport('Архивная справка о рождении','&Архивная справка о рождении.frf');
       end;
       if GlobalTask.ParamAsBoolean('SPRAV_BEL') then begin 
         AddReport('---------------------------------------------','&Empty.frf');
-        AddReport('Справка о рождении (форма №1) бел.|1','&Справка о регистрации рожденияBLK_BEL.frf');
+        AddReport('Справка о рождении (форма №1) бел.|1','&Справка о регистрации рожденияBLK_BEL.fr3');
         if IsZvMat(ds) then begin // заявление матери и не введен отец
-          AddReport('Справка о рождении (форма №2) бел.|2','&Справка о регистрации рожденияBLK_BEL.frf');
-          AddReport('Справка о постановке на учет для улучшения жилищных условий бел.|3','&Справка о регистрации рожденияBLK_BEL.frf');
+          AddReport('Справка о рождении (форма №2) бел.|2','&Справка о регистрации рожденияBLK_BEL.fr3');
+          AddReport('Справка о постановке на учет для улучшения жилищных условий бел.|3','&Справка о регистрации рожденияBLK_BEL.fr3');
         end;
-        if sm<>'*' then AddReport(sm+' бел.','&Справка о рождении умершего ребенкаBLK_BEL.frf');
+        if sm<>'*' then AddReport(sm+' бел.','&Справка о рождении умершего ребенкаBLK_BEL.fr3');
         if IdProg='ZAGS' then begin
-          AddReport('Архивная справка о рождении бел.','&Архивная справка о рожденииBLK_BEL.frf');
+          AddReport('Архивная справка о рождении бел.','&Архивная справка о рожденииBLK_BEL.fr3');
         end;
       end;
 
@@ -1610,18 +1528,19 @@ begin
     AddReport('>Запись акта о рождении FR3 (c 26.07.2013)','&Запись акта о рожденииН.fr3');
     AddReport('>Восстановленная запись акта о рождении 3 ','&Восстановленная запись акта о рождении.fr3');
     AddReport('>Восстановленная запись акта о рождении (c 26.07.2013)','&Восстановленная запись акта о рожденииН.fr3');
-    AddReport('>Заявление о рождении (ст.55)','Заявление о рождении55.fr3');
-    AddReport('>Заявление о рождении','Заявление о рождении.fr3');
-    AddReport('>Справка о рождении (форма №1) бланк|1','&Справка о регистрации рожденияBLK.frf');
-    AddReport('>Справка о рождении (форма №1) бланк бел|1','&Справка о регистрации рожденияBLK_BEL.frf');
-    AddReport('>Справка о рождении (форма №2) бланк|2','&Справка о регистрации рожденияBLK.frf');
-    AddReport('>Справка о рождении (форма №2) бланк бел.|2','&Справка о регистрации рожденияBLK_BEL.frf');
-    AddReport('>Справка о постановке на учет для улучшения жилищных условий бланк|3','&Справка о регистрации рожденияBLK.frf');
-    AddReport('>Справка о постановке на учет для улучшения жилищных условий бланк бел.|3','&Справка о регистрации рожденияBLK_BEL.frf');
-    AddReport('>Справка о рождении умершего ребенка бланк','&Справка о рождении умершего ребенкаBLK.frf');
-    AddReport('>Справка о рождении умершего ребенка бел.','&Справка о рождении умершего ребенкаBLK_BEL.frf');
-    AddReport('>Архивная справка о рождении бланк','&Архивная справка о рожденииBLK.frf');
-    AddReport('>Архивная справка о рождении бел.','&Архивная справка о рожденииBLK_BEL.frf');
+    AddReport('>Заявление о регистрации рождения (ст.55)','Заявление о рождении55.fr3');
+    AddReport('>Заявление о регистрации рождения','Заявление о рождении.fr3');
+    AddReport('-------------------------------','&Empty.frf');
+    AddReport('Справка о рождении (форма №1)|1','&Справка о регистрации рожденияBLK.fr3');
+    AddReport('Справка о рождении (форма №2)|2','&Справка о регистрации рожденияBLK.fr3');
+    AddReport('Справка о постановке на учет для улучшения жилищных условий|3','&Справка о регистрации рожденияBLK.fr3');
+    AddReport('>Справка о рождении умершего ребенка бланк','&Справка о рождении умершего ребенкаBLK.fr3');
+    AddReport('Справка о рождении (форма №1) бел.|1','&Справка о регистрации рожденияBLK_BEL.fr3');
+    AddReport('Справка о рождении (форма №2) бел.|2','&Справка о регистрации рожденияBLK_BEL.fr3');
+    AddReport('Справка о постановке на учет для улучшения жилищных условий бел.|3','&Справка о регистрации рожденияBLK_BEL.fr3');
+    AddReport('>Справка о рождении умершего ребенка бел.','&Справка о рождении умершего ребенкаBLK_BEL.fr3');
+    AddReport('>Архивная справка о рождении бланк','&Архивная справка о рожденииBLK.fr3');
+    AddReport('>Архивная справка о рождении бел.','&Архивная справка о рожденииBLK_BEL.fr3');
   end;
   Result := '&LIST&';
 end;
@@ -1695,12 +1614,14 @@ begin
 //    ds.Fld('VOENKOM').AsString := Parameters('ID_VOENKOM');   
 
     ds.Fld('TYPEROD').AsString := '1';
-    ds.Fld('SCHET').AsString := '1';
-    ds.Fld('OSTAT').AsString := '1';
     ds.Fld('SVED').AsString := '1';
     ds.Fld('TYPEREG').AsString := '1';
-    ds.Fld('DOKUMENT').AsString := Parameters('DOK_ROGD');
-    if ds.Fld('VOSSTAN').IsNull or not ds.Fld('VOSSTAN').AsBoolean then begin
+    if not IsSimpleVvod  then begin
+      ds.Fld('SCHET').AsString := '1';
+      ds.Fld('OSTAT').AsString := '1';
+      ds.Fld('DOKUMENT').AsString := Parameters('DOK_ROGD');
+    end;
+    if not IsSimpleVvod and not ds.Fld('VOSSTAN').AsBoolean then begin
       ds.Fld('ON_DOK_TYPE').AsString  := '1';   
       ds.Fld('ONA_DOK_TYPE').AsString := '1';   
     end;
@@ -1758,7 +1679,7 @@ var
   s,ss,sEXT : String;
 begin
   ds := fmMain.GetCurrentDokument;
-  s := GetAddNameAkt(true,sEXT);
+  s:=GetAddNameAkt(true,sEXT);
   ss:=getAddNameSvid(ds);
   if CurDok.OnlySvid then begin
     AddReport('Свидетельство об установлении отцовства','&Свидетельство об установлении отцовства'+ss+'.fr3');
@@ -1776,7 +1697,7 @@ begin
     if (s='') then AddReport('Запись акта об отцовстве (до изменения)','&Запись акта об отцовстве2.frf');
   {$ENDIF}
   if DokZAGS.Fld('OSNOV').AsInteger=2 then s:='(суд)' else s:='';
-  AddReport('Заявление об установлении отцовства','&Заявление об установлении отцовства'+s+'.fr3'); 
+  AddReport('Заявление о регистрации установления отцовства','&Заявление об установлении отцовства'+s+'.fr3'); 
 
   if IsSystemAdmin then begin
     AddReport('-------------------------------','&Empty.frf');
@@ -1865,7 +1786,8 @@ var
 begin
   ds := fmMain.GetCurrentDokument;
   if ds<>nil then begin
-    AddReport('Заявление','&Захоронение_заявление.fr3');
+    AddReport('Заявление о земельном участке','&Захоронение_заявление.fr3');
+    AddReport('Заявление о выдаче справки','&Захоронение_заявление2.fr3');
     AddReport('Справка (A5)','&Захоронение_справка.fr3');
     AddReport('Справка (A4)','&Захоронение_справкаА4.fr3');
 //    AddReport('Акт о захоронении','&Захоронение_акт2.fr3');
@@ -1876,6 +1798,7 @@ begin
     AddReport('Справка (A5)','&Захоронение_справка.fr3');
     AddReport('Справка (A4)','&Захоронение_справкаА4.fr3');
     AddReport('Заявление','&Захоронение_заявление.fr3');
+    AddReport('Заявление 2','&Захоронение_заявление2.fr3');
     AddReport('Удостоверение','&Захоронение_удостоверение.fr3');
     AddReport('Акт о захоронении','&Захоронение_акт.fr3');
   end;
@@ -1958,15 +1881,15 @@ begin
         AddReport(StringOfChar('-',100),'empty');
       end;
       if GlobalTask.ParamAsBoolean('SPRAV_BLANK') then begin 
-        AddReport('Справка о смерти','&Справка о смертиBLK.frf');
+        AddReport('Справка о смерти','&Справка о смертиBLK.fr3');
       end else begin
         AddReport('Справка о смерти','&Справка о смерти.fr3');
       end;
-      AddReport('Заявление о смерти','&Заявление о смерти.fr3');
+      AddReport('Заявление о регистрации смерти','&Заявление о смерти.fr3');
       if IdProg='ZAGS' then begin
         AddReport('Выписка о смерти','&Выписка о смерти.frf');
         if GlobalTask.ParamAsBoolean('SPRAV_BLANK') then begin 
-          AddReport('Архивная справка о смерти','&Архивная справка о смертиBLK.frf');
+          AddReport('Архивная справка о смерти','&Архивная справка о смертиBLK.fr3');
         end else begin
           AddReport('Архивная справка о смерти','&Архивная справка о смерти.fr3');
         end;
@@ -1976,8 +1899,8 @@ begin
      {$ENDIF}
       if GlobalTask.ParamAsBoolean('SPRAV_BEL') then begin 
         AddReport(StringOfChar('-',100),'empty');
-        AddReport('Справка о смерти (бел.)','&Справка о смертиBLK_BEL.frf');
-        AddReport('Архивная справка о смерти (бел.)','&Архивная справка о смертиBLK_BEL.frf');
+        AddReport('Справка о смерти (бел.)','&Справка о смертиBLK_BEL.fr3');
+        AddReport('Архивная справка о смерти (бел.)','&Архивная справка о смертиBLK_BEL.fr3');
       end;
       if l then begin
         AddReport(StringOfChar('-',100),'empty');
@@ -2010,11 +1933,12 @@ begin
     AddReport('>Запись акта о смерти (c 26.07.2013) Минск','&Запись акта о смерти5Н.fr3');
     AddReport('>Запись акта о смерти (c 26.07.2013)','&Запись акта о смертиН.fr3');
     AddReport('>Справка о смерти FR3','&Справка о смерти.fr3');
-    AddReport('>Справка о смерти бланк','&Справка о смертиBLK.frf');
-    AddReport('>Справка о смерти (бел.)','&Справка о смертиBLK_BEL.frf');
     AddReport('>Архивная справка о смерти','&Архивная справка о смерти.fr3');
-    AddReport('>Архивная справка о смерти бланк','&Архивная справка о смертиBLK.frf');
-    AddReport('>Архивная справка о смерти (бел.)','&Архивная справка о смертиBLK_BEL.frf');
+    AddReport('-------------------------------','&Empty.frf');
+    AddReport('>Справка о смерти бланк','&Справка о смертиBLK.fr3');
+    AddReport('>Справка о смерти (бел.)','&Справка о смертиBLK_BEL.fr3');
+    AddReport('>Архивная справка о смерти бланк','&Архивная справка о смертиBLK.fr3');
+    AddReport('>Архивная справка о смерти (бел.)','&Архивная справка о смертиBLK_BEL.fr3');
   end;
 end;
 
@@ -2064,7 +1988,7 @@ begin
           
     if not ds.Fld('VOSSTAN').AsBoolean then begin
       ds.Fld('VUS').AsBoolean := false;   
-      ds.Fld('SDAN_VB').AsString := 'НЕ ПРЕДОСТАВЛЕН';   
+      ds.Fld('SDAN_VB').AsString := 'НЕ ПРЕДСТАВЛЕН';   
       ds.Fld('SDAN_DOK').AsString := '';   
       ds.Fld('IS_SDAN_DOK').AsBoolean := true;   
       if IdProg='ZAGS' then begin
@@ -2086,7 +2010,12 @@ begin
   end;
 end;
 
-
+//-------- запрос данных ---------------------------------
+function QueryGis_Report : String;
+begin
+  Result := '&LIST&';
+  AddReport('Запрос персональных данных','&Запрос персональных данных.fr3');
+end;
 //-------- акты усыновления ---------------------------------
 function ZAdopt_Report : String;
 var
@@ -2106,9 +2035,10 @@ begin
     AddReport('Запись акта об усыновлении','&Запись акта об усыновлении'+s+'.'+sEXT);
     AddReport('Свидетельство об усыновлении(место рожд. 4 строки)','&Свидетельство об усыновлении2'+ss+'.frf');
     if GlobalTask.ParamAsBoolean('OLD_SVID') then begin
-      AddReport('Свидетельство об усыновлении','&Свидетельство об усыновлении'+ss+'.frf');
+      AddReport('Свидетельство об усыновлении','&Свидетельство об усыновлении.frf');
       AddReport('Свидетельство об усыновлении (старое)','&Свидетельство об усыновлении(старое).frf');
     end;
+    AddReport('Заявление об усыновлении','&Заявление об усыновлении.fr3');
 //    AddReport('Запись акта об усыновлении (c 26.07.2013)','&Запись акта об усыновленииН.fr3');
     AddReport('Извещение об изменении акта о рождении усыновленного','Извещение об изменении акта усыновленного.frf'); 
     {$IFDEF ADD_OLD_AKT}
@@ -2117,6 +2047,9 @@ begin
 
     if IsSystemAdmin then begin
       AddReport('-------------------------------','&Empty.frf');
+      AddReport('Свидетельство об усыновлении(место рожд. 4 строки)','&Свидетельство об усыновлении2.frf');
+      AddReport('Свидетельство об усыновлении(место рожд. 4 строки) Минск','&Свидетельство об усыновлении2М.frf');
+
       AddReport('Свидетельство об усыновлении FR3','&Свидетельство об усыновлении.fr3');
       AddReport('>Запись акта об усыновлении2','&Запись акта об усыновлении2.frf');
       AddReport('>Запись акта об усыновлении2_2008','&Запись акта об усыновлении2_2008.frf');
@@ -2196,25 +2129,24 @@ begin
     ss:=getAddNameSvid(ds);
 //    if GlobalTask.ParamAsBoolean('AKT_ALBOM') then s := 'АЛБ'+s;
     if CurDok.OnlySvid then begin
-      AddReport('Свидетельство о перемене имени','&Свидетельство о перемене имени(новое)'+ss+'.frf');
+      AddReport('Свидетельство о перемене имени','&Свидетельство о перемене имени.fr3');
+//      AddReport('Свидетельство о перемене имени','&Свидетельство о перемене имени(новое)'+ss+'.frf');
       Result := '&LIST&';
       exit;
     end;
     AddReport('Запись акта о перемене имени','&Запись акта о перемене имени'+s+'.'+sEXT);
-    AddReport('Свидетельство о перемене имени','&Свидетельство о перемене имени(новое)'+ss+'.frf');
+    AddReport('Свидетельство о перемене имени','&Свидетельство о перемене имени.fr3');
     if GlobalTask.ParamAsBoolean('OLD_SVID')
       then AddReport('Свидетельство о перемене имени (старое)','&Свидетельство о перемене имени.frf');
-//    AddReport('Запись акта о перемене имени (c 26.07.2013)','&Запись акта о перемене имениН.fr3');
-
     if IdProg='ZAGS' then begin
       AddReport('Выписка о перемене имени','&Выписка о перемене имени.frf');
       if GlobalTask.ParamAsBoolean('SPRAV_BLANK') then begin 
-        AddReport('Архивная справка о перемене имени','&Архивная справка о перемене имениBLK.frf');
+        AddReport('Архивная справка о перемене имени','&Архивная справка о перемене имениBLK.fr3');
       end else begin
         AddReport('Архивная справка о перемене имени','&Архивная справка о перемене имени.frf');
       end;
       if GlobalTask.ParamAsBoolean('SPRAV_BEL') then begin 
-        AddReport('Архивная справка о перемене имени (бел.)','&Архивная справка о перемене имениBLK_BEL.frf');
+        AddReport('Архивная справка о перемене имени (бел.)','&Архивная справка о перемене имениBLK_BEL.fr3');
       end;
     end;
     {$IFDEF ADD_OLD_AKT}
@@ -2231,9 +2163,9 @@ begin
       AddReport('>Запись акта о перемене имениАЛБ_2008','&Запись акта о перемене имениАЛБ_2008.frf');
       AddReport('>Запись акта о перемене имени FR3','&Запись акта о перемене имени.fr3');
       AddReport('>Запись акта о перемене имени FR3 (26.06.2013)','&Запись акта о перемене имениН.fr3');
-      AddReport('>Архивная справка о перемене имени бланк','&Архивная справка о перемене имениBLK.frf');
       AddReport('>Архивная справка о перемене имени','&Архивная справка о перемене имени.frf');
-      AddReport('>Архивная справка о перемене имени (бел.)','&Архивная справка о перемене имениBLK_BEL.frf');
+      AddReport('>Архивная справка о перемене имени бланк','&Архивная справка о перемене имениBLK.fr3');
+      AddReport('>Архивная справка о перемене имени (бел.)','&Архивная справка о перемене имениBLK_BEL.fr3');
     end;
     Result := '&LIST&';
   end;
@@ -2453,14 +2385,18 @@ begin
 end;
 
 function DeclRegistr_Report : String;
+var
+  sAdd:String;
 begin
 //  Result := '&LIST&';
 //  AddReport('Заявление о регистрации по месту жительства','&Заявление о регистрации по месту жительства.fr3'); 
 //  AddReport('Заявление о регистрации по месту пребывания','&Заявление о регистрации по месту пребывания.fr3'); 
+  if GlobalTask.GetLastValueAsString('DECL_REG_A4')='1'
+    then sAdd:='А4' else sAdd:='';
   if CurDok.Fld('TYPEREG').AsInteger=MESTO_GIT then begin
-    Result:='&Заявление о регистрации по месту жительства.fr3'; 
+    Result:='&Заявление о регистрации по месту жительства'+sAdd+'.fr3'; 
   end else begin
-    Result:='&Заявление о регистрации по месту пребывания.fr3'; 
+    Result:='&Заявление о регистрации по месту пребывания'+sAdd+'.fr3'; 
   end;
 end;
 
@@ -2470,20 +2406,25 @@ var
 begin
   ds := fmMain.GetCurrentDokument;
   AddReport('Поквартирная карточка','&Поквартирная карточка (лицевой).fr3');
-  AddReport('Лицевой счет(новый)','&Лицевой Счет.fr3');
+  AddReport('Лицевой счет','&Лицевой Счет.fr3');
+  AddReport('Лицевой счет(книжный)','&Лицевой Счет_книжный.fr3');
   if IdProg()<>'GKH' 
-    then AddReport('Лицевой счет(новый)+земля','&Лицевой Счет_земля.fr3');
-  AddReport('Лицевой счет','&Лицевой Счет.frf');
+    then AddReport('Лицевой счет+земля','&Лицевой Счет_земля.fr3');
+  AddReport('Лицевой счет(старый)','&Лицевой Счет.frf');
   AddReport('Справка о составе семьи и занимаемом жилом помещении(банк)','@PrintSSS');
   Result := '&LIST&';
 end;
 
 function Adres_Report : String;
+var
+  adr:TAdresLic;
 begin
-  Result := '&Поквартирная карточка.fr3';
+  AddReport('Поквартирная карточка','&Поквартирная карточка.fr3');
+  if (Adres.Mens.Count=0) or not dbLocate(Adres.Mens.DataSet,'PROPIS', [true], '')
+    then AddReport('Лицевой счет(пустующего дома)','&Лицевой Счет_пустующий.fr3');
 //  AddReport('Лицевой Счет','&Лицевой Счет.frf');
 //  AddReport('Справка о составе семьи и занимаемом жилом помещении(банк)','@PrintSSS');
-//  Result := '&LIST&';
+  Result := '&LIST&';
 end;
 
 //---------------------------------------------------
@@ -2579,144 +2520,6 @@ begin
            'SELECT ID, IIF(ukaz is null,'''',''№''+trim(UKAZ)+''  п '')+NAME AS NAME, ENDDATE, ''1'' TTT FROM SysSpr.SprSnOch '+
            ' ORDER BY ttt,enddate,id ';
 end;
-//------------------------------------------------------------------
-procedure CreateNalogZ;
-var
-  f  : TfmParamQuest;
-  n, nGod, iRound, iNalog  : Integer;
-  dDateVist, dDateSrok : TDateTime;
-  nStavka,nZeml : Extended;
-  ds,dsNalogi : TDataSet;
-begin
-  iRound := GlobalTask.ParamAsInteger('ROUND');
-  f := TfmParamQuest.Create(nil);
-  f.Caption := 'Введите значения';
-//  f.StepY:=17;
-//  f.Flat:=false;
-//  f.AddParamEx(1  , 'Налог'               , 'NALOG','TYPE=LOOKUP~DESC=LOOKUP_NALOGI~WIDTH=250');
-  n := StrToInt(FormatDateTime('YYYY', GlobalTask.CurrentDate));
-  f.AddParamEx(n      , 'За какой год'    , 'YEAR'    ,'TYPE=LIST~DESC=KEY_YEARS');
-  f.AddParamEx(Now    , 'Дата начисления' , 'DATEVIS' ,'TYPE=DATE');
-  f.AddParamEx('EMPTY', 'Срок оплаты'     , 'SROK'    ,'TYPE=DATE');
-  f.AddParamEx(GlobalTask.ParamAsFloat('STAVKA_ZEM'), 'Ставка земельного налога' , 'STAVKA','FORMAT=###');
-
-//  f.AddParamEx(0, 'Сумма', '4','FORMAT=### ### ### ###.##');
-//  f.AddParamEx(2, 'List', '4','TYPE=LIST~DESC=KEY_TYPE_OBJ~WIDTH=100');
-//  f.AddParamEx(6, 'Spr', '5','TYPE=SPR~DESC=LOOKUP_EDIZM~WIDTH=50~DOPSHOW=NAME');
-//  f.AddParamEx(8, 'LookUp', '11','TYPE=LOOKUP~DESC=LOOKUP_EDIZM~WIDTH=350');
-  f.AddButtons('Выполнить~Отказ',0);
-  n  := f.ShowQuest;
-  if n = 1 then begin
-    dDateVist:= f.GetValue('DATEVIS','D');
-    dDateSrok:= f.GetValue('SROK','D');
-    nStavka  := f.GetValue('STAVKA','N');
-    nGod     := f.GetValue('YEAR','N');
-    iNalog := 1; // налог на землю
-    f.Free;
-    ds := dbGetDataSet('fmGurnAlfKn.Query');
-    if ds<>nil then ds.DisableControls;
-    OpenMessage('Расчет земельного налога ...','',10);
-//    if dmBase = nil then showmessage('33333333333');
-//    dsNalogi := dmBase.GetDataSet('tbNalogi');
-    dsNalogi := dbGetDataSet('dmBase.tbNalogi');
-    if (ds <> nil) and (dsNalogi<>nil) then begin
-      dbSetIndex(dsNalogi, 'PR_KEY');
-      ds.First;
-      try
-        while not ds.Eof do begin
-          // прочитаем реквизит всего земли
-          nZeml := dmBase.ReadPropAsFloat(ds.Fld('DATE_FIKS').AsDateTime,
-                                      ds.Fld('ID').AsInteger, 'VSEGO');
-          if nZeml > 0 then begin  // если есть земля
-//            if not dbLocate(dsNalogi, 'DATE_FIKS;ID;GOD;NALOG',[ds.Fld('DATE_FIKS').AsDateTime,ds.Fld('ID').AsInteger,
-//                      nGod,iNalog], '') then begin
-            if not dbFindKey(dsNalogi, [ds.Fld('DATE_FIKS').AsDateTime,ds.Fld('ID').AsInteger,
-                      nGod,iNalog], true) then begin
-              dsNalogi.Append;
-              dsNalogi.Fld('DATE_FIKS').AsDateTime := ds.Fld('DATE_FIKS').AsDateTime;
-              dsNalogi.Fld('ID').AsInteger := ds.Fld('ID').AsInteger;
-              dsNalogi.Fld('TYPEOBJ').AsInteger := dmBase.TypeObj_Lich;
-              dsNalogi.Fld('GOD').AsInteger   := nGod; //
-              dsNalogi.Fld('NALOG').AsInteger := iNalog; 
-            end else begin
-              dsNalogi.Edit;
-            end;
-            if dDateVist <> 0 then dsNalogi.Fld('DATE_VIST').AsDateTime := dDateVist;
-            if dDateSrok <> 0 then dsNalogi.Fld('DATE_SROK').AsDateTime := dDateSrok;
-            dsNalogi.Fld('SUMMA_VIST').AsFloat   := xRound(nZeml*nStavka,iRound);
-//            dsNalogi.Fld('SUMMA_VIST').AsFloat   := RoundBYR(nZeml*nStavka);
-            dsNalogi.Post;
-          end;
-          ds.Next;
-        end;
-      finally
-        ds.First;
-      end;
-    end;
-    if ds<>nil then ds.EnableControls;
-    CloseMessage();
-  end else begin
-    f.Free;
-  end;
-//  fmMain.acSprPunktExecute(nil);
-//  f.AddParamEx(false, 'Boolean', '1','TYPE=BOOLEAN');
-//  f.AddParamEx('строка символов', 'String', '2','');
-//  f.AddParamEx('', 'File', '8','TYPE=FILE~WIDTH=300');
-//  f.AddParamEx('', 'Dir', '33','TYPE=DIR~WIDTH=300');
-//  f.AddParamEx(3, 'Kvartal', '55','TYPE=KVARTAL');
-//  f.AddParamEx(2, 'Month', '44','TYPE=MONTH');
-end;
-
-//------------------------------------------------------------------
-procedure DeleteNalog;
-var
-  f  : TfmParamQuest;
-  d : TDateTime;
-  ds : TDataSet;
-  lErr : Boolean;
-  n,nGod,iNalog : Integer;
-begin
-  f := TfmParamQuest.Create(nil);
-  f.Caption := 'Введите значения';
-//  f.StepY:=17;
-//  f.Flat:=false;
-  f.AddParamEx(1  , 'Налог'               , 'NALOG','TYPE=LOOKUP~DESC=LOOKUP_NALOGI~WIDTH=250');
-  n := StrToInt(FormatDateTime('YYYY', GlobalTask.CurrentDate));
-  f.AddParamEx(n      , 'За какой год'    , 'YEAR'    ,'TYPE=LIST~DESC=KEY_YEARS');
-  f.AddButtons('Выполнить~Отказ',0);
-  n  := f.ShowQuest;
-  if n = 1 then begin
-    nGod   := f.GetValue('YEAR','N');
-    iNalog := f.GetValue('NALOG','N');
-    f.Free;
-    if Problem('  Вы уверены что хотите удалить ? ') then begin
-      ds := dbGetDataSet('fmGurnAlfKn.Query');
-      d  := ds.Fld('DATE_FIKS').AsDateTime;
-      SetScreenCursor('HOURCLASS');
-      lErr := not dbExecuteSQL('DELETE FROM nalogi WHERE DATE_FIKS='+DateToSQL(d)+
-                    ' and GOD='+IntToStr(nGod)+' and NALOG='+IntToStr(iNalog));
-      RestScreenCursor;
-      if lErr then begin
-        PutError(dbLastError());
-      end;
-//      ds := dbGetDataSet('fmGurnAlfKn.Query');
-//      dsNalogi := dmBase.GetDataSet('tbNalogi');
-//      if (ds <> nil) and (dsNalogi<>nil) then begin
-//        dbSetIndex(dsNalogi, 'PR_KEY');
-//      ds.First;
-//      try
-//        while not ds.Eof do begin
-//          ds.Next;
-//        end;
-//      finally
-//        ds.First;
-//      end;
-    end;
-  end else begin
-    f.Free;
-  end;
-end;
-
 // обработка в журнале населения по корректности заполнеия номера идентификации
 procedure CheckNomerIdentif;
 var

@@ -436,7 +436,7 @@ inherited fmLichSchet: TfmLichSchet
       Top = 65
       Width = 970
       Height = 552
-      ActivePage = tsSostav
+      ActivePage = tsAdd
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText

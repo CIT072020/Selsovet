@@ -10,7 +10,6 @@ inherited fmGurnZOpeka: TfmGurnZOpeka
       Stretch = True
       inherited TBItemAddDok: TTBItem
         Hint = #1044#1086#1074#1072#1074#1080#1090#1100
-        Visible = True
       end
       inherited TBItemGrantSprav: TTBItem
         Caption = #1055#1086#1083#1091#1095#1080#1090#1100' '#1076#1086#1082#1091#1084#1077#1085#1090

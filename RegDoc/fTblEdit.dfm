@@ -2,7 +2,7 @@ object fmTblEdit: TfmTblEdit
   Left = 457
   Top = 230
   Width = 794
-  Height = 375
+  Height = 475
   Caption = 'fmTblEdit'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -32,20 +32,20 @@ object fmTblEdit: TfmTblEdit
     Left = 0
     Top = 70
     Width = 778
-    Height = 267
+    Height = 367
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object spLeft: TSplitter
       Left = 129
       Top = 0
-      Height = 267
+      Height = 367
     end
     object dgTable: TDBGridEh
       Left = 132
       Top = 0
       Width = 646
-      Height = 267
+      Height = 367
       Align = alClient
       DrawMemoText = True
       Flat = True
@@ -73,7 +73,7 @@ object fmTblEdit: TfmTblEdit
       Left = 0
       Top = 0
       Width = 129
-      Height = 267
+      Height = 367
       Align = alLeft
       Constraints.MinWidth = 50
       Ctl3D = True
@@ -133,6 +133,8 @@ object fmTblEdit: TfmTblEdit
       OnAfterSelectionChange = tvLookAfterSelectionChange
       OnItemExpand = tvLookItemExpand
       OnItemCollapse = tvLookItemCollapse
+      OnDragDrop = tvLookDragDrop
+      OnDragOver = tvLookDragOver
     end
   end
   object paTop: TPanel

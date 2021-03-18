@@ -1,6 +1,6 @@
 inherited fmZapisOpeka: TfmZapisOpeka
-  Left = 439
-  Top = 82
+  Left = 423
+  Top = 133
   ActiveControl = edDateUst
   Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086#1073' '#1086#1087#1077#1082#1077' /'#1087#1086#1087#1077#1095#1080#1090#1077#1083#1100#1089#1090#1074#1077'/'
   ClientHeight = 768
@@ -277,9 +277,9 @@ inherited fmZapisOpeka: TfmZapisOpeka
       object Label66: TLabel
         Left = 6
         Top = 152
-        Width = 58
+        Width = 77
         Height = 13
-        Caption = #1087#1077#1088#1077#1076#1072#1085#1086' '#1074
+        Caption = #1076#1077#1083#1086' '#1087#1077#1088#1077#1076#1072#1085#1086
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -288,7 +288,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         ParentFont = False
       end
       object Label70: TLabel
-        Left = 630
+        Left = 230
         Top = 152
         Width = 42
         Height = 13
@@ -308,7 +308,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Hint = #1044#1088#1091#1075#1072#1103' '#1086#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103' '#1091#1089#1090#1072#1085#1086#1074#1080#1083#1072' '#1086#1087#1077#1082#1091
         AutoSize = False
         Caption = #1044#1088#1091#1075#1072#1103#13#10#1086#1088#1075#1072#1085#1080#1079#1072#1085#1080#1103
-        TabOrder = 13
+        TabOrder = 17
         Visible = False
       end
       object edNomer: TDBEditEh
@@ -327,7 +327,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 11
+        TabOrder = 15
         Visible = False
       end
       object N_F_1: TDBCheckBoxEh
@@ -338,7 +338,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Caption = '1-'#1099#1081' '#1101#1082#1079#1077#1084#1087#1083#1103#1088
         DataField = 'First_Ekz'
         DataSource = dsDokument
-        TabOrder = 12
+        TabOrder = 16
         TabStop = False
         ValueChecked = 'True'
         ValueUnchecked = 'False'
@@ -360,7 +360,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Style = []
         Kind = dtkDateEh
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 2
         Visible = True
         OnCheckDrawRequiredState = GisunCheckDrawRequiredState
       end
@@ -378,7 +378,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 4
         Visible = True
         OnCheckDrawRequiredState = NomerCheckDrawRequiredState
       end
@@ -398,7 +398,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Style = []
         Kind = dtkDateEh
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 8
         Visible = True
         OnCheckDrawRequiredState = edDateOtmCheckDrawRequiredState
       end
@@ -416,7 +416,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 11
         Visible = True
         OnCheckDrawRequiredState = NomerCheckDrawRequiredState
       end
@@ -425,6 +425,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Top = 4
         Width = 509
         Height = 26
+        AutoSelect = False
         DataField = 'VID'
         DataSource = dsDokument
         DropDownBox.Rows = 10
@@ -454,7 +455,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 10
+        TabOrder = 14
         Visible = True
       end
       object N_F_cbOtheOrg: TDBCheckBoxEh
@@ -465,7 +466,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Hint = #1044#1088#1091#1075#1072#1103' '#1086#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103' '#1091#1089#1090#1072#1085#1086#1074#1080#1083#1072' '#1086#1087#1077#1082#1091
         DataField = 'UST_OTHER'
         DataSource = dsDokument
-        TabOrder = 5
+        TabOrder = 7
         TabStop = False
         ValueChecked = 'True'
         ValueUnchecked = 'False'
@@ -486,7 +487,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 3
         Visible = True
         OnCheckDrawRequiredState = N_F_edDocOpekaCheckDrawRequiredState
       end
@@ -550,7 +551,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Style = []
         ParentFont = False
         ReadOnly = True
-        TabOrder = 4
+        TabOrder = 6
         Visible = True
         OnCheckDrawRequiredState = edUstOrgCheckDrawRequiredState
       end
@@ -563,7 +564,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Caption = #1082#1086#1085#1090#1088#1086#1083#1100' '#1074#1086#1079#1088#1072#1089#1090#1072
         DataField = 'IS_CONTROL'
         DataSource = dsDokument
-        TabOrder = 14
+        TabOrder = 1
         TabStop = False
         ValueChecked = 'True'
         ValueUnchecked = 'False'
@@ -631,7 +632,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Style = []
         ParentFont = False
         ReadOnly = True
-        TabOrder = 9
+        TabOrder = 13
         Visible = True
         OnCheckDrawRequiredState = edOtmOrgCheckDrawRequiredState
       end
@@ -650,7 +651,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 7
+        TabOrder = 9
         Visible = True
         OnCheckDrawRequiredState = N_F_edDocOpekaOCheckDrawRequiredState
       end
@@ -668,7 +669,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 15
+        TabOrder = 10
         Visible = True
         OnChange = N_F_edTypeSnChange
       end
@@ -688,7 +689,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Style = []
         Kind = dtkDateEh
         ParentFont = False
-        TabOrder = 16
+        TabOrder = 5
         Visible = True
         OnCheckDrawRequiredState = edDateDokUstCheckDrawRequiredState
       end
@@ -708,18 +709,18 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Style = []
         Kind = dtkDateEh
         ParentFont = False
-        TabOrder = 17
+        TabOrder = 12
         Visible = True
         OnCheckDrawRequiredState = edDateDokSnCheckDrawRequiredState
       end
       object edSendOrg: TDBEditEh
-        Left = 76
+        Left = 590
         Top = 145
         Width = 378
         Height = 26
         Hint = #1054#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103' '#1082#1091#1076#1072' '#1087#1077#1088#1077#1076#1072#1085#1086' '#1076#1077#1083#1086
         Anchors = [akLeft, akTop, akRight]
-        DataField = 'SEND_ORG_SPR'
+        DataField = 'SEND_ORG'
         DataSource = dsDokument
         EditButtons = <
           item
@@ -773,16 +774,15 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Style = []
         ParentFont = False
         ReadOnly = True
-        TabOrder = 18
+        TabOrder = 20
         Visible = True
-        OnCheckDrawRequiredState = edOtmOrgCheckDrawRequiredState
       end
       object edSendDate: TDBDateTimeEditEh
-        Left = 486
+        Left = 94
         Top = 145
         Width = 115
         Height = 26
-        Hint = #1044#1072#1090#1072' '#1091#1089#1090#1072#1085#1086#1074#1083#1077#1085#1080#1103' '#1086#1087#1077#1082#1080' ('#1087#1086#1087#1077#1095#1080#1090#1077#1083#1100#1089#1090#1074#1072')'
+        Hint = #1044#1072#1090#1072' '#1087#1077#1088#1077#1076#1072#1095#1080' '#1076#1077#1083#1072
         DataField = 'SEND_DATE'
         DataSource = dsDokument
         EditButtons = <>
@@ -793,16 +793,15 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Style = []
         Kind = dtkDateEh
         ParentFont = False
-        TabOrder = 19
+        TabOrder = 18
         Visible = True
-        OnCheckDrawRequiredState = GisunCheckDrawRequiredState
       end
       object edSendPrich: TDBEditEh
-        Left = 688
+        Left = 288
         Top = 145
         Width = 277
         Height = 26
-        Anchors = [akLeft, akTop, akRight]
+        Hint = #1055#1088#1080#1095#1080#1085#1072' '#1087#1077#1088#1077#1076#1072#1095#1080' '#1076#1077#1083#1072
         DataField = 'SEND_PRICH'
         DataSource = dsDokument
         EditButtons = <>
@@ -812,7 +811,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 20
+        TabOrder = 19
         Visible = True
       end
     end
@@ -5090,7 +5089,7 @@ inherited fmZapisOpeka: TfmZapisOpeka
         DataType = ftString
         Size = 30
       end>
-    Left = 216
+    Left = 208
     Top = 178
     object DokumentNOMER: TIntegerField [0]
       FieldName = 'NOMER'
@@ -5689,8 +5688,9 @@ inherited fmZapisOpeka: TfmZapisOpeka
       FieldName = 'OTM_ORG'
       Size = 200
     end
-    object DokumentOTM_ORG_SPR: TIntegerField
+    object DokumentOTM_ORG_SPR: TStringField
       FieldName = 'OTM_ORG_SPR'
+      Size = 12
     end
     object DokumentOTM_ORG_TYPE: TIntegerField
       FieldName = 'OTM_ORG_TYPE'
@@ -5714,8 +5714,9 @@ inherited fmZapisOpeka: TfmZapisOpeka
       FieldName = 'SEND_ORG'
       Size = 200
     end
-    object DokumentSEND_ORG_SPR: TIntegerField
+    object DokumentSEND_ORG_SPR: TStringField
       FieldName = 'SEND_ORG_SPR'
+      Size = 12
     end
     object DokumentSEND_ORG_TYPE: TIntegerField
       FieldName = 'SEND_ORG_TYPE'

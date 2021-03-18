@@ -996,6 +996,10 @@ begin
     edPRICH.ReadOnly:=false;
     edPRICH.Color:=clWindow;
   end;
+
+  edDOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edDOK_TYPE.DropDownBox.Width:=TYPEDOK_WIDTH;  // utypes.pas
+
 end;
 
 destructor TfmDeclChName.Destroy;

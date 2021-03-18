@@ -121,7 +121,7 @@ begin
          UpdateButton;
          LoadLayout(FilterInterface.Ini, FilterInterface.Section);
          if ShowModal=mrOk then begin
-            FileName:=GetSaveName;
+            FileName:=GetSaveName;          
             Filter.Caption:=GetName;
             if not Filter.SaveToFile(FileName, Err) then begin
                if Err='' then begin

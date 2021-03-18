@@ -108,13 +108,6 @@ type
     edDolgNameVUS: TDBEditEh;
     edWorkNameVUS: TDBEditEh;
     Label48: TLabel;
-    gbDateSV: TGroupBox;
-    Label42: TLabel;
-    edDateSV_VK: TDBDateTimeEditEh;
-    Label43: TLabel;
-    edDateSV_LIC: TDBDateTimeEditEh;
-    Label44: TLabel;
-    edDateSV_F2: TDBDateTimeEditEh;
     gbKomiss: TGroupBox;
     edDateKomiss: TDBDateTimeEditEh;
     edKomiss: TDBLookupComboboxEh;
@@ -171,13 +164,6 @@ type
     edPasp_Organ: TDBEditEh;
     Label68: TLabel;
     edDateProp2: TDBDateTimeEditEh;
-    gbPens: TGroupBox;
-    Label21: TLabel;
-    Label23: TLabel;
-    Label24: TLabel;
-    edPENS_TIP: TDBLookupComboboxEh;
-    edPENS_KNIGA: TDBEditEh;
-    edPENS_DATE: TDBDateTimeEditEh;
     ImageSpec: TImage;
     N_F_cbSpec: TDBCheckBoxEh;
     edUdost: TDBComboBoxEh;
@@ -282,11 +268,6 @@ type
     Panel5: TPanel;
     edPrim: TDBMemo;
     gbPrizn: TGroupBox;
-    gbParent: TGroupBox;
-    edPapa: TDBEditEh;
-    edMama: TDBEditEh;
-    lbpapa: TLabel;
-    lbMama: TLabel;
     gbOtkudaPrib: TGroupBox;
     Label103: TLabel;
     Label104: TLabel;
@@ -393,7 +374,7 @@ type
     edWorkTelefonVUS: TDBEditEh;
     Label121: TLabel;
     edAGitTel: TDBEditEh;
-    pnUdostLgot: TPanel;
+    pnAdd: TPanel;
     Label122: TLabel;
     edUdostLgot: TDBEditEh;
     N_F_cbMnogo4: TDBCheckBoxEh;
@@ -434,6 +415,17 @@ type
     dsSverki: TDataSource;
     Label73: TLabel;
     edSuprug2: TDBEditEh;
+    Label21: TLabel;
+    edPENS_TIP: TDBLookupComboboxEh;
+    Label23: TLabel;
+    edPENS_KNIGA: TDBEditEh;
+    Label24: TLabel;
+    edPENS_DATE: TDBDateTimeEditEh;
+    lbpapa: TLabel;
+    edPapa: TDBEditEh;
+    lbMama: TLabel;
+    edMama: TDBEditEh;
+    cbIskl: TDBCheckBoxEh;
     procedure FormShow(Sender: TObject);
     procedure dsMigrDataChange(Sender: TObject; Field: TField);
     procedure edPolChange(Sender: TObject);
@@ -601,6 +593,8 @@ begin
 
   edDateLgotEl.EditButtons[0].Glyph:=ImBtRun.Picture.Bitmap;
   edDateLgotEl.EditButtons[1].Glyph:=ImBtClear.Picture.Bitmap;
+  edUdost.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edUdost.DropDownBox.Width:=TYPEDOK_Width;  // utypes.pas
 
   FSubType:='LIC';
 
@@ -715,6 +709,9 @@ begin
   SetErrorDateControl(10,'ISK_DATE'  , -1, 0, 0);
   SetUpdateDate;
   //------
+  if Role.SystemAdmin then begin
+    GridSobstv.ReadOnly:=false;
+  end;
 
 end;
 
@@ -872,6 +869,7 @@ begin
       edDolgNameVUS.Font.Style := [fsBold];
     end;
   end;
+  cbIskl.Enabled:=(edDateUb.Value<>null);
 end;
 
 procedure TfmMen.FormShow(Sender: TObject);
@@ -1142,6 +1140,7 @@ begin
     Screen.OnActiveControlChange:=ActiveControlChanged;
     CheckImageAndFont;
     CheckDecDate;
+    EditDataSet(dmMen.mtDokument);
     if ShowModal = mrOk then begin
       Result := true;
     end;

@@ -16,7 +16,11 @@ const
 
   dkSMDO=7; // документ из СМДО
 
-
+//---------------------------------------------------------------
+function CreateFIO(ds:TDataSet):String;
+begin
+  Result:=ds.Fld('FAMILIA').AsString+' '+ds.Fld('NAME').AsString+' '+ds.Fld('OTCH').AsString;
+end;
 //--пустой ИН для з/а и свидетельств -------------------------------------
 function getEmptyIN(sLang:String):String;
 begin

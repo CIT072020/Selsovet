@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATASETS VERSION="1">
+  <SPR39 ONE_RECORD="0" RECORD_COUNT="18">
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>54100032</EXTCODE>
+      <LEX1>ПРИОБРЕТЕНИЕ ГРАЖДАНСТВА</LEX1>
+      <LEX2>1ГР</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2017-09-08</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>54100033</EXTCODE>
+      <LEX1>УТРАТА ГРАЖДАНСТВА</LEX1>
+      <LEX2>2ГР</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2017-09-08</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>54100034</EXTCODE>
+      <LEX1>ПОЛУЧЕНИЕ РАЗРЕШЕНИЯ НА ПОСТОЯННОЕ ПРОЖИВАНИЕ</LEX1>
+      <LEX2>1ПРПП</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2017-09-08</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>54100035</EXTCODE>
+      <LEX1>АННУЛИРОВАНИЕ РАЗРЕШЕНИЯ НА ПОСТОЯННОЕ ПРОЖИВАНИЕ</LEX1>
+      <LEX2>2АР</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2017-09-08</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>54100036</EXTCODE>
+      <LEX1>19 ЛИСТОК ПРИБЫТИЯ РЕГИСТРАЦИЯ ПО МЕСТУ ПРЕБЫВАНИЯ/ПРОЖИВАНИЯ</LEX1>
+      <LEX2>Ф19</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2017-09-08</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>54100037</EXTCODE>
+      <LEX1>20 ЛИСТОК УБЫТИЯ ПО МЕСТУ ПРЕБЫВАНИЯ/ПРОЖИВАНИЯ</LEX1>
+      <LEX2>Ф20</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2017-09-13</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>54100001</EXTCODE>
+      <LEX1>ПАСПОРТ ГРАЖДАНИНА РБ</LEX1>
+      <LEX2>ПАШПАРТ ГРАМАДЗЯНІНА РБ</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2009-04-25</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>54100015</EXTCODE>
+      <LEX1>ВИД НА ЖИТЕЛЬСТВО ЛИЦА БЕЗ ГРАЖДАНСТВА</LEX1>
+      <LEX2>ПАСВЕДЧАННЕ НА ЖЫХАРСТВА АСОБЫ БЕЗ ГРАМАДЗЯНСТВА</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2009-04-25</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>54100029</EXTCODE>
+      <LEX1>ВИД НА ЖИТЕЛЬСТВО ИНОСТРАННОГО ГРАЖДАНИНА</LEX1>
+      <LEX2>ПАСВЕДЧАННЕ НА ЖЫХАРСТВА ЗАМЕЖНАГА ГРАМАДЗЯНІНА</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2009-04-25</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>124</EXTCODE>
+      <LEX1>Биометрический вид на жительство в Республике Беларусь лица без гражданства</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-26</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>125</EXTCODE>
+      <LEX1>Биометрический паспорт гражданина Республики Беларусь</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-26</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>126</EXTCODE>
+      <LEX1>Биометрический дипломатический паспорт гражданина Республики Беларусь</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-26</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>127</EXTCODE>
+      <LEX1>Биометрический служебный паспорт гражданина Республики Беларусь</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-26</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>128</EXTCODE>
+      <LEX1>Биометрический проездной документ Республики Беларусь</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-26</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>129</EXTCODE>
+      <LEX1>Проездной документ (Конвенция от 28 июля 1951 года?)</LEX1>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-26</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>123</EXTCODE>
+      <LEX1>Биометрический вид на жительство в Республике Беларусь иностранного гражданина</LEX1>
+      <LEX2>ВАДЗІЦЕЛЬСКАЕ ПАСВЕДЧАННЕ</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-11</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>121</EXTCODE>
+      <LEX1>ВОДИТЕЛЬСКОЕ УДОСТОВЕРЕНИЕ</LEX1>
+      <LEX2>БІЯПАШПАРТ</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-07</BEGINDATE>
+    </row>
+    <row>
+      <TYPESPR>39</TYPESPR>
+      <EXTCODE>122</EXTCODE>
+      <LEX1>Идентификационная карта гражданина Республики Беларусь</LEX1>
+      <LEX2>ID карта</LEX2>
+      <PARENT>0</PARENT>
+      <EXTTYPE>39</EXTTYPE>
+      <ACTIVE>1</ACTIVE>
+      <BEGINDATE>2020-08-07</BEGINDATE>
+    </row>
+  </SPR39>
+</DATASETS>

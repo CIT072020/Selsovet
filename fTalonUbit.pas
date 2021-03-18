@@ -245,6 +245,8 @@ type
     edRAION_O: TDBEditEh;
     edRAION_V: TDBEditEh;
     edOBL_V: TDBEditEh;
+    DokumentATE_ID: TIntegerField;
+    DokumentEVA_ID: TIntegerField;
     procedure edPolChange(Sender: TObject);
     procedure dsDokumentDataChange(Sender: TObject; Field: TField);
     procedure TextAdresGetText(Sender: TObject; var Text: String);
@@ -266,6 +268,7 @@ type
     procedure WriteDvigMen( nIDMen : Integer);
   public
     { Public declarations }
+    FEnabledEva:Boolean;
     FPrintSS:Boolean;
     FCurLic : Integer;
     function WriteDok : Boolean; override;
@@ -380,7 +383,10 @@ begin
   pc.ActivePageIndex:=0;
   FPageControl := pc;
   FPrintSS:=(GlobalTask.ParamAsString('TALON_PR_SS')='1');  // печать сельского совета в талонах
+  FUpdatingObj:=GetUpdatingObj(TypeObj);
 //  GridDeti.Columns[0].EditButtons[0].Glyph.Assign( edFamilia.EditButtons[0].Glyph);
+  FEnabledEva:=IsActiveGISRU;
+
   if GlobalTask.ParamAsBoolean('AUTO_UBIT') then begin
     cbProvDvig.Visible := true;
     cbProvDvig.Checked := true;
@@ -467,6 +473,9 @@ begin
   bt.Visible := true;
   bt.Style   := ebsGlyphEh;
   bt.Glyph   := BtU.Picture.Bitmap;
+
+  edUdost.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edUdost.DropDownBox.Width:=TYPEDOK_Width;  // utypes.pas
 
 end;
 {

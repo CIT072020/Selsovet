@@ -36,6 +36,7 @@ constructor TfmGurnDIzm.Create(Owner: TComponent);
 begin
   TypeEditObj := _TypeObj_DIzm;
   inherited;
+  VisibleItem(TBSubSysFlt, false);
 end;
 
 function TfmGurnDIzm.LoadQuery: Boolean;
@@ -50,7 +51,7 @@ begin
     end;
   except
   end;
-  CreateSysFlt_GISUN;
+//  CreateSysFlt_GISUN;
 end;
 
 procedure TfmGurnDIzm.GridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);

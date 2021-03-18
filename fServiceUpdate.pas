@@ -31,6 +31,7 @@ type
     Query: TAdsQuery;
     btSetFiles: TButton;
     cbPart: TCheckBox;
+    odFile: TOpenDialog;
     procedure IdFTP1Work(Sender: TObject; AWorkMode: TWorkMode;   const AWorkCount: Integer);
     procedure IdFTP1WorkBegin(Sender: TObject; AWorkMode: TWorkMode;  const AWorkCountMax: Integer);
     procedure IdFTP1WorkEnd(Sender: TObject; AWorkMode: TWorkMode);
@@ -45,6 +46,7 @@ type
   private
     { Private declarations }
   public
+    FFileName:String;
     FPath:String;
     FIdBase:String;
     FIdProg:String;
@@ -71,6 +73,8 @@ type
     function ConnectBase(var lErr:Boolean; lContinue:Boolean=true):Boolean;
     procedure BaseToArx;
     procedure BaseFromArx;
+    procedure FileFromFTP;
+    procedure FileToFTP;
     procedure BaseToFTP;
     procedure BaseFromFTP;
     procedure DownloadSetup(sFileName:String; sFolder:String);
@@ -194,8 +198,9 @@ procedure TfmServiceUpdate.FormCreate(Sender: TObject);
 var
   n:Integer;
   Ini:TSasaIniFile;
-  s:String;
+  s:String;        
 begin
+  FFileName:='';
   FFiles:='';
   FIdBase:=IntToStr(GlobalTask.ParamasInteger('ID'));
   FIdProg:=GlobalTask.ParamAsString('IDPROG');
@@ -533,7 +538,7 @@ begin
       end;
       if lOk then begin
         if IsFull then  begin
-          GlobalTask.LogFile.WriteToLogFile('Копирование базы из резервного архива.');
+          GlobalTask.WriteToLogFile('Копирование базы из резервного архива.');
           sb.Panels[0].Text:='  Копирование файлов...';
           Application.ProcessMessages;
           lOk:=CopyListFiles(CheckSleshN(strDirTmp), CheckSleshN(FPath) );
@@ -544,7 +549,7 @@ begin
             PutError('Ошибка копирования файлов.');
           end;
         end else begin  // частичная замена файлов из архива part_XXXX.zip
-//          GlobalTask.LogFile.WriteToLogFile('Замена файлов базы из архива.');
+//          GlobalTask.WriteToLogFile('Замена файлов базы из архива.');
           sb.Panels[0].Text:='  Замена файлов...';
           Application.ProcessMessages;
 //        FPath = ExtractFilePath(dmBaseConf.GetPathConnect);
@@ -571,7 +576,91 @@ begin
     ShowMessage('Операция выполнена успешно.');
   end;
 end;
-
+//-----------------------------------------------------------------------------------------------
+// ЗАБРАТЬ ФАЙЛ ПО FTP
+//-----------------------------------------------------------------------------------
+procedure TfmServiceUpdate.FileFromFTP;
+var
+  slPar:TStringList;
+  sErr:String;
+begin
+  if not InputQuery('Скачать', 'Имя файла', FFileName) or (Trim(FFileName)='')
+    then exit;
+  FFileName:=ANSILowerCase(Trim(FFileName));
+  slPar:=TStringList.Create;
+  slPar.Add('FILE='+FFileName);
+  slPar.Add('TYPE=data');
+  btRun.Enabled:=false;
+  CheckEnabledControl(false);
+  oUpdate:=TSynapseObj.Create(sb);
+  try
+    oUpdate.FMessages:='';
+    oUpdate.FTypeServer:=GetTypeServer;
+    oUpdate.FThread:=false;
+    oUpdate.FCheckMessages:=false;
+    oUpdate.FOutputDir:=ExtractFilePath(Application.ExeName)+'Tmp\';
+    if oUpdate.GetFileFTP(true, slPar) then begin
+      oUpdate.RunFileFTP(2);
+    end else begin
+      if oUpdate.FError='' then begin
+        sErr:='Ошибка загрузки файла '+FFileName;
+      end else begin
+        if Pos(FFileName,oUpdate.FError)=0
+          then sErr:=FFileName+':  '+oUpdate.FError
+          else sErr:=oUpdate.FError;
+      end;
+      PutError(sErr);
+    end;
+  finally
+    btRun.Enabled:=true;
+    CheckEnabledControl(true);
+    slPar.Free;
+    FreeAndNil(oUpdate);
+  end;
+end;
+//-----------------------------------------------------------------------------------------------
+// ПЕРЕДАТЬ ФАЙЛ ПО FTP
+//-----------------------------------------------------------------------------------
+procedure TfmServiceUpdate.FileToFTP;
+var
+  sFileName:String;
+  lOk:Boolean;
+begin
+  if odFile.Execute and FileExists(odFile.FileName) and Problem('Передать файл "'+odFile.FileName+'" ?')
+    then sFileName:=odFile.FileName
+    else exit;
+  sb.Panels[1].Text:='';
+  Application.ProcessMessages;
+  //  n := GetFileSize(Zip.FileName);
+  CheckVisibleProgress(true, '');
+  sb.Panels[0].Text:='  Передача файла...';
+  Application.ProcessMessages;
+  TypeServerFTP:=GetTypeServer;
+  {
+  case cbServer.ItemIndex of
+    0: TypeServerFTP:=SERVER_BREST;   // 1-Брест  9-НЦЭУ   11-НЦЭУ доп
+    1: TypeServerFTP:=SERVER_NCES_UPD;
+    2: TypeServerFTP:=SERVER_NCES_UPD2;
+  end;
+  }
+  SetPropertyFPT('data');
+  lOk:=false;
+  try
+    CheckEnabledControl(false);
+    if PutFileFTP(true, sFileName) then begin
+      lOk:=true;
+    end;
+  finally
+    pb.Visible:=false;
+    Application.ProcessMessages;
+    CheckVisibleProgress(false, '');
+  end;
+  CheckEnabledControl(true);
+  if lOk then begin
+    ShowMessage('Передача завершена.');
+  end;
+  FRun:=false;
+end;
 //-----------------------------------------------------------------------------------------------
 // ПЕРЕДАТЬ БАЗУ ПО FTP
 //-----------------------------------------------------------------------------------
@@ -585,34 +674,6 @@ begin
 //  lOk:=true;
   lErr:=false;
   lOk:=ConnectBase(lErr);
-  {
-  dmBaseConf.AdsConnection.DisConnect;
-  dmBaseConf.AdsConnection.ConnectPath:=CheckSleshN(FPath)+NameDict;
-  dmBaseConf.AdsConnection.Username:='ADSSYS';
-  dmBaseConf.AdsConnection.Password:=fmMainConf.SystemPassword;
-  try
-    dmBaseConf.AdsConnection.Connect;
-  except
-    on E:Exception do begin
-      lOk:=false;
-      lErr:=true;
-      PutError('Ошибка подключения к базе.'+#13+E.Message);
-      if Problem('   Продолжить ?   ') then begin
-        lOk:=true;
-      end;
-    end;
-  end;
-  if lOk and not lErr then begin
-    try
-      tbCh.Active:=true;
-    except
-      on E:Exception do begin
-        PutError('Ошибка блокировки базы. Таблица "'+tbCh.TableName+'"'+#13+E.Message);
-        lOk:=false;
-      end;
-    end;
-  end;
-  }
   if lOk and not IsFull then begin
     if not Problem('Вы хотите передать часть базы ?') then begin
       lOk:=false;
@@ -665,11 +726,7 @@ begin
       CheckVisibleProgress(true, '');
       sb.Panels[0].Text:='  Передача файла...';
       Application.ProcessMessages;
-      case cbServer.ItemIndex of
-        0: TypeServerFTP:=SERVER_BREST;   // 1-Брест  9-НЦЭУ   11-НЦЭУ доп
-        1: TypeServerFTP:=SERVER_NCES_UPD;
-        2: TypeServerFTP:=SERVER_NCES_UPD2;
-      end;
+      TypeServerFTP:=GetTypeServer;
       SetPropertyFPT('data');
       try
         if PutFileFTP(true, Zip.FileName) then begin
@@ -715,11 +772,7 @@ begin
   ForceDirectories(strPath);
   ClearDir(strPath,false);
   CheckEnabledControl(false);
-  case cbServer.ItemIndex of
-    0: TypeServerFTP:=SERVER_BREST;   // 1-Брест
-    1: TypeServerFTP:=SERVER_NCES_UPD;
-    2: TypeServerFTP:=SERVER_NCES_UPD2;
-  end;
+  TypeServerFTP:=GetTypeServer;
   SetPropertyFPT('data');
 
   strFile:='';
@@ -800,14 +853,14 @@ begin
       end;
       if lOk then begin
         if IsFull then begin
-          GlobalTask.LogFile.WriteToLogFile('Копирование базы из резервного архива.');
+          GlobalTask.WriteToLogFile('Копирование базы из резервного архива.');
           sb.Panels[0].Text:='  Копирование файлов...';
           Application.ProcessMessages;
           lOk:=CopyListFiles(CheckSleshN(strDirTmp), CheckSleshN(FPath) );
           if lOk then begin
-            GlobalTask.LogFile.WriteToLogFile('Успешное завершение копирования из резервного архива.');
+            GlobalTask.WriteToLogFile('Успешное завершение копирования из резервного архива.');
           end else begin
-            GlobalTask.LogFile.WriteToLogFile('ОШИБКА копирования базы из резервного архива.');
+            GlobalTask.WriteToLogFile('ОШИБКА копирования базы из резервного архива.');
             PutError('Ошибка копирования файлов.');
           end;
         end else begin  // частичная замена файлов из архива part_XXXX.zip
@@ -816,9 +869,9 @@ begin
 //        FPath = ExtractFilePath(dmBaseConf.GetPathConnect);
           lOk:=ReplaceFiles(CheckSleshN(strDirTmp), CheckSleshN(FPath) );
           if lOk then begin
-            GlobalTask.LogFile.WriteToLogFile('Успешное завершение замены файлов из архива.');
+            GlobalTask.WriteToLogFile('Успешное завершение замены файлов из архива.');
           end else begin
-            GlobalTask.LogFile.WriteToLogFile('ОШИБКА замены файлов из архива.');
+            GlobalTask.WriteToLogFile('ОШИБКА замены файлов из архива.');
             PutError('Ошибка замены файлов.');
           end;
         end;
@@ -890,7 +943,7 @@ begin
   try
     oUpdate.FMessages:='';
     oUpdate.FTypeServer:=GetTypeServer;
-    oUpdate.FCurUpdate:=1; // !!!     
+    oUpdate.FCurUpdate:=1; // !!!
     oUpdate.FThread:=false;
     oUpdate.FCheckMessages:=false;
     oUpdate.FOutputDir:=ExtractFilePath(Application.ExeName)+sFolder;
@@ -898,7 +951,7 @@ begin
       if Problem('Доступно обновление программы № '+IntToStr(oUpdate.FUpdate)+'. Загрузить?') then begin  //Доступно обновление
         if oUpdate.GetFileFTP(true) then begin
           oUpdate.RunFileFTP(2);
-        end else begin                    
+        end else begin
           if oUpdate.FError<>''
             then PutError(oUpdate.FError);
         end;
@@ -926,12 +979,7 @@ begin
   strPath   := ExtractFilePath(Application.ExeName)+sFolder+'\';
   ForceDirectories(strPath);
   ClearDir(strPath,false);
-
-  case cbServer.ItemIndex of
-    0: TypeServerFTP:=SERVER_BREST;   // 1-Брест
-    1: TypeServerFTP:=SERVER_NCES_UPD;
-    2: TypeServerFTP:=SERVER_NCES_UPD2;
-  end;
+  TypeServerFTP:=GetTypeServer;
   SetPropertyFPT('setup');
 
   strFile:='';
@@ -1210,6 +1258,7 @@ begin
   edPath.Enabled:=lEnabled;
   cbType.Enabled:=lEnabled;
   cbServer.Enabled:=lEnabled;
+  edDir.Enabled:=lEnabled;
   cbPart.Enabled:=lEnabled;
   btSetFiles.Enabled:=lEnabled;
   lbPath.Enabled:=lEnabled;
@@ -1257,7 +1306,7 @@ begin
       IdFTP1.ChangeDir(DirFTP);
     end;
   //  IdFTP1.TransferType := ftASCII;
-    IdFTP1.List(LS);                
+    IdFTP1.List(LS);
 
     //IdFTP1.TransferType := ftBinary;
     if strFileName='' then begin   // запрошен список файлов
@@ -1469,6 +1518,8 @@ const
   DOWNLOAD_UPDATE = 5;
   DOWNLOAD_SYSSPR = 6;
   DOWNLOAD_PATH   = 7;
+  FILE_TO_FTP     = 8;
+  FILE_FROM_FTP   = 9;
 
 //-------------------------------------------------------------------------------------------------------------------------
 procedure TfmServiceUpdate.btRunClick(Sender: TObject);
@@ -1490,6 +1541,8 @@ begin
         DOWNLOAD_UPDATE : DownloadLastUpdate('Обновление');
         DOWNLOAD_SYSSPR : DownloadSysSpr('Обновление');
         DOWNLOAD_PATH   : DownloadSetup(NAME_PATH_PROG_, 'Обновление');
+        FILE_TO_FTP     : FileToFTP;
+        FILE_FROM_FTP   : FileFromFTP;
       end;
     end;
   end;
@@ -1507,13 +1560,18 @@ begin
   end;
   case cbType.ItemIndex of
     BASE_TO_ARX,
-    BASE_TO_FTP : lb.Caption:='куда';
+    BASE_TO_FTP,
+    FILE_TO_FTP : lb.Caption:='куда';
   else
     lb.Caption:='откуда';
   end;
-  if ((FIdProg='SELSOVET') or (FIdProg='POST')) and
-     ((cbType.ItemIndex=BASE_TO_ARX) or (cbType.ItemIndex=BASE_TO_FTP)) then begin
-    cbXML.Visible:=true;
+  if (cbType.ItemIndex=BASE_TO_ARX) or (cbType.ItemIndex=BASE_TO_FTP) or
+     (cbType.ItemIndex=BASE_FROM_ARX) or (cbType.ItemIndex=BASE_FROM_FTP) then begin
+    if ((FIdProg='SELSOVET') or (FIdProg='POST')) then begin
+      cbXML.Visible:=true;
+    end else begin
+      cbXML.Visible:=false;
+    end;
     cbPart.Visible:=true;
   end else begin
     cbXML.Visible:=false;

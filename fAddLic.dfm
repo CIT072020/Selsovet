@@ -1,6 +1,6 @@
 inherited fmAddLic: TfmAddLic
-  Left = 511
-  Top = 315
+  Left = 531
+  Top = 266
   Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099' '#1085#1086#1074#1086#1075#1086' '#1083#1080#1094#1077#1074#1086#1075#1086' '#1089#1095#1077#1090#1072
   ClientHeight = 219
   ClientWidth = 475
@@ -69,9 +69,9 @@ inherited fmAddLic: TfmAddLic
     end
   end
   object cbOwnerHouse: TDBCheckBoxEh
-    Left = 283
+    Left = 338
     Top = 19
-    Width = 180
+    Width = 123
     Height = 17
     Caption = #1074' '#1089#1086#1073#1089#1090#1074#1077#1085#1085#1086#1089#1090#1080
     TabOrder = 4
@@ -81,7 +81,7 @@ inherited fmAddLic: TfmAddLic
   object edLic: TDBEditEh
     Left = 160
     Top = 16
-    Width = 101
+    Width = 158
     Height = 24
     EditButtons = <
       item

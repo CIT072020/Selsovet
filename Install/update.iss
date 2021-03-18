@@ -3,14 +3,14 @@
 ;gisun_cur  !!!
 
 ;#define AppZAGS
-;#define AppLAIS             
+#define AppLAIS             
 ;#define AppPost
 
 ;#define AppZAH
 ;#define AppOPEKA
 
 ;#define AppGKH
-#define AppOCH
+;#define AppOCH
 
 ;#define SELSOVET_TO_LAIS
 #define ADS
@@ -72,9 +72,9 @@ WizardSmallImageFile=compiler:MY_WIZMODERNSMALLIMAGE.BMP
 #endif
 #ifdef AppZAGS
   AppName=Обновление "ЗАГС"
-  AppVerName=Обновление "ЗАГС" №184
+  AppVerName=Обновление "ЗАГС" №187
   DefaultGroupName=ЗАГС
-  OutputBaseFilename=UpdateZAGS184
+  OutputBaseFilename=UpdateZAGS187
 #endif
 #ifdef AppOCH
   AppName=Обновление "Учет очередников"
@@ -84,27 +84,27 @@ WizardSmallImageFile=compiler:MY_WIZMODERNSMALLIMAGE.BMP
 #endif
 #ifdef AppZAH
   AppName=Обновление "Учет захоронений"
-  AppVerName=Обновление "Учет захоронений" №26
+  AppVerName=Обновление "Учет захоронений" №27
   DefaultGroupName=Учет захоронений
-  OutputBaseFilename=UpdateZAH26
+  OutputBaseFilename=UpdateZAH27
 #endif
 #ifdef AppOPEKA
   AppName=Обновление "Опека и попечительство"
-  AppVerName=Обновление "Опека и попечительство" №25
+  AppVerName=Обновление "Опека и попечительство" №27
   DefaultGroupName=Опека и попечительство
-  OutputBaseFilename=UpdateOPEKA25
+  OutputBaseFilename=UpdateOPEKA27
 #endif
 #ifdef AppPost
   AppName=Обновление "ЛАИС.СМДО"
-  AppVerName=Обновление "ЛАИС.СМДО" №25
+  AppVerName=Обновление "ЛАИС.СМДО" №26
   DefaultGroupName=ЛАИС.СМДО
-  OutputBaseFilename=UpdateLAISSMDO25
+  OutputBaseFilename=UpdateLAISSMDO26
 #endif
 #ifdef AppLAIS
   AppName=Обновление ЛАИС
-  AppVerName=Обновление ЛАИС №191
+  AppVerName=Обновление ЛАИС №195
   DefaultGroupName=ЛАИС
-  OutputBaseFilename=UpdateLAIS191
+  OutputBaseFilename=UpdateLAIS195
 #endif
 DefaultDirName={code:GetProgDir}
 AppPublisher=Государственное предприятие "ЦИТ Белстата" e-mail:vc_bous@brest.by
@@ -310,6 +310,8 @@ Source: "E:\Projects\SelSovet7\Filters\SMDOPost\Стандартные\*.flt"; DestDir: "{a
 Source: "E:\Projects\SelSovet7\Filters\AktZ\Стандартные\*.flt"; DestDir: "{app}\Filters\AktZ\Стандартные"; Flags: ignoreversion;
 Source: "E:\Projects\SelSovet7\Filters\Входящие\Непрочтенные дополнительные материалы.flt"; DestDir: "{app}\Filters\Входящие"; Flags: ignoreversion;
 Source: "E:\Projects\SelSovet7\Filters\AktOpek\Стандартные\*.flt"; DestDir: "{app}\Filters\AktOpek\Стандартные"; Flags: ignoreversion;
+Source: "E:\Projects\SelSovet7\Filters\RegDogN\Стандартные\*.flt"; DestDir: "{app}\Filters\RegDogN\Стандартные"; Flags: ignoreversion;
+Source: "E:\Projects\SelSovet7\Filters\RegDogN2\Стандартные\*.flt"; DestDir: "{app}\Filters\RegDogN2\Стандартные"; Flags: ignoreversion;
 Source: "E:\Projects\SelSovet7\Group\Население\*.gfl"; DestDir: "{app}\Group\Население"; Flags: ignoreversion;
 Source: "E:\Projects\SelSovet7\Doc\Руководство пользователя ЛАИС.doc"; DestDir: "{app}\Doc"; Flags: ignoreversion;
 Source: "E:\Projects\SelSovet7\Doc\Руководство по установке ЛАИС.doc"; DestDir: "{app}\Doc"; Flags: ignoreversion;
@@ -539,6 +541,7 @@ Name: "{group}\ЗАГС"; Filename: "{app}\ZAGS.exe"; WorkingDir: "{app}"
 Name: "{group}\Документация"; Filename: "{app}\Doc\Документация ЗАГС.doc"; WorkingDir: "{app}"
 Name: "{group}\Удаление индексных файлов"; Filename: "{app}\DeleteIndex.exe"; WorkingDir: "{app}"; IconFilename: "{app}\UpdateInd.ico"; Check: IsMainComp
 Name: "{group}\Переключение типа сервера"; Filename: "{app}\UpdateProg.exe"; Parameters:"/TYPESERVER"; WorkingDir: "{app}"; IconFilename: "{app}\Update.ico"; Check: IsMainComp
+Name: "{group}\Поиск сервера"; Filename: "{app}\CheckConnect.exe"; WorkingDir: "{app}"; IconFilename: ""
 Name: "{group}\Сервис"; Filename: "{app}\UpdateProg.exe"; Parameters:"/SERVICE /ZAGS"; WorkingDir: "{app}"; IconFilename: "{app}\Tools.ico"; Check: IsMainComp
 #ifdef GISUN
   Name: "{group}\Параметры ГИС РН"; Filename: "{app}\UpdateProg.exe"; Parameters:"/GISUN /ZAGS"; WorkingDir: "{app}"; IconFilename: "{app}\Gisun.ico"; Check: IsMainComp
@@ -566,6 +569,7 @@ Name: "{group}\Документация"; Filename: "{app}\Doc\Руководство пользователя ЛАИС
 Name: "{group}\Переключение типа сервера"; Filename: "{app}\UpdateProg.exe"; Parameters:"/TYPESERVER"; WorkingDir: "{app}"; IconFilename: "{app}\Update.ico"; Check: IsMainComp
 Name: "{group}\Удаление индексных файлов"; Filename: "{app}\DeleteIndex.exe"; WorkingDir: "{app}"; IconFilename: "{app}\UpdateInd.ico"; Check: IsMainComp
 Name: "{group}\Последнее обновление"; Filename: "{app}\LastUpdate\LastUpdate.exe"; WorkingDir: "{app}"; IconFilename: "{app}\LastUpdate.ico"
+Name: "{group}\Поиск сервера"; Filename: "{app}\CheckConnect.exe"; WorkingDir: "{app}"; IconFilename: ""
 Name: "{group}\Сервис"; Filename: "{app}\UpdateProg.exe"; Parameters:"/SERVICE /LAIS"; WorkingDir: "{app}"; IconFilename: "{app}\Tools.ico"; Check: IsMainComp
   #ifdef GISUN
     Name: "{group}\Параметры ГИС РН"; Filename: "{app}\UpdateProg.exe"; Parameters:"/GISUN /LAIS"; WorkingDir: "{app}"; IconFilename: "{app}\Gisun.ico"; Check: IsMainComp
@@ -610,8 +614,8 @@ root:HKCU;subkey:"Software\VCBOUS\GKH";valuetype:string;valuename:"update";value
 #ifdef AppZAGS
 root:HKCU;subkey:"Software\VCBOUS\ZAGS"; Flags: uninsdeletekey
 root:HKCU;subkey:"Software\VCBOUS\ZAGS";valuetype:string;valuename:"installpath";valuedata:"{app}"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\ZAGS";valuetype:string;valuename:"version";valuedata:"9.2.0"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\ZAGS";valuetype:string;valuename:"update";valuedata:"184"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\ZAGS";valuetype:string;valuename:"version";valuedata:"9.4.0"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\ZAGS";valuetype:string;valuename:"update";valuedata:"187"; Flags: uninsdeletevalue
 #endif
 #ifdef AppOCH
 root:HKCU;subkey:"Software\VCBOUS\Ochered"; Flags: uninsdeletekey
@@ -622,26 +626,26 @@ root:HKCU;subkey:"Software\VCBOUS\Ochered";valuetype:string;valuename:"update";v
 #ifdef AppZAH
 root:HKCU;subkey:"Software\VCBOUS\ZAH"; Flags: uninsdeletekey
 root:HKCU;subkey:"Software\VCBOUS\ZAH";valuetype:string;valuename:"installpath";valuedata:"{app}"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\ZAH";valuetype:string;valuename:"version";valuedata:"5.0.0"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\ZAH";valuetype:string;valuename:"update";valuedata:"26"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\ZAH";valuetype:string;valuename:"version";valuedata:"5.1.0"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\ZAH";valuetype:string;valuename:"update";valuedata:"27"; Flags: uninsdeletevalue
 #endif
 #ifdef AppOPEKA
 root:HKCU;subkey:"Software\VCBOUS\OPEKA"; Flags: uninsdeletekey
 root:HKCU;subkey:"Software\VCBOUS\OPEKA";valuetype:string;valuename:"installpath";valuedata:"{app}"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\OPEKA";valuetype:string;valuename:"version";valuedata:"5.0.0"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\OPEKA";valuetype:string;valuename:"update";valuedata:"25"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\OPEKA";valuetype:string;valuename:"version";valuedata:"5.2.0"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\OPEKA";valuetype:string;valuename:"update";valuedata:"27"; Flags: uninsdeletevalue
 #endif
 #ifdef AppPost
 root:HKCU;subkey:"Software\VCBOUS\POST"; Flags: uninsdeletekey
 root:HKCU;subkey:"Software\VCBOUS\POST";valuetype:string;valuename:"installpath";valuedata:"{app}"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\POST";valuetype:string;valuename:"version";valuedata:"1.3.5"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\POST";valuetype:string;valuename:"update";valuedata:"25"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\POST";valuetype:string;valuename:"version";valuedata:"1.3.6"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\POST";valuetype:string;valuename:"update";valuedata:"26"; Flags: uninsdeletevalue
 #endif
 #ifdef AppLAIS
 root:HKCU;subkey:"Software\VCBOUS\LAIS"; Flags: uninsdeletekey
 root:HKCU;subkey:"Software\VCBOUS\LAIS";valuetype:string;valuename:"installpath";valuedata:"{app}"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\LAIS";valuetype:string;valuename:"version";valuedata:"12.3.0"; Flags: uninsdeletevalue
-root:HKCU;subkey:"Software\VCBOUS\LAIS";valuetype:string;valuename:"update";valuedata:"191"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\LAIS";valuetype:string;valuename:"version";valuedata:"12.7.0"; Flags: uninsdeletevalue
+root:HKCU;subkey:"Software\VCBOUS\LAIS";valuetype:string;valuename:"update";valuedata:"195"; Flags: uninsdeletevalue
 #endif
 
 [Code]
@@ -674,8 +678,8 @@ const
 #endif
 #ifdef AppZAGS
   IS_POST=false;
-  IDUpdate = '184';
-  IDProg   = '9.2.0';
+  IDUpdate = '187';
+  IDProg   = '9.4.0';
   NameExeProg = 'ZAGS.exe';
   REG_NAME = 'ZAGS';
   PROG_NAME = 'ЗАГС';
@@ -692,8 +696,8 @@ const
 #endif
 #ifdef AppZAH
   IS_POST=false;
-  IDUpdate = '26';
-  IDProg   = '5.0.0';
+  IDUpdate = '27';
+  IDProg   = '5.1.0';
   NameExeProg = 'ZAH.exe';
   REG_NAME = 'ZAH';
   PROG_NAME = 'Учет захоронений';
@@ -701,8 +705,8 @@ const
 #endif
 #ifdef AppOPEKA
   IS_POST=false;
-  IDUpdate = '25';
-  IDProg   = '5.0.0';
+  IDUpdate = '27';
+  IDProg   = '5.2.0';
   NameExeProg = 'Opeka.exe';
   REG_NAME = 'OPEKA';
   PROG_NAME = 'Опека и попечительство';
@@ -710,8 +714,8 @@ const
 #endif
 #ifdef AppPost
   IS_POST=true;
-  IDUpdate = '25';
-  IDProg   = '1.3.5';
+  IDUpdate = '26';
+  IDProg   = '1.3.6';
   NameExeProg = 'LaisSmdo.exe';
   REG_NAME = 'POST';
   PROG_NAME = 'ЛАИС.СМДО';
@@ -719,8 +723,8 @@ const
 #endif
 #ifdef AppLAIS
   IS_POST=true;
-  IDUpdate = '191';
-  IDProg   = '12.3.0';
+  IDUpdate = '195';
+  IDProg   = '12.7.0';
   NameExeProg = 'LAIS.exe';
   REG_NAME = 'LAIS';
   PROG_NAME = 'ЛАИС';
@@ -1021,18 +1025,18 @@ var
   sl:TStringList;
 begin
   #ifdef AppPost
-ListOrg:=',Org6548,Org6833,Org9661,Org6298,Org6971,Org11616,Org7316,Org9600,Org12337,Org12338,Org12339,Org12340,Org12322,Org12324,'+
+ListOrg:=',Org6548,Org6833,Org6298,Org6971,Org11616,Org7316,Org9600,Org12337,Org12338,Org12339,Org12340,Org12322,Org12324,'+
 'Org12316,Org12317,Org9408,Org9409,Org9410,Org9411,Org9412,Org9413,Org9421,Org9420,Org9414,Org9415,Org9416,Org9417,Org9419,'+
 'Org7581,Org9282,Org11481,Org7801,Org10941,Org7231,Org7802,Org11035,Org11034,Org11030,Org11033,Org8173,Org12959,Org11814,Org9814,'+
-'Org6199,Org10452,Org10188,Org10190,Org10191,Org10194,Org10195,Org9114,Org10196,Org10197,Org10186,'+
-'Org10189,Org10201,Org10202,Org10192,Org10193,Org10200,Org10936,Org7833,Org10553,Org10664,Org9150,Org7409,Org2255,Org10937,'+
+'Org6199,Org10188,Org10190,Org10191,Org10194,Org10195,Org9114,Org10196,Org10197,'+
+'Org10189,Org10201,Org10202,Org10192,Org10193,Org10200,Org7833,Org10553,Org10664,Org9150,Org7409,Org2255,'+
 'Org10291,Org10361,Org10676,Org10675,Org10378,Org13803,Org11928,Org12590,Org2559,Org12833,Org13258,'+
 'Org12600,Org11429,Org11131,Org11261,Org11448,Org10668,Org11403,Org8949,Org5085,Org11582,'+
-'Org7666,Org10592,Org11451,Org11450,Org11452,Org11454,Org11453,Org7469,Org12243,Org10455,Org11922,'+
-'Org13291,Org11625,Org13260,Org12084,Org6086,Org7526,Org7318,Org7587,Org6167,Org5497,Org11471,Org11253,Org8957,'+
-'Org4178,Org13393,Org10391,Org10009,Org5132,Org7875,Org7871,Org6173,Org11510,Org11640,'+
+'Org7666,Org10592,Org11451,Org11450,Org11452,Org11454,Org11453,Org7469,Org10455,Org11922,'+
+'Org13291,Org11625,Org12084,Org6086,Org7526,Org7318,Org7587,Org6167,Org5497,Org11471,Org11253,Org8957,'+
+'Org4178,Org13393,Org10391,Org10009,Org5132,Org7875,Org7871,Org6173,Org11510,'+
 'Org8712,Org11091,Org11092,Org11111,Org11081,Org11100,Org11082,Org11099,Org11096,Org11094,Org11095,Org11112,Org8623,Org7688,'+
-'Org9952,Org9703,Org7560,Org8682,Org9109,Org7203,Org13682,'+
+'Org9703,Org7560,Org8682,Org9109,Org7203,Org13682,'+
 'Org4221,Org8798,Org8244,Org10064,Org9159,Org6183,Org7624,Org7395,Org7752,Org8011,Org8560,Org8493,Org8169,Org9626,Org8648,Org9424,Org9267,Org12598,'+   // +витебск
 'Org10042,Org10327,Org13827,Org8494,Org12321,Org14257,Org7586,Org9714,Org13622,Org12323,Org12388,Org10757,Org12642,Org13592,'+
 'Org13503,Org8890,Org9503,Org10008,Org10456,Org9161,Org7684,Org10259,Org9698,Org10293,Org9911,Org10239,Org10448,Org9699,Org12674,Org12795,Org10011,'+
@@ -1288,8 +1292,8 @@ ListOrg:=',Org6548,Org6833,Org9661,Org6298,Org6971,Org11616,Org7316,Org9600,Org1
     if FileExists(s) then begin
       sl:=TStringList.Create;
       sl.LoadFromFile(s);
-      // ищем минский спецкомбинат    '"ID","Организация","100135770"'
-      if Pos('"ID","Организация","100135770"', sl.Text)>0 
+      // дрибин спецкомбинат               минский спецкомбинат    '"ID","Организация","100135770"'
+      if Pos('"ID","Организация","700085892"', sl.Text)>0 
         then Result:=false;
       sl.Free;
       if Result then begin
@@ -1696,6 +1700,14 @@ begin
       end;
     end else begin
       strUser:='АДМИНИСТРАТОР';
+      if not lExtractCheck then begin
+        ExtractTemporaryFile('CheckConnect.exe');
+        ss := ExpandConstant('{tmp}\CheckConnect.exe');
+        lOk:=FileCopy(ss, DataDir + '\CheckConnect.exe', false);
+        if lOk then lExtractCheck:=true;
+//      end else begin
+//        lOk:=true;
+      end;
     end;
     #ifdef SELSOVET_TO_LAIS
       if Result and lSelSovetToLAIS then begin

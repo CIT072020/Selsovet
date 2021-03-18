@@ -117,12 +117,12 @@ begin
       else if fmLogon.edPassword.Text=''
         then fmLogon.ActiveControl:=fmLogon.edPassword
         else fmLogon.ActiveControl:=fmLogon.edPIN;
-    fmLogon.pnPIN.Visible:=true;
+    fmLogon.pnPIN.Visible:=true;   
     fmLogon.FLengthPIN:=0;
-    if ETSP2<>nil then begin
-      fmLogon.edPIN.EditMask:=Replicate('c',ETSP2.LengthPIN)+';1; ';
-      fmLogon.FLengthPIN:=ETSP2.LengthPIN;
-    end;
+//    if (ETSP2<>nil) then begin
+//      fmLogon.edPIN.EditMask:=Replicate('c',ETSP2.LengthPIN)+';1; ';
+//      fmLogon.FLengthPIN:=ETSP2.LengthPIN;
+//    end;
     if Gisun.DbUserAsGIS and (strUser<>'') and (strPassword<>'') then begin
       fmLogon.FCheckUser:=false;
     end else begin

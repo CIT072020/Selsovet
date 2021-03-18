@@ -30,7 +30,7 @@ uses
   adscnnct, uPSComponent,NativeXML, ComCtrls, Animate, GIFCtrl,
   IdBaseComponent, IdAntiFreezeBase, IdAntiFreeze, InvokeRegistry, Rio,
   SOAPHTTPClient, IdTCPConnection, IdTCPClient, frxExportXLS, frxExportCSV,
-  frxExportBIFF, IdFTP;
+  frxExportBIFF, IdFTP, cxGraphics;
 
 type
   TFormGurnal = class of TfmGurnal;
@@ -321,10 +321,9 @@ type
     acClearUserGIS: TAction;
     TBItem55: TTBItem;
     acCheckUpdate: TAction;
-    TBItem58: TTBItem;
+    TBItemCheckUpdate: TTBItem;
     GIFAnimator: TRxGIFAnimator;
     pb: TProgressBar;
-    sb: TStatusBar;
     btCancel: TButton;
     IdAntiFreeze: TIdAntiFreeze;
     HTTPRIO1: THTTPRIO;
@@ -364,6 +363,10 @@ type
     TBItemRefreshCOC: TTBItem;
     acSaveCert: TAction;
     TBItemSaveCert: TTBItem;
+    pn: TPanel;
+    sb: TStatusBar;
+    TBItemEditUrlCOC: TTBItem;
+    ImageList24: TcxImageList;
     procedure acSetParametersExecute(Sender: TObject);
     procedure acAdminParametersExecute(Sender: TObject);
 
@@ -539,6 +542,8 @@ type
     procedure TBItemPropUsersClick(Sender: TObject);
     procedure acRefreshCOCExecute(Sender: TObject);
     procedure acSaveCertExecute(Sender: TObject);
+    procedure TBItemLoadSysSprClick(Sender: TObject);
+    procedure TBItemEditUrlCOCClick(Sender: TObject);
   private
     { Private declarations }
     FYearFiks: Integer;
@@ -653,6 +658,7 @@ type
     procedure ChangeParamGISUN;
     procedure CheckCaptionActiveGisun;
     procedure WMDEVICECHANGE(var Msg : TMessage); message WM_DEVICECHANGE;
+    procedure WMCheckUpdate(var Msg:TMessage); message WM_CHECKUPDATE;
 
     procedure CreateParamsOpisEditSpr;
     procedure BeforeSaveSprWork( Grid : TSasaDbGrid; lAdd : Boolean; Ic : TIcon);
@@ -699,7 +705,7 @@ type
 //    function CheckUpdate(lRun:Boolean; lShow:Boolean; nTypeServer:Integer; lCheck:Boolean; var strFileUpdate:String):String;
    //---------------------------------------------------
 
-  end;
+  end;           
 
 //  procedure DeleteFromListGurnal( strName : String);
 
@@ -711,10 +717,14 @@ const
   IL_BRAK=51;   // индекс в ImageList для брака
   IL_ROGD=83;   // индекс в ImageList для рождений
   IL_CH_MEN=2;  //
+
   IL_ADD_CHILD=119;
   IL_ADD_MEN=119;
+  IL_ADD=119;
   IL_DEL_CHILD=120;
   IL_DEL_MEN=120;
+  IL_DEL=20;
+
   IL_INFO_CORR=148;
 
 implementation
@@ -730,7 +740,7 @@ uses TasksEx, AsyncCalls,
      uAvest,
      {$ENDIF}
      fLogon, uProjectAll, fActions, ifpii_dbfunc,
-     fEditPerevod, fEditMemo, fSetPropUsers, fMyNotify,
+     fEditPerevod, fEditMemo, fSetPropUsers, fMyNotify, uSynapseObj,
      fSetPassword, fCopyData, fOpisTables, SelLibFr, uProject, fExpDs, mExport, fSeekBase,
      uObjectsScript, fWarning, uFindBase, fmChList,
      fRegGISUN, fSeekAkt, fChPunktATE,
@@ -1068,8 +1078,8 @@ begin
 //   ActionList2RTF(ActionList,GlobalTask.PathService+'act_list.rtf');
 //   ImageList2RTF(ImageList,GlobalTask.PathService+'img_list.rtf');
 // end;
- ClearDir(ExtractFilePath(Application.ExeName)+'$TEMP$',true);
- GlobalTask.LogFile.WriteToLogFile('Завершен сеанс пользователя.');
+ ClearDir(ExtractFilePath(Application.ExeName)+NameTmpDir(2),true);
+ GlobalTask.WriteToLogFile('Завершен сеанс.');
  FEventsWordReports.Free;
  FEventsBlankReports.Free;
  FEventsBlankZAGSReports.Free;
@@ -1438,7 +1448,6 @@ var
 begin
   if not Role.SystemAdmin then exit;
 
-//    Gisun.
 //  dmBase.tbZapisOpeka.Open;
 
 //  RunXML2Opeka;
@@ -2140,6 +2149,7 @@ begin
         Gurnal.DateFiks := fmMain.DateFiks;
         if Gurnal.LoadQuery then begin
           Gurnal.LoadFromIni;
+          Gurnal.PrepareMenu;
           Globaltask.CurrentOpisEdit.SetKeyForm(Gurnal,nil);
           ListGurnal.AddObject(strName, Gurnal);
           lCreate:=true;
@@ -2750,7 +2760,7 @@ begin
       end;
     end;
   end;
-  GlobalTask.LogFile.WriteToLogFile(s+E.Message);
+  GlobalTask.WriteToLogFile(s+E.Message);
   if (E is EADSDatabaseError) then begin
     if (EADSDatabaseError(E).ACEErrorCode=7057) and (EADSDatabaseError(E).TableName<>'') then begin
       s := 'Таблица: '+EADSDatabaseError(E).TableName+' ';
@@ -3154,16 +3164,8 @@ begin
 
     {$IFDEF UPDATE_SYNA}
       if Globaltask.ParamAsBoolean('CHECK_UPDATE') then begin
-        oUpdate:=TSynapseObj.Create(pn);
-        oUpdate.FCheckMessages:=true;
-  //      oUpdate.FThread:=false;
-        if oUpdate.CheckUpdate then begin
-  //      ShowMessage(oUpdate.FFileName+'  '+inttostr(oUpdate.FUpdate));
-          AddNotifyProg(fmMain, 'Доступно обновление программы № '+IntToStr(oUpdate.FUpdate), false, true,0,0);
-        end;
-        if oUpdate.FMessages<>''
-          then CheckMessagesProg(oUpdate.FMessages);
-      end;
+        PostMessage(Handle,WM_CHECKUPDATE,0,0);
+      end;  
     {$ELSE}
       s:='?';
       sUpd:=CheckUpdate(IdFTP1, false, false, 0, false, s, lPath);
@@ -3820,10 +3822,42 @@ end;
 
 procedure TfmMain.acCheckUpdateExecute(Sender: TObject);
 var
-  strFileUpdate:String;
-  lpath:Boolean;
+  strMessages:String;
+  lPath:Boolean;
 begin
-  CheckUpdate(IdFTP1, true, true, 0, true, strFileUpdate, lpath);
+  {$IFDEF UPDATE_SYNA}
+    if oUpdate=nil
+      then oUpdate:=TSynapseObj.Create(pn);
+    oUpdate.FMessages:='';
+    if oUpdate.FUpdate=0 then  begin // не определяли наличие обновления
+      oUpdate.FTypeServer:=0;
+      oUpdate.FThread:=false;
+      oUpdate.FCheckMessages:=true;
+      if oUpdate.CheckUpdate then begin
+        if Problem('Доступно обновление программы № '+IntToStr(oUpdate.FUpdate)+'. Загрузить?') then begin  //Доступно обновление
+          oUpdate.FThread:=true;
+          if oUpdate.GetFileFTP(true)
+            then oUpdate.RunFileFTP;
+        end;
+      end else begin
+        if oUpdate.FError=''
+          then ShowMessage(PADCStr('Обновление не найдено.',40,' '))
+          else PutError(oUpdate.FError);
+      end;
+    end else begin
+      oUpdate.FTypeServer:=0;
+      if oUpdate.GetFileFTP(true) then begin
+        oUpdate.RunFileFTP;
+      end else begin
+        if oUpdate.FError<>''
+          then PutError(oUpdate.FError);
+      end;
+    end;
+    if oUpdate.FMessages<>''
+      then CheckMessagesProg(oUpdate.FMessages);
+  {$ELSE}
+//    CheckUpdate(IdFTP1, true, true, 0, true, s, lPath);
+  {$ENDIF}
 end;
 
 //--------------------------------------------------------------------------------------------------
@@ -3985,6 +4019,13 @@ begin
     end;
   end;
 {$ENDIF}
+end;
+//------------------------------------------------------
+procedure TfmMain.WMCheckUpdate(var Msg: TMessage);
+begin
+  if Msg.Msg = WM_CHECKUPDATE then begin
+    CheckUpdateSyna(pn);
+  end;
 end;
 
 //------------------------------------------------------
@@ -4237,9 +4278,9 @@ var
   slPar:TStringList;
 begin
   if GlobalTask.ParamAsBoolean('CHECK_VOZR') then begin
-    dmBase.WorkQuery.SQL.Text:='select top 1 ID from AktOpek where '+
-                                 '(vid='+inttostr(VID_OPEKA_DO14) +' and date_otm is null and date_osv is null  and date_otst is null and (is_control is null or is_control=true) and getVozrast(curdate(),dater)>=14 ) or '+
-                                 '(vid='+inttostr(VID_POPECH_DO18)+' and date_otm is null and date_osv is null  and date_otst is null and (is_control is null or is_control=true) and getVozrast(curdate(),dater)>=18 )';
+    dmBase.WorkQuery.SQL.Text:='select top 1 ID from AktOpek where pole_grn>=3000 and datez is not null and send_date is null and date_otm is null and (is_control is null or is_control=true) and '+
+                                 '((vid='+inttostr(VID_OPEKA_DO14) +' and getVozrast(curdate(),dater)>=14 ) or '+
+                                 ' (vid='+inttostr(VID_POPECH_DO18)+' and getVozrast(curdate(),dater)>=18 ))';
     lErr:=false;
     lCheck:=false;
     try
@@ -4255,10 +4296,11 @@ begin
     if not lErr
       then dmBase.WorkQuery.Close;
     if lCheck then begin
-//      ShowMessage()
-      slPar:=TStringList.Create;
-      slPar.Add('SYSFILTER=&Необходимо прекращение опеки или попечительства');
-      ShowGurnal(TfmGurnZOpeka, 'fmGurnZOpeka', slPar);
+      if Problem('Найдены люди для которых необходима отмена опеки(попечительства). Открыть ?') then begin
+        slPar:=TStringList.Create;
+        slPar.Add('SYSFILTER=&Необходимо прекращение опеки или попечительства');
+        ShowGurnal(TfmGurnZOpeka, 'fmGurnZOpeka', slPar);
+      end;
     end;
   end;
 //
@@ -4350,6 +4392,11 @@ begin
     then ShowMessage(s);
 end;
 //------------------------------------------
+procedure TfmMain.TBItemEditUrlCOCClick(Sender: TObject);
+begin
+  Gisun.EditUrlCOC;
+end;
+//------------------------------------------
 procedure TfmMain.acSaveCertExecute(Sender: TObject);
 begin
   Gisun.SaveCertToSChannel;
@@ -4359,6 +4406,7 @@ procedure TfmMain.TBItemLoadSysSprClick(Sender: TObject);
 begin
   RunLoadSysSpr(pn);
 end;
+
 
 initialization
   ListGurnal := TStringList.Create;

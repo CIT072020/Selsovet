@@ -14,13 +14,11 @@ type
   TfmChPunktATE = class(TForm)
     btOk: TBitBtn;
     BitBtn2: TBitBtn;
-    edObl: TDBLookupComboboxEh;
     edRn: TDBLookupComboboxEh;
     edSS: TDBLookupComboboxEh;
     Bevel1: TBevel;
     queryRn: TAdsQuery;
     querySS: TAdsQuery;
-    dsObl: TDataSource;
     dsRn: TDataSource;
     dsSS: TDataSource;
     edNP: TDBLookupComboboxEh;
@@ -59,14 +57,14 @@ type
     function GetATEValue(nUr:Integer; var Category:Integer):Integer;
 //    function GetDatasetUr(nUr:Integer):TDataSet;
     function GetControlUr(nUr:Integer):TComponent;
-
+    procedure UpdateActions; override;
     property ValueSOATO : String read FValueSOATO write SetValueSOATO;
     property ValueATE : Integer read FValueATE write SetValueATE;
     property TypeChoice:Integer read FTypeChoice write SetTypeChoice;
     property Add:Boolean read FAdd write SetAdd;
   end;
 
-  function ChoiceFromATE(Owner:TWinControl; lAdd:Boolean; nATE:Integer):TATE;
+  function ChoiceFromATE(Owner:TWinControl; lAdd:Boolean; nATE:Integer; slPar:TStringList=nil):TATE;
 
 implementation
 
@@ -74,11 +72,14 @@ uses uProject, mPermit;
 
 {$R *.DFM}
 
-function ChoiceFromATE(Owner:TWinControl; lAdd:Boolean; nATE:Integer):TATE;
+function ChoiceFromATE(Owner:TWinControl; lAdd:Boolean; nATE:Integer; slPar:TStringList):TATE;
 var
   f: TfmChPunktATE;
 begin
   f:=TfmChPunktATE.Create(Owner);
+  if (slPar<>nil) and Assigned(slPar) and (slPar.Count>0) then begin
+    f.TypeChoice:=StrToIntDef(ValueFromParams(slPar, 'TYPECHOICE', '0'),0);
+  end;
   f.Edit1.Visible:=Role.SystemAdmin;
   f.Add:=lAdd;
   Result.ATE_ID:=0;
@@ -94,11 +95,26 @@ end;
 
 { TfmChPunktATE }
 
-procedure TfmChPunktATE.SetValueSOATO(const Value: String);
+procedure TfmChPunktATE.FormCreate(Sender: TObject);
 var
-  cur : TCursor;
+  sName:String;
+begin
+  sName:='iif(front=1,trim(namec)+'' '','''')+trim(name)+iif(front=1,'''','' ''+trim(namec)) full_name';
+//  if Role.SystemAdmin
+//    then sName:='CAST(ATE_ID AS SQL_CHAR)+'+sName;
+  queryRn.SQL.Text:='select ATE_ID KOD,'+sName+' , ate_parentid parent, category from sysspr.ate where ate_parentid=:PAR and dateout is null order by kod';
+  querySS.SQL.Text:=queryRn.SQL.Text;
+  queryNP.SQL.Text:='select ATE_ID KOD,'+sName+' , ate_parentid parent, category from sysspr.ate where ate_parentid=:PAR and dateout is null order by name';
+  FClearKey := false;
+  FTypeChoice:=0;
+end;
+
+procedure TfmChPunktATE.SetValueSOATO(const Value: String);
+//var
+//  cur : TCursor;
 begin
   {$IFDEF OCHERED}
+  {
     lbDetail.Caption:='Город';
     querySS.SQL.Text:=
      'SELECT *  FROM СпрСОАТО s '+
@@ -106,8 +122,10 @@ begin
      ' (Substring(kod,5,1)=''3'' or ( ((Substring(kod,5,1)=''5'' and Substring(kod,7,1)<>''0'') or (Substring(kod,5,2)=''51'')) '+
      ' and Substring(kod,8,3)='+QStr('000')+' and Substring(kod,2,1)<>'+QStr('4')+'))';
     edSS.DropDownBox.Rows:=5;
+    }
   {$ENDIF}
   FValueSOATO := Value;
+  {
   if Value <> '' then begin
     cur := Screen.Cursor;
     edObl.Value:= Copy(Value,1,1)+'000000000';
@@ -122,28 +140,15 @@ begin
 
     Screen.Cursor := cur;
   end;
-end;
-
-
-procedure TfmChPunktATE.FormCreate(Sender: TObject);
-var
-  sName:String;
-begin
-  sName:='iif(front=1,trim(namec)+'' '','''')+trim(name)+iif(front=1,'''','' ''+trim(namec)) full_name';
-//  if Role.SystemAdmin                                  
-//    then sName:='CAST(ATE_ID AS SQL_CHAR)+'+sName;
-  queryRn.SQL.Text:='select ATE_ID KOD,'+sName+' , ate_parentid parent, category from sysspr.ate where ate_parentid=:PAR and dateout is null order by kod';
-  querySS.SQL.Text:=queryRn.SQL.Text;
-  queryNP.SQL.Text:='select ATE_ID KOD,'+sName+' , ate_parentid parent, category from sysspr.ate where ate_parentid=:PAR and dateout is null order by name';
-  FClearKey := false;
-  FTypeChoice:=0;
+  }
 end;
 
 procedure TfmChPunktATE.edOblChange(Sender: TObject);
-var
-  cur:TCursor;
-  v:Variant;
+//var
+//  cur:TCursor;
+//  v:Variant;
 begin
+{
  cur := Screen.Cursor;
  queryRn.Close;
  querySS.Close;
@@ -159,6 +164,7 @@ begin
  end;
  queryRn.Open;
  Screen.Cursor:=cur;
+ }
 end;
 
 procedure TfmChPunktATE.cbOblChange(Sender: TObject);
@@ -167,13 +173,16 @@ var
   n:Integer;
 begin
  cur := Screen.Cursor;
- Tag:=0;
+ cbObl.Tag:=0;
  queryRn.Close;
  querySS.Close;
  queryNP.Close;
  edRN.Value:=null;
+ edRN.Tag:=0;
  edSS.Value:=null;
+ edSS.Tag:=0;
  edNP.Value:=null;
+ edNP.Tag:=0;
  n:=cbObl.ItemIndex;
  if (n<0) then begin
    queryRn.ParamByName('PAR').AsInteger := -1;
@@ -181,7 +190,7 @@ begin
    n:=IndexToObl(n);
    queryRn.ParamByName('PAR').AsInteger := n; //Copy(TDBLookupComboboxEh(Sender).Value,1,1);
    if dmBase.ATESys.Locate('ATE_ID',n,[]) then begin
-     Tag:=dmBase.ATESys.fieldByName('CATEGORY').AsInteger;
+     cbObl.Tag:=dmBase.ATESys.fieldByName('CATEGORY').AsInteger;
    end;
  end;
  queryRn.Open;
@@ -194,11 +203,13 @@ var
   v:Variant;
 begin
  cur := Screen.Cursor;
- Tag:=queryRn.fieldByName('CATEGORY').AsInteger;
+ edRn.Tag:=queryRn.fieldByName('CATEGORY').AsInteger;
  querySS.Close;
  queryNP.Close;
  edSS.Value:=null;
+ edSS.Tag:=0;
  edNP.Value:=null;
+ edNP.Tag:=0;
  v:=TDBLookupComboboxEh(Sender).Value;
  if (v=null) or (VarToStr(v)='') then begin
    querySS.ParamByName('PAR').AsInteger:=-1;
@@ -223,9 +234,10 @@ var
   v:Variant;
 begin
  cur := Screen.Cursor;
- Tag:=querySS.fieldByName('CATEGORY').AsInteger;
+ edSS.Tag:=querySS.fieldByName('CATEGORY').AsInteger;
  queryNP.Close;
  edNP.Value:=null;
+ edNP.Tag:=0;
  v:=TDBLookupComboboxEh(Sender).Value;
  if (v=null) or (VarToStr(v)='') then begin
    queryNP.ParamByName('PAR').AsInteger:=-1;
@@ -246,7 +258,7 @@ end;
 
 procedure TfmChPunktATE.edNPChange(Sender: TObject);
 begin
- Tag:=queryNP.fieldByName('CATEGORY').AsInteger;
+ edNP.Tag:=queryNP.fieldByName('CATEGORY').AsInteger;
  try
    if edNP.Value=null
      then edit1.Text:='нет'
@@ -258,17 +270,29 @@ end;
 
 procedure TfmChPunktATE.btOkClick(Sender: TObject);
 var
-  n:Integer;
+  nCat,nUr:Integer;
+  sErr:String;
 begin
-//  if FTypeChoice=0 then begin   // выбор нас.пункта
-  FValueATE:=GetLastATE(n);
-  if FValueATE>0 then begin
-    ModalResult:=mrOk;
+  sErr:='';
+  FValueATE:=GetLastATE(nUr);
+  if (FTypeChoice=1) then begin   // д.б. выбран нас.пункт
+    if FValueATE>0 then begin
+      GetATEValue(nUr, nCat);
+      if (CategoryType(nCat)<>CATEGORY_PUNKT) then begin
+        sErr:='Выберите населенный пункт';
+      end;
+    end;
+  end;
+  if sErr='' then begin
+    if FValueATE>0 then begin
+      ModalResult:=mrOk;
+    end;
+  end else begin
+    PutError(PadCStd(sErr));
   end;
 end;
 
-procedure TfmChPunktATE.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TfmChPunktATE.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   Event_FormKeyDown(Self, FClearKey, Sender, Key, Shift);
   if Key<>0 then begin
@@ -415,7 +439,7 @@ function TfmChPunktATE.GetControlUr(nUr:Integer):TComponent;
 begin
   Result:=nil;
   case nUr of
-    1: Result:=edObl;
+    1: Result:=cbObl;
     2: Result:=edRn;
     3: Result:=edSS;
     4: Result:=edNP;
@@ -455,7 +479,7 @@ var
   nUr,n,m,i,nCat:Integer;
   ds:TDataSet;
 //  fld:TField;
-  s:String;
+  s,s_b:String;
   cont:TComponent;
 begin
 //  ds:=dmBase.ATE;
@@ -464,7 +488,9 @@ begin
   Result.Raion:='';
   Result.SS:='';
   Result.Name:='';
+  Result.Name_B:='';
   Result.Category:=0;
+  Result.Kod:='';
   Result.ATE_ID:=GetLastATE(nUr);
   if Result.ATE_ID>0 then begin
     for m:=nUr downto 1 do begin
@@ -476,19 +502,25 @@ begin
 //      if ds.Locate('KOD',n,[]) then begin
       if ds<>nil then begin
         s:=ds.FieldByName('NAME').AsString;
+        s_b:=ds.FieldByName('NAME_B').AsString;
         nCat:=ds.FieldByName('CATEGORY').AsInteger;
         i:=CategoryType(nCat);
+        Result.Kod:=ds.FieldByName('KOD').AsString;
         if i=CATEGORY_OBL then begin
           Result.Obl:=s;
+          Result.Obl_B:=s_b;
         end else if i=CATEGORY_RAION then begin
           Result.Raion:=s;
+          Result.Raion_B:=s_b;
         end else if i=CATEGORY_RNGOROD then begin
           Result.RnGorod:=s;
+          Result.RnGorod_B:=s_b;
         end else if i=CATEGORY_SS then begin
           Result.SS:=s;
+          Result.SS_B:=s_b;
         end else if i=CATEGORY_PUNKT then begin
-          Result.Name:=s; // !!!!!
-//          Result.Category:=StrToInt(fld.AsString);
+          Result.Name:=s;   // !!!!!
+          Result.Name_B:=s_b;
           Result.Category:=nCat;
         end;
       end;
@@ -504,6 +536,11 @@ end;
 procedure TfmChPunktATE.SetAdd(const Value: Boolean);
 begin
   FAdd := Value;
+end;
+
+procedure TfmChPunktATE.UpdateActions;
+begin
+  inherited;
 end;
 
 end.

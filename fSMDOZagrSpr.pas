@@ -603,12 +603,12 @@ begin
   if lChange then begin
     ss:='Загрузка изменений справочника '+sName+' ... ';
     if lShow then OpenMessage(PadCStr(ss,50,' '));
-    GlobalTask.LogFile.WriteToLogFile('СМДО: загрузка изменений справочника ' +sName);
+    GlobalTask.WriteToLogFile('СМДО: загрузка изменений справочника ' +sName);
   end else begin
     ss:='Подготовка к загрузке справочника '+sName+' ... ';
     if lShow then OpenMessage(PadCStr(ss,50,' '));
     ss:='Загрузка справочника '+sName+' ... ';
-    GlobalTask.LogFile.WriteToLogFile('СМДО: загрузка справочника ' +sName);
+    GlobalTask.WriteToLogFile('СМДО: загрузка справочника ' +sName);
     dmBase.AdsConnection.Execute('DELETE FROM '+sTableName);
   end;
   Application.ProcessMessages;
@@ -657,7 +657,7 @@ begin
         if ds.Locate('rowID', rowID, []) then begin
           if dDelete>0 then begin
             sDeleteKod:=ds.FieldByName('smdocode').AsString;
-            GlobalTask.LogFile.WriteToLogFile('удаление: '+rowID+' '+ds.FieldByName('smdocode').AsString+' '+ds.FieldByName('SHORTNAME').AsString);
+            GlobalTask.WriteToLogFile('удаление: '+rowID+' '+ds.FieldByName('smdocode').AsString+' '+ds.FieldByName('SHORTNAME').AsString);
             ds.Delete;
           end else begin
             lEdit:=true;
@@ -842,7 +842,7 @@ begin
     Result:=true;
     if lChange then sSoob:='Изменения справочника '+ss+' успешно загружены'+#13#10'Последнее изменение: '+DatePropis(FLastDate,3)
                else sSoob:='Справочник '+ss+' успешно загружен '#13#10'Актуальная дата: '+DatePropis(FActualDate,3)+#13#10'Последнее изменение: '+DatePropis(FLastDate,3);
-//    GlobalTask.LogFile.WriteToLogFile(sSoob);
+//    GlobalTask.WriteToLogFile(sSoob);
     AddProtokol(StringReplace(sSoob,#13#10,', ',[rfReplaceAll]));
     if lShow then begin
       AddNotifyProg(fmMain {Screen.ActiveForm}, sSoob, false, true,0,0);
@@ -858,7 +858,7 @@ begin
       PutError(sSoob);
       Application.ProcessMessages;
     end;
-//    GlobalTask.LogFile.WriteToLogFile(FProtokol.Text);
+//    GlobalTask.WriteToLogFile(FProtokol.Text);
   end;
   if sTmpPath<>''
     then ClearDir(sTmpPath,true);

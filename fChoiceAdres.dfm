@@ -1,6 +1,6 @@
 object fmChoiceAdres: TfmChoiceAdres
-  Left = 543
-  Top = 178
+  Left = 516
+  Top = 200
   Width = 677
   Height = 549
   Caption = #1040#1076#1088#1077#1089' '#1093#1086#1079#1103#1081#1089#1090#1074#1072

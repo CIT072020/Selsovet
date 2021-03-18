@@ -100,7 +100,7 @@ inherited fmDeclBrak: TfmDeclBrak
       Top = 32
       Width = 902
       Height = 625
-      ActivePage = tsTail1
+      ActivePage = tsTail2
       Align = alClient
       HotTrack = True
       Images = fmMain.ImageList
@@ -3169,7 +3169,7 @@ inherited fmDeclBrak: TfmDeclBrak
           Left = 0
           Top = 563
           Width = 889
-          Height = 7
+          Height = 5
           Anchors = [akLeft, akTop, akRight, akBottom]
           Lines.Strings = (
             'm'

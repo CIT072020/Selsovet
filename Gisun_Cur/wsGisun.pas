@@ -1,21 +1,21 @@
 // ************************************************************************ //
 // The types declared in this file were generated from data read from the
 // WSDL File described below:
-// WSDL     : http://todes.by:8888/gisun-inf/common/ws?wsdl
-//  >Import : http://todes.by:8888/gisun-inf/common/ws?wsdl:0
-//  >Import : http://todes.by:8888/gisun-inf/common/ws?xsd=1
-//  >Import : http://todes.by:8888/gisun-inf/common/ws?xsd=2
-//  >Import : http://todes.by:8888/gisun-inf/common/ws?wsdl:1
+// WSDL     : http://127.0.0.1:8000/gisun-inf/common/ws?wsdl
+//  >Import : http://127.0.0.1:8000/gisun-inf/common/ws?wsdl:0
+//  >Import : http://127.0.0.1:8000/gisun-inf/common/ws?xsd=1
+//  >Import : http://127.0.0.1:8000/gisun-inf/common/ws?xsd=2
+//  >Import : http://127.0.0.1:8000/gisun-inf/common/ws?wsdl:1
 // Encoding : UTF-8
 // Version  : 1.0
-// (08.05.2018 12:00:04 - - $Rev: 10138 $)
+// (11.01.2021 12:33:26 - - $Rev: 10138 $)
 // ************************************************************************ //
 
-unit wsGisun;
+unit wsGisun;   // vadim
 
 interface
 
-uses InvokeRegistry, SOAPHTTPClient, Types, XSBuiltIns, OPConvert;
+uses InvokeRegistry, SOAPHTTPClient, Types, XSBuiltIns, OPConvert;    // vadim
 
 const
   IS_OPTN = $0001;
@@ -35,23 +35,24 @@ type
   // typically map to predefined/known XML or Borland types; however, they could also 
   // indicate incorrect WSDL documents that failed to declare or import a schema type.
   // ************************************************************************ //
-  // !:date            - "http://www.w3.org/2001/XMLSchema"[Gbl]
   // !:string          - "http://www.w3.org/2001/XMLSchema"[Gbl]
-  // !:boolean         - "http://www.w3.org/2001/XMLSchema"[Gbl]
   // !:int             - "http://www.w3.org/2001/XMLSchema"[Lit][Gbl]
+  // !:boolean         - "http://www.w3.org/2001/XMLSchema"[Gbl]
   // !:dateTime        - "http://www.w3.org/2001/XMLSchema"[Gbl]
+  // !:date            - "http://www.w3.org/2001/XMLSchema"[Gbl]
   // !:base64Binary    - "http://www.w3.org/2001/XMLSchema"[Gbl]
+  // !:decimal         - "http://www.w3.org/2001/XMLSchema"[Gbl]
   // !:integer         - "http://www.w3.org/2001/XMLSchema"[Gbl]
 
-  ActData              = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
-  Document             = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
   Classifier           = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
   LangValue            = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
+  Document             = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
+  ActData              = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
   birth_place          = class;                 { "http://gisun.agatsystem.by/common/types/"[Cplx] }
   Citizenship          = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
-  Address              = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
   photoInfo            = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
   Nationality2         = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
+  Address              = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
   Death                = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
   deathInfo            = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
   decease_place        = class;                 { "http://gisun.agatsystem.by/common/types/"[Cplx] }
@@ -96,20 +97,22 @@ type
   taxInfo              = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
   Military             = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
   militaryInfo         = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
+  Disability           = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
+  disabilityInfo       = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
   MessageCover         = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
   QueryParam           = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
   personalDataInfo     = class;                 { "http://gisun.agatsystem.by/common/ws/"[GblCplx] }
+  LexemStatus          = class;                 { "http://gisun.agatsystem.by/common/ws/"[GblCplx] }
   RegisterResponse     = class;                 { "http://gisun.agatsystem.by/common/ws/"[Lit][GblCplx] }
   ResponsePerson       = class;                 { "http://gisun.agatsystem.by/common/ws/"[GblCplx] }
   ResponseIdentif      = class;                 { "http://gisun.agatsystem.by/common/ws/"[GblCplx] }
-  WsException          = class;                 { "http://gisun.agatsystem.by/common/ws/"[Flt][GblCplx] }
   WsError              = class;                 { "http://gisun.agatsystem.by/common/ws/"[GblCplx] }
+  WsException          = class;                 { "http://gisun.agatsystem.by/common/ws/"[Flt][GblCplx] }
   RegisterPersonListRequest = class;            { "http://gisun.agatsystem.by/common/ws/"[Lit][GblCplx] }
   PersonListRequest    = class;                 { "http://gisun.agatsystem.by/common/ws/"[GblCplx] }
   RegisterRequest      = class;                 { "http://gisun.agatsystem.by/common/ws/"[Lit][GblCplx] }
   PersonRequest        = class;                 { "http://gisun.agatsystem.by/common/ws/"[GblCplx] }
   IdentifRequest       = class;                 { "http://gisun.agatsystem.by/common/ws/"[GblCplx] }
-  LexemStatus          = class;                 { "http://gisun.agatsystem.by/common/ws/"[GblCplx] }
   ClassifierChangeRequest = class;              { "http://gisun.agatsystem.by/common/ws/"[Lit][GblCplx] }
   RegisterPersonIdentifRequest = class;         { "http://gisun.agatsystem.by/common/ws/"[Lit][GblCplx] }
   PersonIdentifRequest = class;                 { "http://gisun.agatsystem.by/common/ws/"[GblCplx] }
@@ -136,6 +139,7 @@ type
   insurances_info      = class;                 { "http://gisun.agatsystem.by/common/types/"[Alias] }
   taxies_info          = class;                 { "http://gisun.agatsystem.by/common/types/"[Alias] }
   militaries_info      = class;                 { "http://gisun.agatsystem.by/common/types/"[Alias] }
+  disability_info      = class;                 { "http://gisun.agatsystem.by/common/types/"[Alias] }
   document2            = class;                 { "http://gisun.agatsystem.by/common/types/"[Alias] }
   prnt_rights_data     = class;                 { "http://gisun.agatsystem.by/common/types/"[Alias] }
   employment_period    = class;                 { "http://gisun.agatsystem.by/common/types/"[Alias] }
@@ -155,97 +159,6 @@ type
   FamilyData           = class;                 { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
   ResponseData         = class;                 { "http://gisun.agatsystem.by/common/ws/"[GblCplx] }
   RequestData          = class;                 { "http://gisun.agatsystem.by/common/ws/"[GblCplx] }
-
-
-
-  // ************************************************************************ //
-  // XML       : ActData, global, <complexType>
-  // Namespace : http://gisun.agatsystem.by/common/types/
-  // ************************************************************************ //
-  ActData = class(TRemotable)
-  private
-    Fact_type: Classifier;
-    Fact_type_Specified: boolean;
-    Fauthority: Classifier;
-    Fauthority_Specified: boolean;
-    Fdate: TXSDate;
-    Fdate_Specified: boolean;
-    Fnumber: WideString;
-    Fnumber_Specified: boolean;
-    procedure Setact_type(Index: Integer; const AClassifier: Classifier);
-    function  act_type_Specified(Index: Integer): boolean;
-    procedure Setauthority(Index: Integer; const AClassifier: Classifier);
-    function  authority_Specified(Index: Integer): boolean;
-    procedure Setdate(Index: Integer; const ATXSDate: TXSDate);
-    function  date_Specified(Index: Integer): boolean;
-    procedure Setnumber(Index: Integer; const AWideString: WideString);
-    function  number_Specified(Index: Integer): boolean;
-  public
-    destructor Destroy; override;
-  published
-    property act_type:  Classifier  Index (IS_OPTN) read Fact_type write Setact_type stored act_type_Specified;
-    property authority: Classifier  Index (IS_OPTN) read Fauthority write Setauthority stored authority_Specified;
-    property date:      TXSDate     Index (IS_OPTN) read Fdate write Setdate stored date_Specified;
-    property number:    WideString  Index (IS_OPTN) read Fnumber write Setnumber stored number_Specified;
-  end;
-
-
-
-  // ************************************************************************ //
-  // XML       : Document, global, <complexType>
-  // Namespace : http://gisun.agatsystem.by/common/types/
-  // ************************************************************************ //
-  Document = class(TRemotable)
-  private
-    Faccess: Classifier;
-    Faccess_Specified: boolean;
-    Fdocument_type: Classifier;
-    Fdocument_type_Specified: boolean;
-    Fauthority: Classifier;
-    Fauthority_Specified: boolean;
-    Fdate_of_issue: TXSDate;
-    Fdate_of_issue_Specified: boolean;
-    Fexpire_date: TXSDate;
-    Fexpire_date_Specified: boolean;
-    Fseries: WideString;
-    Fseries_Specified: boolean;
-    Fnumber: WideString;
-    Fnumber_Specified: boolean;
-    Fact_data: ActData;
-    Fact_data_Specified: boolean;
-    Factive: Boolean;
-    Factive_Specified: boolean;
-    procedure Setaccess(Index: Integer; const AClassifier: Classifier);
-    function  access_Specified(Index: Integer): boolean;
-    procedure Setdocument_type(Index: Integer; const AClassifier: Classifier);
-    function  document_type_Specified(Index: Integer): boolean;
-    procedure Setauthority(Index: Integer; const AClassifier: Classifier);
-    function  authority_Specified(Index: Integer): boolean;
-    procedure Setdate_of_issue(Index: Integer; const ATXSDate: TXSDate);
-    function  date_of_issue_Specified(Index: Integer): boolean;
-    procedure Setexpire_date(Index: Integer; const ATXSDate: TXSDate);
-    function  expire_date_Specified(Index: Integer): boolean;
-    procedure Setseries(Index: Integer; const AWideString: WideString);
-    function  series_Specified(Index: Integer): boolean;
-    procedure Setnumber(Index: Integer; const AWideString: WideString);
-    function  number_Specified(Index: Integer): boolean;
-    procedure Setact_data(Index: Integer; const AActData: ActData);
-    function  act_data_Specified(Index: Integer): boolean;
-    procedure Setactive(Index: Integer; const ABoolean: Boolean);
-    function  active_Specified(Index: Integer): boolean;
-  public
-    destructor Destroy; override;
-  published
-    property access:        Classifier  Index (IS_OPTN) read Faccess write Setaccess stored access_Specified;
-    property document_type: Classifier  Index (IS_OPTN) read Fdocument_type write Setdocument_type stored document_type_Specified;
-    property authority:     Classifier  Index (IS_OPTN) read Fauthority write Setauthority stored authority_Specified;
-    property date_of_issue: TXSDate     Index (IS_OPTN) read Fdate_of_issue write Setdate_of_issue stored date_of_issue_Specified;
-    property expire_date:   TXSDate     Index (IS_OPTN) read Fexpire_date write Setexpire_date stored expire_date_Specified;
-    property series:        WideString  Index (IS_OPTN) read Fseries write Setseries stored series_Specified;
-    property number:        WideString  Index (IS_OPTN) read Fnumber write Setnumber stored number_Specified;
-    property act_data:      ActData     Index (IS_OPTN) read Fact_data write Setact_data stored act_data_Specified;
-    property active:        Boolean     Index (IS_OPTN) read Factive write Setactive stored active_Specified;
-  end;
 
   LangValueList = array of value;               { "http://gisun.agatsystem.by/common/types/"[GblCplx] }
   ClassifierList = array of classifier2;        { "http://gisun.agatsystem.by/common/types/"[Lit][GblCplx] }
@@ -310,6 +223,97 @@ type
   published
     property Text: WideString  Index (IS_TEXT) read FText write FText;
     property lang: WideString  Index (IS_ATTR) read Flang write Flang;
+  end;
+
+
+
+  // ************************************************************************ //
+  // XML       : Document, global, <complexType>
+  // Namespace : http://gisun.agatsystem.by/common/types/
+  // ************************************************************************ //
+  Document = class(TRemotable)
+  private
+    Faccess: Classifier;
+    Faccess_Specified: boolean;
+    Fdocument_type: Classifier;
+    Fdocument_type_Specified: boolean;
+    Fauthority: Classifier;
+    Fauthority_Specified: boolean;
+    Fdate_of_issue: TXSDate;
+    Fdate_of_issue_Specified: boolean;
+    Fexpire_date: TXSDate;
+    Fexpire_date_Specified: boolean;
+    Fseries: WideString;
+    Fseries_Specified: boolean;
+    Fnumber: WideString;
+    Fnumber_Specified: boolean;
+    Fact_data: ActData;
+    Fact_data_Specified: boolean;
+    Factive: Boolean;
+    Factive_Specified: boolean;
+    procedure Setaccess(Index: Integer; const AClassifier: Classifier);
+    function  access_Specified(Index: Integer): boolean;
+    procedure Setdocument_type(Index: Integer; const AClassifier: Classifier);
+    function  document_type_Specified(Index: Integer): boolean;
+    procedure Setauthority(Index: Integer; const AClassifier: Classifier);
+    function  authority_Specified(Index: Integer): boolean;
+    procedure Setdate_of_issue(Index: Integer; const ATXSDate: TXSDate);
+    function  date_of_issue_Specified(Index: Integer): boolean;
+    procedure Setexpire_date(Index: Integer; const ATXSDate: TXSDate);
+    function  expire_date_Specified(Index: Integer): boolean;
+    procedure Setseries(Index: Integer; const AWideString: WideString);
+    function  series_Specified(Index: Integer): boolean;
+    procedure Setnumber(Index: Integer; const AWideString: WideString);
+    function  number_Specified(Index: Integer): boolean;
+    procedure Setact_data(Index: Integer; const AActData: ActData);
+    function  act_data_Specified(Index: Integer): boolean;
+    procedure Setactive(Index: Integer; const ABoolean: Boolean);
+    function  active_Specified(Index: Integer): boolean;
+  public
+    destructor Destroy; override;
+  published
+    property access:        Classifier  Index (IS_OPTN) read Faccess write Setaccess stored access_Specified;
+    property document_type: Classifier  Index (IS_OPTN) read Fdocument_type write Setdocument_type stored document_type_Specified;
+    property authority:     Classifier  Index (IS_OPTN) read Fauthority write Setauthority stored authority_Specified;
+    property date_of_issue: TXSDate     Index (IS_OPTN) read Fdate_of_issue write Setdate_of_issue stored date_of_issue_Specified;
+    property expire_date:   TXSDate     Index (IS_OPTN) read Fexpire_date write Setexpire_date stored expire_date_Specified;
+    property series:        WideString  Index (IS_OPTN) read Fseries write Setseries stored series_Specified;
+    property number:        WideString  Index (IS_OPTN) read Fnumber write Setnumber stored number_Specified;
+    property act_data:      ActData     Index (IS_OPTN) read Fact_data write Setact_data stored act_data_Specified;
+    property active:        Boolean     Index (IS_OPTN) read Factive write Setactive stored active_Specified;
+  end;
+
+
+
+  // ************************************************************************ //
+  // XML       : ActData, global, <complexType>
+  // Namespace : http://gisun.agatsystem.by/common/types/
+  // ************************************************************************ //
+  ActData = class(TRemotable)
+  private
+    Fact_type: Classifier;
+    Fact_type_Specified: boolean;
+    Fauthority: Classifier;
+    Fauthority_Specified: boolean;
+    Fdate: TXSDate;
+    Fdate_Specified: boolean;
+    Fnumber: WideString;
+    Fnumber_Specified: boolean;
+    procedure Setact_type(Index: Integer; const AClassifier: Classifier);
+    function  act_type_Specified(Index: Integer): boolean;
+    procedure Setauthority(Index: Integer; const AClassifier: Classifier);
+    function  authority_Specified(Index: Integer): boolean;
+    procedure Setdate(Index: Integer; const ATXSDate: TXSDate);
+    function  date_Specified(Index: Integer): boolean;
+    procedure Setnumber(Index: Integer; const AWideString: WideString);
+    function  number_Specified(Index: Integer): boolean;
+  public
+    destructor Destroy; override;
+  published
+    property act_type:  Classifier  Index (IS_OPTN) read Fact_type write Setact_type stored act_type_Specified;
+    property authority: Classifier  Index (IS_OPTN) read Fauthority write Setauthority stored authority_Specified;
+    property date:      TXSDate     Index (IS_OPTN) read Fdate write Setdate stored date_Specified;
+    property number:    WideString  Index (IS_OPTN) read Fnumber write Setnumber stored number_Specified;
   end;
 
 
@@ -409,104 +413,6 @@ type
   end;
 
   nationality = array of nationality_info;      { "http://gisun.agatsystem.by/common/types/"[Cplx] }
-
-
-  // ************************************************************************ //
-  // XML       : Address, global, <complexType>
-  // Namespace : http://gisun.agatsystem.by/common/types/
-  // ************************************************************************ //
-  Address = class(TRemotable)
-  private
-    Faccess: Classifier;
-    Faccess_Specified: boolean;
-    Fcountry: Classifier;
-    Fcountry_Specified: boolean;
-    Farea: Classifier;
-    Farea_Specified: boolean;
-    Fregion: Classifier;
-    Fregion_Specified: boolean;
-    Fsoviet: Classifier;
-    Fsoviet_Specified: boolean;
-    Flocality_type: Classifier;
-    Flocality_type_Specified: boolean;
-    Flocality: Classifier;
-    Flocality_Specified: boolean;
-    Fcity_region: Classifier;
-    Fcity_region_Specified: boolean;
-    Fstreet_type: Classifier;
-    Fstreet_type_Specified: boolean;
-    Fstreet: Classifier;
-    Fstreet_Specified: boolean;
-    Fhouse: WideString;
-    Fhouse_Specified: boolean;
-    Fbuilding: WideString;
-    Fbuilding_Specified: boolean;
-    Fflat: WideString;
-    Fflat_Specified: boolean;
-    Freg_date: TXSDate;
-    Freg_date_Specified: boolean;
-    Freg_date_till: TXSDate;
-    Freg_date_till_Specified: boolean;
-    Fsign_away: Boolean;
-    Fsign_away_Specified: boolean;
-    Factive: Boolean;
-    Factive_Specified: boolean;
-    procedure Setaccess(Index: Integer; const AClassifier: Classifier);
-    function  access_Specified(Index: Integer): boolean;
-    procedure Setcountry(Index: Integer; const AClassifier: Classifier);
-    function  country_Specified(Index: Integer): boolean;
-    procedure Setarea(Index: Integer; const AClassifier: Classifier);
-    function  area_Specified(Index: Integer): boolean;
-    procedure Setregion(Index: Integer; const AClassifier: Classifier);
-    function  region_Specified(Index: Integer): boolean;
-    procedure Setsoviet(Index: Integer; const AClassifier: Classifier);
-    function  soviet_Specified(Index: Integer): boolean;
-    procedure Setlocality_type(Index: Integer; const AClassifier: Classifier);
-    function  locality_type_Specified(Index: Integer): boolean;
-    procedure Setlocality(Index: Integer; const AClassifier: Classifier);
-    function  locality_Specified(Index: Integer): boolean;
-    procedure Setcity_region(Index: Integer; const AClassifier: Classifier);
-    function  city_region_Specified(Index: Integer): boolean;
-    procedure Setstreet_type(Index: Integer; const AClassifier: Classifier);
-    function  street_type_Specified(Index: Integer): boolean;
-    procedure Setstreet(Index: Integer; const AClassifier: Classifier);
-    function  street_Specified(Index: Integer): boolean;
-    procedure Sethouse(Index: Integer; const AWideString: WideString);
-    function  house_Specified(Index: Integer): boolean;
-    procedure Setbuilding(Index: Integer; const AWideString: WideString);
-    function  building_Specified(Index: Integer): boolean;
-    procedure Setflat(Index: Integer; const AWideString: WideString);
-    function  flat_Specified(Index: Integer): boolean;
-    procedure Setreg_date(Index: Integer; const ATXSDate: TXSDate);
-    function  reg_date_Specified(Index: Integer): boolean;
-    procedure Setreg_date_till(Index: Integer; const ATXSDate: TXSDate);
-    function  reg_date_till_Specified(Index: Integer): boolean;
-    procedure Setsign_away(Index: Integer; const ABoolean: Boolean);
-    function  sign_away_Specified(Index: Integer): boolean;
-    procedure Setactive(Index: Integer; const ABoolean: Boolean);
-    function  active_Specified(Index: Integer): boolean;
-  public
-    destructor Destroy; override;
-  published
-    property access:        Classifier  Index (IS_OPTN) read Faccess write Setaccess stored access_Specified;
-    property country:       Classifier  Index (IS_OPTN) read Fcountry write Setcountry stored country_Specified;
-    property area:          Classifier  Index (IS_OPTN) read Farea write Setarea stored area_Specified;
-    property region:        Classifier  Index (IS_OPTN) read Fregion write Setregion stored region_Specified;
-    property soviet:        Classifier  Index (IS_OPTN) read Fsoviet write Setsoviet stored soviet_Specified;
-    property locality_type: Classifier  Index (IS_OPTN) read Flocality_type write Setlocality_type stored locality_type_Specified;
-    property locality:      Classifier  Index (IS_OPTN) read Flocality write Setlocality stored locality_Specified;
-    property city_region:   Classifier  Index (IS_OPTN) read Fcity_region write Setcity_region stored city_region_Specified;
-    property street_type:   Classifier  Index (IS_OPTN) read Fstreet_type write Setstreet_type stored street_type_Specified;
-    property street:        Classifier  Index (IS_OPTN) read Fstreet write Setstreet stored street_Specified;
-    property house:         WideString  Index (IS_OPTN) read Fhouse write Sethouse stored house_Specified;
-    property building:      WideString  Index (IS_OPTN) read Fbuilding write Setbuilding stored building_Specified;
-    property flat:          WideString  Index (IS_OPTN) read Fflat write Setflat stored flat_Specified;
-    property reg_date:      TXSDate     Index (IS_OPTN) read Freg_date write Setreg_date stored reg_date_Specified;
-    property reg_date_till: TXSDate     Index (IS_OPTN) read Freg_date_till write Setreg_date_till stored reg_date_till_Specified;
-    property sign_away:     Boolean     Index (IS_OPTN) read Fsign_away write Setsign_away stored sign_away_Specified;
-    property active:        Boolean     Index (IS_OPTN) read Factive write Setactive stored active_Specified;
-  end;
-
   temp_addresses = array of temp_address;       { "http://gisun.agatsystem.by/common/types/"[Cplx] }
   deaths     = array of death2;                 { "http://gisun.agatsystem.by/common/types/"[Cplx] }
   burials    = array of burial_info;            { "http://gisun.agatsystem.by/common/types/"[Cplx] }
@@ -520,6 +426,7 @@ type
   insurances = array of insurances_info;        { "http://gisun.agatsystem.by/common/types/"[Cplx] }
   taxies     = array of taxies_info;            { "http://gisun.agatsystem.by/common/types/"[Cplx] }
   militaries = array of militaries_info;        { "http://gisun.agatsystem.by/common/types/"[Cplx] }
+  disabilities = array of disability_info;      { "http://gisun.agatsystem.by/common/types/"[Cplx] }
   documents  = array of document2;              { "http://gisun.agatsystem.by/common/types/"[Cplx] }
 
 
@@ -576,6 +483,114 @@ type
     property nationality: Classifier  Index (IS_OPTN) read Fnationality write Setnationality stored nationality_Specified;
     property documents:   documents2  Index (IS_OPTN) read Fdocuments write Setdocuments stored documents_Specified;
     property active:      Boolean     Index (IS_OPTN) read Factive write Setactive stored active_Specified;
+  end;
+
+
+
+  // ************************************************************************ //
+  // XML       : Address, global, <complexType>
+  // Namespace : http://gisun.agatsystem.by/common/types/
+  // ************************************************************************ //
+  Address = class(TRemotable)
+  private
+    Faccess: Classifier;
+    Faccess_Specified: boolean;
+    Fcountry: Classifier;
+    Fcountry_Specified: boolean;
+    Farea: Classifier;
+    Farea_Specified: boolean;
+    Fregion: Classifier;
+    Fregion_Specified: boolean;
+    Fsoviet: Classifier;
+    Fsoviet_Specified: boolean;
+    Flocality_type: Classifier;
+    Flocality_type_Specified: boolean;
+    Flocality: Classifier;
+    Flocality_Specified: boolean;
+    Fcity_region: Classifier;
+    Fcity_region_Specified: boolean;
+    Fstreet_type: Classifier;
+    Fstreet_type_Specified: boolean;
+    Fstreet: Classifier;
+    Fstreet_Specified: boolean;
+    Fhouse: WideString;
+    Fhouse_Specified: boolean;
+    Fbuilding: WideString;
+    Fbuilding_Specified: boolean;
+    Fflat: WideString;
+    Fflat_Specified: boolean;
+    Freg_date: TXSDate;
+    Freg_date_Specified: boolean;
+    Freg_date_till: TXSDate;
+    Freg_date_till_Specified: boolean;
+    Fsign_away: Boolean;
+    Fsign_away_Specified: boolean;
+    FaddrNum: TXSDecimal;
+    FaddrNum_Specified: boolean;
+    FateAddress: WideString;
+    FateAddress_Specified: boolean;
+    Factive: Boolean;
+    Factive_Specified: boolean;
+    procedure Setaccess(Index: Integer; const AClassifier: Classifier);
+    function  access_Specified(Index: Integer): boolean;
+    procedure Setcountry(Index: Integer; const AClassifier: Classifier);
+    function  country_Specified(Index: Integer): boolean;
+    procedure Setarea(Index: Integer; const AClassifier: Classifier);
+    function  area_Specified(Index: Integer): boolean;
+    procedure Setregion(Index: Integer; const AClassifier: Classifier);
+    function  region_Specified(Index: Integer): boolean;
+    procedure Setsoviet(Index: Integer; const AClassifier: Classifier);
+    function  soviet_Specified(Index: Integer): boolean;
+    procedure Setlocality_type(Index: Integer; const AClassifier: Classifier);
+    function  locality_type_Specified(Index: Integer): boolean;
+    procedure Setlocality(Index: Integer; const AClassifier: Classifier);
+    function  locality_Specified(Index: Integer): boolean;
+    procedure Setcity_region(Index: Integer; const AClassifier: Classifier);
+    function  city_region_Specified(Index: Integer): boolean;
+    procedure Setstreet_type(Index: Integer; const AClassifier: Classifier);
+    function  street_type_Specified(Index: Integer): boolean;
+    procedure Setstreet(Index: Integer; const AClassifier: Classifier);
+    function  street_Specified(Index: Integer): boolean;
+    procedure Sethouse(Index: Integer; const AWideString: WideString);
+    function  house_Specified(Index: Integer): boolean;
+    procedure Setbuilding(Index: Integer; const AWideString: WideString);
+    function  building_Specified(Index: Integer): boolean;
+    procedure Setflat(Index: Integer; const AWideString: WideString);
+    function  flat_Specified(Index: Integer): boolean;
+    procedure Setreg_date(Index: Integer; const ATXSDate: TXSDate);
+    function  reg_date_Specified(Index: Integer): boolean;
+    procedure Setreg_date_till(Index: Integer; const ATXSDate: TXSDate);
+    function  reg_date_till_Specified(Index: Integer): boolean;
+    procedure Setsign_away(Index: Integer; const ABoolean: Boolean);
+    function  sign_away_Specified(Index: Integer): boolean;
+    procedure SetaddrNum(Index: Integer; const ATXSDecimal: TXSDecimal);
+    function  addrNum_Specified(Index: Integer): boolean;
+    procedure SetateAddress(Index: Integer; const AWideString: WideString);
+    function  ateAddress_Specified(Index: Integer): boolean;
+    procedure Setactive(Index: Integer; const ABoolean: Boolean);
+    function  active_Specified(Index: Integer): boolean;
+  public
+    destructor Destroy; override;
+  published
+    property access:        Classifier  Index (IS_OPTN) read Faccess write Setaccess stored access_Specified;
+    property country:       Classifier  Index (IS_OPTN) read Fcountry write Setcountry stored country_Specified;
+    property area:          Classifier  Index (IS_OPTN) read Farea write Setarea stored area_Specified;
+    property region:        Classifier  Index (IS_OPTN) read Fregion write Setregion stored region_Specified;
+    property soviet:        Classifier  Index (IS_OPTN) read Fsoviet write Setsoviet stored soviet_Specified;
+    property locality_type: Classifier  Index (IS_OPTN) read Flocality_type write Setlocality_type stored locality_type_Specified;
+    property locality:      Classifier  Index (IS_OPTN) read Flocality write Setlocality stored locality_Specified;
+    property city_region:   Classifier  Index (IS_OPTN) read Fcity_region write Setcity_region stored city_region_Specified;
+    property street_type:   Classifier  Index (IS_OPTN) read Fstreet_type write Setstreet_type stored street_type_Specified;
+    property street:        Classifier  Index (IS_OPTN) read Fstreet write Setstreet stored street_Specified;
+    property house:         WideString  Index (IS_OPTN) read Fhouse write Sethouse stored house_Specified;
+    property building:      WideString  Index (IS_OPTN) read Fbuilding write Setbuilding stored building_Specified;
+    property flat:          WideString  Index (IS_OPTN) read Fflat write Setflat stored flat_Specified;
+    property reg_date:      TXSDate     Index (IS_OPTN) read Freg_date write Setreg_date stored reg_date_Specified;
+    property reg_date_till: TXSDate     Index (IS_OPTN) read Freg_date_till write Setreg_date_till stored reg_date_till_Specified;
+    property sign_away:     Boolean     Index (IS_OPTN) read Fsign_away write Setsign_away stored sign_away_Specified;
+    property addrNum:       TXSDecimal  Index (IS_OPTN) read FaddrNum write SetaddrNum stored addrNum_Specified;
+    property ateAddress:    WideString  Index (IS_OPTN) read FateAddress write SetateAddress stored ateAddress_Specified;
+    property active:        Boolean     Index (IS_OPTN) read Factive write Setactive stored active_Specified;
   end;
 
 
@@ -829,6 +844,8 @@ type
     Ftermination_guardianship_date_Specified: boolean;
     Fremove_guardian_date: TXSDate;
     Fremove_guardian_date_Specified: boolean;
+    Frelease_guardian_date: TXSDate;
+    Frelease_guardian_date_Specified: boolean;
     Fdocuments: documents5;
     Fdocuments_Specified: boolean;
     procedure Setguardian(Index: Integer; const APersonalData: PersonalData);
@@ -839,6 +856,8 @@ type
     function  termination_guardianship_date_Specified(Index: Integer): boolean;
     procedure Setremove_guardian_date(Index: Integer; const ATXSDate: TXSDate);
     function  remove_guardian_date_Specified(Index: Integer): boolean;
+    procedure Setrelease_guardian_date(Index: Integer; const ATXSDate: TXSDate);
+    function  release_guardian_date_Specified(Index: Integer): boolean;
     procedure Setdocuments(Index: Integer; const Adocuments5: documents5);
     function  documents_Specified(Index: Integer): boolean;
   public
@@ -848,6 +867,7 @@ type
     property establish_guardianship_date:   TXSDate       Index (IS_OPTN) read Festablish_guardianship_date write Setestablish_guardianship_date stored establish_guardianship_date_Specified;
     property termination_guardianship_date: TXSDate       Index (IS_OPTN) read Ftermination_guardianship_date write Settermination_guardianship_date stored termination_guardianship_date_Specified;
     property remove_guardian_date:          TXSDate       Index (IS_OPTN) read Fremove_guardian_date write Setremove_guardian_date stored remove_guardian_date_Specified;
+    property release_guardian_date:         TXSDate       Index (IS_OPTN) read Frelease_guardian_date write Setrelease_guardian_date stored release_guardian_date_Specified;
     property documents:                     documents5    Index (IS_OPTN) read Fdocuments write Setdocuments stored documents_Specified;
   end;
 
@@ -868,6 +888,8 @@ type
     Ftermination_trusteeship_date_Specified: boolean;
     Fremove_trustee_date: TXSDate;
     Fremove_trustee_date_Specified: boolean;
+    Frelease_trustee_date: TXSDate;
+    Frelease_trustee_date_Specified: boolean;
     Fdocuments: documents6;
     Fdocuments_Specified: boolean;
     procedure Settrustee(Index: Integer; const APersonalData: PersonalData);
@@ -878,6 +900,8 @@ type
     function  termination_trusteeship_date_Specified(Index: Integer): boolean;
     procedure Setremove_trustee_date(Index: Integer; const ATXSDate: TXSDate);
     function  remove_trustee_date_Specified(Index: Integer): boolean;
+    procedure Setrelease_trustee_date(Index: Integer; const ATXSDate: TXSDate);
+    function  release_trustee_date_Specified(Index: Integer): boolean;
     procedure Setdocuments(Index: Integer; const Adocuments6: documents6);
     function  documents_Specified(Index: Integer): boolean;
   public
@@ -887,6 +911,7 @@ type
     property establish_trusteeship_date:   TXSDate       Index (IS_OPTN) read Festablish_trusteeship_date write Setestablish_trusteeship_date stored establish_trusteeship_date_Specified;
     property termination_trusteeship_date: TXSDate       Index (IS_OPTN) read Ftermination_trusteeship_date write Settermination_trusteeship_date stored termination_trusteeship_date_Specified;
     property remove_trustee_date:          TXSDate       Index (IS_OPTN) read Fremove_trustee_date write Setremove_trustee_date stored remove_trustee_date_Specified;
+    property release_trustee_date:         TXSDate       Index (IS_OPTN) read Frelease_trustee_date write Setrelease_trustee_date stored release_trustee_date_Specified;
     property documents:                    documents6    Index (IS_OPTN) read Fdocuments write Setdocuments stored documents_Specified;
   end;
 
@@ -1927,6 +1952,73 @@ type
     property documents:     documents24  Index (IS_OPTN) read Fdocuments write Setdocuments stored documents_Specified;
   end;
 
+
+
+  // ************************************************************************ //
+  // XML       : Disability, global, <complexType>
+  // Namespace : http://gisun.agatsystem.by/common/types/
+  // ************************************************************************ //
+  Disability = class(TRemotable)
+  private
+    Faccess: Classifier;
+    Faccess_Specified: boolean;
+    Fdisability_group: Classifier;
+    Fdisability_group_Specified: boolean;
+    Fdisability_date: TXSDate;
+    Fdisability_date_Specified: boolean;
+    Fdisability_term: TXSDate;
+    Fdisability_term_Specified: boolean;
+    Fdisability_cause: Classifier;
+    Fdisability_cause_Specified: boolean;
+    Factive: Boolean;
+    Factive_Specified: boolean;
+    procedure Setaccess(Index: Integer; const AClassifier: Classifier);
+    function  access_Specified(Index: Integer): boolean;
+    procedure Setdisability_group(Index: Integer; const AClassifier: Classifier);
+    function  disability_group_Specified(Index: Integer): boolean;
+    procedure Setdisability_date(Index: Integer; const ATXSDate: TXSDate);
+    function  disability_date_Specified(Index: Integer): boolean;
+    procedure Setdisability_term(Index: Integer; const ATXSDate: TXSDate);
+    function  disability_term_Specified(Index: Integer): boolean;
+    procedure Setdisability_cause(Index: Integer; const AClassifier: Classifier);
+    function  disability_cause_Specified(Index: Integer): boolean;
+    procedure Setactive(Index: Integer; const ABoolean: Boolean);
+    function  active_Specified(Index: Integer): boolean;
+  public
+    destructor Destroy; override;
+  published
+    property access:           Classifier  Index (IS_OPTN) read Faccess write Setaccess stored access_Specified;
+    property disability_group: Classifier  Index (IS_OPTN) read Fdisability_group write Setdisability_group stored disability_group_Specified;
+    property disability_date:  TXSDate     Index (IS_OPTN) read Fdisability_date write Setdisability_date stored disability_date_Specified;
+    property disability_term:  TXSDate     Index (IS_OPTN) read Fdisability_term write Setdisability_term stored disability_term_Specified;
+    property disability_cause: Classifier  Index (IS_OPTN) read Fdisability_cause write Setdisability_cause stored disability_cause_Specified;
+    property active:           Boolean     Index (IS_OPTN) read Factive write Setactive stored active_Specified;
+  end;
+
+  documents25 = array of document2;             { "http://gisun.agatsystem.by/common/types/"[Cplx] }
+
+
+  // ************************************************************************ //
+  // XML       : disabilityInfo, global, <complexType>
+  // Namespace : http://gisun.agatsystem.by/common/types/
+  // ************************************************************************ //
+  disabilityInfo = class(TRemotable)
+  private
+    Fdisability_data: Disability;
+    Fdisability_data_Specified: boolean;
+    Fdocuments: documents25;
+    Fdocuments_Specified: boolean;
+    procedure Setdisability_data(Index: Integer; const ADisability: Disability);
+    function  disability_data_Specified(Index: Integer): boolean;
+    procedure Setdocuments(Index: Integer; const Adocuments25: documents25);
+    function  documents_Specified(Index: Integer): boolean;
+  public
+    destructor Destroy; override;
+  published
+    property disability_data: Disability   Index (IS_OPTN) read Fdisability_data write Setdisability_data stored disability_data_Specified;
+    property documents:       documents25  Index (IS_OPTN) read Fdocuments write Setdocuments stored documents_Specified;
+  end;
+
   query_params = array of param;                { "http://gisun.agatsystem.by/common/types/"[Cplx] }
 
 
@@ -2003,7 +2095,8 @@ type
   insurances2 = array of insurances_info;       { "http://gisun.agatsystem.by/common/ws/"[Cplx] }
   taxies2    = array of taxies_info;            { "http://gisun.agatsystem.by/common/ws/"[Cplx] }
   militaries2 = array of militaries_info;       { "http://gisun.agatsystem.by/common/ws/"[Cplx] }
-  documents25 = array of document2;             { "http://gisun.agatsystem.by/common/ws/"[Cplx] }
+  disabilities2 = array of disability_info;     { "http://gisun.agatsystem.by/common/ws/"[Cplx] }
+  documents26 = array of document2;             { "http://gisun.agatsystem.by/common/ws/"[Cplx] }
 
 
   // ************************************************************************ //
@@ -2014,20 +2107,43 @@ type
   private
     Fpersonal_data: PersonalData;
     Fpersonal_data_Specified: boolean;
-    Fdocuments: documents25;
+    Fdocuments: documents26;
     Fdocuments_Specified: boolean;
     procedure Setpersonal_data(Index: Integer; const APersonalData: PersonalData);
     function  personal_data_Specified(Index: Integer): boolean;
-    procedure Setdocuments(Index: Integer; const Adocuments25: documents25);
+    procedure Setdocuments(Index: Integer; const Adocuments26: documents26);
     function  documents_Specified(Index: Integer): boolean;
   public
     destructor Destroy; override;
   published
     property personal_data: PersonalData  Index (IS_OPTN or IS_UNQL) read Fpersonal_data write Setpersonal_data stored personal_data_Specified;
-    property documents:     documents25   Index (IS_OPTN or IS_UNQL) read Fdocuments write Setdocuments stored documents_Specified;
+    property documents:     documents26   Index (IS_OPTN or IS_UNQL) read Fdocuments write Setdocuments stored documents_Specified;
   end;
 
   prnt_rights2 = array of prnt_rights_data;     { "http://gisun.agatsystem.by/common/ws/"[Cplx] }
+
+
+  // ************************************************************************ //
+  // XML       : LexemStatus, global, <complexType>
+  // Namespace : http://gisun.agatsystem.by/common/ws/
+  // ************************************************************************ //
+  LexemStatus = class(TRemotable)
+  private
+    Flexema: LangValueList;
+    Flexema_Specified: boolean;
+    Factive: Boolean;
+    Factive_Specified: boolean;
+    procedure Setlexema(Index: Integer; const ALangValueList: LangValueList);
+    function  lexema_Specified(Index: Integer): boolean;
+    procedure Setactive(Index: Integer; const ABoolean: Boolean);
+    function  active_Specified(Index: Integer): boolean;
+  public
+    destructor Destroy; override;
+  published
+    property lexema: LangValueList  Index (IS_OPTN) read Flexema write Setlexema stored lexema_Specified;
+    property active: Boolean        Index (IS_OPTN) read Factive write Setactive stored active_Specified;
+  end;
+
 
 
   // ************************************************************************ //
@@ -2084,27 +2200,6 @@ type
 
 
   // ************************************************************************ //
-  // XML       : WsException, global, <complexType>
-  // Namespace : http://gisun.agatsystem.by/common/ws/
-  // Info      : Fault
-  // ************************************************************************ //
-  WsException = class(ERemotableException)
-  private
-    Fcover: MessageCover;
-    Ferror_list: ErrorList;
-    Ferror_list_Specified: boolean;
-    procedure Seterror_list(Index: Integer; const AErrorList: ErrorList);
-    function  error_list_Specified(Index: Integer): boolean;
-  public
-    destructor Destroy; override;
-  published
-    property cover:      MessageCover  read Fcover write Fcover;
-    property error_list: ErrorList     Index (IS_OPTN) read Ferror_list write Seterror_list stored error_list_Specified;
-  end;
-
-
-
-  // ************************************************************************ //
   // XML       : WsError, global, <complexType>
   // Namespace : http://gisun.agatsystem.by/common/ws/
   // ************************************************************************ //
@@ -2145,6 +2240,27 @@ type
     property check_name:    WideString  Index (IS_OPTN) read Fcheck_name write Setcheck_name stored check_name_Specified;
     property description:   WideString  Index (IS_OPTN) read Fdescription write Setdescription stored description_Specified;
     property identif:       WideString  Index (IS_OPTN) read Fidentif write Setidentif stored identif_Specified;
+  end;
+
+
+
+  // ************************************************************************ //
+  // XML       : WsException, global, <complexType>
+  // Namespace : http://gisun.agatsystem.by/common/ws/
+  // Info      : Fault
+  // ************************************************************************ //
+  WsException = class(ERemotableException)
+  private
+    Fcover: MessageCover;
+    Ferror_list: ErrorList;
+    Ferror_list_Specified: boolean;
+    procedure Seterror_list(Index: Integer; const AErrorList: ErrorList);
+    function  error_list_Specified(Index: Integer): boolean;
+  public
+    destructor Destroy; override;
+  published
+    property cover:      MessageCover  read Fcover write Fcover;
+    property error_list: ErrorList     Index (IS_OPTN) read Ferror_list write Seterror_list stored error_list_Specified;
   end;
 
 
@@ -2356,29 +2472,6 @@ type
   end;
 
   LexemStatusList = array of lexemStatus2;      { "http://gisun.agatsystem.by/common/ws/"[Lit][GblCplx] }
-
-
-  // ************************************************************************ //
-  // XML       : LexemStatus, global, <complexType>
-  // Namespace : http://gisun.agatsystem.by/common/ws/
-  // ************************************************************************ //
-  LexemStatus = class(TRemotable)
-  private
-    Flexema: LangValueList;
-    Flexema_Specified: boolean;
-    Factive: Boolean;
-    Factive_Specified: boolean;
-    procedure Setlexema(Index: Integer; const ALangValueList: LangValueList);
-    function  lexema_Specified(Index: Integer): boolean;
-    procedure Setactive(Index: Integer; const ABoolean: Boolean);
-    function  active_Specified(Index: Integer): boolean;
-  public
-    destructor Destroy; override;
-  published
-    property lexema: LangValueList  Index (IS_OPTN) read Flexema write Setlexema stored lexema_Specified;
-    property active: Boolean        Index (IS_OPTN) read Factive write Setactive stored active_Specified;
-  end;
-
 
 
   // ************************************************************************ //
@@ -2705,6 +2798,17 @@ type
 
 
   // ************************************************************************ //
+  // XML       : disability_info, alias
+  // Namespace : http://gisun.agatsystem.by/common/types/
+  // ************************************************************************ //
+  disability_info = class(disabilityInfo)
+  private
+  published
+  end;
+
+
+
+  // ************************************************************************ //
   // XML       : document, alias
   // Namespace : http://gisun.agatsystem.by/common/types/
   // ************************************************************************ //
@@ -2889,6 +2993,8 @@ type
     Ftaxies_Specified: boolean;
     Fmilitaries: militaries2;
     Fmilitaries_Specified: boolean;
+    Fdisabilities: disabilities2;
+    Fdisabilities_Specified: boolean;
     procedure Setpersonal_history(Index: Integer; const Apersonal_history: personal_history);
     function  personal_history_Specified(Index: Integer): boolean;
     procedure Setnationality_data(Index: Integer; const AArray_Of_Citizenship: Array_Of_Citizenship);
@@ -2933,6 +3039,8 @@ type
     function  taxies_Specified(Index: Integer): boolean;
     procedure Setmilitaries(Index: Integer; const Amilitaries2: militaries2);
     function  militaries_Specified(Index: Integer): boolean;
+    procedure Setdisabilities(Index: Integer; const Adisabilities2: disabilities2);
+    function  disabilities_Specified(Index: Integer): boolean;
   public
     destructor Destroy; override;
   published
@@ -2958,6 +3066,7 @@ type
     property insurances:             insurances2           Index (IS_OPTN or IS_UNQL) read Finsurances write Setinsurances stored insurances_Specified;
     property taxies:                 taxies2               Index (IS_OPTN or IS_UNQL) read Ftaxies write Settaxies stored taxies_Specified;
     property militaries:             militaries2           Index (IS_OPTN or IS_UNQL) read Fmilitaries write Setmilitaries stored militaries_Specified;
+    property disabilities:           disabilities2         Index (IS_OPTN or IS_UNQL) read Fdisabilities write Setdisabilities stored disabilities_Specified;
   end;
 
 
@@ -3046,6 +3155,8 @@ type
     Ftaxies_Specified: boolean;
     Fmilitaries: militaries;
     Fmilitaries_Specified: boolean;
+    Fdisabilities: disabilities;
+    Fdisabilities_Specified: boolean;
     Fhistory: History;
     Fhistory_Specified: boolean;
     procedure Setaccess(Index: Integer; const AClassifier: Classifier);
@@ -3126,6 +3237,8 @@ type
     function  taxies_Specified(Index: Integer): boolean;
     procedure Setmilitaries(Index: Integer; const Amilitaries: militaries);
     function  militaries_Specified(Index: Integer): boolean;
+    procedure Setdisabilities(Index: Integer; const Adisabilities: disabilities);
+    function  disabilities_Specified(Index: Integer): boolean;
     procedure Sethistory(Index: Integer; const AHistory: History);
     function  history_Specified(Index: Integer): boolean;
   public
@@ -3170,6 +3283,7 @@ type
     property insurances:             insurances            Index (IS_OPTN) read Finsurances write Setinsurances stored insurances_Specified;
     property taxies:                 taxies                Index (IS_OPTN) read Ftaxies write Settaxies stored taxies_Specified;
     property militaries:             militaries            Index (IS_OPTN) read Fmilitaries write Setmilitaries stored militaries_Specified;
+    property disabilities:           disabilities          Index (IS_OPTN) read Fdisabilities write Setdisabilities stored disabilities_Specified;
     property history:                History               Index (IS_OPTN) read Fhistory write Sethistory stored history_Specified;
   end;
 
@@ -3329,46 +3443,46 @@ type
 
   // ************************************************************************ //
   // Namespace : http://gisun.agatsystem.by/common/ws/
-  // soapAction: |urn:getPersonalData||urn:getPersonIdentif|urn:getPersonList
+  // soapAction: ||urn:getPersonIdentif|urn:getPersonList|urn:getPersonalData
   // transport : http://schemas.xmlsoap.org/soap/http
   // style     : document
   // binding   : wsBinding
   // service   : ws
   // port      : ws
-  // URL       : http://todes.by:8888/gisun-inf/common/ws
+  // URL       : http://127.0.0.1:8000/gisun-inf/common/ws
   // ************************************************************************ //
   GisunCommonWs = interface(IInvokable)
   ['{16FFF6A9-8631-D0C4-E000-7E8955849292}']
 
-    // Cannot unwrap:
-    //     - Input element wrapper name does not match operation's name
-    //     - More than one strictly out element was found
-    function  getPersonalData(const registerRequest: register_request): register_response; stdcall;
-
-    // Cannot unwrap:
+    // Cannot unwrap: 
     //     - The input part is not a complex type
     function  getLexemStatus(const getLexemStatus: getLexemStatus): getLexemStatusResponse; stdcall;
     function  getClassifierChange(const getClassifierChange: getClassifierChange): getClassifierChangeResponse; stdcall;
 
-    // Cannot unwrap:
+    // Cannot unwrap: 
     //     - Input element wrapper name does not match operation's name
     //     - More than one strictly out element was found
     function  getPersonIdentif(const registerPersonIdentifRequest: register_person_identif_request): register_response; stdcall;
 
-    // Cannot unwrap:
+    // Cannot unwrap: 
     //     - Input element wrapper name does not match operation's name
     //     - More than one strictly out element was found
     function  getPersonList(const registerPersonListRequest: register_person_list_request): register_response; stdcall;
+
+    // Cannot unwrap: 
+    //     - Input element wrapper name does not match operation's name
+    //     - More than one strictly out element was found
+    function  getPersonalData(const registerRequest: register_request): register_response; stdcall;
   end;
 
-function GetGisunCommonWsImpl(UseWSDL: Boolean=System.False; Addr: string=''; HTTPRIO: THTTPRIO = nil): GisunCommonWs;
-function GetGisunWs(Addr, Proxy: string; RIO: THTTPRIO): GisunCommonWs;
+function GetGisunCommonWsImpl(UseWSDL: Boolean=System.False; Addr: string=''; HTTPRIO: THTTPRIO = nil): GisunCommonWs;  // vadim
+function GetGisunWs(Addr, Proxy: string; RIO: THTTPRIO): GisunCommonWs;  // vadim
 
 
 implementation
   uses SysUtils;
 
-function GetGisunWs(Addr, Proxy: string; RIO: THTTPRIO): GisunCommonWs;
+function GetGisunWs(Addr, Proxy: string; RIO: THTTPRIO): GisunCommonWs;  // vadim
 begin
    Result := nil;
    if Addr<>'' then begin
@@ -3381,8 +3495,8 @@ end;
 
 function GetGisunCommonWsImpl(UseWSDL: Boolean; Addr: string; HTTPRIO: THTTPRIO): GisunCommonWs;
 const
-  defWSDL = 'http://todes.by:8888/gisun-inf/common/ws?wsdl';
-  defURL  = 'http://todes.by:8888/gisun-inf/common/ws';
+  defWSDL = 'http://127.0.0.1:8000/gisun-inf/common/ws?wsdl';
+  defURL  = 'http://127.0.0.1:8000/gisun-inf/common/ws';
   defSvc  = 'ws';
   defPrt  = 'ws';
 var
@@ -3416,56 +3530,96 @@ begin
 end;
 
 
-destructor ActData.Destroy;
+destructor Classifier.Destroy;
+var
+  I: Integer;
 begin
-  FreeAndNil(Fact_type);
-  FreeAndNil(Fauthority);
-  FreeAndNil(Fdate);
+  for I := 0 to Length(Flexema)-1 do
+    FreeAndNil(Flexema[I]);
+  SetLength(Flexema, 0);
+  for I := 0 to Length(Fparents)-1 do
+    FreeAndNil(Fparents[I]);
+  SetLength(Fparents, 0);
+  FreeAndNil(Fbegin_date);
+  FreeAndNil(Fend_date);
   inherited Destroy;
 end;
 
-procedure ActData.Setact_type(Index: Integer; const AClassifier: Classifier);
+procedure Classifier.Setcode(Index: Integer; const AWideString: WideString);
 begin
-  Fact_type := AClassifier;
-  Fact_type_Specified := True;
+  Fcode := AWideString;
+  Fcode_Specified := True;
 end;
 
-function ActData.act_type_Specified(Index: Integer): boolean;
+function Classifier.code_Specified(Index: Integer): boolean;
 begin
-  Result := Fact_type_Specified;
+  Result := Fcode_Specified;
 end;
 
-procedure ActData.Setauthority(Index: Integer; const AClassifier: Classifier);
+procedure Classifier.Settype_(Index: Integer; const AInteger: Integer);
 begin
-  Fauthority := AClassifier;
-  Fauthority_Specified := True;
+  Ftype_ := AInteger;
+  Ftype__Specified := True;
 end;
 
-function ActData.authority_Specified(Index: Integer): boolean;
+function Classifier.type__Specified(Index: Integer): boolean;
 begin
-  Result := Fauthority_Specified;
+  Result := Ftype__Specified;
 end;
 
-procedure ActData.Setdate(Index: Integer; const ATXSDate: TXSDate);
+procedure Classifier.Setlexema(Index: Integer; const ALangValueList: LangValueList);
 begin
-  Fdate := ATXSDate;
-  Fdate_Specified := True;
+  Flexema := ALangValueList;
+  Flexema_Specified := True;
 end;
 
-function ActData.date_Specified(Index: Integer): boolean;
+function Classifier.lexema_Specified(Index: Integer): boolean;
 begin
-  Result := Fdate_Specified;
+  Result := Flexema_Specified;
 end;
 
-procedure ActData.Setnumber(Index: Integer; const AWideString: WideString);
+procedure Classifier.Setactive(Index: Integer; const ABoolean: Boolean);
 begin
-  Fnumber := AWideString;
-  Fnumber_Specified := True;
+  Factive := ABoolean;
+  Factive_Specified := True;
 end;
 
-function ActData.number_Specified(Index: Integer): boolean;
+function Classifier.active_Specified(Index: Integer): boolean;
 begin
-  Result := Fnumber_Specified;
+  Result := Factive_Specified;
+end;
+
+procedure Classifier.Setbegin_date(Index: Integer; const ATXSDateTime: TXSDateTime);
+begin
+  Fbegin_date := ATXSDateTime;
+  Fbegin_date_Specified := True;
+end;
+
+function Classifier.begin_date_Specified(Index: Integer): boolean;
+begin
+  Result := Fbegin_date_Specified;
+end;
+
+procedure Classifier.Setend_date(Index: Integer; const ATXSDateTime: TXSDateTime);
+begin
+  Fend_date := ATXSDateTime;
+  Fend_date_Specified := True;
+end;
+
+function Classifier.end_date_Specified(Index: Integer): boolean;
+begin
+  Result := Fend_date_Specified;
+end;
+
+procedure Classifier.Setparents(Index: Integer; const AClassifierList: ClassifierList);
+begin
+  Fparents := AClassifierList;
+  Fparents_Specified := True;
+end;
+
+function Classifier.parents_Specified(Index: Integer): boolean;
+begin
+  Result := Fparents_Specified;
 end;
 
 destructor Document.Destroy;
@@ -3578,96 +3732,56 @@ begin
   Result := Factive_Specified;
 end;
 
-destructor Classifier.Destroy;
-var
-  I: Integer;
+destructor ActData.Destroy;
 begin
-  for I := 0 to Length(Flexema)-1 do
-    FreeAndNil(Flexema[I]);
-  SetLength(Flexema, 0);
-  for I := 0 to Length(Fparents)-1 do
-    FreeAndNil(Fparents[I]);
-  SetLength(Fparents, 0);
-  FreeAndNil(Fbegin_date);
-  FreeAndNil(Fend_date);
+  FreeAndNil(Fact_type);
+  FreeAndNil(Fauthority);
+  FreeAndNil(Fdate);
   inherited Destroy;
 end;
 
-procedure Classifier.Setcode(Index: Integer; const AWideString: WideString);
+procedure ActData.Setact_type(Index: Integer; const AClassifier: Classifier);
 begin
-  Fcode := AWideString;
-  Fcode_Specified := True;
+  Fact_type := AClassifier;
+  Fact_type_Specified := True;
 end;
 
-function Classifier.code_Specified(Index: Integer): boolean;
+function ActData.act_type_Specified(Index: Integer): boolean;
 begin
-  Result := Fcode_Specified;
+  Result := Fact_type_Specified;
 end;
 
-procedure Classifier.Settype_(Index: Integer; const AInteger: Integer);
+procedure ActData.Setauthority(Index: Integer; const AClassifier: Classifier);
 begin
-  Ftype_ := AInteger;
-  Ftype__Specified := True;
+  Fauthority := AClassifier;
+  Fauthority_Specified := True;
 end;
 
-function Classifier.type__Specified(Index: Integer): boolean;
+function ActData.authority_Specified(Index: Integer): boolean;
 begin
-  Result := Ftype__Specified;
+  Result := Fauthority_Specified;
 end;
 
-procedure Classifier.Setlexema(Index: Integer; const ALangValueList: LangValueList);
+procedure ActData.Setdate(Index: Integer; const ATXSDate: TXSDate);
 begin
-  Flexema := ALangValueList;
-  Flexema_Specified := True;
+  Fdate := ATXSDate;
+  Fdate_Specified := True;
 end;
 
-function Classifier.lexema_Specified(Index: Integer): boolean;
+function ActData.date_Specified(Index: Integer): boolean;
 begin
-  Result := Flexema_Specified;
+  Result := Fdate_Specified;
 end;
 
-procedure Classifier.Setactive(Index: Integer; const ABoolean: Boolean);
+procedure ActData.Setnumber(Index: Integer; const AWideString: WideString);
 begin
-  Factive := ABoolean;
-  Factive_Specified := True;
+  Fnumber := AWideString;
+  Fnumber_Specified := True;
 end;
 
-function Classifier.active_Specified(Index: Integer): boolean;
+function ActData.number_Specified(Index: Integer): boolean;
 begin
-  Result := Factive_Specified;
-end;
-
-procedure Classifier.Setbegin_date(Index: Integer; const ATXSDateTime: TXSDateTime);
-begin
-  Fbegin_date := ATXSDateTime;
-  Fbegin_date_Specified := True;
-end;
-
-function Classifier.begin_date_Specified(Index: Integer): boolean;
-begin
-  Result := Fbegin_date_Specified;
-end;
-
-procedure Classifier.Setend_date(Index: Integer; const ATXSDateTime: TXSDateTime);
-begin
-  Fend_date := ATXSDateTime;
-  Fend_date_Specified := True;
-end;
-
-function Classifier.end_date_Specified(Index: Integer): boolean;
-begin
-  Result := Fend_date_Specified;
-end;
-
-procedure Classifier.Setparents(Index: Integer; const AClassifierList: ClassifierList);
-begin
-  Fparents := AClassifierList;
-  Fparents_Specified := True;
-end;
-
-function Classifier.parents_Specified(Index: Integer): boolean;
-begin
-  Result := Fparents_Specified;
+  Result := Fnumber_Specified;
 end;
 
 destructor birth_place.Destroy;
@@ -3841,6 +3955,94 @@ begin
   Result := Factive_Specified;
 end;
 
+destructor photoInfo.Destroy;
+var
+  I: Integer;
+begin
+  for I := 0 to Length(Fdocuments)-1 do
+    FreeAndNil(Fdocuments[I]);
+  SetLength(Fdocuments, 0);
+  inherited Destroy;
+end;
+
+procedure photoInfo.Setphoto(Index: Integer; const ATByteDynArray: TByteDynArray);
+begin
+  Fphoto := ATByteDynArray;
+  Fphoto_Specified := True;
+end;
+
+function photoInfo.photo_Specified(Index: Integer): boolean;
+begin
+  Result := Fphoto_Specified;
+end;
+
+procedure photoInfo.Setdocuments(Index: Integer; const Adocuments: documents);
+begin
+  Fdocuments := Adocuments;
+  Fdocuments_Specified := True;
+end;
+
+function photoInfo.documents_Specified(Index: Integer): boolean;
+begin
+  Result := Fdocuments_Specified;
+end;
+
+destructor Nationality2.Destroy;
+var
+  I: Integer;
+begin
+  for I := 0 to Length(Fdocuments)-1 do
+    FreeAndNil(Fdocuments[I]);
+  SetLength(Fdocuments, 0);
+  FreeAndNil(Faccess);
+  FreeAndNil(Fnationality);
+  inherited Destroy;
+end;
+
+procedure Nationality2.Setaccess(Index: Integer; const AClassifier: Classifier);
+begin
+  Faccess := AClassifier;
+  Faccess_Specified := True;
+end;
+
+function Nationality2.access_Specified(Index: Integer): boolean;
+begin
+  Result := Faccess_Specified;
+end;
+
+procedure Nationality2.Setnationality(Index: Integer; const AClassifier: Classifier);
+begin
+  Fnationality := AClassifier;
+  Fnationality_Specified := True;
+end;
+
+function Nationality2.nationality_Specified(Index: Integer): boolean;
+begin
+  Result := Fnationality_Specified;
+end;
+
+procedure Nationality2.Setdocuments(Index: Integer; const Adocuments2: documents2);
+begin
+  Fdocuments := Adocuments2;
+  Fdocuments_Specified := True;
+end;
+
+function Nationality2.documents_Specified(Index: Integer): boolean;
+begin
+  Result := Fdocuments_Specified;
+end;
+
+procedure Nationality2.Setactive(Index: Integer; const ABoolean: Boolean);
+begin
+  Factive := ABoolean;
+  Factive_Specified := True;
+end;
+
+function Nationality2.active_Specified(Index: Integer): boolean;
+begin
+  Result := Factive_Specified;
+end;
+
 destructor Address.Destroy;
 begin
   FreeAndNil(Faccess);
@@ -3855,6 +4057,7 @@ begin
   FreeAndNil(Fstreet);
   FreeAndNil(Freg_date);
   FreeAndNil(Freg_date_till);
+  FreeAndNil(FaddrNum);
   inherited Destroy;
 end;
 
@@ -4034,6 +4237,28 @@ begin
   Result := Fsign_away_Specified;
 end;
 
+procedure Address.SetaddrNum(Index: Integer; const ATXSDecimal: TXSDecimal);
+begin
+  FaddrNum := ATXSDecimal;
+  FaddrNum_Specified := True;
+end;
+
+function Address.addrNum_Specified(Index: Integer): boolean;
+begin
+  Result := FaddrNum_Specified;
+end;
+
+procedure Address.SetateAddress(Index: Integer; const AWideString: WideString);
+begin
+  FateAddress := AWideString;
+  FateAddress_Specified := True;
+end;
+
+function Address.ateAddress_Specified(Index: Integer): boolean;
+begin
+  Result := FateAddress_Specified;
+end;
+
 procedure Address.Setactive(Index: Integer; const ABoolean: Boolean);
 begin
   Factive := ABoolean;
@@ -4041,94 +4266,6 @@ begin
 end;
 
 function Address.active_Specified(Index: Integer): boolean;
-begin
-  Result := Factive_Specified;
-end;
-
-destructor photoInfo.Destroy;
-var
-  I: Integer;
-begin
-  for I := 0 to Length(Fdocuments)-1 do
-    FreeAndNil(Fdocuments[I]);
-  SetLength(Fdocuments, 0);
-  inherited Destroy;
-end;
-
-procedure photoInfo.Setphoto(Index: Integer; const ATByteDynArray: TByteDynArray);
-begin
-  Fphoto := ATByteDynArray;
-  Fphoto_Specified := True;
-end;
-
-function photoInfo.photo_Specified(Index: Integer): boolean;
-begin
-  Result := Fphoto_Specified;
-end;
-
-procedure photoInfo.Setdocuments(Index: Integer; const Adocuments: documents);
-begin
-  Fdocuments := Adocuments;
-  Fdocuments_Specified := True;
-end;
-
-function photoInfo.documents_Specified(Index: Integer): boolean;
-begin
-  Result := Fdocuments_Specified;
-end;
-
-destructor Nationality2.Destroy;
-var
-  I: Integer;
-begin
-  for I := 0 to Length(Fdocuments)-1 do
-    FreeAndNil(Fdocuments[I]);
-  SetLength(Fdocuments, 0);
-  FreeAndNil(Faccess);
-  FreeAndNil(Fnationality);
-  inherited Destroy;
-end;
-
-procedure Nationality2.Setaccess(Index: Integer; const AClassifier: Classifier);
-begin
-  Faccess := AClassifier;
-  Faccess_Specified := True;
-end;
-
-function Nationality2.access_Specified(Index: Integer): boolean;
-begin
-  Result := Faccess_Specified;
-end;
-
-procedure Nationality2.Setnationality(Index: Integer; const AClassifier: Classifier);
-begin
-  Fnationality := AClassifier;
-  Fnationality_Specified := True;
-end;
-
-function Nationality2.nationality_Specified(Index: Integer): boolean;
-begin
-  Result := Fnationality_Specified;
-end;
-
-procedure Nationality2.Setdocuments(Index: Integer; const Adocuments2: documents2);
-begin
-  Fdocuments := Adocuments2;
-  Fdocuments_Specified := True;
-end;
-
-function Nationality2.documents_Specified(Index: Integer): boolean;
-begin
-  Result := Fdocuments_Specified;
-end;
-
-procedure Nationality2.Setactive(Index: Integer; const ABoolean: Boolean);
-begin
-  Factive := ABoolean;
-  Factive_Specified := True;
-end;
-
-function Nationality2.active_Specified(Index: Integer): boolean;
 begin
   Result := Factive_Specified;
 end;
@@ -4556,6 +4693,7 @@ begin
   FreeAndNil(Festablish_guardianship_date);
   FreeAndNil(Ftermination_guardianship_date);
   FreeAndNil(Fremove_guardian_date);
+  FreeAndNil(Frelease_guardian_date);
   inherited Destroy;
 end;
 
@@ -4603,6 +4741,17 @@ begin
   Result := Fremove_guardian_date_Specified;
 end;
 
+procedure guardianshipInfo.Setrelease_guardian_date(Index: Integer; const ATXSDate: TXSDate);
+begin
+  Frelease_guardian_date := ATXSDate;
+  Frelease_guardian_date_Specified := True;
+end;
+
+function guardianshipInfo.release_guardian_date_Specified(Index: Integer): boolean;
+begin
+  Result := Frelease_guardian_date_Specified;
+end;
+
 procedure guardianshipInfo.Setdocuments(Index: Integer; const Adocuments5: documents5);
 begin
   Fdocuments := Adocuments5;
@@ -4625,6 +4774,7 @@ begin
   FreeAndNil(Festablish_trusteeship_date);
   FreeAndNil(Ftermination_trusteeship_date);
   FreeAndNil(Fremove_trustee_date);
+  FreeAndNil(Frelease_trustee_date);
   inherited Destroy;
 end;
 
@@ -4670,6 +4820,17 @@ end;
 function trusteeshipInfo.remove_trustee_date_Specified(Index: Integer): boolean;
 begin
   Result := Fremove_trustee_date_Specified;
+end;
+
+procedure trusteeshipInfo.Setrelease_trustee_date(Index: Integer; const ATXSDate: TXSDate);
+begin
+  Frelease_trustee_date := ATXSDate;
+  Frelease_trustee_date_Specified := True;
+end;
+
+function trusteeshipInfo.release_trustee_date_Specified(Index: Integer): boolean;
+begin
+  Result := Frelease_trustee_date_Specified;
 end;
 
 procedure trusteeshipInfo.Setdocuments(Index: Integer; const Adocuments6: documents6);
@@ -6190,6 +6351,115 @@ begin
   Result := Fdocuments_Specified;
 end;
 
+destructor Disability.Destroy;
+begin
+  FreeAndNil(Faccess);
+  FreeAndNil(Fdisability_group);
+  FreeAndNil(Fdisability_date);
+  FreeAndNil(Fdisability_term);
+  FreeAndNil(Fdisability_cause);
+  inherited Destroy;
+end;
+
+procedure Disability.Setaccess(Index: Integer; const AClassifier: Classifier);
+begin
+  Faccess := AClassifier;
+  Faccess_Specified := True;
+end;
+
+function Disability.access_Specified(Index: Integer): boolean;
+begin
+  Result := Faccess_Specified;
+end;
+
+procedure Disability.Setdisability_group(Index: Integer; const AClassifier: Classifier);
+begin
+  Fdisability_group := AClassifier;
+  Fdisability_group_Specified := True;
+end;
+
+function Disability.disability_group_Specified(Index: Integer): boolean;
+begin
+  Result := Fdisability_group_Specified;
+end;
+
+procedure Disability.Setdisability_date(Index: Integer; const ATXSDate: TXSDate);
+begin
+  Fdisability_date := ATXSDate;
+  Fdisability_date_Specified := True;
+end;
+
+function Disability.disability_date_Specified(Index: Integer): boolean;
+begin
+  Result := Fdisability_date_Specified;
+end;
+
+procedure Disability.Setdisability_term(Index: Integer; const ATXSDate: TXSDate);
+begin
+  Fdisability_term := ATXSDate;
+  Fdisability_term_Specified := True;
+end;
+
+function Disability.disability_term_Specified(Index: Integer): boolean;
+begin
+  Result := Fdisability_term_Specified;
+end;
+
+procedure Disability.Setdisability_cause(Index: Integer; const AClassifier: Classifier);
+begin
+  Fdisability_cause := AClassifier;
+  Fdisability_cause_Specified := True;
+end;
+
+function Disability.disability_cause_Specified(Index: Integer): boolean;
+begin
+  Result := Fdisability_cause_Specified;
+end;
+
+procedure Disability.Setactive(Index: Integer; const ABoolean: Boolean);
+begin
+  Factive := ABoolean;
+  Factive_Specified := True;
+end;
+
+function Disability.active_Specified(Index: Integer): boolean;
+begin
+  Result := Factive_Specified;
+end;
+
+destructor disabilityInfo.Destroy;
+var
+  I: Integer;
+begin
+  for I := 0 to Length(Fdocuments)-1 do
+    FreeAndNil(Fdocuments[I]);
+  SetLength(Fdocuments, 0);
+  FreeAndNil(Fdisability_data);
+  inherited Destroy;
+end;
+
+procedure disabilityInfo.Setdisability_data(Index: Integer; const ADisability: Disability);
+begin
+  Fdisability_data := ADisability;
+  Fdisability_data_Specified := True;
+end;
+
+function disabilityInfo.disability_data_Specified(Index: Integer): boolean;
+begin
+  Result := Fdisability_data_Specified;
+end;
+
+procedure disabilityInfo.Setdocuments(Index: Integer; const Adocuments25: documents25);
+begin
+  Fdocuments := Adocuments25;
+  Fdocuments_Specified := True;
+end;
+
+function disabilityInfo.documents_Specified(Index: Integer): boolean;
+begin
+  Result := Fdocuments_Specified;
+end;
+
 destructor MessageCover.Destroy;
 var
   I: Integer;
@@ -6287,15 +6557,47 @@ begin
   Result := Fpersonal_data_Specified;
 end;
 
-procedure personalDataInfo.Setdocuments(Index: Integer; const Adocuments25: documents25);
+procedure personalDataInfo.Setdocuments(Index: Integer; const Adocuments26: documents26);
 begin
-  Fdocuments := Adocuments25;
+  Fdocuments := Adocuments26;
   Fdocuments_Specified := True;
 end;
 
 function personalDataInfo.documents_Specified(Index: Integer): boolean;
 begin
   Result := Fdocuments_Specified;
+end;
+
+destructor LexemStatus.Destroy;
+var
+  I: Integer;
+begin
+  for I := 0 to Length(Flexema)-1 do
+    FreeAndNil(Flexema[I]);
+  SetLength(Flexema, 0);
+  inherited Destroy;
+end;
+
+procedure LexemStatus.Setlexema(Index: Integer; const ALangValueList: LangValueList);
+begin
+  Flexema := ALangValueList;
+  Flexema_Specified := True;
+end;
+
+function LexemStatus.lexema_Specified(Index: Integer): boolean;
+begin
+  Result := Flexema_Specified;
+end;
+
+procedure LexemStatus.Setactive(Index: Integer; const ABoolean: Boolean);
+begin
+  Factive := ABoolean;
+  Factive_Specified := True;
+end;
+
+function LexemStatus.active_Specified(Index: Integer): boolean;
+begin
+  Result := Factive_Specified;
 end;
 
 constructor RegisterResponse.Create;
@@ -6315,28 +6617,6 @@ destructor ResponsePerson.Destroy;
 begin
   FreeAndNil(Fdata);
   inherited Destroy;
-end;
-
-destructor WsException.Destroy;
-var
-  I: Integer;
-begin
-  for I := 0 to Length(Ferror_list)-1 do
-    FreeAndNil(Ferror_list[I]);
-  SetLength(Ferror_list, 0);
-  FreeAndNil(Fcover);
-  inherited Destroy;
-end;
-
-procedure WsException.Seterror_list(Index: Integer; const AErrorList: ErrorList);
-begin
-  Ferror_list := AErrorList;
-  Ferror_list_Specified := True;
-end;
-
-function WsException.error_list_Specified(Index: Integer): boolean;
-begin
-  Result := Ferror_list_Specified;
 end;
 
 destructor WsError.Destroy;
@@ -6409,6 +6689,28 @@ end;
 function WsError.identif_Specified(Index: Integer): boolean;
 begin
   Result := Fidentif_Specified;
+end;
+
+destructor WsException.Destroy;
+var
+  I: Integer;
+begin
+  for I := 0 to Length(Ferror_list)-1 do
+    FreeAndNil(Ferror_list[I]);
+  SetLength(Ferror_list, 0);
+  FreeAndNil(Fcover);
+  inherited Destroy;
+end;
+
+procedure WsException.Seterror_list(Index: Integer; const AErrorList: ErrorList);
+begin
+  Ferror_list := AErrorList;
+  Ferror_list_Specified := True;
+end;
+
+function WsException.error_list_Specified(Index: Integer): boolean;
+begin
+  Result := Ferror_list_Specified;
 end;
 
 constructor RegisterPersonListRequest.Create;
@@ -6714,38 +7016,6 @@ begin
   inherited Destroy;
 end;
 
-destructor LexemStatus.Destroy;
-var
-  I: Integer;
-begin
-  for I := 0 to Length(Flexema)-1 do
-    FreeAndNil(Flexema[I]);
-  SetLength(Flexema, 0);
-  inherited Destroy;
-end;
-
-procedure LexemStatus.Setlexema(Index: Integer; const ALangValueList: LangValueList);
-begin
-  Flexema := ALangValueList;
-  Flexema_Specified := True;
-end;
-
-function LexemStatus.lexema_Specified(Index: Integer): boolean;
-begin
-  Result := Flexema_Specified;
-end;
-
-procedure LexemStatus.Setactive(Index: Integer; const ABoolean: Boolean);
-begin
-  Factive := ABoolean;
-  Factive_Specified := True;
-end;
-
-function LexemStatus.active_Specified(Index: Integer): boolean;
-begin
-  Result := Factive_Specified;
-end;
-
 constructor ClassifierChangeRequest.Create;
 begin
   inherited Create;
@@ -6826,6 +7096,9 @@ begin
   for I := 0 to Length(Fmilitaries)-1 do
     FreeAndNil(Fmilitaries[I]);
   SetLength(Fmilitaries, 0);
+  for I := 0 to Length(Fdisabilities)-1 do
+    FreeAndNil(Fdisabilities[I]);
+  SetLength(Fdisabilities, 0);
   FreeAndNil(Ffamily);
   FreeAndNil(Femployment_status_info);
   FreeAndNil(Fcourts);
@@ -7076,6 +7349,17 @@ begin
   Result := Fmilitaries_Specified;
 end;
 
+procedure History.Setdisabilities(Index: Integer; const Adisabilities2: disabilities2);
+begin
+  Fdisabilities := Adisabilities2;
+  Fdisabilities_Specified := True;
+end;
+
+function History.disabilities_Specified(Index: Integer): boolean;
+begin
+  Result := Fdisabilities_Specified;
+end;
+
 destructor PersonalData.Destroy;
 var
   I: Integer;
@@ -7131,6 +7415,9 @@ begin
   for I := 0 to Length(Fmilitaries)-1 do
     FreeAndNil(Fmilitaries[I]);
   SetLength(Fmilitaries, 0);
+  for I := 0 to Length(Fdisabilities)-1 do
+    FreeAndNil(Fdisabilities[I]);
+  SetLength(Fdisabilities, 0);
   FreeAndNil(Faccess);
   FreeAndNil(Fsex);
   FreeAndNil(Fbirth_place);
@@ -7575,6 +7862,17 @@ begin
   Result := Fmilitaries_Specified;
 end;
 
+procedure PersonalData.Setdisabilities(Index: Integer; const Adisabilities: disabilities);
+begin
+  Fdisabilities := Adisabilities;
+  Fdisabilities_Specified := True;
+end;
+
+function PersonalData.disabilities_Specified(Index: Integer): boolean;
+begin
+  Result := Fdisabilities_Specified;
+end;
+
 procedure PersonalData.Sethistory(Index: Integer; const AHistory: History);
 begin
   Fhistory := AHistory;
@@ -7844,21 +8142,20 @@ end;
 
 initialization
   InvRegistry.RegisterInterface(TypeInfo(GisunCommonWs), 'http://gisun.agatsystem.by/common/ws/', 'UTF-8');
-  InvRegistry.RegisterAllSOAPActions(TypeInfo(GisunCommonWs), '|urn:getPersonalData||urn:getPersonIdentif|urn:getPersonList');
+  InvRegistry.RegisterAllSOAPActions(TypeInfo(GisunCommonWs), '||urn:getPersonIdentif|urn:getPersonList|urn:getPersonalData');
   InvRegistry.RegisterInvokeOptions(TypeInfo(GisunCommonWs), ioDocument);
-  InvRegistry.RegisterInvokeOptions(TypeInfo(GisunCommonWs), ioLiteral);
-  RemClassRegistry.RegisterXSClass(ActData, 'http://gisun.agatsystem.by/common/types/', 'ActData');
-  RemClassRegistry.RegisterXSClass(Document, 'http://gisun.agatsystem.by/common/types/', 'Document');
+  InvRegistry.RegisterInvokeOptions(TypeInfo(GisunCommonWs), ioLiteral);    // vadim
   RemClassRegistry.RegisterXSInfo(TypeInfo(LangValueList), 'http://gisun.agatsystem.by/common/types/', 'LangValueList');
   RemClassRegistry.RegisterXSInfo(TypeInfo(ClassifierList), 'http://gisun.agatsystem.by/common/types/', 'ClassifierList');
   RemClassRegistry.RegisterSerializeOptions(TypeInfo(ClassifierList), [xoLiteralParam]);
   RemClassRegistry.RegisterXSClass(Classifier, 'http://gisun.agatsystem.by/common/types/', 'Classifier');
   RemClassRegistry.RegisterExternalPropName(TypeInfo(Classifier), 'type_', 'type');
   RemClassRegistry.RegisterXSClass(LangValue, 'http://gisun.agatsystem.by/common/types/', 'LangValue');
+  RemClassRegistry.RegisterXSClass(Document, 'http://gisun.agatsystem.by/common/types/', 'Document');
+  RemClassRegistry.RegisterXSClass(ActData, 'http://gisun.agatsystem.by/common/types/', 'ActData');
   RemClassRegistry.RegisterXSClass(birth_place, 'http://gisun.agatsystem.by/common/types/', 'birth_place');
   RemClassRegistry.RegisterXSClass(Citizenship, 'http://gisun.agatsystem.by/common/types/', 'Citizenship');
   RemClassRegistry.RegisterXSInfo(TypeInfo(nationality), 'http://gisun.agatsystem.by/common/types/', 'nationality');
-  RemClassRegistry.RegisterXSClass(Address, 'http://gisun.agatsystem.by/common/types/', 'Address');
   RemClassRegistry.RegisterXSInfo(TypeInfo(temp_addresses), 'http://gisun.agatsystem.by/common/types/', 'temp_addresses');
   RemClassRegistry.RegisterXSInfo(TypeInfo(deaths), 'http://gisun.agatsystem.by/common/types/', 'deaths');
   RemClassRegistry.RegisterXSInfo(TypeInfo(burials), 'http://gisun.agatsystem.by/common/types/', 'burials');
@@ -7872,10 +8169,12 @@ initialization
   RemClassRegistry.RegisterXSInfo(TypeInfo(insurances), 'http://gisun.agatsystem.by/common/types/', 'insurances');
   RemClassRegistry.RegisterXSInfo(TypeInfo(taxies), 'http://gisun.agatsystem.by/common/types/', 'taxies');
   RemClassRegistry.RegisterXSInfo(TypeInfo(militaries), 'http://gisun.agatsystem.by/common/types/', 'militaries');
+  RemClassRegistry.RegisterXSInfo(TypeInfo(disabilities), 'http://gisun.agatsystem.by/common/types/', 'disabilities');
   RemClassRegistry.RegisterXSInfo(TypeInfo(documents), 'http://gisun.agatsystem.by/common/types/', 'documents');
   RemClassRegistry.RegisterXSClass(photoInfo, 'http://gisun.agatsystem.by/common/types/', 'photoInfo');
   RemClassRegistry.RegisterXSInfo(TypeInfo(documents2), 'http://gisun.agatsystem.by/common/types/', 'documents2', 'documents');
   RemClassRegistry.RegisterXSClass(Nationality2, 'http://gisun.agatsystem.by/common/types/', 'Nationality2', 'Nationality');
+  RemClassRegistry.RegisterXSClass(Address, 'http://gisun.agatsystem.by/common/types/', 'Address');
   RemClassRegistry.RegisterXSClass(Death, 'http://gisun.agatsystem.by/common/types/', 'Death');
   RemClassRegistry.RegisterXSInfo(TypeInfo(documents3), 'http://gisun.agatsystem.by/common/types/', 'documents3', 'documents');
   RemClassRegistry.RegisterXSClass(deathInfo, 'http://gisun.agatsystem.by/common/types/', 'deathInfo');
@@ -7948,6 +8247,9 @@ initialization
   RemClassRegistry.RegisterXSClass(Military, 'http://gisun.agatsystem.by/common/types/', 'Military');
   RemClassRegistry.RegisterXSInfo(TypeInfo(documents24), 'http://gisun.agatsystem.by/common/types/', 'documents24', 'documents');
   RemClassRegistry.RegisterXSClass(militaryInfo, 'http://gisun.agatsystem.by/common/types/', 'militaryInfo');
+  RemClassRegistry.RegisterXSClass(Disability, 'http://gisun.agatsystem.by/common/types/', 'Disability');
+  RemClassRegistry.RegisterXSInfo(TypeInfo(documents25), 'http://gisun.agatsystem.by/common/types/', 'documents25', 'documents');
+  RemClassRegistry.RegisterXSClass(disabilityInfo, 'http://gisun.agatsystem.by/common/types/', 'disabilityInfo');
   RemClassRegistry.RegisterXSInfo(TypeInfo(query_params), 'http://gisun.agatsystem.by/common/types/', 'query_params');
   RemClassRegistry.RegisterXSClass(MessageCover, 'http://gisun.agatsystem.by/common/types/', 'MessageCover');
   RemClassRegistry.RegisterXSClass(QueryParam, 'http://gisun.agatsystem.by/common/types/', 'QueryParam');
@@ -7967,16 +8269,18 @@ initialization
   RemClassRegistry.RegisterXSInfo(TypeInfo(insurances2), 'http://gisun.agatsystem.by/common/ws/', 'insurances2', 'insurances');
   RemClassRegistry.RegisterXSInfo(TypeInfo(taxies2), 'http://gisun.agatsystem.by/common/ws/', 'taxies2', 'taxies');
   RemClassRegistry.RegisterXSInfo(TypeInfo(militaries2), 'http://gisun.agatsystem.by/common/ws/', 'militaries2', 'militaries');
-  RemClassRegistry.RegisterXSInfo(TypeInfo(documents25), 'http://gisun.agatsystem.by/common/ws/', 'documents25', 'documents');
+  RemClassRegistry.RegisterXSInfo(TypeInfo(disabilities2), 'http://gisun.agatsystem.by/common/ws/', 'disabilities2', 'disabilities');
+  RemClassRegistry.RegisterXSInfo(TypeInfo(documents26), 'http://gisun.agatsystem.by/common/ws/', 'documents26', 'documents');
   RemClassRegistry.RegisterXSClass(personalDataInfo, 'http://gisun.agatsystem.by/common/ws/', 'personalDataInfo');
   RemClassRegistry.RegisterXSInfo(TypeInfo(prnt_rights2), 'http://gisun.agatsystem.by/common/ws/', 'prnt_rights2', 'prnt_rights');
+  RemClassRegistry.RegisterXSClass(LexemStatus, 'http://gisun.agatsystem.by/common/ws/', 'LexemStatus');
   RemClassRegistry.RegisterXSClass(RegisterResponse, 'http://gisun.agatsystem.by/common/ws/', 'RegisterResponse');
   RemClassRegistry.RegisterSerializeOptions(RegisterResponse, [xoLiteralParam]);
   RemClassRegistry.RegisterXSClass(ResponsePerson, 'http://gisun.agatsystem.by/common/ws/', 'ResponsePerson');
   RemClassRegistry.RegisterXSClass(ResponseIdentif, 'http://gisun.agatsystem.by/common/ws/', 'ResponseIdentif');
   RemClassRegistry.RegisterXSInfo(TypeInfo(ErrorList), 'http://gisun.agatsystem.by/common/ws/', 'ErrorList');
-  RemClassRegistry.RegisterXSClass(WsException, 'http://gisun.agatsystem.by/common/ws/', 'WsException');
   RemClassRegistry.RegisterXSClass(WsError, 'http://gisun.agatsystem.by/common/ws/', 'WsError');
+  RemClassRegistry.RegisterXSClass(WsException, 'http://gisun.agatsystem.by/common/ws/', 'WsException');
   RemClassRegistry.RegisterXSClass(RegisterPersonListRequest, 'http://gisun.agatsystem.by/common/ws/', 'RegisterPersonListRequest');
   RemClassRegistry.RegisterSerializeOptions(RegisterPersonListRequest, [xoLiteralParam]);
   RemClassRegistry.RegisterXSClass(PersonListRequest, 'http://gisun.agatsystem.by/common/ws/', 'PersonListRequest');
@@ -7987,7 +8291,6 @@ initialization
   RemClassRegistry.RegisterXSClass(IdentifRequest, 'http://gisun.agatsystem.by/common/ws/', 'IdentifRequest');
   RemClassRegistry.RegisterXSInfo(TypeInfo(LexemStatusList), 'http://gisun.agatsystem.by/common/ws/', 'LexemStatusList');
   RemClassRegistry.RegisterSerializeOptions(TypeInfo(LexemStatusList), [xoLiteralParam]);
-  RemClassRegistry.RegisterXSClass(LexemStatus, 'http://gisun.agatsystem.by/common/ws/', 'LexemStatus');
   RemClassRegistry.RegisterXSClass(ClassifierChangeRequest, 'http://gisun.agatsystem.by/common/ws/', 'ClassifierChangeRequest');
   RemClassRegistry.RegisterExternalPropName(TypeInfo(ClassifierChangeRequest), 'type_', 'type');
   RemClassRegistry.RegisterSerializeOptions(ClassifierChangeRequest, [xoLiteralParam]);
@@ -8021,6 +8324,7 @@ initialization
   RemClassRegistry.RegisterXSClass(insurances_info, 'http://gisun.agatsystem.by/common/types/', 'insurances_info');
   RemClassRegistry.RegisterXSClass(taxies_info, 'http://gisun.agatsystem.by/common/types/', 'taxies_info');
   RemClassRegistry.RegisterXSClass(militaries_info, 'http://gisun.agatsystem.by/common/types/', 'militaries_info');
+  RemClassRegistry.RegisterXSClass(disability_info, 'http://gisun.agatsystem.by/common/types/', 'disability_info');
   RemClassRegistry.RegisterXSClass(document2, 'http://gisun.agatsystem.by/common/types/', 'document2', 'document');
   RemClassRegistry.RegisterXSClass(prnt_rights_data, 'http://gisun.agatsystem.by/common/types/', 'prnt_rights_data');
   RemClassRegistry.RegisterXSClass(employment_period, 'http://gisun.agatsystem.by/common/types/', 'employment_period');

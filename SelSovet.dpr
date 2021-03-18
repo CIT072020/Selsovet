@@ -71,7 +71,6 @@ uses
   fGurnTalonPrib in 'fGurnTalonPrib.pas' {fmGurnTalonPrib},
   fOpisTables in 'fOpisTables.pas' {fmOpisTables},
   uDate in 'uDate.pas',
-  fmQueryUserParamsEditor in '..\..\Delphi7\Projects\Forms\fmQueryUserParamsEditor.pas' {fQueryUserParamsEditor},
   fZapisRogd in 'fZapisRogd.pas' {fmZapisRogd},
   fGurnDBrak in 'fGurnDBrak.pas' {fmGurnDBrak},
   fDeclBrak in 'fDeclBrak.pas' {fmDeclBrak},
@@ -104,7 +103,7 @@ uses
   fChoicePokaz in 'fChoicePokaz.pas' {fmChoicePokaz},
   fShablon in 'fShablon.pas' {fmShablon},
   fSimpleDialog in 'fSimpleDialog.pas' {fmSimpleDialog},
-  fAddLic in 'fAddLic.pas' {fmAddLic},
+  fChVigrDelo in 'fChVigrDelo.pas' {fmChVigrDelo},
   fLookUp in 'fLookUp.pas' {fmLookUp},
   fChoiceNasel in 'fChoiceNasel.pas' {fmChoiceNasel},
   fChoiceUlica in 'fChoiceUlica.pas' {fmChoiceUlica},
@@ -151,7 +150,7 @@ uses
   fTalonPrib in 'fTalonPrib.pas' {fmTalonPrib},
   fZapisSmert in 'fZapisSmert.pas' {fmZapisSmert},
   fRunSprav_UserPropt in 'fRunSprav_UserPropt.pas' {fmRunSprav_UserProp},
-  fDeclRegistr in 'fDeclRegistr.pas' {fmDeclRegistr},
+  fRegDogN in 'fRegDogN.pas' {fmRegDogN},
   fMultiChoice in 'fMultiChoice.pas' {fmMultiChoice},
   fGurnOwners in 'fGurnOwners.pas' {fmGurnOwners},
   fVidGit in 'fVidGit.pas' {fmVidGit},
@@ -172,13 +171,16 @@ uses
   fZapisOpeka in 'fZapisOpeka.pas' {fmZapisOpeka},
   uSMDO in 'uSMDO.pas',
   fMsgList in 'fMsgList.pas' {fmMsgList},
-  fEditRecSprZAH in 'fEditRecSprZAH.pas' {fmEditRecSprZAH},
+  fEditRecSprPunkt in 'fEditRecSprPunkt.pas' {fmEditRecSprPunkt},
   fChVigrZAH in 'fChVigrZAH.pas' {fmChVigrZAH},
   fChDir in 'fChDir.pas' {fmChDir},
   fDeliverStatus in 'fDeliverStatus.pas' {fmDeliverStatus},
   fRecordGrid in 'fRecordGrid.pas' {fmRecordGrid},
   fSetPropUsers in 'fSetPropUsers.pas' {fmSetPropUsers},
-  uFuncRegDoc in 'uFuncRegDoc.pas';
+  uFuncRegDoc in 'uFuncRegDoc.pas',
+  fDeclRegistr in 'fDeclRegistr.pas' {fmDeclRegistr},
+  fChoiceNomen in 'fChoiceNomen.pas' {fmChoiceNomen},
+  fEditRecSprZAH in 'fEditRecSprZAH.pas' {fmEditRecSprZAH};
 
 {$R *.RES}
 
@@ -227,16 +229,9 @@ begin
   MemCheckLogFileName := 'F:\Projects\SelSovet\MemLog.txt';
   MemChk;
   {$ENDIF}
-//  GlobalTask.LogFile.MaxSize:=1000000;
-  GlobalTask.LogFile.IncDateTime := true;
-  GlobalTask.LogFile.DateTimeFormatStr := 'dd.mm.yyyy hh:nn  ';
-  GlobalTask.LogFile.LoggingActive := GlobalTask.ParamAsBoolean('LOG_ACTIVE');
-  GlobalTask.LogFile.LogFileName   := CheckSleshN(GlobalTask.PathWorkDir)+'LogFile.txt';
-
   strUser     :='';
   strPassword :='';
   strPIN:='';
-
   lRestore := false;
   if ParamCount>0 then begin
     for i:=1 to ParamCount do begin
@@ -263,9 +258,6 @@ begin
   fmMain.IDProg := 'SELSOVET';
   GlobalTask.SetWorkParam('TYPEBASE','SELSOVET');   // переменная используется в update.pas
 
-  fmMain.Log_WriteException        := GlobalTask.ParamAsBoolean('LOG_EXCEPTION');
-  fmMain.Log_WriteOwner            := GlobalTask.ParamAsBoolean('LOG_OWNER');
-
   Application.OnException := fmMain.MyHandleException;
   GlobalTask.OnBeforeSaveParams := fmMain.BeforeSaveParamsEvent;
   GlobalTask.OnUpdateParams := fmMain.UpdateParamsEvent;
@@ -285,7 +277,7 @@ begin
   end;
 //  ShowMessage('After Create dmBase');
 
-  if not dmBase.CheckPathBase then begin
+  if not dmBase.CheckPathBase then begin  // установаливается NameFileParamTask и создается TaskParam !!!
     lOk := false;
     lExit := true;
   end else begin
@@ -293,6 +285,14 @@ begin
     lOk := true;
   end;
 //  ShowMessage('After Check Path Base');
+//  GlobalTask.LogFile.MaxSize:=1000000;
+  fmMain.Log_WriteException      := GlobalTask.ParamAsBoolean('LOG_EXCEPTION');
+  fmMain.Log_WriteOwner          := GlobalTask.ParamAsBoolean('LOG_OWNER');
+  GlobalTask.LogFile.IncDateTime := true;
+  GlobalTask.LogFile.DateTimeFormatStr := 'dd.mm.yyyy hh:nn  ';
+  GlobalTask.LogFile.LoggingActive:=dmBase.LogActive; //  !!!  читается из SysParams.ini
+  GlobalTask.FLogTypes:=dmBase.LogTypes;                //  !!!  читается из SysParams.ini
+  GlobalTask.LogFile.LogFileName   := CheckSleshN(GlobalTask.PathWorkDir)+'LogFile.txt';
 
   while lOk do begin
     i:=fmSplash.Left-8;
@@ -310,7 +310,9 @@ begin
 
       if dmBase.OpenConnect(strErr) then begin
         Role.SystemAdmin := false;
-        lOk := false;
+        lOk:=false;
+        GlobalTask.WriteToLogFile('>>>>Начат сеанс пользователя '+strUser+'; версия: ПО '+GetVersionProgram(5)+', базы '+dmBase.GetVersionBase(dmBase.AdsConnection));
+        GlobalTask.WriteToLogFile(strUser, nil, LOG_SQL);
         dmBase.SimpleDisconnect;
 
         Role.User := dmBase.UserID;
@@ -328,9 +330,7 @@ begin
             Role.Status := rsUser;
           end;
         end;
-
         if dmBase.FullOpen(dmBase.GlobalPar.RelConnectPath, dmBase.GlobalPar.RelSharedConnectPath ) then begin
-
 //          if not dmBase.LockBase then begin
 //            ShowMessage('Not Lock');
 //          end;
@@ -471,7 +471,6 @@ begin
     dmBase.SprRazdel   := fmMain.mtSprRazdel;
     dmBase.SprProperty := fmMain.mtSprProperty;
 //  GlobalTask.TypeWinEditSpr:=twMDI;
-    GlobalTask.LogFile.WriteToLogFile('Начат сеанс пользователя '+strUser);
     {$IFDEF USE_TEMPLATE}
       fmMain.TemplateInterface.DefaultScript := GlobalTask.Script;
       fmMain.TemplateInterface.DefaultDatabaseName := 'dmBase.AdsConnection';
@@ -498,6 +497,7 @@ begin
 
       fmMain.CheckFormMen;  // для того чтобы fmMen и dmMen никогда небыли nil
 
+      fmMain.EnabledEVA:=false;      // читать из параметров
 
       {$IFDEF SMDO}
         SMDO := TSMDO.Create;

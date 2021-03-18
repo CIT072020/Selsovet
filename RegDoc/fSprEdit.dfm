@@ -1,6 +1,6 @@
 object fmSprEdit: TfmSprEdit
-  Left = 501
-  Top = 226
+  Left = 565
+  Top = 218
   Width = 549
   Height = 458
   Color = clBtnFace
@@ -160,6 +160,9 @@ object fmSprEdit: TfmSprEdit
       UseMultiTitle = True
       VTitleMargin = 5
       OnDblClick = dgTableDblClick
+      OnEnter = dgTableEnter
+      OnExit = dgTableExit
+      OnKeyDown = dgTableKeyDown
       OnKeyPress = dgTableKeyPress
       Columns = <
         item
@@ -175,8 +178,9 @@ object fmSprEdit: TfmSprEdit
       Align = alLeft
       Constraints.MinWidth = 50
       Ctl3D = True
-      CustomPlusMinus = True
       DoInplaceEdit = False
+      DragExpandDelay = 1000
+      DragImageMode = dimOne
       ExpandOnDblClick = False
       FullRowSelect = False
       HeaderHeight = 21
@@ -229,9 +233,17 @@ object fmSprEdit: TfmSprEdit
       UseSystemHintColors = True
       TextColor = clBtnText
       OnAfterSelectionChange = tvTreeAfterSelectionChange
+      OnDragTargetChange = tvTreeDragTargetChange
       OnItemExpand = tvTreeItemExpand
       OnItemCollapse = tvTreeItemCollapse
+      OnEnter = tvTreeEnter
+      OnExit = tvTreeExit
+      OnDragDrop = tvTreeDragDrop
+      OnDragOver = tvTreeDragOver
+      OnStartDrag = tvTreeStartDrag
+      OnEndDrag = tvTreeEndDrag
       OnDblClick = tvTreeDblClick
+      OnKeyDown = tvTreeKeyDown
     end
   end
   object paBottom: TPanel

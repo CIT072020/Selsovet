@@ -4,7 +4,7 @@ inherited fmRastBrak: TfmRastBrak
   ActiveControl = edNomer
   Caption = #1047#1072#1087#1080#1089#1100' '#1072#1082#1090#1072' '#1086' '#1088#1072#1089#1090#1086#1088#1078#1077#1085#1080#1080' '#1073#1088#1072#1082#1072
   ClientHeight = 725
-  ClientWidth = 888
+  ClientWidth = 898
   Constraints.MinHeight = 640
   Constraints.MinWidth = 848
   Icon.Data = {
@@ -23,7 +23,7 @@ inherited fmRastBrak: TfmRastBrak
   TextHeight = 13
   inherited sp: TSplitter
     Top = 26
-    Width = 888
+    Width = 898
     Visible = False
   end
   object Label22: TLabel [1]
@@ -35,12 +35,12 @@ inherited fmRastBrak: TfmRastBrak
   end
   inherited pnTable: TPanel
     Top = 53
-    Width = 888
+    Width = 898
     Height = 650
     Visible = False
   end
   inherited TBDock: TTBDock
-    Width = 888
+    Width = 898
     inherited TBToolbar: TTBToolbar
       inherited TBSubmenuTmp: TTBSubmenuItem [2]
       end
@@ -116,7 +116,7 @@ inherited fmRastBrak: TfmRastBrak
         Visible = True
       end
       inherited TBToolbarOrgan: TTBToolbar
-        Left = 884
+        Left = 894
         Top = 22
         inherited edZAGS: TDBEditEh
           TabStop = False
@@ -126,7 +126,7 @@ inherited fmRastBrak: TfmRastBrak
   end
   inherited sb: TScrollBox
     Top = 53
-    Width = 888
+    Width = 898
     Height = 650
     Align = alClient
     TabOrder = 2
@@ -142,7 +142,7 @@ inherited fmRastBrak: TfmRastBrak
     object pc: TPageControl
       Left = 0
       Top = 34
-      Width = 888
+      Width = 898
       Height = 616
       ActivePage = tsTail1
       Align = alClient
@@ -159,7 +159,7 @@ inherited fmRastBrak: TfmRastBrak
       object tsTail1: TTabSheet
         Caption = #1063#1072#1089#1090#1100' 1'
         DesignSize = (
-          880
+          890
           585)
         object Label1: TLabel
           Left = 9
@@ -1191,7 +1191,7 @@ inherited fmRastBrak: TfmRastBrak
           Visible = True
         end
         object btPadeg: TButton
-          Left = 543
+          Left = 553
           Top = 3
           Width = 23
           Height = 22
@@ -1390,7 +1390,7 @@ inherited fmRastBrak: TfmRastBrak
           OnCheckDrawRequiredState = ENG_edON_IDENTIFCheckDrawRequiredState
         end
         object N_F_cbBelorus: TDBCheckBoxEh
-          Left = 829
+          Left = 839
           Top = -2
           Width = 48
           Height = 16
@@ -1892,7 +1892,7 @@ inherited fmRastBrak: TfmRastBrak
         Caption = #1063#1072#1089#1090#1100' 2'
         ImageIndex = 1
         DesignSize = (
-          880
+          890
           585)
         object Label24: TLabel
           Left = 8
@@ -2070,14 +2070,14 @@ inherited fmRastBrak: TfmRastBrak
           ParentFont = False
         end
         object Label69: TLabel
-          Left = 378
+          Left = 400
           Top = 130
           Width = 13
           Height = 16
           Caption = #1086#1090
         end
         object Label70: TLabel
-          Left = 720
+          Left = 743
           Top = 130
           Width = 13
           Height = 16
@@ -2153,7 +2153,7 @@ inherited fmRastBrak: TfmRastBrak
         object lbDolgRuk: TvchDBText
           Left = 11
           Top = 483
-          Width = 623
+          Width = 633
           Height = 17
           Alignment = taRightJustify
           Anchors = [akLeft, akTop, akRight]
@@ -2169,7 +2169,7 @@ inherited fmRastBrak: TfmRastBrak
         object lbDolgSpec: TvchDBText
           Left = 11
           Top = 512
-          Width = 623
+          Width = 633
           Height = 17
           Alignment = taRightJustify
           Anchors = [akLeft, akTop, akRight]
@@ -2185,7 +2185,7 @@ inherited fmRastBrak: TfmRastBrak
         object edOTMETKA: TDBEditEh
           Left = 128
           Top = 436
-          Width = 743
+          Width = 753
           Height = 39
           Anchors = [akLeft, akTop, akRight]
           AutoSize = False
@@ -2204,7 +2204,7 @@ inherited fmRastBrak: TfmRastBrak
           OnDblClick = TBItemEditMemoClick
         end
         object edRukov: TDBEditEh
-          Left = 641
+          Left = 651
           Top = 478
           Width = 230
           Height = 26
@@ -2229,7 +2229,7 @@ inherited fmRastBrak: TfmRastBrak
           OnEnter = edRukovEnter
         end
         object edSpec: TDBEditEh
-          Left = 641
+          Left = 651
           Top = 507
           Width = 230
           Height = 26
@@ -2383,7 +2383,7 @@ inherited fmRastBrak: TfmRastBrak
         object edON_POSHLINA: TDBEditEh
           Left = 284
           Top = 70
-          Width = 214
+          Width = 251
           Height = 26
           Hint = #1050#1074#1080#1090#1072#1085#1094#1080#1103
           DataField = 'ON_POSHLINA'
@@ -2399,9 +2399,9 @@ inherited fmRastBrak: TfmRastBrak
           Visible = True
         end
         object edONA_POSHLINA: TDBEditEh
-          Left = 624
+          Left = 628
           Top = 70
-          Width = 213
+          Width = 251
           Height = 26
           Hint = #1050#1074#1080#1090#1072#1085#1094#1080#1103
           DataField = 'ONA_POSHLINA'
@@ -2455,7 +2455,7 @@ inherited fmRastBrak: TfmRastBrak
         object edIzmen: TDBEditEh
           Left = 128
           Top = 537
-          Width = 743
+          Width = 753
           Height = 45
           HelpType = htKeyword
           HelpContext = 999
@@ -2538,7 +2538,7 @@ inherited fmRastBrak: TfmRastBrak
         object edON_DOKUMENT: TDBEditEh
           Left = 205
           Top = 152
-          Width = 293
+          Width = 330
           Height = 26
           DataField = 'ON_DOKUMENT'
           DataSource = dsDokument
@@ -2555,7 +2555,7 @@ inherited fmRastBrak: TfmRastBrak
         object edONA_DOKUMENT: TDBEditEh
           Left = 549
           Top = 152
-          Width = 293
+          Width = 330
           Height = 26
           DataField = 'ONA_DOKUMENT'
           DataSource = dsDokument
@@ -2572,7 +2572,7 @@ inherited fmRastBrak: TfmRastBrak
         object edON_DOK_TYPE: TDBComboBoxEh
           Left = 205
           Top = 98
-          Width = 293
+          Width = 330
           Height = 26
           DataField = 'ON_DOK_TYPE'
           DataSource = dsDokument
@@ -2589,7 +2589,7 @@ inherited fmRastBrak: TfmRastBrak
         object edON_DOK_SERIA: TDBEditEh
           Left = 205
           Top = 125
-          Width = 54
+          Width = 62
           Height = 26
           CharCase = ecUpperCase
           DataField = 'ON_DOK_SERIA'
@@ -2605,9 +2605,9 @@ inherited fmRastBrak: TfmRastBrak
           Visible = True
         end
         object edON_DOK_NOMER: TDBEditEh
-          Left = 271
+          Left = 279
           Top = 125
-          Width = 99
+          Width = 110
           Height = 26
           DataField = 'ON_DOK_NOMER'
           DataSource = dsDokument
@@ -2622,9 +2622,9 @@ inherited fmRastBrak: TfmRastBrak
           Visible = True
         end
         object edON_DOK_DATE: TDBDateTimeEditEh
-          Left = 398
+          Left = 425
           Top = 126
-          Width = 100
+          Width = 110
           Height = 26
           DataField = 'ON_DOK_DATE'
           DataSource = dsDokument
@@ -2642,7 +2642,7 @@ inherited fmRastBrak: TfmRastBrak
         object edONA_DOK_SERIA: TDBEditEh
           Left = 549
           Top = 125
-          Width = 54
+          Width = 62
           Height = 26
           CharCase = ecUpperCase
           DataField = 'ONA_DOK_SERIA'
@@ -2660,7 +2660,7 @@ inherited fmRastBrak: TfmRastBrak
         object edONA_DOK_TYPE: TDBComboBoxEh
           Left = 549
           Top = 98
-          Width = 293
+          Width = 330
           Height = 26
           DataField = 'ONA_DOK_TYPE'
           DataSource = dsDokument
@@ -2675,9 +2675,9 @@ inherited fmRastBrak: TfmRastBrak
           Visible = True
         end
         object edONA_DOK_NOMER: TDBEditEh
-          Left = 613
+          Left = 623
           Top = 125
-          Width = 99
+          Width = 110
           Height = 26
           DataField = 'ONA_DOK_NOMER'
           DataSource = dsDokument
@@ -2692,9 +2692,9 @@ inherited fmRastBrak: TfmRastBrak
           Visible = True
         end
         object edONA_DOK_DATE: TDBDateTimeEditEh
-          Left = 742
+          Left = 769
           Top = 125
-          Width = 100
+          Width = 110
           Height = 26
           DataField = 'ONA_DOK_DATE'
           DataSource = dsDokument
@@ -2712,7 +2712,7 @@ inherited fmRastBrak: TfmRastBrak
         object edON_OBRAZ: TDBComboBoxEh
           Left = 205
           Top = 16
-          Width = 293
+          Width = 330
           Height = 26
           HelpContext = 888
           DataField = 'ON_OBRAZ'
@@ -2730,7 +2730,7 @@ inherited fmRastBrak: TfmRastBrak
         object edONA_OBRAZ: TDBComboBoxEh
           Left = 549
           Top = 16
-          Width = 301
+          Width = 330
           Height = 26
           DataField = 'ONA_OBRAZ'
           DataSource = dsDokument
@@ -2865,7 +2865,7 @@ inherited fmRastBrak: TfmRastBrak
         object pnDeti: TPanel
           Left = 0
           Top = 260
-          Width = 879
+          Width = 889
           Height = 89
           Anchors = [akLeft, akTop, akRight]
           BevelOuter = bvNone
@@ -2873,7 +2873,7 @@ inherited fmRastBrak: TfmRastBrak
           object gbDeti: TGroupBox
             Left = 0
             Top = 0
-            Width = 838
+            Width = 848
             Height = 89
             Align = alClient
             Caption = ' 14. '#1054#1073#1097#1080#1077' '#1076#1077#1090#1080' '#1085#1077' '#1076#1086#1089#1090#1080#1075#1096#1080#1077' 18 '#1083#1077#1090' '
@@ -2887,7 +2887,7 @@ inherited fmRastBrak: TfmRastBrak
             object GridDeti: TDBGridEh
               Left = 2
               Top = 15
-              Width = 834
+              Width = 844
               Height = 72
               Align = alClient
               DataSource = dsDeti
@@ -2945,7 +2945,7 @@ inherited fmRastBrak: TfmRastBrak
             end
           end
           object Panel2: TPanel
-            Left = 838
+            Left = 848
             Top = 0
             Width = 41
             Height = 89
@@ -3349,7 +3349,7 @@ inherited fmRastBrak: TfmRastBrak
         Caption = #1057#1074#1080#1076#1077#1090#1077#1083#1100#1089#1090#1074#1086
         ImageIndex = 4
         DesignSize = (
-          880
+          890
           585)
         object Label77: TLabel
           Left = 12
@@ -4082,7 +4082,7 @@ inherited fmRastBrak: TfmRastBrak
           Visible = True
         end
         object N_F_cbPovtor: TDBCheckBoxEh
-          Left = 764
+          Left = 774
           Top = 5
           Width = 99
           Height = 13
@@ -4113,12 +4113,12 @@ inherited fmRastBrak: TfmRastBrak
     object pnMain: TPanel
       Left = 0
       Top = 0
-      Width = 888
+      Width = 898
       Height = 34
       Align = alTop
       TabOrder = 0
       DesignSize = (
-        888
+        898
         34)
       object lbNomer: TLabel
         Left = 8
@@ -4147,7 +4147,7 @@ inherited fmRastBrak: TfmRastBrak
         ParentFont = False
       end
       object ImageGISUN: TImage
-        Left = 859
+        Left = 869
         Top = 6
         Width = 20
         Height = 20
@@ -4299,11 +4299,11 @@ inherited fmRastBrak: TfmRastBrak
   end
   inherited StBar: TStatusBar
     Top = 703
-    Width = 888
+    Width = 898
   end
   inherited pnAdd: TPanel
     Top = 29
-    Width = 888
+    Width = 898
   end
   inherited dsDokument: TDataSource
     Left = 416
@@ -5883,8 +5883,8 @@ inherited fmRastBrak: TfmRastBrak
     Top = 90
   end
   inherited dsPovtor: TDataSource
-    Left = 512
-    Top = 242
+    Left = 496
+    Top = 290
   end
   inherited dsRN: TDataSource
     Left = 792

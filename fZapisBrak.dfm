@@ -2251,14 +2251,14 @@ inherited fmZapisBrak: TfmZapisBrak
           ParentFont = False
         end
         object Label69: TLabel
-          Left = 332
+          Left = 390
           Top = 76
           Width = 12
           Height = 13
           Caption = #1086#1090
         end
         object Label70: TLabel
-          Left = 673
+          Left = 759
           Top = 76
           Width = 12
           Height = 13
@@ -2352,7 +2352,7 @@ inherited fmZapisBrak: TfmZapisBrak
         object N_F_lbON_SEM: TvchDBText
           Left = 366
           Top = 20
-          Width = 155
+          Width = 163
           Height = 15
           DataField = 'ON_SEM'
           DataSource = dsDokument
@@ -2365,9 +2365,9 @@ inherited fmZapisBrak: TfmZapisBrak
           OnGetText = N_F_lbON_SEMGetText
         end
         object N_F_lbONA_SEM: TvchDBText
-          Left = 704
+          Left = 732
           Top = 20
-          Width = 174
+          Width = 159
           Height = 15
           DataField = 'ONA_SEM'
           DataSource = dsDokument
@@ -2382,7 +2382,7 @@ inherited fmZapisBrak: TfmZapisBrak
         object edON_DOKUMENT: TDBEditEh
           Left = 191
           Top = 97
-          Width = 269
+          Width = 334
           Height = 26
           DataField = 'ON_DOKUMENT'
           DataSource = dsDokument
@@ -2397,9 +2397,9 @@ inherited fmZapisBrak: TfmZapisBrak
           Visible = True
         end
         object edONA_DOKUMENT: TDBEditEh
-          Left = 530
+          Left = 558
           Top = 97
-          Width = 267
+          Width = 334
           Height = 26
           DataField = 'ONA_DOKUMENT'
           DataSource = dsDokument
@@ -2633,7 +2633,7 @@ inherited fmZapisBrak: TfmZapisBrak
           Visible = True
         end
         object edONA_SEM: TDBComboBoxEh
-          Left = 530
+          Left = 558
           Top = 16
           Width = 170
           Height = 26
@@ -2837,7 +2837,7 @@ inherited fmZapisBrak: TfmZapisBrak
         object edON_DOK_TYPE: TDBComboBoxEh
           Left = 191
           Top = 43
-          Width = 268
+          Width = 334
           Height = 26
           Ctl3D = True
           DataField = 'ON_DOK_TYPE'
@@ -2854,9 +2854,9 @@ inherited fmZapisBrak: TfmZapisBrak
           Visible = True
         end
         object edON_DOK_SERIA: TDBEditEh
-          Left = 191
+          Left = 192
           Top = 70
-          Width = 33
+          Width = 64
           Height = 26
           CharCase = ecUpperCase
           Ctl3D = True
@@ -2874,9 +2874,9 @@ inherited fmZapisBrak: TfmZapisBrak
           Visible = True
         end
         object edON_DOK_NOMER: TDBEditEh
-          Left = 235
+          Left = 269
           Top = 70
-          Width = 89
+          Width = 110
           Height = 26
           Ctl3D = True
           DataField = 'ON_DOK_NOMER'
@@ -2893,9 +2893,9 @@ inherited fmZapisBrak: TfmZapisBrak
           Visible = True
         end
         object edON_DOK_DATE: TDBDateTimeEditEh
-          Left = 351
+          Left = 415
           Top = 70
-          Width = 107
+          Width = 110
           Height = 26
           Ctl3D = True
           DataField = 'ON_DOK_DATE'
@@ -2913,9 +2913,9 @@ inherited fmZapisBrak: TfmZapisBrak
           Visible = True
         end
         object edONA_DOK_SERIA: TDBEditEh
-          Left = 530
+          Left = 559
           Top = 70
-          Width = 33
+          Width = 64
           Height = 26
           CharCase = ecUpperCase
           DataField = 'ONA_DOK_SERIA'
@@ -2931,9 +2931,9 @@ inherited fmZapisBrak: TfmZapisBrak
           Visible = True
         end
         object edONA_DOK_TYPE: TDBComboBoxEh
-          Left = 530
+          Left = 558
           Top = 43
-          Width = 268
+          Width = 334
           Height = 26
           DataField = 'ONA_DOK_TYPE'
           DataSource = dsDokument
@@ -2948,9 +2948,9 @@ inherited fmZapisBrak: TfmZapisBrak
           Visible = True
         end
         object edONA_DOK_NOMER: TDBEditEh
-          Left = 578
+          Left = 640
           Top = 70
-          Width = 89
+          Width = 110
           Height = 26
           DataField = 'ONA_DOK_NOMER'
           DataSource = dsDokument
@@ -2965,9 +2965,9 @@ inherited fmZapisBrak: TfmZapisBrak
           Visible = True
         end
         object edONA_DOK_DATE: TDBDateTimeEditEh
-          Left = 691
+          Left = 782
           Top = 70
-          Width = 107
+          Width = 110
           Height = 26
           DataField = 'ONA_DOK_DATE'
           DataSource = dsDokument
@@ -3005,7 +3005,7 @@ inherited fmZapisBrak: TfmZapisBrak
         object edON_Voenkom: TDBLookupComboboxEh
           Left = 191
           Top = 124
-          Width = 269
+          Width = 334
           Height = 26
           DataField = 'ON_VOENKOM'
           DataSource = dsDokument
@@ -3073,9 +3073,9 @@ inherited fmZapisBrak: TfmZapisBrak
           OnChange = edON_VoenkomChange
         end
         object edONA_VOENKOM: TDBLookupComboboxEh
-          Left = 530
+          Left = 558
           Top = 124
-          Width = 269
+          Width = 334
           Height = 26
           DataField = 'ONA_VOENKOM'
           DataSource = dsDokument
@@ -3156,7 +3156,7 @@ inherited fmZapisBrak: TfmZapisBrak
           ValueUnchecked = 'False'
         end
         object cbONA_VUS: TDBCheckBoxEh
-          Left = 508
+          Left = 536
           Top = 128
           Width = 17
           Height = 17
@@ -6698,8 +6698,8 @@ inherited fmZapisBrak: TfmZapisBrak
     Top = 315
   end
   inherited HistZAGS: TkbmMemTable
-    Left = 512
-    Top = 138
+    Left = 488
+    Top = 114
   end
   inherited dsSeria: TDataSource
     Left = 840

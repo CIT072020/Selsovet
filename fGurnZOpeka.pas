@@ -86,6 +86,7 @@ var
 begin
   Result := inherited LoadQuery;
   CreateSysFlt_GISUN;
+  VisibleItems([TBItemAddDok], true);
 //  lAdd:=true;
   {
   if Role.IsCheckSubSystem then begin
@@ -102,7 +103,7 @@ begin
       
 {$IFDEF OPEKA }
   if Role.Status=rsAdmin then begin
-    TBSubItemRun.Visible:=true;
+    VisibleItem(TBSubItemRun, true); //.Visible:=true;
 
     itDop := TTbItem.Create(TBSubItemRun);
     itDop.Caption:= 'Ввести шаблон для нового опекуна(попечителя)';
@@ -116,10 +117,10 @@ begin
     itDop.OnClick:=Event_CopyRecord;
     TBSubItemRun.Add(itDop);
   end else begin
-    TBSubItemRun.Visible:=false;
+    VisibleItem(TBSubItemRun, false); //.Visible:=false;
   end;
 {$ELSE}
-  TBSubItemRun.Visible:=false;
+  VisibleItem(TBSubItemRun, false); //.Visible:=false;
 {$ENDIF}
 {
   itDop := TTbItem.Create(TBSubItemRun);
@@ -302,7 +303,7 @@ begin
         slProt.Add('Создана карточка и установлена опека в количестве '+intToStr(nAdd));
         slProt.Add('>>>>> Обработка завершена');
         for i:=0 to slProt.Count-1 do
-          GlobalTask.LogFile.WriteToLogFile(slProt.Strings[i]);
+          GlobalTask.WriteToLogFile(slProt.Strings[i]);
         ShowMemo(slProt, 'Протокол', '50;200;800;400');
         slProt.Free;
       end;
@@ -417,8 +418,9 @@ begin
     AFont.Color := clRed;
   end;
   }
-  fld := Query.FindField('LICH_ID');
-  if (fld <> nil) and (fld.AsInteger=1) then begin
+//fld := Query.FindField('LICH_ID');
+//if (fld <> nil) and (fld.AsInteger=1) then begin
+  if not Query.FieldByName('SEND_DATE').IsNull then begin
     Background:=GetNoTransferColor;
   end;
 end;

@@ -58,7 +58,7 @@ type
     DokumentM_GOROD: TStringField;
     DokumentM_GOROD_R: TStringField;
     DokumentM_B_OBL: TBooleanField;
-    DokumentSEM: TIntegerField;
+    DokumentSEM_REG: TIntegerField;
     DokumentV_OBAZAN: TBooleanField;
     DokumentDOKUMENT: TMemoField;
     DokumentOTMETKA: TMemoField;
@@ -158,19 +158,23 @@ type
     DokumentM_KV: TStringField;
     DokumentREG_DATE: TDateField;
     DokumentREG_DATE_TILL: TDateField;
-    Label3: TLabel;
+    lbUser: TLabel;
     N_F_edGisUser: TDBEditEh;
-    Label8: TLabel;
-    N_F_GisIdQuery: TDBEditEh;
-    Label13: TLabel;
+    lbId: TLabel;
+    N_F_edGisIdQuery: TDBEditEh;
+    lbDt: TLabel;
     N_F_edGisTimeQuery: TDBDateTimeEditEh;
     N_F_lbStatus: TvchDBText;
     dsReshSud: TDataSource;
     edDateS: TDBDateTimeEditEh;
     DokumentDATES: TDateField;
-    N_F_OnlyActive: TCheckBox;
-    N_F_Do18: TCheckBox;
     lbDateS: TLabel;
+    DokumentONLYACTIVE: TBooleanField;
+    DokumentDO18: TBooleanField;
+    N_F_OnlyActive: TDBCheckBoxEh;
+    N_F_Do18: TDBCheckBoxEh;
+    DokumentM_TEXTADRES: TStringField;
+    DokumentM_ADRNUM: TStringField;
     procedure FormResize(Sender: TObject);
     procedure dsDokumentDataChange(Sender: TObject; Field: TField);
     procedure edOBL_RNotInList(Sender: TObject; NewText: String;      var RecheckInList: Boolean);
@@ -192,8 +196,8 @@ type
     procedure GridDetiGetCellParams(Sender: TObject; Column: TColumnEh;
       AFont: TFont; var Background: TColor; State: TGridDrawState);
     procedure N_F_lbStatusGetText(Sender: TObject; var Text: String);
-    procedure N_F_Do18Click(Sender: TObject);
     procedure N_F_OnlyActiveClick(Sender: TObject);
+    procedure N_F_Do18Click(Sender: TObject);
   private
 //    H : THintWindow;
     procedure OnDestroyHint(Sender : TObject);
@@ -205,6 +209,7 @@ type
     function ReadDeti(strDeti:String): Boolean;
     function NewDok( lAppend : Boolean ) : Boolean; override;
     function GetVid : String; override;
+    procedure SetDefaultField;
 //    function GetNameReport : String; override;
     function BeforeEdit : Boolean; override;
     constructor Create(Owner : TComponent); override;
@@ -223,6 +228,7 @@ type
     procedure SetOnlyPovtorSvid(lOnlyPovtor: Boolean;  pc: TPageControl; ts: TWinControl; NonVisibleControls: array of TVarRec;  lbSvid, lbNomer: TLabel);
     function  CheckDateEditGIS:Boolean; override;   // корректировались или нет поля отправляемые в регистр
     procedure WriteAfterRegister_GISUN; override;
+    procedure LoadFromIni; override;
     procedure CheckFilterDeti;
 
   end;
@@ -242,15 +248,18 @@ uses dBase, fMain, fShablon, uDataSet2XML, fGetGisun1;
 { TfmZapisBrak }
 
 function RunQueryGISUN( nID : Integer; slPar:TStringList) : boolean;
+var
+  lRefresh:Boolean;
 begin
 //  result := true;
+  lRefresh:=false;
   fmQueryGISUN := TfmQueryGISUN.Create(nil);
   fmQueryGISUN.IsCreateForm:=false;
   fmQueryGISUN.AssignPar(slPar);
   try
     fmQueryGISUN.IsReadDokument:=true;
-    if nID=-1 then begin
-      fmQueryGISUN.NewDok(true);
+    if (nID=-1) or (nID=0) then begin
+      fmQueryGISUN.NewDok(true);                 
       fmQueryGISUN.SetIDZags;
     end else begin
       fmQueryGISUN.ReadDok( nID );
@@ -263,11 +272,15 @@ begin
 //      fmZapisChName.CheckImageGisun(fmZapisChName.DokumentPOLE_GRN,fmZapisChName.ImageGISUN);
       fmQueryGISUN.BeforeEditFormGISUN;
     {$ENDIF}
-    result := fmQueryGISUN.EditModal;
+    Result:=fmQueryGISUN.EditModal;
+    if fmQueryGISUN.FWriteDok
+      then lRefresh:=true;
   finally
     fmQueryGISUN.Free;
     fmQueryGISUN := nil;
   end;
+  if lRefresh
+    then RefreshGurnal('fmGurnQueryGis');
 end;
 
 function TfmQueryGISUN.GetVid: String;
@@ -275,15 +288,22 @@ begin
   Result := GetVidFromTypeObj(_TypeObj_QueryGis); //
 end;
 
+procedure TfmQueryGISUN.SetDefaultField;
+begin
+  DokumentPOVTOR.AsBoolean:=false;
+  DokumentB_OBL.AsBoolean:=true;
+  DokumentM_B_OBL.AsBoolean:=true;
+  DokumentFirst_Ekz.AsBoolean:=true;
+  DokumentONLYACTIVE.AsBoolean:=true;
+  DokumentDO18.AsBoolean:=true;
+end;
+
 function TfmQueryGISUN.NewDok( lAppend : Boolean ): Boolean;
 begin
   Dokument.EmptyTable;
   Dokument.Append;
   DokumentID.AsInteger := -1;
-  DokumentPOVTOR.AsBoolean:=false;
-  DokumentB_OBL.AsBoolean      := true;
-  DokumentM_B_OBL.AsBoolean    := true;
-  DokumentFirst_Ekz.AsBoolean := true;
+  SetDefaultField;
   inherited NewDok(lAppend);
   QueryExit:=false;
   Result := true;
@@ -319,15 +339,16 @@ begin
     Result := false;
     exit;
   end;
+  FRun:=true;
+  try
   NewDok(false);
   //------- читаем карточку -----------
-  Dokument.Edit;
-
   ds2xml.StringToXML(dmBase.tbQueryGisun.FieldByName('ADD_FIELDS').AsString);
   ds2xml.XMLToData;
   tbReshSud.First;
   tbFamily.First;
 
+  EditDataSet(Dokument); // Dokument.Edit;
   for i:=0 to dmBase.tbQueryGisun.FieldCount-1 do begin
     strField := dmBase.tbQueryGisun.Fields[i].FieldName;
     fld := Dokument.FindField(strField);
@@ -348,8 +369,11 @@ begin
 
   //---------------------------------------
   if not Role.SystemAdmin
-    then tsReshSud.TabVisible:=(tbReshSud.RecordCount>0)
-
+    then tsReshSud.TabVisible:=(tbReshSud.RecordCount>0);
+  finally
+    FRun:=false;
+    CheckFilterDeti;
+  end;
 end;
 //------------------------------------------------------------------
 function TfmQueryGISUN.CheckDokumentSimple(nType: Integer; lWriteDok: Boolean): Boolean;
@@ -384,7 +408,7 @@ begin
   strErr:=FLastError;
   if strErr<>'' then begin
     PutError(strErr,self);
-    Result := false;               
+    Result := false;
     exit;
   end;
   //-------------------------------------------------------
@@ -449,11 +473,13 @@ end;
 function TfmQueryGISUN.CreateSubMenuRun: Boolean;
 begin
   inherited CreateSubmenuRun;
-  Result:=true;
-  AddSubmenu_CheckFIO;
-  AddSubmenu_ReadDolg;
+  Result:=false;
+//  AddSubmenu_CheckFIO;
+//  AddSubmenu_ReadDolg;
+  FAddButtonMRUList:=false;   // создавать дополнительную кнопку для MRUList
+  FAddButtonMRUList_Punkt:=false;
 end;
-
+//---------------------------------------------------------------------------
 constructor TfmQueryGISUN.Create(Owner: TComponent);
 var
   n:Integer;
@@ -462,12 +488,14 @@ begin
   inherited;
   FCheckLookupField:=false;   // так как все поля (область,район,город) переделаны на DbEditEh.MRUList;
   FDokRegister:=true;
+  FEnableWrite:=false;
+  TBItemWrite.Visible:=false;
 //  Dokument.Active:=true;
   if not Dokument.Active  then Dokument.Active:=true;
   if not tbFamily.Active  then tbFamily.Active:=true;
   if not tbReshSud.Active then tbReshSud.Active:=true;
-  FDokZAGS := false;
-  TypeObj := _TypeObj_QueryGIS;
+  FDokZAGS:=false;
+  TypeObj:= _TypeObj_QueryGIS;
   FUpdatingObj:=GetUpdatingObj(TypeObj);
   FCheckKeyGrid:=false;
 
@@ -507,11 +535,15 @@ begin
   {$IFDEF GISUN}
     FImageGisun:=nil; //ImageGISUN;
     FPoleGRN:=DokumentPOLE_GRN;
+
+    TBSubmenuGISUN.Visible:=false;
+    TBItemGetDataGISUN.Visible:=IsActiveGISUN;
+
+//    CheckMenuGISUN('VOSSTAN');
 //    ImageGISUN.Visible := IsActiveGISUN;
     {
     TBSubmenuGISUN.Visible:=IsActiveSubMenuGISUN; //   ???
     FSubmenuGISUN:=TBSubmenuGISUN;
-    CheckMenuGISUN;
     }
     AfterCreateFormGISUN;
   {$ELSE}
@@ -519,10 +551,23 @@ begin
     ImageGISUN.Visible := false;
   {$ENDIF}
   TBItemHistCorr.Visible:=FUpdatingObj;
-  if not Role.SystemAdmin
-    then tsReshSud.TabVisible:=false
-end;
 
+  if not Role.SystemAdmin
+    then tsReshSud.TabVisible:=false;
+
+  lbId.Hint:=N_F_edGisIdQuery.Hint;
+  lbUser.Hint:=N_F_edGisUser.Hint;
+  lbDt.Hint:=N_F_edGisTimeQuery.Hint;
+end;
+//----------------------------------------
+procedure TfmQueryGISUN.LoadFromIni;
+begin
+  inherited;
+  SetStrHelp('<F1> запросить  <F5> предпросмотр  <F6> печать  <Ctrl-F2> выход');
+  TBItemGetDataGISUN.Enabled:=IsActiveGISUN;   // !!!   из-за FEnableWrite=false  CheckToolBar вызывается в LoadFromIni
+  TBItemGetDataGISUN.Visible:=TBItemGetDataGISUN.Enabled;
+end;
+//--------------------------------------------
 destructor TfmQueryGISUN.Destroy;
 begin
   DestroyHint(H);
@@ -626,6 +671,7 @@ begin
   Result:= inherited BeforeEdit;
 
 // в методе Create отключена проверка FCheckLookupField:=false
+  {
   n:=LimitMRUList(3);
   SetMRUList(edGOROD,n,3,true,false,false,FAddButtonMRUList_Punkt);
   SetMRUList(edM_GOROD,n,3,true,false,false,FAddButtonMRUList_Punkt);
@@ -637,7 +683,7 @@ begin
   n:=LimitMRUList(2);
   SetMRUList(edRAION,n,2,true,false,false,FAddButtonMRUList);
   SetMRUList(edM_RAION,n,2,true,false,false,FAddButtonMRUList);
-
+  }
 end;
 
 procedure TfmQueryGISUN.Button1Click(Sender: TObject);
@@ -713,6 +759,20 @@ begin
   tbFamily.Filtered:=(tbFamily.Filter<>'');
 end;
 //-----------------------------------------------------------
+procedure TfmQueryGISUN.N_F_OnlyActiveClick(Sender: TObject);
+begin
+  if not N_F_OnlyActive.Checked and N_F_Do18.Checked
+    then N_F_Do18.Checked:=false;
+  CheckFilterDeti;
+end;
+//-----------------------------------------------------------
+procedure TfmQueryGISUN.N_F_Do18Click(Sender: TObject);
+begin
+  if N_F_Do18.Checked and not N_F_OnlyActive.Checked
+    then N_F_OnlyActive.Checked:=true;
+  CheckFilterDeti;
+end;
+//-----------------------------------------------------------
 procedure TfmQueryGISUN.dsDetiDataChange(Sender: TObject; Field: TField);
 begin
   if (Field<>nil) and not IsReadDokument then begin
@@ -736,23 +796,27 @@ begin
   if Gisun.LoadSemStatus then begin  // загружать семейный статус
 //    s:=dsOutPut.FieldByName('PREFIX').AsString; // ON ONA
     fld:=dsDokument.FindField('SEM_DOK');
-    fld2:=dsDokument.FindField('SEM');
+    fld2:=dsDokument.FindField('SEM_REG');
     if (fld<>nil) and (fld2<>nil) then begin
 //      ed:=edSEM;
 //      edText:=edSEM_DOK;
       sPar:='<FIO>'; //<FIO><NAME>';
       ms:=Gisun.RegInt.GetMartialStatus(data, sPar);
-      mDebug.Text:=mDebug.Text+'Status='+IntToStr(ms.Status)+': '+ms.Text+#13#10+
-                               'NameStatus='+ms.NameStatus+'  Doc='+ms.Doc+#13#10;
+      if mDebug.Visible then begin
+        mDebug.Text:=mDebug.Text+'Status='+IntToStr(ms.Status)+': '+ms.Text+#13#10+
+                                 'NameStatus='+ms.NameStatus+'  Doc='+ms.Doc+#13#10;
+      end;                           
+      EditDataSet(dsDokument);
       if ms.Status>0 then begin
-        sem:=Gisun.RegInt.MartialStatus2Sem(ms.Status);
-        EditDataSet(dsDokument);
-        fld.Tag:=ms.Status;
+//        sem:=Gisun.RegInt.MartialStatus2Sem(ms.Status);
+//        fld.Tag:=ms.Status;
 //      if ms.Status=10
 //        then fld.AsString:='СОСТОИТ В БРАКЕ! '+ms.Text
         fld.AsString:=Concat2Str(ms.NameStatus, ms.Text, ', ');
-        fld2.AsInteger:=sem;
+        fld2.AsInteger:=ms.Status;
       end else begin
+        fld.AsString:='';
+        fld2.AsInteger:=0;
       end;
     end;
   end;
@@ -768,6 +832,10 @@ var
   ds:TDataSet;
 begin
 {$IFDEF GISUN}
+  if DokumentCOVER_MESSAGE_ID.AsString<>'' then begin
+    ShowMessageCont(PadCStd('Запрос уже был осуществлен.'),Self);
+    exit;
+  end;
   cur:=Screen.Cursor;
   Screen.Cursor:=crHourGlass;
   Gisun.CurAkt:=Self;    // !!! важно
@@ -779,9 +847,12 @@ begin
         if (Dokument.Fields[i].FieldName<>'IDENTIF') and (Dokument.Fields[i].FieldName<>'ID')
           then Dokument.Fields[i].AsVariant:=null;
       end;
+      SetDefaultField;
       Dokument.CheckBrowseMode;
       tbReshSud.EmptyTable;
       tbFamily.EmptyTable;
+      tbFamily.Filter:='';
+      tbFamily.Filtered:=false;
 //      mDebug.Text:='';
       sl:=TStringList.Create;
       if ENG_edIDENTIF.Text<>'' then begin
@@ -795,7 +866,7 @@ begin
         ds:=Gisun.LoadIdentifData(sl,Dokument,slPar);
       finally
         slPar.Free;
-        Gisun.RegInt.FObrPersonalData:=nil
+        Gisun.RegInt.FObrPersonalData:=nil;
       end;
 
       if ds<>nil then begin
@@ -887,6 +958,9 @@ begin
       sl.Free;
       if not Role.SystemAdmin
         then tsReshSud.TabVisible:=(tbReshSud.RecordCount>0);
+
+      WriteDok; // !!! записываем сразу после запроса
+
       tbReshSud.First;
       CheckFilterDeti;
       tbFamily.First;
@@ -922,18 +996,6 @@ end;
 procedure TfmQueryGISUN.N_F_lbStatusGetText(Sender: TObject; var Text: String);
 begin
   Text:=GetStatus(DokumentSTATUS);
-end;
-
-procedure TfmQueryGISUN.N_F_Do18Click(Sender: TObject);
-begin
-  if N_F_Do18.Checked and not N_F_OnlyActive.Checked
-    then N_F_OnlyActive.Checked:=true;
-  CheckFilterDeti;
-end;
-
-procedure TfmQueryGISUN.N_F_OnlyActiveClick(Sender: TObject);
-begin
-  CheckFilterDeti;
 end;
 
 function TfmQueryGISUN.SetNewNomerDok(lSetDate: Boolean): Integer;

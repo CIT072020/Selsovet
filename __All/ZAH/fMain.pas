@@ -32,7 +32,7 @@ uses
   adscnnct, uPSComponent,NativeXML, ComCtrls, Animate, GIFCtrl,
   IdBaseComponent, IdAntiFreezeBase, IdAntiFreeze, InvokeRegistry, Rio,
   SOAPHTTPClient, IdTCPConnection, IdTCPClient, frxExportXLS, frxExportCSV,
-  frxExportBIFF, IdFTP;
+  frxExportBIFF, IdFTP, cxGraphics;
 
 type
   TFormGurnal = class of TfmGurnal;
@@ -368,6 +368,9 @@ type
     TBItemRefreshCOC: TTBItem;
     acSaveCert: TAction;
     TBItemSaveCert: TTBItem;
+    TBItemEditUrl: TTBItem;
+    TBItemLoadSysSpr: TTBItem;
+    ImageList24: TcxImageList;
     procedure acSetParametersExecute(Sender: TObject);
     procedure acAdminParametersExecute(Sender: TObject);
 
@@ -545,6 +548,8 @@ type
     procedure acGisunParamsExecute(Sender: TObject);
     procedure acRefreshCOCExecute(Sender: TObject);
     procedure acSaveCertExecute(Sender: TObject);
+    procedure TBItemEditUrlClick(Sender: TObject);
+    procedure TBItemLoadSysSprClick(Sender: TObject);
   private
     FYearFiks: Integer;
     FRunActivate : Boolean;
@@ -659,6 +664,7 @@ type
     procedure ChangeParamGISUN;
     procedure CheckCaptionActiveGisun;
     procedure WMDEVICECHANGE(var Msg : TMessage); message WM_DEVICECHANGE;
+    procedure WMCheckUpdate(var Msg:TMessage); message WM_CHECKUPDATE;
 
     procedure CreateParamsOpisEditSpr;
     procedure BeforeSaveSprWork( Grid : TSasaDbGrid; lAdd : Boolean; Ic : TIcon);
@@ -718,17 +724,21 @@ const
   IL_BRAK=51;   // индекс в ImageList для брака
   IL_ROGD=83;   // индекс в ImageList для рождений
   IL_CH_MEN=2;  //
+
   IL_ADD_CHILD=119;
   IL_ADD_MEN=119;
+  IL_ADD=119;
   IL_DEL_CHILD=120;
   IL_DEL_MEN=120;
+  IL_DEL=120;
+
   IL_INFO_CORR=148;
 
 implementation
 
 uses TasksEx, AsyncCalls,
      fPropertyObj, fAbout, fOperFind, fEditSpr, fParamsFTP, fLoadZAH_CSV,
-     fChZagrZags2ZAH,  uSynapseObj,
+     fChZagrZags2ZAH,  uSynapseObj, uBase,
      fChVigrZAH, fChZagrZAH, fLoad_IN_GIS,
      {fPassport, fGurnPassport, fCreateFiks, fDeleteFiks,}
      NewDialogs, uFilter, fmDosFileView,
@@ -1032,8 +1042,8 @@ begin
 //   ActionList2RTF(ActionList,GlobalTask.PathService+'act_list.rtf');
 //   ImageList2RTF(ImageList,GlobalTask.PathService+'img_list.rtf');
 // end;
- ClearDir(ExtractFilePath(Application.ExeName)+'$TEMP$',true);
- GlobalTask.LogFile.WriteToLogFile('Завершен сеанс пользователя.');
+ ClearDir(ExtractFilePath(Application.ExeName)+NameTmpDir(2),true);
+ GlobalTask.WriteToLogFile('Завершен сеанс пользователя.');
  FEventsWordReports.Free;
  FEventsBlankReports.Free;
  FEventsBlankZAGSReports.Free;
@@ -1509,12 +1519,25 @@ var
   ds:TDataSet;
 //  info:TInfoSaveDok;
 //  f:TfmSeekAkt;
-//  s,ss:String;
+  s:String;
 //  d:TDateTime;
 begin
   if not Role.SystemAdmin then exit;
 
-    Gisun.SaveCertToSChannel;
+  {  кодирование + запись
+  s:=XorEncode(PPP_CONST, 'NOT=WW1234567,100135770,');
+  dmBase.ExecuteSQL('UPDATE help SET text='+QStr(s)+' WHERE kod=''ADD63''', dmBase.AdsSharedConnection);
+  }
+
+  // чтение
+  dmBase.WorkQueryS.SQL.text:='SELECT text FROM help WHERE kod=''ADD63''';
+  dmBase.WorkQueryS.Open;
+  s:=XorDecode(PPP_CONST, trim(dmBase.WorkQueryS.Fields[0].AsString));
+  dmBase.WorkQueryS.Close;
+  ShowMessage(s);
+
+
+//    Gisun.SaveCertToSChannel;
 
 //  n:=17030;
 
@@ -2254,6 +2277,7 @@ begin
         Gurnal.DateFiks := fmMain.DateFiks;
         if Gurnal.LoadQuery then begin
           Gurnal.LoadFromIni;
+          Gurnal.PrepareMenu;
           Globaltask.CurrentOpisEdit.SetKeyForm(Gurnal,nil);
           ListGurnal.AddObject(strName, Gurnal);
         end else begin
@@ -2869,7 +2893,7 @@ begin
       end;
     end;
   end;
-  GlobalTask.LogFile.WriteToLogFile(s+E.Message);
+  GlobalTask.WriteToLogFile(s+E.Message);
   if (E is EADSDatabaseError) then begin
     if (EADSDatabaseError(E).ACEErrorCode=7057) and (EADSDatabaseError(E).TableName<>'') then begin
       s := 'Таблица: '+EADSDatabaseError(E).TableName+' ';
@@ -3121,16 +3145,26 @@ end;
 
 procedure TfmMain.TBItemRegisterProgClick(Sender: TObject);
 var
-  CurKey : String;
+  s,CurKey:String;
+  lDemo:Boolean;
 begin
   if GlobalTask.DemoVersion then begin
-    if Copy(ReadKeyProg(CurKey,false),1,5)<>'ZGS10' then begin
-//    GlobalTask.DemoVersion := true;
+    if GlobalTask.ParamAsString('ID')='' then begin
+      lDemo:=true;
     end else begin
-      GlobalTask.SetEnablePrintReport(true);
-      GlobalTask.DemoVersion := false;
-      WriteKeyProg(CurKey);
-      TBItemRegisterProg.Visible := false;
+      lDemo:=ReadNotKeyProg('ADD63', GlobalTask.ParamAsString('ID'), s);
+      if lDemo and Role.SystemAdmin
+        then AddNotifyProg(fmMain, 'Текущий ключ:"'+s+'"', false, true,0,0);
+    end;
+    if not lDemo then begin
+      if Copy(ReadKeyProg(CurKey,false),1,5)<>'ZGS10' then begin
+  //    GlobalTask.DemoVersion := true;
+      end else begin
+        GlobalTask.SetEnablePrintReport(true);
+        GlobalTask.DemoVersion:=false;
+        WriteKeyProg(CurKey);
+        TBItemRegisterProg.Visible:=false;
+      end;
     end;
   end;
 end;
@@ -3259,6 +3293,8 @@ begin
     end;
   end;
   if not FRunActivate then begin
+    FRunActivate := true;
+
     if dmBase.LastDatabaseError=0 then begin
       fmMain.RunAutoBackup;
     end;
@@ -3276,15 +3312,7 @@ begin
 
     {$IFDEF UPDATE_SYNA}
       if Globaltask.ParamAsBoolean('CHECK_UPDATE') then begin
-        oUpdate:=TSynapseObj.Create(pn);
-        oUpdate.FCheckMessages:=true;
-  //      oUpdate.FThread:=false;
-        if oUpdate.CheckUpdate then begin
-  //      ShowMessage(oUpdate.FFileName+'  '+inttostr(oUpdate.FUpdate));
-          AddNotifyProg(fmMain, 'Доступно обновление программы № '+IntToStr(oUpdate.FUpdate), false, true,0,0);
-        end;
-        if oUpdate.FMessages<>''
-          then CheckMessagesProg(oUpdate.FMessages);
+        PostMessage(Handle,WM_CHECKUPDATE,0,0);
       end;
     {$ELSE}
       s:='?';
@@ -3299,7 +3327,6 @@ begin
       end;
     {$ENDIF}
 
-    FRunActivate := true;
 {
     sUpd:=CheckUpdate(IdFTP1, false, false, 0, false, s);
     if sUpd<>'' then begin
@@ -4014,7 +4041,7 @@ begin
     if oUpdate.FMessages<>''
       then CheckMessagesProg(oUpdate.FMessages);
   {$ELSE}
-    CheckUpdate(IdFTP1, true, true, 0, true, s, lPath);
+//    CheckUpdate(IdFTP1, true, true, 0, true, s, lPath);
   {$ENDIF}
 end;
 
@@ -4194,6 +4221,13 @@ begin
     end;
   end;
 {$ENDIF}
+end;
+
+procedure TfmMain.WMCheckUpdate(var Msg:TMessage);
+begin
+  if Msg.Msg = WM_CHECKUPDATE then begin
+    CheckUpdateSyna(pn);
+  end;
 end;
 
 //------------------------------------------------------
@@ -4480,6 +4514,11 @@ begin
   n:=Avest.RefreshCOC(getURLCOC, true, s, true);
   if s<>''
     then ShowMessage(s);
+end;
+//------------------------------------------
+procedure TfmMain.TBItemEditUrlClick(Sender: TObject);
+begin
+  Gisun.EditUrlCOC;
 end;
 //---------------------
 procedure TfmMain.acSaveCertExecute(Sender: TObject);

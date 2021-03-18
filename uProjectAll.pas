@@ -8,8 +8,8 @@ uses
   Windows, Db, Messages, SysUtils, StdCtrls, Classes, Graphics, ComCtrls, Controls, Forms, Dialogs, DsiWin32, ActnList, uTypes,
   mMD5, RKP, NativeXML,
   FuncPr, dbFunc, ifpii_dbfunc, fLogon, kbmMemTable, ToolCtrlsEh,
-  ActiveX, ShlObj,  ace,
-  uPadegFIO, QStrings, SasaIniFile, MetaTask;
+  ActiveX, ShlObj,  ace, ShellAPI,
+  {uAvest,} NewDialogs, uPadegFIO, QStrings, SasaIniFile, MetaTask;
 
 type
 
@@ -214,9 +214,11 @@ var
   ArrPasxa:TArrStrings;
 //  strTypeBase:String;
 const
+  PPP_CONST='bd3141f9aed34f62a74c8a093a0b2ba9';
+
   _GIS_ = 'ГИС РН';
-  // 1.1-163(10);  1.2-164(11)  1.25-169  1.27-173   1.28-177  1.31-182
-  VERSION_SYSTEM_SMDO='версия 1.31';
+  // 1.1-163(10);  1.2-164(11)  1.25-169  1.27-173   1.28-177  1.31-182   1.36-192
+  VERSION_SYSTEM_SMDO='версия 1.36';
 
   MAX_REC=20;
 
@@ -386,12 +388,12 @@ begin
           end;
         end;
       end else begin
-        FLastError:='Ошибка вызова функции Sign';
+        FLastError:='Ошибка вызова функции ZChannel Sign';
         Result:='';
       end;
     end;
   end else begin
-    FLastError:='Ошибка вызова функции Sign (библиотека не загружена)';
+    FLastError:='Ошибка вызова функции ZChannel Sign (библиотека не загружена)';
     Result:='';
   end;
 end;
@@ -1174,16 +1176,25 @@ end;
 //---------------------------------------------------------------------
 function GetPropertyVCBrest(sType:String):TPropFTP;
 begin
+  sType:=LowerCase(sType);
   Result.Ok:=true;
   Result.Port:=21;
-  Result.Host:='cpanel3.datacenter.by';
-  Result.Username:='vcbrest';
-  Result.Password:='admin1106^';
+  Result.Host:='vc.brest.by'; //cpanel3.datacenter.by';
   Result.Passive:=true;
-  sType:=LowerCase(sType);
+  if (sType='update') or (sType='setup') then begin
+    Result.Username:='update@vc.brest.by';
+    Result.Password:='903update^';
+    Result.Dir:='/';
+  end else begin
+    Result.Username:='bases@vc.brest.by';
+    Result.Password:='903bases^';
+    Result.Dir:='/';
+  end;
+  {
   if (sType='update') or (sType='setup')
     then Result.Dir:='/public_html/download'
     else Result.Dir:='/public_html/bases';
+  }
   {
   Result.Host:='vc.brest.by';
   Result.Username:='vc';
@@ -1193,8 +1204,6 @@ begin
     else Result.Dir:='/www/vc.brest.by/bases';
   }
 end;
-const
-  PPP_CONST='bd3141f9aed34f62a74c8a093a0b2ba9';
 
 //-------------------------------------------
 function DIR_UPDATE_:String;

@@ -3,7 +3,7 @@ unit dMen;
     AutoReposition=true    при изменении ключевых полей после post, dataset остается на текущей записи
     AutoReposition=false   при изменении ключевых полей после post, dataset может сменить текущую запись
 }
-interface                               
+interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, DateUtils, OpisEdit, uPadegFIO, ShellApi, kbmMemTable,
@@ -352,6 +352,7 @@ type
     tbSverkiNAME: TStringField;
     tbSverkiFIO: TStringField;
     tbSverkiID_INTERNAL: TIntegerField;
+    mtDokumentVUS_ISKL: TBooleanField;
   private
     FCurMen : Integer;
     FEditFromLichSchet : Boolean;
@@ -3544,6 +3545,9 @@ begin
           if FieldByName('PRIZ').IsNull
             then mtDokumentPRIZ.AsBoolean:=false
             else mtDokumentPRIZ.AsBoolean:=FieldByName('PRIZ').AsBoolean;
+          if FieldByName('VUS_ISKL').IsNull
+            then mtDokumentVUS_ISKL.AsBoolean:=false
+            else mtDokumentVUS_ISKL.AsBoolean:=FieldByName('VUS_ISKL').AsBoolean;
 
           mtDokumentVOENKOM.AsString:=FieldByName('VOENKOM').AsString;
           if FieldByName('VOENKOM').IsNull and (GlobalTask.ParamAsInteger('ID_VOENKOM')>0) then begin
@@ -3588,7 +3592,7 @@ begin
           WriteField( mtDokumentVUS_SOSTAV      ,FieldByName('VUS_SOSTAV'), lErr);
           WriteField( mtDokumentVUS_PREDN       ,FieldByName('VUS_PREDN'), lErr);
           WriteField( mtDokumentVUS_MARKA_TS    ,FieldByName('VUS_MARKA_TS'), lErr);
-                  
+
           ReadAddData(FieldByName('ADD_FIELDS').AsString, mtDokument);
 
           if FieldByName('AGIT_TEL').AsString<>''
@@ -3729,6 +3733,7 @@ begin
         FieldByName('VOENKOM').AsInteger:=mtDokumentVOENKOM.AsInteger;
       end;
 
+      WriteField( FieldByName('VUS_ISKL')       ,mtDokumentVUS_ISKL        , lErr);
       WriteField( FieldByName('PRIZ')           ,mtDokumentPRIZ            , lErr);
       WriteField( FieldByName('DATESV_VK')      ,mtDokumentDATESV_VK       , lErr);
       WriteField( FieldByName('DATESV_LIC')     ,mtDokumentDATESV_LIC      , lErr);

@@ -133,20 +133,14 @@ begin
    Security_.Hash := '';
    Security_.SignDate := '';
    {$IFDEF SIGN}
-//   if ActiveETSP then begin
-     // если не для справочника или для справочника активна ЭЦП
-//     if not lSpr or ActiveETSPSpr then begin
-//       if (ETSP2<>nil) and ETSP2.Active then begin
     if Gisun.IsCreateTagSign then begin
       Security_.Sign := '##Sign##';
       Security_.Key  := '##Key##';
       if IsCreateHash
         then Security_.Hash := '##Hash##';
-      if IsCreateSignDate
-        then Security_.SignDate := '##SignDate##';
     end;
-//     end;
-//   end;
+    if IsCreateSignDate
+      then Security_.SignDate := '##SignDate##';
    {$ENDIF}
    Result:=Security_;
 end;
@@ -241,7 +235,7 @@ begin
             sSign:=ETSP2.Sign(Length(sUtf8),sUtf8);
             gisun.WriteTextLog('ЭЦП подписать '+ETSP2.LastError,LOG_GISUN);
             if ETSP2.Debug then begin
-              MemoWrite(ExtractFilePath(Application.ExeName)+'sign', sSign);
+              MemoWrite(ExtractFilePath(Application.ExeName)+'zchannel sign', sSign);
             end;
           finally                                
             // работает или нет поток созданный функцией EnterWorkerThread

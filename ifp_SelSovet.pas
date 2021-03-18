@@ -277,7 +277,7 @@ begin
   s.AddTypeS('TATE', 'record Kod:String;ATE_PARENTID:Integer;ATE_ID:Integer;Name:String;Name_B:String;Category:Integer;NameC:String;NaneC_B:String;'+
                      'Front:Integer;FullName:String;Obl:String;Obl_B:String;Raion:String;Raion_B:String;RnGorod:String;SS:String;Error:String;'+
                      'Active:Boolean;idObl:Integer;idRaion:Integer;idRaionG:Integer;idSS:Integer;end;');
-    
+
   s.AddDelphiFunction('function ZH_GetNamePunkt(sDS:String; sPar:String; sType:Integer):String;');
 
   s.AddDelphiFunction('function ReshIsPostanovka(nTip:Boolean):Boolean;');
@@ -396,6 +396,7 @@ begin
 
   s.AddDelphiFunction('function FullNameSOATO(sSoato:String; nType:Integer; sRazd:String):String;');
   s.AddDelphiFunction('function FullNameATE(ateID:Integer; nType:Integer; sRazd:String):String;);');
+
 
 //  s.AddDelphiFunction('function Q_StrTok1(var S: string; Delimiters: string): string;');
 
@@ -621,6 +622,9 @@ begin
     RegisterMethod('function GetNomerDom(strDom : String; nType:Integer) : String;');
     RegisterMethod('function GetNomerDomEx(strDom : String; nType:Integer) : String;');
 
+    {$IF Defined(ZAGS) or Defined(ADD_MENS_PU) }
+    RegisterMethod('function GetMenTel( DateFiks : TDateTime; strID : String; strType:String; strDelim:String): String;');
+    {$IFEND}
     RegisterMethod('function GetMenWork( DateFiks : TDateTime; strID : String): String;');
     RegisterMethod('function GetMenDolg( DateFiks : TDateTime; strID : String): String;');
     RegisterMethod('function GetMenStud( DateFiks : TDateTime; strID : String): String;');
@@ -753,6 +757,9 @@ begin
     RegisterMethod(@TdmBase.GetLichSchetFromAdres,'GETLICHSCHETFROMADRES');
     RegisterMethod(@TdmBase.GetIDLichSchetFromAdres,'GETIDLICHSCHETFROMADRES');
     RegisterMethod(@TdmBase.GetMen,'GETMEN');
+    {$IF Defined(ZAGS) or Defined(ADD_MENS_PU) }
+    RegisterMethod(@TdmBase.GetMenTel ,'GETMENTEL');
+    {$IFEND}
     RegisterMethod(@TdmBase.GetMenWork ,'GETMENWORK');
     RegisterMethod(@TdmBase.GetMenDOLG ,'GETMENDOLG');
     RegisterMethod(@TdmBase.GetMenSTUD ,'GETMENSTUD');

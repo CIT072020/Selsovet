@@ -1051,6 +1051,9 @@ begin
     ImageGISUN.Visible := false;
   {$ENDIF}
 
+  edDOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edDOK_TYPE.DropDownBox.Width:=TYPEDOK_WIDTH;  // utypes.pas
+
 end;
 
 destructor TfmDeclIzm.Destroy;

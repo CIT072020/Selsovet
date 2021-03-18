@@ -1561,10 +1561,11 @@ begin
 
     TmpQuery.SQL.Text:=StringReplace( slSQL.Text, '&tmp&', GetNameTmpIdTable, [rfReplaceAll]);
     slSQL.Free;
-    memowrite('last_tmp.sql',TmpQuery.SQL.Text);
+    s1:=KodGurnal+' create find: '+TmpQuery.SQL.Text;
     TmpQuery.ExecSQL;
     TmpQuery.SQL.Text:='SELECT COUNT(*) FROM '+GetNameTmpIdTable;
     TmpQuery.Open;
+    GlobalTask.WriteToLogFile(s1+', recordcount='+TmpQuery.Fields[0].AsString, nil, LOG_SQL);
     if TmpQuery.Fields[0].AsInteger>0 then  begin
       Result:=true;
     end;

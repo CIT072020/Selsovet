@@ -1097,16 +1097,21 @@ begin
       WQuery.Close;
       }
     end;
-    node_info.WriteString('count',IntToStr(nCount));
-    CountMen:=nCount;
-    Result:=true;
+    OpenMessage('Сохранения файла ...','',10);
     try
-      XMLDokument.SaveToFile(FNameExportFile);
-    except
-      on E: Exception do begin
-        Result:=false;
-        FLastError:=E.Message;
+      node_info.WriteString('count',IntToStr(nCount));
+      CountMen:=nCount;
+      Result:=true;
+      try
+        XMLDokument.SaveToFile(FNameExportFile);
+      except
+        on E: Exception do begin
+          Result:=false;
+          FLastError:=E.Message;
+        end;
       end;
+    finally
+      CloseMessage;
     end;
   end;
 end;

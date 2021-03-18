@@ -7,7 +7,7 @@ interface
 uses
   Windows, Messages, FileCtrl, SysUtils, Math, Classes, WinInet, Controls, Forms, db, Dialogs, ifpii_dbfunc, dbFunc, uCheckKod, DateUtils,
   fSimpleD, uJSON, IdHTTP, IdTCPConnection, ShellApi, uTypes, kbmMemTable, QStrings,
-  TasksEx, AsyncCalls,
+  TasksEx, AsyncCalls, NewDialogs,
   uDataSet2XML, mRegInt, FuncPr, uProjectAll, MetaTask, OpisEdit, DBConsts, Graphics, Variants, mPermit, fLogon, fSetPropUsers,
   {$IFDEF GISUN2} mClassif, {$ENDIF}
   {$IFDEF AVEST_GISUN} uAvest, {$ENDIF}
@@ -81,7 +81,7 @@ type
     FTypeEnableControl: Integer;
     FTimeOut: Integer;
     FIsDecodePathError: Boolean;
-    FIsActive: Boolean;
+//    FIsActive: Boolean;
     FIsCheckBelNazv: Boolean;
     FIsCheckQuery: Boolean;
     FDbUserAsGIS:Boolean;
@@ -108,7 +108,7 @@ type
     procedure SetLoadGrag(const Value: Boolean);
     procedure SetTypeEnableControl(const Value: Integer);
     procedure SetIsDecodePathError(const Value: Boolean);
-    procedure SetIsActive(const Value: Boolean);
+//    procedure SetIsActive(const Value: Boolean);
     procedure SetIsCheckBelNazv(const Value: Boolean);
     procedure SetIsCheckQuery(const Value: Boolean);
     procedure SetDbUserAsGIS(const Value: Boolean);
@@ -165,7 +165,7 @@ type
     IsWriteLogToBase : Boolean;
     property IsCheckQuery:Boolean read FIsCheckQuery write SetIsCheckQuery;
     property IsEnabled:Boolean read FIsEnabled write SetIsEnabled;    //
-    property IsActive:Boolean read FIsActive write SetIsActive;    //
+//    property IsActive:Boolean read FIsActive write SetIsActive;    //
     property IsDebug : Boolean read FIsDebug write SetIsDebug;
     property TypeAkt : String read FTypeAkt write SetTypeAkt;
     property TypeMessage : String read FTypeMessage write SetTypeMessage;
@@ -274,6 +274,7 @@ type
     function Code_Pol(strPol : String) : String;
     function Decode_Pol(strPol : String) : String;
     //-- код страны -------------------------------------------
+    function Code_Alfa3Ex(strKod: String; fldLex:TField; fldLexB:TField): String;
     function Code_Alfa3( strKod : String) : String;
     function Decode_Alfa3( strKod : String; strName:String) : String;
     //--------------------------------------------------------
@@ -419,6 +420,7 @@ type
     function LinkUserToETSP(sUserName:String;lQuest:Boolean):Boolean;
     procedure DropLinkUser(sUserName:String);
     function SaveCertToSChannel:Boolean;
+    procedure EditUrlCOC;     //  корректировка файла CrlDPExt.txt
     procedure ClearETSPSession;
 
     constructor Create;
@@ -1534,6 +1536,7 @@ var
   sg,s,ss,cNameInputFile,cNameOutputFile,strFile:String;
   sPerem,sPeremValue:String;
   nTimeOut:Integer;
+//  TVerify, Len: DWORD;
   lUrlETSP:Boolean;
   lCreateIniETSP:Boolean;
   {$IFDEF AVEST_GISUN}
@@ -1550,7 +1553,7 @@ begin
   FCheckUSB:=false;
   FLoadSemStatus:=true;
   FEnabledReloadETSP:=false;
-  FEnabledSimPin:=true;
+  FEnabledSimPin:=true;   
   FSprWithETSP:=true;
   FSprThread:=false;
   FEnableRegisterZah:=true;
@@ -1614,12 +1617,12 @@ begin
     WriteTextLog('GISUN open file '+strFile,LOG_GISUN);
     s := Trim(Ini.ReadString('ADMIN', 'MESSAGESOURCE', ''));
     if s='' then begin
-      FMessageSource:=SystemProg.MessageSourceGISUN(GlobalTask);   // код ЗАГС
+      FMessageSource:=Trim(SystemProg.MessageSourceGISUN(GlobalTask));   // код ЗАГС
     end else begin
       FConstMessageSource:=s;
       FMessageSource:=s;   // код ЗАГС
     end;
-    WriteTextLog('MESSAGESOURCE='+FMessageSource,LOG_GISUN);
+    WriteTextLog('MESSAGESOURCE="'+FMessageSource+'"',LOG_GISUN);
 
     FConstTypeSource:='';
     {$IFDEF ADD_WS_LOCAL}
@@ -1685,12 +1688,20 @@ begin
     FTimeOut:=0;
     nTimeOut:=Ini.ReadInteger('ADMIN', 'TIMEOUT', 0);
     if nTimeOut>0 then begin
+      if nTimeOut<60
+        then nTimeOut:=60;
       nTimeOut:=nTimeOut*1000;
       InternetSetOption(nil, INTERNET_OPTION_CONNECT_TIMEOUT, Pointer(@nTimeOut), SizeOf(nTimeOut));
 //      ShowMessage(inttostr(GetLastError));
       InternetSetOption(nil, INTERNET_OPTION_SEND_TIMEOUT, Pointer(@nTimeOut), SizeOf(nTimeOut));
       InternetSetOption(nil, INTERNET_OPTION_RECEIVE_TIMEOUT, Pointer(@nTimeOut), SizeOf(nTimeOut));
+
     end;
+    {
+    Len:=sizeof(dword);
+    InternetQueryOption(nil, INTERNET_OPTION_CONNECT_TIMEOUT, @TVerify, Len);
+    ShowMessage(IntToStr(TVerify));
+    }
     WriteTextLog('TIMEOUT='+IntToStr(nTimeOut),LOG_GISUN);
 
     nTimeOut:=Ini.ReadInteger('ADMIN', 'TIMEOUT_BP', 0);
@@ -1710,9 +1721,19 @@ begin
       if ActiveETSP
         then FAllCreateTagSign:=true
         else FAllCreateTagSign:=Ini.ReadBool('ADMIN', 'ALL_CREATE_TAG_SIGN', false);
-//      ss:=Trim(UpperCase(Ini.ReadString('ADMIN', 'ETSP_TYPE', 'NII_TZI')));
-      TypeETSP:=GetTypeETSP(Role.User); // читаем из словаря базы данных (base.add, selsovet.add)
-      WriteTextLog('тип используеиой ЭЦП: '+NameETSP,LOG_GISUN);
+
+      ss:=Trim(UpperCase(Ini.ReadString('ADMIN', 'ETSP_TYPE', 'PAR')));
+      s:=' (константа из параметров ГИС РН)';
+      if ss='AVEST' then begin
+        TypeETSP:=ETSP_AVEST;           
+      end else if ss='TZI' then begin
+        TypeETSP:=ETSP_NIITZI;
+      end else begin
+        TypeETSP:=GetTypeETSP(Role.User); // 
+        s:='';
+      end;
+      WriteTextLog('тип используемой ЭЦП: '+NameETSP+s,LOG_GISUN);
+
       if ActiveETSP then begin
         {$IFDEF LAIS}            
           FOpenDefSession:=Ini.ReadBool('ADMIN', 'AVEST_SESSION', false);
@@ -1833,7 +1854,8 @@ begin
     end;
 }
     //FRegInt.Version
-    FIsDebug := Ini.ReadBool('ADMIN', 'DEBUG', false);
+    FIsDebug:=Ini.ReadBool('ADMIN', 'DEBUG', false);
+    FRegInt.FGisun.EnabledLog:=FIsDebug;
     IsWriteLogToBase := false;
 
 //    IsActiveSubMenuGISUN := Ini.ReadBool('ADMIN', 'SUBMENU', false);
@@ -2571,11 +2593,33 @@ begin
 end;
 
 //-----------------------------------------------------------------
+function TGisun.Code_Alfa3Ex(strKod: String; fldLex:TField; fldLexB:TField): String;
+begin
+  Result:='0';
+  if (strKod<>'') then begin
+    if dmBase.SprStran.Locate('ID',strKod,[]) then begin
+      Result:=Trim(dmBase.SprStran.FieldByName('ALFA3').AsString);
+      if (Result='999') or (Result='') or (Result='0') then begin  // нет соответствия в справочнике ГИС РН
+        Result:='0';
+        if (fldLex<>nil) then begin
+          fldLex.AsString:=Trim(dmBase.SprStran.FieldByName('FNAME').AsString);
+        end;
+        if (fldLexB<>nil) then begin
+          fldLexB.AsString:=Trim(dmBase.SprStran.FieldByName('FNAME_B').AsString);
+        end;
+      end else begin
+        if Copy(Result,1,2)='DE'    // для Германии  т.к. их в справочнике 3 штуки
+          then Result:='DEU'; // DEU
+      end;
+    end;
+  end;
+end;
+//-----------------------------------------------------------------
 function TGisun.Code_Alfa3(strKod: String): String;
 begin
   if (strKod<>'') then begin
     if dmBase.SprStran.Locate('ID',strKod,[]) then begin
-      Result := dmBase.SprStran.FieldByName('ALFA3').AsString;
+      Result:=Trim(dmBase.SprStran.FieldByName('ALFA3').AsString);
       if Copy(dmBase.SprStran.FieldByName('ALFA3').AsString,1,2)='DE'    // для Германии  т.к. их в справочнике 3 штуки
         then Result:='DEU'; // DEU
     end else begin
@@ -2866,13 +2910,13 @@ begin
            '>>>>> '+FormatDateTime('dd.mm.yyyy hh:nn:ss',Now)+'  '+sOper+' <<<<< '+chr(13)+
            StringOfChar('>',40)+chr(13)+
            RegInt.Log.Text;
-        dmBase.Log.Post;   
+        dmBase.Log.Post;
       except
         dmBase.Log.Cancel;
       end;
     end;
   end;
-end; 
+end;
 //-------------------------------------------------------------------------------------
 procedure TGisun.WriteTextLog(sOper:String;sFile:String);
 begin
@@ -2919,7 +2963,7 @@ begin
     end;
     Input.Post;
   end;
-
+  TypeMessage:=QUERY_INFO; // !!!    16.03.2021
   RequestResult:=RegInt.Get(akGetPersonalData, TypeMessage, Input, Output, Error, Dok, slPar);
 
   if IsDebug then begin
@@ -3055,7 +3099,8 @@ begin
   Input.FieldByName('OTCH').AsString:=AnsiUpperCase(sOtch);
   Input.FieldByName('DATER').AsString:=Code_Date(dDateR,nTypeDate);
   Input.Post;
-  MessageType:='0100';
+//  MessageType:='0100';  было
+  MessageType:=QUERY_INFO;   // 16.03.2021  по просьбе МВД
 
 //  DataSetToLog('Запрос данных', Input, meInput.Lines);
   try
@@ -3387,11 +3432,14 @@ end;
 function TGisun.GetOnlyIdentif(nCount:Integer; sl:TStringList; lShow:Boolean) : Integer;
 var
   i:Integer;
+  lErr:Boolean;
 begin
   Result:=0;
+  lErr:=false;
   if nCount<=0  then nCount:=1;
   if nCount>100 then nCount:=100;  // защита от дурака
   sl.Clear;
+  WriteTextLog('Запрос ИН в количестве: '+IntToStr(nCount),LOG_GISUN);
   if lShow
     then OpenMessage('Запрос ИН         ','',10);
   try
@@ -3416,12 +3464,19 @@ begin
       end;
     end;
   finally
-    if sl.Count=0
-      then WriteTextLog('ИН не запрошены',LOG_GISUN)
-      else WriteTextLog('ИН запрошены в количестве '+IntToStr(sl.Count)+': '+sl.CommaText,LOG_GISUN);
+    if sl.Count=0 then begin
+      WriteTextLog('ИН не запрошены',LOG_GISUN);
+      lErr:=true;
+    end else begin
+      WriteTextLog('ИН запрошены в количестве '+IntToStr(sl.Count)+': '+sl.CommaText,LOG_GISUN);
+    end;
   end;
-  if lShow
-    then CloseMessage;
+  if lShow then begin
+    CloseMessage;
+    if lErr then begin
+      HandleError(RequestResult, akGetPersonIdentif, opGet, Input, Output, Error, FRegInt.FaultError);
+    end;
+  end;
 end;
 
 // запрос ИН для ребенка
@@ -3465,9 +3520,9 @@ begin
   end;
   if lShow then begin
     CloseMessage;
-    if lErr then begin
-      HandleError(RequestResult, akGetPersonIdentif, opGet, Input, Output, Error, FRegInt.FaultError);
-    end;
+  end;
+  if lErr then begin
+    HandleError(RequestResult, akGetPersonIdentif, opGet, Input, Output, Error, FRegInt.FaultError);
   end;
 end;
 
@@ -3944,6 +3999,7 @@ begin
     Input.FieldByName('POL').AsString:=Code_Pol(AktRogd.DokumentPOL.AsString);
     Input.FieldByName('DATER').AsString:=DTOS(AktRogd.DokumentDateR.AsDateTime,tdClipper); //Дата рождения
   {!!!}Input.FieldByName('GOSUD').AsString:=Code_Alfa3(AktRogd.DokumentGOSUD.AsString); //Страна рождения
+//Input.FieldByName('GOSUD').AsString:=Code_Alfa3Ex(AktRogd.DokumentGOSUD.AsString, Input.FindField('GOSUD_LEX'), Input.FindField('GOSUD_LEX_B')); //Страна рождения
   {!!!}Input.FieldByName('GRAJD').AsString:='0';   // было 'BLR' до 02.11.2012    Гражданство
 
 // отменено 09.01.2017 по просьбе Ирины Антоновны, т.к. должна быть передана запись акта о смерти
@@ -4010,6 +4066,7 @@ begin
   //    Input.FieldByName('ONA_STATUS').AsString:=AktRogd.Dokument.FieldByName('ONA_STATUS').AsString; //Статус
       //Место рождения
       Input.FieldByName('ONA_GOSUD').AsString:=Code_Alfa3(AktRogd.DokumentONA_M_GOSUD.AsString); //Страна рождения
+//      Input.FieldByName('ONA_GOSUD').AsString:=Code_Alfa3Ex(AktRogd.DokumentONA_M_GOSUD.AsString, Input.FindField('ONA_GOSUD_LEX'), nil); //Страна рождения
       Input.FieldByName('ONA_OBL').AsString:=AktRogd.DokumentONA_M_OBL.AsString; //Область рождения
       Input.FieldByName('ONA_RAION').AsString:=AktRogd.DokumentONA_M_RAION.AsString; //Район рождения
 
@@ -4052,10 +4109,10 @@ begin
       end;
 
       //Место рождения
+//      Input.FieldByName('ON_GOSUD').AsString:=Code_Alfa3Ex(AktRogd.DokumentON_M_GOSUD.AsString, Input.FindField('ON_GOSUD_LEX'), nil); //Страна рождения
       Input.FieldByName('ON_GOSUD').AsString:=Code_Alfa3(AktRogd.DokumentON_M_GOSUD.AsString); //Страна рождения
       Input.FieldByName('ON_OBL').AsString:=AktRogd.DokumentON_M_OBL.AsString; //Область рождения
       Input.FieldByName('ON_RAION').AsString:=AktRogd.DokumentON_M_RAION.AsString; //Район рождения
-
       CodePunkt_MestoRogd(AktRogd.Dokument, 'ON_M_B_GOROD','ON_M_GOROD','',Input,'ON_TIP_GOROD','ON_GOROD','');
 
       // если фиктивный отец
@@ -11804,9 +11861,15 @@ begin
       dDateOtm:=getDateField(AktOpeka.DokumentDATE_OTM,0);
       if dDateOtm>0 then begin
         case nTypeSn of
-          1,2: Input.FieldByName('DATE_OTM').AsDateTime:=dDateOtm; // потом оставить только 1 !!!
-//   !!!  2: Input.FieldByName('DATE_OSV').AsDateTime:=dDateOtm;
+          1: Input.FieldByName('DATE_OTM').AsDateTime:=dDateOtm; // потом оставить только 
+          2: Input.FieldByName('DATE_OSV').AsDateTime:=dDateOtm;//  release_guardian_date   release_trustee_date
           3: Input.FieldByName('DATE_OTST').AsDateTime:=dDateOtm;
+
+         { было до 28.01.2021         
+          1,2: Input.FieldByName('DATE_OTM').AsDateTime:=dDateOtm; // потом оставить только 1 !!!
+//   !!!  2: Input.FieldByName('DATE_OSV').AsDateTime:=dDateOtm;    release_guardian_date
+          3: Input.FieldByName('DATE_OTST').AsDateTime:=dDateOtm;
+          }
         end;
       end;
       {  было до 29.04.2019
@@ -12036,10 +12099,10 @@ begin
   FIsDecodePathError := Value;
 end;                                                  
 
-procedure TGisun.SetIsActive(const Value: Boolean);
-begin
-  FIsActive := Value;
-end;
+//procedure TGisun.SetIsActive(const Value: Boolean);
+//begin
+//  FIsActive := Value;
+//end;
 //--------------------------------------------------------------------
 function TGisun.Version:Integer;
 begin
@@ -12251,6 +12314,42 @@ begin
         end;
       end;
     end;
+  end;
+end;
+//-------------------------------------------------------------
+// корректировка файла CrlDPExt.txt
+procedure TGisun.EditUrlCOC;
+var
+  n:Integer;
+  ss,s,sUrl:String;
+  lCreate:Boolean;
+begin
+  if Avest.IsActive then begin
+    s:=CheckSleshN(Avest.PathDLL)+'CrlDPExt.txt';
+    lCreate:=false;
+    if FileExists(s) then begin
+      MemoRead(s,sURL);
+      DelChars(sURL, ' '+#13#10#9);
+      if sUrl='' then begin
+        lCreate:=true;
+        ss:='Файл "'+s+'" не содержит значений. Пересоздать ?';
+      end;
+    end else begin
+      lCreate:=true;
+      ss:='Файл не найден "'+s+'" . Создать ?';
+    end;
+    if lCreate then begin
+      n:=QuestionPos(ss, 'пустой; nces.by ; 10.30.254.20 ;нет;','',-1,-1,qtConfirmation, nil);
+      case n of
+        1:sUrl:=' ';
+        2:sUrl:=GlobalTask.ParamAsString('URL_COC_INT');
+        3:sUrl:=GlobalTask.ParamAsString('URL_COC_NCES');
+      end;
+      if (n>0) and (n<4) then begin
+        MemoWrite(s,sUrl);
+      end;
+    end;
+    ShellExecute(Application.Handle, nil, PChar(s), nil, nil, SW_SHOWNORMAL);
   end;
 end;
 //--------------------------------------------------------------------

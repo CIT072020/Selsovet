@@ -8,7 +8,7 @@ interface
 {$WARN UNIT_PLATFORM OFF}
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, ShellAPI, ace,uCheckKod,
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, ShellAPI, ace,uCheckKod, NewDialogs,
   DataTask, adsset, adstable, Db, adsdata, adsfunc, adscnnct, Metatask, OpisEdit, uFindBase, frxClass, frxADSComponents,
   {$IFDEF SMDO}
     uSMDO,
@@ -74,11 +74,13 @@ type
     Prich    : String;
     PrichKod : Integer;
     Komm     : String;
+    Gosud : Integer;
     B_Obl : Boolean;
     Obl   : String;
     Rn    : String;
     B_Punkt : Integer;
     Punkt : String;
+    Adres :String;
   end;
 
   TValueProp = record
@@ -252,9 +254,13 @@ type
     {$IFDEF GKH}
       SprGES   : TAdsTable;
       tbResh : TAdsTable;
+      tbRegDogN : TAdsTable;
+      EVA:TAdsTable;
     {$ENDIF}
     {$IFDEF LAIS}
       tbResh : TAdsTable;
+      tbRegDogN : TAdsTable;
+      EVA:TAdsTable;
     {$ENDIF}
 
     {$IFDEF ADD_ZAH}
@@ -271,7 +277,7 @@ type
     {$IFDEF GISUN}
     tbQueryGisun:TAdsTable;
     {$ENDIF}
-    
+
     {$IFDEF ZAGS}
       PredZapis:TAdsTable;
       DeclareTermMarriage : TAdsTable;
@@ -400,7 +406,7 @@ type
     SprMainBase : TStringList; // справочники главной базы
     function EnableEditSpr(strName : String) : Boolean;
 
-    function CheckDeleteMen(DateFiks : TDateTime; nId : Integer; var strErr : String; strFIO:String) : Boolean;
+    function CheckDeleteMen(DateFiks : TDateTime; nId : Integer; var strErr : String; strFIO:String; var nIdMen:Integer) : Boolean;
     function DeleteFromBaseFilter:Boolean;
     function DeletePunkt(v : Variant; Conn:TAdsConnection; lFromSpr:Boolean; lDelFreeMen:Boolean) : Boolean;
     //----------- для скрипта -----------
@@ -436,6 +442,7 @@ type
 
     function DeletePropSimpleDok(strID : String; nTypeDok : Integer; sPokaz:String='') : Boolean;
 //------------------------------------------------------------------------
+   function ReadAllPropSimpleDok(dsDoc:TDataSet; nTypeObj : Integer; nKodObj : Integer; DateSave : TDateTime) : Integer;
    function ReadPropSimpleDok(nTypeObj : Integer; nKodObj : Integer; DateSave : TDateTime; strKodProp : String; ft : TFieldType ) : Variant;
    function WritePropSimpleDok(nTypeObj : Integer; nKodObj: Integer; DateSave: TDateTime; strKodProp : String; fld : TField; sVal:String=''; nDataType:TFieldType=ftUnknown): Boolean;
    function ErasePropSimpleDok(nTypeObj : Integer; nKodObj: Integer; strKodProp : String): Boolean;
@@ -470,6 +477,7 @@ type
     function getMenDolg(DateFiks : TDateTime; strID : String) : String;
     function getMenStud(DateFiks : TDateTime; strID : String) : String;
     function getMenDvig(DateFiks : TDateTime; strID : String; strRazd:String) : String;
+    function getMenTel(DateFiks:TDateTime; strID:String; strType:String; strDelim:String): String;
     function GetMenFields( DateFiks : TDateTime; strID : String; strParams:String; var arrRec: TCurrentRecord):Boolean;
 
     function SostavSemToStr(strID: String; strType:String; strRazd:String) : String;
@@ -532,6 +540,8 @@ type
 
     function GetTypePunkt( strType : String; strLF : String; var strName : String ) : Integer;
 
+    function PriznMen(dsPrizn:TDataSet; DateFiks:TDateTime; strID:String; strDelim:String): String;  //признаки человека
+    function PriznMen2(strID:String; strDelim:String): String;
     function LgotMen(dsLgot:TDataSet; DateFiks:TDateTime; strID:String; strDelim:String): String;  //льготы человека
     function LgotMen2(strID:String; strDelim:String): String;  //льготы человека
 
@@ -649,7 +659,7 @@ type
     {$ENDIF}
     procedure ClearBase;
 
-    function CheckNomerLich(DateFiks : TDateTime; nID : Integer; sNomer : String) : Boolean;
+    function CheckNomerLich(DateFiks : TDateTime; nID : Integer; sNomer : String; lQuest:Boolean) : Boolean;
 
     function GetLichSchet( DateFiks : TDateTime; strID : String) : TDataSet;
     function GetLichSchetFromAdres2( DateFiks : TDateTime; strIDAdres : String; lAddDelete : Boolean): TArrLich;
@@ -716,7 +726,8 @@ type
 
     function CountMens( DateFiks : TDateTime; strLicID : String): Integer;
     function CountMensEx( DateFiks : TDateTime; strLicID : String; strType : String; slPar:TStringList): Integer;
-    function ListMensLic(strLicID:String; nIDFirst:Integer; strType:String;  strParAdd:String;  strDelim:String; dsList:TDataSet):String;
+    function ListMensLic(strLicID:String; nIDCurMen:Integer; strType:String;  strParAdd:String;  strDelim:String; dsList:TDataSet):String;
+    function ListMensAdres(strAdrID:String; nIDCurMen:Integer; strType:String;  strParAdd:String;  strDelim:String; dsList:TDataSet):String;
 
     function CountMens2Where( DateFiks : TDateTime; nType:Integer; strType : String; slPar:TStringList): String;
     function CountMensAdres( DateFiks : TDateTime; strAdresID : String; strType : String; slPar:TStringList): Integer;
@@ -863,8 +874,11 @@ type
     function GetListFieldsTable(strTable:String) : String;
     function GetErrorLoadBase(nErr:Integer):String;
     function CheckOneSprLoadBase(tbSpr:TAdsTable;slTables:TStringList; nTypeObj:Integer=0) : Boolean;
-    function GetVersionZAH(lLoad : Boolean) : String;
 
+    function GetDateDelo(nType:Integer; nDelo:Integer; var dBegin:TDateTime; var dEnd:TDateTime; var sText:String):Integer;
+
+
+    function GetVersionZAH(lLoad : Boolean) : String;
     function GetTypeZah: Integer;
 
     //------------- очередь ----------------------------
@@ -897,7 +911,7 @@ const
 
 implementation
 
-uses fMain, SelLibFR, fWarning, fsimpleD, fChoiceAdres, fNotLoadPunkt, fShablon, fChDir;
+uses fMain, SelLibFR, fWarning, fsimpleD, fChoiceAdres, fNotLoadPunkt, fShablon, fChDir, mDRecInt;
 
 {$R *.DFM}
 
@@ -984,7 +998,9 @@ begin
   {$IFEND}
 
   {$IF Defined(GKH) or Defined(LAIS) }
-    tbResh:= CreateAddTable('Resh','tbResh','AdsConnection');
+    tbResh:=CreateAddTable('Resh','tbResh','AdsConnection');
+    tbRegDogN:=CreateAddTable('RegDogN','tbRegDogN','AdsConnection');
+    EVA:=CreateAddTable('EVA','EVA','AdsSharedConnection');
   {$IFEND}
 
   {$IFDEF ADD_ZAH}
@@ -999,11 +1015,13 @@ begin
   {$ENDIF}
 
 
-  {$IF Defined(GISUN) and Defined(QUERY_GIS) }
-    tbQueryGisun:=CreateAddTable('QueryGis','tbQueryGisun','AdsConnection');
-  {$ELSE}
-    tbQueryGisun:=nil;
-  {$IFEND}
+  {$IFDEF GISUN}
+    {$IFDEF QUERY_GIS}
+      tbQueryGisun:=CreateAddTable('QueryGis','tbQueryGisun','AdsConnection');
+    {$ELSE}
+      tbQueryGisun:=nil;
+    {$ENDIF}
+  {$ENDIF}
 
   SprPerevod  := CreateAddTable('SprPerevod','','AdsConnection');
   SprSklon    := CreateAddTable('Sklonenie','SprSklon','AdsSharedConnection');
@@ -1391,7 +1409,7 @@ begin
   if arrFld[4]<>'' then fldRAION:=ds.FindField(arrFld[4]) else fldRAION:=nil;
   if arrFld[5]<>'' then fldB_GOROD:=ds.FindField(arrFld[5]) else fldB_GOROD:=nil;
   if arrFld[6]<>'' then fldGOROD:=ds.FindField(arrFld[6]) else fldGOROD:=nil;
-  SetLength(Arr,4);   
+  SetLength(Arr,4);
   strDelim:=',';
   if fldGOSUD=nil then s:='' else s:=fldGOSUD.AsString;
   arr[0]:='';
@@ -2700,6 +2718,42 @@ begin
     RestSostTable(tbSostavSem,st);
   end;
 end;
+//-----------------------------------------------------------------------------------------
+{
+function TdmMen.GetCountSostavSem:Integer;
+var
+  l:Boolean;
+  m,n,nOld:Integer;
+  s:String;
+begin
+  m:=0;
+  if tbSostavSem.RecordCount>0 then begin
+    s:=tbSostavSem.Bookmark;
+    l:=dbDisableControls(tbSostavSem);
+    tbSostavSem.First;
+    while not tbSostavSem.Eof do begin
+      if not tbSostavSemISKL.AsBoolean
+        then m:=m+1;
+      if tbSostavSemISKL.AsBoolean then begin
+        if tbSostavSemNOMER.AsString<>'' then begin
+          tbSostavSem.Edit;
+          tbSostavSemNOMER.AsString:='';
+          tbSostavSem.Post;
+        end;
+      end else if (tbSostavSemNOMER.AsInteger<>m) then begin
+        tbSostavSem.Edit;
+        tbSostavSemNOMER.AsInteger:=m;
+        tbSostavSem.Post;
+      end;
+      tbSostavSem.Next;
+    end;
+    tbSostavSem.Bookmark:=s;
+    dbEnableControls(tbSostavSem,l);
+  end;
+  EditDataSet(mtDokument);
+  mtDokumentKOLVO_SOSTAV.AsInteger:=m+1;
+end;
+}
 //-------------------------------------------------------------------------------------------------------------------
 // !nType = 0  все дети лицевого счета, независимо от PA_ID и MA_ID
 // !nType = 1  все дети у которых установлено PA_ID или MA_ID
@@ -3125,8 +3179,12 @@ function TdmBase.AdresMen(DateFiks: TDateTime; strID: String; var strName : Stri
 var
   sLicID,sAdresID : String;
   ID,nAdresID : Integer;
-  lOk,lLic:Boolean;
+  lAddRead,lOk,lLic:Boolean;
   save_adr:TAdres;
+  ld:TLastDvig;
+  {$IFDEF OCHERED}
+    n : Integer;
+  {$ENDIF}
 begin
   save_adr:=GlobalAdresToRec; // !!!  сохраним значения глобальных переменных
   strName := '';
@@ -3240,27 +3298,41 @@ begin
     if (not lLic or lCheckAdresPropis) and (tbMens.FieldByName('PROPIS').AsBoolean=false) then begin // не прописан на територии с/с
 //было    if not lLic and (tbMens.FieldByName('PROPIS').AsBoolean=false) then begin // не прописан на територии с/с
       ID:=StrToInt(strID);
-      Result.AdresPropis := Trim(dmBase.ReadOneProp(DateFiks, ID, 'ADRES_PROP', ftMemo));
+      Result.AdresPropis:=Trim(dmBase.ReadOneProp(DateFiks, ID, 'ADRES_PROP', ftMemo));
       Result.Propis:=false;
+      lAddRead:=true;
+      if lLic and (Result.AdresPropis='') then begin  // адрес вручную не введен
+        ld:=LastDvigMen(DateFiks, InttoStr(ID));
+        if (ld.TypeMigr=0) and ld.Contant then begin
+          Result.AdresPropis:=ld.Adres;
+          Result.Obl:=ld.Obl;
+          Result.Raion:=ld.Rn;
+          Result.Punkt:=ld.Punkt;
+          Result.PunktN:=ld.Punkt;
+          lAddRead:=false;
+        end;
+      end;
       if (Result.AdresPropis='') or (Pos('не известен',ANSILowerCase(Result.AdresPropis) )>0) then begin
         Result.AdresPropis:='не известен';
         Result.OnlyText:=true;
       end else begin
-        Result.Obl:=dmBase.ReadOneProp(DateFiks, ID, 'APROP_OBL', ftMemo);
-        Result.Raion:=dmBase.ReadOneProp(DateFiks, ID, 'APROP_RN', ftMemo);
-        Result.Punkt := dmBase.ReadOneProp(DateFiks, ID, 'APROP_PN', ftMemo);
-        Result.PunktN := Result.Punkt;
-        Result.Ulica := dmBase.ReadOneProp(DateFiks, ID, 'APROP_UL', ftMemo);
-        if Result.Ulica=''
-          then Result.PunktUlica:=Result.Punkt
-          else Result.PunktUlica:=Result.Punkt+', '+Result.Ulica;
-        Result.NDom  := dmBase.ReadPropAsString(DateFiks, ID, 'APROP_DOM');
-        Result.Korp  := dmBase.ReadPropAsString(DateFiks, ID, 'APROP_KORP');
-        Result.Kv    := dmBase.ReadPropAsString(DateFiks, ID, 'APROP_KV');
-        Result.Dom := getDom(Result.NDom,Result.Korp,Result.Kv,'',false);
-        Result.Dom2:= Result.Dom;
-        if (Result.Dom='') and (Result.Punkt='') and (Result.Obl='') and (Result.Raion='')
-          then Result.OnlyText:=true;
+        if lAddRead then begin
+          Result.Obl:=dmBase.ReadOneProp(DateFiks, ID, 'APROP_OBL', ftMemo);
+          Result.Raion:=dmBase.ReadOneProp(DateFiks, ID, 'APROP_RN', ftMemo);
+          Result.Punkt := dmBase.ReadOneProp(DateFiks, ID, 'APROP_PN', ftMemo);
+          Result.PunktN := Result.Punkt;
+          Result.Ulica := dmBase.ReadOneProp(DateFiks, ID, 'APROP_UL', ftMemo);
+          if Result.Ulica=''
+            then Result.PunktUlica:=Result.Punkt
+            else Result.PunktUlica:=Result.Punkt+', '+Result.Ulica;
+          Result.NDom  := dmBase.ReadPropAsString(DateFiks, ID, 'APROP_DOM');
+          Result.Korp  := dmBase.ReadPropAsString(DateFiks, ID, 'APROP_KORP');
+          Result.Kv    := dmBase.ReadPropAsString(DateFiks, ID, 'APROP_KV');
+          Result.Dom := getDom(Result.NDom,Result.Korp,Result.Kv,'',false);
+          Result.Dom2:= Result.Dom;
+          if (Result.Dom='') and (Result.Punkt='') and (Result.Obl='') and (Result.Raion='')
+            then Result.OnlyText:=true;
+        end;
       end;
     end else if nAdresID>0 then begin
 //     SaveGlobalAdres;
@@ -4507,6 +4579,55 @@ begin
 end;
 
 //------------------------------------------------------------------------
+function TdmBase.ReadAllPropSimpleDok(dsDoc:TDataSet; nTypeObj:Integer; nKodObj:Integer; DateSave:TDateTime) : Integer;
+var
+  fld:TField;
+const
+  sSQL = 'select 0 ismemo, pokaz, value, nvalue, typesave from BaseProp '+#13#10+
+         '  where typeobj=%d and id=%d and dates=%s '+#13#10+
+         ' union all '+#13#10+
+         'select 1 ismemo, pokaz, value, 0 nvalue, 0 typesave from BaseTextProp '+#13#10+
+         '  where typeobj=%d and id=%d and dates=%s ';
+begin
+  Result:=0;
+  WorkQuery.SQL.Text:=Format(sSQL, [nTypeObj, nKodObj, DateToSQL(DateSave), nTypeObj, nKodObj, DateToSQL(DateSave)]);
+//  memowrite('!!!.sql', WorkQuery.SQL.Text);
+  WorkQuery.Open;
+  while not WorkQuery.Eof do begin
+    fld:=dsDoc.FindField(WorkQuery.Fields[1].AsString);
+    if fld<>nil then begin
+      if WorkQuery.FieldByName('VALUE').IsNull then begin
+        fld.AsString:='';
+        Inc(Result,1);
+      end else begin
+        try
+          case fld.DataType of
+            ftDate,ftTime,ftDateTime :
+                  fld.AsDateTime:=STOD(WorkQuery.FieldByName('VALUE').AsString, tdAds);
+            ftInteger,ftWord,ftSmallint :
+                  fld.AsInteger:=StrToInt(WorkQuery.FieldByName('VALUE').AsString);
+            ftFloat,ftCurrency :
+                  fld.AsFloat:=StrToFloatMy(WorkQuery.FieldByName('VALUE').AsString);
+            ftString :
+                  fld.AsString:=WorkQuery.FieldByName('VALUE').AsString;
+            ftBoolean :
+                  fld.AsBoolean:=WorkQuery.FieldByName('VALUE').AsString='1';
+          else
+            fld.AsString:=WorkQuery.FieldByName('VALUE').AsString;
+          end;
+          Inc(Result,1);
+        except
+          on E:Exception do begin
+            LastError := 'ОШИБКА чтения реквизита '+fld.FieldName+#13+E.Message;
+          end;
+        end;
+      end;
+    end;
+    WorkQuery.Next;
+  end;
+  WorkQuery.Close;
+end;
+//------------------------------------------------------------------------
 function TdmBase.ReadPropSimpleDok(nTypeObj:Integer; nKodObj:Integer; DateSave:TDateTime; strKodProp:String; ft:TFieldType ) : Variant;
 var
   vKeyValues : Variant;
@@ -5306,18 +5427,23 @@ end;
 function TdmBase.CountMensEx( DateFiks : TDateTime; strLicID : String; strType : String; slPar:TStringList): Integer;
 var
   c1,c2,c3 : Char;
-  lOk1,lOk2,lOk3,lVozr,lOk : Boolean;
+  lAdres,lOk1,lOk2,lOk3,lVozr,lOk : Boolean;
   n,i,j:Integer;
   nTrud,nVozr1,nVozr2,nVozr:Integer;
   strIDAdres,s,ss:String;
   slParOwners:TStringList;
 begin
-  Result := 0;
-  if strLicID<>'' then begin
+  Result:=0;
+  lAdres:=false;
+  if Copy(strLicID,1,1)='*' then begin
+    lAdres:=true;
+    strLicID:=Copy(strLicID,2,Length(strLicID));
+  end;
+  if (strLicID<>'') and (strLicID<>'0') then begin
     lVozr:=false;
     nVozr1:=-1;
     nVozr2:=-1;
-    nTrud:=-1;      
+    nTrud:=-1;
     strIdAdres:='';
     if slPar<>nil then begin
       for i:=0 to slPar.Count-1 do begin
@@ -5327,7 +5453,12 @@ begin
       end;
     end;
     tbMens.CancelRange;
-    tbMens.IndexName := 'LIC_KEY';
+    if lAdres then begin
+      tbMens.IndexName:='ADRES_LIC_KEY';  // DATE_FIKS;ADRES_ID;LIC_ID;NSTR
+    end else begin
+      tbMens.IndexName:='LIC_KEY';        // DATE_FIKS;LIC_ID;NSTR
+    end;
+    tbMens.SetRange([DateFiks,strLicID],[DateFiks,strLicID]);
     try
       i:=Pos(';',strType);
       if i>0 then begin  // передан возраст: 000;0#18
@@ -5353,10 +5484,10 @@ begin
           end;
         end;
       end;
+      strType:=PadRStr(strType,3,'0');
       c1 := strType[1];
       c2 := strType[2];
       c3 := strType[3];
-      tbMens.SetRange([DateFiks,strLicID],[DateFiks,strLicID]);
       while not tbMens.Eof do begin
         if ( tbMens.FieldByName('CANDELETE').IsNull or
              not tbMens.FieldByName('CANDELETE').AsBoolean) then begin
@@ -5426,21 +5557,40 @@ begin
   end;
 end;
 
-// strType    см. выше  CountMensEx
-// strParAdd ';ALL;FIRST;OTN;;DATER;DATEP;IN;PASP;LGOT;'
 //------------------------------------------------------------------------------------------------------------
-function TdmBase.ListMensLic(strLicID:String; nIDFirst:Integer; strType:String; strParAdd:String; strDelim:String; dsList:TDataSet):String;
+function TdmBase.ListMensAdres(strAdrID:String; nIDCurMen:Integer; strType:String; strParAdd:String; strDelim:String; dsList:TDataSet):String;
+begin
+  Result:=ListMensLic('*'+strAdrID, nIDCurMen, strType, strParAdd, strDelim, dsList);
+end;
+
+// strType    см. выше  CountMensEx
+// strParAdd ';ALL;FIRST;OTN;;DATER;DATEP;IN;PASP;LGOT;WORK;'
+//------------------------------------------------------------------------------------------------------------
+function TdmBase.ListMensLic(strLicID:String; nIDCurMen:Integer; strType:String; strParAdd:String; strDelim:String; dsList:TDataSet):String;
 var
   c1,c2,c3 : Char;
-  lOk1,lOk2,lOk3,lOk,lVozr : Boolean;
+  lOk1,lOk2,lOk3,lOk,lVozr,l : Boolean;
   n,nTrud,nVozr,nVozr1,nVozr2,i,j:Integer;
-  s,ss : String;
+  sID,s,ss,sW : String;
   p:TPassport;
+  lAdres:Boolean;
 begin
   s:='';
-  if strLicID<>'' then begin
-    tbMens.CancelRange;
-    tbMens.IndexName := 'LIC_KEY';
+  tbMens.CancelRange;
+  lAdres:=false;
+  //-----------------------------------
+  if Copy(strLicID,1,1)='*' then begin
+    lAdres:=true;   // будем собирать людей по адресу
+    strLicID:=Copy(strLicID,2,Length(strLicID));
+  end;
+  //-----------------------------------
+  if (strLicID<>'') and (strLicID<>'0') then begin
+    if lAdres then begin
+      tbMens.IndexName:='ADRES_LIC_KEY';  // DATE_FIKS;ADRES_ID;LIC_ID;NSTR
+    end else begin
+      tbMens.IndexName:='LIC_KEY';        // DATE_FIKS;LIC_ID;NSTR
+    end;
+    tbMens.SetRange([fmMain.DateFiks,strLicID],[fmMain.DateFiks,strLicID]);
     try
       c1 := strType[1];
       c2 := strType[2];
@@ -5480,15 +5630,14 @@ begin
         then lVozr:=false;
       //-------------------------------------------
 //        lOk:=false;
-      tbMens.SetRange([fmMain.DateFiks,strLicID],[fmMain.DateFiks,strLicID]);
       while not tbMens.Eof do begin
         if (tbMens.FieldByName('CANDELETE').IsNull or not tbMens.FieldByName('CANDELETE').AsBoolean) and
-           ( (Pos(';FIRST;', strParAdd)>0) or (nIDFirst<>tbMens.FieldByName('ID').AsInteger)) then begin
+           ( (Pos(';FIRST;', strParAdd)>0) or (nIDCurMen<>tbMens.FieldByName('ID').AsInteger)) then begin
           lOk :=false;
           lOk1:=false;
           lOk2:=false;
           lOk3:=false;
-
+          sID:=tbMens.FieldByName('ID').AsString;
           if (c1='0') or ((c1='1') and tbMens.FieldByName('PRESENT').AsBoolean) or
              ((c1='2') and not tbMens.FieldByName('PRESENT').AsBoolean)
             then lOk1 := true;
@@ -5551,11 +5700,32 @@ begin
                s := s + ' ' + tbMens.FieldByName('LICH_NOMER').AsString;
             end;
             if (Pos(';PASP;', strParAdd)>0) and (tbMens.FieldByName('PASP_NOMER').AsString<>'') then begin
-               p:=PasportMen(tbMens.FieldByName('DATE_FIKS').AsDateTime,tbMens.FieldByName('ID').AsString);
+               p:=PasportMen(tbMens.FieldByName('DATE_FIKS').AsDateTime,sID);
                s:=s+' '+PasportToText(p,0);
             end;
+            if (Pos(';WORK;', strParAdd)>0) then begin
+              sW:=dmBase.getMenWork(fmMain.DateFiks,sID);
+              if sW<>'' then begin
+                ss:=dmBase.getMenDolg(fmMain.DateFiks,sID);
+                if ss<>'' then sW:=sW+', '+ss;
+                s:=s+' '+sW;
+              end;
+            end;
+            l:=false;
             if (Pos(';LGOT;', strParAdd)>0) then begin
-               s := s+ ' ' + LgotMen(dmBase.tbMensLgot, fmMain.DateFiks, tbMens.FieldByName('ID').AsString, ', ');
+              ss:=LgotMen(dmBase.tbMensLgot, fmMain.DateFiks, sID, ', ');
+              if ss<>'' then begin
+                s := s+' '+ss;
+                l:=true;
+              end;
+            end;
+            if (Pos(';PRIZN;', strParAdd)>0) then begin
+              ss:=PriznMen(dmBase.tbMensPr, fmMain.DateFiks, tbMens.FieldByName('ID').AsString, ', ');
+              if ss<>'' then begin
+                if l
+                  then s:=s+', '+ss
+                  else s:=s+' '+ss;
+              end;
             end;
             s:=s+strDelim;
           end;
@@ -5658,6 +5828,10 @@ end;
 //     1 Заполнена
 //     2 Пустая
 function TdmBase.CountMensAdres( DateFiks : TDateTime; strAdresID : String; strType : String; slPar:TStringList): Integer;
+begin
+  Result:=CountMensEx(DateFiks, '*'+strAdresID, strType, slPar);
+end;
+{          
 var
   c1,c2 : Char;
   lOk1,lOk2,lOk : Boolean;
@@ -5729,7 +5903,7 @@ begin
     end;
   end;
 end;
-
+}
 function TdmBase.CountMensAdresNotRegistred( DateFiks : TDateTime; strAdresID : String): Integer;
 begin
   Result := 0;
@@ -5838,14 +6012,16 @@ end;
 
 //------------------------------------------------------------------------------
 {$IFDEF OCHERED}
-function TdmBase.CheckDeleteMen(DateFiks : TDateTime; nId : Integer; var strErr : String; strFIO:String) : Boolean;
+function TdmBase.CheckDeleteMen(DateFiks : TDateTime; nId : Integer; var strErr : String; strFIO:String; var nIdMen:Integer) : Boolean;
 begin
+  nIdMen:=0;
   Result:=true;
 end;
 {$ELSE}
-function TdmBase.CheckDeleteMen(DateFiks : TDateTime; nId : Integer; var strErr : String; strFIO:String) : Boolean;
+function TdmBase.CheckDeleteMen(DateFiks : TDateTime; nId : Integer; var strErr : String; strFIO:String; var nIdMen:Integer) : Boolean;
 begin
   strErr:='';
+  nIdMen:=0;
   Result:=true;
   if tbVUS.Active then begin
     if tbVUS.Locate('ID', nId,[]) then begin
@@ -5859,6 +6035,7 @@ begin
   end;
   if Result then begin
     if tbSostavSem.Locate('MEMBER_ID', nId,[]) then begin
+      nIdMen:=tbSostavSem.FieldByName('ID').AsInteger;
       strErr:=strErr+'присутствует в составе семьи стоящего в очереди'+chr(13);
     end;
   end;
@@ -5919,7 +6096,7 @@ var
   s:String;
 begin
   if nTypeObj=_TypeObj_AktZAH then begin
-    GlobalTask.LogFile.WriteToLogFile('Удаление информации о захоронении: книга '+ds.FieldByName('BOOK').AsString+' запись №'+ds.FieldByName('NOMER').AsString+' от '+
+    GlobalTask.WriteToLogFile('Удаление информации о захоронении: книга '+ds.FieldByName('BOOK').AsString+' запись №'+ds.FieldByName('NOMER').AsString+' от '+
     FormatDateTime('dd.mm.yyyy',ds.FieldByName('DATEZ').AsDateTime)+'  ИН:'+ds.FieldByName('LICH_NOMER').AsString);
   end else begin
     if (ds.FindField('NOMER')<>nil) and (ds.FindField('DATEZ')<>nil) then begin
@@ -5929,7 +6106,7 @@ begin
       end else begin
         s:=' з/а '+s;
       end;
-      GlobalTask.LogFile.WriteToLogFile('Удаление '+s+' №'+ds.FieldByName('NOMER').AsString+' от '+FormatDateTime('dd.mm.yyyy',ds.FieldByName('DATEZ').AsDateTime));
+      GlobalTask.WriteToLogFile('Удаление '+s+' №'+ds.FieldByName('NOMER').AsString+' от '+FormatDateTime('dd.mm.yyyy',ds.FieldByName('DATEZ').AsDateTime));
     end;
   end;
 end;
@@ -6078,8 +6255,15 @@ begin
     end else begin
       Result:=DeleteMen( ds.FieldByName('DATE_FIKS').AsDateTime, sID, true, lIgnoreCheck);
     end;
-  end else if nTypeObj = TypeObj_Adres then begin
+  end else if nTypeObj = _TypeObj_Adres then begin
     Result:=DeleteAdres( ds.FieldByName('DATE_FIKS').AsDateTime, sID);
+  {$IF Defined(GKH) or Defined(LAIS) }
+  end else if nTypeObj = _TypeObj_RegDogN then begin
+    if SeekID(tbRegDogN) then begin
+      tbRegDogN.Delete;
+      AppendToDelObj(ds.FieldByName('DATEZ').AsDateTime, sID, _TypeObj_RegDogN);
+    end;
+  {$IFEND}
   end else if nTypeObj = TypeObj_Passport then begin
     dFiks:=ds.FieldByName('DATE_ZAPOLN').AsDateTime;
     while tbPaspChildren.Locate('ID', sID, []) do
@@ -6119,7 +6303,7 @@ begin
         on E:Exception do begin
           Result := false;
           sKomm:='Ошибка удаления сообщения:'+sKomm+' >>'+E.Message;
-          GlobalTask.LogFile.WriteToLogFile(sKomm);
+          GlobalTask.WriteToLogFile(sKomm);
         end;
       end;
       AppendToDelObjEx(_TypeObj_SMDOPost, sID, dFiks, -1, sKomm);
@@ -6128,7 +6312,8 @@ begin
 //        DeletePropSimpleDok(sID, _TypeObj_SMDOPost);
 
       // удаляем прикрепленные файлы если нет ссылок на подсистему "входящих документов"
-      if Result and not DocMain.Locate('POST_ID', StrToInt(sID), []) then begin
+      // gtIncoming=3(входящие документы)  gtOutgoing=4(исходящие документы)
+      if Result and not DocMain.Locate('POST_ID;DOC_TYPE', VarArrayOf([StrToInt(sID),gtIncoming]), []) then begin
         ClearDir(SMDO.GetPathAttach(0,StrToInt(sID)),true);  // ??? !!!  удалять или нет прикрепленные файлы !!!
       end;
     {$ENDIF SMDO}
@@ -6154,6 +6339,16 @@ begin
   end else if nTypeObj = TypeObj_PassportViza then begin
 //      if tbPasportViza.Locate('ID', ds.FieldByName('ID').AsInteger, []) then
 //        tbPasportViza.Delete;
+  end else if nTypeObj = _TypeObj_QueryGIS then begin
+    {$IFDEF GISUN}
+      if (tbQueryGisun<>nil) and SeekID(tbQueryGisun) then begin
+        dFiks:=DateOf(ds.FieldByName('COVER_MESSAGE_TIME').AsDateTime);
+        sKomm:=InfoForDelete(tbQueryGisun, _TypeObj_QueryGis, false);
+        tbQueryGisun.Delete;
+        DeletePropSimpleDok(sID, _TypeObj_QueryGis);
+        AppendToDelObjEx(_TypeObj_QueryGis, sID, dFiks, -1, sKomm);
+      end;
+    {$ENDIF}
   end else if nTypeObj = _TypeObj_AktZAH then begin
     {$IFDEF ADD_ZAH}
       if SeekID(AktZ) then begin
@@ -6455,10 +6650,12 @@ end;
 
 function TdmBase.AdresForSeek(ds : TDataSet) : TAdres;
 var
-  fld : TField;
+  fld : TField;            
 begin
   Result.Punkt:=ds.FieldByName('PUNKT').AsString;
-  Result.PunktKod:=StrToInt(ds.FieldByName('PUNKT').AsString);
+  if Result.Punkt=''  
+    then Result.Punkt:='0';
+  Result.PunktKod:=StrToIntDef(ds.FieldByName('PUNKT').AsString,0);
   Result.Ulica:=Trim(ds.FieldByName('UL').AsString);
   if Result.Ulica=''
     then Result.UlicaInt:=0
@@ -6550,8 +6747,9 @@ begin
 //    {$ENDIF}
     if Result then begin
       tbAdres.IndexName:='PR_KEY';
+      adr.PunktKod:=0;
       if tbAdres.FindKey([DateFiks,strID]) then begin
-        adr := AdresForSeek(tbAdres);
+        adr:=AdresForSeek(tbAdres);
       end;
       WorkQuery.Close;
       WorkQuery.SQL.Clear;
@@ -6565,9 +6763,11 @@ begin
       try
         WorkQuery.ExecSQL;
         //------- если адресов больше нет то удалим и дом ---------------
-        if not FindAdres(DateFiks, StrToInt(adr.Punkt), adr.UlicaInt, adr.Dom, adr.Korp, '{---}', -1) then begin
-          if FindBigHouse(adr, DateFiks) then begin
-             DeleteBigHouse;
+        if adr.PunktKod>0 then begin
+          if not FindAdres(DateFiks, adr.PunktKod, adr.UlicaInt, adr.Dom, adr.Korp, '{---}', -1) then begin
+            if FindBigHouse(adr, DateFiks) then begin
+               DeleteBigHouse;
+            end;
           end;
         end;
         //------ если были лиц. счета по адресу -----------
@@ -6669,14 +6869,21 @@ end;
 //---------------------------------------------------------------------------
 function TdmBase.DeleteMen(DateFiks : TDateTime; strID : String; lCheckDel : Boolean; lIgnoreCheck:Boolean) : Boolean;
 var
-  strDate,strErr : String;
+  s,strDate,strErr : String;
+  n,nIdMenOch:Integer;
 begin
   Result := true;
   if (strID='') or (strID='-1')
     then exit;
+  nIdMenOch:=0;    // ID основного человека стоящего в очереди, если удаляем человека из состава семьи очередника
+  n:=Pos('=', strID); // !!!
+  if n>0 then begin   // может передали ID для проверки если lCheckDel=false
+    nIdMenOch:=StrToIntDef(Copy(strID,n+1,Length(strID)),0);
+    strID:=Copy(strID,1,n-1);     
+  end;
   if lCheckDel then begin
     LastErrorDelete:='';
-    Result:=CheckDeleteMen(DateFiks, StrToInt(strId), strErr,'');
+    Result:=CheckDeleteMen(DateFiks, StrToInt(strId), strErr,'', nIdMenOch);
     if not Result then begin
       if lIgnoreCheck then begin
         if not Problem(strErr+#13+'Удалить человека ?') then begin
@@ -6717,6 +6924,13 @@ begin
     end;
     try
       WorkQuery.ExecSQL;
+      if nIdMenOch>0 then begin   // обновим количество очередников
+        WorkQuery.Close;
+        WorkQuery.SQL.Clear;
+        WorkQuery.SQL.Add('DELETE FROM SostavSem WHERE member_id='+strID+';');
+        WorkQuery.SQL.Add(StringReplace('UPDATE ochered SET kolvo_sostav=(select count(*)+1 kolvo from sostavsem where id=&ID& and (iskl=false or iskl is null)) WHERE id=&ID&',  '&ID&', InttoStr(nIdMenOch), [rfReplaceAll]));
+        WorkQuery.ExecSQL;
+      end;
     except
       on E:Exception do begin
         Result := false;
@@ -6747,9 +6961,10 @@ end;
 //---------------------------------------------------------------------------
 function TdmBase.DeleteLich(DateFiks : TDateTime; strID : String) : Boolean;
 var
-  strDate, strErr, s : String;
+  sID, strDate, strErr, s : String;
   slAdd : TStringList;
   i : Integer;
+  arrID:TArrInteger;
 begin
   Result := true;
   strDate := DTOS(DateFiks,tdAds);
@@ -6767,9 +6982,11 @@ begin
     WorkQuery.Close;
 
     //-------- имею ли я право удалять людей  -------------------
+    SetLength(arrID, slAdd.Count);
     s:='';
     for i:=0 to slAdd.Count-1 do begin
-      if not CheckDeleteMen(DateFiks, StrToInt(slAdd.Strings[i]), strErr,'') then begin
+      arrID[i]:=0;
+      if not CheckDeleteMen(DateFiks, StrToInt(slAdd.Strings[i]), strErr,'', arrID[i]) then begin
         s:=s+#13+strErr;
       end;
     end;
@@ -6781,7 +6998,10 @@ begin
 
     //-------- удалим людей -------------------
     for i:=0 to slAdd.Count-1 do begin
-      DeleteMen(DateFiks, slAdd.Strings[i],false);
+      sID:=slAdd.Strings[i];
+      if arrID[i]>0
+        then sID:=sID+'='+IntToStr(arrID[i]);  // !!!
+      DeleteMen(DateFiks, sID, false);
     end;
 
     slAdd.Free;
@@ -6840,7 +7060,7 @@ begin
     tbDelObj.Post;
     DeleteUpdating(nTypeObj, strID);
   except
-    GlobalTask.LogFile.WriteToLogFile('Ошибка записи информации об удалении ('+IntToStr(nTypeObj)+','+strID+')  '+strKomm);
+    GlobalTask.WriteToLogFile('Ошибка записи информации об удалении ('+IntToStr(nTypeObj)+','+strID+')  '+strKomm);
   end;
 end;
 //---------------------------------------------------------------
@@ -6866,7 +7086,7 @@ begin
 //       Format('%s,%d,%s,CURRENT_TIMESTAMP(0),''%s'',%s,%d,''%s'')',[strID,nTypeObj, IIFS(lNewObj,'true','false'),UserID,
 //                                                              IIFS(lBeforeGrn,'true','false'),nValueGrn,strKomm]));
   except
-    GlobalTask.LogFile.WriteToLogFile('Ошибка записи информации о корректировке ('+IntToStr(nTypeObj)+','+InttoStr(nID)+')  '+strKomm);
+    GlobalTask.WriteToLogFile('Ошибка записи информации о корректировке ('+IntToStr(nTypeObj)+','+InttoStr(nID)+')  '+strKomm);
   end;
 end;
 
@@ -6958,8 +7178,8 @@ begin
     WorkQuery.Active := false;
     {$IFNDEF DEBUG}
     if lCreateCur
-      then GlobalTask.LogFile.WriteToLogFile('Создание текущего состояния базы из состояния на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года')
-      else GlobalTask.LogFile.WriteToLogFile('Создание состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года');
+      then GlobalTask.WriteToLogFile('Создание текущего состояния базы из состояния на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года')
+      else GlobalTask.WriteToLogFile('Создание состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года');
     if lCreateCur
       then OpenMessage( 'Создание текущего состояния базы из состояния на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года', '')
       else OpenMessage( 'Создание состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года', '');
@@ -7124,7 +7344,7 @@ begin
         Application.ProcessMessages;
         //---------------------------------------------------------------------------------
       end;
-      GlobalTask.LogFile.WriteToLogFile('Создание успешно завершено.');
+      GlobalTask.WriteToLogFile('Создание успешно завершено.');
     finally
       {$IFNDEF DEBUG}
       CloseMessage;
@@ -7161,7 +7381,7 @@ begin
   end;
   WorkQuery.Active := false;
   if lOk then begin
-    GlobalTask.LogFile.WriteToLogFile('Удаление состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года');
+    GlobalTask.WriteToLogFile('Удаление состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года');
     OpenMessage( 'Удаление состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года', '');
     try
       WorkQuery.Active := false;
@@ -7204,7 +7424,7 @@ begin
       end;
       //-------------------------------------------------------------------------
       if Result then
-        GlobalTask.LogFile.WriteToLogFile('Удаление успешно завершено.');
+        GlobalTask.WriteToLogFile('Удаление успешно завершено.');
     finally
       CloseMessage;
     end;
@@ -7314,10 +7534,13 @@ end;
 
 //-----------------------------------------------------------------------------
 function TdmBase.getMenWork(DateFiks:TDateTime; strID:String): String;
+{$IFDEF ADD_MENS_PU}
 var
   ds:TDataSet;
+{$ENDIF}
 begin
   Result := '';
+  {$IFDEF ADD_MENS_PU}
   ds:=GetMen(DateFiks,strID);
   if ds<>nil then begin
     if not ds.FieldByName('WORK_SPR').IsNull then begin
@@ -7328,14 +7551,18 @@ begin
       Result := ReadOneProp( dateFiks, StrToInt(strID), 'WORK_NAME', ftMemo);
     end;
   end;
+  {$ENDIF}
 end;
 
 //-----------------------------------------------------------------------------
 function TdmBase.getMenStud(DateFiks:TDateTime; strID:String): String;
+{$IFDEF ADD_MENS_PU}
 var
   ds:TDataSet;
+{$ENDIF}
 begin
   Result := '';
+  {$IFDEF ADD_MENS_PU}
   ds:=GetMen(DateFiks,strID);
   if ds<>nil then begin
     if not ds.FieldByName('STUDENT_SPR').IsNull then begin
@@ -7346,14 +7573,18 @@ begin
       Result := ReadOneProp( dateFiks, StrToInt(strID), 'STUD_PLACE', ftMemo);
     end;
   end;
+  {$ENDIF}
 end;
 
 //-----------------------------------------------------------------------------
 function TdmBase.getMenDolg(DateFiks:TDateTime; strID:String): String;
+{$IFDEF ADD_MENS_PU}
 var
   ds:TDataSet;
+{$ENDIF}
 begin
   Result := '';
+  {$IFDEF ADD_MENS_PU}
   ds:=GetMen(DateFiks,strID);
   if ds<>nil then begin
     if not ds.FieldByName('DOLG_SPR').IsNull then begin
@@ -7364,15 +7595,58 @@ begin
       Result := ds.FieldByName('DOLG_NAME').AsString;
     end;
   end;
+  {$ENDIF}
+end;
+//-----------------------------------------------------------------------------
+function TdmBase.getMenTel(DateFiks:TDateTime; strID:String; strType:String; strDelim:String): String;
+{$IFDEF ADD_MENS_PU}
+var
+  ds:TDataSet;
+  s,st,ss,sTelLic:String;
+  i:Integer;
+{$ENDIF}
+begin
+  Result := '';
+  {$IFDEF ADD_MENS_PU}
+  if strType='' then strType:='DMRP';   // D лиц.счет и(или) отдельный, M мобильный, R рабочий, P места пребывания
+  sTelLic:='';
+  ds:=GetMen(DateFiks,strID);
+  if ds<>nil then begin
+    for i:=1 to Length(strType) do begin
+      s:=Copy(strType,i,1);
+      if s='D' then begin
+        if (ds.FieldByName('LIC_ID').AsInteger>0) and tbLich.Locate('DATE_FIKS;ID', VarArrayOf([DateFiks, ds.FieldByName('LIC_ID').AsInteger]), []) then begin
+          sTelLic:=Trim(tbLich.FieldByName('TELEFON').AsString);
+          if sTelLic<>'' then Result:=Result+'дом.'+sTelLic+strDelim;    // TELEFON с лицевого
+        end;
+        if (sTelLic='') then ss:='дом.' else ss:='';
+        st:=Trim(ds.FieldByName('TELEFON').AsString);
+        if (st<>'') and ((sTelLic='') or (sTelLic<>st))  // TELEFON с карточки человека если не равен лицевому
+          then Result:=Result+ss+st+strDelim;
+      end else if (s='M') and not ds.FieldByName('TELEFON_M').IsNull then begin
+        Result:=Result+'моб.'+ds.FieldByName('TELEFON_M').AsString+strDelim;
+      end else if (s='R') and not ds.FieldByName('WORK_TELEF').IsNull then begin
+        Result:=Result+'раб.'+ds.FieldByName('WORK_TELEF').AsString+strDelim;
+      end else if (s='P') then begin
+        if tbVUS.Locate('ID', strID, [])
+          then if not tbVUS.FieldByName('AGIT_TEL').IsNull then Result:=Result+'преб.'+tbVUS.FieldByName('AGIT_TEL').AsString+strDelim;
+      end;
+    end;
+  end;
+  if Result<>'' then Result:=Copy(Result,1,Length(Result)-Length(strDelim));
+  {$ENDIF}
 end;
 
 function TdmBase.getMenDvig(DateFiks: TDateTime; strID,  strRazd: String): String;
+{$IFDEF ADD_MENS_PU}
 var
   ds:TDataSet;
   dPropis:TDateTime;
   st:TSostTable;
+{$ENDIF}
 begin
   Result := '';
+  {$IFDEF ADD_MENS_PU}
   ds:=GetMen(DateFiks,strID);
   if ds<>nil then begin
     if ds.FieldByName('DATEP').IsNull
@@ -7388,6 +7662,7 @@ begin
       RestSostTable(tbMensDvig,st);
     end;
   end;
+  {$ENDIF}
 end;
 
 //-----------------------------------------------------------------------------
@@ -7733,11 +8008,13 @@ begin
           if tbMensDvig.FieldByName('CONTANT').AsInteger = 1
             then Result.Contant := true
             else Result.Contant := false;
+          Result.Gosud := tbMensDvig.FieldByName('OP_GOSUD').AsInteger;
           Result.B_Obl := tbMensDvig.FieldByName('OP_B_OBL').AsBoolean;
           Result.Obl   := tbMensDvig.FieldByName('OP_OBL').AsString;
           Result.Rn    := tbMensDvig.FieldByName('OP_RAION').AsString;
           Result.B_Punkt:= tbMensDvig.FieldByName('OP_B_GOROD').AsInteger;
-          Result.Punkt := tbMensDvig.FieldByName('OP_GOROD').AsString;
+          Result.Punkt:=tbMensDvig.FieldByName('OP_GOROD').AsString;
+          Result.Adres:=GetMestoFromFields(tbMensDvig,';OP_GOSUD;OP_B_OBL;OP_OBL;OP_RAION;OP_B_GOROD;OP_GOROD',true,0);
         end;
       end;
     finally
@@ -8404,7 +8681,7 @@ begin
   end else begin
     Result:=false;
     try
-      GlobalTask.LogFile.WriteToLogFile('IsDirBase: Папка с базой  '+strDir+' недоступна');
+      GlobalTask.WriteToLogFile('IsDirBase: Папка с базой  '+strDir+' недоступна');
     except
     end;
     if GlobalPar.PingBase and (stADS_REMOTE in GlobalPar.ServerTypes) then begin
@@ -8435,8 +8712,8 @@ begin
       end;
       try
        if Result
-         then GlobalTask.LogFile.WriteToLogFile('IsDirBase: Папка с базой  '+strDir+' соединение установлено')
-         else GlobalTask.LogFile.WriteToLogFile('IsDirBase: Папка с базой  '+strDir+' ошибка соединения '+sErr);
+         then GlobalTask.WriteToLogFile('IsDirBase: Папка с базой  '+strDir+' соединение установлено')
+         else GlobalTask.WriteToLogFile('IsDirBase: Папка с базой  '+strDir+' ошибка соединения '+sErr);
       except
       end;
     end;
@@ -9092,7 +9369,7 @@ begin
         end;
       end;
     except
-      on E:Exception do GlobalTask.LogFile.WriteToLogFile(FormatDateTime('dd.mm.yyyy hh:nn ',dmBase.getCurDate)+E.Message);
+      on E:Exception do GlobalTask.WriteToLogFile(FormatDateTime('dd.mm.yyyy hh:nn ',dmBase.getCurDate)+E.Message);
     end;
   end;
 end;
@@ -11626,7 +11903,7 @@ begin
     RestSostTable(ListSvid,st);
     lNext := false;
   end;
-  }      
+  }
   if lNext then begin
 //    nn:=GetTickCount;
     st := SaveSostTable(tb,true,true);
@@ -11637,65 +11914,56 @@ begin
     if tb.FieldByName('DATESV').IsNull
       then d1 := 0  else d1 := tb.FieldByName('DATESV').AsDateTime;
     {$IFDEF ZAGS}
-    cur := Screen.Cursor;
-    Screen.Cursor := crHourGlass;
-    fldZags := tb.FindField('ID_ZAGS');
-    strNomer1 := '';
-    strSeria1 := '';
-    strNomer2:='';
-    strSeria2:='';
-//    d2:=0;
+    //---- ищем в базе только если не архив загс, т.к. он практически не создает записи, а только выписывает повторные свидетельства -------
+    if not OblArxivZAGS then begin
+      cur := Screen.Cursor;
+      Screen.Cursor := crHourGlass;
+      fldZags := tb.FindField('ID_ZAGS');
+      strNomer1 := '';
+      strSeria1 := '';
+      strNomer2:='';
+      strSeria2:='';
+      // !!! может долго работать !!!    для более быстрого поиска нужна сортировка "ID_ZAGS;ID" с установкой SetRange по ID_ZAGS
+      nIDZags:=GlobalTask.ParamAsInteger('ID');
+      while (fldZags.AsInteger<>nIDZags) or (tb.FieldByName('SVID_NOMER').AsString='') do begin
+        tb.Prior;
+        if tb.Bof then break;
+      end;
 
- {  tb.IndexFieldNames := 'ID_ZAGS;ID';
-    tb.SetRange([GlobalTask.ParamAsInteger('ID')],[GlobalTask.ParamAsInteger('ID')]);
-    tb.Last;  }
-{
-    WorkQuery.SQL.Text:='select max(id) from '+tb.TableName+' where id_zags='+GlobalTask.ParamAsString('ID')+' and svid_nomer<>'''' ';
-    WorkQuery.Open;
-    n:=WorkQuery.Fields[0].AsInteger;
-    WorkQuery.Close;
-    if tb.Locate('ID',n,[]) and (n>0) then begin
-}
-    // !!! может долго работать !!!
-    nIDZags:=GlobalTask.ParamAsInteger('ID');
-    while (fldZags.AsInteger<>nIDZags) or (tb.FieldByName('SVID_NOMER').AsString='') do begin
-      tb.Prior;
-      if tb.Bof then break;
-    end;
-
-    if not tb.Bof and (fldZags.AsInteger=nIDZags) then begin
-      id1:=tb.FieldByName('ID').AsInteger;
-      strNomer1 := Trim(tb.FieldByName('SVID_NOMER').AsString);
-      strSeria1 := Trim(tb.FieldByName('SVID_SERIA').AsString);
-      if tb.FieldByName('DATESV').IsNull
-        then d1 := 0  else d1 := tb.FieldByName('DATESV').AsDateTime;
-      //-------- для установления отцовства ---------------------
-      if tb.FindField('TWO_SVID')<>nil then begin
-        if tb.FindField('TWO_SVID').AsBoolean then begin
-          strNomer2 := Trim(tb.FieldByName('SVID_NOMER2').AsString);
-          strSeria2 := Trim(tb.FieldByName('SVID_SERIA2').AsString);
-          if tb.FieldByName('DATESV2').IsNull
-            then d2 := 0  else d2 := tb.FieldByName('DATESV2').AsDateTime;
-          if strNomer2<>'' then begin
-            try
-              if StrToInt(strNomer2)>StrToInt(strNomer1) then begin
-                strNomer1:=strNomer2;
-                strSeria1:=strSeria2;
-                d1:=d2;
+      if not tb.Bof and (fldZags.AsInteger=nIDZags) then begin
+        id1:=tb.FieldByName('ID').AsInteger;
+        strNomer1 := Trim(tb.FieldByName('SVID_NOMER').AsString);
+        strSeria1 := Trim(tb.FieldByName('SVID_SERIA').AsString);
+        if tb.FieldByName('DATESV').IsNull
+          then d1 := 0  else d1 := tb.FieldByName('DATESV').AsDateTime;
+        //-------- для установления отцовства ---------------------
+        if tb.FindField('TWO_SVID')<>nil then begin
+          if tb.FindField('TWO_SVID').AsBoolean then begin
+            strNomer2 := Trim(tb.FieldByName('SVID_NOMER2').AsString);
+            strSeria2 := Trim(tb.FieldByName('SVID_SERIA2').AsString);
+            if tb.FieldByName('DATESV2').IsNull
+              then d2 := 0  else d2 := tb.FieldByName('DATESV2').AsDateTime;
+            if strNomer2<>'' then begin
+              try
+                if StrToInt(strNomer2)>StrToInt(strNomer1) then begin
+                  strNomer1:=strNomer2;
+                  strSeria1:=strSeria2;
+                  d1:=d2;
+                end;
+              except
               end;
-            except
             end;
           end;
+          strNomer2:='';
+          strSeria2:='';
+  //        d2:=0;
         end;
-        strNomer2:='';
-        strSeria2:='';
-//        d2:=0;
       end;
-      //----------------------------------------------------------
+  //    end;
+      tb.CancelRange;
+      Screen.Cursor := cur;
     end;
-//    end;
-    tb.CancelRange;
-    Screen.Cursor := cur;
+    //----------------------------------------------------------
     {$ENDIF}
     while Copy(strNomer1,1,1)='0' do strNomer1:=Copy(strNomer1,2,SVID_LEN);
     n1 := Length(strNomer1);
@@ -11783,36 +12051,6 @@ begin
   strNewSeriaON  := '';
   strNewSeriaONA := '';
   lNext := true;
-  {
-  if GlobalTask.ParamAsBoolean('CHECK_SVID') then begin
-    st := SaveSostTable(ListSvid,true,true);
-    ListSvid.IndexFieldNames := 'SVID_TYPE;SVID_SERIA;SVID_NOMER';
-    ListSvid.SetRange([TypeObj_ZRast],[TypeObj_ZRast]);
-    ListSvid.Filter := 'sost=0';  // не выдано
-    ListSvid.Filtered := true;
-    ListSvid.First;
-    if ListSvid.Eof then begin
-      Result := '  Закончились свидетельства ! ';
-    end else begin
-      strNewNomerON := ListSvid.FieldByName('SVID_NOMER').AsString;
-      strNewSeriaON := ListSvid.FieldByName('SVID_SERIA').AsString;
-      ListSvid.Next;
-      if ListSvid.Eof then begin
-        Result := '  Закончились свидетельства ! ';
-        strNewNomerON := '';
-        strNewSeriaON := '';
-      end else begin
-        strNewNomerONA := ListSvid.FieldByName('SVID_NOMER').AsString;
-        strNewSeriaONA := ListSvid.FieldByName('SVID_SERIA').AsString;
-      end;
-    end;
-    ListSvid.Filtered := false;
-    ListSvid.Filter := '';
-    ListSvid.CancelRange;
-    RestSostTable(ListSvid,st);
-    lNext := false;
-  end;
-  }
   if lNext then begin
     tb := tbZapisRast;
     st := SaveSostTable(tb,true,true);
@@ -12250,15 +12488,23 @@ begin
 end;
 
 //------------------------------------------------------------------
-function TdmBase.CheckNomerLich(DateFiks : TDateTime; nID:Integer; sNomer: String): Boolean;
+function TdmBase.CheckNomerLich(DateFiks : TDateTime; nID:Integer; sNomer: String; lQuest:Boolean): Boolean;
 var
-  old : String;
+  old,s,ss,sSoob:String;
+  n,nCount,nLikv:Integer;
+  d:TDateTime;
+  lLive:Boolean;
 begin
   Result := true;
+  sSoob:='';
   if GlobalTask.ParamAsBoolean('CHECK_N_LIC') then begin
-    old := tbLich.IndexFieldNames;
+    old:=tbLich.IndexFieldNames;
+    s:=tbLich.Bookmark;
     tbLich.IndexFieldNames:='DATE_FIKS;NOMER';
     tbLich.SetRange([DateFiks,sNomer],[DateFiks,sNomer]);
+    nCount:=0;
+    nLikv:=0;
+    lLive:=false;
     try
       if nID = -1 then begin  // новый
         if not tbLich.Eof then Result := false;
@@ -12266,6 +12512,13 @@ begin
         if not tbLich.Eof then begin
           while not tbLich.Eof do begin
             if tbLich.FieldByName('ID').AsInteger<>nID then begin
+              if not tbLich.FieldByName('DATE_LIKV').IsNull then begin
+                sSoob:='дата ликвидации '+DatePropis(tbLich.FieldByName('DATE_LIKV').AsDateTime, 3);
+                nLikv:=nLikv+1;
+              end else begin
+                lLive:=true;
+              end;
+              nCount:=nCount+1;
               Result := false;
             end;
             tbLich.Next;
@@ -12275,6 +12528,26 @@ begin
     finally
       tbLich.CancelRange;
       tbLich.IndexFieldNames:=old;
+      tbLich.Bookmark:=s;
+    end;
+    if not Result and (nCount>0) and lQuest then begin
+      if nCount=1 then begin
+        if lLive
+          then sSoob:='';   // один живой лицевой счет
+//        else см. выше        ликвидированный с датой ликвидации
+      end else begin
+        if lLive then begin
+          if nLikv>0 then ss:=' (из них ликвидировано: '+IntToStr(nLikv)+')' else ss:='';
+          sSoob:=IntToStr(nCount)+' лицевых счета'+ss;
+        end else begin
+          sSoob:=IntToStr(nCount)+' ливидированных лицевых счета';
+        end;
+      end;
+      if sSoob<>'' then sSoob:=' ('+sSoob+')';
+      n:=QuestionPos(' Лицевой счет с номером "'+sNomer+'" существует'+sSoob+'. Сохранить документ ? ',
+                    'Да;&Отказ ;','',2,2,qtConfirmation,nil);
+      if n=1
+        then Result:=true;
     end;
   end;
 end;
@@ -13155,7 +13428,7 @@ var
   nPunkt : Integer;
   strDom,strKorp : String;
 begin
-  nPunkt := StrToInt(adr.Punkt);
+  nPunkt := StrToIntDef(adr.Punkt,0);
   strDom := getNomerDom(adr.Dom);
   if Trim(strDom)='' then strDom:=HOUSE_EMPTY_DOM;
   strKorp:= getNomerDom(adr.Korp);
@@ -13762,6 +14035,56 @@ end;
 function TdmBase.LgotMen2(strID:String; strDelim:String): String;
 begin
   Result:=LgotMen(tbMensLgot, fmMain.DateFiks, strID, strDelim);
+end;
+//-------------------------------------------------------------
+function TdmBase.PriznMen(dsPrizn:TDataSet; DateFiks:TDateTime; strID:String; strDelim:String): String;
+var
+  iID : Integer;
+  lAdsTable, lKr : Boolean;
+  s:String;
+  fld:TField;
+begin
+  Result:='';
+  if Pos('<К>', strDelim)>0 then begin
+    lKr:=true;
+    strDelim:=StringReplace(strDelim,'<К>','',[]);
+  end else begin
+    lKr:=false;
+  end;
+  lAdsTable:=false;
+  try
+    iID:=StrToInt(strID);
+  except
+    iID:=0;
+  end;
+  if (dsPrizn is TAdsTable) and (dsPrizn.FindField('DATE_FIKS')<>nil) then begin
+    if iID=0 then exit;
+    TAdsTable(dsPrizn).IndexFieldNames := 'DATE_FIKS;ID;KOD';
+    TAdsTable(dsPrizn).SetRange([DateFiks,iID],[DateFiks,iID]);
+    lAdsTable:=true;
+  end;
+  try
+    fld:=dmBase.SprPrNasel.FindField('KNAME');
+    dsPrizn.First;
+    while not dsPrizn.Eof do begin
+      if dmBase.SprPrNasel.Locate('ID',dsPrizn.FieldByName('KOD').AsString,[]) then begin
+        if lKr and (fld<>nil) and (fld.AsString<>'')
+          then s:=fld.AsString
+          else s:=dmBase.SprPrNasel.FieldByName('NAME').AsString;
+        Result := Result + s + strDelim;
+      end;
+      dsPrizn.Next;
+    end;
+    if Result<>'' then
+      Result:=Copy(Result,1,Length(Result)-Length(strDelim));
+  finally
+    if lAdsTable
+      then TAdsTable(dsPrizn).CancelRange;
+  end;
+end;
+function TdmBase.PriznMen2(strID:String; strDelim:String): String;
+begin
+  Result:=PriznMen(tbMensPr, fmMain.DateFiks, strID, strDelim);
 end;
 //---------------------------------------------------------------------------
 // сформируем новый номер в очереди
@@ -15229,7 +15552,7 @@ begin
     GetTypePunkt(SprPunkt.FieldByName('TYPEPUNKT').AsString,'R',s);
     sName:=Trim(s+' '+SprPunkt.FieldByName('NAME').AsString);
 
-    GlobalTask.LogFile.WriteToLogFile('Начало удаления из базы: '+sName);
+    GlobalTask.WriteToLogFile('Начало удаления из базы: '+sName);
     OpenMessage('Полное удаление '+sName+' из базы ...','',10);
   end;
 
@@ -15268,7 +15591,7 @@ begin
   except
     on E:Exception do begin
       if lFromSpr then begin
-        GlobalTask.LogFile.WriteToLogFile('ОШИБКА удаления из базы: '+sName);
+        GlobalTask.WriteToLogFile('ОШИБКА удаления из базы: '+sName);
         PutError('ОШИБКА удаления из базы: '+#13#10+sName);
         Result := false;
       end else begin // при объединении баз
@@ -15286,7 +15609,7 @@ begin
   }
   if lFromSpr then begin
     CloseMessage;
-    if Result then GlobalTask.LogFile.WriteToLogFile('Успешное завершения удаления из базы: '+sName);
+    if Result then GlobalTask.WriteToLogFile('Успешное завершения удаления из базы: '+sName);
     LookUpPunkt.Close;
     LookUpPunkt.AdsCloseSQLStatement;
     LookUpPunkt.Open;
@@ -16748,7 +17071,7 @@ function TdmBase.CheckSprTematic(sType:String):Boolean;
 var
   s:String;
   dDate,dDateSys:TDateTime;
-begin     
+begin
   Result:=true;
   OpenMessage('Обновление тематик обращений граждан ...');
   dDate:=0;
@@ -16763,7 +17086,7 @@ begin
     WorkQueryS.Open;
     dDateSys:=WorkQueryS.Fields[0].AsDateTime;
     WorkQueryS.Close;
-  except                                  
+  except
     on E: Exception do begin
       CloseMessage;
       Result:=false;
@@ -16783,7 +17106,7 @@ begin
 //         'INSERT INTO sprDocSubjG SELECT * FROM sysspr.sprDocSubj WHERE handled=false;'#13#10;
       AdsConnection.Execute(s);
     except
-      on E: Exception do begin    
+      on E: Exception do begin
         CloseMessage;
         Result:=false;
         PutError('ОШИБКА:'+E.Message);
@@ -16792,7 +17115,48 @@ begin
   end;
   if Result then CloseMessage;
 end;
-
+//--------------------------------------------------------------
+function TdmBase.GetDateDelo(nType:Integer; nDelo:Integer; var dBegin:TDateTime; var dEnd:TDateTime; var sText:String):Integer;
+var
+  fldBegin, fldEnd:TField;
+  sB:String;
+begin
+  Result:=0;
+  dBegin:=0;
+  dEnd:=0;
+  with SprDocFileList do begin
+    sB:=Bookmark;
+    fldBegin:=FieldByName('DATE_BEGIN');
+    fldEnd:=FieldByName('DATE_END');
+    while nDelo>0 do begin
+      if Locate('ID', nDelo, []) then begin
+        nDelo:=FieldByName('PARENT_ID').AsInteger;
+        if not fldBegin.IsNull and ((dBegin=0) or (fldBegin.AsDateTime>dBegin))
+          then dBegin:=fldBegin.AsDateTime;
+        if not fldEnd.IsNull and ((dEnd=0) or (fldEnd.AsDateTime<dEnd))
+          then dEnd:=fldEnd.AsDateTime;
+      end else begin
+        nDelo:=0;
+      end;
+      Bookmark:=sB;
+    end;
+  end;
+  if dBegin>0 then Inc(Result,1);
+  if dEnd>0   then Inc(Result,1);
+  sText:='';
+  if (nType>0) and (Result>0) then begin
+    if nType=1 then begin
+      if (dEnd>0) then begin
+//        if dBegin=0
+//          then sText:=' (по'
+//          else sText:=' (с '+DatePropis(dBegin,3)+' по';
+//        sText:=sText+' '+DatePropis(dEnd,3)+')';
+        sText:=' ('+DatePropis(dEnd,3)+')';
+      end;
+    end;
+  end;
+end;
+//-----------------------------------------------
 function TdmBase.GetVersionZAH(lLoad : Boolean) : String;
 var
   s : String;

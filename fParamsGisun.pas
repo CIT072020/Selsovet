@@ -69,6 +69,7 @@ type
     cbLocal2: TDBCheckBoxEh;
     cbAteGIS: TDBCheckBoxEh;
     cbIgnoreCOC: TDBCheckBoxEh;
+    cbTypeETSP: TComboBox;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -147,6 +148,8 @@ begin
 end;
 
 procedure TfmParamsGisun.BitBtn1Click(Sender: TObject);
+var
+  s:String;
 begin
   Ini.WriteString('HTTP', 'ZAGS_URL', Trim(edZAGSUrl.Text));
   Ini.WriteString('HTTP', 'ZAGS_PROXY', Trim(edZAGSProxy.Text));
@@ -157,9 +160,13 @@ begin
 
   ini.WriteString('ADMIN','MESSAGESOURCE',Trim(edSource.Text));
   ini.WriteString('ADMIN','TYPEMESSAGESOURCE',Trim(edTypeSource.Text));
-  if Trim(edTimeOut.Text)<>''
-    then ini.WriteString('ADMIN','TIMEOUT',edTimeOut.Text)
-    else ini.WriteString('ADMIN','TIMEOUT','0');
+  if Trim(edTimeOut.Text)<>'' then begin
+    if StrToIntDef(edTimeOut.Text,0)<60
+      then edTimeOut.Text:='0';
+    ini.WriteString('ADMIN','TIMEOUT',edTimeOut.Text)
+  end else begin
+    ini.WriteString('ADMIN','TIMEOUT','0');
+  end;
 
   ini.WriteBool('ADMIN','ACTIVE',cbActive.Checked);
   ini.WriteBool('ADMIN','POST_USERNAME',cbUser.Checked);
@@ -175,11 +182,18 @@ begin
 //  ini.WriteBool('ADMIN','ETSP_SPR',cbCheckSPR.Checked);
 
   {$IFDEF AVEST_GISUN}
-//    if cbTypeETSP.ItemIndex=1
-//      then Ini.WriteString('ADMIN', 'ETSP_TYPE', 'AVEST')
-//      else Ini.WriteString('ADMIN', 'ETSP_TYPE', 'NII_TZI');
+    if cbTypeETSP.Visible then begin
+      case cbTypeETSP.ItemIndex of
+        0: s:='PAR';
+        1: s:='AVEST';
+        2: s:='TZI';
+      end;
+    end else begin
+      s:='PAR';
+    end;
+    Ini.WriteString('ADMIN', 'ETSP_TYPE', s);
   {$ELSE}
-//    Ini.WriteString('ADMIN', 'ETSP_TYPE', 'NII_TZI');
+    Ini.WriteString('ADMIN', 'ETSP_TYPE', 'PAR');
   {$ENDIF}
 
 //  ini.WriteBool('ADMIN','PIN_ENABLED_SIM',cbSimPIN.Checked);
@@ -215,6 +229,8 @@ begin
 end;
 
 procedure TfmParamsGisun.FormCreate(Sender: TObject);
+var
+  s:String;
 begin
   FTypeBase:='';
   if PathFileParamsGISUN=''   // !!!
@@ -251,15 +267,18 @@ begin
   cbAteGIS.Checked:=Ini.ReadBool('ADMIN', 'ATE_GIS', true);  // учитывать код территории из регистра
 
   {$IFDEF AVEST_GISUN}
-//    cbTypeETSP.Visible:=true;
-//    if Trim(UpperCase(Ini.ReadString('ADMIN', 'ETSP_TYPE', 'NII_TZI')))='AVEST' then begin
-//      cbTypeETSP.ItemIndex:=1;
-//    end else begin
-//      cbTypeETSP.ItemIndex:=0;
-//    end;
+    if cbTypeETSP.Visible then begin
+      s:=Trim(UpperCase(Ini.ReadString('ADMIN', 'ETSP_TYPE', 'PAR')));
+      if s='AVEST' then begin
+        cbTypeETSP.ItemIndex:=1;
+      end else if s='TZI' then begin
+        cbTypeETSP.ItemIndex:=2;
+      end else begin
+        cbTypeETSP.ItemIndex:=0;
+      end;
+    end;  
   {$ELSE}
-//    cbTypeETSP.Visible:=false;
-//    cbTypeETSP.ItemIndex:=0;
+//
   {$ENDIF}
 //  if cbLocal1.Visible  then cbLocal1.Checked:=ini.ReadBool('ADMIN','ENABLE_LOCAL_ZAH',false);
   if cbLocal2.Visible     then cbLocal2.Checked:=ini.ReadBool('ADMIN','ENABLE_LOCAL_OPEKA',false);

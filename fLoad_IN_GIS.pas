@@ -122,14 +122,14 @@ begin
   FProp:=0;
   FLoad:=0;
   FCount:=0;
-  GlobalTask.LogFile.WriteToLogFile('Начало загрузки ИН из файла ГИС РН '+edFile.Text);
+  GlobalTask.WriteToLogFile('Начало загрузки ИН из файла ГИС РН '+edFile.Text);
 
   RunImport;
 
   lbZagr.Caption:='Загружкно '+IntToStr(FLoad);
   lbProp.Caption:='Пропущено '+IntToStr(FProp);
   Application.ProcessMessages;
-  GlobalTask.LogFile.WriteToLogFile('Окончание загрузки ИН из файла ГИС РН');
+  GlobalTask.WriteToLogFile('Окончание загрузки ИН из файла ГИС РН');
 end;
 
 //-----------------------------------------------------------

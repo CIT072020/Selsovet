@@ -5,40 +5,46 @@ inherited fmPovtorSvid: TfmPovtorSvid
   ClientWidth = 730
   PixelsPerInch = 96
   TextHeight = 13
-  inherited TBDock1: TTBDock
+  inherited TBDock: TTBDock
     Width = 730
+    AllowDrag = False
     inherited TBToolbar1: TTBToolbar
       Left = 0
-      DockPos = -16
+      Align = alLeft
+      DockPos = -1
       object TBItemOpenAkt: TTBItem [0]
-        Caption = #1054#1090#1082#1088#1099#1090#1100
-        Hint = #1054#1090#1082#1088#1099#1090#1100' '#1072#1082#1090#1086#1074#1091#1102' '#1079#1072#1087#1080#1089#1100
+        Caption = #1054#1090#1082#1088#1099#1090#1100' '
+        Hint = #1054#1090#1082#1088#1099#1090#1100' '#1079#1072#1087#1080#1089#1100' '#1072#1082#1090#1072
         ImageIndex = 33
         OnClick = TBItemOpenAktClick
       end
       inherited TBItemDel: TTBItem
-        Enabled = False
-        ShortCut = 0
         Visible = False
       end
     end
     inherited TBToolbarMove: TTBToolbar
-      Left = 257
-      Visible = False
-      inherited DBNavigator: TDBNavigator
-        Enabled = False
+      Left = 647
+      DockPos = 647
+      inherited DBNavigator1: TDBNavigator
+        Width = 60
+        Hints.Strings = ()
         Visible = False
       end
     end
     inherited TBToolbar2: TTBToolbar
-      DockPos = 178
+      Left = 257
+      inherited cbOrderBy: TComboBox
+        Width = 320
+      end
     end
   end
   inherited Grid: TSasaDBGrid
-    Top = 63
+    Top = 99
     Width = 730
-    Height = 342
+    Height = 306
+    AllowedOperations = []
     Flat = True
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete]
     ReadOnly = True
     TitleFont.Height = -13
     OnDblClick = TBItemOpenAktClick
@@ -100,7 +106,7 @@ inherited fmPovtorSvid: TfmPovtorSvid
   end
   object pnFilter: TPanel [2]
     Left = 0
-    Top = 26
+    Top = 62
     Width = 730
     Height = 37
     Align = alTop
@@ -149,11 +155,36 @@ inherited fmPovtorSvid: TfmPovtorSvid
       OnChange = edTypeChange
     end
   end
+  inherited TBDock24: TTBDock
+    Width = 730
+    inherited DBNavigator24: TDBNavigator
+      Left = 632
+      Hints.Strings = ()
+      Visible = False
+    end
+    inherited TBToolbarMenu24: TTBToolbar
+      Left = 0
+      DockPos = -1
+      object TBItemOpenAkt24: TTBItem [0]
+        Caption = #1054#1090#1082#1088#1099#1090#1100' '
+        ImageIndex = 86
+        OnClick = TBItemOpenAktClick
+      end
+      inherited TBItemDel24: TTBItem
+        Visible = False
+      end
+    end
+    inherited TBToolbarMenu24_2: TTBToolbar
+      Left = 345
+      DockPos = 344
+    end
+  end
   inherited DataSource: TDataSource
     Left = 104
     Top = 136
   end
   inherited Table: TAdsTable
+    ReadOnly = True
     TableName = 'SvidPovtor'
     Left = 152
     Top = 136

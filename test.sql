@@ -1,1 +1,1 @@
-(a.punkt=19)
+(a.punkt=2)

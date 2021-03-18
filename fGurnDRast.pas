@@ -12,8 +12,7 @@ type
     TBItemToAkt: TTBItem;
     procedure GridGetCellParams(Sender: TObject; Column: TColumnEh;  AFont: TFont; var Background: TColor; State: TGridDrawState);
     procedure GridColumns0GetCellParams(Sender: TObject; EditMode: Boolean;  Params: TColCellParamsEh);
-    procedure GridColumns1GetCellParams(Sender: TObject;
-          EditMode: Boolean; Params: TColCellParamsEh);
+    procedure GridColumns1GetCellParams(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
     procedure TBItemToAktClick(Sender: TObject);
 
   private

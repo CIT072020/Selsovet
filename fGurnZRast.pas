@@ -9,12 +9,9 @@ uses
 
 type
   TfmGurnZRast = class(TfmGurnal)
-    procedure GridGetCellParams(Sender: TObject; Column: TColumnEh;
-      AFont: TFont; var Background: TColor; State: TGridDrawState);
-    procedure GridColumns0GetCellParams(Sender: TObject; EditMode: Boolean;
-      Params: TColCellParamsEh);
-    procedure GridColumns1GetCellParams(Sender: TObject;
-          EditMode: Boolean; Params: TColCellParamsEh);
+    procedure GridGetCellParams(Sender: TObject; Column: TColumnEh;   AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure GridColumns0GetCellParams(Sender: TObject; EditMode: Boolean;   Params: TColCellParamsEh);
+    procedure GridColumns1GetCellParams(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
   private
     { Private declarations }
   public

@@ -9,8 +9,7 @@ uses
 
 type
   TfmGurnZUstOtc = class(TfmGurnal)
-    procedure GridGetCellParams(Sender: TObject; Column: TColumnEh;
-      AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure GridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -33,6 +32,7 @@ constructor TfmGurnZUstOtc.Create(Owner: TComponent);
 begin
   TypeEditObj := dmBase.TypeObj_ZUstOtc;
   inherited;
+  VisibleItems([TBItemGrantSprav], false);
 end;
 
 function TfmGurnZUstOtc.LoadQuery: Boolean;

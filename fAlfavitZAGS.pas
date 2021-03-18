@@ -48,11 +48,15 @@ type
     TBItemDateError: TTBItem;
     TBItemDeleteGrup: TTBItem;
     TableDATELOAD: TDateField;
+    TBItemParams24: TTBItem;
+    TBItemLoad24: TTBItem;
+    TBItemDateError24: TTBItem;
+    TBItemDeleteGrup24: TTBItem;
+    TBItemEdit24: TTBItem;
     procedure FormCreate(Sender: TObject);
     procedure TBItemParamsClick(Sender: TObject);
     procedure edFamiliaChange(Sender: TObject);
     procedure TableBeforePost(DataSet: TDataSet);
-    procedure DBNavigatorBeforeAction(Sender: TObject;   Button: TNavigateBtn);
     procedure FormKeyDown(Sender: TObject; var Key: Word;  Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure edFamiliaEditButtons0Click(Sender: TObject;   var Handled: Boolean);
@@ -65,6 +69,7 @@ type
     procedure GridColumns7GetCellParams(Sender: TObject; EditMode: Boolean;  Params: TColCellParamsEh);
     procedure TBItemDeleteGrupClick(Sender: TObject);
     procedure GridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
+    procedure DBNavigator1BeforeAction(Sender: TObject;  Button: TNavigateBtn);
   private
     { Private declarations }
 //    n1,n2,n3,n4 : Integer;
@@ -112,6 +117,7 @@ type
     procedure LoadRecord_ZChName( tb : TAdsTable );
     procedure LoadRecord_ZAdopt( tb : TAdsTable );
     function  CheckParams : Boolean;
+    procedure PrepareMenu; override;
     procedure LoadParams;
     procedure SaveParams;
     procedure TableFilterRecord(DataSet: TDataSet; var Accept: Boolean);
@@ -331,13 +337,16 @@ begin
   if not FRunChange then begin
     FRunChange := true;
     if (edType.Value<>null) and (edType.ItemIndex>-1) then begin
-//    ChangeIndex('TYPE_FIO');
+      FClearFilterControl:=false;
+      ClearFilter;
+      FClearFilterControl:=true;
       Table.SetRange([edType.KeyItems[edType.ItemIndex]],[edType.KeyItems[edType.ItemIndex]]);
-      TBItemClrFlt.Enabled:=true;
+      EnableItem(TBItemClrFlt, true);
     end else begin
       ClearFilter;
-//      Table.CancelRange;
+      EnableItem(TBItemClrFlt, false);
     end;
+    SetCaptionGurnal(true,'');
     CheckSystemFilter;
     FRunChange := false;
   end;
@@ -496,8 +505,7 @@ begin
   fmAddAkt.Free;
 end;
 
-procedure TfmAlfavitZAGS.DBNavigatorBeforeAction(Sender: TObject;
-  Button: TNavigateBtn);
+procedure TfmAlfavitZAGS.DBNavigator1BeforeAction(Sender: TObject; Button: TNavigateBtn);
 begin
   if Button = nbInsert then begin
     AddRecord;
@@ -505,8 +513,7 @@ begin
   end;
 end;
 
-procedure TfmAlfavitZAGS.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TfmAlfavitZAGS.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   inherited;
   if Key=VK_INSERT then begin
@@ -970,17 +977,23 @@ end;
 procedure TfmAlfavitZAGS.TBItemEditClick(Sender: TObject);
 var
   slPar:TStringList;
+//  fld:TField;
   dsAkt:TDataSet;
 begin
   if TableAKT_ID.AsInteger=0 then begin
-    PutError(' Запись введена вручную. ')
+    PutError(' Запись введена вручную. ',self);
   end else begin
     dsAkt:=dmBase.MainTableFromTypeObj(TableAKT_TYPE.AsInteger);
     if (dsAkt<>nil) and dsAkt.Locate('ID', TableAKT_ID.AsInteger, []) then begin
-      slPar := nil;
+//      fld:=dsAkt.FindField('VOSSTAN');
+      slPar:=nil;
+//      if (fld<>nil) and (fld.AsBoolean=true) then begin
+//        slPar:=TStringList.Create;
+//        slPar.Add('VOSSTAN=1');
+//      end;
       fmMain.EditDokument( Table, TableAKT_TYPE.AsInteger, 'AKT_ID', slPar, false, KodGurnal);
     end else begin
-      PutError(' Запись акта не найдена. ');
+      PutError(' Запись акта не найдена. ',self);
     end;
   end;
 end;
@@ -1038,8 +1051,10 @@ end;
 procedure TfmAlfavitZAGS.BeforeClearFilter;
 begin
   edFamilia.Text:='';
-  edType.Value:=null;
-  edType.ItemIndex:=-1;
+  if FClearFilterControl then begin
+    edType.Value:=null;
+    edType.ItemIndex:=-1;
+  end;
   Table.Scoped:=false;
   Table.ScopeBegin:='';
   Table.ScopeEnd:='';
@@ -1058,10 +1073,11 @@ procedure TfmAlfavitZAGS.TBItemDateErrorClick(Sender: TObject);
 begin
   Table.OnFilterRecord:=TableFilterRecord;
   Table.Filtered := true;
-  TBItemClrFlt.Enabled:=true;
+//  TBItemClrFlt.Enabled:=true;
+  EnableItem(TBItemClrFlt, true);
   FSysFltCaption:='[ВКЛ.СИСТЕМ.ОТБОР]';
   SetCaptionGurnal(false,'');
-end;
+end;        
 
 procedure TfmAlfavitZAGS.TableFilterRecord(DataSet: TDataSet;  var Accept: Boolean);
 var
@@ -1133,6 +1149,12 @@ end;
 procedure TfmAlfavitZAGS.GridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
 begin
   if TableVOSSTAN.AsBoolean then AFont.Color := COLOR_VOSSTAN;
+end;
+
+procedure TfmAlfavitZAGS.PrepareMenu;
+begin
+  CheckTbItems;
+  pnFilter.Visible:=true;
 end;
 
 end.

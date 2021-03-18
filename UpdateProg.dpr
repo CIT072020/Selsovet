@@ -44,7 +44,7 @@ begin
   lSetTypeServer:=false;
   lSetGisun:=false;
   lClearBase := false;
-  lCopyLastUpdate := false;
+  lCopyLastUpdate := false;    
   lService := false;
   lRunSQL := false;
   for i:=1 to ParamCount do begin
@@ -237,7 +237,8 @@ begin
     //      fmMainConf.TypeChange := chRestore;
     //    end;
         lOk := true;
-        fmMainConf.CheckUpdate;
+        fmMainConf.CheckUpdate; // заполн€ютс€ параметры выполнени€ обновлени€
+//        ShowMessage(fmMainConf.ScriptFile);
         if fmMainConf.ScriptFile<>'' then begin
           GlobalTask.SetNameFileMainScript(fmMainConf.ScriptFile);
           RegisterScriptClass( SIRegister_Metatask, RIRegister_Metatask);
@@ -248,7 +249,7 @@ begin
     //      RegisterScriptVar('dmBaseConf', 'TdmBaseConf', dmBaseConf);
 
           lOk := GlobalTask.CreateMainScript; // об€зательно после RegisterDatatask
-        end;       
+        end;
         if lOk then begin
           fmMainConf.CreateReadme;
           if fmMainConf.ScriptFile<>'' then begin
@@ -256,8 +257,8 @@ begin
             GlobalTask.Script.RunEx('BEFOREUPDATE',[],val);
             if (val <> null) and (VarType(val)<>varEmpty) then begin
               ExitCode := val;
-            end;                                    
-          end; 
+            end;
+          end;
           if ExitCode = 0 then begin
             try
               dmBaseConf.AdsConnection.CloseCachedTables;
@@ -271,6 +272,7 @@ begin
             end;
           end;
         end else begin
+          PutError('ќшибка создани€ скрипта '+fmMainConf.ScriptFile);
           ExitCode := 1;
         end;
     //    Application.Run;

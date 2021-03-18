@@ -203,7 +203,7 @@ begin
     lErr:=true;
   end;
   if lErr then exit;
-  GlobalTask.LogFile.WriteToLogFile('Начало проверки списка ИН.');
+  GlobalTask.WriteToLogFile('Начало проверки списка ИН.');
 
   SetNomerGraf;
   sl:=TStringList.Create;
@@ -305,7 +305,7 @@ begin
     lbNotFound.Caption:='Не найдено '+IntToStr(nNotFound);
     lbEmpty.Caption:='Пустых '+IntToStr(nProp);
     Application.ProcessMessages;
-    GlobalTask.LogFile.WriteToLogFile('Окончание зпроверки.');
+    GlobalTask.WriteToLogFile('Окончание зпроверки.');
     xl:=null;
     sl.Free;
   end;

@@ -347,6 +347,7 @@ begin
       end;
 //   showmessage(tbSource.Filter);
       tbSource.Filtered:=true;
+      GlobalTask.WriteToLogFile('Выгрузка информации из таблицы "'+tbSource.TableName+'" по фильтру: "'+tbSource.Filter+'"');
 //      ShowMessage(tbSource.Filter+'  '+IntToStr(tbSource.RecordCount));
       while not tbSource.Eof do begin
         tbDesc.Append;
@@ -491,10 +492,11 @@ begin
        then report.ShowPreparedReport;
 
       if not lErr then begin
-        s :=' Выгрузка успешно завершена.   Выгружено: '+#13+#13;
+        s :=' Выгрузка успешно завершена. Выгружено: '+#13;
         for i:=0 to slOpis.Count-1 do begin
-          s := s + slOpis.Strings[i] + '    -    ' + IntToStr(arrCountDok[i]) + '  '+#13  ;
+          s := s + slOpis.Strings[i] + '    -    ' + IntToStr(arrCountDok[i]) + '  '+#13;
         end;
+        GlobalTask.WriteToLogFile(StringReplace(s,#13,'',[rfReplaceAll]));
       end;
       if lCopy then begin
         DeleteFiles(strPath+'\*.*');

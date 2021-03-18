@@ -473,7 +473,7 @@ begin
     if Selection.DataCellSelected(Columns[0].Index,DataSource.Dataset.Bookmark) then begin
       Selection.Rows.CurrentRowSelected:=false;
       Selection.Refresh;
-    end else begin
+    end else begin                                  
       Selection.Rows.CurrentRowSelected:=true;
       Selection.Refresh;
     end;

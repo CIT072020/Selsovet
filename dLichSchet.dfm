@@ -67,6 +67,9 @@ inherited dmLichSchet: TdmLichSchet
       FieldName = 'KNIGA_STR'
       Size = 5
     end
+    inherited mtDokumentNOMER: TStringField
+      Size = 11
+    end
     object mtDokumentDOPOLN: TMemoField [19]
       FieldName = 'DOPOLN'
       BlobType = ftMemo

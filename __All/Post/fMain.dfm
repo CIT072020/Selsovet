@@ -1,6 +1,6 @@
 object fmMain: TfmMain
-  Left = 533
-  Top = 206
+  Left = 722
+  Top = 236
   Width = 809
   Height = 534
   Caption = #1051#1040#1048#1057'.'#1057#1052#1044#1054
@@ -283,13 +283,11 @@ object fmMain: TfmMain
         end
         object TBSeparatorVedArx: TTBSeparatorItem
         end
-        object TBItemNomekToVedomArx: TTBItem
-          Caption = #1042#1099#1075#1088#1091#1079#1080#1090#1100' '#1089#1087#1088#1072#1074#1086#1095#1085#1080#1082' '#1085#1086#1084#1077#1085#1082#1083#1072#1090#1091#1088#1099' '#1074'  '#1074#1077#1076#1086#1089#1090#1074#1077#1085#1085#1099#1081' '#1072#1088#1093#1080#1074
-          OnClick = TBItemNomekToVedomArxClick
-        end
         object TBItemDeloToVedomArx: TTBItem
-          Caption = #1042#1099#1075#1088#1091#1079#1080#1090#1100' '#1076#1077#1083#1086' '#1074' '#1074#1077#1076#1086#1084#1089#1090#1074#1077#1085#1085#1099#1081' '#1072#1088#1093#1080#1074
-          OnClick = TBItemDeloToVedomArxClick
+          Action = acDeloToVedomArx
+        end
+        object TBItemNomekToVedomArx: TTBItem
+          Action = acNomenToVedomArx
         end
         object TBSeparatorItem12: TTBSeparatorItem
         end
@@ -1569,6 +1567,16 @@ object fmMain: TfmMain
       Category = #1057#1077#1088#1074#1080#1089
       Caption = #1057#1082#1072#1095#1072#1090#1100' '#1086#1073#1085#1086#1074#1083#1077#1085#1080#1077' '#1089#1087#1088#1072#1074#1086#1095#1085#1080#1082#1086#1074' '#1057#1052#1044#1054
       OnExecute = acLoadSprSMDOExecute
+    end
+    object acDeloToVedomArx: TAction
+      Category = #1057#1077#1088#1074#1080#1089
+      Caption = #1042#1099#1075#1088#1091#1079#1080#1090#1100' '#1076#1077#1083#1086' '#1076#1083#1103' "'#1051#1040#1048#1057'.'#1040#1056#1061#1048#1042'"'
+      OnExecute = acDeloToVedomArxExecute
+    end
+    object acNomenToVedomArx: TAction
+      Category = #1057#1077#1088#1074#1080#1089
+      Caption = #1042#1099#1075#1088#1091#1079#1080#1090#1100' '#1089#1087#1088#1072#1074#1086#1095#1085#1080#1082' '#1085#1086#1084#1077#1085#1082#1083#1072#1090#1091#1088#1099' '#1076#1083#1103' "'#1051#1040#1048#1057'.'#1040#1056#1061#1048#1042'"'
+      OnExecute = acNomenToVedomArxExecute
     end
   end
   object frADSComponents1: TfrADSComponents
@@ -8354,5 +8362,9 @@ object fmMain: TfmMain
     OnTimer = TimerNewPostTimer
     Left = 672
     Top = 80
+  end
+  object ImageList24: TcxImageList
+    Left = 360
+    Top = 264
   end
 end

@@ -11,7 +11,7 @@ uses
   fSimpleD, Db, kbmMemTable, ComCtrls, TB2Item, TB2Dock, TB2Toolbar,
   {$IFDEF GISUN} uGisun, fGetGisun1, {$ENDIF}
   AdsData, ExtCtrls, StdCtrls, DBLookupEh, DBCtrlsEh, Mask, FuncPr, dbFunc, dMen, uTypes,
-  OpisEdit, MetaTask, Grids, DBGridEh, Buttons, vchDBCtrls, FR_DSet, uCheckKod, uProject, ifpii_dbfunc,
+  OpisEdit, MetaTask, Grids, DBGridEh, Buttons, vchDBCtrls, FR_DSet, uCheckKod, uProject, uProjectAll, ifpii_dbfunc,
   FR_DBSet, ToolCtrlsEh, ImgList, kbmMemCSVStreamFormat, ZipForge;
 
 type
@@ -254,6 +254,10 @@ type
     edSS_O: TDBEditEh;
     lbSS_O: TLabel;
     DokumentSS_O: TStringField;
+    DokumentATE_ID: TIntegerField;
+    DokumentEVA_ID: TIntegerField;
+    DokumentPOLE_GRN: TIntegerField;
+    ImageGISUN: TImage;
     procedure edPolChange(Sender: TObject);
     procedure dsDokumentDataChange(Sender: TObject; Field: TField);
     procedure TextAdresGetText(Sender: TObject; var Text: String);
@@ -285,6 +289,7 @@ type
 //    FBitRB : TBitMap;
   public
     { Public declarations }
+    FEnabledEva:Boolean;
     FPrintSS:Boolean;
     FCurLic : Integer;
     FRunTalonUbit : Boolean;
@@ -656,6 +661,9 @@ begin
   FPageControl := pc;
   FRunTalonUbit := false;
   FFromMen:=False;
+  FUpdatingObj:=GetUpdatingObj(TypeObj);
+
+  FEnabledEva:=IsActiveGISRU;
 
   FPrintSS:=(GlobalTask.ParamAsString('TALON_PR_SS')='1');  // печать сельского совета в талонах
   edSS_O.Visible:=FPrintSS;
@@ -724,6 +732,10 @@ begin
 
   FArrChoiceRekv[2].nType:=SHABLON_ROVD;
   FArrChoiceRekv[2].FieldName:='ADRESAT';
+
+  edUdost.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edUdost.DropDownBox.Width:=TYPEDOK_Width;  // utypes.pas
+
 end;
 
 {

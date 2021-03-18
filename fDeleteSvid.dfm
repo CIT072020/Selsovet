@@ -2,7 +2,7 @@ object fmDeleteSvid: TfmDeleteSvid
   Left = 296
   Top = 248
   BorderStyle = bsDialog
-  Caption = 'Удаление свидетельств'
+  Caption = #1059#1076#1072#1083#1077#1085#1080#1077' '#1089#1074#1080#1076#1077#1090#1077#1083#1100#1089#1090#1074
   ClientHeight = 219
   ClientWidth = 405
   Color = clBtnFace
@@ -12,16 +12,16 @@ object fmDeleteSvid: TfmDeleteSvid
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poMainFormCenter
+  Position = poOwnerFormCenter
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object lbDate: TLabel
     Left = 16
     Top = 86
-    Width = 102
+    Width = 92
     Height = 16
-    Caption = 'Дата прихода'
+    Caption = #1044#1072#1090#1072' '#1087#1088#1080#1093#1086#1076#1072
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -46,9 +46,9 @@ object fmDeleteSvid: TfmDeleteSvid
   object lbType: TLabel
     Left = 16
     Top = 52
-    Width = 29
+    Width = 22
     Height = 16
-    Caption = 'Тип'
+    Caption = #1058#1080#1087
     FocusControl = edTypeSvid
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -61,7 +61,7 @@ object fmDeleteSvid: TfmDeleteSvid
     Left = 0
     Top = 0
     Width = 405
-    Height = 39
+    Height = 41
     object TBToolbar1: TTBToolbar
       Left = 0
       Top = 0
@@ -75,14 +75,14 @@ object fmDeleteSvid: TfmDeleteSvid
       ShowHint = True
       TabOrder = 0
       object TBItem1: TTBItem
-        Caption = 'Выполнить'
-        Hint = 'Выполнить операцию'
+        Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+        Hint = #1042#1099#1087#1086#1083#1085#1080#1090#1100' '#1086#1087#1077#1088#1072#1094#1080#1102
         ImageIndex = 7
         OnClick = TBItem1Click
       end
       object TBItem2: TTBItem
-        Caption = 'Выход'
-        Hint = 'Выход'
+        Caption = #1042#1099#1093#1086#1076
+        Hint = #1042#1099#1093#1086#1076
         ImageIndex = 62
         OnClick = TBItem2Click
       end
@@ -92,11 +92,11 @@ object fmDeleteSvid: TfmDeleteSvid
     Left = 136
     Top = 82
     Width = 127
-    Height = 24
+    Height = 26
     EditButtons = <>
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     KeyField = 'DATEP'
@@ -109,12 +109,12 @@ object fmDeleteSvid: TfmDeleteSvid
   object edTypeSvid: TDBComboBoxEh
     Left = 136
     Top = 48
-    Width = 166
-    Height = 24
+    Width = 207
+    Height = 26
     EditButtons = <>
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
@@ -125,7 +125,6 @@ object fmDeleteSvid: TfmDeleteSvid
   end
   object AdsQuery1: TAdsQuery
     DatabaseName = 'dmBase.AdsConnection'
-    StoreActive = True
     SQL.Strings = (
       'SELECT distinct DATEP FROM ListSvid ')
     AdsConnection = dmBase.AdsConnection
@@ -139,7 +138,6 @@ object fmDeleteSvid: TfmDeleteSvid
     Top = 134
   end
   object AdsQuery2: TAdsQuery
-    StoreActive = True
     AdsConnection = dmBase.AdsConnection
     Left = 344
     Top = 56

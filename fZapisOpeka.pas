@@ -420,7 +420,6 @@ type
     Bevel3: TBevel;
     Label64: TLabel;
     DokumentOTM_ORG: TStringField;
-    DokumentOTM_ORG_SPR: TIntegerField;
     DokumentOTM_ORG_TYPE: TIntegerField;
     DokumentOTM_OTHER: TBooleanField;
     DokumentDOC_OPEKA_OTM: TIntegerField;
@@ -440,10 +439,11 @@ type
     edSendDate: TDBDateTimeEditEh;
     edSendPrich: TDBEditEh;
     DokumentSEND_ORG: TStringField;
-    DokumentSEND_ORG_SPR: TIntegerField;
     DokumentSEND_ORG_TYPE: TIntegerField;
     DokumentSEND_DATE: TDateField;
     DokumentSEND_PRICH: TStringField;
+    DokumentSEND_ORG_SPR: TStringField;
+    DokumentOTM_ORG_SPR: TStringField;
     procedure dsDokumentDataChange(Sender: TObject; Field: TField);
     procedure edFamiliaDoCheckDrawRequiredState(Sender: TObject;  var DrawState: Boolean);
     procedure edOBL_RNotInList(Sender: TObject; NewText: String;   var RecheckInList: Boolean);
@@ -489,14 +489,10 @@ type
     procedure edDateDokUstCheckDrawRequiredState(Sender: TObject;   var DrawState: Boolean);
     procedure edDateDokSnCheckDrawRequiredState(Sender: TObject;    var DrawState: Boolean);
     procedure lbDokToTextGetText(Sender: TObject; var Text: String);
-    procedure edSendOrgEditButtons0Click(Sender: TObject;
-      var Handled: Boolean);
-    procedure edSendOrgEditButtons1Click(Sender: TObject;
-      var Handled: Boolean);
-    procedure edSendOrgEditButtons2Click(Sender: TObject;
-      var Handled: Boolean);
-    procedure edSendOrgEditButtons3Click(Sender: TObject;
-      var Handled: Boolean);
+    procedure edSendOrgEditButtons0Click(Sender: TObject;  var Handled: Boolean);
+    procedure edSendOrgEditButtons1Click(Sender: TObject;  var Handled: Boolean);
+    procedure edSendOrgEditButtons2Click(Sender: TObject;  var Handled: Boolean);
+    procedure edSendOrgEditButtons3Click(Sender: TObject;  var Handled: Boolean);
   private
 //    H : THintWindow;
     procedure OnDestroyHint(Sender : TObject);
@@ -573,6 +569,7 @@ begin
       fmZapisOpeka.TBItemZAGS.Visible:=false;
       fmZapisOpeka.TBItemChOpeka.Enabled:=false;
 //      fmZapisOpeka.CheckEnabledNameOrgan(false);
+      fmZapisOpeka.ActiveControl:=fmZapisOpeka.edVid;
     end;
     fmZapisOpeka.IsReadDokument:=false;
     {$IFDEF GISUN}
@@ -585,7 +582,7 @@ begin
     Result := fmZapisOpeka.EditModal;
   finally
     fmZapisOpeka.Free;
-    fmZapisOpeka := nil;
+    fmZapisOpeka:=nil;
   end;
 end;
 
@@ -604,7 +601,8 @@ begin
   GridRS.Color:=clInfoBk;
 
   edUstOrg.EditButtons[edUstOrg.EditButtons.Count-1].Glyph:=ImBtClear.Picture.Bitmap;
-  edOtmOrg.EditButtons[edUstOrg.EditButtons.Count-1].Glyph:=ImBtClear.Picture.Bitmap;
+  edOtmOrg.EditButtons[edOtmOrg.EditButtons.Count-1].Glyph:=ImBtClear.Picture.Bitmap;
+  edSendOrg.EditButtons[edSendOrg.EditButtons.Count-1].Glyph:=ImBtClear.Picture.Bitmap;
 
   {$IFDEF LAIS}
     FShowRequired:=true;
@@ -627,7 +625,7 @@ begin
   FCheckLookupField:=false;   // так как все пол€ (область,район,город) переделаны на DbEditEh.MRUList;
   FDokZAGS:=false;
   FDokRegister:=true;
-  TypeObj := _TypeObj_Opeka;
+  TypeObj:=_TypeObj_Opeka;
   FUpdatingObj:=GetUpdatingObj(TypeObj);
 
 //  d2xml:=ds2xml.DS_Add(Dokument,true);
@@ -936,6 +934,15 @@ begin
     end;
   end;
   {$ENDIF}
+
+  if (DokumentSEND_ORG_SPR.AsString<>'') and (DokumentSEND_ORG_TYPE.AsInteger<>0) then begin
+    rSpr:=Locate_AllSprGISUN(DokumentSEND_ORG_TYPE.AsInteger, DokumentSEND_ORG_SPR.AsString);
+    if rSpr.Ok then begin
+      DokumentSEND_ORG.AsString:=rSpr.Lex1;
+    end else begin
+      DokumentSEND_ORG.AsString:='организаци€ с кодом '+DokumentOTM_ORG_SPR.AsString+'('+DokumentOTM_ORG_TYPE.AsString+') не найдена';
+    end;
+  end;
 
   {$IFDEF GISUN}
     ReadMessageID;
@@ -2065,23 +2072,75 @@ end;
 //----------------------------------------------------------------------------------
 //====== SEND_ORG ========
 procedure TfmZapisOpeka.edSendOrgEditButtons0Click(Sender: TObject;  var Handled: Boolean);
+var
+  arrRec:TCurrentRecord;
+  slPar:TStringList;
 begin
-//
+  slPar:=TStringList.Create;
+  slPar.Add('CLASS='+IntToStr(ctOpeka));
+//  EXTCODE_KEY -> TYPESPR;PADL(TRIM(EXTCODE),10,' ')
+//  LEX3_KEY    -> TYPESPR;LEX3 )
+  slPar.Add('INDEX=EXTCODE_KEY');
+  if ChoiceGIS_Class( edSendOrg, DokumentSEND_ORG_SPR.AsString, 'VAL(EXTCODE)>0', arrRec, slPar) then begin
+    EditDataSet(Dokument);
+    DokumentSEND_ORG.AsString:=GetValueField(arrRec,'LEX1');
+    DokumentSEND_ORG_SPR.AsString:=GetValueField(arrRec,'EXTCODE');
+    DokumentSEND_ORG_TYPE.AsInteger:=ctOpeka;
+    GlobalTask.SetLastValueAsString('LAST_ORG_OPEKA', DokumentSEND_ORG_SPR.AsString);
+    GlobalTask.SetLastValueAsInteger('LAST_TYPEORG_OPEKA', ctOpeka);
+  end;
 end;
 
 procedure TfmZapisOpeka.edSendOrgEditButtons1Click(Sender: TObject;  var Handled: Boolean);
 begin
-//
+  {$IFDEF OPEKA}
+  fmChSS_Opeka:=TfmChSS_Opeka.Create(nil);
+  if DokumentSEND_ORG_SPR.AsString<>''
+    then fmChSS_Opeka.ValueCC:=DokumentSEND_ORG_SPR.AsString; // !!!
+  if fmChSS_Opeka.ShowModal=mrOk then begin
+//    ShowMessage(fmChSS_Opeka.ValueCC);
+    EditDataSet(Dokument);
+    DokumentSEND_ORG.AsString:=fmChSS_Opeka.ValueNAME;
+    DokumentSEND_ORG_SPR.AsString:=fmChSS_Opeka.ValueCC;
+    DokumentSEND_ORG_TYPE.AsInteger:=ctZags;
+    GlobalTask.SetLastValueAsString('LAST_ORG_OPEKA', DokumentSEND_ORG_SPR.AsString);
+    GlobalTask.SetLastValueAsInteger('LAST_TYPEORG_OPEKA', ctZags);
+  end;
+  fmChSS_Opeka.Free;
+  {$ENDIF}
 end;
 
 procedure TfmZapisOpeka.edSendOrgEditButtons2Click(Sender: TObject;  var Handled: Boolean);
+var
+  s:String;
+  n:Integer;
+  r:TRecSprGISUN;
 begin
-//
+  s:=GlobalTask.GetLastValueAsString('LAST_ORG_OPEKA');
+  n:=GlobalTask.GetLastValueAsInteger('LAST_TYPEORG_OPEKA');
+  if (s<>'') and (n<>0) then begin
+    r:=Locate_AllSprGISUN(n,s);
+    if r.Ok then begin
+      EditDataSet(Dokument);
+      edSendOrg.Text:='';
+      DokumentSEND_ORG.AsString:=r.Lex1;
+      DokumentSEND_ORG_SPR.AsString:=s;
+      DokumentSEND_ORG_TYPE.AsInteger:=n;
+    end else begin
+      PutError('«начение не найдено в справочнике',self);
+    end;
+  end else begin
+    ShowMessageCont('«начение ранее не выбиралось',self);
+  end;
 end;
 
 procedure TfmZapisOpeka.edSendOrgEditButtons3Click(Sender: TObject;  var Handled: Boolean);
 begin
-//
+  EditDataSet(Dokument);
+  edSendOrg.Text:='';
+  DokumentSEND_ORG.AsString:='';
+  DokumentSEND_ORG_SPR.AsString:='';
+  DokumentSEND_ORG_TYPE.AsString:='';
 end;
 //--------------------------------------------------------------------------------------
 

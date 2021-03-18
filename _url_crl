@@ -12,6 +12,8 @@ http://10.30.254.20/files/cert/atrib-cert-ul.cer (добавить в ЛАИС и ЛАИС.СМДО)
 http://10.30.254.20/files/cert/kuc.crl
 http://10.30.254.20/files/cert/ruc.crl
 http://10.30.254.20/files/cert/cas_ruc.crl (добавить в ЛАИС и ЛАИС.СМДО)
+http://10.30.254.20/files/cert/KorOtCert.crl
+http://10.30.254.20/files/cert/OtCert.crl
 
 Закачка сертификатов *.cer необходима для случая, когда меняются сроки 
 действия сертификатов удостоверяющих центров, тем более, что в 2019 году 
@@ -19,3 +21,15 @@ http://10.30.254.20/files/cert/cas_ruc.crl (добавить в ЛАИС и ЛАИС.СМДО)
 тянуть все руками.
 
 
+https://nces.by/wp-content/uploads/certificates/pki/kuc.cer
+https://nces.by/wp-content/uploads/certificates/pki/ruc.cer
+https://nces.by/wp-content/uploads/certificates/atrib-cert-ul.cer
+https://nces.by/wp-content/uploads/certificates/pki/kuc.crl
+https://nces.by/wp-content/uploads/certificates/pki/ruc.crl
+https://nces.by/wp-content/uploads/certificates/pki/cas_ruc.crl
+https://nces.by/wp-content/uploads/certificates/KorOtCert.crl
+https://nces.by/wp-content/uploads/certificates/OtCert.crl
+
+
+"1700","1000","URL_COC_INT","URL для СОС из Internet","https://nces.by/wp-content/uploads/certificates/pki/kuc.cer%c%nhttps://nces.by/wp-content/uploads/certificates/pki/ruc.cer%c%nhttps://nces.by/wp-content/uploads/certificates/atrib-cert-ul.cer%c%nhttps://nces.by/wp-content/uploads/certificates/pki/kuc.crl%c%nhttps://nces.by/wp-content/uploads/certificates/pki/ruc.crl%c%nhttps://nces.by/wp-content/uploads/certificates/pki/cas_ruc.crl%c%nhttps://nces.by/wp-content/uploads/certificates/KorOtCert.crl%c%nhttps://nces.by/wp-content/uploads/certificates/OtCert.crl","M",,,"False","400",,"300",,"ADSSYS","False","True","False",
+"1701","1000","URL_COC_NCES","URL для СОС из НЦЭУ","http://10.30.254.20/files/cert/kuc.cer%c%nhttp://10.30.254.20/files/cert/ruc.cer%c%nhttp://10.30.254.20/files/cert/atrib-cert-ul.cer%c%nhttp://10.30.254.20/files/cert/kuc.crl%c%nhttp://10.30.254.20/files/cert/ruc.crl%c%nhttp://10.30.254.20/files/cert/cas_ruc.crl%c%nhttp://10.30.254.20/files/cert/KorOtCert.crl%c%nhttp://10.30.254.20/files/cert/OtCert.crl%c%n","M",,,"False","400",,"301",,"ADSSYS","False","True","False",

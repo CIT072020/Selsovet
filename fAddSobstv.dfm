@@ -1,10 +1,10 @@
 object fmAddSobstv: TfmAddSobstv
-  Left = 329
-  Top = 209
+  Left = 439
+  Top = 201
   BorderStyle = bsDialog
   Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1089#1086#1073#1089#1090#1074#1077#1085#1085#1080#1082#1072
   ClientHeight = 295
-  ClientWidth = 585
+  ClientWidth = 649
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -97,7 +97,7 @@ object fmAddSobstv: TfmAddSobstv
   object edSobstv: TDBEditEh
     Left = 136
     Top = 9
-    Width = 425
+    Width = 501
     Height = 26
     EditButtons = <
       item
@@ -188,7 +188,7 @@ object fmAddSobstv: TfmAddSobstv
   object edAdres: TDBEditEh
     Left = 136
     Top = 39
-    Width = 425
+    Width = 501
     Height = 26
     EditButtons = <>
     Enabled = False
@@ -204,8 +204,10 @@ object fmAddSobstv: TfmAddSobstv
   object edTail: TDBEditEh
     Left = 136
     Top = 70
-    Width = 129
+    Width = 169
     Height = 26
+    DataField = 'TAIL'
+    DataSource = DataSource
     EditButtons = <>
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -219,9 +221,11 @@ object fmAddSobstv: TfmAddSobstv
   object edPrim: TDBEditEh
     Left = 136
     Top = 100
-    Width = 425
+    Width = 501
     Height = 81
     AutoSize = False
+    DataField = 'PRIM'
+    DataSource = DataSource
     EditButtons = <>
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -250,7 +254,7 @@ object fmAddSobstv: TfmAddSobstv
     Visible = True
   end
   object BitBtn1: TBitBtn
-    Left = 369
+    Left = 431
     Top = 261
     Width = 90
     Height = 25
@@ -277,7 +281,7 @@ object fmAddSobstv: TfmAddSobstv
     NumGlyphs = 2
   end
   object BitBtn2: TBitBtn
-    Left = 478
+    Left = 540
     Top = 261
     Width = 90
     Height = 25
@@ -300,5 +304,47 @@ object fmAddSobstv: TfmAddSobstv
     ParentFont = False
     TabOrder = 5
     Visible = True
+  end
+  object DataSource: TDataSource
+    DataSet = tbOwner
+    Left = 72
+    Top = 136
+  end
+  object tbOwner: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <
+      item
+        Name = 'PRIM'
+        DataType = ftString
+        Size = 500
+      end
+      item
+        Name = 'TAIL'
+        DataType = ftString
+        Size = 20
+      end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
+    Left = 32
+    Top = 136
+    object tbOwnerPRIM: TStringField
+      FieldName = 'PRIM'
+      Size = 500
+    end
+    object tbOwnerTAIL: TStringField
+      FieldName = 'TAIL'
+    end
   end
 end

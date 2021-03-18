@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, uTypes,
-  dDokument, dMen, Db, kbmMemTable, FuncPr, DbFunc, FR_DSet, FR_DBSet,mPermit, uProjectAll,
+  dDokument, dMen, Db, kbmMemTable, FuncPr, DbFunc, FR_DSet, FR_DBSet,mPermit, uProjectAll, NewDialogs,
   MetaTask
   {$IFDEF VER150} ,Variants {$ENDIF}  ;
 
@@ -99,6 +99,7 @@ type
     slAddMens : TStringList;
     slPerevodMens : TStringList;
     slChangeIDMens:TStringList;
+    slCheckFirst:TStringList;
     property  dmMens : TdmMen read FdmMens write SetdmMens;
 
     function  CurOwnerOk(d:TDateTime) : Boolean;
@@ -147,6 +148,7 @@ begin
   slAddMens := TStringList.Create;
   slPerevodMens := TStringList.Create;
   slChangeIDMens:=TStringList.Create;
+  slCheckFirst:=TStringList.Create;
   FNewMen:=false;
 //  ListDopRazdel.AddObject('3', nil);
   {$IFDEF USE_FR3}
@@ -168,6 +170,7 @@ begin
   slAddMens.Free;
   slPerevodMens.Free;
   slChangeIDMens.Free;
+  slCheckFirst.Free;
   inherited;
 end;
 
@@ -222,6 +225,7 @@ begin
   slAddMens.Clear;
   slPerevodMens.Clear;
   slChangeIDMens.Clear;
+  slCheckFirst.Clear;
   FNewMen:=false;
   vKeyValues := VarArrayCreate( [0, 1], varOleStr );
   vKeyValues[0] := DateFiks;
@@ -429,12 +433,13 @@ var
   fld:TField;
   arr:TArrStrings;
   dsChild:TDataSet;
-  strPolFirst:String;
+  sBookmark, strPolFirst:String;
   recID:TID;
   ld : TLastDvig;
 begin
   LastNomerLic := '';
   PostDokument;
+
   Result := CheckDokument(strErr);
   if not Result then begin
     if strErr<>'' then begin
@@ -675,7 +680,7 @@ begin
   if Result then begin
     for i:=0 to slDelMens.Count-1 do begin
       lCheckEn:=true;
-      if not dmBase.DeleteMen( DateFiks, slDelMens.Strings[i], false ) then begin
+      if not dmBase.DeleteMen( DateFiks, slDelMens.Strings[i], false) then begin
         Result:=false;
         Beep;
         PutError(dmBase.LastErrorDelete);
@@ -781,7 +786,6 @@ begin
 //        PutError(' Ошибка перевода на другой лицевой счет ! ');
       end;
     end;
-
     dmMens.sChilds:='';
     dmBase.tbLich.CheckBrowseMode;
     Result:=dmMens.WriteAllMens(ID, nIdFirst, nIdAdres, nIdRealFirst);
@@ -792,7 +796,7 @@ begin
         dmMens.CheckEN:=true;
         SystemProg.SetRunMenReport(recID, 2{'SprMGS'});
       end;
-    end;                           
+    end;
 
     if (dmMens.sChilds<>'') then begin  // у главы лицевого счета есть дети
       StrToArr(dmMens.sChilds,arr,',',true);
@@ -844,6 +848,23 @@ begin
     dbEnableControls(dmMens.mtDokument, lMen);
     if dmMens.mtDokument.ControlsDisabled
       then dmMens.mtDokument.EnableControls;
+
+    // если был перенес на текущий лицевой счет глава друго лицевого
+    for i:=0 to slCheckFirst.Count-1 do begin           // список номеров лицевых счетов для контроля
+      nIDSeek:=StrToIntDef(slCheckFirst.Strings[i],0);
+      vKeyValues[0] := DateFiks;
+      vKeyValues[1] := nIDSeek;
+      sBookmark:=dmBase.tbLich.Bookmark;
+      try
+        if dmBase.tbLich.Locate('DATE_FIKS;ID', vKeyValues, []) then begin
+          dmBase.tbLich.Edit;
+          dmBase.tbLich.FieldByName('FIRST').AsInteger:=0;
+          dmBase.tbLich.Post;
+        end;
+      finally
+        dmBase.tbLich.Bookmark:=sBookmark;
+      end;
+    end;
 
 //    dmBase.AdsConnection.Commit;
   end else begin
@@ -1145,38 +1166,40 @@ end;
 function TdmLichSchet.CheckDokument(var strErr: String): Boolean;
 var
   lCanDelete, lCheck, lYesMens, lPresent : Boolean;
-  strDateLikv : String;
+  sNom,sSoob,strDateLikv : String;
   d : TDateTime;
+  n:Integer;
 begin
-  lCanDelete := false;
-  lPresent   := true;
-  strErr := '';
-  Result := inherited CheckDokument(strErr);
-  if Result then begin
-    if GlobalTask.DemoVersion then begin
-      if Result then begin
-        if (dmBase.tbLich.RecordCount >= 20) and (mtDokumentID.AsInteger=-1) then begin
-          strErr := 'В демо-версии невозможно создать болеее 20 лицевых счетов !';
-          Result := false;
-        end;
-      end;
+  lCanDelete:=false;
+  lPresent:=true;
+  strErr:='';
+  Result:=inherited CheckDokument(strErr);
+  if Result and GlobalTask.DemoVersion then begin
+    if (dmBase.tbLich.RecordCount >= 20) and (mtDokumentID.AsInteger=-1) then begin
+      strErr:='В демо-версии невозможно создать болеее 20 лицевых счетов !';
+      Result:=false;
     end;
   end;
+  sNom:=Trim(mtDokumentNOMER.AsString);
   if Result then begin
-    if Trim(mtDokumentNOMER.AsString) = '' then begin
-      strErr := 'Не введен номер лицевого счета !';
+    if sNom='' then begin
+      strErr:='Не введен номер лицевого счета';
+    end else if not IsAllDigit(sNom) then begin
+      strErr:=' В номере могут быть только цифры';
+    end else if Length(sNom)>11 then begin    // поле в базе NOMER(12,0)     такая же проверка в AddLic (fAddLic.pas)
+      strErr:=' Количество цифр не может быть больше 11';
     end else if mtDokumentADRES_ID.AsString='' then begin
-      strErr := 'Не выбран адрес лицевого счета !';
+      strErr:='Не выбран адрес лицевого счета';
     end;
-    if strErr<>'' then Result := false;
+    if strErr<>'' then Result:=false;
   end;
   if Result then begin
-    if Trim(mtDokumentNOMER.AsString)<>'' then begin
-      if not dmBase.CheckNomerLich(DateFiks, mtDokumentID.AsInteger, mtDokumentNOMER.AsString) then begin
-        strErr := ' Введенный номер лицевого счета уже существует ! ';
-        Result := false;
-      end;
-    end;
+    Result:=dmBase.CheckNomerLich(DateFiks, mtDokumentID.AsInteger, mtDokumentNOMER.AsString, true);
+    if not Result
+      then exit;
+//        strErr := ' Введенный номер лицевого счета уже существует ! ';
+//        Result := false;
+//      end;
   end;
   strDateLikv:='';
   if Result then begin

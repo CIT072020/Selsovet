@@ -219,9 +219,11 @@ begin
   fmParam.AddParamEx(Now, 'Конечная дата' , 'DATE2' ,'TYPE=DATE');
   fmParam.AddParamEx(true, 'Заявления о браке' , 'ZBRAK' ,'');
   fmParam.AddParamEx(true, 'Браки' , 'BRAK' ,'');
-  fmParam.AddParamEx(true, 'Разводы' , 'RAST' ,'');
-  fmParam.AddParamEx(true, 'Перемена ФИО' , 'CHNAME' ,'');
-  fmParam.AddParamEx(true, 'Только мой загс' , 'ISMY' ,'');
+  if IdProg='ZAGS' then begin
+    fmParam.AddParamEx(true, 'Разводы' , 'RAST' ,'');
+    fmParam.AddParamEx(true, 'Перемена ФИО' , 'CHNAME' ,'');
+    fmParam.AddParamEx(true, 'Только мой загс' , 'ISMY' ,'');
+  end;
   fmParam.AddButtons('Выполнить~Отказ',0);
   n:=fmParam.ShowQuest;
   if n=1 then begin
@@ -229,10 +231,15 @@ begin
     Date2:=fmParam.GetValue('DATE2','D');
     lZBrak:=fmParam.GetValue('ZBRAK','L');
     lBrak:=fmParam.GetValue('BRAK','L');
-    lRast:=fmParam.GetValue('RAST','L');
-    lChName:=fmParam.GetValue('CHNAME','L');
-    if fmParam.GetValue('ISMY','L')
-      then sAdd:=' and id_zags='+GlobalTask.ParamAsString('ID') else sAdd:='';
+    if IdProg='ZAGS' then begin
+      lRast:=fmParam.GetValue('RAST','L');
+      lChName:=fmParam.GetValue('CHNAME','L');
+      if fmParam.GetValue('ISMY','L')
+        then sAdd:=' and id_zags='+GlobalTask.ParamAsString('ID') else sAdd:='';
+    end else begin
+      lRast:=false;
+      lChName:=false;
+    end;
     OpenMessage('  Расчет ...  ','',10);
     m1:=0;
     m2:=0;

@@ -54,6 +54,7 @@ type
     FFontSize: Integer;
     FListLabel : TList;
     FResult : Integer;
+    FResultEvent : Integer;
     FCreateControls : Boolean;
     FListCheckOpis:TStringList;
     FCheckLang: Boolean;
@@ -67,11 +68,22 @@ type
     function  CheckValue(var sErr:String): Boolean;
     procedure SetAllRequired(const Value: Boolean);
   public
+    EventUpdateActions: TNotifyEvent;
+    EventOkClick: TNotifyEvent;
+
+    arrBt   : array of TButton;
+    arrCont : array of TWinControl;
+    arrST   : array of TStaticText;
+
+    function getControl(n:Integer):TWinControl;
+    function getST(n:Integer):TStaticText;
+    function getButtom(n:Integer):TButton;
+
     procedure CreateControls;
     function IsEnableEditing( nCol : Integer) : Boolean;
     constructor Create( Owner : TComponent ); override;
     destructor Destroy; override;
-
+    procedure UpdateActions; override;
     procedure AddParamEx(Value : Variant; strCaption : String; strKod : String;  strParam : String);
     procedure AddParam(strKod : String; strCaption : String; strParam : String);
     function  ParamCount : Integer;
@@ -85,6 +97,7 @@ type
     procedure AddButtons(strButtons : String; nEsc : Integer);
     procedure CreateListDisk(ed:TDbComboBoxEh);
     function ShowQuest : Integer;
+    procedure SetResultEvent(n:Integer);
     property ListOpis : TListOpisEdit read FListOpis write SetListOpis;
   published
     property AllRequired : Boolean read FAllRequired write SetAllRequired;
@@ -133,16 +146,36 @@ begin
   }
 end;
 
+function TfmParamQuest.getControl(n:Integer):TWinControl;
+begin
+  Result:=arrCont[n];
+end;
+function TfmParamQuest.getST(n:Integer):TStaticText;
+begin
+  Result:=arrSt[n];
+end;
+function TfmParamQuest.getButtom(n:Integer):TButton;
+begin
+  Result:=arrBt[n];
+end;
+procedure TfmParamQuest.UpdateActions;
+begin
+  inherited;
+  if Assigned(EventUpdateActions)
+    then EventUpdateActions(Self);
+end;
+
+
 procedure TfmParamQuest.CreateControls;
 var
-  i,n,m : Integer;
+  i,n,m,j : Integer;
   nTop,nLeft, nMaxWidth : Integer;
   ed : TDbEditEh;
   cb : TDBComboBoxEh;
   bt : TEditButtonEh;
   lFirst : Boolean;
   Contr,cc : TWinControl;
-  nLastPos,nSm : Integer;
+  nCount,nLastPos,nSm : Integer;
   p : TParamQ;
   OpisEdit : TOpisEdit;
   s,sAdd : String;
@@ -151,6 +184,7 @@ var
   lb: TStaticText;
   c:TColumnEh;
   arr:TArrStrings;
+  st:TStaticText;
 begin
   if FCreateControls then exit;
   FCreateControls:=true;
@@ -160,28 +194,39 @@ begin
   nMaxWidth:=50;
   nLastPos:=200;
   nTop:=10;
+  nCount:=0;
   for i:=0 to ParamCount-1 do begin
     if IsEnableEditing(i) then begin
-      p := GetParam(i);
-      with TStaticText.Create(sb) do begin
-        Parent  := sb;
-        Caption := StringReplace( p.Caption, '|', ' ', [rfReplaceAll]);
-        if FontSize > 0 then Font.Size := FontSize;
-        Name := 'Label' + IntToStr(i);
-        if FFlat then begin
-          Top := nTop+2;
-        end else begin
-          Top := nTop+3;
-        end;
-        Left := nLeft;
-        nMaxWidth := Max(nMaxWidth,Width);
+      nCount:=nCount+1;
+    end;
+  end;
+  SetLength(arrST,nCount);
+  SetLength(arrCont,nCount);
+  j:=0;
+  for i:=0 to ParamCount-1 do begin
+    if IsEnableEditing(i) then begin
+      p:=getParam(i);
+      st:=TStaticText.Create(sb);
+      st.Parent  := sb;
+      st.Caption := StringReplace( p.Caption, '|', ' ', [rfReplaceAll]);
+      if FontSize > 0 then st.Font.Size := FontSize;
+      st.Name := 'Label' + IntToStr(i);
+      if FFlat then begin
+        st.Top := nTop+2;
+      end else begin
+        st.Top := nTop+3;
       end;
+      st.Left:=nLeft;
+      nMaxWidth:=Max(nMaxWidth,st.Width);
       nTop:=nTop+StepY;
+      arrST[j]:=st;
+      j:=j+1;
     end;
   end;
   nTop:=10;
   nSm:=30;
   lFirst := false;
+  j:=0;
   for i:=0 to ParamCount-1 do begin
     if IsEnableEditing(i) then begin
       p := GetParam(i);
@@ -298,25 +343,23 @@ begin
         tpBoolean: begin
                      cb := TDbComboBoxEh.Create(sb);
                      p.Control := cb;
-                        cb.Items.Add('Да');
-                        cb.Items.Add('Нет');
-                        cb.KeyItems.Add('1');
-                        cb.KeyItems.Add('0');
-                        if p.Value
-                          then cb.Value := 1
-                          else cb.Value := 0;
+                     cb.Items.Add('Да');
+                     cb.Items.Add('Нет');
+                     cb.KeyItems.Add('1');
+                     cb.KeyItems.Add('0');
+                     if p.Value
+                       then cb.Value := 1
+                       else cb.Value := 0;
 
-                        cb.Parent  := sb;
-                        cb.Name := 'Edit' + IntToStr(i);
-                        if FontSize > 0 then cb.Font.Size := FontSize;
-                        cb.Top := nTop;
-                        cb.Left := nLeft+nSm+nMaxWidth;
-                        n := p.ParamAsInteger('WIDTH');
-                        if n<=0 then begin
-                          n:=50;
-                        end;
-                        cb.Width := n;
-                        cb.Flat := FFlat;
+                     cb.Parent  := sb;
+                     cb.Name := 'Edit' + IntToStr(i);
+                     if FontSize > 0 then cb.Font.Size := FontSize;
+                     cb.Top := nTop;
+                     cb.Left := nLeft+nSm+nMaxWidth;
+                     n:=p.ParamAsInteger('WIDTH');
+                     if n<=0 then n:=50;
+                     cb.Width := n;
+                     cb.Flat := FFlat;
                    end;
         tpMonth  : begin
                      p.Control := TDbComboBoxEh.Create(sb);
@@ -433,7 +476,7 @@ begin
                     bt := ed.EditButtons.Add;
                     bt.Visible:=true;
                     OpisEdit := ListOpis.GetSprOpisA(p.ParamAsString('DESC'));
-                    if TOpisEdit <> nil then begin
+                    if OpisEdit<>nil then begin
                       ed.Tag := Integer(OpisEdit);
                       bt.OnClick := TEvents.EditButtons_OnClick;
                       bt.OnDown  := TEvents.EditButtons_OnDown;
@@ -458,8 +501,8 @@ begin
                       OnChange := OnChangeSpr;
                     end;
                     if (OpisEdit<>nil) then begin //and (p.ParamAsString('DOPSHOW')<>'') then begin
-                      ds := TDataSource.Create(sb);
-                      ds.DataSet:=OpisEdit.Table;
+//                      ds := TDataSource.Create(sb);
+//                      ds.DataSet:=OpisEdit.Table;
 //                      lb := TLabel.Create(sb);
                       lb := TStaticText.Create(sb);
                       with lb do begin
@@ -542,18 +585,20 @@ begin
           p.Control.Value := p.Value;
         end;
       end;
-      cc := TWinControl(sb.Controls[sb.ControlCount-1]);
+      cc:=TWinControl(sb.Controls[sb.ControlCount-1]);
       if ((cc.Left+cc.Width)>nLastPos) then begin
         nLastPos:=cc.Left+cc.Width;
       end;
+      arrCont[j]:=cc;
+      j:=j+1;
       if not lFirst then begin
-        lFirst := true;
-        Contr := cc;
+        lFirst:=true;
+        Contr:=cc;
       end;
       nTop:=nTop+StepY;
     end;
   end;
-  if Contr <> nil then begin
+  if Contr<>nil then begin
     ActiveControl:=Contr;
     ActiveControl.HelpContext:=888;
     TWinControl(sb.Controls[sb.ControlCount-1]).HelpContext:=999;
@@ -665,6 +710,8 @@ begin
     Position:=poOwnerFormCenter;
   end;
   inherited Create(Owner);
+  EventUpdateActions:=nil;
+  EventOkClick:=nil;
   FOkClik:=false;
   FAllRequired:=false;
   FListParam := TList.Create;
@@ -830,8 +877,14 @@ begin
       if (v=null) or (VarToStr(v)='')
         then sErr:=sErr+p.Caption+#13#10;
     end;
-  end;           
-  if sErr<>'' then Result:=false;
+  end;
+  if sErr<>''
+    then Result:=false;
+  if Result and Assigned(EventOkClick) then begin
+    Self.FResultEvent:=0;
+    EventOkClick(Self);
+    Result:=(Self.FResultEvent=1);
+  end;
 end;
 
 function TfmParamQuest.GetValue(strKod: String; strType : String): Variant;
@@ -925,7 +978,7 @@ begin
       end else if p.TypeQ=tpDate then begin
         if VarToStr(Value)<>''
           then p.Control.Value := Value;
-      end else begin           
+      end else begin
         p.Control.Value := Value;
       end;
     end else begin
@@ -991,11 +1044,16 @@ begin
   end;
 end;
 
+procedure TfmParamQuest.SetResultEvent(n:Integer);
+begin
+  FResultEvent:=n;
+end;
+
 procedure TfmParamQuest.AddButtons(strButtons: String; nEsc : Integer);
 var
   arr : TArrStrings;
   i, nMaxWidth, nLeft : Integer;
-  arrBt : array of TButton;
+//  arrBt : array of TButton;
 //  Canvas : TCanvas;
   Canvas : TControlCanvas;
   s : String;
@@ -1052,11 +1110,12 @@ procedure TfmParamQuest.ButtonOkClick(Sender: TObject);
 var
   sErr:String;
 begin
-  FResult := StrToInt( Copy(TComponent(Sender).Name, 7, 3) );
+  FResult:=StrToInt( Copy(TComponent(Sender).Name, 7, 3) );
   if CheckValue(sErr) then begin
     ModalResult:=mrOk;
   end else begin
-    PutError('Требуется значение: '+#13#10+sErr);
+    if sErr<>''
+      then PutError('Требуется значение: '+#13#10+sErr);
   end;
 end;
 

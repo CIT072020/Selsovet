@@ -1808,7 +1808,7 @@ end;
 //---------------------------------------------------
 procedure AktZAH_AfterCreate;
 var
-  ds : TDataSet;
+  ds,dsS : TDataSet;
   i : Integer;
   fld:TField;
 begin
@@ -1837,8 +1837,14 @@ begin
     ds.Fld('SVID_ZAGS').AsString := '';
     ds.Fld('DOKUMENT').AsString := '';
     ds.Fld('MOG_TYPE').AsString := '1';
-    ds.Fld('MOG_L').AsFloat := 2.3;
-    ds.Fld('MOG_W').AsFloat := 1.4;
+    dsS:=dbGetDataSet('dmBase.SprRazmer');
+    if dbLocate(dsS,'ID',[ds.Fld('MOG_TYPE').AsInteger],'') then begin
+      ds.Fld('MOG_L').AsFloat:=dsS.Fld('MOG_L').AsFloat;
+      ds.Fld('MOG_W').AsFloat:=dsS.Fld('MOG_W').AsFloat;
+    end else begin
+      ds.Fld('MOG_L').AsFloat := 2.3;
+      ds.Fld('MOG_W').AsFloat := 1.4;
+    end;
     ds.Fld('ZH_MOG').AsString := '1';
   end;
 end;
@@ -2010,7 +2016,12 @@ begin
   end;
 end;
 
-
+//-------- запрос данных ---------------------------------
+function QueryGis_Report : String;
+begin
+  Result := '&LIST&';
+  AddReport('Запрос персональных данных','&Запрос персональных данных.fr3');
+end;
 //-------- акты усыновления ---------------------------------
 function ZAdopt_Report : String;
 var
@@ -2415,7 +2426,7 @@ var
   adr:TAdresLic;
 begin
   AddReport('Поквартирная карточка','&Поквартирная карточка.fr3');
-  if (Adres.Mens.Count=0) or not dbLocate(Adres.Mens.DataSet,'PRESENT', [true], '')
+  if (Adres.Mens.Count=0) or not dbLocate(Adres.Mens.DataSet,'PROPIS', [true], '')
     then AddReport('Лицевой счет(пустующего дома)','&Лицевой Счет_пустующий.fr3');
 //  AddReport('Лицевой Счет','&Лицевой Счет.frf');
 //  AddReport('Справка о составе семьи и занимаемом жилом помещении(банк)','@PrintSSS');

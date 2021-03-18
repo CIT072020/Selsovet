@@ -651,7 +651,7 @@ begin
     old := Screen.Cursor;
     Screen.Cursor := crHourGlass;
     OpenMessage(' Подождите пожалуйста ... ','Выпонение',10);
-    GlobalTask.LogFile.WriteToLogFile('Начало заполнения даты записи в журнале');
+    GlobalTask.WriteToLogFile('Начало заполнения даты записи в журнале');
     try
       while not Query.Eof do begin
         Inc(k,1);
@@ -677,7 +677,7 @@ begin
       dbEnableControls(Query,lCheck);
       Refresh(true);
     end;
-    GlobalTask.LogFile.WriteToLogFile('Окончание заполнения даты записи в журнале, записано: '+IntToStr(m));
+    GlobalTask.WriteToLogFile('Окончание заполнения даты записи в журнале, записано: '+IntToStr(m));
     ShowMessage('Просмотрено записей: '+IntToStr(k)+#13+'Заполнено '+IntToStr(m));
   end;
 end;
@@ -714,7 +714,7 @@ begin
     old := Screen.Cursor;
     Screen.Cursor := crHourGlass;
     OpenMessage(' Подождите пожалуйста ... ','Выпонение',10);
-    GlobalTask.LogFile.WriteToLogFile('Начало перезаписи глобального номера '+ss);
+    GlobalTask.WriteToLogFile('Начало перезаписи глобального номера '+ss);
     try
       while not Query.Eof do begin
         Inc(k,1);
@@ -955,7 +955,7 @@ begin
     old := Screen.Cursor;
     Screen.Cursor := crHourGlass;
     OpenMessage(' Подождите пожалуйста ... ','Сверка',10);
-    GlobalTask.LogFile.WriteToLogFile('Начало сверки базы захоронений со справочником');
+    GlobalTask.WriteToLogFile('Начало сверки базы захоронений со справочником');
     try
       while not Query.Eof do begin
         if dmBase.AktZ.Locate('ID',Query.FieldByName('ID').AsInteger,[]) then begin
@@ -987,7 +987,7 @@ begin
       dbEnableControls(Query,lCheck);
       Refresh(true);
     end;
-    GlobalTask.LogFile.WriteToLogFile('Окончание сверки базы захоронений со справочником');
+    GlobalTask.WriteToLogFile('Окончание сверки базы захоронений со справочником');
   end;
 end;
 
@@ -1346,10 +1346,12 @@ begin
 
     TmpQuery.SQL.Text:=StringReplace( slSQL.Text, '&tmp&', GetNameTmpIdTable, [rfReplaceAll]);
     slSQL.Free;
-    memowrite('last_tmp.sql',TmpQuery.SQL.Text);
+//    memowrite('last_tmp.sql',TmpQuery.SQL.Text);
+    s1:=KodGurnal+' create find: '+TmpQuery.SQL.Text;
     TmpQuery.ExecSQL;
     TmpQuery.SQL.Text:='SELECT COUNT(*) FROM '+GetNameTmpIdTable;
     TmpQuery.Open;
+    GlobalTask.WriteToLogFile(s1+', recordcount='+TmpQuery.Fields[0].AsString, nil, LOG_SQL);
     if TmpQuery.Fields[0].AsInteger>0 then  begin
       Result:=true;
     end;

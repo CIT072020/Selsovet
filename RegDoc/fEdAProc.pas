@@ -7,9 +7,9 @@ interface
 uses
    Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
    Dialogs, DB, ExtCtrls, ComCtrls, Grids, DBGridEh, DBLookupEh, StdCtrls, Mask,
-   DBCtrlsEh, ToolWin, ImgList, ActnList, AdsTable, Menus, fShablon, uProject,
+   DBCtrlsEh, ToolWin, ImgList, ActnList, AdsTable, Menus, fShablon, uProject, uTypes,
    OpisEdit, MetaTask, dbFunc, FuncPr, uProjectAll,
-   mAdsObj, mDRecInt, fSprEdit, dDocImg, mDoc2Sel;
+   mAdsObj, mDRecInt, fSprEdit, dDocImg, mDoc2Sel, Buttons, vchDBCtrls;
 
 type
    TfmEdAProc=class(TForm)
@@ -145,6 +145,10 @@ type
     deDeloDate: TDBDateTimeEditEh;
     Label1: TLabel;
     dcCreateMan: TDBComboBoxEh;
+    pnFileID: TPanel;
+    lbFileID: TvchDBText;
+    sbFileID: TSpeedButton;
+    sbFileID2: TSpeedButton;
       procedure FormCreate(Sender: TObject);
       procedure acOkExecute(Sender: TObject);
       procedure acCancelExecute(Sender: TObject);
@@ -186,9 +190,16 @@ type
       var Handled: Boolean);
     procedure deCheckManEditButtons0Click(Sender: TObject;
       var Handled: Boolean);
+    procedure lbFileIDClick(Sender: TObject);
+    procedure lbFileIDGetText(Sender: TObject; var Text: String);
+    procedure sbFileIDClick(Sender: TObject);
+    procedure deRegIndEditButtons0Click(Sender: TObject;   var Handled: Boolean);
+    procedure deRegIndDblClick(Sender: TObject);
+    procedure sbFileID2Click(Sender: TObject);
    private
       FDoc: TAdmProcDoc;
       FIsTableView: Boolean;
+      FFormula:String;
    private
       procedure SetFileView(IsTable: Boolean);
       procedure AddFileToListView;
@@ -226,7 +237,7 @@ type
 
 implementation
 uses
-   dBase, fEdRept;
+   dBase, fEdRept, fChoiceNomen;
 
 {$R *.dfm}
 
@@ -234,6 +245,7 @@ procedure TfmEdAProc.FormCreate(Sender: TObject);
 var
    Column: TListColumn;
 begin
+   FFormula:=Trim(GlobalTask.ParamAsString('ADMIN_NOMER'));
    FDoc:=nil;
    Screen.OnActiveControlChange:=ActiveControlChanged;
    DOC_FILE.Align:=alClient;
@@ -249,6 +261,9 @@ begin
   {$ELSE}
     btChoiceMen.Visible:=false;
   {$IFEND}
+  dcProvType.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  dcProvType.DropDownBox.Width:=TYPEDOK_Width;  // utypes.pas
+
 end;
 procedure TfmEdAProc.FormDestroy(Sender: TObject);
 begin
@@ -278,10 +293,17 @@ begin
     then btShablon.Enabled:=lEnabled;
 end;
 procedure TfmEdAProc.FormKeyDown(Sender: TObject; var Key: Word;  Shift: TShiftState);
+var
+  l:Boolean;
 begin
   if (Shift=[]) and (Key=VK_F10)  then begin
     Key:=0;
-    btShablonClick(nil);
+    btShablonClick(Sender);
+  end else if ((Key=VK_ADD) or (Key=187)) and (Shift=[ssCtrl]) then begin
+    if FFormula<>'' then begin
+      Key:=0;
+      deRegIndEditButtons0Click(nil,l);
+    end;
   end;
 end;
 
@@ -492,6 +514,14 @@ begin
    dcExecMan.EditButtons[0].OnClick:=dcExecManEditButtons0Click;
    deCheckMan.EditButtons[0].OnClick:=deCheckManEditButtons0Click;
    dcCreateMan.EditButtons[0].OnClick:=dcCreateManEditButtons0Click;
+
+   if FFormula=''
+     then deRegInd.EditButtons[0].Visible:=false
+     else deRegInd.Hint:=FFormula;
+
+   lbFileID.DataSource:=dlFileId.DataSource;
+   lbFileID.DataField:='FILE_ID';
+
 end;
 
 procedure TfmEdAProc.SetControlEvent;
@@ -548,6 +578,11 @@ begin
    dlFileId.Enabled:=chbInFile.Checked;
    laDeloDate.Enabled:=chbInFile.Checked;
    deDeloDate.Enabled:=chbInFile.Checked;
+
+   sbFileID.Enabled:=chbInFile.Checked;
+   sbFileID2.Enabled:=chbInFile.Checked;
+   pnFileID.Enabled:=chbInFile.Checked;
+   lbFileID.Enabled:=chbInFile.Checked;
    //laFileVol.Enabled:=chbInFile.Checked;
    //deFileVol.Enabled:=chbInFile.Checked;
    //laFileList.Enabled:=chbInFile.Checked;
@@ -953,5 +988,87 @@ begin
   nID:=ChoiceSpecID(deCheckMan);
   if nID>0 then FDoc['CHECK_MAN'].AsInteger:=nID;
 end;
+
+procedure TfmEdAProc.lbFileIDGetText(Sender: TObject; var Text: String);
+var
+  n:Integer;
+  d1,d2:TDateTime;
+  s:String;
+  c:TColor;
+begin
+  c:=clWindowText;
+  if dmBase.SprDocFileList.Locate('ID', FDoc['FILE_ID'].AsInteger, []) then begin
+    Text:=dmBase.SprDocFileList.FieldByName('FILE_IND').AsString;
+    lbFileID.Hint:=dmBase.SprDocFileList.FieldByName('NAME').AsString;
+    n:=dmBase.GetDateDelo(1, dmBase.SprDocFileList.FieldByName('ID').AsInteger, d1, d2, s);
+    if (n>0) and (d2>0) then begin
+      Text:=Text+s;
+      c:=clRed;
+      lbFileID.Font.Color:=clRed;
+    end;
+  end else begin
+    Text:='';
+  end;
+  if lbFileID.Font.Color<>c
+    then lbFileID.Font.Color:=c;
+end;
+
+procedure TfmEdAProc.deRegIndEditButtons0Click(Sender: TObject;  var Handled: Boolean);
+var
+  s,sGrup,sInd:string;
+begin
+// subj_id  =  Spr:=SprList.AddItem('SP_FILELIST', 'SprDocFileList', 'sp', 'Номенклатура дел', 'Номенклатура дел', '', 'CODE', '', 'ID', 'NAME', 'ID', [bsSpr, {тест}bsTree]);
+// group_id =  Spr:=SprList.AddItem('SP_DOCGROUP', 'SprDocGroup', 'sp', 'Группы документов', 'Группы документов', '', 'N_ORDER', '', 'ID', 'NAME', 'ID', [bsSpr, bsPickList, bsOrder, bsTree]);
+//FDoc.DBItem.FieldList.ByName('GROUP_ID').LinkSpr.FindTable()
+  if FFormula<>'' then begin
+    FDoc.DBItem.EditTable.CheckBrowseMode;
+    FDoc.DBItem.EditTable.Edit;
+    if (FDoc['REG_IND'].AsString='') or Problem('Сформировать индекс повторно ?') then begin
+      s:=FDoc.GetRegInd(FDoc.DocType,FDoc['GROUP_ID'].AsInteger,'ADMIN_NOMER',false);
+      if s<>'' then
+        FDoc['REG_IND'].AsString:=s;
+    end;
+  end;
+end;
+
+procedure TfmEdAProc.deRegIndDblClick(Sender: TObject);
+var
+  l:Boolean;
+begin
+  deRegIndEditButtons0Click(Sender, l);
+end;
+procedure TfmEdAProc.sbFileIDClick(Sender: TObject);
+var
+  fi:TFieldItem;
+  KeyValue:String;
+begin
+   fi:=FDoc.DBItem.FieldList.ByName('FILE_ID');
+   if fi<>nil then begin
+     KeyValue:=FDoc['FILE_ID'].AsString;
+     if SelectSprValue(fi.LinkSpr, KeyValue, fi.LinkSpr.CodeFieldName) then begin
+       FDoc.DBItem.EditTable.CheckBrowseMode;
+       FDoc.DBItem.EditTable.Edit;
+       FDoc['FILE_ID'].AsString:=KeyValue;
+     end;
+   end;
+end;
+
+procedure TfmEdAProc.sbFileID2Click(Sender: TObject);
+var
+  n:Integer;
+begin
+  n:=ChoiceNomen(1,true,false,'');
+  if n>0 then begin
+    FDoc.DBItem.EditTable.CheckBrowseMode;
+    FDoc.DBItem.EditTable.Edit;
+    FDoc['FILE_ID'].AsInteger:=n;
+  end;
+end;
+
+procedure TfmEdAProc.lbFileIDClick(Sender: TObject);
+begin
+  sbFileID2Click(nil);
+end;
+
 
 end.

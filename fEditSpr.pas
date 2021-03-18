@@ -7,7 +7,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, ImgList, TypInfo, uTypes,
   Controls, Forms, Dialogs, IniFiles, Db,
-  DbGridEh, SasaDbGrid, FuncEh, DataTask, DbFunc, OpisEdit, fLookUp, fRecordGrid,
+  DbGrids, DbGridEh, SasaDbGrid, FuncEh, DataTask, DbFunc, OpisEdit, fLookUp, fRecordGrid,
   SasaUtils, Menus, Grids, GridSetUp, {$IFNDEF EHLIB3} GridsEh, {$ENDIF} StdCtrls, ExtCtrls, PrnDbgeh,
   UserEvents,ComCtrls, TB2Item, ActnList, TB2Dock, TB2Toolbar, fmStringSeek, mPermit
   {$IFDEF VER150} ,Variants {$ENDIF}  ;
@@ -363,6 +363,11 @@ begin
         else Grid.Columns[i].Visible:=false;
     end;
   end;
+  if not (dgEditing in Grid.Options) then begin
+    for i:=0 to Grid.Columns.Count-1 do begin
+      Grid.Columns[i].ReadOnly:=true;
+    end;
+  end;                         
 
   if ParamsEditSpr<>nil then begin
     for i:=0 to ParamsEditSpr.FormatList.Count-1 do begin

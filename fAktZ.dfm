@@ -1,7 +1,7 @@
 inherited fmAktZ: TfmAktZ
   Left = 431
   Top = 56
-  ActiveControl = edFamilia
+  ActiveControl = edINST_MN_NAME
   Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086' '#1079#1072#1093#1086#1088#1086#1085#1077#1085#1080#1080
   ClientHeight = 812
   ClientWidth = 939
@@ -310,7 +310,7 @@ inherited fmAktZ: TfmAktZ
       Top = 34
       Width = 939
       Height = 706
-      ActivePage = ts1
+      ActivePage = tsAdd
       Align = alClient
       MultiLine = True
       TabOrder = 2
@@ -3627,7 +3627,7 @@ inherited fmAktZ: TfmAktZ
           Left = 226
           Top = 221
           Width = 47
-          Height = 21
+          Height = 19
           TabStop = False
           DataField = 'ONLYGOD'
           DataSource = dsDokument
@@ -3657,7 +3657,7 @@ inherited fmAktZ: TfmAktZ
           Left = 594
           Top = 35
           Width = 137
-          Height = 21
+          Height = 19
           TabStop = False
           DataField = 'ONLYGOD_R'
           DataSource = dsDokument
@@ -5000,7 +5000,7 @@ inherited fmAktZ: TfmAktZ
             Top = 15
             Width = 125
             Height = 13
-            Caption = #1047#1072#1087#1089#1080#1100' '#1072#1082#1090#1072' '#1086' '#1089#1084#1077#1088#1090#1080
+            Caption = #1047#1072#1087#1080#1089#1100' '#1072#1082#1090#1072' '#1086' '#1089#1084#1077#1088#1090#1080
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -5022,7 +5022,7 @@ inherited fmAktZ: TfmAktZ
             ParentFont = False
           end
           object Label54: TLabel
-            Left = 306
+            Left = 346
             Top = 15
             Width = 12
             Height = 13
@@ -5035,7 +5035,7 @@ inherited fmAktZ: TfmAktZ
             ParentFont = False
           end
           object Label56: TLabel
-            Left = 465
+            Left = 498
             Top = 15
             Width = 58
             Height = 13
@@ -5048,9 +5048,9 @@ inherited fmAktZ: TfmAktZ
             ParentFont = False
           end
           object edZapAktNomer: TDBEditEh
-            Left = 165
+            Left = 169
             Top = 8
-            Width = 126
+            Width = 157
             Height = 26
             DataField = 'ZAPAKT_NOMER'
             DataSource = dsDokument
@@ -5065,9 +5065,9 @@ inherited fmAktZ: TfmAktZ
             Visible = True
           end
           object edZapAktDate: TDBDateTimeEditEh
-            Left = 330
+            Left = 370
             Top = 8
-            Width = 119
+            Width = 110
             Height = 26
             DataField = 'ZAPAKT_DATE'
             DataSource = dsDokument
@@ -5083,9 +5083,9 @@ inherited fmAktZ: TfmAktZ
             Visible = True
           end
           object edZapAktZags: TDBEditEh
-            Left = 536
+            Left = 567
             Top = 8
-            Width = 383
+            Width = 360
             Height = 26
             HelpContext = 999
             Anchors = [akLeft, akTop, akRight]
@@ -6282,7 +6282,7 @@ inherited fmAktZ: TfmAktZ
     end
     object DokumentZAPAKT_NOMER: TStringField
       FieldName = 'ZAPAKT_NOMER'
-      Size = 15
+      Size = 25
     end
     object DokumentZAPAKT_DATE: TDateField
       FieldName = 'ZAPAKT_DATE'

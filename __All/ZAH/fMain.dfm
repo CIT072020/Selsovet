@@ -391,7 +391,11 @@ object fmMain: TfmMain
           end
           object TBItemCheckUpdate: TTBItem
             Action = acCheckUpdate
+          end
+          object TBItemLoadSysSpr: TTBItem
+            Caption = #1057#1082#1072#1095#1072#1090#1100' '#1086#1073#1085#1086#1074#1083#1077#1085#1080#1077' '#1089#1080#1089#1090#1077#1084#1085#1099#1093' '#1089#1087#1088#1072#1074#1086#1095#1085#1080#1082#1086#1074
             Visible = False
+            OnClick = TBItemLoadSysSprClick
           end
           object TBItem48: TTBItem
             Action = acSetPassword
@@ -434,6 +438,10 @@ object fmMain: TfmMain
         end
         object TBItemRefreshCOC: TTBItem
           Action = acRefreshCOC
+        end
+        object TBItemEditUrl: TTBItem
+          Caption = #1050#1086#1088#1088#1077#1090#1080#1088#1086#1074#1082#1072' URL '#1057#1054#1057
+          OnClick = TBItemEditUrlClick
         end
         object TBItemSaveCert: TTBItem
           Action = acSaveCert
@@ -6182,7 +6190,7 @@ object fmMain: TfmMain
     end
     object acCheckUpdate: TAction
       Category = #1057#1077#1088#1074#1080#1089
-      Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1086#1073#1085#1086#1074#1083#1077#1085#1080#1077' '#1087#1088#1086#1075#1088#1072#1084#1084#1099
+      Caption = #1057#1082#1072#1095#1072#1090#1100' '#1086#1073#1085#1086#1074#1083#1077#1085#1080#1077' '#1087#1088#1086#1075#1088#1072#1084#1084#1099
       ImageIndex = 59
       OnExecute = acCheckUpdateExecute
     end
@@ -7765,5 +7773,9 @@ object fmMain: TfmMain
     PrintScaling = False
     Left = 680
     Top = 216
+  end
+  object ImageList24: TcxImageList
+    Left = 360
+    Top = 264
   end
 end

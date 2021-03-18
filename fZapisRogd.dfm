@@ -1,6 +1,6 @@
 inherited fmZapisRogd: TfmZapisRogd
-  Left = 320
-  Top = 124
+  Left = 401
+  Top = 202
   Caption = #1047#1072#1087#1080#1089#1100' '#1072#1082#1090#1072' '#1086' '#1088#1086#1078#1076#1077#1085#1080#1080
   ClientHeight = 722
   ClientWidth = 868
@@ -4072,7 +4072,7 @@ inherited fmZapisRogd: TfmZapisRogd
           ParentFont = False
         end
         object Label69: TLabel
-          Left = 176
+          Left = 236
           Top = 92
           Width = 12
           Height = 13
@@ -4085,7 +4085,7 @@ inherited fmZapisRogd: TfmZapisRogd
           ParentFont = False
         end
         object Label70: TLabel
-          Left = 541
+          Left = 630
           Top = 92
           Width = 12
           Height = 13
@@ -4724,7 +4724,7 @@ inherited fmZapisRogd: TfmZapisRogd
         object edON_DOK_TYPE: TDBComboBoxEh
           Left = 35
           Top = 58
-          Width = 269
+          Width = 334
           Height = 26
           DataField = 'ON_DOK_TYPE'
           DataSource = dsDokument
@@ -4741,7 +4741,7 @@ inherited fmZapisRogd: TfmZapisRogd
         object edON_DOK_SERIA: TDBEditEh
           Left = 35
           Top = 85
-          Width = 33
+          Width = 65
           Height = 26
           CharCase = ecUpperCase
           DataField = 'ON_DOK_SERIA'
@@ -4757,9 +4757,9 @@ inherited fmZapisRogd: TfmZapisRogd
           Visible = True
         end
         object edON_DOK_NOMER: TDBEditEh
-          Left = 79
+          Left = 114
           Top = 85
-          Width = 89
+          Width = 110
           Height = 26
           DataField = 'ON_DOK_NOMER'
           DataSource = dsDokument
@@ -4774,9 +4774,9 @@ inherited fmZapisRogd: TfmZapisRogd
           Visible = True
         end
         object edON_DOK_DATE: TDBDateTimeEditEh
-          Left = 196
+          Left = 259
           Top = 85
-          Width = 107
+          Width = 110
           Height = 26
           DataField = 'ON_DOK_DATE'
           DataSource = dsDokument
@@ -4792,7 +4792,7 @@ inherited fmZapisRogd: TfmZapisRogd
           Visible = True
         end
         object edONA_DOKUMENT: TDBEditEh
-          Left = 401
+          Left = 429
           Top = 112
           Width = 334
           Height = 26
@@ -4809,9 +4809,9 @@ inherited fmZapisRogd: TfmZapisRogd
           Visible = True
         end
         object edONA_DOK_TYPE: TDBComboBoxEh
-          Left = 401
+          Left = 429
           Top = 58
-          Width = 269
+          Width = 334
           Height = 26
           DataField = 'ONA_DOK_TYPE'
           DataSource = dsDokument
@@ -4826,9 +4826,9 @@ inherited fmZapisRogd: TfmZapisRogd
           Visible = True
         end
         object edONA_DOK_SERIA: TDBEditEh
-          Left = 401
+          Left = 429
           Top = 85
-          Width = 33
+          Width = 65
           Height = 26
           CharCase = ecUpperCase
           DataField = 'ONA_DOK_SERIA'
@@ -4844,9 +4844,9 @@ inherited fmZapisRogd: TfmZapisRogd
           Visible = True
         end
         object edONA_DOK_NOMER: TDBEditEh
-          Left = 446
+          Left = 509
           Top = 85
-          Width = 89
+          Width = 110
           Height = 26
           DataField = 'ONA_DOK_NOMER'
           DataSource = dsDokument
@@ -4861,9 +4861,9 @@ inherited fmZapisRogd: TfmZapisRogd
           Visible = True
         end
         object edONA_DOK_DATE: TDBDateTimeEditEh
-          Left = 563
+          Left = 653
           Top = 85
-          Width = 107
+          Width = 110
           Height = 26
           DataField = 'ONA_DOK_DATE'
           DataSource = dsDokument
@@ -4968,7 +4968,7 @@ inherited fmZapisRogd: TfmZapisRogd
           Visible = True
         end
         object edONA_OBRAZ: TDBComboBoxEh
-          Left = 401
+          Left = 429
           Top = 16
           Width = 269
           Height = 26
@@ -5268,7 +5268,7 @@ inherited fmZapisRogd: TfmZapisRogd
           Visible = True
         end
         object edONA_VOENKOM: TDBLookupComboboxEh
-          Left = 401
+          Left = 429
           Top = 151
           Width = 334
           Height = 26

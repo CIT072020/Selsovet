@@ -1102,7 +1102,7 @@ begin
         
       //IN15 Поступило, по тематикам
       SQL:=
-         'select ifnull(sp.NAME, ''Тематика не указана'') as SUBJ_NAME, s.IN15_VAL1, s.IN15_VAL2 '+
+         'select iif(s.SUBJ_ID<10000,ifnull(sp.NAME, ''Тематика не указана''),ifnull(spg.NAME, ''Тематика не указана'')) as SUBJ_NAME, s.IN15_VAL1, s.IN15_VAL2 '+
          'from ( '+
          '   select '+
          '      SUBJ_ID, '+
@@ -1115,7 +1115,8 @@ begin
                    //исключать: письменные, поручения, из вышестоящих
          '         (d.COVER_CORR is null or not (isnull(d.APP_FORM,0)=1 and isnull(c.CORR_TYPE,0)=1 and isnull(d.COVER_TYPE,0)=1)) '+
          '   group by SUBJ_ID) s '+
-         'left join SprDocSubj sp on sp.ID=s.SUBJ_ID '+
+         'left join SprDocSubj  sp  on sp.ID=s.SUBJ_ID '+
+         'left join SprDocSubjG spg on spg.ID=s.SUBJ_ID '+
          'order by sp.code';
       dbChangeSQL(quSQL ,SQL, True);
       quSQL.First;

@@ -10,17 +10,15 @@ uses
 
 type
   TfmGurnNakl = class(TfmGurnal)
-    TBToolWindow1: TTBToolWindow;
-    Label3: TLabel;
-    edFamilia: TDBEditEh;
+    pnFilter: TPanel;
     Label4: TLabel;
     edTip: TDBComboBoxEh;
-    procedure edTipEditButtons0Click(Sender: TObject;
-      var Handled: Boolean);
+    Label3: TLabel;
+    edFamilia: TDBEditEh;
+    procedure edTipEditButtons0Click(Sender: TObject;    var Handled: Boolean);
     procedure edTipChange(Sender: TObject);
     procedure edFamiliaChange(Sender: TObject);
-    procedure edFamiliaEditButtons0Click(Sender: TObject;
-      var Handled: Boolean);
+    procedure edFamiliaEditButtons0Click(Sender: TObject;  var Handled: Boolean);
 
   private
     { Private declarations }
@@ -191,8 +189,7 @@ begin  SetFilter; end;
 procedure TfmGurnNakl.edFamiliaChange(Sender: TObject);
 begin  SetFilter; end;
 
-procedure TfmGurnNakl.edFamiliaEditButtons0Click(Sender: TObject;
-  var Handled: Boolean);
+procedure TfmGurnNakl.edFamiliaEditButtons0Click(Sender: TObject;  var Handled: Boolean);
 begin
   edFamilia.Text:='';
 end;

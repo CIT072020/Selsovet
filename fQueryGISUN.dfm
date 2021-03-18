@@ -1,10 +1,9 @@
 inherited fmQueryGISUN: TfmQueryGISUN
-  Left = 506
-  Top = 195
+  Left = 381
+  Top = 145
   ActiveControl = edFamilia
   Caption = #1047#1072#1087#1088#1086#1089' '#1076#1072#1085#1085#1099#1093' '#1086' '#1095#1077#1083#1086#1074#1077#1082#1077
-  ClientHeight = 681
-  ClientWidth = 876
+  ClientHeight = 716
   Constraints.MinHeight = 625
   Constraints.MinWidth = 790
   Icon.Data = {
@@ -49,7 +48,6 @@ inherited fmQueryGISUN: TfmQueryGISUN
   TextHeight = 13
   inherited sp: TSplitter
     Top = 26
-    Width = 876
     Visible = False
   end
   object Label22: TLabel [1]
@@ -61,12 +59,10 @@ inherited fmQueryGISUN: TfmQueryGISUN
   end
   inherited pnTable: TPanel
     Top = 63
-    Width = 876
-    Height = 596
+    Height = 631
     Visible = False
   end
   inherited TBDock: TTBDock
-    Width = 876
     inherited TBToolbar: TTBToolbar
       object TBItemChoiceMen: TTBItem [2]
         Caption = #1042#1099#1073#1088#1072#1090#1100
@@ -123,9 +119,6 @@ inherited fmQueryGISUN: TfmQueryGISUN
       inherited TBItemZAGS: TTBItem
         Visible = False
       end
-      inherited TBItemEditMemo: TTBItem
-        Visible = True
-      end
       inherited TBItemAdresat: TTBItem
         Visible = False
       end
@@ -135,8 +128,12 @@ inherited fmQueryGISUN: TfmQueryGISUN
       inherited TBItemDeclSvid: TTBItem
         Visible = False
       end
+      inherited TBItemCancel: TTBItem
+        Caption = '&'#1042#1099#1093#1086#1076
+        Hint = #1042#1099#1093#1086#1076
+      end
       inherited TBToolbarOrgan: TTBToolbar
-        Left = 236
+        Left = 213
         inherited edZAGS: TDBEditEh
           TabStop = False
         end
@@ -145,8 +142,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
   end
   inherited sb: TScrollBox
     Top = 63
-    Width = 876
-    Height = 596
+    Height = 631
     Align = alClient
     inherited pnPovtor: TPanel
       Left = 760
@@ -170,7 +166,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
       Left = 0
       Top = 0
       Width = 876
-      Height = 596
+      Height = 631
       ActivePage = tsTail1
       Align = alClient
       HotTrack = True
@@ -182,7 +178,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
         ImageIndex = -1
         DesignSize = (
           868
-          567)
+          602)
         object Label1: TLabel
           Left = 5
           Top = 23
@@ -526,6 +522,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Height = 26
           HelpType = htKeyword
           HelpContext = 888
+          Color = clInfoBk
           DataField = 'Familia'
           DataSource = dsDokument
           EditButtons = <>
@@ -544,6 +541,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 43
           Width = 145
           Height = 26
+          Color = clInfoBk
           DataField = 'Name'
           DataSource = dsDokument
           EditButtons = <>
@@ -562,6 +560,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 70
           Width = 145
           Height = 26
+          Color = clInfoBk
           DataField = 'Otch'
           DataSource = dsDokument
           EditButtons = <>
@@ -580,6 +579,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 43
           Width = 161
           Height = 26
+          Color = clInfoBk
           DataField = 'DateR'
           DataSource = dsDokument
           EditButtons = <>
@@ -599,6 +599,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 323
           Width = 300
           Height = 26
+          Color = clInfoBk
           DataField = 'GRAG'
           DataSource = dsDokument
           DropDownBox.Width = 300
@@ -622,6 +623,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 16
           Width = 161
           Height = 26
+          Color = clInfoBk
           DataField = 'POL'
           DataSource = dsDokument
           EditButton.Visible = False
@@ -642,6 +644,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Width = 161
           Height = 26
           CharCase = ecUpperCase
+          Color = clInfoBk
           DataField = 'IDENTIF'
           DataSource = dsDokument
           EditButtons = <>
@@ -660,6 +663,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 70
           Width = 145
           Height = 26
+          Color = clInfoBk
           DataField = 'Otch_B'
           DataSource = dsDokument
           EditButtons = <>
@@ -678,6 +682,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 43
           Width = 145
           Height = 26
+          Color = clInfoBk
           DataField = 'Name_B'
           DataSource = dsDokument
           EditButtons = <>
@@ -698,6 +703,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Height = 26
           HelpType = htKeyword
           HelpContext = 888
+          Color = clInfoBk
           DataField = 'Familia_B'
           DataSource = dsDokument
           EditButtons = <>
@@ -716,6 +722,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 116
           Width = 222
           Height = 26
+          Color = clInfoBk
           DataField = 'GOSUD'
           DataSource = dsDokument
           EditButton.Visible = False
@@ -758,6 +765,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Width = 150
           Height = 26
           HelpKeyword = '<FULL>'
+          Color = clInfoBk
           DataField = 'GOROD'
           DataSource = dsDokument
           EditButtons = <>
@@ -776,7 +784,8 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 143
           Width = 222
           Height = 26
-          HelpKeyword = '<FULL>'
+          HelpType = htKeyword
+          Color = clInfoBk
           DataField = 'OBL_B'
           DataSource = dsDokument
           EditButtons = <>
@@ -795,6 +804,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 170
           Width = 222
           Height = 26
+          Color = clInfoBk
           DataField = 'RAION_B'
           DataSource = dsDokument
           EditButtons = <>
@@ -814,6 +824,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Width = 60
           Height = 26
           Alignment = taRightJustify
+          Color = clInfoBk
           DataField = 'B_GOROD'
           DataSource = dsDokument
           EditButton.Visible = False
@@ -836,6 +847,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 170
           Width = 222
           Height = 26
+          Color = clInfoBk
           DataField = 'RAION'
           DataSource = dsDokument
           EditButtons = <>
@@ -855,6 +867,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Width = 222
           Height = 26
           HelpKeyword = '<FULL>'
+          Color = clInfoBk
           DataField = 'OBL'
           DataSource = dsDokument
           EditButtons = <>
@@ -874,6 +887,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Width = 148
           Height = 26
           HelpKeyword = '<FULL>'
+          Color = clInfoBk
           DataField = 'GOROD_B'
           DataSource = dsDokument
           EditButtons = <>
@@ -942,6 +956,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 294
           Width = 166
           Height = 26
+          Color = clInfoBk
           DataField = 'M_GOROD_R'
           DataSource = dsDokument
           EditButtons = <>
@@ -960,6 +975,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 294
           Width = 147
           Height = 26
+          Color = clInfoBk
           DataField = 'M_RNGOROD'
           DataSource = dsDokument
           DropDownBox.Rows = 15
@@ -984,6 +1000,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 294
           Width = 55
           Height = 26
+          Color = clInfoBk
           DataField = 'M_DOM'
           DataSource = dsDokument
           EditButtons = <>
@@ -1002,6 +1019,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 294
           Width = 48
           Height = 26
+          Color = clInfoBk
           DataField = 'M_KORP'
           DataSource = dsDokument
           EditButtons = <>
@@ -1020,6 +1038,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 294
           Width = 57
           Height = 26
+          Color = clInfoBk
           DataField = 'M_KV'
           DataSource = dsDokument
           EditButtons = <>
@@ -1038,6 +1057,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 237
           Width = 205
           Height = 26
+          Color = clInfoBk
           DataField = 'M_GOSUD'
           DataSource = dsDokument
           EditButton.Visible = False
@@ -1061,6 +1081,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Width = 15
           Height = 17
           AllowGrayed = True
+          Color = clBtnFace
           DataField = 'M_B_OBL'
           DataSource = dsDokument
           Font.Charset = DEFAULT_CHARSET
@@ -1068,7 +1089,9 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Font.Height = -11
           Font.Name = 'Tahoma'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
+          ReadOnly = True
           TabOrder = 27
           TabStop = False
           ValueChecked = 'True'
@@ -1080,6 +1103,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Width = 205
           Height = 26
           HelpKeyword = '<FULL>'
+          Color = clInfoBk
           DataField = 'M_OBL'
           DataSource = dsDokument
           EditButtons = <>
@@ -1099,6 +1123,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Width = 44
           Height = 26
           Alignment = taRightJustify
+          Color = clInfoBk
           DataField = 'M_B_GOROD'
           DataSource = dsDokument
           EditButton.Visible = False
@@ -1122,6 +1147,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Width = 152
           Height = 26
           HelpKeyword = '<FULL>'
+          Color = clInfoBk
           DataField = 'M_GOROD'
           DataSource = dsDokument
           EditButtons = <>
@@ -1140,6 +1166,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 265
           Width = 205
           Height = 26
+          Color = clInfoBk
           DataField = 'M_RAION'
           DataSource = dsDokument
           EditButtons = <>
@@ -1158,6 +1185,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 410
           Width = 659
           Height = 26
+          Color = clInfoBk
           DataField = 'DOKUMENT'
           DataSource = dsDokument
           EditButtons = <>
@@ -1177,7 +1205,8 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Width = 193
           Height = 26
           HelpContext = 888
-          DataField = 'SEM'
+          Color = clInfoBk
+          DataField = 'SEM_REG'
           DataSource = dsDokument
           EditButton.Visible = False
           EditButtons = <>
@@ -1196,6 +1225,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 381
           Width = 329
           Height = 26
+          Color = clInfoBk
           DataField = 'DOK_TYPE'
           DataSource = dsDokument
           EditButton.Visible = False
@@ -1216,6 +1246,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Width = 52
           Height = 26
           CharCase = ecUpperCase
+          Color = clInfoBk
           DataField = 'DOK_SERIA'
           DataSource = dsDokument
           EditButtons = <>
@@ -1234,6 +1265,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 381
           Width = 89
           Height = 26
+          Color = clInfoBk
           DataField = 'DOK_NOMER'
           DataSource = dsDokument
           EditButtons = <>
@@ -1248,10 +1280,11 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Visible = True
         end
         object edDOK_DATE: TDBDateTimeEditEh
-          Left = 735
+          Left = 736
           Top = 381
           Width = 107
           Height = 26
+          Color = clInfoBk
           DataField = 'DOK_DATE'
           DataSource = dsDokument
           EditButton.Visible = False
@@ -1271,7 +1304,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Left = 2
           Top = 444
           Width = 864
-          Height = 113
+          Height = 135
           Anchors = [akLeft, akTop, akRight, akBottom]
           Caption = ' '#1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1076#1077#1090#1103#1093'                          '
           Font.Charset = DEFAULT_CHARSET
@@ -1285,10 +1318,11 @@ inherited fmQueryGISUN: TfmQueryGISUN
             Left = 2
             Top = 15
             Width = 860
-            Height = 96
+            Height = 118
             TabStop = False
             Align = alClient
             AllowedOperations = []
+            Color = clInfoBk
             DataSource = dsDeti
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -1382,7 +1416,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
                 FieldName = 'IDENTIF'
                 Footers = <>
                 Title.Alignment = taCenter
-                Title.Caption = #1048#1076#1077#1085#1090#1080#1092#1080#1082#1072#1086#1085#1085#1099#1081' '#1085#1086#1084#1077#1088
+                Title.Caption = #1048#1076#1077#1085#1090#1080#1092#1080#1082#1072#1094#1080#1086#1085#1085#1099#1081' '#1085#1086#1084#1077#1088
                 Width = 143
               end
               item
@@ -1434,11 +1468,12 @@ inherited fmQueryGISUN: TfmQueryGISUN
           end
         end
         object edSEM_DOK: TDBEditEh
-          Left = 392
+          Left = 395
           Top = 352
           Width = 448
           Height = 26
           Hint = #1044#1086#1082#1091#1084#1077#1085#1090' '#1087#1086#1076#1090#1074#1077#1088#1078#1076#1072#1102#1097#1080#1081' '#1087#1088#1077#1082#1088#1072#1097#1077#1085#1080#1077' '#1087#1088#1077#1076#1099#1076#1091#1097#1077#1075#1086' '#1073#1088#1072#1082#1072
+          Color = clInfoBk
           DataField = 'SEM_DOK'
           DataSource = dsDokument
           EditButtons = <>
@@ -1457,6 +1492,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Top = 143
           Width = 161
           Height = 21
+          Color = clInfoBk
           DataField = 'DATES'
           DataSource = dsDokument
           EditButtons = <>
@@ -1471,38 +1507,36 @@ inherited fmQueryGISUN: TfmQueryGISUN
           TabOrder = 40
           Visible = False
         end
-        object N_F_OnlyActive: TCheckBox
-          Left = 134
-          Top = 443
-          Width = 99
-          Height = 15
+        object N_F_OnlyActive: TDBCheckBoxEh
+          Left = 130
+          Top = 442
+          Width = 97
+          Height = 17
           Caption = #1072#1082#1090#1080#1074#1085#1099#1077
-          Checked = True
+          DataField = 'ONLYACTIVE'
+          DataSource = dsDokument
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
-          State = cbChecked
           TabOrder = 41
+          ValueChecked = 'True'
+          ValueUnchecked = 'False'
           OnClick = N_F_OnlyActiveClick
         end
-        object N_F_Do18: TCheckBox
-          Left = 225
-          Top = 443
-          Width = 83
-          Height = 15
+        object N_F_Do18: TDBCheckBoxEh
+          Left = 220
+          Top = 442
+          Width = 85
+          Height = 17
           Caption = #1076#1086' 18 '#1083#1077#1090
-          Checked = True
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          State = cbChecked
+          DataField = 'DO18'
+          DataSource = dsDokument
           TabOrder = 42
+          ValueChecked = 'True'
+          ValueUnchecked = 'False'
           OnClick = N_F_Do18Click
         end
       end
@@ -1511,7 +1545,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
         ImageIndex = 19
         DesignSize = (
           868
-          567)
+          602)
         object lbDolgSpec: TvchDBText
           Left = 2
           Top = 426
@@ -1559,6 +1593,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Width = 860
           Height = 257
           Anchors = [akLeft, akTop, akRight]
+          Color = clInfoBk
           DataSource = dsReshSud
           Flat = True
           Font.Charset = DEFAULT_CHARSET
@@ -1605,6 +1640,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
               FieldName = 'FIO'
               Footers = <>
               Title.Caption = #1060#1048#1054
+              Visible = False
               Width = 182
             end
             item
@@ -1619,7 +1655,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
               FieldName = 'DATE_RESH'
               Footers = <>
               Title.Caption = #1044#1072#1090#1072
-              Width = 78
+              Width = 98
             end
             item
               EditButtons = <>
@@ -1651,6 +1687,7 @@ inherited fmQueryGISUN: TfmQueryGISUN
           Lines.Strings = (
             'mDebug')
           TabOrder = 2
+          Visible = False
         end
       end
     end
@@ -1662,19 +1699,17 @@ inherited fmQueryGISUN: TfmQueryGISUN
     end
   end
   inherited StBar: TStatusBar
-    Top = 659
-    Width = 876
+    Top = 694
   end
   inherited pnAdd: TPanel
     Top = 29
-    Width = 876
     Height = 34
     inherited lbAnnulir: TvchDBText
       Left = 853
       Width = 13
       Visible = False
     end
-    object Label3: TLabel
+    object lbUser: TLabel
       Left = 10
       Top = 9
       Width = 84
@@ -1687,12 +1722,12 @@ inherited fmQueryGISUN: TfmQueryGISUN
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Label8: TLabel
-      Left = 249
+    object lbId: TLabel
+      Left = 241
       Top = 9
-      Width = 58
+      Width = 87
       Height = 13
-      Caption = 'ID '#1086#1090#1074#1077#1090#1072
+      Caption = #1048#1076'. '#1089#1086#1086#1073#1097#1077#1085#1080#1103
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
       Font.Height = -11
@@ -1700,8 +1735,8 @@ inherited fmQueryGISUN: TfmQueryGISUN
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Label13: TLabel
-      Left = 623
+    object lbDt: TLabel
+      Left = 633
       Top = 9
       Width = 79
       Height = 13
@@ -1714,10 +1749,11 @@ inherited fmQueryGISUN: TfmQueryGISUN
       ParentFont = False
     end
     object N_F_edGisUser: TDBEditEh
-      Left = 107
+      Left = 104
       Top = 4
       Width = 122
       Height = 24
+      Hint = #1048#1084#1103' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1103' '#1043#1048#1057' '#1056#1053' '#1079#1072#1087#1088#1086#1089#1080#1074#1096#1077#1075#1086' '#1076#1072#1085#1085#1099#1077
       Color = 16776176
       Ctl3D = True
       DataField = 'USER_GIS'
@@ -1734,11 +1770,12 @@ inherited fmQueryGISUN: TfmQueryGISUN
       TabOrder = 0
       Visible = True
     end
-    object N_F_GisIdQuery: TDBEditEh
-      Left = 323
+    object N_F_edGisIdQuery: TDBEditEh
+      Left = 339
       Top = 4
       Width = 280
       Height = 24
+      Hint = #1048#1076#1077#1085#1090#1080#1092#1080#1082#1072#1090#1086#1088' '#1089#1086#1086#1073#1097#1077#1085#1080#1103' '#1043#1048#1057' '#1056#1053
       Color = 16776176
       Ctl3D = True
       DataField = 'COVER_MESSAGE_ID'
@@ -1756,10 +1793,11 @@ inherited fmQueryGISUN: TfmQueryGISUN
       Visible = True
     end
     object N_F_edGisTimeQuery: TDBDateTimeEditEh
-      Left = 716
+      Left = 723
       Top = 4
       Width = 144
       Height = 24
+      Hint = #1044#1072#1090#1072' '#1080' '#1074#1088#1077#1084#1103' '#1086#1090#1074#1077#1090#1072' '#1043#1048#1057' '#1056#1053
       Color = 16776176
       Ctl3D = True
       DataField = 'COVER_MESSAGE_TIME'
@@ -2312,106 +2350,114 @@ inherited fmQueryGISUN: TfmQueryGISUN
       FieldName = 'M_KV'
       Size = 10
     end
-    object DokumentSEM: TIntegerField [27]
-      FieldName = 'SEM'
+    object DokumentM_TEXTADRES: TStringField [27]
+      FieldName = 'M_TEXTADRES'
+      Size = 300
     end
-    object DokumentSEM_DOK: TStringField [28]
+    object DokumentM_ADRNUM: TStringField [28]
+      FieldName = 'M_ADRNUM'
+      Size = 12
+    end
+    object DokumentSEM_REG: TIntegerField [29]
+      FieldName = 'SEM_REG'
+    end
+    object DokumentSEM_DOK: TStringField [30]
       FieldName = 'SEM_DOK'
       Size = 200
     end
-    object DokumentV_OBAZAN: TBooleanField [29]
+    object DokumentV_OBAZAN: TBooleanField [31]
       FieldName = 'V_OBAZAN'
     end
-    object DokumentV_WHO: TMemoField [30]
+    object DokumentV_WHO: TMemoField [32]
       DisplayLabel = #1043#1076#1077' '#1089#1086#1089#1090#1086#1080#1090' '#1085#1072' '#1091#1095#1077#1090#1077
       FieldName = 'V_WHO'
       BlobType = ftMemo
     end
-    object DokumentDOKUMENT: TMemoField [31]
+    object DokumentDOKUMENT: TMemoField [33]
       FieldName = 'DOKUMENT'
       BlobType = ftMemo
       Size = 1
     end
-    object DokumentOTMETKA: TMemoField [32]
+    object DokumentOTMETKA: TMemoField [34]
       FieldName = 'OTMETKA'
       BlobType = ftMemo
       Size = 1
     end
-    object DokumentRUKOV: TStringField [33]
+    object DokumentRUKOV: TStringField [35]
       FieldName = 'RUKOV'
       Size = 60
     end
-    object DokumentRUKOV_B: TStringField [34]
+    object DokumentRUKOV_B: TStringField [36]
       FieldName = 'RUKOV_B'
       Size = 60
     end
-    object DokumentSPEC: TStringField [35]
+    object DokumentSPEC: TStringField [37]
       FieldName = 'SPEC'
       Size = 60
     end
-    object DokumentID_ZAGS: TIntegerField [36]
+    object DokumentID_ZAGS: TIntegerField [38]
       FieldName = 'ID_ZAGS'
     end
-    object DokumentID_SOURCE: TIntegerField [37]
+    object DokumentID_SOURCE: TIntegerField [39]
       FieldName = 'ID_SOURCE'
     end
-    object DokumentB_OBL: TBooleanField [38]
+    object DokumentB_OBL: TBooleanField [40]
       FieldName = 'B_OBL'
     end
-    object DokumentFirst_Ekz: TBooleanField [39]
+    object DokumentFirst_Ekz: TBooleanField [41]
       FieldName = 'First_Ekz'
     end
-    object DokumentOBL_B: TStringField [44]
+    object DokumentOBL_B: TStringField [46]
       FieldName = 'OBL_B'
       Size = 30
     end
-    object DokumentRAION_B: TStringField [45]
+    object DokumentRAION_B: TStringField [47]
       FieldName = 'RAION_B'
       Size = 30
     end
-    object DokumentGOROD_B: TStringField [46]
+    object DokumentGOROD_B: TStringField [48]
       FieldName = 'GOROD_B'
       Size = 30
     end
-    object DokumentB_GOROD: TSmallintField [54]
+    object DokumentB_GOROD: TSmallintField [56]
       FieldName = 'B_GOROD'
     end
-    object DokumentSTATUS: TStringField [55]
+    object DokumentSTATUS: TStringField [57]
       FieldName = 'STATUS'
       Size = 1
     end
-    object DokumentPOLE_GRN: TSmallintField [56]
+    object DokumentPOLE_GRN: TSmallintField [58]
       FieldName = 'POLE_GRN'
     end
-    object DokumentDOK_TYPE: TSmallintField [57]
+    object DokumentDOK_TYPE: TSmallintField [59]
       FieldName = 'DOK_TYPE'
     end
-    object DokumentDOK_SERIA: TStringField [58]
+    object DokumentDOK_SERIA: TStringField [60]
       FieldName = 'DOK_SERIA'
       Size = 7
     end
-    object DokumentDOK_NOMER: TStringField [59]
+    object DokumentDOK_NOMER: TStringField [61]
       FieldName = 'DOK_NOMER'
       Size = 10
     end
-    object DokumentDOK_DATE: TDateField [60]
+    object DokumentDOK_DATE: TDateField [62]
       FieldName = 'DOK_DATE'
     end
-    object DokumentDOK_ORGAN: TIntegerField [61]
+    object DokumentDOK_ORGAN: TIntegerField [63]
       FieldName = 'DOK_ORGAN'
     end
-    object DokumentVOENKOM: TIntegerField [62]
+    object DokumentVOENKOM: TIntegerField [64]
       FieldName = 'VOENKOM'
     end
-    object DokumentTYPEMESSAGE: TStringField [63]
+    object DokumentTYPEMESSAGE: TStringField [65]
       FieldName = 'TYPEMESSAGE'
       Size = 4
     end
-    object DokumentIDENTIF: TStringField [64]
+    object DokumentIDENTIF: TStringField [66]
       FieldName = 'IDENTIF'
       Size = 14
     end
-    object DokumentSPEC_B: TStringField [65]
+    object DokumentSPEC_B: TStringField [67]
       FieldName = 'SPEC_B'
       Size = 60
     end
@@ -2423,6 +2469,12 @@ inherited fmQueryGISUN: TfmQueryGISUN
     end
     object DokumentDATES: TDateField
       FieldName = 'DATES'
+    end
+    object DokumentONLYACTIVE: TBooleanField
+      FieldName = 'ONLYACTIVE'
+    end
+    object DokumentDO18: TBooleanField
+      FieldName = 'DO18'
     end
   end
   inherited frDBDokument: TfrDBDataSet
@@ -2454,7 +2506,6 @@ inherited fmQueryGISUN: TfmQueryGISUN
     Top = 210
   end
   inherited dsRnGor: TDataSource
-    Left = 560
     Top = 242
   end
   inherited dsTypeGorod: TDataSource

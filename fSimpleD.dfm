@@ -1,10 +1,10 @@
 object fmSimpleD: TfmSimpleD
-  Left = 405
-  Top = 211
+  Left = 475
+  Top = 212
   HelpType = htKeyword
   AutoScroll = False
   ClientHeight = 465
-  ClientWidth = 805
+  ClientWidth = 876
   Color = clBtnFace
   Constraints.MinHeight = 493
   Constraints.MinWidth = 600
@@ -31,7 +31,7 @@ object fmSimpleD: TfmSimpleD
   object sp: TSplitter
     Left = 0
     Top = 370
-    Width = 805
+    Width = 876
     Height = 3
     Cursor = crVSplit
     Align = alTop
@@ -39,7 +39,7 @@ object fmSimpleD: TfmSimpleD
   object pnTable: TPanel
     Left = 0
     Top = 373
-    Width = 805
+    Width = 876
     Height = 70
     Align = alClient
     BevelOuter = bvNone
@@ -48,7 +48,7 @@ object fmSimpleD: TfmSimpleD
   object TBDock: TTBDock
     Left = 0
     Top = 0
-    Width = 805
+    Width = 876
     Height = 26
     AllowDrag = False
     object TBToolbar: TTBToolbar
@@ -442,7 +442,7 @@ object fmSimpleD: TfmSimpleD
   object sb: TScrollBox
     Left = 0
     Top = 50
-    Width = 805
+    Width = 876
     Height = 320
     Align = alTop
     BorderStyle = bsNone
@@ -524,8 +524,8 @@ object fmSimpleD: TfmSimpleD
       Height = 233
       TabOrder = 0
       object imBE: TImage
-        Left = 496
-        Top = 136
+        Left = 512
+        Top = 184
         Width = 15
         Height = 17
         Hint = #1055#1077#1088#1077#1082#1083#1102#1095#1080#1090#1100#1089#1103' '#1085#1072' '#1073#1077#1083#1086#1088#1091#1089#1089#1082#1091#1102' '#1088#1072#1089#1082#1083#1072#1076#1082#1091' '#1082#1083#1072#1074#1080#1072#1090#1091#1088#1099
@@ -677,7 +677,7 @@ object fmSimpleD: TfmSimpleD
       end
       object btClearFirst: TBitBtn
         Left = 442
-        Top = 51
+        Top = 45
         Width = 145
         Height = 25
         Hint = #1054#1095#1080#1089#1090#1080#1090#1100' '#1076#1072#1085#1085#1099#1077' '#1086' '#1087#1077#1088#1074#1080#1095#1085#1086#1084' '#1089#1074#1080#1076#1077#1090#1077#1083#1100#1089#1090#1074#1077
@@ -736,27 +736,29 @@ object fmSimpleD: TfmSimpleD
         Caption = #1055#1077#1095#1072#1090#1100' '#1074' '#1089#1074#1080#1076#1077#1090#1077#1083#1100#1089#1090#1074#1077' '#1089#1083#1086#1074#1072' "'#1087#1086#1074#1090#1086#1088#1085#1086#1077'"'
         DataField = 'PRINT_POVTOR'
         DataSource = dsDokument
-        TabOrder = 3
+        TabOrder = 5
         ValueChecked = 'True'
         ValueUnchecked = 'False'
       end
       object btDelPovtor: TBitBtn
         Left = 442
-        Top = 88
+        Top = 105
         Width = 149
         Height = 25
         Hint = #1059#1076#1072#1083#1080#1090#1100' '#1090#1077#1082#1091#1097#1091#1102' '#1089#1090#1088#1086#1082#1091'  '#1089#1087#1080#1089#1082#1072' '#1087#1086#1074#1090#1086#1088#1085#1099#1093' '#1089#1074#1080#1076#1077#1090#1077#1083#1100#1089#1090#1074
-        Caption = #1059#1076#1072#1083#1080#1090#1100' '#1089#1090#1088#1086#1082#1091'         '
+        Caption = #1059#1076#1072#1083#1080#1090#1100' '#1089#1090#1088#1086#1082#1091'       '
         TabOrder = 4
         OnClick = btDelPovtorClick
-        Glyph.Data = {
-          BE000000424DF600000000000000760000002800000010000000100000000100
-          040000000000800000000000000000000000020000000200000004020400C4C2
-          C400111111111111111111111111111111111111111111111011111011111111
-          1111110001111111011111000111111011111110001111001111111100011001
-          1111111110000011111111111100011111111111100000111111111100011011
-          1111110000111100111110000111111001111001111111110011111111111111
-          1111}
+      end
+      object btAddPovtor: TBitBtn
+        Left = 442
+        Top = 75
+        Width = 149
+        Height = 25
+        Hint = #1044#1086#1073#1072#1074#1080#1090#1100' '#1085#1086#1074#1091#1102' '#1089#1090#1088#1086#1082#1091'  '#1089#1087#1080#1089#1082#1072' '#1087#1086#1074#1090#1086#1088#1085#1099#1093' '#1089#1074#1080#1076#1077#1090#1077#1083#1100#1089#1090#1074
+        Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1089#1090#1088#1086#1082#1091'      '
+        TabOrder = 3
+        OnClick = btAddPovtorClick
       end
     end
     object N_F_edTypeEkz: TComboBox
@@ -782,7 +784,7 @@ object fmSimpleD: TfmSimpleD
   object StBar: TStatusBar
     Left = 0
     Top = 443
-    Width = 805
+    Width = 876
     Height = 22
     Panels = <
       item
@@ -794,7 +796,7 @@ object fmSimpleD: TfmSimpleD
   object pnAdd: TPanel
     Left = 0
     Top = 26
-    Width = 805
+    Width = 876
     Height = 24
     Align = alTop
     TabOrder = 4
@@ -1028,8 +1030,8 @@ object fmSimpleD: TfmSimpleD
   end
   object dsObl: TDataSource
     DataSet = dmBase.LookupObl
-    Left = 464
-    Top = 234
+    Left = 472
+    Top = 282
   end
   object SvidPovtor: TkbmMemTable
     DesignActivation = True
@@ -1108,8 +1110,8 @@ object fmSimpleD: TfmSimpleD
   end
   object dsRnGor: TDataSource
     DataSet = dmBase.LookupRnGor
-    Left = 552
-    Top = 234
+    Left = 560
+    Top = 290
   end
   object dsTypeGorod: TDataSource
     DataSet = dmBase.TypePunkt

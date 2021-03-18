@@ -241,7 +241,7 @@ begin
             sSign:=ETSP2.Sign(Length(sUtf8),sUtf8);
             gisun.WriteTextLog('ЭЦП подписать '+ETSP2.LastError,LOG_GISUN);
             if ETSP2.Debug then begin
-              MemoWrite(ExtractFilePath(Application.ExeName)+'sign', sSign);
+              MemoWrite(ExtractFilePath(Application.ExeName)+'zchannel sign', sSign);
             end;
           finally                                
             // работает или нет поток созданный функцией EnterWorkerThread

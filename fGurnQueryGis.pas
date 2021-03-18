@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, uTypes,
-  fGurnal, Db, adsdata, adsfunc, adstable, Grids, DBGridEh, SasaDBGrid,
+  fGurnal, Db, adsdata, adsfunc, adstable, Grids, DBGridEh, SasaDBGrid, mPermit,
   TB2Item, TB2Dock, TB2Toolbar, dBase, ImgList, Menus, ComCtrls, ExtCtrls;
 
 type
@@ -32,13 +32,21 @@ constructor TfmGurnQueryGis.Create(Owner: TComponent);
 begin
   TypeEditObj := _TypeObj_QueryGis;
   inherited;
+  //------- !!! пока удаление недоступно !!! -----------
+  if not Role.SystemAdmin then begin
+    QuestDel:='';
+    VisibleItems([TBItemDelDok], false);
+  end;
+  VisibleItem(TBItemAddDok, true);
+  VisibleItems([TBItemDelayRegister, TBItemGrantSprav, TBSubSysFlt], false);
+//  QuestDel:='  Удалить запрос в ГИс РН ?  ';
+  //------------------------------------------------
 end;
 
 function TfmGurnQueryGis.LoadQuery: Boolean;
-var
-  c : TColumnEh;
 begin
   Result := inherited LoadQuery;
+  {
   try
     c := Grid.FieldColumns['DOKUMENT'];
     if c<>nil then begin
@@ -46,9 +54,8 @@ begin
     end;
   except
   end;
-
-  CreateSysFlt_GISUN;
-
+  }
+//  CreateSysFlt_GISUN;
 end;
 
 procedure TfmGurnQueryGis.GridGetCellParams(Sender: TObject;  Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);

@@ -730,6 +730,9 @@ begin
 
   edONA_Familia.EditButtons[0].Glyph := edON_Familia.EditButtons[0].Glyph;
   edFamiliaDo.EditButtons[0].Glyph   := edON_Familia.EditButtons[0].Glyph;
+  fmMain.ImageList.GetBitmap(IL_ROGD, btAktRogd.Glyph );
+  edONA_Familia.EditButtons[1].Glyph := btAktRogd.Glyph;
+
 
   {$IFDEF ZAGS}
     edFamiliaDO.EditButtons.Items[0].Visible:=false;
@@ -820,6 +823,11 @@ begin
   TBItemHistCorr.Visible:=FUpdatingObj;
 
   Globaltask.SetLastValueAsString('CUR_SVID', '1');  // печать даты свидетельсва DATESV
+
+  edON_DOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edONA_DOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;
+  edON_DOK_TYPE.DropDownBox.Width:=TYPEDOK_Width;  // utypes.pas
+  edONA_DOK_TYPE.DropDownBox.Width:=TYPEDOK_Width;
 
 end;
 {
@@ -2321,7 +2329,6 @@ begin
 //    s := DokumentFamiliaDo.AsString + ' ' + DokumentNameDo.AsString + ' ' + DokumentOtchDo.AsString;
     SetLength(arr,3);
     if SvidInPadeg(TypeObj) then begin  // свидетельство в падеже
-//      s := GetPadegFIO(s,'м','Р');
       cPol:=ANSILowerCase(DokumentPOL.AsString);
       arr[0]:=GetPadegFIO(DokumentFamiliaDo.AsString,cPol,'Р');
       s:=GetPadegIF(DokumentNameDo.AsString, DokumentOtchDo.AsString, cPol, 'Р');
@@ -2345,10 +2352,11 @@ begin
     end;
   end;
   if lNewMama then begin
-    s := DokumentONA_Familia.AsString + ' ' + DokumentONA_NAME.AsString + ' ' + DokumentONA_OTCH.AsString;
     if SvidInPadeg(TypeObj) then begin  // свидетельство в падеже
-      s := GetPadegFIO(s,'ж','Р');
+      s:=GetPadegFIO3(DokumentONA_Familia.AsString, DokumentONA_NAME.AsString, DokumentONA_OTCH.AsString,'ж','Р');
       if not LastSimIsLower(s) then s:=ANSIUpperCase(s);
+    end else begin
+      s:=DokumentONA_Familia.AsString + ' ' + DokumentONA_NAME.AsString + ' ' + DokumentONA_OTCH.AsString;
     end;
     StrToArr(s,arr,' ',false);
     if Length(arr)>3 then lErr := true;

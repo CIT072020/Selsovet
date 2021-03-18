@@ -287,7 +287,7 @@ type
     Label36: TLabel;
     Label37: TLabel;
     Label38: TLabel;
-    Label59: TLabel;
+    lbIzmen: TLabel;
     Label6: TLabel;
     edRukov: TDBEditEh;
     edSem: TDBComboBoxEh;
@@ -711,6 +711,18 @@ begin
     cbProvDvig.Visible := false;
     cbProvDvig.Checked := false;
   end;
+  if GlobalTask.ParamAsBoolean('MESTO_ZAH') then begin
+    edMestoZ.Visible:=true;
+    lbMestoZ.Visible:=true;
+    lbMestoZ.Top:=edMestoZ.Top+5;
+    edIzmen.Height:=edIzmen.Height-edMestoZ.Height-4;
+    edIzmen.Top:=edMestoZ.Top+edMestoZ.Height+5;
+    lbIzmen.Top:=edIzmen.Top;
+//  end else begin
+//    edMestoZ.Visible:=false;
+//    lbMestoZ.Visible:=false;
+  end;
+
   edFamilia.OnExit := OnDestroyHint;
   edName.OnExit    := OnDestroyHint;
   edOtch.OnExit    := OnDestroyHint;
@@ -1187,7 +1199,7 @@ var
   arr:TArrStrings;
 //  SOATO:TSOATO;
   lFullWrite:Boolean;   // полная запись актовой записи
-  sSeria,sNomer,sRukov,sRukovB,sSpec,sSpecB:String;
+  oldInd,sSeria,sNomer,sRukov,sRukovB,sSpec,sSpecB:String;
   dDate:TDateTime;
   {$IFNDEF ZAGS}
   nIdFirst,nIDLic : Integer;
@@ -1210,7 +1222,7 @@ begin
     DokumentSM_GOROD_B.AsString:='';
   end;
   }
-  WriteOtherData(Dokument, 'OTHER', 'RUKOV_D;SPEC_D;COVER_MESSAGE_ID;COVER_MESSAGE_TIME;REQUEST_IN;DECL_IN;PRICH_NOT_DOK;LICH_NOMER_GIS');
+  WriteOtherData(Dokument, 'OTHER', 'RUKOV_D;SPEC_D;COVER_MESSAGE_ID;COVER_MESSAGE_TIME;REQUEST_IN;DECL_IN;PRICH_NOT_DOK;LICH_NOMER_GIS;MESTO_Z');
   PostDataSet(Dokument);
 
   Result:=CheckDokument(0,false,true,true);
@@ -1409,20 +1421,32 @@ begin
 // см. выше
 //    dLastSost := dmBase.LastDateSost;
     if cbProvDvig.Visible and cbProvDvig.Checked then begin
+
       // если человека не выбирали, но получили из ГИС РН его ИН попробуем его найти
       if (DokumentLICH_NOMER.AsString<>'') and (DokumentMEN_ID.AsString='') and ((dLastSost = dmBase.GetDateCurrentSost) or (DokumentDATEZ.AsDateTime >= dLastSost)) then begin
-        if dmBase.tbMens.Locate('DATE_FIKS;LICH_NOMER', VarArrayOf([dmBase.GetDateCurrentSost,DokumentLICH_NOMER.AsString]), []) then begin
-          EditDataSet(Dokument);
-          DokumentMEN_ID.AsString:=dmBase.tbMens.FieldByName('ID').AsString;
-          PostDataSet(Dokument);
-          try
-            FMainTable.Edit;
-            FMainTable.FieldByName('LICH_NOMER').AsString:=DokumentLICH_NOMER.AsString;
-            FMainTable.Post;
-          except
+
+        oldInd:=dmBase.tbMens.IndexFieldNames;
+        dmBase.tbMens.IndexFieldNames:='DATE_FIKS;LICH_NOMER';
+        dmBase.tbMens.SetRange([dmBase.GetDateCurrentSost, DokumentLICH_NOMER.AsString],[dmBase.GetDateCurrentSost, DokumentLICH_NOMER.AsString]);
+        while not dmBase.tbMens.Eof do begin
+          if dmBase.tbMens.FieldByName('NEW_ID').AsInteger=0 then begin  // не копия
+            EditDataSet(Dokument);
+            DokumentMEN_ID.AsString:=dmBase.tbMens.FieldByName('ID').AsString;
+            PostDataSet(Dokument);
+            try
+              FMainTable.Edit;
+              FMainTable.FieldByName('MEN_ID').AsString:=DokumentMEN_ID.AsString;
+              FMainTable.FieldByName('LICH_NOMER').AsString:=DokumentLICH_NOMER.AsString;
+              FMainTable.Post;
+            except
+            end;
           end;
+          dmBase.tbMens.Next;
         end;
+        dmBase.tbMens.CancelRange;
+        dmBase.tbMens.IndexFieldNames:=oldInd;
       end;
+
       if (DokumentMEN_ID.AsString<>'') and ((dLastSost = dmBase.GetDateCurrentSost) or (DokumentDATEZ.AsDateTime >= dLastSost)) then begin
 // см. выше
 //        EditDataSet(Dokument);

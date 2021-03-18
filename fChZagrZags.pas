@@ -997,7 +997,7 @@ begin
         on E: Exception do begin
           Cancel;
           s:=sAddText+' ID='+IntToStr(nIDDesc)+' POKAZ='+tbSourceBaseProp.fieldByName('POKAZ').AsString;
-          GlobalTask.LogFile.WriteToLogFile(s);
+          GlobalTask.WriteToLogFile(s);
           PutError('Ошибка записи в базу свойств');
         end;
       end;
@@ -1112,7 +1112,7 @@ begin
             Cancel;
             s:=sAddText+' серия='+FListSvid[i].SVID_SERIA+
                ' номер='+FListSvid[i].SVID_NOMER+' дата='+datePropis(FListSvid[i].SVID_DATE,3);
-            GlobalTask.LogFile.WriteToLogFile(s);
+            GlobalTask.WriteToLogFile(s);
             PutError('Ошибка записи в базу повторных свидетельств');
           end;
         end;

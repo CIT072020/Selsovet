@@ -198,13 +198,17 @@ inherited fmGurnAktZ: TfmGurnAktZ
     end
   end
   inherited Grid: TSasaDBGrid
-    Top = 59
+    Top = 85
     Width = 1005
-    Height = 441
+    Height = 415
     OnGetCellParams = GridGetCellParams
   end
   inherited StBar: TStatusBar
     Top = 500
+    Width = 1005
+  end
+  inherited TBDock24: TTBDock
+    Top = 59
     Width = 1005
   end
   inherited Query: TAdsQuery

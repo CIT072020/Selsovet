@@ -14,11 +14,12 @@ uses
 
 type
   TfmPovtorSvid = class(TfmTableGurnal)
-    TBItemOpenAkt: TTBItem;
     pnFilter: TPanel;
     lbType: TLabel;
     edType: TDBComboBoxEh;
     ImageListGisun: TImageList;
+    TBItemOpenAkt: TTBItem;
+    TBItemOpenAkt24: TTBItem;
     procedure GridColumns4GetCellParams(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
     procedure FormCreate(Sender: TObject);
     procedure TBItemOpenAktClick(Sender: TObject);
@@ -30,6 +31,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    procedure PrepareMenu; override;
     procedure BeforeClearFilter; override;
     function BeforeChangeOrder : Boolean; override;
     procedure AfterChangeOrder; override;
@@ -105,22 +107,20 @@ var
   slPar:TStringList;
 begin
   if (Table.FieldByName('SVID_TYPE').AsInteger>0) and (Table.FieldByName('AKT_ID').AsInteger>0) then begin
-    slPar:=nil;
     ds:=dmBase.MainTableFromTypeObj(Table.FieldByName('SVID_TYPE').AsInteger);
-  //  !!! проверить (измененно 03.11.2017) !!!
-    if (ds<>nil) and (ds.FindField('VOSSTAN')<>nil) then begin
+    if (ds<>nil) then begin
       if ds.Locate('ID',Table.FieldByName('AKT_ID').AsInteger,[]) then begin
-        if ds.FieldByName('VOSSTAN').AsBoolean then begin
+        slPar:=nil;
+        if (ds.FindField('VOSSTAN')<>nil) and ds.FieldByName('VOSSTAN').AsBoolean then begin
           slPar:=TStringList.Create;
           slPar.Add('VOSSTAN=1');
         end;
+        fmMain.EditDokument(Table,Table.FieldByName('SVID_TYPE').AsInteger,'AKT_ID',slPar,false,'');
+        FreeAndNil(slPar);
       end;
     end;
-    fmMain.EditDokument(Table,Table.FieldByName('SVID_TYPE').AsInteger,'AKT_ID',slPar,false,'');
-    FreeAndNil(slPar);
   end;
 end;
-
 
 procedure TfmPovtorSvid.FormActivate(Sender: TObject);
 begin
@@ -139,15 +139,18 @@ begin
     FRunChange := true;
     try
       if (edType.Value<>null) and (edType.ItemIndex>-1) then begin
-        Table.Filtered:=false;
-        Table.SetRange([edType.KeyItems[edType.ItemIndex]],[edType.KeyItems[edType.ItemIndex]]);
-        TBItemClrFlt.Enabled:=true;
-      end else begin
-        TBItemClrFlt.Enabled:=false;
+        FClearFilterControl:=false;
         ClearFilter;
+        FClearFilterControl:=true;
+        Table.SetRange([edType.KeyItems[edType.ItemIndex]],[edType.KeyItems[edType.ItemIndex]]);
+        EnableItem(TBItemClrFlt, true);
+      end else begin
+        ClearFilter;
+        EnableItem(TBItemClrFlt, false);
       end;
+      SetCaptionGurnal(true,'');
     finally
-    FRunChange := false;
+      FRunChange := false;
     end;
   end;
 end;
@@ -161,8 +164,10 @@ end;
 
 procedure TfmPovtorSvid.BeforeClearFilter;
 begin
-  edType.Value:=null;
-  edType.ItemIndex:=-1;
+  if FClearFilterControl then begin
+    edType.Value:=null;
+    edType.ItemIndex:=-1;
+  end;
   Table.Scoped := false;
   Table.ScopeBegin:='';
   Table.ScopeEnd:='';
@@ -198,6 +203,12 @@ begin
     Params.ImageIndex:=Table.FieldByName('GISRN').AsInteger;
   end;
 {$ENDIF}
+end;
+
+procedure TfmPovtorSvid.PrepareMenu;
+begin
+  CheckTbItems;
+  pnFilter.Visible:=true;
 end;
 
 end.

@@ -36,7 +36,7 @@ object fmChPunktATE: TfmChPunktATE
     Height = 25
     Anchors = [akTop, akRight]
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
-    TabOrder = 6
+    TabOrder = 5
     OnClick = btOkClick
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
@@ -65,7 +65,7 @@ object fmChPunktATE: TfmChPunktATE
     Anchors = [akTop, akRight]
     Caption = #1054#1090#1082#1072#1079
     ModalResult = 2
-    TabOrder = 7
+    TabOrder = 6
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -85,25 +85,6 @@ object fmChPunktATE: TfmChPunktATE
       0000}
     NumGlyphs = 2
   end
-  object edObl: TDBLookupComboboxEh
-    Left = 88
-    Top = 164
-    Width = 41
-    Height = 26
-    EditButtons = <>
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -15
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    KeyField = 'KOD'
-    ListField = 'NAME'
-    ListSource = dsObl
-    ParentFont = False
-    TabOrder = 0
-    Visible = False
-    OnChange = edOblChange
-  end
   object edRn: TDBLookupComboboxEh
     Left = 15
     Top = 45
@@ -120,7 +101,7 @@ object fmChPunktATE: TfmChPunktATE
     ListField = 'FULL_NAME'
     ListSource = dsRn
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 1
     Visible = True
     OnChange = edRnChange
   end
@@ -140,7 +121,7 @@ object fmChPunktATE: TfmChPunktATE
     ListField = 'FULL_NAME'
     ListSource = dsSS
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 2
     Visible = True
     OnChange = edSSChange
   end
@@ -160,7 +141,7 @@ object fmChPunktATE: TfmChPunktATE
     ListField = 'FULL_NAME'
     ListSource = dsNP
     ParentFont = False
-    TabOrder = 4
+    TabOrder = 3
     Visible = True
     OnChange = edNPChange
   end
@@ -177,7 +158,7 @@ object fmChPunktATE: TfmChPunktATE
     Font.Style = []
     ItemHeight = 18
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 0
     OnChange = cbOblChange
     Items.Strings = (
       #1075#1086#1088#1086#1076' '#1052#1080#1085#1089#1082
@@ -193,7 +174,7 @@ object fmChPunktATE: TfmChPunktATE
     Top = 157
     Width = 76
     Height = 21
-    TabOrder = 5
+    TabOrder = 4
     Text = 'Edit1'
   end
   object queryRn: TAdsQuery
@@ -209,10 +190,6 @@ object fmChPunktATE: TfmChPunktATE
     Left = 264
     Top = 79
     ParamData = <>
-  end
-  object dsObl: TDataSource
-    Left = 160
-    Top = 12
   end
   object dsRn: TDataSource
     DataSet = queryRn

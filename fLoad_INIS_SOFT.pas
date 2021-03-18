@@ -141,7 +141,7 @@ begin
     dmBase.WorkQuery.Close;
     if n>0 then begin
       dmBase.AdsConnection.Execute('DELETE FROM AktOpek WHERE EXTERNAL_ID is not null and EXTERNAL_ID<>'''' ');
-      GlobalTask.LogFile.WriteToLogFile('Удаление из таблицы ОПЕКА ранее загруженных людей из программы ИНИС-СОФТ');
+      GlobalTask.WriteToLogFile('Удаление из таблицы ОПЕКА ранее загруженных людей из программы ИНИС-СОФТ');
       edDebug.Lines.Add('удалено: '+IntToStr(n));
     end;
   end;
@@ -154,7 +154,7 @@ begin
   FProp:=0;
   FLoad:=0;
   FCount:=0;
-  GlobalTask.LogFile.WriteToLogFile('Начало загрузки списка из программы ИНИС-СОФТ');
+  GlobalTask.WriteToLogFile('Начало загрузки списка из программы ИНИС-СОФТ');
 
   ex:=TOpeka2XML.Create;
   ex.NameExportFile:=edFile.Text;
@@ -171,7 +171,7 @@ begin
   lbZagr.Caption:='Загружкно '+IntToStr(FLoad);
   lbProp.Caption:='Пропущено '+IntToStr(FProp);
   Application.ProcessMessages;
-  GlobalTask.LogFile.WriteToLogFile('Окончание загрузки списка из программы ИНИС-СОФТ');
+  GlobalTask.WriteToLogFile('Окончание загрузки списка из программы ИНИС-СОФТ');
 end;
 
 //-----------------------------------------------------------

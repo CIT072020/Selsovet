@@ -639,7 +639,7 @@ end;
 //---------------------------------------------------
 procedure AktZAH_AfterCreate;
 var
-  ds : TDataSet;
+  ds,dsS : TDataSet;
   i : Integer;
   fld:TField;
 begin
@@ -667,8 +667,14 @@ begin
     ds.Fld('SVID_ZAGS').AsString := '';
     ds.Fld('DOKUMENT').AsString := '';
     ds.Fld('MOG_TYPE').AsString := '1';
-    ds.Fld('MOG_L').AsFloat := 2.3;
-    ds.Fld('MOG_W').AsFloat := 1.4;
+    dsS:=dbGetDataSet('dmBase.SprRazmer');
+    if dbLocate(dsS,'ID',[ds.Fld('MOG_TYPE').AsInteger],'') then begin
+      ds.Fld('MOG_L').AsFloat:=dsS.Fld('MOG_L').AsFloat;
+      ds.Fld('MOG_W').AsFloat:=dsS.Fld('MOG_W').AsFloat;
+    end else begin
+      ds.Fld('MOG_L').AsFloat := 2.3;
+      ds.Fld('MOG_W').AsFloat := 1.4;
+    end;
 //    ds.Fld('ZH_MOG').AsString := '1';
     
   end;

@@ -414,7 +414,7 @@ type
 
     function CheckSprOtnosh(strName:String):Integer;
     function GetOtnoshMen(nID:Integer):String;
-
+              
     function CheckRunMen(nTypeObj:Integer; nType:Integer; nID:Integer; var recID:TID; lSaveSost:Boolean=false): Boolean;
 
     function CheckSprAdmProc(sType:String):Boolean;
@@ -429,14 +429,14 @@ type
     function getDom( ds : TDataSet; lNameIsNotDom:Boolean ) : String;  overload;
     function getDom( strDom, strKorp, strKv, strNameHouse : String; lNotDom:Boolean) : String; overload;
 
+//    function GetDateDelo(nType:Integer; nDelo:Integer; var dBegin:TDateTime; var dEnd:TDateTime; var sText:String):Integer;
 
     function  CreateSeekAdres(DateFiks: TDateTime; nPunkt:Integer; strUL: String; strDom:String; strKorp:String; strKv: String):String;
     function FindAdres(DateFiks : TDateTime; nPunkt, nUL : Integer; strDom, strKorp, strKv : String; nID : Integer=-1) : Boolean;
     function TipBigHouseFromAdres(DateFiks: TDateTime; nPunkt, nUL: Integer; strDom, strKorp, strKv: String; var ID:Integer): Integer;
     function GetFindAdresID:Integer;
     // вернуть свойство дома из базы свойств
-    function InitHouseProp(DateFiks : TDateTime; nPunkt, nUL : Variant; strDom, strKorp : String;
-             nID : Integer=-1) : Boolean;
+    function InitHouseProp(DateFiks : TDateTime; nPunkt, nUL : Variant; strDom, strKorp : String; nID : Integer=-1) : Boolean;
     function GetHouseProp(strProp : String; strType : String) : Variant;
 
     function AdresForSeek(ds : TDataSet)  : TAdres;
@@ -456,6 +456,7 @@ type
 
     procedure ClearIdBase;
     function GetIdBase(var nCountZnak:Integer) : Integer;
+    function GetSysIdBase: String;
     function IsMainBase:Boolean;
     function IsDistributeBase: Boolean;  // база распределенная ?
 
@@ -4837,7 +4838,7 @@ end;
 procedure TdmBase.WriteLogDeleteDok(ds: TDataSet; nTypeObj:Integer);
 begin
   if (ds.FindField('NOMER')<>nil) and (ds.FindField('DATEZ')<>nil) then
-    GlobalTask.LogFile.WriteToLogFile(FormatDateTime('dd.mm.yyyy hh:mm ',dmBase.getCurDate)+'Удаление з/а '+GlobalTask.CurrentOpisEdit.GetListOpisA('KEY_TYPEZAGS_FULL').Naim(nTypeObj,false)+
+    GlobalTask.WriteToLogFile(FormatDateTime('dd.mm.yyyy hh:mm ',dmBase.getCurDate)+'Удаление з/а '+GlobalTask.CurrentOpisEdit.GetListOpisA('KEY_TYPEZAGS_FULL').Naim(nTypeObj,false)+
         ' №'+ds.FieldByName('NOMER').AsString+' от '+FormatDateTime('dd.mm.yyyy',ds.FieldByName('DATEZ').AsDateTime));
 end;
 
@@ -5224,7 +5225,7 @@ begin
     tbDelObj.Post;
     DeleteUpdating(nTypeObj, strID);
   except
-    GlobalTask.LogFile.WriteToLogFile('Ошибка записи информации об удалении ('+IntToStr(nTypeObj)+','+strID+')  '+strKomm);
+    GlobalTask.WriteToLogFile('Ошибка записи информации об удалении ('+IntToStr(nTypeObj)+','+strID+')  '+strKomm);
   end;
 end;
 //---------------------------------------------------------------
@@ -5250,7 +5251,7 @@ begin
 //       Format('%s,%d,%s,CURRENT_TIMESTAMP(0),''%s'',%s,%d,''%s'')',[strID,nTypeObj, IIFS(lNewObj,'true','false'),UserID,
 //                                                              IIFS(lBeforeGrn,'true','false'),nValueGrn,strKomm]));
   except
-    GlobalTask.LogFile.WriteToLogFile('Ошибка записи информации о корректировке ('+IntToStr(nTypeObj)+','+InttoStr(nID)+')  '+strKomm);
+    GlobalTask.WriteToLogFile('Ошибка записи информации о корректировке ('+IntToStr(nTypeObj)+','+InttoStr(nID)+')  '+strKomm);
   end;
 end;
 //---------------------------------------------------------------
@@ -5336,8 +5337,8 @@ begin
     WorkQuery.Active := false;
     {$IFNDEF DEBUG}
     if lCreateCur
-      then GlobalTask.LogFile.WriteToLogFile('Создание текущего состояния базы из состояния на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года')
-      else GlobalTask.LogFile.WriteToLogFile('Создание состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года');
+      then GlobalTask.WriteToLogFile('Создание текущего состояния базы из состояния на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года')
+      else GlobalTask.WriteToLogFile('Создание состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года');
     if lCreateCur
       then OpenMessage( 'Создание текущего состояния базы из состояния на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года', '')
       else OpenMessage( 'Создание состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года', '');
@@ -5502,7 +5503,7 @@ begin
         Application.ProcessMessages;
         //---------------------------------------------------------------------------------
       end;
-      GlobalTask.LogFile.WriteToLogFile('Создание успешно завершено.');
+      GlobalTask.WriteToLogFile('Создание успешно завершено.');
     finally
       {$IFNDEF DEBUG}
       CloseMessage;
@@ -5539,7 +5540,7 @@ begin
   end;
   WorkQuery.Active := false;
   if lOk then begin
-    GlobalTask.LogFile.WriteToLogFile('Удаление состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года');
+    GlobalTask.WriteToLogFile('Удаление состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года');
     OpenMessage( 'Удаление состояния базы на 1 января '+Copy(DTOS(DateFiks,tdAds),1,4)+' года', '');
     try
       WorkQuery.Active := false;
@@ -5582,7 +5583,7 @@ begin
       end;
       //-------------------------------------------------------------------------
       if Result then
-        GlobalTask.LogFile.WriteToLogFile('Удаление успешно завершено.');
+        GlobalTask.WriteToLogFile('Удаление успешно завершено.');
     finally
       CloseMessage;
     end;
@@ -6619,7 +6620,7 @@ begin
       if FileExists(strDir+'version') then begin
         if MemoRead(strDir+'version', strMainVersion) then begin
           if strMainVersion<>'' then begin
-            strVersion := GetVersionProgram;
+            strVersion := GetVersionProgram(5);
             try
               nVersion     := StrToInt(StringReplace(strVersion,'.','',[rfReplaceAll]));
               nMainVersion := StrToInt(StringReplace(strMainVersion,'.','',[rfReplaceAll]));
@@ -10196,7 +10197,26 @@ end;
 procedure TdmBase.LoadHouseOwners(ID : Integer; d : TDateTime; tb,tbHist: TkbmMemTable);
 begin
 end;
-
+//----------------------------------------------------------------
+function TdmBase.GetSysIdBase: String;
+begin
+  Result:='';
+  if AdsConnection.IsConnected then begin
+    WorkQuery.Close;
+    WorkQuery.SQL.Text:='SELECT sysid FROM global';
+    try
+      WorkQuery.Open;
+      Result:=Trim(WorkQuery.Fields[0].AsString);
+      WorkQuery.Close;
+      if Result='' then begin
+//        AdsConnection.Execute('UPDATE global set sysid=Replace(NewIDString(),''-'','''')');
+        AdsConnection.Execute('UPDATE global set sysid=NewIDString()');
+        Result:=GetSysIdBase;
+      end;
+    except
+    end;
+  end;
+end;
 //---------------------------------------------------------
 procedure TdmBase.SaveHouseOwners(ID : Integer; d : TDateTime; tb,tbHist: TkbmMemTable);
 begin
@@ -12262,7 +12282,49 @@ procedure TdmBase.Event_CheckStringFilter(var sFilter:String);   // контроль зна
 begin
   sFilter:=CheckTypeShablon(sFilter);   // fShablon.pas
 end;
-
+{
+//--------------------------------------------------------------
+function TdmBase.GetDateDelo(nType:Integer; nDelo:Integer; var dBegin:TDateTime; var dEnd:TDateTime; var sText:String):Integer;
+var
+  fldBegin, fldEnd:TField;
+  sB:String;
+begin
+  Result:=0;
+  dBegin:=0;
+  dEnd:=0;
+  with SprDocFileList do begin
+    sB:=Bookmark;
+    fldBegin:=FieldByName('DATE_BEGIN');
+    fldEnd:=FieldByName('DATE_END');
+    while nDelo>0 do begin
+      if Locate('ID', nDelo, []) then begin
+        nDelo:=FieldByName('PARENT_ID').AsInteger;
+        if not fldBegin.IsNull and ((dBegin=0) or (fldBegin.AsDateTime>dBegin))
+          then dBegin:=fldBegin.AsDateTime;
+        if not fldEnd.IsNull and ((dEnd=0) or (fldEnd.AsDateTime<dEnd))
+          then dEnd:=fldEnd.AsDateTime;
+      end else begin
+        nDelo:=0;
+      end;
+      Bookmark:=sB;
+    end;
+  end;
+  if dBegin>0 then Inc(Result,1);
+  if dEnd>0   then Inc(Result,1);
+  sText:='';
+  if (nType>0) and (Result>0) then begin
+    if nType=1 then begin
+      if (dEnd>0) then begin
+//        if dBegin=0
+//          then sText:=' (по'
+//          else sText:=' (с '+DatePropis(dBegin,3)+' по';
+//        sText:=sText+' '+DatePropis(dEnd,3)+')';
+        sText:=' ('+DatePropis(dEnd,3)+')';
+      end;
+    end;
+  end;
+end;
+}
 end.
 
 

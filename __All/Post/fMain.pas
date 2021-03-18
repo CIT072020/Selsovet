@@ -33,7 +33,8 @@ uses
   adscnnct, uPSComponent, Animate, GIFCtrl, ComCtrls, fs_ichartrtti, mVerInfo,
   fs_idbrtti, fs_iclassesrtti, ZipForge, IdFTP, IdAntiFreezeBase,
   ftpSend,blcksock,pingsend,
-  IdAntiFreeze, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,IdHTTP;
+  IdAntiFreeze, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,IdHTTP,
+  cxGraphics;
 
 type
   TFormGurnal = class of TfmGurnal;
@@ -375,6 +376,9 @@ type
     TBSeparatorVedArx: TTBSeparatorItem;
     TBItemNomekToVedomArx: TTBItem;
     TBItemDeloToVedomArx: TTBItem;
+    ImageList24: TcxImageList;
+    acDeloToVedomArx: TAction;
+    acNomenToVedomArx: TAction;
     procedure acSetParametersExecute(Sender: TObject);
     procedure acAdminParametersExecute(Sender: TObject);
 
@@ -510,8 +514,8 @@ type
     procedure imgNewPostClick(Sender: TObject);
     procedure TimerNewPostTimer(Sender: TObject);
     procedure TBItemNew2Click(Sender: TObject);
-    procedure TBItemNomekToVedomArxClick(Sender: TObject);
-    procedure TBItemDeloToVedomArxClick(Sender: TObject);
+    procedure acDeloToVedomArxExecute(Sender: TObject);
+    procedure acNomenToVedomArxExecute(Sender: TObject);
   private
     { Private declarations }
     FYearFiks: Integer;
@@ -577,7 +581,7 @@ type
     procedure UpdateParamsEvent( Meta : TMetaTask; const strName : String);
 
     procedure BeforeSaveParamsEvent( Meta : TMetaTask; var lOk : boolean);
-//    procedure AfterSaveParamsEvent( Meta : TMetaTask; const strName : String);
+    procedure AfterSaveParamsEvent( Meta : TMetaTask; const strName : String);
     procedure CheckFormLichSchet;
     procedure CheckFormMen;
     function IsGorSovet : Boolean;
@@ -718,6 +722,7 @@ begin
     GlobalTask.SetEditEventParameter('KOD', EditSOATO_SS, SOATO_GetText,nil);
     GlobalTask.SetEditEventParameter('VXOD_NOMER', Event_EditFormNomer, nil, nil);
     GlobalTask.SetEditEventParameter('ISXOD_NOMER', Event_EditFormNomer, nil, nil);
+    GlobalTask.SetEditEventParameter('ADMIN_NOMER', Event_EditFormNomer, nil, nil);
     GlobalTask.EditParameters;
   end else begin
     GlobalTask.ViewParameters;
@@ -789,6 +794,13 @@ begin
   {$ENDIF}
 end;
 
+//-------------------- после сохранения параметров --------------------------
+procedure TfmMain.AfterSaveParamsEvent(Meta: TMetaTask; const strName: String);
+begin
+  TemplateInterface.OutputDir:=GetFolderMyDocument+'\';
+  SetRole;
+end;
+
 //-------------------------------------------------
 procedure TfmMain.BeforeSaveParamsEvent( Meta : TMetaTask; var lOk : boolean);
 var
@@ -816,25 +828,6 @@ begin
   Meta.WriteParamAsString('ID', strID);
   Meta.WriteParamAsString('NAME', Meta.ParamAsString('NAME_TERR') );
 //    Meta.WriteParamAsString('NAME_TERR', dmBase.SprSoato.FieldByName('NAME').AsString);
-  lOk := true;
-
-//  end;
-  if lOk then begin
-    MemoWrite(NameFromExe('current_organ'),strSOATO);
-    with  dmBase.SprNames do begin
-     FieldByName('SOATO').AsString   := strSOATO;
-     FieldByName('ID').AsString      := strID;
-     FieldByName('SHTAMP').AsString  := Meta.ParamAsString('SHTAMP_ZAGS');
-     FieldByName('NAME').AsString    := Meta.ParamAsString('NAME');
-     FieldByName('NAME_B').AsString  := Meta.ParamAsString('NAME_B');
-     FieldByName('KNAME').AsString   := Meta.ParamAsString('KNAME');
-     FieldByName('KNAME_B').AsString := Meta.ParamAsString('KNAME_B');
-    end;
-    dmBase.SprNames.Post;
-  end else begin
-//    PutError('Не найден код СОАТО '+'"'+Meta.ParamAsString('KOD')+'"');
-  end;
-  SetRole;
 end;
 
 procedure TfmMain.acAdminParametersExecute(Sender: TObject);
@@ -909,13 +902,7 @@ begin
   LoadFromIni;
   TBToolWindowS.DockPos:=2000;
   CreateNotifyProg('');
-
-  //------ ведомственный архив --
-  TBSeparatorVedArx.Visible:=VEDOM_ARXIV;       // uTypes.pas
-  TBItemNomekToVedomArx.Visible:=VEDOM_ARXIV;
-  TBItemDeloToVedomArx.Visible:=VEDOM_ARXIV;
-  //-----------------------------
-
+                            
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
@@ -935,14 +922,17 @@ begin
  FreeAndNil(frxHTMLExport);
  FreeAndNil(frxRTFExport);
  {$ENDIF}
+{
  if GlobalTask.ParamAsBoolean('VIGR_ACTIONS') then begin
    ActionList2RTF(ActionList,GlobalTask.PathService+'act_list.rtf');
    ImageList2RTF(ImageList,GlobalTask.PathService+'img_list.rtf');
  end;
- 
+} 
  FreeNotifyProg;
 
- GlobalTask.LogFile.WriteToLogFile('Завершен сеанс пользователя.');
+ ClearDir(ExtractFilePath(Application.ExeName)+NameTmpDir(2),true);
+
+ GlobalTask.WriteToLogFile('Завершен сеанс пользователя.');
  FEventsWordReports.Free;
  FEventsBlankReports.Free;
  FEventsBlankZAGSReports.Free;
@@ -1878,7 +1868,9 @@ begin
 end;
 
 procedure TfmMain.acSprDolgExecute(Sender: TObject);
-begin Globaltask.EditSpr('EDIT_SPRDOLG', nil); end;
+begin
+Globaltask.EditSpr('EDIT_SPRDOLG', nil);
+end;
 
 procedure TfmMain.acStrTypePensExecute(Sender: TObject);
 begin Globaltask.EditSpr('EDIT_SPRTYPEPENS', nil); end;
@@ -2312,6 +2304,7 @@ begin
         Gurnal.DateFiks := fmMain.DateFiks;
         if Gurnal.LoadQuery then begin
           Gurnal.LoadFromIni;
+          Gurnal.PrepareMenu;
           Globaltask.CurrentOpisEdit.SetKeyForm(Gurnal,nil);
           ListGurnal.AddObject(strName, Gurnal);
         end else begin
@@ -2427,6 +2420,13 @@ begin
 
   if SMDO<>nil
     then SMDO.CheckEnabledPost;
+
+  //------ ведомственный архив --
+  l:=( (Role.Status=rsAdmin) or (Role.CheckSubSystem(SS_OBRACH)=ptFull) ) and GlobalTask.ParamAsBoolean('VEDOM_ARX');
+  acDeloToVedomArx.Visible:=l;
+  acNomenToVedomArx.Visible:=l;
+  TBSeparatorVedArx.Visible:=l;
+  //-----------------------------
 
 {
   if not EnableWrite(Self) then begin
@@ -2882,7 +2882,7 @@ begin
       end;
     end;
   end;
-  GlobalTask.LogFile.WriteToLogFile(s+E.Message);
+  GlobalTask.WriteToLogFile(s+E.Message);
   if (E is EADSDatabaseError) then begin
     if (EADSDatabaseError(E).ACEErrorCode=7057) and (EADSDatabaseError(E).TableName<>'') then begin
       s := 'Таблица: '+EADSDatabaseError(E).TableName+' ';
@@ -4664,20 +4664,22 @@ begin
 end;
 
 //--- Ведомственный архив -------------------------------------------------------
-procedure TfmMain.TBItemNomekToVedomArxClick(Sender: TObject);
+procedure TfmMain.acDeloToVedomArxExecute(Sender: TObject);
+begin
+  DeloToVedomArx;
+end;
+
+procedure TfmMain.acNomenToVedomArxExecute(Sender: TObject);
 begin
   NomekToVedomArx;
 end;
 //---------------------
-procedure TfmMain.TBItemDeloToVedomArxClick(Sender: TObject);
-begin
-  DeloToVedomArx;
-end;
-//---------------------
+{
 procedure TfmMain.TBItemLoadSysSprClick(Sender: TObject);
 begin
   RunLoadSysSpr(pn);
 end;
+}
 
 initialization
   ListGurnal := TStringList.Create;

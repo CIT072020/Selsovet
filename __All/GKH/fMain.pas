@@ -26,7 +26,7 @@ uses
  {$IFDEF USE_FR3} MainLibFR3, frxAdsComponents, modify_components, {frx2xto30, }
   frxClass, frxDCtrl, frxDesgn, frxExportRTF, frxExportHTML, frxDBSet,
   frxExportMail, frxExportImage, frxExportXML, frxExportPDF, frxRich, frxChart, {$ENDIF}
-  adscnnct, uPSComponent;
+  adscnnct, uPSComponent, cxGraphics;
 
 type
   TFormGurnal = class of TfmGurnal;
@@ -450,6 +450,7 @@ type
     acSprDocSubjG: TAction;
     TBItem34: TTBItem;
     TBItemDefaultIni: TTBItem;
+    ImageList24: TcxImageList;
     procedure acSetParametersExecute(Sender: TObject);
     procedure acAdminParametersExecute(Sender: TObject);
 
@@ -1104,8 +1105,8 @@ begin
 //   ActionList2RTF(ActionList,GlobalTask.PathService+'act_list.rtf');
 //   ImageList2RTF(ImageList,GlobalTask.PathService+'img_list.rtf');
 // end;
- ClearDir(ExtractFilePath(Application.ExeName)+'$TEMP$',true);
- GlobalTask.LogFile.WriteToLogFile('Завершен сеанс пользователя.');
+ ClearDir(ExtractFilePath(Application.ExeName)+NameTmpDir(2),true);
+ GlobalTask.WriteToLogFile('Завершен сеанс пользователя.');
  FEventsWordReports.Free;
  FEventsBlankReports.Free;
  FEventsBlankZAGSReports.Free;
@@ -2609,6 +2610,7 @@ begin
         Gurnal.DateFiks := fmMain.DateFiks;
         if Gurnal.LoadQuery then begin
           Gurnal.LoadFromIni;
+          Gurnal.PrepareMenu;
           Globaltask.CurrentOpisEdit.SetKeyForm(Gurnal,nil);
           ListGurnal.AddObject(strName, Gurnal);
         end else begin
@@ -3352,7 +3354,7 @@ begin
       end;
     end;
   end;
-  GlobalTask.LogFile.WriteToLogFile(s+E.Message);
+  GlobalTask.WriteToLogFile(s+E.Message);
   if (E is EADSDatabaseError) then begin
     if (EADSDatabaseError(E).ACEErrorCode=7057) and (EADSDatabaseError(E).TableName<>'') then begin
       s := 'Таблица: '+EADSDatabaseError(E).TableName+' ';

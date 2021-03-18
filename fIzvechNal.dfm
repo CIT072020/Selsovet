@@ -87,14 +87,14 @@ object fmIzvechNal: TfmIzvechNal
   end
   object Label9: TLabel
     Left = 16
-    Top = 61
+    Top = 63
     Width = 31
     Height = 13
     Caption = #1059#1083#1080#1094#1072
   end
   object Label10: TLabel
     Left = 280
-    Top = 61
+    Top = 63
     Width = 20
     Height = 13
     Caption = #1044#1086#1084
@@ -114,7 +114,7 @@ object fmIzvechNal: TfmIzvechNal
   end
   object Label12: TLabel
     Left = 400
-    Top = 61
+    Top = 63
     Width = 17
     Height = 13
     Caption = #1050#1074'.'
@@ -621,7 +621,7 @@ object fmIzvechNal: TfmIzvechNal
   object edKv: TDBEditEh
     Left = 425
     Top = 58
-    Width = 41
+    Width = 49
     Height = 22
     DataField = 'ADRES_KV'
     DataSource = DataSource

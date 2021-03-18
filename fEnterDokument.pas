@@ -41,7 +41,7 @@ var
 
 implementation
 
-uses MetaTask, fShablon;
+uses MetaTask, fShablon, uTypes;
 
 {$R *.dfm}
 
@@ -50,6 +50,8 @@ begin
   if not tb.Active then tb.Active:=true;
   tb.Append;
   tb.Post;
+  edDOK_TYPE.DropDownBox.Rows:=TYPEDOK_ROWS;  // utypes.pas
+  edDOK_TYPE.DropDownBox.Width:=TYPEDOK_Width;  // utypes.pas
   GlobalTask.CurrentOpisEdit.SetKeyForm(Self,nil);
 end;
 

@@ -1,20 +1,19 @@
 inherited fmAlfavitZAGS: TfmAlfavitZAGS
-  Left = 582
-  Top = 214
+  Left = 466
+  Top = 202
   Caption = #1040#1083#1092#1072#1074#1080#1090#1085#1072#1103' '#1082#1085#1080#1075#1072' '#1079#1072#1075#1089
   ClientWidth = 849
   OldCreateOrder = True
   OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
-  inherited TBDock1: TTBDock
+  inherited TBDock: TTBDock
     Width = 849
-    Height = 28
     inherited TBToolbar1: TTBToolbar
       BorderStyle = bsNone
       object TBItemEdit: TTBItem [2]
         Caption = #1055#1088#1086#1089#1084#1086#1090#1088
-        Hint = #1055#1088#1086#1089#1084#1086#1090#1088' '#1080' '#1082#1086#1088#1088#1077#1082#1090#1080#1088#1086#1074#1082#1072' '#1072#1082#1090#1086#1074#1086#1081' '#1079#1072#1087#1080#1089#1080
+        Hint = #1055#1088#1086#1089#1084#1086#1090#1088' '#1080' '#1082#1086#1088#1088#1077#1082#1090#1080#1088#1086#1074#1082#1072' '#1079#1072#1087#1080#1089#1080' '#1072#1082#1090#1072
         ImageIndex = 33
         OnClick = TBItemEditClick
       end
@@ -46,26 +45,20 @@ inherited fmAlfavitZAGS: TfmAlfavitZAGS
       end
     end
     inherited TBToolbarMove: TTBToolbar
-      inherited DBNavigator: TDBNavigator
-        Top = 1
-        BeforeAction = DBNavigatorBeforeAction
+      inherited DBNavigator1: TDBNavigator
+        Hints.Strings = ()
+        BeforeAction = DBNavigator1BeforeAction
       end
     end
     inherited TBToolbar2: TTBToolbar
-      Left = 413
+      Left = 431
       BorderStyle = bsNone
-      inherited cbOrderBy: TComboBox
-        Height = 24
-        Font.Height = -13
-        ItemHeight = 16
-        ParentFont = False
-      end
     end
   end
   inherited Grid: TSasaDBGrid
-    Top = 67
+    Top = 101
     Width = 849
-    Height = 338
+    Height = 304
     Flat = True
     Font.Charset = RUSSIAN_CHARSET
     OnGetCellParams = GridGetCellParams
@@ -158,7 +151,7 @@ inherited fmAlfavitZAGS: TfmAlfavitZAGS
   end
   object pnFilter: TPanel [2]
     Left = 0
-    Top = 28
+    Top = 62
     Width = 849
     Height = 39
     Align = alTop
@@ -246,6 +239,49 @@ inherited fmAlfavitZAGS: TfmAlfavitZAGS
       TabOrder = 1
       Visible = True
       OnChange = edTypeChange
+    end
+  end
+  inherited TBDock24: TTBDock
+    Width = 849
+    inherited DBNavigator24: TDBNavigator
+      Hints.Strings = (
+        '')
+      BeforeAction = DBNavigator1BeforeAction
+    end
+    inherited TBToolbarMenu24: TTBToolbar
+      object TBItemEdit24: TTBItem [2]
+        Caption = #1055#1088#1086#1089#1084#1086#1090#1088
+        ImageIndex = 86
+        OnClick = TBItemEditClick
+      end
+      object TBItemParams24: TTBItem [4]
+        Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099
+        ImageIndex = 24
+        OnClick = TBItemParamsClick
+      end
+      object TBItemLoad24: TTBItem [5]
+        Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100
+        ImageIndex = 81
+        OnClick = TBItemLoadClick
+      end
+      inherited TBSubmenuSysFilter24: TTBSubmenuItem
+        Visible = True
+        object TBItemDateError24: TTBItem
+          Caption = #1054#1096#1080#1073#1086#1095#1085#1099#1077' '#1076#1072#1090#1099
+          OnClick = TBItemDateErrorClick
+        end
+      end
+      inherited TBSubmenuRun24: TTBSubmenuItem
+        object TBItemDeleteGrup24: TTBItem
+          Caption = #1043#1088#1091#1087#1087#1086#1074#1086#1077' '#1091#1076#1072#1083#1077#1085#1080#1077
+          OnClick = TBItemDeleteGrupClick
+        end
+      end
+    end
+    inherited TBToolbarMenu24_2: TTBToolbar
+      Left = 559
+      ParentShowHint = False
+      ShowHint = True
     end
   end
   inherited DataSource: TDataSource

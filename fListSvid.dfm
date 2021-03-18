@@ -6,7 +6,7 @@ inherited fmListSvid: TfmListSvid
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
-  inherited TBDock1: TTBDock
+  inherited TBDock: TTBDock
     Width = 870
     inherited TBToolbar1: TTBToolbar
       BorderStyle = bsNone
@@ -75,21 +75,21 @@ inherited fmListSvid: TfmListSvid
       end
     end
     inherited TBToolbarMove: TTBToolbar
-      inherited DBNavigator: TDBNavigator
+      inherited DBNavigator1: TDBNavigator
         Hints.Strings = ()
       end
     end
     inherited TBToolbar2: TTBToolbar
-      Left = 470
+      Left = 488
       inherited cbOrderBy: TComboBox
         Width = 298
       end
     end
   end
   inherited Grid: TSasaDBGrid
-    Top = 63
+    Top = 90
     Width = 870
-    Height = 342
+    Height = 315
     Flat = True
     TitleFont.Height = -13
     OnDblClick = TBItemOpenAktClick
@@ -208,12 +208,13 @@ inherited fmListSvid: TfmListSvid
   end
   object pnFilter: TPanel [2]
     Left = 0
-    Top = 26
+    Top = 54
     Width = 870
-    Height = 37
+    Height = 36
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 2
+    Visible = False
     object lbType: TLabel
       Left = 11
       Top = 10
@@ -254,6 +255,68 @@ inherited fmListSvid: TfmListSvid
       TabOrder = 0
       Visible = True
       OnChange = edTypeChange
+    end
+    object Button1: TButton
+      Left = 488
+      Top = 9
+      Width = 137
+      Height = 21
+      Caption = #1076#1072#1090#1072' '#1087#1088#1080#1093#1086#1076#1072#13#10'12.01.2000-31.12.2020'
+      TabOrder = 1
+      Visible = False
+    end
+  end
+  inherited TBDock24: TTBDock
+    Width = 870
+    inherited DBNavigator24: TDBNavigator
+      Hints.Strings = ()
+    end
+    inherited TBToolbarMenu24: TTBToolbar
+      object TBItemOpenAkt24: TTBItem [0]
+        Caption = #1054#1090#1082#1088#1099#1090#1100
+        ImageIndex = 86
+        OnClick = TBItemOpenAktClick
+      end
+      inherited TBItemDel24: TTBItem [1]
+      end
+      object TBItemPrixodSvid24: TTBItem [2]
+        Caption = #1055#1088#1080#1093#1086#1076' '#1089#1074#1080#1076#1077#1090#1077#1083#1100#1089#1090#1074
+        ImageIndex = 82
+        OnClick = TBItemPrixodSvidClick
+      end
+      object TBItemToSS24: TTBItem [3]
+        Caption = #1042#1099#1076#1072#1090#1100' '#1074' '#1089'/'#1089
+        ImageIndex = 103
+        OnClick = TBItemToSSClick
+      end
+      object TBItemDeleteSvid24: TTBItem [4]
+        Caption = #1059#1076#1072#1083#1077#1085#1080#1077' '#1089#1074#1080#1076#1077#1090#1077#1083#1100#1089#1090#1074
+        ImageIndex = 83
+        OnClick = TBItemDeleteSvidClick
+      end
+      object TBItemPerexod24: TTBItem [5]
+        Caption = #1055#1077#1088#1077#1093#1086#1076
+        ImageIndex = 96
+        OnClick = TBItemPerexodClick
+      end
+      object TBItemClearStr24: TTBItem [6]
+        Caption = #1054#1095#1080#1089#1090#1080#1090#1100
+        ImageIndex = 80
+        OnClick = TBItemClearStrClick
+      end
+      object TBSubmenuNakl24: TTBSubmenuItem [7]
+        Caption = #1055#1088#1080#1093#1086#1076#1085#1086'-'#1088#1072#1089#1093#1086#1076#1085#1072#1103' '#1085#1072#1082#1083#1072#1076#1085#1072#1103
+        DropdownCombo = True
+        ImageIndex = 19
+        OnClick = TBSubmenuNaklClick
+      end
+      inherited TBItemPreview24: TTBItem [8]
+      end
+      inherited TBItemPrint24: TTBItem [9]
+      end
+    end
+    inherited TBToolbarMenu24_2: TTBToolbar
+      Left = 525
     end
   end
   inherited DataSource: TDataSource

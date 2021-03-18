@@ -1,6 +1,6 @@
 inherited fmGurnAlfKn: TfmGurnAlfKn
-  Left = 24
-  Top = 122
+  Left = 457
+  Top = 124
   Width = 934
   Height = 471
   ActiveControl = Grid
@@ -134,7 +134,7 @@ inherited fmGurnAlfKn: TfmGurnAlfKn
   end
   inherited Grid: TSasaDBGrid
     Width = 918
-    Height = 383
+    Height = 357
     OnGetCellParams = GridGetCellParams
     OnKeyDown = GridKeyDown
     NewRowColor = clGreen
@@ -142,6 +142,9 @@ inherited fmGurnAlfKn: TfmGurnAlfKn
   end
   inherited StBar: TStatusBar
     Top = 409
+    Width = 918
+  end
+  inherited TBDock24: TTBDock
     Width = 918
   end
   inherited Query: TAdsQuery

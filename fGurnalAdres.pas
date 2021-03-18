@@ -7,7 +7,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   fGurnal, Db, adsdata, adsfunc, adstable, Grids, DBGridEh, SasaDBGrid, uProject, uProjectAll,
-  TB2Item, TB2Dock, TB2Toolbar, StdCtrls, vchDBCtrls, TB2ToolWindow, MetaTask, mPermit, uTypes,
+  TB2Item, TB2Dock, TB2Toolbar, StdCtrls, vchDBCtrls, TB2ToolWindow, MetaTask, mPermit, uTypes, dbFunc,
   dBase, ImgList, Mask, DBCtrlsEh, DBLookupEh, Buttons, PrnDbgeh, funcPr, sasaIniFile, QStrings,
   Menus, fmChList, fSeekSobstv,Variants, ComCtrls, ExtCtrls;
 
@@ -15,7 +15,7 @@ type
   TfmGurnalAdres = class(TfmGurnal)
     HImageList: TImageList;
     TBToolWindow2: TTBToolWindow;
-    edPunkt: TDBLookupComboboxEh;
+    edPunkt2: TDBLookupComboboxEh;
     dsPunkt: TDataSource;
     edUL: TDBLookupComboboxEh;
     dsUL: TDataSource;
@@ -35,8 +35,9 @@ type
     QueryN: TAdsQuery;
     cbFind: TComboBox;
     TBItemMen: TTBItem;
+    edPunkt: TDBComboBoxEh;
     procedure DBTextGetText(Sender: TObject; var Text: String);
-    procedure edPunktChange(Sender: TObject);
+    procedure edPunkt2Change(Sender: TObject);
     procedure edULChange(Sender: TObject);
     procedure edPunktEditButtons0Click(Sender: TObject;    var Handled: Boolean);
     procedure edULEditButtons1Click(Sender: TObject; var Handled: Boolean);
@@ -57,23 +58,36 @@ type
     procedure TBSubmenuPunktsClick(Sender: TObject);
     procedure TBItemClearPunktsClick(Sender: TObject);
     procedure TBItemMenClick(Sender: TObject);
+    procedure edPunktChange(Sender: TObject);
   private
     { Private declarations }
     FSQLPunkt : String;
     FSQLAll   : String;
     FStrID    : String;
     procedure SetFilter;
+    procedure CreateParAddMen;
   public
-    CurSeek : TRecordSeekSobstv;
-    FParOwners : TStringList;
-    FTypeCountMens    : String;
-    FVisibleCountMensNotRegistred : Boolean;
+    FParAdd:String;
+    FAddOtnosh : Boolean;
+    FAddDateR : Boolean;
+    FAddDateP : Boolean;
+    FAddIN : Boolean;
+    FAddLgot : Boolean;
+    FAddPrizn: Boolean;
+    FAddPasp : Boolean;
+    FAddWork : Boolean;
+    FAddCurMen : Boolean;
+    FAddAllMens : Boolean;
+    FTypeCountMens : String;
     FVisibleCountMens : Boolean;
     FVisibleListMens  : Boolean;
-    FVisibleListOwners:Boolean;
+
+    CurSeek : TRecordSeekSobstv;
+    FParOwners : TStringList;
+    FVisibleCountMensNotRegistred : Boolean;
+    FVisibleOwners:Boolean;
     FAddTail  : Boolean;
     FAddAdres : Boolean;
-    FAddDateP  : Boolean;
     FVisibleNameDom   : Boolean;
     FVisibleNamePunkt : Boolean;
     FVisibleRnGor     : Boolean;
@@ -91,6 +105,7 @@ type
     procedure GridColumnsGetLich(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
     procedure GridColumnsGetOpisLich(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
     procedure GridColumnsGetOwners(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
+    procedure GridColumnsMsPrim(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
     function  LoadQuery : Boolean; override;
 
     procedure SaveToIni; override;
@@ -110,7 +125,7 @@ var
 
 implementation
 
-uses fTypeCountMensAdres, fAddAdres, fEditAdres, fMain, fInitField;
+uses fTypeCountMensAdres, fAddAdres, fEditAdres, fMain, fInitField, uBase;
 
 {$R *.DFM}
 
@@ -122,22 +137,33 @@ begin
   CurSeek.History:=SOBSTV_CUR;
   CurSeek.Value:='';
   QuestDel := '  Удалить текущий адрес ?  ';
-  FTypeCountMens    := '';
+
+  FEnabledUnionAdres:=true;
+  FTypeCountMens:= '';
   FVisibleCountMensNotRegistred := false;
   FVisibleCountMens := false;
   FVisibleListMens  := false;
-  FVisibleListOwners:=true;
+  FAddOtnosh := false;
+  FAddDateR  := false;
+  FAddLgot   := false;
+  FAddPrizn  := false;
+  FAddIN     := false;
+  FAddPasp   := false;
+  FAddWork   := false;
+  FAddDateP  := false;
+  FUnionAdres:=false;;
+  FParAdd:='';
+
+  FVisibleOwners:=true;
   FAddTail:=false;
   FAddAdres:=false;
-
-  FAddDateP  := false;
   FVisibleNameDom   := false;
   FVisibleNamePunkt := true;
   FVisibleRnGor := false;
+
   FParOwners:=TStringList.Create;
   FParOwners.Add('DELIM= '+chr(13)+chr(10));
   FParOwners.Add('TAIL=, ');
-
 //  FAddOtnosh := false;
   {$IFDEF OCHERED}
      TBItemLich.Visible:=false;
@@ -196,17 +222,25 @@ begin
   ini.WriteBool(KodGurnal+'.Add','VISIBLE_COUNT_MENS_NOT_REGISTRED',FVisibleCountMensNotRegistred);
   ini.WriteBool(KodGurnal+'.Add','VISIBLE_COUNT_MENS',FVisibleCountMens);
   ini.WriteBool(KodGurnal+'.Add','VISIBLE_LIST_MENS',FVisibleListMens);
+  ini.WriteBool(KodGurnal+'.Add','VISIBLE_LIST_OWNERS',FVisibleOwners);
 
-  ini.WriteBool(KodGurnal+'.Add','VISIBLE_LIST_OWNERS',FVisibleListOwners);
+  ini.WriteBool(KodGurnal+'.Add','ADD_OTNOSH_MENS',FAddOtnosh);
+  ini.WriteBool(KodGurnal+'.Add','ADD_DATER_MENS',FAddDateR);
+  ini.WriteBool(KodGurnal+'.Add','ADD_LGOT_MENS',FAddLgot);
+  ini.WriteBool(KodGurnal+'.Add','ADD_PRIZN_MENS',FAddPrizn);
+  ini.WriteBool(KodGurnal+'.Add','ADD_IN_MENS',FAddIN);
+  ini.WriteBool(KodGurnal+'.Add','ADD_PASP_MENS',FAddPasp);
+  ini.WriteBool(KodGurnal+'.Add','ADD_WORK_MENS',FAddWork);
+  ini.WriteBool(KodGurnal+'.Add','ADD_DATEP_MENS',FAddDateP);
+  ini.WriteString(KodGurnal+'.Add','TYPE_COUNT_MENS',FTypeCountMens);
+  ini.WriteBool(KodGurnal+'.Add','UNION_ADRES',FUnionAdres);
+
   ini.WriteBool(KodGurnal+'.Add','ADD_TAIL',FAddTail);
   ini.WriteBool(KodGurnal+'.Add','ADD_ADRES',FAddAdres);
 
-  ini.WriteBool(KodGurnal+'.Add','ADD_DATE_PROP',FAddDateP);
   ini.WriteBool(KodGurnal+'.Add','VISIBLE_NAME_DOM',FVisibleNameDom);
   ini.WriteBool(KodGurnal+'.Add','VISIBLE_NAME_PUNKT',FVisibleNamePunkt);
   ini.WriteBool(KodGurnal+'.Add','VISIBLE_RNGOR',FVisibleRnGor);
-//  ini.WriteBool(KodGurnal+'.Add','ADD_OTNOSH_MENS',FAddOtnosh);
-  ini.WriteString(KodGurnal+'.Add','TYPE_COUNT_MENS',FTypeCountMens);
 end;
 
 procedure TfmGurnalAdres.LoadFromIni;
@@ -219,12 +253,23 @@ begin
   FVisibleCountMensNotRegistred := ini.ReadBool(KodGurnal+'.Add','VISIBLE_COUNT_MENS_NOT_REGISTRED',false);
   FVisibleCountMens := ini.ReadBool(KodGurnal+'.Add','VISIBLE_COUNT_MENS',false);
   FVisibleListMens  := ini.ReadBool(KodGurnal+'.Add','VISIBLE_LIST_MENS',false);
-
-  FVisibleListOwners:=ini.ReadBool(KodGurnal+'.Add','VISIBLE_LIST_OWNERS',true);
+  FVisibleOwners:=ini.ReadBool(KodGurnal+'.Add','VISIBLE_LIST_OWNERS',true);
   FAddTail := ini.ReadBool(KodGurnal+'.Add','ADD_TAIL',false);
   FAddAdres:= ini.ReadBool(KodGurnal+'.Add','ADD_ADRES',false);
+  if FEnabledUnionAdres
+    then FUnionAdres:=ini.ReadBool(KodGurnal+'.Add','UNION_ADRES',false)
+    else FUnionAdres:=false;
 
-  FAddDateP := ini.ReadBool(KodGurnal+'.Add','ADD_DATE_PROP',false);
+  FAddOtnosh := ini.ReadBool(KodGurnal+'.Add','ADD_OTNOSH_MENS',false);
+  FAddDateR  := ini.ReadBool(KodGurnal+'.Add','ADD_DATER_MENS',false);
+  FAddDateP  := ini.ReadBool(KodGurnal+'.Add','ADD_DATEP_MENS',false);
+  FAddLgot   := ini.ReadBool(KodGurnal+'.Add','ADD_LGOT_MENS',false);
+  FAddPrizn  := ini.ReadBool(KodGurnal+'.Add','ADD_PRIZN_MENS',false);
+  FAddIN     := ini.ReadBool(KodGurnal+'.Add','ADD_IN_MENS',false);
+  FAddPasp   := ini.ReadBool(KodGurnal+'.Add','ADD_PASP_MENS',false);
+  FAddWork   := ini.ReadBool(KodGurnal+'.Add','ADD_WORK_MENS',false);
+  CreateParAddMen;
+
   FVisibleNameDom   := ini.ReadBool(KodGurnal+'.Add','VISIBLE_NAME_DOM',false);
   {$IFDEF GKH}
     FVisibleNamePunkt := ini.ReadBool(KodGurnal+'.Add','VISIBLE_NAME_PUNKT',true);
@@ -234,7 +279,9 @@ begin
     FVisibleRnGor     := false;
   {$ENDIF}
 //  FAddOtnosh := ini.ReadBool(KodGurnal+'.Add','ADD_OTNOSH_MENS',false);
-  FTypeCountMens    := ini.ReadString(KodGurnal+'.Add','TYPE_COUNT_MENS','10');
+  FTypeCountMens    := ini.ReadString(KodGurnal+'.Add','TYPE_COUNT_MENS','100');
+  if Length(FTypeCountMens)<3
+    then FTypeCountMens := PadRStr(FTypeCountMens,3,'0');
   for i:=0 to Grid.Columns.Count-1 do begin
     if Grid.Columns[i].FieldName='ISLIFE' then begin
       Grid.Columns[i].ImageList := HImageList;
@@ -260,6 +307,8 @@ begin
       Grid.Columns[i].OnGetCellParams := GridColumnsCountMensNotRegistred;
     end else if Grid.Columns[i].FieldName='LIST_MENS' then begin
       Grid.Columns[i].OnGetCellParams := GridColumnsListMens;
+    end else if UpperCase(Grid.Columns[i].FieldName)='MS_PRIM' then begin
+      Grid.Columns[i].OnGetCellParams := GridColumnsMsPrim;
     end else if UpperCase(Grid.Columns[i].FieldName)='DOM_NAME' then begin
       Grid.Columns[i].OnGetCellParams := GridColumnsNameDom;
     end else if UpperCase(Grid.Columns[i].FieldName)='DOM' then begin
@@ -267,11 +316,25 @@ begin
     end else if UpperCase(Grid.Columns[i].FieldName)='KORP' then begin
       Grid.Columns[i].OnGetCellParams := GridColumnsKOrp;
     end;
-  end;
+  end;            
   CheckCountMens;
-
+  CheckPropertyUnionAdres;
 end;
-
+//------------------------------------------------------------------------------------------------------------
+procedure TfmGurnalAdres.CreateParAddMen;
+begin
+  FParAdd:=';';
+//  if FAddOtnosh then  FParAdd:=FParAdd+'OTN;';
+  if FAddDateR  then  FParAdd:=FParAdd+'DATER;';
+  if FAddDateP  then  FParAdd:=FParAdd+'DATEP;';
+  if FAddIN     then  FParAdd:=FParAdd+'IN;';
+  if FAddLgot   then  FParAdd:=FParAdd+'LGOT;';
+  if FAddPrizn  then  FParAdd:=FParAdd+'PRIZN;';
+  if FAddPasp   then  FParAdd:=FParAdd+'PASP;';
+  if FAddWork   then  FParAdd:=FParAdd+'WORK;';
+//  if FAddFirst  then  FParAdd:=FParAdd+'FIRST;';
+//  if FAddAllMens then FParAdd:=FParAdd+'ALL;';
+end;
 //-----------------------------------------------------------
 function TfmGurnalAdres.getAdditiveWhere: String;
 var
@@ -472,6 +535,25 @@ begin
   }
 end;
 
+procedure TfmGurnalAdres.edPunkt2Change(Sender: TObject);
+begin
+  if FRun
+    then exit;
+  if (edPunkt2.Text = '') then begin
+    QueryUL.Filter   := '';
+    QueryUL.Filtered := false;
+    edUL.ListSource := dsUlAll;
+  end else begin
+    edUL.Value:=null;
+    QueryUL.Filter   := 'punkt='+VarToStr(edPunkt2.Value);
+    QueryUL.Filtered := true;
+    edUL.ListSource := dsUl;
+  end;
+  SetFilter;
+  CheckEnabledPunkts;
+  ActiveControl:=Grid;
+end;
+
 procedure TfmGurnalAdres.edPunktChange(Sender: TObject);
 begin
   if FRun
@@ -579,11 +661,24 @@ begin
     QueryULAll.SQL.Text := FSQLAll;
     QueryUL.SQL.Text    := FSQLPunkt;
   end;
+  {
+  QueryN.SQL.Text:=dmBase.LookUpPunkt.SQL.Text;
+  QueryN.SQL.Text:=ChangeWhere(Query.SQL.Text, '1=1', false);
+  QueryN.Open;
+  }
   QueryUL.Open;
   QueryULAll.Open;
   FtbLich.Open;
   FtbMens.Open;
-end;
+
+  FRun:=true;
+  try
+    FillListPunkt(DateFiks, edPunkt.Items, edPunkt.KeyItems, nil);
+  finally
+    FRun:=false;
+  end;  
+
+end;                
 
 procedure TfmGurnalAdres.FormDestroy(Sender: TObject);
 begin
@@ -741,22 +836,6 @@ begin
   Result := inherited EnableOpen;
 end;
 
-procedure TfmGurnalAdres.GridColumnsCountMens(Sender: TObject;
-  EditMode: Boolean; Params: TColCellParamsEh);
-begin
- if FVisibleCountMens then begin
-   Params.Text := IntToStr(dmBase.CountMensAdres( DateFiks, Query.FieldByName('ID').AsString, FTypeCountMens, nil));
- end;
-end;
-
-procedure TfmGurnalAdres.GridColumnsCountMensNotRegistred(Sender: TObject;
-  EditMode: Boolean; Params: TColCellParamsEh);
-begin
- if FVisibleCountMensNotRegistred then begin
-   Params.Text := IntToStr(dmBase.CountMensAdresNotRegistred( DateFiks, Query.FieldByName('ID').AsString));
- end;
-end;
-
 procedure TfmGurnalAdres.GridColumnsDom(Sender: TObject; EditMode: Boolean;  Params: TColCellParamsEh);
 begin
   if Query.FieldByName('NOT_DOM').AsBoolean then Params.Text:='';
@@ -789,7 +868,32 @@ begin
  end;
 end;
 
+procedure TfmGurnalAdres.GridColumnsCountMens(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
+begin
+ if FVisibleCountMens then begin
+   Params.Text := IntToStr(dmBase.CountMensAdres( DateFiks, Query.FieldByName('ID').AsString, FTypeCountMens, nil));
+ end;
+end;
+
+procedure TfmGurnalAdres.GridColumnsMsPrim(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
+begin
+  Params.Text:=dmBase.ReadOneProp(Query.FieldByName('DATE_FIKS').AsDateTime, Query.FieldByName('ID').AsInteger, 'MS_PRIM', ftmemo);
+end;
+
+procedure TfmGurnalAdres.GridColumnsCountMensNotRegistred(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
+begin
+ if FVisibleCountMensNotRegistred then begin
+   Params.Text := IntToStr(dmBase.CountMensAdresNotRegistred( DateFiks, Query.FieldByName('ID').AsString));
+ end;
+end;
+
 procedure TfmGurnalAdres.GridColumnsListMens(Sender: TObject; EditMode: Boolean; Params: TColCellParamsEh);
+begin
+  if FVisibleListMens then begin
+    Params.Text:=dmBase.ListMensAdres(Query.FieldByName('ID').AsString, -1, FTypeCountMens, FParAdd, IIFS(FRunExport, #13#10, ', '), nil);
+  end;
+end;
+{
 var
   c1,c2 : Char;
   lOk1,lOk2 : Boolean;
@@ -850,34 +954,20 @@ begin
   end;
   Params.Text := s;
 end;
-
+}
 procedure TfmGurnalAdres.CheckCountMens;
 begin
-  {$IFDEF GKH}
-  {
-    Label1.Visible:=FVisibleNamePunkt;
-    edPunkt.Visible:=FVisibleNamePunkt;
-    if FVisibleNamePunkt then begin
-      Label2.Left:=281;
-      edUl.Left:=318;
-      Label3.Left:=520;
-      edSobstv.Left:=598;
-    end else begin
-      Label2.Left:=8;
-      edUl.Left:=60;
-      Label3.Left:=281;
-      edSobstv.Left:=368;
-    end;
-    }
-  {$ENDIF}
   try
     Grid.FieldColumns['COUNT_MENS_NOT_REGISTRED'].Visible:=FVisibleCountMensNotRegistred;
     Grid.FieldColumns['COUNT_MENS'].Visible:=FVisibleCountMens;
     Grid.FieldColumns['LIST_MENS'].Visible:=FVisibleListMens;
-    Grid.FieldColumns['OWNERS'].Visible:=FVisibleListOwners;
+    Grid.FieldColumns['OWNERS'].Visible:=FVisibleOwners;
+
     Grid.FieldColumns['DOM_NAME'].Visible:=FVisibleNameDom;
+    {$IFDEF GKH}
     Grid.FieldColumns['PUNKT'].Visible:=FVisibleNamePunkt;
     Grid.FieldColumns['RNGOR'].Visible:=FVisibleRnGor;
+    {$ENDIF}
   except
   end
 end;
@@ -885,60 +975,127 @@ end;
 procedure TfmGurnalAdres.TBItemCountMensClick(Sender: TObject);
 var
   lCheck:Boolean;
+  f:TfmTypeCountMensAdres;
+  s,ss:String;
+  i,j,nVozr1,nVozr2:Integer;
 begin
   lCheck:=false;
-  fmTypeCountMensAdres := TfmTypeCountMensAdres.Create(nil);
-  fmTypeCountMensAdres.cbShow.Checked:=FVisibleCountMens;
-  fmTypeCountMensAdres.cbNotRegistred.Checked:=FVisibleCountMensNotRegistred;
-  fmTypeCountMensAdres.cbListMens.Checked:=FVisibleListMens;
+  f := TfmTypeCountMensAdres.Create(nil);
+  f.cbShow.Checked:=FVisibleCountMens;
+  f.cbNotRegistred.Checked:=FVisibleCountMensNotRegistred;
+  f.cbListMens.Checked:=FVisibleListMens;
+  f.cbOwners.Checked:=FVisibleOwners;
+  f.cbAddTail.Checked:=FAddTail;
+  f.cbAddAdres.Checked:=FAddAdres;
+  f.cbNameDom.Checked:=FVisibleNameDom;
+  f.cbNamePunkt.Checked:=FVisibleNamePunkt;
+  f.cbRnGor.Checked:=FVisibleRnGor;
 
-  fmTypeCountMensAdres.cbOwners.Checked:=FVisibleListOwners;
-  fmTypeCountMensAdres.cbAddTail.Checked:=FAddTail;
-  fmTypeCountMensAdres.cbAddAdres.Checked:=FAddAdres;
-
-  fmTypeCountMensAdres.cbDateP.Checked:=FAddDateP;
-  fmTypeCountMensAdres.cbNameDom.Checked:=FVisibleNameDom;
-  fmTypeCountMensAdres.cbNamePunkt.Checked:=FVisibleNamePunkt;
-  fmTypeCountMensAdres.cbRnGor.Checked:=FVisibleRnGor;
-//  fmTypeCountMensAdres.cbOtnosh.Checked:=FAddOtnosh;
+  f.cbDateR.Checked:=FAddDateR;
+  f.cbDateP.Checked:=FAddDateP;
+  f.cbLgot.Checked:=FAddLgot;
+  f.cbPrizn.Checked:=FAddPrizn;
+  f.cbIN.Checked:=FAddIN;
+  f.cbPasp.Checked:=FAddPasp;
+  f.cbWork.Checked:=FAddWork;
+  f.cbUnionAdres.Visible:=FEnabledUnionAdres;
+  f.cbUnionAdres.Checked:=FUnionAdres;
   if FTypeCountMens='' then begin
-    fmTypeCountMensAdres.rbPresent.ItemIndex :=1;
-    fmTypeCountMensAdres.rbPropis.ItemIndex  :=0;
+    f.rbPresent.ItemIndex :=1;
+    f.rbZareg.ItemIndex   :=0;
+    f.rbPropis.ItemIndex  :=0;
+    f.cbVozr.ItemIndex:=0;
   end else begin
-    fmTypeCountMensAdres.rbPresent.ItemIndex := StrToInt(Copy(FTypeCountMens,1,1));
-    fmTypeCountMensAdres.rbPropis.ItemIndex  := StrToInt(Copy(FTypeCountMens,2,1));
+    f.rbPresent.ItemIndex := StrToInt(Copy(FTypeCountMens,1,1));
+    f.rbPropis.ItemIndex  := StrToInt(Copy(FTypeCountMens,2,1));
+    f.rbZareg.ItemIndex   := StrToInt(Copy(FTypeCountMens,3,1));
+    if Pos(';',FTypeCountMens)>0 then begin
+      f.cbVozr.ItemIndex:=0;
+      s:=FTypeCountMens;
+      nVozr1:=-2;
+      nVozr2:=-2;
+      try
+        i:=Pos(';',s);
+        s:=Copy(s,i+1,Length(s));
+        if s<>'' then begin
+          if Copy(s,1,4)='TRUD' then begin
+            f.cbVozr.ItemIndex:=StrToIntDef(Copy(s,5,1),2)+2;
+          end else begin
+            f.cbVozr.ItemIndex:=1;
+            j:=Pos('#',s);
+            if j=0 then begin
+              nVozr1:=StrToInt(s);
+            end else begin
+              ss:=Trim(Copy(s,1,j-1));
+              if ss<>''
+                then nVozr1:=StrToInt(ss)
+                else nVozr1:=-1;
+              ss:=Trim(Copy(s,j+1,100));
+              if ss<>''
+                then nVozr2:=StrToInt(ss)
+                else nVozr2:=-1;
+            end;
+          end;
+        end;
+      except
+        f.cbVozr.ItemIndex:=0;
+        nVozr1:=-2;
+        nVozr2:=-2;
+      end;
+      if nVozr1>-2 then f.edVozr1.Value:=nVozr1;
+      if nVozr2>-2 then f.edVozr2.Value:=nVozr2;
+      if f.edVozr1.Value=-1 then f.edVozr1.Text:='';
+      if f.edVozr2.Value=-1 then f.edVozr2.Text:='';
+    end else begin
+      f.cbVozr.ItemIndex:=0;
+    end;
   end;
   {$IFNDEF GKH}
-    fmTypeCountMensAdres.cbNamePunkt.Visible:=false;
-    fmTypeCountMensAdres.cbRnGor.Visible:=false;
-    fmTypeCountMensAdres.Height:=fmTypeCountMensAdres.Height-40;
+    f.cbNamePunkt.Visible:=false;
+    f.cbRnGor.Visible:=false;
+    f.Height:=f.Height-40;
   {$ENDIF}
-  if fmTypeCountMensAdres.ShowModal=mrOk then begin
-    FTypeCountMens := IntToStr(fmTypeCountMensAdres.rbPresent.ItemIndex)+
-                      IntToStr(fmTypeCountMensAdres.rbPropis.ItemIndex);
-    FVisibleCountMens := fmTypeCountMensAdres.cbShow.Checked;
-    FVisibleCountMensNotRegistred := fmTypeCountMensAdres.cbNotregistred.Checked;
-    FVisibleListMens  := fmTypeCountMensAdres.cbListMens.Checked;
-    FAddDateP := fmTypeCountMensAdres.cbDateP.Checked;
-    FVisibleNameDom   := fmTypeCountMensAdres.cbNameDom.Checked;
-
-    FVisibleListOwners:=fmTypeCountMensAdres.cbOwners.Checked;
-    FAddTail:=fmTypeCountMensAdres.cbAddTail.Checked;
-    FAddAdres:=fmTypeCountMensAdres.cbAddAdres.Checked;
-
+  if f.ShowModal=mrOk then begin
+    FVisibleCountMens := f.cbShow.Checked;
+    FVisibleCountMensNotRegistred := f.cbNotregistred.Checked;
+    FVisibleListMens  := f.cbListMens.Checked;
+    FVisibleNameDom   := f.cbNameDom.Checked;
+    FVisibleOwners:=f.cbOwners.Checked;
+    FAddTail:=f.cbAddTail.Checked;
+    FAddAdres:=f.cbAddAdres.Checked;
     {$IFDEF GKH}
-      FVisibleNamePunkt := fmTypeCountMensAdres.cbNamePunkt.Checked;
-      FVisibleRnGor     := fmTypeCountMensAdres.cbRnGor.Checked;
+      FVisibleNamePunkt := f.cbNamePunkt.Checked;
+      FVisibleRnGor     := f.cbRnGor.Checked;
     {$ELSE}
       FVisibleNamePunkt := true;
       FVisibleRnGor     := false;
     {$ENDIF}
-//    FAddOtnosh        := fmTypeCountMensAdres.cbOtnosh.Checked;
+    FTypeCountMens := IntToStr(f.rbPresent.ItemIndex)+IntToStr(f.rbPropis.ItemIndex)+IntToStr(f.rbZareg.ItemIndex);
+//    if not fmTypeCountMens.cbNotVozr.Checked then begin
+    if f.cbVozr.ItemIndex>0 then begin
+      if f.cbVozr.ItemIndex>1 then begin
+        FTypeCountMens:=FTypeCountMens+';TRUD'+IntToStr(f.cbVozr.ItemIndex-2);
+      end else begin
+        if (f.edVozr1.Text<>'') or (f.edVozr2.Text<>'') then begin
+          FTypeCountMens:=FTypeCountMens+';'+f.edVozr1.Text+'#'+f.edVozr2.Text;
+        end;
+      end;
+    end;
+    FAddDateR         := f.cbDateR.Checked;
+    FAddDateP         := f.cbDateP.Checked;
+    FAddLgot          := f.cbLgot.Checked;
+    FAddPrizn         := f.cbPrizn.Checked;
+    FAddIN            := f.cbIN.Checked;
+    FAddPasp          := f.cbPasp.Checked;
+    FAddWork          := f.cbWork.Checked;
+    FUnionAdres       := f.cbUnionAdres.Checked;
+    CreateParAddMen;
     CheckCountMens;
+    CheckPropertyUnionAdres;
     CheckPropertyGridColumns;
     lCheck:=true;
   end;
-  fmTypeCountMensAdres.Free;
+  f.Free;
   if lCheck then begin
     SetFilter;
   end;
@@ -1139,7 +1296,10 @@ end;
 procedure TfmGurnalAdres.GridGetCellParams(Sender: TObject; Column: TColumnEh; AFont: TFont; var Background: TColor; State: TGridDrawState);
 begin
   if not Query.FieldByName('SPEC_UCH').IsNull and Query.FieldByName('SPEC_UCH').AsBoolean then begin
-    AFont.Style := AFont.Style + [fsBold];
+    AFont.Style:=AFont.Style + [fsBold];
+  end;
+  if not Query.FieldByName('UCH_ISKL_DATE').IsNull then begin
+    AFont.Color:=clRed;
   end;
 end;
 //-------------------------------------------------------------------
@@ -1171,7 +1331,7 @@ begin
 end;
 
 procedure TfmGurnalAdres.TBItemClearPunktsClick(Sender: TObject);
-begin          
+begin
   inherited;
   CheckEnabledPunkts;
 end;

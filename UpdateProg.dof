@@ -100,7 +100,7 @@ Conditionals=
 DebugSourceDirs=
 UsePackages=0
 [Parameters]
-RunParams=/USR:¿ƒÃ»Õ»—“–¿“Œ– /PSW:1 /SERVICE /post
+RunParams=/USR:¿ƒÃ»Õ»—“–¿“Œ– /PSW:1 /ZAGS
 HostApplication=
 Launcher=
 UseLauncher=0

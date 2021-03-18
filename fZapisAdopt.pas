@@ -926,6 +926,8 @@ begin
   {$ENDIF}
   TBItemHistCorr.Visible:=FUpdatingObj;
 
+  fmMain.ImageList.GetBitmap(IL_ROGD, btAktRogd.Glyph );
+
 end;
 
 function TfmZapisAdopt.GetVid: String;
@@ -1841,7 +1843,6 @@ begin
     s := DokumentON_Familia.AsString+' '+DokumentON_NAME.AsString+' '+DokumentON_OTCH.AsString;
 
     if SvidInPadeg(TypeObj) then begin  // свидетельство в падеже
-//      s := GetPadegFIO(s,'м','Т');
       s := GetPadegFIO3(DokumentON_Familia.AsString,DokumentON_NAME.AsString,DokumentON_OTCH.AsString,'м','Т');
       if not LastSimIsLower(s) then s:=ANSIUpperCase(s);
     end;
@@ -1855,7 +1856,7 @@ begin
   if DokumentONA_Familia_P.AsString='' then begin
     s := DokumentONA_Familia.AsString+' '+DokumentONA_NAME.AsString+' '+DokumentONA_OTCH.AsString;
     if SvidInPadeg(TypeObj) then begin  // свидетельство в падеже
-//      s := GetPadegFIO(s,'ж','Т');
+
       s := GetPadegFIO3(DokumentONA_Familia.AsString,DokumentONA_NAME.AsString,DokumentONA_OTCH.AsString,'ж','Т');
       if not LastSimIsLower(s) then s:=ANSIUpperCase(s);
     end;

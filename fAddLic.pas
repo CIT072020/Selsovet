@@ -6,7 +6,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  fSimpleDialog, StdCtrls, Buttons, ExtCtrls, dBase, OpisEdit, MetaTask, dbFunc,
+  fSimpleDialog, StdCtrls, Buttons, ExtCtrls, dBase, OpisEdit, MetaTask, dbFunc, NewDialogs,
   Db, DBLookupEh, Mask, DBCtrlsEh, FuncPr
   {$IFDEF VER150} ,Variants {$ENDIF}  ;
 
@@ -24,12 +24,9 @@ type
     dsSprTypeHouse: TDataSource;
     edDateSozd: TDBDateTimeEditEh;
     Label5: TLabel;
-    procedure edTypeHouseEditButtons0Click(Sender: TObject;
-      var Handled: Boolean);
-    procedure edLicEditButtons1Click(Sender: TObject;
-      var Handled: Boolean);
-    procedure edLicEditButtons0Click(Sender: TObject;
-      var Handled: Boolean);
+    procedure edTypeHouseEditButtons0Click(Sender: TObject;    var Handled: Boolean);
+    procedure edLicEditButtons1Click(Sender: TObject;          var Handled: Boolean);
+    procedure edLicEditButtons0Click(Sender: TObject;          var Handled: Boolean);
   private
     { Private declarations }
   public
@@ -157,13 +154,21 @@ begin
 end;
 
 function TfmAddLic.CheckOk: Boolean;
+var
+  sSoob,sNom:String;
+  n:Integer;
 begin
-  Result := true;
-  if Trim(edLic.Text)<>'' then begin
-    Result := dmBase.CheckNomerLich(dmBase.GetDateCurrentSost,-1,Trim(edLic.Text));
+  Result:=false;
+  sNom:=Trim(edLic.Text);
+  if (sNom<>'') then begin
+    if not IsAllDigit(sNom) then begin
+      PutError(' В номере могут быть только цифры');
+    end else if Length(sNom)>11 then begin    // поле в базе NOMER(12,0)
+      PutError(' Количество цифр не может быть больше 11');
+    end else begin
+      Result:=dmBase.CheckNomerLich(dmBase.GetDateCurrentSost,-1, sNom, true);
+    end;
   end;
-  if not Result
-    then PutError(' Введенный номер лицевого счета уже существует ! ');
 end;
 
 

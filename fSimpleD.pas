@@ -262,6 +262,7 @@ type
     tbFamilySTATUS_NAME: TStringField;
     tbFamilyPOL: TStringField;
     tbFamilyVOZR: TIntegerField;
+    btAddPovtor: TBitBtn;
     procedure TBItemSetUpClick(Sender: TObject);
     procedure TBItemDesignReportClick(Sender: TObject);
     procedure StBarDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel; const Rect: TRect);
@@ -321,6 +322,7 @@ type
     procedure TBItemSprAktClick(Sender: TObject);
     procedure TBItemDeclSvidClick(Sender: TObject);
     procedure TBItemHistCorrClick(Sender: TObject);
+    procedure btAddPovtorClick(Sender: TObject);
   private
     curID:Integer;
     curSource:Integer;
@@ -357,6 +359,7 @@ type
     itParCopy:TTbItem;
     FQuerySOATO:Boolean;   // запрос на изменение рассчитанного СОАТО
     FUpdatingObj:Boolean;  // запись в файл UpdatingObj даты корректировки
+    FWriteDok:Boolean;     // вызывался метод WriteDok
     FReportIN:Boolean;
     FShowOrgCaption:Boolean;
     FCheckPol : Boolean;
@@ -1152,7 +1155,7 @@ begin
     for i:=0 to Length(FArrCheckBelField)-1 do begin
       if fld.FieldName = FArrCheckBelField[i].strFieldName then begin
         s:=dmBase.GetBelNazv(FArrCheckBelField[i].nTip, FArrCheckBelField[i].lSelect, fld.AsString);
-
+           
         CheckBelRegister;  // см. выше
 
         Dokument.FieldByName(FArrCheckBelField[i].strFieldNameB).AsString:=s;
@@ -1302,7 +1305,7 @@ begin
   FMinVoenkom:=16;
   FMaxVoenkom:=65;
   FActiveOn:=false;
-
+  FWriteDok:=false;
   FUpdatingObj:=false;      // true - запись даты корректировки в файл UpdatingObj
 
   FWriteBeforeGisun:=false;   // идет запись документа перед отправкой в регистр
@@ -1414,7 +1417,7 @@ begin
     TBItemSvidIspor.Visible := false;
   end;
   {$IFDEF ZAGS}
-    if Dokument.FindField('ID_ZAGS')<>nil then begin
+    if (Dokument.FindField('ID_ZAGS')<>nil) and FDokZags then begin
       TBItemZAGS.Visible:=true;
       TBItemZAGS.Enabled:=true;
     end else begin
@@ -1453,6 +1456,9 @@ begin
 
   if not TBItemFastPrint.Visible
     then TBItemFastPrint.ShortCut:=0;  //TextToShortCut('');
+
+  fmMain.ImageList.GetBitmap(IL_ADD, btAddPovtor.Glyph);
+  fmMain.ImageList.GetBitmap(IL_DEL, btDelPovtor.Glyph);
 
   SetEvent;
 //  if Role.SystemAdmin then begin
@@ -2588,7 +2594,7 @@ var
   arrVal:TArrStrings;
   sVal:String;
   AYear,AMonth,ADay,AHour,AMin,ASec:Word;
-begin   
+begin
   fld:=ds.FindField(sField);
   if fld<>nil then begin
     StrToArr(fld.AsString, arrVal,#13#10, true);
@@ -2657,14 +2663,19 @@ end;
 //------------------------------------------------------------
 procedure TfmSimpleD.ReadDopProperty(nTypeObj,nKodObj : Integer; dDateSave : TDateTime);
 var
-  i : Integer;  
+  i : Integer;
+//  n : Integer;
 begin
   EditDataSet(Dokument);
+//  n:=GetTickCount;
   for i:=0 to Length(FArrAddProperty)-1 do begin
     Dokument.FieldByName(FArrAddProperty[i].FieldName).Value :=
-    dmBase.ReadPropSimpleDok(nTypeObj, nKodObj, dDateSave, FArrAddProperty[i].FieldName,
-                FArrAddProperty[i].DataType);
+    dmBase.ReadPropSimpleDok(nTypeObj, nKodObj, dDateSave, FArrAddProperty[i].FieldName, FArrAddProperty[i].DataType);
   end;
+//  i:=dmBase.ReadAllPropSimpleDok(Dokument, nTypeObj, nKodObj, dDateSave);
+//i:=0;
+//  n:=GetTickCount-n;
+//  showmessage(inttostr(n)+'  =>'+inttostr(Length(FArrAddProperty))+' / '+inttostr(i));
   ReadOtherData(Dokument, 'OTHER');
 end;
 //------------------------------------------------------------
@@ -3400,7 +3411,7 @@ begin
           Dokument.FindField('ID_ZAGS').AsInteger:=nOrgan;
           Dokument.FindField('ID').AsInteger:=n;
           FCheckNewNomerAkt:=true;
-          GlobalTask.LogFile.WriteToLogFile('Создание пустой з/а '+GlobalTask.CurrentOpisEdit.GetListOpisA('KEY_TYPEZAGS_FULL').Naim(FTypeObj,false)+
+          GlobalTask.WriteToLogFile('Создание пустой з/а '+GlobalTask.CurrentOpisEdit.GetListOpisA('KEY_TYPEZAGS_FULL').Naim(FTypeObj,false)+
                                             ' №'+IntToStr(nNomer)+' от '+FormatDateTime('dd.mm.yyyy',dDateZ)+ '('+dmBase.UserID+')');
         end else begin
           FError:=2;
@@ -3795,7 +3806,7 @@ var
   i:Integer;
 begin
   if GlobalTask.ParamAsBoolean('NAME_ORGAN_ZAGS') then begin
-    if Dokument.FindField('ID_ZAGS')<>nil then begin
+    if (Dokument.FindField('ID_ZAGS')<>nil) and FDokZags then begin
       if Dokument.FieldByName('ID_ZAGS').IsNull or lNew or
          (DokumentNAME_ZAGS.AsString<>'') then begin
         TBToolBarOrgan.Visible := true;
@@ -3831,8 +3842,8 @@ begin
         end;
       end;
     end else begin
-      TBItemZAGS.Visible:=lChoiceZAGS;
-      TBItemZAGS.Enabled:=lChoiceZAGS;
+      TBItemZAGS.Visible:=(lChoiceZAGS and FDokZags);
+      TBItemZAGS.Enabled:=(lChoiceZAGS and FDokZags);
     end;
   {$ELSE}
     TBItemZAGS.Visible:=false;
@@ -4594,9 +4605,11 @@ procedure TfmSimpleD.btNewPovtorClick(Sender: TObject);
 var
   strErr : String;
   strNewNomer,strNewSeria, s1, s2 : String;
+  lOk:Boolean;
 begin
   if DokumentPOVTOR.AsBoolean then begin
     if (SvidPovtor.state<>dsEdit)	and (SvidPovtor.state<>dsInsert) then begin
+      SvidPovtor.CheckBrowseMode;
       btNewPovtor.Enabled:=false;
       try
         if FTypeObj=dmBase.TypeObj_ZRast then begin
@@ -4607,21 +4620,27 @@ begin
           strErr := dmBase.GetNewNomerSvid(FTypeObj, FMainTable, strNewNomer, strNewSeria);
         end;
         if strErr='' then begin
-          if SvidPovtor.Locate('SVID_SERIA;SVID_NOMER', VarArrayOf([strNewSeria,strNewNomer]),[]) then begin
-            SvidPovtor.Append;
+          lOk:=false;
+          try
+            if SvidPovtor.Locate('SVID_SERIA;SVID_NOMER', VarArrayOf([strNewSeria,strNewNomer]),[]) then begin
+              SvidPovtor.Append;
+            end else begin
+              SvidPovtor.Append;
+              SvidPovtorSVID_SERIA.AsString:=strNewSeria;
+              SvidPovtorSVID_NOMER.AsString:=strNewNomer;
+            end;
             SvidPovtorSVID_DATE.AsDateTime:=Date;
             SvidPovtorGISRN.AsInteger:=0;
             SvidPovtor.Post;
-            ActiveControl:=DbGridEh1;
-          end else begin
-            SvidPovtor.Append;
-            SvidPovtorSVID_SERIA.AsString := strNewSeria;
-            SvidPovtorSVID_NOMER.AsString := strNewNomer;
-            SvidPovtorSVID_DATE.AsDateTime  := Date;
-            SvidPovtorGISRN.AsInteger:=0;
-            SvidPovtor.Post;
-            ActiveControl:=DbGridEh1;
+            lOk:=true;
+          except
+            on E:Exception do begin
+              SvidPovtor.Cancel;
+              PutError('Дублирующее значение "Дата"+"Номер"');
+            end;
           end;
+          if lOk then
+            ActiveControl:=DbGridEh1;
         end else begin
           PutError(strErr,self);
         end;
@@ -4631,6 +4650,30 @@ begin
     end;
   end else begin
     ShowMessageCont('  Включите повторное свидетельство  ',self);
+  end;
+end;
+
+procedure TfmSimpleD.btAddPovtorClick(Sender: TObject);
+var
+  lOk:Boolean;
+begin
+  if DokumentPOVTOR.AsBoolean then begin
+    lOk:=false;
+    try
+      SvidPovtor.CheckBrowseMode;
+      SvidPovtor.Append;
+      SvidPovtorSVID_DATE.AsDateTime:=Date;
+      SvidPovtorGISRN.AsInteger:=0;
+      SvidPovtor.Post;
+      lOk:=true;
+    except
+      on E:Exception do begin
+        SvidPovtor.Cancel;
+        PutError('Дублирующее значение "Дата"+"Номер"');
+      end;
+    end;
+    if lOk then
+      ActiveControl:=DbGridEh1;
   end;
 end;
 
@@ -5071,6 +5114,7 @@ end;
 //-----------------------------------------------------------
 procedure TfmSimpleD.AdditiveBeforeWriteDok;
 begin
+//  RunProcScript(GetVid+'_BeforeWrite',v);
   FQueryExitW:=FQueryExit;
 end;
 //-----------------------------------------------
@@ -5095,12 +5139,13 @@ var
   sKomm:String;
   nGrn,nOper:Integer;
 begin
+  FWriteDok:=true;
   // FQueryExitW устанавливается из FQueryExit перед началом записи WriteDok
   if FUpdatingObj and FQueryExitW then begin
 //    if FAddNewDok
 //      then s:='Добавление'
 //      else s:='Корректировка';
-//    GlobalTask.LogFile.WriteToLogFile(s+' з/а '+GlobalTask.CurrentOpisEdit.GetListOpisA('KEY_TYPEZAGS_FULL').Naim(FTypeObj,false)+
+//    GlobalTask.WriteToLogFile(s+' з/а '+GlobalTask.CurrentOpisEdit.GetListOpisA('KEY_TYPEZAGS_FULL').Naim(FTypeObj,false)+
 //       ' №'+Dokument.FieldByName('NOMER').AsString+' от '+FormatDateTime('dd.mm.yyyy',Dokument.FieldByName('DATEZ').AsDateTime)+ '('+dmBase.UserID+')');
     sKomm:=CreateKommUpdateObj; //'№'+Dokument.FieldByName('NOMER').AsString+' от '+DatePropis(Dokument.FieldByName('DATEZ').AsDateTime,3);
     {$IFDEF GISUN}
@@ -6674,7 +6719,7 @@ begin
 //    FImageGisun.Enable:=flase;
 //    FSubmenuGISUN.Enabled:=false;
     Gisun.CurAkt:=Self;
-
+   
     if FPoleGRN=nil then begin
       FPoleGRN:=Dokument.FindField('POLE_GRN');
     end;
@@ -8417,6 +8462,7 @@ procedure TfmSimpleD.TBItemHistCorrClick(Sender: TObject);
 var
   Param  : TParamsEditSpr;
 begin
+  // см. TdmBase.WriteUpdateObj
   try
     dmBase.tbUpdObj.IndexName:='VIEW_KEY';
     dmBase.tbUpdObj.SetRange([FTypeObj,DokumentID.AsInteger],[FTypeObj,DokumentID.AsInteger]);
@@ -8438,6 +8484,7 @@ begin
     then Result:=ERR_RNGOROD
     else Result:='';
 end;
+
 
 initialization
   ListLastAddObj:=TStringList.Create;

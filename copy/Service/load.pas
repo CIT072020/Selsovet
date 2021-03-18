@@ -16,6 +16,21 @@ const
 
   dkSMDO=7; // документ из СМДО
 
+
+//--пустой ИН для з/а и свидетельств -------------------------------------
+function getEmptyIN(sLang:String):String;
+begin
+  sLang:=AnsiUpperCase(Copy(sLang,1,1));
+  if (sLang='R') or (sLang='Р') or (sLang='')
+    then Result:='сведения отсутствуют'
+    else Result:='звесткі адсутнічаюць';
+end;
+//---------------------------------------------------------------------
+// код организации СМДО ПК "Одно окно"
+function AdresatOW:String;
+begin
+  Result:='s_window';
+end;
 //---------------------------------------------------------------------
 function SortPunkt(nType:Integer; lStat:Boolean):String;
 begin
@@ -160,32 +175,50 @@ end;
 // основание постановки на очередь
 function GetOsnovOchered_(nTypeSpr:Integer; sPrich:String; nTypeResult:Integer):String;
 var
-  sSpr,sUkaz,sPunkt:String;
+  s,sSpr,sDok,sPunkt:String;
 begin
 //  Result:=' п.'+SeekValueSpr('SprPostOch','ID',s,'PUNKT')+' Указа Президента Республики Беларусь №';
 //  Result:=' п.'+SeekValueSpr('SprPostOch','ID',s,'PUNKT')+' Указа Президента Республики Беларусь №';
   if nTypeSpr=2  then sSpr:='SprSnOch'  else sSpr:='SprPostOch';
-  sUkaz:=SeekValueSpr(sSpr,'ID',sPrich,'UKAZ');
+  sDok:=SeekValueSpr(sSpr,'ID',sPrich,'UKAZ');
   sPunkt:=SeekValueSpr(sSpr,'ID',sPrich,'PUNKT')
-  if (sPunkt='') and (sUkaz='') then begin  // простая причина без указа и номера пункта из него
+//writedebug('GetOsnovOchered_   punkt='+sPunkt+' Spr='+sSpr+'  TypeResult='+IntToStr(nTypeResult));
+  if (sPunkt='') and (sDok='') then begin  // простая причина без указа и номера пункта из него
     Result:=SeekValueSpr(sSpr,'ID',sPrich,'NAME');
   end else begin
-    if sUkaz='' then sUkaz:='565';
-    sUkaz:=' положения согласно Указу Президента Республики Беларусь №'+sUkaz;
-    if nTypeResult=OCH_OSN_FULL then begin             // 1
-      Result:=' п.'+sPunkt+' '+SeekValueSpr(sSpr,'ID',sPrich,'FNAME');
-    end else if nTypeResult=OCH_OSN_FULL2 then begin             // 1
-      Result:=' п.'+sPunkt+' '+SeekValueSpr(sSpr,'ID',sPrich,'FNAME')+sUkaz;
-    end else if nTypeResult=OCH_OSN_KRAT then begin    // 2
-      Result:=' п. '+SeekValueSpr(sSpr,'ID',sPrich,'NAME')+sUkaz;
-    end else if nTypeResult=OCH_OSN_UKAZ then begin    // 3
-      Result:=' п.'+sPunkt+sUkaz;
-    end else if nTypeResult=OCH_OSN_POLOG then begin    // 3
-      Result:=' п.'+sPunkt+' Положения об учете граждан, нуждающихся в улучшении жилищных условий, и о порядке предоставления жилых помещений государственного жилищного фонда';
-    end else if nTypeResult=OCH_OSN_PUNKT then begin  // 4
-      Result:=' п.'+sPunkt;
+    if sDok='' then sDok:='ЖК';
+    if sDok='ЖК' then begin  // Жилищный кодекс
+      s:=' согласно';
+      sDok:=' Жилищного кодекса Республики Беларусь';
+      if nTypeResult=OCH_OSN_FULL then begin             // 1  полное наименование
+        Result:=sPunkt+' '+SeekValueSpr(sSpr,'ID',sPrich,'FNAME');
+      end else if nTypeResult=OCH_OSN_FULL2 then begin   // 6  полное наименование + наз.документа
+        Result:=sPunkt+' '+SeekValueSpr(sSpr,'ID',sPrich,'FNAME')+s+sDok;
+      end else if nTypeResult=OCH_OSN_KRAT then begin    // 2  краткое + наз.документа
+        Result:=SeekValueSpr(sSpr,'ID',sPrich,'NAME')+s+sDok;
+      end else if (nTypeResult=OCH_OSN_UKAZ) or (nTypeResult=OCH_OSN_POLOG) then begin    // 3,4 пункт + наз.документа
+        Result:=sPunkt+sDok;
+      end else if nTypeResult=OCH_OSN_PUNKT then begin   // 5 только номер пункта
+        Result:=sPunkt;
+      end;
+    end else begin
+      sDok:=' положения согласно Указу Президента Республики Беларусь №'+sDok;
+      if nTypeResult=OCH_OSN_FULL then begin             // 1  полное наименование
+        Result:=' п.'+sPunkt+' '+SeekValueSpr(sSpr,'ID',sPrich,'FNAME');
+      end else if nTypeResult=OCH_OSN_FULL2 then begin   // 6  полное наименование + наименование указа           
+        Result:=' п.'+sPunkt+' '+SeekValueSpr(sSpr,'ID',sPrich,'FNAME')+sDok;
+      end else if nTypeResult=OCH_OSN_KRAT then begin    // 2  краткое + наименование указа
+        Result:=' п. '+SeekValueSpr(sSpr,'ID',sPrich,'NAME')+sDok;
+      end else if nTypeResult=OCH_OSN_UKAZ then begin    // 3 пункт + наименование указа
+        Result:=' п.'+sPunkt+sDok;
+      end else if nTypeResult=OCH_OSN_POLOG then begin   // 4 пункт + положение
+        Result:=' п.'+sPunkt+' Положения об учете граждан, нуждающихся в улучшении жилищных условий, и о порядке предоставления жилых помещений государственного жилищного фонда';
+      end else if nTypeResult=OCH_OSN_PUNKT then begin   // 5 только номер пункта
+        Result:=' п.'+sPunkt;
+      end;
     end;
   end;
+//writedebug('GetOsnovOchered_ '+result);
 end;
 
 function GetOsnovOchered(sTypeSpr:String;ds:TDataSet;nType:Integer):String;

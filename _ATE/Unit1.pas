@@ -35,8 +35,19 @@ type
     Adresa: TAdsTable;
     DBGridEh2: TDBGridEh;
     DataSource2: TDataSource;
+    EVA: TAdsTable;
+    tsEva: TTabSheet;
+    DBGridEh3: TDBGridEh;
+    DataSource3: TDataSource;
+    Panel2: TPanel;
+    BitBtn5: TBitBtn;
+    edGrafE: TEdit;
+    BitBtn6: TBitBtn;
+    Panel3: TPanel;
     BitBtn4: TBitBtn;
     edGrafA: TEdit;
+    EvaSys: TAdsTable;
+    edExcel: TEdit;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -48,12 +59,15 @@ type
     procedure cbOnlyActiveClick(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
+    procedure BitBtn5Click(Sender: TObject);
+    procedure BitBtn6Click(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     function LoadOneATE(sl:TStringList):Boolean;
     function LoadOneAdres(sl:TStringList; var npp:INteger):Boolean;
+    function LoadOneEva(sl:TStringList; var npp:INteger):Boolean;
     procedure LoadOneCAT(sl:TStringList);
     function DateFromStr(s:String):TDateTime;
     function PathXLS:String;
@@ -226,8 +240,8 @@ begin
   end;
   if lErr then exit;
   i1:=VarArrayLowBound(arr,1);
-  i2:=VarArrayHighBound(arr,1);                    
-  npp:=1;  
+  i2:=VarArrayHighBound(arr,1);
+  npp:=1;
   for i:=i1 to i2 do begin
     mmm:=VarArrayLowBound(arr,2);
     t := VarType(arr[i,mmm+1]);
@@ -394,7 +408,6 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   AdsConnection2.IsConnected:=true;
-  ateSys.Open;
   AdsConnection1.IsConnected:=true;
   ate.Open;
   cbIndex.ItemIndex:=0;
@@ -402,6 +415,7 @@ begin
   Categ.Open;
   adresa.Open;
   adresa.IndexName:='NPP_KEY';
+  eva.Open;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -409,7 +423,6 @@ begin
   ate.Close;
   Categ.Close;
   AdsConnection1.IsConnected:=false;
-  ateSys.Close;
   AdsConnection2.IsConnected:=false;
 end;
 
@@ -509,8 +522,7 @@ begin
   end;
 end;
 
-procedure TForm1.DBGridEh1GetCellParams(Sender: TObject; Column: TColumnEh;
-          AFont: TFont; var Background: TColor; State: TGridDrawState);
+procedure TForm1.DBGridEh1GetCellParams(Sender: TObject; Column: TColumnEh;  AFont: TFont; var Background: TColor; State: TGridDrawState);
 begin
   if Copy(Ate.FieldByName('KOD').AsString,2,9)='000000000' then begin
     AFont.Style:=[fsBold];
@@ -546,49 +558,221 @@ var
   n:Integer;
 begin
 //
+  AdsConnection2.Execute('DELETE FROM ATE');
+
+  ateSys.Open;
   ate.DisableControls;
   ate.First;
   label1.Caption:='';
   n:=0;
-  while not Ate.Eof do begin
-{     KOD Char( 10 ),
-      NAME CIChar( 80 ),
-      NAME_B CIChar( 80 ),
-      ATE_PARENTID Integer,
-      ATE_ID Integer,
-      DATEIN Date,
-      DATEOUT Date,
-      CATEGORY Integer,
-      NAMEC CIChar( 10 ),
-      NAMEC_B CIChar( 10 ),
-      FRONT Integer) IN DATABASE;  }
-    AteSys.Append;
-    AteSys.FieldByName('ATE_ID').AsString:=Ate.FieldByName('ID').AsString;
-    AteSys.FieldByName('ATE_PARENTID').AsString:=Ate.FieldByName('PARENTID').AsString;
-    AteSys.FieldByName('KOD').AsString:=Ate.FieldByName('KOD').AsString;
-    AteSys.FieldByName('NAME').AsString:=Ate.FieldByName('NAME').AsString;
-    AteSys.FieldByName('NAME_B').AsString:=Ate.FieldByName('NAME_B').AsString;
-    AteSys.FieldByName('CATEGORY').AsString:=Ate.FieldByName('CATEGORY').AsString;
-    AteSys.FieldByName('DATEIN').Value:=Ate.FieldByName('DATEIN').Value;
-    AteSys.FieldByName('DATEOUT').Value:=Ate.FieldByName('DATEOUT').Value;
-    AteSys.FieldByName('CATEGORY').AsString:=Ate.FieldByName('CATEGORY').AsString;
-    if Categ.Locate('KOD', Ate.FieldByName('CATEGORY').AsInteger, []) then begin
-      AteSys.FieldByName('NAMEC').AsString:=Categ.FieldByName('NAMEC').AsString;
-      AteSys.FieldByName('NAMEC_B').AsString:=Categ.FieldByName('NAMEC_B').AsString;
-      AteSys.FieldByName('FRONT').AsString:=Categ.FieldByName('FRONT').AsString;
+  try
+    while not Ate.Eof do begin
+  {     KOD Char( 10 ),
+        NAME CIChar( 80 ),
+        NAME_B CIChar( 80 ),
+        ATE_PARENTID Integer,
+        ATE_ID Integer,
+        DATEIN Date,
+        DATEOUT Date,
+        CATEGORY Integer,
+        NAMEC CIChar( 10 ),
+        NAMEC_B CIChar( 10 ),
+        FRONT Integer) IN DATABASE;  }
+      AteSys.Append;
+      AteSys.FieldByName('ATE_ID').AsString:=Ate.FieldByName('ID').AsString;
+      AteSys.FieldByName('ATE_PARENTID').AsString:=Ate.FieldByName('PARENTID').AsString;
+      AteSys.FieldByName('KOD').AsString:=Ate.FieldByName('KOD').AsString;
+      AteSys.FieldByName('NAME').AsString:=Ate.FieldByName('NAME').AsString;
+      AteSys.FieldByName('NAME_B').AsString:=Ate.FieldByName('NAME_B').AsString;
+      AteSys.FieldByName('CATEGORY').AsString:=Ate.FieldByName('CATEGORY').AsString;
+      AteSys.FieldByName('DATEIN').Value:=Ate.FieldByName('DATEIN').Value;
+      AteSys.FieldByName('DATEOUT').Value:=Ate.FieldByName('DATEOUT').Value;
+      AteSys.FieldByName('CATEGORY').AsString:=Ate.FieldByName('CATEGORY').AsString;
+      if Categ.Locate('KOD', Ate.FieldByName('CATEGORY').AsInteger, []) then begin
+        AteSys.FieldByName('NAMEC').AsString:=Categ.FieldByName('NAMEC').AsString;
+        AteSys.FieldByName('NAMEC_B').AsString:=Categ.FieldByName('NAMEC_B').AsString;
+        AteSys.FieldByName('FRONT').AsString:=Categ.FieldByName('FRONT').AsString;
+      end;
+  //    AteSys.FieldByName('CATEGORY').AsString:=Ate.FieldByName('CATEGORY').AsString;
+      AteSys.Post;
+      n:=n+1;
+      ate.Next;
+      label1.Caption:=inttostr(n);
+      Application.ProcessMessages;
     end;
-//    AteSys.FieldByName('CATEGORY').AsString:=Ate.FieldByName('CATEGORY').AsString;
-    AteSys.Post;
+  finally
+    ateSys.Open;
+    ate.First;
+    ate.EnableControls;
+  end;
+end;
+
+//---------------- load EVA -----------------------
+procedure TForm1.BitBtn5Click(Sender: TObject);
+var
+  t,n,nn,m,j,mmm,nnn,i,i1,i2,tnCount:Integer;
+  arr:Variant;
+  XL:Variant;
+  lErr,lLoad:Boolean;
+  sl:TStringList;
+  nCount:Integer;
+  npp:Integer;
+  v:Variant;
+begin
+  if not Problem('Загрузить EVA ?') then exit;
+  Eva.AdsZapTable;
+  Application.ProcessMessages;
+  nCount:=0;
+  n:=0;
+  m:=0;
+  try
+    try XL := GetActiveOleObject(edExcel.Text); // 'Excel.Application');
+    except XL := CreateOleObject(edExcel.Text); //'Excel.Application');
+  end;
+    except
+      raise Exception.Create('Hе могy запyстить "'+edExcel.Text+'"');
+  end;
+
+  try
+//    xl.Workbooks.Add('E:\Projects\Selsovet7\_ATE\XLS\категории.xls');
+    if FileExists(PathXLS+'EVA.xls') then begin
+      xl.Workbooks.Add(PathXLS+'EVA.xls');
+    end else if FileExists(PathXLS+'EVA.xlsx') then begin
+      xl.Workbooks.Add(PathXLS+'EVA.xlsx');
+    end;
+  except
+    on E: Exception do begin
+      PutError('Ошибка открытия файла'+#13#10+E.Message,self);
+      lErr:=true;
+      edDebug.Lines.Add(E.Message);
+      exit;
+    end;
+  end;
+  lErr:=false;
+  try
+    arr:=XL.Range[Trim(edGrafE.Text)].value;
+  except
+    on E: Exception do begin
+      lErr:=true;
+      edDebug.Lines.Add(E.Message);
+    end;
+  end;
+  if lErr then exit;
+
+  sl:=TStringList.Create;
+  EVA.DisableControls;
+  try
+    nn:=0;
+    n := VarArrayDimCount(arr);
+    if n <> 2 then begin
+      lErr:=true;
+    end;
+    if lErr then exit;
+    i1:=VarArrayLowBound(arr,1);
+    i2:=VarArrayHighBound(arr,1);
+    npp:=1;
+    for i:=i1 to i2 do begin
+      mmm:=VarArrayLowBound(arr,2);
+      t := VarType(arr[i,mmm+1]);
+      if (t=VarNull) or (t=VarEmpty) then begin
+        v:=null;
+      end else begin
+        v:=arr[i,mmm+1];
+      end;
+      if (v=null) or (trim(vartostr(v))='') then begin
+        v:='';
+      end else begin
+        v:=Trim(VarToStr(arr[i,mmm+1]));
+      end;
+      if v='' then begin
+  //      edDebug.Lines.add('строка '+inttostr(i));
+        Application.ProcessMessages;
+      end else begin
+        sl.Clear;
+        for j:=mmm to VarArrayHighBound(arr,2) do begin
+          sl.Add(arr[i,j]);
+        end;
+        if LoadOneEva(sl,npp)
+          then Inc(nCount,1)
+          else Inc(nn,1);
+        Label2.Caption:='Пропущено: '+IntToStr(nn);
+        Label1.Caption:=IntToStr(nCount);
+        Application.ProcessMessages;
+      end;
+    end;
+  finally
+    sl.Free;
+    eva.EnableControls;
+  end;
+  eva.First;
+end;
+
+//-------------------------------------------------------
+function TForm1.LoadOneEva(sl:TStringList; var npp:Integer):Boolean;
+var
+  d1:TDateTime;
+begin
+  Result:=false;
+  if sl[0]<>'' then begin
+    with Eva do begin
+      Append;
+      FieldByName('SOATO').AsString:=sl[0];
+      FieldByName('ATE_ID').AsString:=getInt(sl[1]);
+      FieldByName('NAME_OBL').AsString:=sl[2];
+      FieldByName('NAME_RN').AsString:=sl[3];
+      FieldByName('NAME_SS').AsString:=sl[4];
+      FieldByName('NAME_GAT').AsString:=sl[5];
+      FieldByName('NAME_NP').AsString:=sl[6];
+      FieldByName('VID_ID').AsString:=getInt(sl[7]);
+      FieldByName('VID_NAME').AsString:=sl[8];
+
+      FieldByName('EVA_ID').AsString:=getInt(sl[9]);
+      FieldByName('NAME').AsString:=sl[10];
+      FieldByName('NAME_B').AsString:=sl[11];
+      d1:=DateFromStr(sl[12]);
+      if d1>0
+        then FieldByName('DATE_REG').AsDateTime:=d1;
+      Post;
+      Inc(npp,1);
+    end;
+    Result:=true;
+  end else begin
+//    edDebug.Lines.Add('cat='+sl[6]+'   Active='+sl[8]);
+  end;
+end;
+//---------------------------------------------------------------------------
+procedure TForm1.BitBtn6Click(Sender: TObject);
+var
+  n:Integer;
+begin
+  AdsConnection2.Execute('DELETE FROM Eva');
+  EvaSys.Open;
+  eva.DisableControls;
+  eva.First;
+  try
+  label1.Caption:='';
+  n:=0;
+  while not Eva.Eof do begin
+    EvaSys.Append;
+    EvaSys.FieldByName('ATE_ID').AsString:=Eva.FieldByName('ATE_ID').AsString;
+    EvaSys.FieldByName('VID_ID').AsString:=Eva.FieldByName('VID_ID').AsString;
+//    EvaSys.FieldByName('VID_NAME').AsString:=Eva.FieldByName('VID_NAME').AsString;
+    EvaSys.FieldByName('ID').AsString:=Eva.FieldByName('EVA_ID').AsString;
+    EvaSys.FieldByName('NAME').AsString:=Copy(Eva.FieldByName('NAME').AsString,1,70);
+    EvaSys.FieldByName('NAME_B').AsString:=Copy(Eva.FieldByName('NAME_B').AsString,1,70);
+    EvaSys.FieldByName('DATE_REG').Value:=Eva.FieldByName('DATE_REG').Value;
+    EvaSys.Post;
     n:=n+1;
-    ate.Next;
+    Eva.Next;
     label1.Caption:=inttostr(n);
     Application.ProcessMessages;
   end;
-  ate.First;
-  ate.EnableControls;
-
+  finally
+    EvaSys.Close;
+    Eva.First;
+    Eva.EnableControls;
+  end;
 end;
-
 
 end.
 

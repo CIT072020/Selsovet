@@ -520,6 +520,7 @@ begin
     if nErr=0 then begin
       //-------------------------------------------------
       OpenMessage(slOpis.Strings[0]+' ... '+StringOfChar(' ',25));
+      GlobalTask.WriteToLogFile('Загрузка информации из "'+strFileArxiv+'" период: '+strNameFilter+' орган: '+strNameOrgan+' ('+IDZahFile+')');
       for i:=0 to slOpis.Count-1 do begin
         nnn:=0;
         ChangeMessage(slOpis.Strings[i]+' ... ');
@@ -541,6 +542,7 @@ begin
         s:=StringReplace(s, '&TYPE_OBJ&', slType.Strings[i], [rfReplaceAll, rfIgnoreCase]);
         try
           dmBase.AdsConnection.Execute(s);
+          GlobalTask.WriteToLogFile('Предварительное удаление: '+s);
         except
           on E: Exception do begin
             PutError('Таблица: '+tbDesc.TableName+Chr(13)+
@@ -552,6 +554,7 @@ begin
         if nErr>0 then break;
         //------------------------------------------------------
         ChangeMessage(slOpis.Strings[i]+'  загрузка');
+        GlobalTask.WriteToLogFile('Загрузка в "'+tbDesc.TableName);
         while not tbSource.Eof do begin
           nnn:=nnn+1;
           tbDesc.Append;
@@ -611,6 +614,7 @@ begin
         end;
         tbSource.Close;
         ChangeMessage(slOpis.Strings[i]+'  '+IntToStr(arrCountAdd[i]));
+        GlobalTask.WriteToLogFile('Загружено '+IntToStr(arrCountAdd[i]));
       end;
     end;
 //    tbSourceBaseProp.Active := false;

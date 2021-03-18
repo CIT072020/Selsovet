@@ -58,7 +58,7 @@ type
     procedure btOkClick(Sender: TObject);
     procedure cbDateIzmClick(Sender: TObject);
   private
-    arrComp:array [0..3] of TWinControl;
+    arrComp:array [0..2] of TWinControl;
     FTypeVigr: Integer;
     FDateIzm:Boolean;
     procedure GetStrDate( var strDate1, strDate2 : String);
@@ -190,7 +190,7 @@ begin
   arrComp[0]:=edMinYear;
   arrComp[1]:=lbMinYear;
   arrComp[2]:=cbDateIzm;
-  arrComp[3]:=btHelp;
+//  arrComp[3]:=btHelp;
   for i:=Low(arrComp) to High(arrComp) do arrComp[i].Visible:=false;
   if not cbOnlySmert.Visible
     then for i:=Low(arrComp) to High(arrComp) do arrComp[i].Top:=arrComp[i].Top-18;
@@ -488,12 +488,12 @@ var
   {$IFDEF ZAGS}
    ss :String;
   {$ENDIF}
-  strVersionZAGS,strDate1,strDate2, strDisk, strPathCopy : String;
+  sFilter,strVersionZAGS,strDate1,strDate2, strDisk, strPathCopy : String;
   dDate1,dDate2:TDateTime;
   sl : TStringList;
   i,j,nnn : Integer;
   n,m : Int64;
-  strPath,s,IDZags,sTable,sField,sAdd : String;
+  strPath,s,IDZags,sTable,sAdd : String;
   lCopy,lReport, lHandleExp : Boolean;
   nFree : TLargeInteger;
   Ini : TSasaIniFile;
@@ -687,12 +687,32 @@ begin
 
     sAdd:='';
     if FDateIzm then begin
-      sField:='DATEIZM';
+//      sField:='DATEIZM';
+      if strDate2='' 
+        then sAdd:='Year(DATEIZM)='+strDate1  // за год
+        else sAdd:='DATEIZM>=STOD('+QStr(strDate1)+') and DATEIZM<=STOD('+QStr(strDate2)+')';
       if (edMinYear.Value<>null) and (edMinYear.Value>0)   // введено ограничение на мин. год записи акта
-        then sAdd:='Year(DATEZ)>='+VarToStr(edMinYear.Value)+' and ';
+        then sAdd:=sAdd+' and Year(DATEZ)>='+VarToStr(edMinYear.Value);
+      sAdd:='('+sAdd+') or ';   // через "ИЛИ" с основным условием !!!
     end else begin
-      sField:='DATEZ';
+//      sField:='DATEZ';
     end;
+    if strDate2='' then begin  // за год
+      sFilter:=sAdd+'Year(DATEZ)='+strDate1;
+    end else begin
+      sFilter:=sAdd+'(DATEZ>='+'STOD('+QStr(strDate1)+') and DATEZ<=STOD('+QStr(strDate2)+'))';
+    end;
+    if (FTypeVigr=1) then begin
+      if not cbAll.Checked then begin   // только мой ЗАГС
+        sFilter:=sFilter+' and id_zags='+IDZags;
+      end;
+      sFilter:=sFilter+' and (resh_suda=false or empty(resh_suda))';    // не по решению суда
+    end;
+    {$IFDEF ZAGS}
+      if FZAGS>0 then begin
+        sFilter:=sFilter+' and id_source='+IntToStr(FZAGS);
+      end;
+    {$ENDIF}
 
     for i:=0 to slOpis.Count-1 do begin
       ChangeMessage(slOpis.Strings[i]+'   ');
@@ -701,26 +721,9 @@ begin
       tbDesc.TableName := tbSource.TableName;
       tbDesc.Open;
       tbSource.Filtered:=false;
-      if strDate2='' then begin  // за год
-        tbSource.Filter:=sAdd+'Year('+sField+')='+strDate1;
-      end else begin
-        tbSource.Filter:=sAdd+sField+'>='+'STOD('+QStr(strDate1)+') and '+
-                              sField+'<='+'STOD('+QStr(strDate2)+')';
-      end;
-//      WriteToDebug([tbSource.Tablename+':  '+tbSource.Filter]);
-      if (FTypeVigr=1) then begin
-        if not cbAll.Checked then begin   // только мой ЗАГС
-          tbSource.Filter:=tbSource.Filter+' and id_zags='+IDZags;
-        end;
-        tbSource.Filter:=tbSource.Filter+' and (resh_suda=false or empty(resh_suda))';    // не по решению суда
-      end;
-      {$IFDEF ZAGS}
-      if FZAGS>0 then begin
-        tbSource.Filter:=tbSource.Filter+' and id_source='+IntToStr(FZAGS);
-      end;
-      {$ENDIF}
+      tbSource.Filter:=sFilter;
       tbSource.Filtered:=true;
-//      ShowMessage(tbSource.Filter+'  '+IntToStr(tbSource.RecordCount));
+//      WriteToDebug([tbSource.Tablename+':  '+tbSource.Filter+'  '+IntToStr(tbSource.RecordCount]);
       while not tbSource.Eof do begin
         tbDesc.Append;
         arrCountDok[i] := arrCountDok[i] + 1;
@@ -835,6 +838,7 @@ begin
       Ini.WriteString('MAIN','BASE',dmBase.GetVersionBase(nil));
       Ini.WriteString('MAIN','VERSIONPROP','1');
       Ini.WriteString('MAIN','PODR',IDPodr);
+      Ini.WriteString('MAIN','FILTER',sFilter);
       {$IFDEF LAIS}
         Ini.WriteString('MAIN','TYPE','PERIOD');
       {$ELSE}

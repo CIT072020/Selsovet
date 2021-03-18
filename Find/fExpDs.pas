@@ -3,6 +3,7 @@ interface
 uses
    Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
    StdCtrls, db, Mask, ExtCtrls, CheckLst, fWait, ShellApi,
+   MetaTask,AdsTable,FuncPr,
    fExpGr, mExport, fGauge, FileCtrl, DBCtrlsEh;
 
 type
@@ -62,12 +63,19 @@ const
 
 function ExportDataSet(Msg: string; ds: TDataSet; ExportTag: TExportFormat; ExcludeFormat: TExportFormats; ExportDir: string; ShowGauge, SelectAll: Boolean; ExportColumns: TExportColumnList; slBookmark:TStringList):Boolean;
 var
-   CurDir: string;
+   sFields,sAdd,CurDir,s: string;
    NppColumn: TExportColumn;
    I: Integer;
    Column: TExportColumn;
 begin
    Result:=false;
+   i:=Pos(';',Msg);
+   sAdd:='';
+   if i>0 then begin
+     sAdd:=Copy(Msg,i+1,Length(Msg));
+     Msg:=Copy(Msg,1,i-1);
+   end;
+
    with TfmExpds.Create(Application) do begin
       CurDir:=GetCurrentDir;
       if ExportDir='' then begin
@@ -99,6 +107,25 @@ begin
                FExportColumns.Insert(0, NppColumn);
             end;
             //
+            sFields:='';
+            for I:=0 to Pred(ExportColumns.Count) do begin
+               Column:=FExportColumns.ByFieldName(ExportColumns[I].FieldName);
+               if (Column<>nil) and Column.Visible then begin
+                 sFields:=sFields+Column.DisplayName+'('+Column.FieldNameInFile+'),';
+               end;
+            end;
+            sFields:=Copy(sFields,1,Length(sFields)-1);
+            //----------------------------------------
+            s:=ds.ClassName+'('+ds.Name+')';
+            if ds is TAdsQuery then begin
+              s:=StringReplace(TAdsQuery(ds).SQL.Text, #13#10, ' ', [rfReplaceAll]);
+            end else if ds is TAdsTable then begin
+              s:='TableName:'+TAdsTable(ds).TableName+' ';
+            end;
+            if (ds.Filter<>'') and ds.Filtered
+              then s:=s+', filter='+ds.Filter;
+            GlobalTask.WriteToLogFile(sAdd+' эскпорт ('+FormatExt[FTarget]+')'#13#10+'  '+CheckLastSim(s,#13#10)+'  Fields:'+sFields);
+            //----------------------------------------
             DoExport(Msg);
          end;
          //[2007.08.06] запоминаем видимые графы

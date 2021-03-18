@@ -154,9 +154,10 @@ type
     procedure SetDemoVersion( Value : Boolean);
   public
 //    property idMetaCurDok : String read FidMetaCurDok write SetidMetaCurDok;
+    FLogTypes:String;
     property EnabledSaveParams : Boolean read FEnabledSaveParams write FEnabledSaveParams;
     property OnlyLocalParams : Boolean read FOnlyLocalParams write FOnlyLocalParams;
-    procedure WriteToLogFile(sSoob:String; slPar:TStringList=nil);
+    procedure WriteToLogFile(sSoob:String; slPar:TStringList=nil; nTypeLog:Integer=0);
     property LastError : String read FLastError write SetLastError;
     property DemoVersion : Boolean read FDemoVersion write SetDemoVersion;
     function GetPathService:String;
@@ -236,6 +237,7 @@ type
     procedure SaveParameters;
     function  WriteParamAsString( strName : String; strValue : String) : Boolean;
     function  WriteParamAsDate( strName : String; dDate:TDateTime) : Boolean;
+    function  ParamAsStringDef(strName: String; sDef:String): String;
     function  ParamAsString( strName : String) : String;
     function  ParamAsFloat( strName : String) : Extended;
     function  ParamAsInteger( strName : String) : Integer;
@@ -365,7 +367,7 @@ implementation
 uses {$IFNDEF NOT_USE_REPORT} fEditAllReports,
        {$IFDEF USE_FR3} fEditAllReports3, {$ENDIF}
      {$ENDIF}
-     DBCtrlsEh, DBGridEh;
+     DBCtrlsEh, DBGridEh, uTypes;
 
 procedure RegisterDataTask( Data : TDMTask);
 begin
@@ -395,6 +397,7 @@ begin
   FDemoVersion := false;
   FNameFileMainScript := 'prog.pas';
   FNameFileReportsIni:='reports.ini';
+  FLogTypes:='';
   FPathParam   := '';
   FPathSQLFiles:= 'SQL';
   FIniMainParams :=nil;
@@ -602,6 +605,13 @@ begin
   end else begin
     Result := FTaskParam.GetEditFromKod(sKod);
   end;
+end;
+
+function TMetaTask.ParamAsStringDef(strName: String; sDef:String): String;
+begin
+  Result:=ParamAsString(strName);
+  if Result=''
+    then Result:=sDef;
 end;
 
 function TMetaTask.ParamAsString(strName: String): String;
@@ -2177,18 +2187,18 @@ begin
 end;
 {$ENDIF}
 
-procedure TMetaTask.WriteToLogFile(sSoob:String; slPar:TStringList);
+procedure TMetaTask.WriteToLogFile(sSoob:String; slPar:TStringList; nTypeLog:Integer);
 var
   nSpaceB,nSpaceA:Integer;
   lFree,lKeepOpen:Boolean;
-  s,sTag,sFile:String;
+  s,sTag,sFile,sOld:String;
 begin
   if LogFile<>nil then begin
     try
       lKeepOpen:=false;
       nSpaceB:=0;
       nSpaceA:=0;
-      sTag:='All';
+      sTag:='ALL';
       sFile:='';
       lFree:=true;
       if slPar<>nil then begin
@@ -2199,7 +2209,17 @@ begin
         s:=slPar.Values['FILE'];    if s<>'' then sFile:=s;
         s:=slPar.Values['FREE'];    if s<>'' then if s='0' then lFree:=false;
       end;
-      LogFile.WriteToLogFile(sSoob,nSpaceB,nSpaceA,lKeepOpen,sTag,sFile);
+      if (nTypeLog=LOG_SQL) then begin
+        if (Pos('SQL;', FLogTypes)>0) then begin
+          sOld:=LogFile.LogFileName;
+          if sFile='' then LogFile.LogFileName:=CheckSleshN(PathWorkDir)+'LogSql.txt';
+          sSoob:=StringReplace(sSoob, #13#10, ' ', [rfReplaceAll]);
+          LogFile.WriteToLogFile(sSoob,nSpaceB,nSpaceA,lKeepOpen,sTag,sFile);
+          LogFile.LogFileName:=sOld;
+        end;
+      end else begin
+        LogFile.WriteToLogFile(sSoob,nSpaceB,nSpaceA,lKeepOpen,sTag,sFile);
+      end;
       if (slPar<>nil) and lFree then FreeAndNil(slPar);
     except
     end;

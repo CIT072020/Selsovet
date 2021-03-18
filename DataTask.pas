@@ -147,6 +147,7 @@ type
     FBaseId: String;
     FUseBaseParam : Boolean;
     FLogActive:Boolean;
+    FLogTypes:String;
     FLastError: String;
     FFirstConnent: Boolean;
     FCheckNewUser: Boolean;
@@ -216,6 +217,8 @@ type
     procedure OpenBaseParam;
     procedure CloseBaseParam;
     function LogActive:Boolean;
+    function LogTypes:String;
+    procedure SetLogTypes(sTypes:String);
 
     function  OpenOneTable(Table : TAdsTable) : Boolean;
     function  GetCommentTable(strName:String; IsEmptyToName:Boolean):String;
@@ -554,6 +557,7 @@ begin
   FListSharedConnects := nil;
   FIniSysParams := nil;
   FLogActive:=true;
+  FLogTypes:='';
 end;
 
 
@@ -1442,14 +1446,16 @@ end;
 function TdmTask.SimpleConnect( var strErr : String ) : Boolean;
 var
   sCode:String;
-begin
+begin             
+  strErr:='';
   Result := true;
   FLastDatabaseError := 0;
   try
     if IsDirBase(AdsConnection.ConnectPath,0) then begin
       AdsConnection.IsConnected := true;
-    end else begin            
+    end else begin
       FLastDatabaseError := -1;
+      strErr:='База данных не найдена: "'+AdsConnection.ConnectPath+'"';
     end;
     if FLastDatabaseError = 0 then begin
       if FUseSharedConnect then begin
@@ -1457,6 +1463,7 @@ begin
           AdsSharedConnection.IsConnected := true;
         end else begin
           FLastDatabaseError := -2;
+          strErr:='Системные справочники не найдены: "'+AdsSharedConnection.ConnectPath+'"';
         end;
       end;
     end;
@@ -1593,7 +1600,7 @@ begin
   showmessage(s);
 }
   while not lExit do begin
-    Result := SimpleConnect(strErr);
+    Result:=SimpleConnect(strErr);
     if Result then begin
       // проверим доступен ли каталог для подключения, если подключаемся не к словарю
       if not AdsConnection.IsDictionaryConn then begin
@@ -2521,6 +2528,8 @@ begin
       strErr:=FListErrorOpen.Strings[i]+#13#10;
     end;
     MemoWrite(NameFromExe('open_error'),strErr);
+  end else begin
+    DeleteFile(NameFromExe('open_error'));
   end;
   OpenBaseParam;
   finally
@@ -2788,7 +2797,7 @@ var
   strFile,s,strPath : String;
   Ini : TSasaIniFile;
   arr : TArrStrings;
-  i : Integer;
+  i : Integer;                
 begin
   strFile := strDir + '\' + GetNameFileSysParam;
   if FIniSysParams<>nil then begin
@@ -2818,6 +2827,9 @@ begin
   end;
   FUseBaseParam := FIniSysParams.ReadBool('PARAM','USE_BASE_PARAM', false);
   FLogActive := FIniSysParams.ReadBool('PARAM','LOG_ACTIVE', true);
+  FLogTypes  := StringReplace(FIniSysParams.ReadString('PARAM','LOG_TYPES', 'SQL'), ',', ';', [rfReplaceAll]);
+  if FLogTypes<>''
+    then FLogTypes:=FLogTypes+';';
 
   //----- усли ошибка открытия выходить из программы ---------------------------
   lCheckErrorOpen       := FIniSysParams.ReadBool('ADMIN','ERROROPEN', true);
@@ -2878,7 +2890,7 @@ begin
     AdsConnection.Compression:=GlobalPar.Compression;
     AdsSharedConnection.Compression:=GlobalPar.Compression;
     try
-      GlobalTask.LogFile.WriteToLogFile('Connection.Compression=ccAdsCompressAlways');
+      GlobalTask.WriteToLogFile('Connection.Compression=ccAdsCompressAlways');
     except
     end;
   end;
@@ -3505,23 +3517,27 @@ var
   oldBase : String;
 begin
   Result := '';
-  if Connect = nil then begin
-    Connect := AdsConnection;
+  if Connect=nil then begin
+    Connect:=AdsConnection;
   end;
-  oldBase := WorkQuery.DataBaseName;
-  if Connect.IsDictionaryConn  then begin
-    WorkQuery.Close;
-    WorkQuery.AdsCloseSQLStatement;
-    WorkQuery.SQL.Text := 'SELECT Version_Major, Version_Minor FROM '+SysQuery('system.dictionary');
-    WorkQuery.DatabaseName := Connect.Name;
-    try
+  try
+    if Connect.IsConnected and Connect.IsDictionaryConn  then begin
+      oldBase:=WorkQuery.DataBaseName;
+      WorkQuery.Close;
+      WorkQuery.AdsCloseSQLStatement;
+      WorkQuery.SQL.Text := 'SELECT Version_Major, Version_Minor FROM '+SysQuery('system.dictionary');
+      WorkQuery.DatabaseName := Connect.Name;
       WorkQuery.Open;
-      Result := Trim(WorkQuery.FieldByName('Version_Major').AsString+'.'+
-                WorkQuery.FieldByName('Version_Minor').AsString);
-    finally
+      Result := Trim(WorkQuery.FieldByName('Version_Major').AsString+'.'+WorkQuery.FieldByName('Version_Minor').AsString);
       WorkQuery.Close;
       WorkQuery.AdsCloseSQLStatement;
       WorkQuery.DatabaseName := oldBase;
+    end else begin
+      Result := 'нет подключения';
+    end;
+  except
+    on E:Exception do begin
+      Result:=E.Message;
     end;
   end;
 end;
@@ -4291,6 +4307,14 @@ function TdmTask.LogActive:Boolean;
 begin
   Result:=FLogActive;
 end;
+function TdmTask.LogTypes:String;
+begin
+  Result:=FLogTypes;
+end;
+procedure TdmTask.SetLogTypes(sTypes:String);
+begin
+  FLogTypes:=sTypes;
+end;
 
 //--------------------------------------------------------------------------------------
 function TdmTask.ReplaceTableBase(strPath:String; strTableName: String): Boolean;
@@ -4416,7 +4440,7 @@ begin
     on E:Exception do begin
       sSQL:=StringReplace(sSQL, #13#10, ' ', [rfReplaceAll]);
       LastError:='Ошибка открытия запроса: '+sSQL+chr(13)+chr(10)+'    >>'+E.Message;
-      GlobalTask.LogFile.WriteToLogFile(LastError);
+      GlobalTask.WriteToLogFile(LastError);
     end;
   end;
 end;
@@ -4443,7 +4467,7 @@ begin
       on E:Exception do begin
         sNewSQL:=StringReplace(sNewSQL, #13#10, ' ', [rfReplaceAll]);
         LastError:='ERROR ChangeSQL: '+sNewSQL+chr(13)+chr(10)+'    >>'+E.Message;
-        GlobalTask.LogFile.WriteToLogFile(LastError);
+        GlobalTask.WriteToLogFile(LastError);
       end;
     end;
   end;
@@ -4472,7 +4496,11 @@ var
   n,nCount:Integer;
   lFind:Boolean;                                        
 begin                  
-  sID:=Grid.DataSource.DataSet.FieldByName('ID').AsString;
+  sID:=Trim(Grid.DataSource.DataSet.FieldByName('ID').AsString);
+  if (sID='0') or (sID='') then begin
+    lDel:=true;
+    exit;
+  end;  
   WorkQuery.SQL.Text:='';
   {$IFDEF POST}
     WorkQuery.SQL.Text:=' select count(*) from DocMain where sign_org='+sID;
@@ -4507,11 +4535,11 @@ begin
         lFind:=true;
         if ss='' then ss:='Организация присутствует:'+#13#10;
         case n of
-          1: s:=s+'таблица вх.,исх.,адм.проц. (корреспондент) - '+IntToStr(nCount)+#13#10;
-          2: s:=s+'таблица собственников (полное) - '+IntToStr(nCount)+#13#10;
-          3: s:=s+'таблица собственников (текущее сост.) - '+IntToStr(nCount)+#13#10;
-          4: s:=s+'таблица истории собственников - '+IntToStr(nCount)+#13#10;
-          5: s:=s+'таблица населения (место работы) - '+IntToStr(nCount)+#13#10;
+          1: s:=s+'таблица вх.,исх.,адм.проц. (корреспондент) : '+IntToStr(nCount)+#13#10;
+          2: s:=s+'таблица собственников (полное) : '+IntToStr(nCount)+#13#10;
+          3: s:=s+'таблица собственников (текущее сост.) : '+IntToStr(nCount)+#13#10;
+          4: s:=s+'таблица истории собственников : '+IntToStr(nCount)+#13#10;
+          5: s:=s+'таблица населения (место работы) : '+IntToStr(nCount)+#13#10;
         end;
       end;
       WorkQuery.Next;

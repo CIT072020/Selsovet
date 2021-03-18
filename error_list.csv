@@ -1,1 +1,3 @@
 error_code.code;error_code.text;error_place;wrong_value;correct_value;check_name;description;identif
+"02";"Ошибка проверки данных";"guardianship_info/ward_data/identif";"7479795A002PB4";"unPerson";"Идентификационный номер";"Неверный идентификационный номер";" Подопечный:7479795A002PB4, Опекун:3080290E022PB8,"
+"02";"Ошибка проверки данных";"guardianship_info/guardian_data/identif";"3080290E022PB8";"unPerson";"Идентификационный номер";"Неверный идентификационный номер";" Подопечный:7479795A002PB4, Опекун:3080290E022PB8,"

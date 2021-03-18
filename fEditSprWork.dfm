@@ -1,6 +1,6 @@
 inherited fmEditSprWork: TfmEditSprWork
-  Left = 468
-  Top = 211
+  Left = 454
+  Top = 216
   Width = 726
   Height = 420
   Caption = #1057#1087#1088#1072#1074#1086#1095#1085#1080#1082' '#1086#1088#1075#1072#1085#1080#1079#1072#1094#1080#1081

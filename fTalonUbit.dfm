@@ -1,6 +1,6 @@
 inherited fmTalonUbit: TfmTalonUbit
-  Left = 381
-  Top = 75
+  Left = 411
+  Top = 111
   Caption = #1058#1072#1083#1086#1085' '#1091#1073#1099#1090#1080#1103
   ClientHeight = 753
   ClientWidth = 754
@@ -40,21 +40,8 @@ inherited fmTalonUbit: TfmTalonUbit
   inherited TBDock: TTBDock
     Width = 754
     inherited TBToolbar: TTBToolbar
-      Images = fmMain.ImageList
       inherited TBItemPerekl: TTBItem
         Visible = False
-      end
-      inherited TBItemFirst: TTBItem
-        Images = fmMain.ImageListMove
-      end
-      inherited TBItemPrev: TTBItem
-        Images = fmMain.ImageListMove
-      end
-      inherited TBItemNext: TTBItem
-        Images = fmMain.ImageListMove
-      end
-      inherited TBItemLast: TTBItem
-        Images = fmMain.ImageListMove
       end
       inherited TBToolbarOrgan: TTBToolbar
         Left = 750
@@ -82,7 +69,7 @@ inherited fmTalonUbit: TfmTalonUbit
       TabOrder = 0
       object Label38: TLabel
         Left = 13
-        Top = 7
+        Top = 11
         Width = 99
         Height = 13
         Caption = #1058#1072#1083#1086#1085' '#1089#1086#1089#1090#1072#1074#1083#1077#1085
@@ -95,7 +82,7 @@ inherited fmTalonUbit: TfmTalonUbit
       end
       object TextLich: TvchDBText
         Left = 336
-        Top = 6
+        Top = 8
         Width = 151
         Height = 18
         Color = clBtnFace
@@ -130,7 +117,7 @@ inherited fmTalonUbit: TfmTalonUbit
       end
       object cbProvDvig: TDBCheckBoxEh
         Left = 505
-        Top = 8
+        Top = 9
         Width = 137
         Height = 17
         Caption = #1055#1088#1086#1074#1086#1076#1080#1090#1100' '#1076#1074#1080#1078#1077#1085#1080#1077
@@ -1643,7 +1630,7 @@ inherited fmTalonUbit: TfmTalonUbit
         object edUdost: TDBComboBoxEh
           Left = 9
           Top = 113
-          Width = 262
+          Width = 350
           Height = 26
           DataField = 'PASP_UDOST'
           DataSource = dsDokument
@@ -2928,10 +2915,19 @@ inherited fmTalonUbit: TfmTalonUbit
       FieldName = 'AKT_SMERT'
       BlobType = ftMemo
     end
+    object DokumentATE_ID: TIntegerField
+      FieldName = 'ATE_ID'
+    end
+    object DokumentEVA_ID: TIntegerField
+      FieldName = 'EVA_ID'
+    end
   end
   inherited frDBDokument: TfrDBDataSet
     Left = 496
     Top = 114
+  end
+  inherited SvidPovtor: TkbmMemTable
+    Left = 656
   end
   inherited dsGorod: TDataSource
     Left = 624

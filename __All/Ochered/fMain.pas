@@ -31,7 +31,7 @@ uses
   adscnnct, uPSComponent, Animate, GIFCtrl, ComCtrls, fs_ichartrtti, mVerInfo,
   fs_idbrtti, fs_iclassesrtti, ZipForge, IdFTP, IdAntiFreezeBase,
   IdAntiFreeze, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
-  IdHTTP;
+  IdHTTP, cxGraphics;
 
 type
   TFormGurnal = class of TfmGurnal;
@@ -487,6 +487,7 @@ type
     TBItemJurnVigr: TTBItem;
     acSprDocSubjG: TAction;
     TBItem47: TTBItem;
+    ImageList24: TcxImageList;
     procedure acSetParametersExecute(Sender: TObject);
     procedure acAdminParametersExecute(Sender: TObject);
 
@@ -929,8 +930,8 @@ begin
     tmShedule.Enabled:=false;
   end;
   if tmShedule.Enabled
-    then GlobalTask.LogFile.WriteToLogFile('Установлен таймер выгрузки, интервал :'+InttoStr(tmShedule.Interval))
-    else GlobalTask.LogFile.WriteToLogFile('Таймер выгрузки отключен');
+    then GlobalTask.WriteToLogFile('Установлен таймер выгрузки, интервал :'+InttoStr(trunc(tmShedule.Interval/60000)))
+    else GlobalTask.WriteToLogFile('Таймер выгрузки отключен');
 //  if GlobalTask.ParamAsBoolean('AUTO_VIGR_OCH')
 //    then AddNotifyProg(fmMain, 'Yes ['+inttostr(length(FArrDate))+']', false, true)
 //    else AddNotifyProg(fmMain, 'No  ['+inttostr(length(FArrDate))+']', false, true);
@@ -1096,7 +1097,7 @@ begin
    ImageList2RTF(ImageList,GlobalTask.PathService+'img_list.rtf');
  end;
 
- GlobalTask.LogFile.WriteToLogFile('Завершен сеанс пользователя.');
+ GlobalTask.WriteToLogFile('Завершен сеанс пользователя.');
  FEventsWordReports.Free;
  FEventsBlankReports.Free;
  FEventsBlankZAGSReports.Free;
@@ -2548,6 +2549,7 @@ begin
         Gurnal.DateFiks := fmMain.DateFiks;
         if Gurnal.LoadQuery then begin
           Gurnal.LoadFromIni;
+          Gurnal.PrepareMenu;
           Globaltask.CurrentOpisEdit.SetKeyForm(Gurnal,nil);
           ListGurnal.AddObject(strName, Gurnal);
         end else begin
@@ -3297,7 +3299,7 @@ begin
       end;
     end;
   end;
-  GlobalTask.LogFile.WriteToLogFile(s+E.Message);
+  GlobalTask.WriteToLogFile(s+E.Message);
   if (E is EADSDatabaseError) then begin
     if (EADSDatabaseError(E).ACEErrorCode=7057) and (EADSDatabaseError(E).TableName<>'') then begin
       s := 'Таблица: '+EADSDatabaseError(E).TableName+' ';
@@ -3795,8 +3797,8 @@ begin
       end;
     end;
     if tmShedule.Enabled
-      then GlobalTask.LogFile.WriteToLogFile('Установлен таймер выгрузки, интервал :'+InttoStr(tmShedule.Interval))
-      else GlobalTask.LogFile.WriteToLogFile('Таймер выгрузки отключен');
+      then GlobalTask.WriteToLogFile('Установлен таймер выгрузки, интервал :'+InttoStr(trunc(tmShedule.Interval/60000))+'мин.')
+      else GlobalTask.WriteToLogFile('Таймер выгрузки отключен');
 
     if tmShedule.Enabled then begin   // первый раз проверим выгрузку без таймера
       RunVigrOchShedule;
@@ -4346,7 +4348,7 @@ begin
         Screen.Cursor:=crDefault;
         s:=E.Message;
         if lShow
-          then PutError(s) else GlobalTask.LogFile.WriteToLogFile(s);
+          then PutError(s) else GlobalTask.WriteToLogFile(s);
         Screen.Cursor:=cur;
       end;
     end;
@@ -4364,14 +4366,14 @@ begin
       Screen.Cursor:=crDefault;
       s:='Загрузка прервана';
       if lShow
-        then ShowMessage(s) else GlobalTask.LogFile.WriteToLogFile(s);
+        then ShowMessage(s) else GlobalTask.WriteToLogFile(s);
       Screen.Cursor:=cur;
     end;
     on E:Exception do begin
       cur:=Screen.Cursor;
       Screen.Cursor:=crDefault;
       if lShow
-        then PutError(E.Message) else GlobalTask.LogFile.WriteToLogFile(E.Message);
+        then PutError(E.Message) else GlobalTask.WriteToLogFile(E.Message);
       Screen.Cursor:=cur;
     end;
   end;
@@ -4802,7 +4804,7 @@ begin
   if _WorkedThread_=true then s:=s+' _WorkedThread_=true ' else s:=s+' _WorkedThread_=false';
 
   }
-  GlobalTask.LogFile.WriteToLogFile('таймер выгрузки');
+  GlobalTask.WriteToLogFile('таймер выгрузки');
   s:='';
   if not FRunTimer and ((Screen.ActiveForm=nil) or (Screen.ActiveForm=Self)) and (ListGurnal.Count=0) and (_WorkedThread_=false) then begin
     FRunTimer:=true;

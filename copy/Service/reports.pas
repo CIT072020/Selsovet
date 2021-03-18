@@ -4,65 +4,70 @@ begin result:='cast(NValue as sql_numeric(15,4))';  end;
 //procedure GetSpravSostavSem(sID:String);
 //begin ExecOneReport(2{'SprMGS'}, false, sID, nil); end;
 
-function AddBLK:String; begin if GlobalTask.ParamAsBoolean('BLK_WITH_IN')=true then Result:='ИН' else Result:=''; end;
+//function AddBLK:String; begin if GlobalTask.ParamAsBoolean('BLK_WITH_IN')=true then Result:='ИН' else Result:=''; end;
+function AddBLK:String; begin Result:=''; end;
 
-procedure Blank_Z_R;   begin GlobalTask.PreviewReport('&Заявление о регистрации рождения'+AddBLK+'.fr3'); end;
-procedure Blank_Z_R55; begin GlobalTask.PreviewReport('&Заявление о регистрации рождения ст55'+AddBLK+'.fr3'); end;
-procedure Blank_Z_RZ;  begin GlobalTask.PreviewReport('&Заявление о регистрации рождения оставлен.fr3'); end;
-procedure Blank_Z_RN;  begin GlobalTask.PreviewReport('&Заявление о регистрации рождения найден.fr3'); end;
-procedure Blank_Z_S;   begin GlobalTask.PreviewReport('&Заявление о регистрации смерти'+AddBLK+'.fr3'); end;
-procedure Blank_Z_S6;  begin GlobalTask.PreviewReport('&Заявление о регистрации смерти 6дней.fr3'); end;
-procedure Blank_Z_U;   begin GlobalTask.PreviewReport('&Заявление о регистрации установления отцовства'+AddBLK+'.fr3'); end;
-procedure Blank_Z_US;  begin GlobalTask.PreviewReport('&Заявление о регистрации установления отцовства суд'+AddBLK+'.fr3'); end;
-procedure Blank_Z_B;   begin GlobalTask.PreviewReport('&Заявление о регистрации заключения брака'+AddBLK+'.fr3'); end;
-procedure Blank_Z_SBV; begin GlobalTask.PreviewReport('&Заявление о снижении брачного возраста.fr3'); end;
-procedure Blank_Z_NO;  begin GlobalTask.PreviewReport('&Заявление не является отцом.fr3'); end;
-procedure Blank_Z_SUO; begin GlobalTask.PreviewReport('&Заявление о согласии на установление отцовства.fr3'); end;
-procedure Blank_Z_UM;  begin GlobalTask.PreviewReport('&Заявление о регистрации установления материнства'+AddBLK+'.fr3'); end;
-procedure Blank_Z_SUM; begin GlobalTask.PreviewReport('&Заявление о согласии на установление материнства.fr3'); end;
-procedure Blank_Z_RB;  begin GlobalTask.PreviewReport('&Заявление о регистрации расторжения брака'+AddBLK+'.fr3'); end;
-procedure Blank_Z_RB35;begin GlobalTask.PreviewReport('&Заявление о регистрации расторжения брака35'+AddBLK+'.fr3'); end; 
-procedure Blank_Z_RU;  begin GlobalTask.PreviewReport('&Заявление о регистрации усыновления'+AddBLK+'.fr3'); end;
-procedure Blank_Z_RPI; begin GlobalTask.PreviewReport('&Заявление о регистрации перемены имени'+AddBLK+'.fr3'); end;
-procedure Blank_Z_AA;  begin GlobalTask.PreviewReport('&Заявление об аннулировании записи акта.fr3'); end;
-procedure Blank_Z_VI;  begin GlobalTask.PreviewReport('&Заявление о внесении изменений.fr3'); end;
-procedure Blank_Z_VA;  begin GlobalTask.PreviewReport('&Заявление о восстановлении записи акта.fr3'); end;
-procedure Blank_Z_VPS; begin GlobalTask.PreviewReport('&Заявление о выдаче повторного свидетельства.fr3'); end;
+procedure Blank_Z_R;   begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации рождения'+AddBLK+'.fr3'); end;
+procedure Blank_Z_R55; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации рождения ст55'+AddBLK+'.fr3'); end;
+procedure Blank_Z_RZ;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации рождения оставлен.fr3'); end;
+procedure Blank_Z_RN;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации рождения найден.fr3'); end;
+procedure Blank_Z_S;   begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации смерти'+AddBLK+'.fr3'); end;
+procedure Blank_Z_S6;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации смерти 6дней.fr3'); end;
+procedure Blank_Z_U;   begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации установления отцовства'+AddBLK+'.fr3'); end;
+procedure Blank_Z_US;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации установления отцовства суд'+AddBLK+'.fr3'); end;
+procedure Blank_Z_B;   begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации заключения брака'+AddBLK+'.fr3'); end;
+procedure Blank_Z_SBV; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о снижении брачного возраста.fr3'); end;
+procedure Blank_Z_NO;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление не является отцом.fr3'); end;
+procedure Blank_Z_SUO; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о согласии на установление отцовства.fr3'); end;
+procedure Blank_Z_UM;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации установления материнства'+AddBLK+'.fr3'); end;
+procedure Blank_Z_SUM; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о согласии на установление материнства.fr3'); end;
+procedure Blank_Z_RB;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации расторжения брака'+AddBLK+'.fr3'); end;
+procedure Blank_Z_RB35;begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации расторжения брака35'+AddBLK+'.fr3'); end; 
+procedure Blank_Z_RU;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации усыновления'+AddBLK+'.fr3'); end;
+procedure Blank_Z_RPI; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации перемены имени'+AddBLK+'.fr3'); end;
+procedure Blank_Z_AA;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление об аннулировании записи акта.fr3'); end;
+procedure Blank_Z_VI;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о внесении измененийбл.fr3'); end;
+procedure Blank_Z_VA;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о восстановлении записи акта.fr3'); end;
+procedure Blank_Z_VPS; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о выдаче повторного свидетельства.fr3'); end;
 
+procedure BlankRMNB; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о рождении матери не состоящей в браке.fr3'); end;
+procedure BlankUOR;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление об установлении отцовства по заявлению родителей.fr3'); end;
+procedure BlankSBV;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о снижении брачного возраста.fr3'); end;
+procedure BlankBRK;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о вступлении в брак.fr3'); end;
+procedure BlankBRKR; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о вступлении в брак2.fr3'); end;
+procedure BlankZVI;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заключение о внесении изм доп и испр в загс.fr3'); end;
+procedure BlankZPF;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заключение о перемене ФИО ф 17.fr3'); end;
+procedure BlankZSV;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заключение о снижении брачного возраста.fr3'); end;
+procedure BlankAPN;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Акт проверки наличия бланков.fr3'); end;
+procedure BlankPNB;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Акт на списание использованных бланков.fr3'); end;
 
-procedure BlankRMNB; begin GlobalTask.PreviewReport('&Заявление о рождении матери не состоящей в браке.fr3'); end;
-procedure BlankUOR;  begin GlobalTask.PreviewReport('&Заявление об установлении отцовства по заявлению родителей.fr3'); end;
-procedure BlankSBV;  begin GlobalTask.PreviewReport('&Заявление о снижении брачного возраста.fr3'); end;
-procedure BlankBRK;  begin GlobalTask.PreviewReport('&Заявление о вступлении в брак.fr3'); end;
-procedure BlankBRKR; begin GlobalTask.PreviewReport('&Заявление о вступлении в брак2.fr3'); end;
-procedure BlankZVI;  begin GlobalTask.PreviewReport('&Заключение о внесении изм доп и испр в загс.fr3'); end;
-procedure BlankZPF;  begin GlobalTask.PreviewReport('&Заключение о перемене ФИО ф 17.fr3'); end;
-procedure BlankZSV;  begin GlobalTask.PreviewReport('&Заключение о снижении брачного возраста.fr3'); end;
-procedure BlankAPN;  begin GlobalTask.PreviewReport('&Акт проверки наличия бланков.fr3'); end;
-procedure BlankPNB;  begin GlobalTask.PreviewReport('&Акт на списание использованных бланков.fr3'); end;
+procedure BlankZPR;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации по месту жительства.frf'); end;
+procedure BlankZPR2; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации по месту пребывания.frf'); end;
+procedure BlankZPR_A5;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации по месту жительстваА5.fr3'); end;
+procedure BlankZPR2_A5; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации по месту пребыванияА5.fr3'); end;
+procedure BlankZVP;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о снятии с учета по месту пребывания.frf'); end;
 
-procedure BlankZPR;  begin GlobalTask.PreviewReport('&Заявление о регистрации по месту жительства.frf'); end;
-procedure BlankZPR2; begin GlobalTask.PreviewReport('&Заявление о регистрации по месту пребывания.frf'); end;
-procedure BlankZPR_A5;  begin GlobalTask.PreviewReport('&Заявление о регистрации по месту жительстваА5.fr3'); end;
-procedure BlankZPR2_A5; begin GlobalTask.PreviewReport('&Заявление о регистрации по месту пребыванияА5.fr3'); end;
-procedure BlankZVP;  begin GlobalTask.PreviewReport('&Заявление о снятии с учета по месту пребывания.frf'); end;
+procedure BlankZRR;  begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о регистрации ребенка.fr3'); end;
+procedure BlankZPSB; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о повт свид о браке.fr3'); end;
+procedure BlankZPSS; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о повт свид о смерти.fr3'); end;
+procedure BlankAKTO; begin GlobalTask.WorkReport(IsSystemAdmin,'&Акт обследования.frf'); end;
 
-procedure BlankZRR;  begin GlobalTask.PreviewReport('&Заявление о регистрации ребенка.fr3'); end;
-procedure BlankZPSB; begin GlobalTask.PreviewReport('&Заявление о повт свид о браке.fr3'); end;
-procedure BlankZPSS; begin GlobalTask.PreviewReport('&Заявление о повт свид о смерти.fr3'); end;
-procedure BlankAKTO; begin GlobalTask.PreviewReport('&Акт обследования.frf'); end;
+procedure BlankZASR; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о выдаче арх справки о рождении.fr3'); end;
+procedure BlankZASS; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о выдаче арх справки о смерти.fr3'); end;
+procedure BlankZSDF; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление Справки о браке (о расторжении).fr3'); end;
 
-procedure BlankZASR; begin GlobalTask.PreviewReport('&Заявление о выдаче арх справки о рождении.fr3'); end;
-procedure BlankZASS; begin GlobalTask.PreviewReport('&Заявление о выдаче арх справки о смерти.fr3'); end;
-procedure BlankZSDF; begin GlobalTask.PreviewReport('&Заявление Справки о браке (о расторжении).fr3'); end;
+procedure BlankOBZS; begin GlobalTask.WorkReport(IsSystemAdmin,'&Оборотка записи о смерти.fr3'); end;
+procedure BlankIPPS; begin GlobalTask.WorkReport(IsSystemAdmin,'&Извещение о препровождении свидетельства.fr3'); end;
 
-procedure BlankOBZS; begin GlobalTask.PreviewReport('&Оборотка записи о смерти.fr3'); end;
-procedure BlankIPPS; begin GlobalTask.PreviewReport('&Извещение о препровождении свидетельства.fr3'); end;
+procedure BlankZVINN; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заключение о внесении ИННбл.fr3'); end; 
+procedure BlankZVIN; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заключение о внесении ИНбл.fr3'); end; 
+procedure BlankZIN; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о внесении ИНбл.fr3'); end; 
+procedure BlankZSOZB; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о выдаче справки об отсутствии записи акта о браке.fr3'); end;
 
-procedure BlankZVINN; begin GlobalTask.PreviewReport('&Заключение о внесении ИННбл.fr3'); end; 
-procedure BlankZVIN; begin GlobalTask.PreviewReport('&Заключение о внесении ИНбл.fr3'); end; 
-procedure BlankZIN; begin GlobalTask.PreviewReport('&Заявление о внесении ИНбл.fr3'); end; 
-procedure BlankZSOZB; begin GlobalTask.PreviewReport('&Заявление о выдаче справки об отсутствии записи акта о браке.fr3'); end;
+procedure Blank_Z_MNO; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление матери не является отцом.fr3'); end; 
+procedure Blank_Z_FIO21; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление о перемене ФИО 21.fr3'); end; 
+procedure Blank_Z_NZB; begin GlobalTask.WorkReport(IsSystemAdmin,'&Заявление об отсутствии записи о браке.fr3'); end;
+
 //--------------------------------------------------------
 //  [RunReport_] + [KOD отчета]   nID-идентификатор, sName-название отчета
 function RunReport_AktSmertCopia(nID:Integer; sName:String):Boolean;
@@ -119,7 +124,9 @@ begin
 
     'Sum( CASE WHEN b1.nvalue>4 THEN 1 ELSE 0 END ) K5_KOLVO,'+
     'Sum( CASE WHEN b1.nvalue>4 THEN CAST(b2.nvalue as SQL_NUMERIC) ELSE 0 END ) K5_PL_ALL,'+
-    'Sum( CASE WHEN b1.nvalue>4 THEN CAST(b3.nvalue as SQL_NUMERIC) ELSE 0 END ) K5_PL_GIL'+
+    'Sum( CASE WHEN b1.nvalue>4 THEN CAST(b3.nvalue as SQL_NUMERIC) ELSE 0 END ) K5_PL_GIL,'+
+
+    'Sum( CASE WHEN IsNull(b1.nvalue,0)<=0 THEN 1 ELSE 0 END ) K0_KOLVO'+
 
     ' FROM БазаДомов d '+
     ' LEFT JOIN СпрНасПунктов s ON s.id=d.punkt '+
@@ -130,10 +137,13 @@ begin
     '    (d.candelete=false or d.candelete is null) and (s.not_stat is null or s.not_stat=false) '+
     '    and ((d.id in (select distinct(adres_id) from ЛицевыеСчета where own_house=true and date_fiks='+DateToSQL(GetDateFiksReport)+') and d.gilfond=0) or d.gilfond=1)'+
     ' GROUP BY 1,2';
+  MemoWrite('report.sql',strSQL);
   q:=dbOpenSQL(strSQL,'');
   while not q.Eof do begin
     ds.Append;
     ds.Fld('BOK').AsString := q.Fld('NAME').AsString;
+    if q.Fld('K0_KOLVO').AsInteger>0
+      then ds.Fld('BOK').AsString:=ds.Fld('BOK').AsString+' ('+q.Fld('K0_KOLVO').AsString+')';
     n:=SeekValueSpr('СпрНасПунктов','ID',q.Fld('PUNKT').AsInteger,'TYPEPUNKT');
     ds.Fld('SSS1').AsString:=SeekValueSpr('TypePunkt','ID',n,'NAME');
     for i:=1 to 15 do begin
@@ -196,6 +206,7 @@ begin
     '    (d.candelete=false or d.candelete is null) and (s.not_stat is null or s.not_stat=false) '+
     '    and ((d.id in (select distinct(adres_id) from ЛицевыеСчета where own_house=true and date_fiks='+DateToSQL(GetDateFiksReport)+') and d.gilfond=0) or d.gilfond=1)'+
     ' GROUP BY 1,2';
+  MemoWrite('report.sql',strSQL);
   q:=dbOpenSQL(strSQL,'');
   if dbLastError()<>'' then begin
     ShowMessage(dbLastError());
@@ -426,10 +437,11 @@ begin
     'CAST( Sum( CASE WHEN POKAZ='+QStr('POSTR')  +' THEN '+PokazZeml+' ELSE 0 END) AS SQL_NUMERIC) NUM3,'+
     'CAST( Sum( CASE WHEN POKAZ='+QStr('PRIUSAD') +' THEN '+PokazZeml+' ELSE 0 END) AS SQL_NUMERIC) NUM4,'+
     'CAST( Sum( CASE WHEN POKAZ='+QStr('SOTKI')+' THEN '+PokazZeml+' ELSE 0 END) AS SQL_NUMERIC) NUM5,'+
-    'CAST( Sum( CASE WHEN POKAZ='+QStr('ARENDA')+' THEN '+PokazZeml+' ELSE 0 END) AS SQL_NUMERIC) NUM6,'+
-    'CAST( Sum( CASE WHEN POKAZ='+QStr('OGOROD')  +' THEN '+PokazZeml+' ELSE 0 END) AS SQL_NUMERIC) NUM7,'+
-    'CAST( Sum( CASE WHEN POKAZ='+QStr('PNV')+' THEN '+PokazZeml+' ELSE 0 END) AS SQL_NUMERIC) NUM8,'+
-    'CAST( Sum( CASE WHEN POKAZ='+QStr('LPX')  +' THEN '+PokazZeml+' ELSE 0 END) AS SQL_NUMERIC) NUM9'+
+    'CAST( Sum( CASE WHEN POKAZ='+QStr('SOTKIS')+' THEN '+PokazZeml+' ELSE 0 END) AS SQL_NUMERIC) NUM6,'+
+    'CAST( Sum( CASE WHEN POKAZ='+QStr('ARENDA')+' THEN '+PokazZeml+' ELSE 0 END) AS SQL_NUMERIC) NUM7,'+
+    'CAST( Sum( CASE WHEN POKAZ='+QStr('OGOROD')  +' THEN '+PokazZeml+' ELSE 0 END) AS SQL_NUMERIC) NUM8,'+
+    'CAST( Sum( CASE WHEN POKAZ='+QStr('PNV')+' THEN '+PokazZeml+' ELSE 0 END) AS SQL_NUMERIC) NUM9,'+
+    'CAST( Sum( CASE WHEN POKAZ='+QStr('LPX')  +' THEN '+PokazZeml+' ELSE 0 END) AS SQL_NUMERIC) NUM10'+
     ' FROM БазаСвойствОбъектов b'+
     ' LEFT JOIN ЛицевыеСчета l ON l.id=b.id and l.date_fiks=b.date_fiks'+
     ' LEFT JOIN БазаДомов d ON l.adres_id=d.id and l.date_fiks=d.date_fiks'+
@@ -446,7 +458,7 @@ begin
     //найдем нас. пункт
     if dbLocate(ds, 'INTKEY', [q.Fld('PUNKT').AsInteger], '') then begin
       ds.Edit;
-      for i:=1 to 9 do begin
+      for i:=1 to 10 do begin
         ds.Fld('NUM'+IntToStr(i)).AsFloat := q.Fld('NUM'+IntToStr(i)).AsFloat;
       end;
       ds.Post;
@@ -455,12 +467,10 @@ begin
   end;
   //----из адресной книги -------------------------------------------------------
   strSQL := 'SELECT d.punkt,'+
-//    'CAST( Sum( CASE WHEN POKAZ='+QStr('PLOSH_UCH')+' THEN cast(NValue as sql_double) ELSE 0 END) AS SQL_DOUBLE) NUM10'+
-    'CAST( Sum( CASE WHEN POKAZ='+QStr('PLOSH_UCH')+' THEN '+PokazZeml+' ELSE 0 END) AS SQL_DOUBLE) NUM10'+
-    ' FROM БазаСвойствОбъектов b'+
-    ' LEFT JOIN БазаДомов d ON d.id=b.id and d.date_fiks=b.date_fiks'+
+    ' IFNULL(Sum(PLOSH_UCH),0) KOLVO'+
+    ' FROM БазаДомов d'+
     ' LEFT JOIN СпрНасПунктов s ON s.id=d.punkt '+
-    ' WHERE b.date_fiks=' + DateToSQL(GetDateFiksReport)+' and b.typeobj='+strType_Adres+' and (s.not_stat is null or s.not_stat=false) '+
+    ' WHERE d.date_fiks=' + DateToSQL(GetDateFiksReport)+' and (s.not_stat is null or s.not_stat=false) '+
     ' GROUP BY 1';
 //  writedebug(strSQL);
   dbChangeSQL(q, strSQL, true);
@@ -468,26 +478,25 @@ begin
     //найдем нас. пункт
     if dbLocate(ds, 'INTKEY', [q.Fld('PUNKT').AsInteger], '') then begin
       ds.Edit;
-      ds.Fld('NUM10').AsFloat := q.Fld('NUM10').AsFloat;
+      ds.Fld('NUM11').AsFloat := q.Fld('KOLVO').AsFloat;
       ds.Post;
     end;
     q.Next;
   end;
   //----из адресной книги без лицевых счетов -------------------------------------------------------
   strSQL := 'SELECT d.punkt,'+
-    'CAST( Sum( CASE WHEN POKAZ='+QStr('PLOSH_UCH')+' THEN '+PokazZeml+' ELSE 0 END) AS SQL_DOUBLE) NUM11'+
-    ' FROM БазаСвойствОбъектов b'+
-    ' LEFT JOIN БазаДомов d ON d.id=b.id and d.date_fiks=b.date_fiks'+
+    ' IFNULL(Sum(PLOSH_UCH),0) KOLVO'+
+    ' FROM БазаДомов d'+
     ' LEFT JOIN СпрНасПунктов s ON s.id=d.punkt '+
-    ' WHERE b.date_fiks=' + DateToSQL(GetDateFiksReport)+' and b.typeobj='+strType_Adres+' and (s.not_stat is null or s.not_stat=false) and '+
-    '    not exists (select adres_id from ЛицевыеСчета l where l.date_fiks=b.date_fiks and l.adres_id=b.id) '+
+    ' WHERE d.date_fiks=' + DateToSQL(GetDateFiksReport)+' and (s.not_stat is null or s.not_stat=false) and '+
+    '    not exists (select adres_id from ЛицевыеСчета l where l.date_fiks=d.date_fiks and l.adres_id=d.id) '+
     ' GROUP BY 1';
   dbChangeSQL(q, strSQL, true);
   while not q.Eof do begin
     //найдем нас. пункт
     if dbLocate(ds, 'INTKEY', [q.Fld('PUNKT').AsInteger], '') then begin
       ds.Edit;
-      ds.Fld('NUM11').AsFloat := q.Fld('NUM11').AsFloat;
+      ds.Fld('NUM12').AsFloat := q.Fld('KOLVO').AsFloat;
       ds.Post;
     end;
     q.Next;
@@ -959,7 +968,7 @@ end;  // KoshkiSobaki_NP
 
 
 //------------------------------------------------------------------------------
-// теперь это приложение 11 к пост. мис. юстиции
+// теперь это приложение 12 к пост. мис. юстиции
 // отчет о государственной регистрации актов гражданского состояния
 function Stat_F24_ZAGS : Boolean;
 var
@@ -977,13 +986,14 @@ begin
   i := StrToInt(FormatDateTime('YYYY', GlobalTask.CurrentDate))-1;
   f.AddParamEx(i, 'За какой год'    , 'YEAR'    ,'TYPE=LIST~DESC=KEY_YEARS');
   f.AddParamEx(Now, 'Дата формирования' , 'DATEF' ,'TYPE=DATE');
-  f.AddParamEx(0, 'Заключений о внесении изменений (всего)', 'ZAK_ALL','');
-  f.AddParamEx(0, 'Об отказе в изменении', 'ZAK_OTK','');
+//  f.AddParamEx(0, 'Заключений о внесении изменений (всего)', 'ZAK_ALL','');
+//  f.AddParamEx(0, 'Об отказе в изменении', 'ZAK_OTK','');
   f.AddParamEx(0, 'Аннулировано записей актов', 'ANULIR','');
   f.AddParamEx(0, 'Золотых свадеб', 'SVADEB_Z','');
   f.AddParamEx(0, 'Серебряных свадеб', 'SVADEB_S','');
-  f.AddParamEx(0, 'Взыскано госпошлины', 'POSHLINA','');
-  f.AddParamEx(0, 'Дополнительные услуги', 'PLAT','');
+  f.AddParamEx(0, 'Других свадеб', 'SVADEB_D','');
+  f.AddParamEx(0, 'Взыскано госпошлины (0-расчет)', 'POSHLINA','');
+  f.AddParamEx(0, 'Дополнительные услуги (0-расчет)', 'PLAT','');
   if IdProg='ZAGS' then begin
     f.AddParamEx(true, 'З\а всех органов загс', 'ALL','');
     f.AddParamEx(false, 'Сформировать файл для портала РИАП', 'RIAP','');
@@ -997,19 +1007,20 @@ begin
     ds := FindReportTable('ZAGS');
     dbZap(ds);
     ds.Append;
-    ds.Fld('NUM19').AsInteger:=f.GetValue('ZAK_ALL','N');
-    ds.Fld('NUM20').AsInteger:=f.GetValue('ZAK_OTK','N');
-    ds.Fld('NUM21').AsInteger:=f.GetValue('ANULIR','N');
-    ds.Fld('NUM22').AsInteger:=f.GetValue('SVADEB_Z','N');
-    ds.Fld('NUM23').AsInteger:=f.GetValue('SVADEB_S','N');
-    ds.Fld('NUM24').AsInteger:=f.GetValue('POSHLINA','N');
-    ds.Fld('NUM25').AsInteger:=f.GetValue('PLAT','N');
-    ds.Fld('DATE_FORM').AsDateTime:=f.GetValue('DATEF','D');
     if IdProg='ZAGS' then begin
       if f.GetValue('ALL','L')=false
         then strAddWhere:=' and ID_ZAGS='+GlobalTask.ParamAsString('ID');
       lRiap:=f.GetValue('RIAP','L'); 
     end;
+    ds.Fld('NUM19').AsInteger:=0;//f.GetValue('ZAK_ALL','N');   заключений всего
+    ds.Fld('NUM20').AsInteger:=0;//f.GetValue('ZAK_OTK','N');   отказ
+    ds.Fld('NUM21').AsInteger:=f.GetValue('ANULIR','N');
+    ds.Fld('NUM22').AsInteger:=f.GetValue('SVADEB_Z','N');
+    ds.Fld('NUM23').AsInteger:=f.GetValue('SVADEB_S','N');
+    ds.Fld('NUM32').AsInteger:=f.GetValue('SVADEB_D','N');
+    ds.Fld('NUM24').AsInteger:=f.GetValue('POSHLINA','N');
+    ds.Fld('NUM25').AsInteger:=f.GetValue('PLAT','N');
+    ds.Fld('DATE_FORM').AsDateTime:=f.GetValue('DATEF','D');
   end;
   f.Free;
   Result := false;
@@ -1033,14 +1044,17 @@ begin
     ds.Fld('NUM4').AsInteger  := q.Fld('G1').AsInteger;
     //-------------- браки
     strSQL := 'SELECT Count(*) allb, '+
-      ' Sum( IIF( ON_GRAG<>'+strGrag+' or ONA_GRAG<>'+strGrag+',1,0)) IN_GR,'+
+      ' Sum( IIF( (ON_GRAG<>'+strGrag+' and ON_GRAG<>999) or (ONA_GRAG<>'+strGrag+' and ONA_GRAG<>999),1,0)) IN_GR,'+
+      ' Sum( IIF( ON_GRAG=999 or ONA_GRAG=999,1,0)) BEZ_GR,'+
       ' Sum( IIF( '+ GetSQLVozrast('IFNULL(DATEB,DATEZ)','ON_DATER')+'<18 or '+
                      GetSQLVozrast('IFNULL(DATEB,DATEZ)','ONA_DATER')+'<18,1,0)) as NES_GR'+
       ' FROM ЗаключениеБраков WHERE Year(datez)='+strGod + ' and vosstan=false'+strAddWhere
+//    writedebug(strSQL);
     dbChangeSQL(q,strSQL,true);
     ds.Fld('NUM5').AsInteger  := q.Fld('ALLB').AsInteger;
     ds.Fld('NUM6').AsInteger  := q.Fld('IN_GR').AsInteger;
     ds.Fld('NUM7').AsInteger  := q.Fld('NES_GR').AsInteger;
+    ds.Fld('NUM31').AsInteger := q.Fld('BEZ_GR').AsInteger;
     //-------------- установление отцовства
     strSQL := 'SELECT Count(*) allo, '+
       ' Sum( IIF( OSNOV=2,1,0)) RESH_SUDA'+
@@ -1048,46 +1062,79 @@ begin
     dbChangeSQL(q,strSQL,true);
     ds.Fld('NUM8').AsInteger  := q.Fld('ALLO').AsInteger;
     ds.Fld('NUM9').AsInteger  := q.Fld('RESH_SUDA').AsInteger;
-    //-------------- перемене имени
-    strSQL := 'SELECT Count(*) alli FROM AktChangeName WHERE Year(datez)='+strGod+strAddWhere
-    dbChangeSQL(q,strSQL,true);
-    ds.Fld('NUM10').AsInteger  := q.Fld('ALLI').AsInteger;
-    //-------------- усыновление
-    strSQL := 'SELECT Count(*) allu, '+
-      ' Sum( IIF( ON_GRAG<>'+strGrag+' or ONA_GRAG<>'+strGrag+',1,0)) IN_GR'+
-      ' FROM AktAdopt WHERE Year(datez)='+strGod+strAddWhere
-    dbChangeSQL(q,strSQL,true);
-    ds.Fld('NUM11').AsInteger  := q.Fld('ALLU').AsInteger;
-    ds.Fld('NUM12').AsInteger  := q.Fld('IN_GR').AsInteger;
-    //-------------- установление материнства
-    strSQL := 'SELECT Count(*) allo '+
-      ' FROM АктыУстМатеринства WHERE Year(datez)='+strGod+strAddWhere
-    dbChangeSQL(q,strSQL,true);
-    ds.Fld('NUM13').AsInteger  := q.Fld('ALLO').AsInteger;
-    //-------------- расторжение браков
-    // по решению суда
-    strSQL := 'SELECT Count(*) KOLVO FROM AktTermMarriage WHERE (type_rast=0 or type_rast is null) and Year(datez)='+strGod+strAddWhere
-    dbChangeSQL(q,strSQL,true);
-    ds.Fld('NUM14').AsInteger  := q.Fld('KOLVO').AsInteger;
-    // по взаимному согласию
-    strSQL := 'SELECT Count(*) KOLVO FROM AktTermMarriage WHERE type_rast=1 and Year(datez)='+strGod+strAddWhere
-    dbChangeSQL(q,strSQL,true);
-    ds.Fld('NUM30').AsInteger  := q.Fld('KOLVO').AsInteger;
-    //-------------- все восстановленные записи
-    strSQL := dmBase.LoadSQLEx('Вост аз за год');
-    strSQL := StringReplace(strSQL, '&gggg&', strGod+strAddWhere);
-    dbChangeSQL(q,strSQL,true);
-    ds.Fld('NUM15').AsInteger  := q.Fld('KOLVO').AsInteger;
-    //-------------- восстановленные записи по рождениям
-    strSQL := ' SELECT Count(*) KOLVO FROM АктыРождений WHERE vosstan=true and Year(datez)='+strGod+strAddWhere;
-    dbChangeSQL(q,strSQL,true);
-    ds.Fld('NUM16').AsInteger  := q.Fld('KOLVO').AsInteger;
+    //-------------- пошлина ---------------
+    if ds.Fld('NUM24').AsInteger=0 then begin
+      strSql:='SELECT isNull(SUM_POSHLINA,0) SUMMA FROM ЗаключениеБраков WHERE Year(datez)='+strGod;
+      if IdProg='ZAGS' then begin
+        strSql:=strSQL+
+            ' UNION ALL'+
+            ' SELECT isNull(ON_SUM_POSHLINA,0)+isNull(ONA_SUM_POSHLINA,0) SUMMA FROM AktTermMarriage WHERE Year(datez)='+strGod+
+            ' UNION ALL'+
+            ' SELECT isNull(SUM_POSHLINA,0) SUMMA FROM AktChangeName WHERE Year(datez)='+strGod;
+      end;
+      strSQL:='SELECT SUM(summa) summa FROM ('+strSQL+') aaa';
+      dbChangeSQL(q,strSQL,true);
+      ds.Fld('NUM24').AsFloat:=q.Fld('SUMMA').AsFloat;
+    end;
+    //-------------- доп. услуги ---------------
+    if ds.Fld('NUM25').AsInteger=0 then begin
+      strSql:='SELECT isNull(TARIF,0) SUMMA FROM ЗаключениеБраков WHERE Year(datez)='+strGod+
+              ' UNION ALL'+
+              ' SELECT isNull(TARIF,0) SUMMA FROM АктыРождений WHERE Year(datez)='+strGod;
+      strSQL:='SELECT SUM(summa) summa FROM ('+strSQL+') aaa';
+      dbChangeSQL(q,strSQL,true);
+      ds.Fld('NUM25').AsFloat:=q.Fld('SUMMA').AsFloat;
+    end;
+    if IdProg='ZAGS' then begin
+      //--------------- заключения о внесении изменений --------------------------------
+      if (ds.Fld('NUM19').AsInteger=0) then begin  // если не внесли вручную
+        strSQL := 'SELECT Count(*) COUNT_OK, Sum(CASE WHEN OK=false THEN 1 ELSE 0 END) COUNT_NOT '+
+                  ' FROM AddDokZAGS ad WHERE typedok=60 and Year(datez)='+strGod; // + strAddWhere;
+        dbChangeSQL(q,strSQL,true);
+        ds.Fld('NUM19').AsInteger:=q.Fld('COUNT_OK').AsInteger;
+        ds.Fld('NUM20').AsInteger:=q.Fld('COUNT_NOT').AsInteger;
+      end;
+      //-------------- перемене имени
+      strSQL := 'SELECT Count(*) alli FROM AktChangeName WHERE Year(datez)='+strGod+strAddWhere
+      dbChangeSQL(q,strSQL,true);
+      ds.Fld('NUM10').AsInteger  := q.Fld('ALLI').AsInteger;
+      //-------------- усыновление
+      strSQL := 'SELECT Count(*) allu, '+
+        ' Sum( IIF( ON_GRAG<>'+strGrag+' or ONA_GRAG<>'+strGrag+',1,0)) IN_GR'+
+        ' FROM AktAdopt WHERE Year(datez)='+strGod+strAddWhere
+      dbChangeSQL(q,strSQL,true);
+      ds.Fld('NUM11').AsInteger  := q.Fld('ALLU').AsInteger;
+      ds.Fld('NUM12').AsInteger  := q.Fld('IN_GR').AsInteger;
+      //-------------- установление материнства
+      strSQL := 'SELECT Count(*) allo '+
+        ' FROM АктыУстМатеринства WHERE Year(datez)='+strGod+strAddWhere
+      dbChangeSQL(q,strSQL,true);
+      ds.Fld('NUM13').AsInteger  := q.Fld('ALLO').AsInteger;
+      //-------------- расторжение браков
+      // по решению суда
+      strSQL := 'SELECT Count(*) KOLVO FROM AktTermMarriage WHERE (type_rast=0 or type_rast is null) and Year(datez)='+strGod+strAddWhere
+      dbChangeSQL(q,strSQL,true);
+      ds.Fld('NUM14').AsInteger  := q.Fld('KOLVO').AsInteger;
+      // по взаимному согласию
+      strSQL := 'SELECT Count(*) KOLVO FROM AktTermMarriage WHERE type_rast=1 and Year(datez)='+strGod+strAddWhere
+      dbChangeSQL(q,strSQL,true);
+      ds.Fld('NUM30').AsInteger  := q.Fld('KOLVO').AsInteger;
+      //-------------- все восстановленные записи
+      strSQL := dmBase.LoadSQLEx('Вост аз за год');
+      strSQL := StringReplace(strSQL, '&gggg&', strGod+strAddWhere);
+      dbChangeSQL(q,strSQL,true);
+      ds.Fld('NUM15').AsInteger  := q.Fld('KOLVO').AsInteger;
+      //-------------- восстановленные записи по рождениям
+      strSQL := ' SELECT Count(*) KOLVO FROM АктыРождений WHERE vosstan=true and Year(datez)='+strGod+strAddWhere;
+      dbChangeSQL(q,strSQL,true);
+      ds.Fld('NUM16').AsInteger  := q.Fld('KOLVO').AsInteger;
+    end;
     //-------------- браков в торжественной обстановке
     strSQL := ' SELECT Count(*) KOLVO FROM ЗаключениеБраков WHERE osnov=true and Year(datez)='+strGod+strAddWhere;
     dbChangeSQL(q,strSQL,true);
     ds.Fld('NUM17').AsInteger  := q.Fld('KOLVO').AsInteger;
     //-------------- рождений в торжественной обстановке
-    strSQL := ' SELECT Count(*) KOLVO FROM АктыРождений WHERE (vosstan=false and sud_date='+QStr('1900-01-01')+') and Year(datez)='+strGod+strAddWhere;
+    strSQL := ' SELECT Count(*) KOLVO FROM АктыРождений WHERE (vosstan=false and dayofyear(sud_date)>0) and Year(datez)='+strGod+strAddWhere;
     dbChangeSQL(q,strSQL,true);
     ds.Fld('NUM18').AsInteger  := q.Fld('KOLVO').AsInteger;
 
@@ -1173,12 +1220,12 @@ begin
                 ' sum( iif(sost=4,1,0) ) s4,sum( iif(sost=5,1,0) ) s5, sum( iif(sost=6,1,0) ) s6 '+
                 ' FROM ListSvid l WHERE svid_type='+sl.Strings[i]+'  and dater>='+strDate1 + ' and dater<='+strDate2; //+strAdd;
       dbChangeSQL(q,strSQL,true);
-      ds.Fld('NUM4').AsInteger  := q.Fld('S1').AsInteger;
-      ds.Fld('NUM5').AsInteger  := q.Fld('S2').AsInteger;
-      ds.Fld('NUM6').AsInteger  := q.Fld('S3').AsInteger;
-      ds.Fld('NUM7').AsInteger  := q.Fld('S4').AsInteger;
-      ds.Fld('NUM8').AsInteger  := q.Fld('S5').AsInteger;
-      ds.Fld('NUM9').AsInteger  := q.Fld('S6').AsInteger;
+      ds.Fld('NUM4').AsInteger  := q.Fld('S1').AsInteger;  // первично
+      ds.Fld('NUM5').AsInteger  := q.Fld('S2').AsInteger;  // повторно
+      ds.Fld('NUM6').AsInteger  := q.Fld('S3').AsInteger;  // испорчено
+      ds.Fld('NUM7').AsInteger  := q.Fld('S4').AsInteger;  // утрачено
+      ds.Fld('NUM8').AsInteger  := q.Fld('S5').AsInteger;  // -----
+      ds.Fld('NUM9').AsInteger  := q.Fld('S6').AsInteger;  // выдано в сельисп. (в вых. форме не считается !!!)
       ds.Post;
     end;
     ds.First;
@@ -1444,7 +1491,7 @@ begin
       dbChangeSQL(q,strSQL,true);
       tb.Fld('ISPOR').Asstring := GetListBlank(q);
       if Length(tb.Fld('ISPOR').AsString)>10 then n5:=nn;
-      // утеряно
+      // !!! НЕТ УТЕРЯНО !!!  <=============================================
 //      strSQL := 'SELECT svid_seria, svid_nomer' +
 //                ' FROM ListSvid l WHERE svid_type='+sl.Strings[i]+' and sost=4 and dater>='+strDate1 + ' and dater<='+strDate2+
 //                ' ORDER BY svid_seria,svid_nomer ';
@@ -1764,7 +1811,7 @@ begin
           ' (n.datev>='+DateToSQL(dBegin)+' and n.candelete=true and n.propis=false)) and n.kateg=0 and n.date_fiks=''1899-12-30'') and l.date_fiks=''1899-12-30'' '+
           ' order by sp.name,su.name,a.dom1,a.dom2,kv,korp,l.id ';
     OpenMessage(' Формирование таблицы ...      ','',10);
-    MemoWrite('last.sql',sSQL);
+    MemoWrite('report.sql',sSQL);
     q:=dbOpenSQL(sSQL,'');
 //Tables='TABLSOST=NNN,ADRES,FIO,KOLVO,SOBSTV,SOSTAV'
 //FIELDS=ABONENT_GAZ,TEKU_DATE,PERIOD,NOMER,PRIL,PPP,SHTAMP,DOLG_PODP1,FIO_PODP1,DOLG_PODP2,FIO_PODP2,DOLG_PODP3,FIO_PODP3
@@ -1984,7 +2031,7 @@ begin
         
       //IN15 Поступило, по тематикам
       SQL:=
-         'select ifnull(sp.NAME, ''Тематика не указана'') as SUBJ_NAME, s.IN15_VAL1, s.IN15_VAL2 '+
+         'select iif(s.SUBJ_ID<10000,ifnull(sp.NAME, ''Тематика не указана''),ifnull(spg.NAME, ''Тематика не указана'')) as SUBJ_NAME, s.IN15_VAL1, s.IN15_VAL2 '+
          'from ( '+
          '   select '+
          '      SUBJ_ID, '+
@@ -1997,7 +2044,8 @@ begin
                    //исключать: письменные, поручения, из вышестоящих
          '         (d.COVER_CORR is null or not (isnull(d.APP_FORM,0)=1 and isnull(c.CORR_TYPE,0)=1 and isnull(d.COVER_TYPE,0)=1)) '+
          '   group by SUBJ_ID) s '+
-         'left join SprDocSubj sp on sp.ID=s.SUBJ_ID '+
+         'left join SprDocSubj  sp  on sp.ID=s.SUBJ_ID '+
+         'left join SprDocSubjG spg on spg.ID=s.SUBJ_ID '+
          'order by sp.code';
       dbChangeSQL(quSQL ,SQL, True);
       quSQL.First;

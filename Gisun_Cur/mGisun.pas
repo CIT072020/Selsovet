@@ -1435,7 +1435,7 @@ begin
       Log.Add(Format(Add+'access                           =%s', [GetClassifierString(M.access)]));
       Log.Add(Format(Add+'military_service_awarding_date   =%s', [GetDateString(M.military_service_awarding_date)]));
       Log.Add(Format(Add+'military_service_suspension_date =%s', [GetDateString(M.military_service_suspension_date)]));
-      Log.Add(Format(Add+'active                           =%s', [M.active]));
+      Log.Add(Format(Add+'active                           =%s', [IntToStr(M.active)]));
    end
    else begin
       Log.Add(Add+' =nil');

@@ -8,7 +8,9 @@ uses
   FastMM4,
   ExceptionLog,
   RKP,
+  uBase,
   uAddKey,
+  fMyNotify,
   SysUtils,
   Windows,
   Dialogs,
@@ -106,7 +108,8 @@ var
   Opis : TOpisEdit;
 //  cur:TCursor;
 {$IFDEF CHECK_KEY}
-  CurKey : String;
+  CurKey:String;
+  lDemo:Boolean;
 {$ENDIF}
 begin
   SetThreadLocale(1049);
@@ -122,39 +125,6 @@ begin
   GlobalTask.NameFileReportsIni:='reportsZAH.ini';
   GlobalTask.SetNameFileMainScript('progz.pas');  // !!!
 
-  {$IFDEF CHECK_KEY}
-  GlobalTask.DemoVersion := true; //not CheckAddKey(strSoato);
-  if GlobalTask.DemoVersion then begin
-    lDemo:=false;
-    {
-    if GlobalTask.ParamAsString('KOD')='' then begin
-      lDemo:=true;
-    end else begin
-      lDemo:=CheckAddKeyEx('ZAH',GlobalTask.ParamAsString('ID'));
-    end;
-    }
-    if lDemo then begin
-      GlobalTask.DemoVersion:=true;
-    end else begin
-      if Copy(ReadKeyProg(CurKey,false),1,5)<>'ZGS10' then begin
-        GlobalTask.DemoVersion := true;
-        DropKeyProg;
-  //        Application.Terminate;
-      end else begin
-        GlobalTask.DemoVersion := false;
-        WriteKeyProg(CurKey);
-      end;
-    end;
-  end;
-  if GlobalTask.DemoVersion then begin
-    Application.Title := 'Учет захоронений (демо-версия)';
-  end;
-  {$ELSE}
-  GlobalTask.DemoVersion := false;
-  {$ENDIF}
-
-//  GlobalTask.DemoVersion := false;
-
   {$IFDEF ENABLE_MEMCHECK}
   MemCheckLogFileName := 'F:\Projects\SelSovet\MemLog.txt';
   MemChk;
@@ -162,8 +132,6 @@ begin
 //  GlobalTask.LogFile.MaxSize:=1000000;
   GlobalTask.LogFile.IncDateTime := true;
   GlobalTask.LogFile.DateTimeFormatStr := 'dd.mm.yyyy hh:nn  ';
-  GlobalTask.LogFile.LoggingActive := GlobalTask.ParamAsBoolean('LOG_ACTIVE');
-  GlobalTask.LogFile.LogFileName   := CheckSleshN(GlobalTask.PathWorkDir)+'LogFile.txt';
 
   strUser     :='';
   strPassword :='';
@@ -188,13 +156,10 @@ begin
   ;
   Application.CreateForm(TfmMain, fmMain);
   ;
-  fmMain.TBItemRegisterProg.Visible := GlobalTask.DemoVersion;
 
   fmMain.IDProg := 'ZAH';
   GlobalTask.SetWorkParam('TYPEBASE','ZAH');
 
-  fmMain.Log_WriteException        := GlobalTask.ParamAsBoolean('LOG_EXCEPTION');
-  fmMain.Log_WriteOwner            := GlobalTask.ParamAsBoolean('LOG_OWNER');
 
   Application.OnException := fmMain.MyHandleException;
   GlobalTask.OnBeforeSaveParams := fmMain.BeforeSaveParamsEvent;
@@ -216,7 +181,7 @@ begin
   end;
 //  ShowMessage('After Create dmBase');
 
-  if not dmBase.CheckPathBase then begin
+  if not dmBase.CheckPathBase then begin  // установаливается NameFileParamTask и создается TaskParam !!!
     lOk := false;
     lExit := true;
   end else begin
@@ -224,7 +189,11 @@ begin
     lOk := true;
   end;
 //  ShowMessage('After Check Path Base');
-
+  fmMain.Log_WriteException        := GlobalTask.ParamAsBoolean('LOG_EXCEPTION');
+  fmMain.Log_WriteOwner            := GlobalTask.ParamAsBoolean('LOG_OWNER');
+  GlobalTask.LogFile.LoggingActive := dmBase.LogActive; //  !!!  читается из SysParams.ini
+  GlobalTask.FLogTypes:=dmBase.LogTypes;                //  !!!  читается из SysParams.ini
+  GlobalTask.LogFile.LogFileName   := CheckSleshN(GlobalTask.PathWorkDir)+'LogFile.txt';
   while lOk do begin
     i:=fmSplash.Left+25;
     n:=fmSplash.Top+170;
@@ -242,8 +211,9 @@ begin
       if dmBase.OpenConnect(strErr) then begin
         Role.SystemAdmin := false;
         lOk := false;
+        GlobalTask.WriteToLogFile('>>>>Начат сеанс пользователя '+strUser+'; версия: ПО '+GetVersionProgram(5)+', базы '+dmBase.GetVersionBase(dmBase.AdsConnection));
+        GlobalTask.WriteToLogFile(strUser, nil, LOG_SQL);
         dmBase.SimpleDisconnect;
-
 
         if dmBase.FullOpen(dmBase.GlobalPar.RelConnectPath, dmBase.GlobalPar.RelSharedConnectPath ) then begin
 
@@ -273,7 +243,7 @@ begin
         end;
         MemoWrite(NameFromExe('lastuser'), strUser);
         if dmBase.IsMainComputer then begin
-          MemoWrite(NameFromExe('version'), GetVersionProgram);
+          MemoWrite(NameFromExe('version'), GetVersionProgram(5));
         end;
 
       end else begin
@@ -311,6 +281,45 @@ begin
 
   GlobalTask.TypeSaveLookUpSpr := SAVE_VERYSMALL2;
   GlobalTask.SetWorkParam('DATEFIKS', dmBase.GetDateCurrentSost);
+
+//  showmessage('"'+GlobalTask.ParamAsString('ID')+'"');
+  {$IFDEF CHECK_KEY}
+  if dmBase.LastDatabaseError=0 then begin
+    if GlobalTask.ParamAsString('ID')='' then begin
+      lDemo:=true;
+    end else begin
+      lDemo:=ReadNotKeyProg('ADD63', GlobalTask.ParamAsString('ID'), s);
+      if lDemo and Role.SystemAdmin
+        then AddNotifyProg(fmMain, 'Текущий ключ:"'+s+'"', false, true,0,0);
+    end;
+  end else begin
+    lDemo:=false;
+  end;
+  {
+  if GlobalTask.ParamAsString('ID')='' then begin
+    lDemo:=true;
+  end else begin
+    lDemo:=CheckAddKeyEx('ZAH',GlobalTask.ParamAsString('ID'));
+  end;
+  }
+  if lDemo then begin
+    GlobalTask.DemoVersion:=true;
+  end else begin
+    if Copy(ReadKeyProg(CurKey,false),1,5)<>'ZGS10' then begin
+      GlobalTask.DemoVersion:=true;
+      DropKeyProg;
+    end else begin
+      GlobalTask.DemoVersion:=false;
+      WriteKeyProg(CurKey);
+    end;
+  end;
+  {$ELSE}
+  GlobalTask.DemoVersion:=false;
+  {$ENDIF}
+  if GlobalTask.DemoVersion then begin
+    Application.Title := 'Учет захоронений (демо-версия)';
+  end;
+  fmMain.TBItemRegisterProg.Visible:=GlobalTask.DemoVersion;
 
 //  if Role.SystemAdmin then begin
 //    GlobalTask.ErrorIfNotFoundParam( true );  // для отладки ненайденных параметров
@@ -402,7 +411,6 @@ begin
     dmBase.SprRazdel   := fmMain.mtSprRazdel;
     dmBase.SprProperty := fmMain.mtSprProperty;
 //  GlobalTask.TypeWinEditSpr:=twMDI;
-    GlobalTask.LogFile.WriteToLogFile('Начат сеанс пользователя '+strUser);
     {$IFDEF USE_TEMPLATE}
       fmMain.TemplateInterface.DefaultScript := GlobalTask.Script;
       fmMain.TemplateInterface.DefaultDatabaseName := 'dmBase.AdsConnection';

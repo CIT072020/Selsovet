@@ -24,10 +24,13 @@ inherited fmGurnZUstMat: TfmGurnZUstMat
   end
   inherited Grid: TSasaDBGrid
     Width = 895
-    Height = 481
+    Height = 447
   end
   inherited StBar: TStatusBar
     Top = 507
+    Width = 895
+  end
+  inherited TBDock24: TTBDock
     Width = 895
   end
   inherited Query: TAdsQuery

@@ -354,7 +354,7 @@ begin
   f:=TfmParamQuest.Create(nil);
   f.Caption:='Параметры';
 //  f.AddParamEx(true, 'Вывод домохозяйств с пустыми значениями' , 'ALL','TYPE=BOOLEAN');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('LIST_PUNKT_OBSL'), 'Названия нас. пунктов через запятую(или -)' , 'SPISOK','TYPE=STRING~WIDTH=300');
+  f.AddParamEx(lvString('LIST_PUNKT_OBSL'), 'Названия нас. пунктов через запятую(или -)' , 'SPISOK','TYPE=STRING~WIDTH=300');
 //  fmParam.AddParamEx(Now, 'Начальная дата' , 'DATE1' ,'TYPE=DATE');
 // не работает   fmParam.AddParamEx('', 'Район города2' , 'RNGOROD2' ,'TYPE=LIST~DESC=KEY_RN_MYGOR~WIDTH=150');
   f.AddButtons('Выполнить~Отказ',0);
@@ -398,7 +398,7 @@ begin
   if lOk and (sPunkt<>'') then begin
     XL:=GetOfficeObject('Excel',lOk);
     if lOk then begin
-      GlobalTask.SetLastValueAsString('LIST_PUNKT_OBSL', sNPunkt);
+      slvString('LIST_PUNKT_OBSL', sNPunkt);
       sPunkt:=Copy(sPunkt,1,Length(sPunkt)-1);
 
       sSQL:=dmBase.LoadSQLEx('Обследование-2018-02_0');
@@ -518,7 +518,7 @@ begin
   f:=TfmParamQuest.Create(nil);
   f.Caption:='Параметры';
 //  f.AddParamEx(true, 'Вывод домохозяйств с пустыми значениями' , 'ALL','TYPE=BOOLEAN');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('LIST_PUNKT_OBSL'), 'Названия нас. пунктов через запятую(или -)' , 'SPISOK','TYPE=STRING~WIDTH=300');
+  f.AddParamEx(lvString('LIST_PUNKT_OBSL'), 'Названия нас. пунктов через запятую(или -)' , 'SPISOK','TYPE=STRING~WIDTH=300');
 //  fmParam.AddParamEx(Now, 'Начальная дата' , 'DATE1' ,'TYPE=DATE');
 // не работает   fmParam.AddParamEx('', 'Район города2' , 'RNGOROD2' ,'TYPE=LIST~DESC=KEY_RN_MYGOR~WIDTH=150');
   f.AddButtons('Выполнить~Отказ',0);
@@ -559,7 +559,7 @@ begin
   if lOk and (sPunkt<>'') then begin
     XL:=GetOfficeObject('Excel',lOk);
     if lOk then begin
-      GlobalTask.SetLastValueAsString('LIST_PUNKT_OBSL', sNPunkt);
+      slvString('LIST_PUNKT_OBSL', sNPunkt);
       sPunkt:=Copy(sPunkt,1,Length(sPunkt)-1);
       OpenMessage(' Выполнение выгрузки ...      ','',10);
 
@@ -642,7 +642,7 @@ begin
   f:=TfmParamQuest.Create(nil);
   f.Caption:='Параметры';
 //  f.AddParamEx(true, 'Вывод домохозяйств с пустыми значениями' , 'ALL','TYPE=BOOLEAN');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('LIST_PUNKT_OBSL'), 'Названия нас. пунктов через запятую(или -)' , 'SPISOK','TYPE=STRING~WIDTH=300');
+  f.AddParamEx(lvString('LIST_PUNKT_OBSL'), 'Названия нас. пунктов через запятую(или -)' , 'SPISOK','TYPE=STRING~WIDTH=300');
 //  fmParam.AddParamEx(Now, 'Начальная дата' , 'DATE1' ,'TYPE=DATE');
 // не работает   fmParam.AddParamEx('', 'Район города2' , 'RNGOROD2' ,'TYPE=LIST~DESC=KEY_RN_MYGOR~WIDTH=150');
   f.AddButtons('Выполнить~Отказ',0);
@@ -686,7 +686,7 @@ begin
   if lOk and (sPunkt<>'') then begin
     XL:=GetOfficeObject('Excel',lOk);
     if lOk then begin
-      GlobalTask.SetLastValueAsString('LIST_PUNKT_OBSL', sNPunkt);
+      slvString('LIST_PUNKT_OBSL', sNPunkt);
       sPunkt:=Copy(sPunkt,1,Length(sPunkt)-1);
 
       sSQL:=dmBase.LoadSQLEx('Обследование3-2019-01');
@@ -787,7 +787,7 @@ begin
   f:=TfmParamQuest.Create(nil);
   f.Caption:='Параметры';
 //  f.AddParamEx(true, 'Вывод домохозяйств с пустыми значениями' , 'ALL','TYPE=BOOLEAN');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('LIST_PUNKT_OBSL'), 'Названия нас. пунктов через запятую(или -)' , 'SPISOK','TYPE=STRING~WIDTH=300');
+  f.AddParamEx(lvString('LIST_PUNKT_OBSL'), 'Названия нас. пунктов через запятую(или -)' , 'SPISOK','TYPE=STRING~WIDTH=300');
 //  fmParam.AddParamEx(Now, 'Начальная дата' , 'DATE1' ,'TYPE=DATE');
 // не работает   fmParam.AddParamEx('', 'Район города2' , 'RNGOROD2' ,'TYPE=LIST~DESC=KEY_RN_MYGOR~WIDTH=150');
   f.AddButtons('Выполнить~Отказ',0);
@@ -831,7 +831,7 @@ begin
   if lOk and (sPunkt<>'') then begin
     XL:=GetOfficeObject('Excel',lOk);
     if lOk then begin
-      GlobalTask.SetLastValueAsString('LIST_PUNKT_OBSL', sNPunkt);
+      slvString('LIST_PUNKT_OBSL', sNPunkt);
       sPunkt:=Copy(sPunkt,1,Length(sPunkt)-1);
 
       sSQL:=dmBase.LoadSQLEx('Обследование4');
@@ -949,8 +949,7 @@ begin
   f:=TfmParamQuest.Create(nil);
   f.Caption:='Параметры';
 //  f.AddParamEx(true, 'Вывод домохозяйств с пустыми значениями' , 'ALL','TYPE=BOOLEAN');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('LIST_PUNKT_OBSL'), 'Названия нас. пунктов через запятую(или -)' , 'SPISOK','TYPE=STRING~WIDTH=300');
-//GlobalTask.GetLastValueAsString('NOT_EMPTY')
+  f.AddParamEx(lvString('LIST_PUNKT_OBSL'), 'Названия нас. пунктов через запятую(или -)' , 'SPISOK','TYPE=STRING~WIDTH=300');
 //  f.AddParamEx(true, 'Не пустые лицевые счета (с данными)' , 'EMPTY','');
 //  fmParam.AddParamEx(Now, 'Начальная дата' , 'DATE1' ,'TYPE=DATE');
 // не работает   fmParam.AddParamEx('', 'Район города2' , 'RNGOROD2' ,'TYPE=LIST~DESC=KEY_RN_MYGOR~WIDTH=150');
@@ -996,8 +995,7 @@ begin
 
     XL:=GetOfficeObject('Excel',lOk);
     if lOk then begin
-      GlobalTask.SetLastValueAsString('LIST_PUNKT_OBSL', sNPunkt);
-//      GlobalTask.SetLastValueAsBoolean('NOT_EMPTY', lEmpty);
+      slvString('LIST_PUNKT_OBSL', sNPunkt);
       sPunkt:=Copy(sPunkt,1,Length(sPunkt)-1);
 
       sSQL:=dmBase.LoadSQLEx('Обследование5');
@@ -1732,13 +1730,13 @@ begin
   f.AddParamEx(GlobalTask.ParamAsDate('DATE_VIBOR'), 'Дата выборов' , 'DATEVZ' ,'TYPE=DATE');
 //  f.AddParamEx(n      , 'Избирательный участок' , 'IZBUCH','TYPE=LOOKUP~DESC=LOOKUP_SPRIZBUCH~WIDTH=400');
   f.AddParamEx(n      , 'Избирательный участок' , 'IZBUCH','');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('NAME_POST_CIK'), 'Дата и номер постановления ЦИК' , 'POSTAN','TYPE=STRING~WIDTH=200');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('NAME_SPIS_GR'), 'Название СПИСКА' , 'SPISOK','TYPE=STRING~WIDTH=500');
+  f.AddParamEx(lvString('NAME_POST_CIK'), 'Дата и номер постановления ЦИК' , 'POSTAN','TYPE=STRING~WIDTH=200');
+  f.AddParamEx(lvString('NAME_SPIS_GR'), 'Название СПИСКА' , 'SPISOK','TYPE=STRING~WIDTH=500');
   f.AddParamEx(1, 'Тип сортировки' , 'SORT','TYPE=LIST~DESC=KEY_SORTIZB~WIDTH=300');
   f.AddParamEx(1, 'Формат' , 'FORMAT','TYPE=LIST~DESC=KEY_FORMAT_SPIS~WIDTH=100');
   f.AddParamEx(false, 'ФИО в одну сроку' , 'FIO_ONE','');
-  f.AddParamEx(GlobalTask.GetLastValueAsBoolean('ADD_ADRES'), 'Проверять адрес жит. для выборов' , 'ADD_ADRES','');
-  f.AddParamEx(GlobalTask.GetLastValueAsBoolean('ADD_DOP'), 'Печать приложения' , 'ADD_DOP','');
+  f.AddParamEx(lvBoolean('ADD_ADRES'), 'Проверять адрес жит. для выборов' , 'ADD_ADRES','');
+  f.AddParamEx(lvBoolean('ADD_DOP'), 'Печать приложения' , 'ADD_DOP','');
 
   f.AddButtons('Выполнить~Отказ',0);
   n  := f.ShowQuest;
@@ -1753,11 +1751,11 @@ begin
     lFIO1:=f.GetValue('FIO_ONE','B');
     lCheckAddAdres:=f.GetValue('ADD_ADRES','B');
     lDop:=f.GetValue('ADD_DOP','B');
-    GlobalTask.SetLastValueAsString('NAME_SPIS_GR', f.GetValue('SPISOK','S'));
-    GlobalTask.SetLastValueAsString('NAME_POST_CIK', f.GetValue('POSTAN','S'));
-    GlobalTask.SetLastValueAsDate('DATE_VIBOR', d);
-    GlobalTask.SetLastValueAsBoolean('ADD_ADRES', lCheckAddAdres);
-    GlobalTask.SetLastValueAsBoolean('ADD_DOP', lDop);
+    slvString('NAME_SPIS_GR', f.GetValue('SPISOK','S'));
+    slvString('NAME_POST_CIK', f.GetValue('POSTAN','S'));
+    slvDate('DATE_VIBOR', d);
+    slvBoolean('ADD_ADRES', lCheckAddAdres);
+    slvBoolean('ADD_DOP', lDop);
     DecodeDate(d,nYear,nMonth,nDay);
     nYear := nYear-18;
     nUch := f.GetValue('IZBUCH','N');
@@ -1868,10 +1866,10 @@ begin
         s:='';
         if lA4 then m:=14 else m:=23;
         for i:=1 to m do s:=s+'\tab';
-        PrintString(sl, s+'\ql Приложение 1\line'+s+' к постановлению Центральной комиссии\line'+s+' Республики Беларусь по выборам и\line'+s+' проведению республиканских\line'+s+' референдумов\line'+s+' '+GlobalTask.GetLastValueAsString('NAME_POST_CIK')+'\par ', 0, 12, false, False, False);
+        PrintString(sl, s+'\ql Приложение 1\line'+s+' к постановлению Центральной комиссии\line'+s+' Республики Беларусь по выборам и\line'+s+' проведению республиканских\line'+s+' референдумов\line'+s+' '+lvString('NAME_POST_CIK')+'\par ', 0, 12, false, False, False);
       end;
       PrintString(sl, '\qc СПИСОК\par ', 0, 14, true, False, False);
-      PrintString(sl, '\qc '+GlobalTask.GetLastValueAsString('NAME_SPIS_GR')+' \par\par ', 0, 14, true, False, False);
+      PrintString(sl, '\qc '+lvString('NAME_SPIS_GR')+' \par\par ', 0, 14, true, False, False);
       PrintString(sl, '\qc '+DatePropis(d,2)+' \par\par ', 0, 14, False, False, true);
       PrintString(sl, 'Участок для голосования № '+IntToStr(nUch)+'      '+strNameUch+' \par\par\par\par ', 0, 12, False, False, true);
 
@@ -2019,19 +2017,19 @@ begin
   f.AddParamEx(GlobalTask.ParamAsDate('DATE_VIBOR'), 'Дата выборов' , 'DATEVZ' ,'TYPE=DATE');
 //  f.AddParamEx(n      , 'Избирательный участок' , 'IZBUCH','TYPE=LOOKUP~DESC=LOOKUP_SPRIZBUCH~WIDTH=400');
   f.AddParamEx(n , 'Избирательный участок' , 'IZBUCH','WIDTH=50');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('NAME_SPIS_GR_M'), 'Название СПИСКА' , 'SPISOK','TYPE=STRING~WIDTH=500');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('NAME_OBL_SOV'), 'областной Совет депутатов' , 'OBL_SOV','TYPE=STRING~WIDTH=500');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('NAME_RAI_SOV'), 'районный(городской) Совет депутатов' , 'RAI_SOV','TYPE=STRING~WIDTH=500');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('NAME_SEL_SOV'), 'сельский Совет депутатов' , 'SEL_SOV','TYPE=STRING~WIDTH=500');
+  f.AddParamEx(lvString('NAME_SPIS_GR_M'), 'Название СПИСКА' , 'SPISOK','TYPE=STRING~WIDTH=500');
+  f.AddParamEx(lvString('NAME_OBL_SOV'), 'областной Совет депутатов' , 'OBL_SOV','TYPE=STRING~WIDTH=500');
+  f.AddParamEx(lvString('NAME_RAI_SOV'), 'районный(городской) Совет депутатов' , 'RAI_SOV','TYPE=STRING~WIDTH=500');
+  f.AddParamEx(lvString('NAME_SEL_SOV'), 'сельский Совет депутатов' , 'SEL_SOV','TYPE=STRING~WIDTH=500');
   f.AddParamEx(1, 'Тип сортировки' , 'SORT','TYPE=LIST~DESC=KEY_SORTIZB~WIDTH=300');
   f.AddParamEx(1, 'Формат' , 'FORMAT','TYPE=LIST~DESC=KEY_FORMAT_SPIS~WIDTH=100');
   f.AddParamEx(false, 'ФИО в одну сроку' , 'FIO_ONE','');
   f.AddParamEx(1, '№ первого в списке' , 'FIRST_NOMER','WIDTH=50');
-  f.AddParamEx(GlobalTask.GetLastValueAsInteger('NNN_OBL'), '№ окр. для обл. совета по умолчанию' , 'NNN_OBL','WIDTH=50');
-  f.AddParamEx(GlobalTask.GetLastValueAsInteger('NNN_RN'), '№ окр. для район. совета по умолчанию' , 'NNN_RN','WIDTH=50');
-  f.AddParamEx(GlobalTask.GetLastValueAsInteger('NNN_GOR'), '№ окр. для гор. совета по умолчанию' , 'NNN_GOR','WIDTH=50');
-  f.AddParamEx(GlobalTask.GetLastValueAsBoolean('ADD_ADRES'), 'Проверять адрес жит. для выборов' , 'ADD_ADRES','');
-  f.AddParamEx(GlobalTask.GetLastValueAsBoolean('ADD_NAMEPUNKT'), 'Печать в адресе названия нас. пункта' , 'ADD_NAMEPUNKT','');
+  f.AddParamEx(lvInteger('NNN_OBL'), '№ окр. для обл. совета по умолчанию' , 'NNN_OBL','WIDTH=50');
+  f.AddParamEx(lvInteger('NNN_RN'), '№ окр. для район. совета по умолчанию' , 'NNN_RN','WIDTH=50');
+  f.AddParamEx(lvInteger('NNN_GOR'), '№ окр. для гор. совета по умолчанию' , 'NNN_GOR','WIDTH=50');
+  f.AddParamEx(lvBoolean('ADD_ADRES'), 'Проверять адрес жит. для выборов' , 'ADD_ADRES','');
+  f.AddParamEx(lvBoolean('ADD_NAMEPUNKT'), 'Печать в адресе названия нас. пункта' , 'ADD_NAMEPUNKT','');
 //  f.AddParamEx(GlobalTask.GetLastValueAsInteger('NNN_SS'), 'Номер окр. для совета' , 'NNN_SS','WIDTH=50');
 
 //  f.AddParamEx(0, 'Сумма', '4','FORMAT=### ### ### ###.##');
@@ -2077,21 +2075,20 @@ begin
       else lA4:=false;
     lFIO1:=f.GetValue('FIO_ONE','B');
     n:= f.GetValue('FIRST_NOMER','I');
-    GlobalTask.SetLastValueAsString('NAME_SPIS_GR_M', f.GetValue('SPISOK','S'));
-    GlobalTask.SetLastValueAsString('NAME_OBL_SOV', f.GetValue('OBL_SOV','S'));
-    GlobalTask.SetLastValueAsString('NAME_RAI_SOV', f.GetValue('RAI_SOV','S'));
-    GlobalTask.SetLastValueAsString('NAME_SEL_SOV', f.GetValue('SEL_SOV','S'));
-    GlobalTask.SetLastValueAsInteger('NNN_OBL', f.GetValue('NNN_OBL','I'));
-    GlobalTask.SetLastValueAsInteger('NNN_RN', f.GetValue('NNN_RN','I'));
-    GlobalTask.SetLastValueAsInteger('NNN_GOR', f.GetValue('NNN_GOR','I'));
-    GlobalTask.SetLastValueAsBoolean('ADD_ADRES', lCheckAddAdres);
-    GlobalTask.SetLastValueAsBoolean('ADD_NAMEPUNKT', lNamePunkt);
-//    GlobalTask.SetLastValueAsInteger('NNN_SS', f.GetValue('NNN_SS','I'));
-    GlobalTask.SetLastValueAsDate('DATE_VIBOR', d);
+    slvString('NAME_SPIS_GR_M', f.GetValue('SPISOK','S'));
+    slvString('NAME_OBL_SOV', f.GetValue('OBL_SOV','S'));
+    slvString('NAME_RAI_SOV', f.GetValue('RAI_SOV','S'));
+    slvString('NAME_SEL_SOV', f.GetValue('SEL_SOV','S'));
+    slvInteger('NNN_OBL', f.GetValue('NNN_OBL','I'));
+    slvInteger('NNN_RN', f.GetValue('NNN_RN','I'));
+    slvInteger('NNN_GOR', f.GetValue('NNN_GOR','I'));
+    slvBoolean('ADD_ADRES', lCheckAddAdres);
+    slvBoolean('ADD_NAMEPUNKT', lNamePunkt);
+    slvDate('DATE_VIBOR', d);
     DecodeDate(d,nYear,nMonth,nDay);
-    if GlobalTask.GetLastValueAsInteger('NNN_GOR')<>0 
+    if lvInteger('NNN_GOR')<>0 
       then lGor:=true;
-    if not lGor and (GlobalTask.GetLastValueAsInteger('NNN_OBL')<>0) 
+    if not lGor and (lvInteger('NNN_OBL')<>0) 
       then lAddObl:=true;
     if lGKH then begin
       lAddObl:=true;
@@ -2173,11 +2170,11 @@ begin
           tb.Fld('MESTO').AsString:='\b\fs28\qc '+strNameOkr +'\b0';
           tb.Post;
         end;
-        i:=GlobalTask.GetLastValueAsInteger('NNN_RN');
+        i:=lvInteger('NNN_RN');
         if i<1 then sDefRn:='' else sDefRn:=IntToStr(i);
-        i:=GlobalTask.GetLastValueAsInteger('NNN_OBL');
+        i:=lvInteger('NNN_OBL');
         if i<1 then sDefObl:='' else sDefObl:=IntToStr(i);
-        i:=GlobalTask.GetLastValueAsInteger('NNN_GOR');
+        i:=lvInteger('NNN_GOR');
         if i<1 then sDefGor:='' else sDefGor:=IntToStr(i);
 
         s := '1234567890';
@@ -2255,11 +2252,11 @@ begin
   
       end; // <---------------------------------------
 
-      if GlobalTask.GetLastValueAsInteger('NNN_OBL')>0 
-        then s1:=GlobalTask.GetLastValueAsString('NNN_OBL')
+      if lvInteger('NNN_OBL')>0 
+        then s1:=lvString('NNN_OBL')
         else s1:='   ';
-      if GlobalTask.GetLastValueAsInteger('NNN_RN')>0 
-        then s2:=GlobalTask.GetLastValueAsString('NNN_RN')
+      if lvInteger('NNN_RN')>0 
+        then s2:=lvString('NNN_RN')
         else s2:='   ';
 
       if lA4 
@@ -2271,13 +2268,13 @@ begin
 //StringOfChar(' ',120)+
       PrintString(sl, '\qc '+DatePropis(d,2)+' \par\par ', 0, 12, False, False, true);
       PrintString(sl, '\qc СПИСОК\par ', 0, 14, true, False, False);
-      PrintString(sl, '\qc '+GlobalTask.GetLastValueAsString('NAME_SPIS_GR_M')+' \par\par ', 0, 14, true, False, False);
+      PrintString(sl, '\qc '+lvString('NAME_SPIS_GR_M')+' \par\par ', 0, 14, true, False, False);
       PrintString(sl, 'Участок для голосования № '+IntToStr(nUch)+'      '+strNameUch+' \par\par ', 0, 12, False, False, true);
-      PrintString(sl, 'избирательный округ № '+s1+'     по выборам  '+ GlobalTask.GetLastValueAsString('NAME_OBL_SOV')+' \par ', 0, 12, false, false, true);
+      PrintString(sl, 'избирательный округ № '+s1+'     по выборам  '+ lvString('NAME_OBL_SOV')+' \par ', 0, 12, false, false, true);
       PrintString(sl, '   (наименование избирательного округа по выборам депутата областного Совета депутатов) \par\par ', 0, 8, false, false, false);
-      PrintString(sl, 'избирательный округ № '+s2+'     по выборам  '+ GlobalTask.GetLastValueAsString('NAME_RAI_SOV')+' \par ', 0, 12, false, false, true);
+      PrintString(sl, 'избирательный округ № '+s2+'     по выборам  '+ lvString('NAME_RAI_SOV')+' \par ', 0, 12, false, false, true);
       PrintString(sl, '   (наименование избирательного округа по выборам депутата районного, городского Совета депутатов) \par\par ', 0, 8, false, false, false);
-      PrintString(sl, 'избирательный округ №            по выборам  '+ GlobalTask.GetLastValueAsString('NAME_SEL_SOV')+' \par ', 0, 12, false, false, true);
+      PrintString(sl, 'избирательный округ №            по выборам  '+ lvString('NAME_SEL_SOV')+' \par ', 0, 12, false, false, true);
       PrintString(sl, '   (наименование избирательного округа по выборам депутата городского(города районного подчинения) поселкового, сельского Совета депутатов) \par\par\par ', 0, 8, false, false, false);
 
 //      PrintString(sl, '   (наименование избирательного округа по выборам депутата областного Совета депутатов)'+StringOfChar(' ',200)+'(наименование областного Совета депутатов) \par ', 0, 8, false, false, false);
@@ -2373,6 +2370,118 @@ end;
 //------------------------------------
 //----- различные СПИСКИ -------------
 //------------------------------------
+function ListSved_UserForm:boolean;
+var
+  f:TfmParamQuest;
+  n:Integer;
+  sUch:String;
+begin
+  Result:=false;
+  f := TfmParamQuest.Create(nil);
+  f.Caption := 'Введите параметры';
+  f.AddParamEx(lvDate('VUS_DATE1') , 'Начальная дата', 'DATE1','TYPE=DATE~REQ=1');
+  f.AddParamEx(lvDate('VUS_DATE2') , 'Конечная дата', 'DATE2','TYPE=DATE~REQ=1');
+  f.AddButtons('<OK>Выполнить~Отказ',0);
+  n:=f.ShowQuest;
+  if (n=1) and (f.GetValue('DATE1','D')>0) and (f.GetValue('DATE2','D')>0) then begin
+    slvDate('VUS_DATE1', f.GetValue('DATE1','D'));
+    slvDate('VUS_DATE2', f.GetValue('DATE2','D'));
+    SetGlobalVar('DATE1',f.GetValue('DATE1','D'));
+    SetGlobalVar('DATE2',f.GetValue('DATE2','D'));
+    Result:=true;
+  end;
+  f.Free;
+end;
+//
+function ListSved(DateFiks: TDateTime; LicID, PID: Word):boolean;
+var
+   dsSup,ds,q:TDataSet;
+   sID,strSQL,d1,d2,s,s1,s2,s3,s4 : String;
+begin
+  Result:=true;
+  ds:=GetTemplateDataSet('MAIN');
+  if ds<>nil then begin
+    if not ds.Active then ds.Open;
+    ds.Edit;
+    ds.Fld('SHTAMP').AsString:=GetShtampSpr();
+    ds.Fld('PRIL').AsString:=getPril(-1,'VOEN_PRIP',14);
+    ds.Fld('DATESOST').AsString:=DatePropis(NOW,2);
+    ds.Fld('PERIOD').AsString:=DatePropis(getGlobalvar('DATE1'),3)+' по '+DatePropis(getGlobalvar('DATE2'),3);
+    ds.Fld('RUKOV').AsString :=DolgRukov()+'             '+FIORukov();
+    ds.Post;
+    ds:=GetTemplateDataSet('TABLSOST');
+    strSQL := 'SELECT n.*, d.suprug_id, v.* '+
+        ' FROM VUS v '+Chr(13)+
+        ' LEFT JOIN Население n ON n.date_fiks=&datefiks& and n.id=v.id '+Chr(13)+
+        ' LEFT JOIN НаселениеДоп d ON n.id=d.id '+Chr(13)+
+        ' WHERE (prib_date>=&d1& and prib_date<=&d2&) or (ubit_date>=&d1& and ubit_date<=&d2&) or (datesost>=&d1& and datesost<=&d2&)'+Chr(13)+
+        ' ORDER BY familia,name,otch ';
+    strSQL:=dmBase.CheckParamsSQL(strSQL);
+    strSQL:=StringReplace(strSQL, '&d1&', DateToSQL(getGlobalvar('DATE1')));
+    strSQL:=StringReplace(strSQL, '&d2&', DateToSQL(getGlobalvar('DATE2')));
+    OpenMessage(' Формирование списка ... ','',10);
+    MemoWrite('report.sql',strSQL);
+
+    q:=dbOpenSQL(strSQL,'');
+    s1:='Исключен';
+    s2:='Снят';
+    s3:='Принят';
+    s4:='супруг';
+    if q.Fld('POL').AsString='Ж' then begin
+      s1:=s1+'а';
+      s2:=s2+'а';
+      s3:=s3+'а';
+    end else begin
+      s4:=s4+'а';
+    end;
+    while not q.Eof do begin
+//      writedebug('ubit_date:'+Inttostr(datetoint(q.fld('ubit_date').AsDateTime))+'  datesost:'+Inttostr(datetoint(q.Fld('datesost').AsDateTime))+'  prib_date:'+Inttostr(datetoint(q.Fld('prib_date').AsDateTime)));
+      sID:=q.Fld('ID').AsString;
+      ds.Append;
+      if not q.Fld('ubit_date').IsNull then begin
+        if q.Fld('vus_iskl').AsBoolean then s:=s1 else s:=s2;
+        s:=s+' с учета '+DatePropis(q.Fld('ubit_date').AsDateTime,3)+' '+q.Fld('UBIT_TEXT').AsString;
+      end else if not q.Fld('datesost').IsNull and (DateToInt(q.fld('datesost').AsDateTime)>DateToInt(q.fld('prib_date').AsDateTime)) then begin 
+        s:='Изменение данных '+DatePropis(q.Fld('datesost').AsDateTime,3);
+      end else if not q.Fld('prib_date').IsNull then begin 
+        s:=s3+' на учет '+DatePropis(q.Fld('prib_date').AsDateTime,3);
+      end;
+      ds.Fld('OSNOV').AsString:=s;
+      ds.Fld('ZVAN').AsString:=Concat2Str(Trim(ValueFromKey('KEY_VUS_ZVANI',q.Fld('ZVAN').AsString,'',false)+' '+ValueFromKey('KEY_VUS_ZVANI2',q.Fld('ZVAN2').AsString,'',false)), 
+                                          q.Fld('NOMER_VUS').AsString,', ');
+      ds.Fld('FIO').AsString:=q.Fld('Familia').AsString+' '+q.Fld('Name').AsString+' '+q.Fld('Otch').AsString+Concat_IF2(', ',q.Fld('LICH_NOMER').AsString);
+      ds.Fld('DATER').AsString:=DatePropis(q.Fld('DateR').AsDateTime,3);
+      ds.Fld('MESTOG').AsString:=dmBase.AdresFromID(DateFiks,q.Fld('adres_id').AsString,false);
+      ds.Fld('MESTOP').AsString:=q.Fld('adres_git').AsString;
+      s:='';
+      if q.Fld('suprug_id').AsInteger>0 then begin
+        dsSup:=dmBase.getMen(DateFiks, q.Fld('suprug_id').AsString);
+        if dsSup<>nil then begin
+          s:=s4+' '+createFIO(dsSup)+' '+DatePropis(dsSup.Fld('DATER').AsDateTime,3);
+        end;
+      end;
+      if s='' then s:=q.Fld('SOSTAV_SEM').AsString
+              else s:=s+Concat_IF2(', ',q.Fld('SOSTAV_SEM').AsString);
+      ds.Fld('SEM').AsString:=s;
+      ds.Fld('OBR').AsString:=ValueFromKey('KEY_OBRAZ',q.Fld('OBRAZ').AsString,'',false);
+      ds.Fld('WORK').AsString:=dmBase.getMenWork(DateFiks,sID);
+      if ds.Fld('WORK').AsString=''
+        then ds.Fld('WORK').AsString:=dmBase.getMenStud(DateFiks,sID)
+        else ds.Fld('WORK').AsString:=ds.Fld('WORK').AsString+Concat_IF2(', ',dmBase.getMenDolg(DateFiks,sID));
+      s:='';
+      if q.Fld('TELEFON_M').AsString<>'' then s:='моб.'+q.Fld('TELEFON_M').AsString+CRLF;
+      if q.Fld('AGIT_TEL').AsString<>''  then s:=s+'преб.'+q.Fld('AGIT_TEL').AsString+CRLF;
+      if q.Fld('WORK_TELEF').AsString<>''  then s:=s+'раб.'+q.Fld('WORK_TELEF').AsString;
+      ds.Fld('TEL').AsString:=dmbase.getMenTel(DateFiks,sID,'MDPR',', ');//CRLF);    
+      ds.Fld('OTMETKA').AsString:=q.Fld('SPEC_TEXT').AsString;
+      ds.Post;
+      q.Next;
+    end;
+    dbClose(q);
+    CloseMessage;
+  end;
+end;
+//==================================================================
 function ListPripis_UserForm:boolean;
 var
   f:TfmParamQuest;
@@ -2382,26 +2491,40 @@ begin
   Result:=false;
   f := TfmParamQuest.Create(nil);
   f.Caption := 'Введите параметры';
-  f.AddParamEx(GlobalTask.GetLastValueAsDate('PRIP_DATE1') , 'Дата рождения с', 'DATE1','TYPE=DATE~REQ=1');
-  f.AddParamEx(GlobalTask.GetLastValueAsDate('PRIP_DATE2') , 'Дата рождения по', 'DATE2','TYPE=DATE~REQ=1');
+  f.AddParamEx(lvDate('PRIP_DATE1') , 'Дата рождения с', 'DATE1','TYPE=DATE~REQ=1');
+  f.AddParamEx(lvDate('PRIP_DATE2') , 'Дата рождения по', 'DATE2','TYPE=DATE~REQ=1');
   f.AddParamEx(true , 'Только мужчины', 'ONLYM','');
   f.AddParamEx(true , 'Включать временно отсутствующих', 'VREM','');
-  f.AddParamEx(GlobalTask.GetLastValueAsString('N_PRIZ_UCH') , 'Номер призывного участка', 'PRIZ_UCH','WIDTH=100');
+  f.AddParamEx(lvString('N_PRIZ_UCH'), 'Номер призывного участка', 'PRIZ_UCH','WIDTH=120');
+  f.AddParamEx(lvInteger('ORIENT_LP'), 'Ориентация листа', 'ORIENT','TYPE=LIST~DESC=KEY_ORIENT~WIDTH=120');
   f.AddButtons('<OK>Выполнить~Отказ',0);
   n:=f.ShowQuest;
   if (n=1) and (f.GetValue('DATE1','D')>0) and (f.GetValue('DATE2','D')>0) then begin
-    GlobalTask.SetLastValueAsDate('PRIP_DATE1', f.GetValue('DATE1','D'));
-    GlobalTask.SetLastValueAsDate('PRIP_DATE2', f.GetValue('DATE2','D'));
-    GlobalTask.SetLastValueAsString('N_PRIZ_UCH', f.GetValue('PRIZ_UCH','S'));
+    slvDate('PRIP_DATE1', f.GetValue('DATE1','D'));
+    slvDate('PRIP_DATE2', f.GetValue('DATE2','D'));
+    slvString('N_PRIZ_UCH', f.GetValue('PRIZ_UCH','S'));
+    slvInteger('ORIENT_LP', f.GetValue('ORIENT','N'));
     SetGlobalVar('PRIZ_UCH',f.GetValue('PRIZ_UCH','C'));
     SetGlobalVar('DATE1',f.GetValue('DATE1','D'));
     SetGlobalVar('DATE2',f.GetValue('DATE2','D'));
     SetGlobalVar('ONLYM',f.GetValue('ONLYM','L'));
     SetGlobalVar('VREM',f.GetValue('VREM','L'));
+    SetGlobalVar('ORIENT',f.GetValue('ORIENT','N'));
     Result:=true;
   end;
   f.Free;
 end;
+//
+function ListPripis_FILE(sUserProp:String; sCaption:String; sFile:String):String;
+begin
+  Result:='';
+  if getGlobalvar('ORIENT')=0 then begin
+    Result:='Список подлежащих приписке_АЛБ.doc';
+  end else begin
+    Result:='Список подлежащих приписке.doc';
+  end;
+end;
+//
 function ListPripis(DateFiks: TDateTime; LicID, PID: Word):boolean;
 var
    ds,q:TDataSet;
@@ -2460,12 +2583,12 @@ begin
   Result:=false;
   f := TfmParamQuest.Create(nil);
   f.Caption := 'Введите параметры';
-  d:=GlobalTask.GetLastValueAsDate('DATE_LIST');
+  d:=lvDate('DATE_LIST');
   if d<=0 then d:=NOW;
   f.AddParamEx(d, 'На дату' , 'DATE_LIST' ,'TYPE=DATE');
   f.AddParamEx(0, 'Начальный возраст' , 'VOZR1' ,'WIDTH=50');
   f.AddParamEx(17, 'Конечный возраст' , 'VOZR2' ,'WIDTH=50');
-  f.AddParamEx(GlobalTask.GetLastValueAsInteger('PUNKT'),'Населенный пункт', 'PUNKT','TYPE=LOOKUP~DESC=LOOKUP_PUNKT~WIDTH=150');
+  f.AddParamEx(lvInteger('PUNKT'),'Населенный пункт', 'PUNKT','TYPE=LOOKUP~DESC=LOOKUP_PUNKT~WIDTH=150');
   f.AddParamEx(false , 'Включать временно отсутствующих', 'NOT_PRESENT','');
   f.AddParamEx(true  , 'Заполнять учебное заведение', 'YES_UCH','');
   f.AddParamEx(false , 'Учитывать дату прибытия', 'IS_DATE_PRIB','');
@@ -2474,11 +2597,11 @@ begin
   f.AddButtons('Выполнить~Отказ',0);
   n:=f.ShowQuest;
   if n = 1 then begin
-    GlobalTask.SetLastValueAsInteger('PUNKT', f.GetValue('PUNKT','I'));
-    GlobalTask.SetLastValueAsInteger('VOZR1', f.GetValue('VOZR1','I'));
-    GlobalTask.SetLastValueAsInteger('VOZR2', f.GetValue('VOZR2','I'));
-    GlobalTask.SetLastValueAsDate('DATE_LIST', f.GetValue('DATE_LIST','D'));
-    GlobalTask.SetLastValueAsBoolean('NOT_PRESENT', f.GetValue('NOT_PRESENT','L'));
+    slvInteger('PUNKT', f.GetValue('PUNKT','I'));
+    slvInteger('VOZR1', f.GetValue('VOZR1','I'));
+    slvInteger('VOZR2', f.GetValue('VOZR2','I'));
+    slvDate('DATE_LIST', f.GetValue('DATE_LIST','D'));
+    slvBoolean('NOT_PRESENT', f.GetValue('NOT_PRESENT','L'));
     SetGlobalVar('IS_DATE_PRIB', f.GetValue('IS_DATE_PRIB','L'));
     SetGlobalVar('DATE_PRIB1', f.GetValue('DATE_PRIB1','D'));
     SetGlobalVar('DATE_PRIB2', f.GetValue('DATE_PRIB2','D'));
@@ -2501,18 +2624,18 @@ begin
   if ds<>nil then begin
     if not ds.Active then ds.Open;
     ds.Edit;
-    nPunkt:=GlobalTask.GetLastValueAsInteger('PUNKT');
+    nPunkt:=lvInteger('PUNKT');
     if nPunkt<=0 
       then s:=''
       else s:=' and d.punkt='+IntToStr(nPunkt);
     // только присутствующих
-    if not GlobalTask.GetLastValueAsBoolean('NOT_PRESENT') then begin
+    if not lvBoolean('NOT_PRESENT') then begin
       s:=s+' and n.present=true';
     end;
-    dSost:= GlobalTask.GetLastValueAsDate('DATE_LIST');
-    nVozr1:= GlobalTask.GetLastValueAsInteger('VOZR1');
+    dSost:= lvDate('DATE_LIST');
+    nVozr1:= lvInteger('VOZR1');
     if nVozr1<0 then nVozr1:=0;
-    nVozr2:= GlobalTask.GetLastValueAsInteger('VOZR2');
+    nVozr2:= lvInteger('VOZR2');
     if nVozr1<0 then nVozr2:=0;
     sNameVozr:='';
     if nVozr1<>0 then sNameVozr:=' от '+IntToStr(nVozr1);

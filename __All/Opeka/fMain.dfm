@@ -400,9 +400,9 @@ object fmMain: TfmMain
               #1059#1089#1090#1072#1085#1086#1074#1080#1090#1100' '#1087#1072#1088#1086#1083#1080' '#1076#1083#1103' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1077#1081', '#1076#1086#1073#1072#1074#1080#1090#1100' '#1080#1083#1080' '#1091#1076#1072#1083#1080#1090#1100' '#1087#1086#1083#1100#1079#1086 +
               #1074#1072#1090#1077#1083#1077#1081
           end
-          object TBItem58: TTBItem
+          object TBItemCheckUpdate: TTBItem
             Action = acCheckUpdate
-            Visible = False
+            Caption = #1057#1082#1072#1095#1072#1090#1100' '#1086#1073#1085#1086#1074#1083#1077#1085#1080#1077' '#1087#1088#1086#1075#1088#1072#1084#1084#1099
           end
           object TBSeparatorItem7: TTBSeparatorItem
           end
@@ -438,6 +438,10 @@ object fmMain: TfmMain
         end
         object TBItemRefreshCOC: TTBItem
           Action = acRefreshCOC
+        end
+        object TBItemEditUrlCOC: TTBItem
+          Caption = #1050#1086#1088#1088#1077#1082#1090#1080#1088#1086#1074#1082#1072' URL '#1057#1054#1057
+          OnClick = TBItemEditUrlCOCClick
         end
         object TBItemSaveCert: TTBItem
           Action = acSaveCert
@@ -523,32 +527,43 @@ object fmMain: TfmMain
     TabOrder = 2
     Visible = False
   end
-  object sb: TStatusBar
-    Left = 0
-    Top = 446
-    Width = 790
-    Height = 19
-    Panels = <
-      item
-        Width = 300
-      end
-      item
-        Width = 300
-      end
-      item
-        Width = 50
-      end>
-    Visible = False
-  end
   object btCancel: TButton
     Left = 216
     Top = 419
     Width = 79
     Height = 17
     Caption = #1055#1088#1077#1088#1074#1072#1090#1100
-    TabOrder = 4
+    TabOrder = 3
     Visible = False
     OnClick = btCancelClick
+  end
+  object pn: TPanel
+    Left = 0
+    Top = 444
+    Width = 790
+    Height = 21
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 4
+    Visible = False
+    object sb: TStatusBar
+      Left = 0
+      Top = 0
+      Width = 790
+      Height = 21
+      Align = alClient
+      Panels = <
+        item
+          Width = 300
+        end
+        item
+          Width = 300
+        end
+        item
+          Width = 50
+        end>
+      Visible = False
+    end
   end
   object TBMDIHandler1: TTBMDIHandler
     Toolbar = TBToolbarMain
@@ -7761,5 +7776,9 @@ object fmMain: TfmMain
     PrintScaling = False
     Left = 680
     Top = 216
+  end
+  object ImageList24: TcxImageList
+    Left = 304
+    Top = 256
   end
 end

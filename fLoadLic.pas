@@ -238,7 +238,7 @@ begin
   try
   if CheckCopy(strErr) then begin
     OpenMessage(' Предварительное копирование базы ...','',12);
-    GlobalTask.LogFile.WriteToLogFile('Начало загрузки базы лицевых счетов:'+FDirSource);
+    GlobalTask.WriteToLogFile('Начало загрузки базы лицевых счетов:'+FDirSource);
  //!!!   dmBase.CloseBase;
     Application.ProcessMessages;
     Sleep(100);
@@ -298,14 +298,14 @@ begin
   end;
 
   if lOk then begin
-    GlobalTask.LogFile.WriteToLogFile('Успешное завершение загрузки базы лицевых счетов.');
+    GlobalTask.WriteToLogFile('Успешное завершение загрузки базы лицевых счетов.');
     ShowMessage(' Загрузка базы успешно завершена.');
   end else begin
     if strErr<>''
       then PutError(strErr)
       else PutError('Ошибка загрузки базы.');
-    GlobalTask.LogFile.WriteToLogFile('При загрузке базы лицевых счетов произошла лшибка.');
-    GlobalTask.LogFile.WriteToLogFile('-> '+strErr);
+    GlobalTask.WriteToLogFile('При загрузке базы лицевых счетов произошла лшибка.');
+    GlobalTask.WriteToLogFile('-> '+strErr);
   end;
   // Close;  ???
 end;

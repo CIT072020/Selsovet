@@ -32,8 +32,8 @@ type
     Label4: TLabel;
     Label10: TLabel;
     Label12: TLabel;
-    edTelMob: TDBEditEh;
     edTelefon: TDBEditEh;
+    edTelMob: TDBEditEh;
     edNomer: TDBNumberEditEh;
     cbRukov: TDBCheckBoxEh;
     cbSpec: TDBCheckBoxEh;

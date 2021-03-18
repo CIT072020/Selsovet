@@ -181,7 +181,7 @@ begin
     ModalResult := mrOk;
   end else begin
     PutError(strErr);
-  end;
+  end;    
 end;
 
 procedure TfmPrixodSvid.edNomer1UpdateData(Sender: TObject;

@@ -122,7 +122,7 @@ inherited fmDeclIzm: TfmDeclIzm
         Visible = True
       end
       inherited TBToolbarOrgan: TTBToolbar
-        Left = 402
+        Left = 425
         inherited edZAGS: TDBEditEh
           TabStop = False
         end
@@ -148,7 +148,7 @@ inherited fmDeclIzm: TfmDeclIzm
       Top = 34
       Width = 978
       Height = 673
-      ActivePage = tsTail1
+      ActivePage = tsTail2
       Align = alClient
       HotTrack = True
       TabOrder = 0

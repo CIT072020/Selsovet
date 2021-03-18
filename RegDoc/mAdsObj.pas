@@ -636,6 +636,8 @@ type
       FLookFilter: string;
       // постоянный фильтр для справочника
       FTableFilter: string;
+      // фильтр для справочника при выборе
+      FTableFilterCh: string;
       FFilterInterface: TFilterInterface;
       FLayoutList: TLayoutList;
       FCanModify: Boolean;
@@ -847,6 +849,7 @@ type
       property KeyFieldList: TStringList read FKeyFieldList;
       property Look: TLookTreeList read FLook;
       property TableFilter: string read FTableFilter write FTableFilter;
+      property TableFilterCh: string read FTableFilterCh write FTableFilterCh;
       property SysFilter: TStringList read FSysFilter;
       property IsDataModified: Boolean read GetIsDataModified;
    public
@@ -2763,6 +2766,7 @@ begin
    FFindGroup:='';
    FLook:=TLookTreeList.Create;
    FTableFilter:='';
+   FTableFilterCh:='';
    FSysFilter:=TStringList.Create;
 end;
 
@@ -9361,7 +9365,7 @@ begin
 end;
 
 function TDBControl.DetailAdd: Boolean;
-begin
+begin               
    Result:=False;
    if OnBeforeNewRecord(FDBItem) then begin
       FDBItem.EditTable.Append;
